@@ -1,10 +1,25 @@
-// React components
-import ArticleListDesktop from './../components/Article/ArticleListDesktop'
+import useMedia from './../hooks/useMedia'
 
-const App = ({ articles }) => {
+// React components
+import Header from './../components/Header'
+import ArticleListDesktop from './../components/Article/ArticleListDesktop'
+import Footer from './../components/Footer/FooterDesktop'
+
+const App = ({ articles, banner, worktimeHead, phoneCommon }) => {
+    // Breakpoints
+    const breakpoint1023 = useMedia(1023)
+
     return (
         <div className="app">
+            {!breakpoint1023 && (
+                <Header
+                    worktimeHead={worktimeHead}
+                    banner={banner}
+                    phoneCommon={phoneCommon}
+                />
+            )}
             <ArticleListDesktop articles={articles} />
+            {!breakpoint1023 && <Footer />}
         </div>
     )
 }
@@ -43,10 +58,16 @@ export const getServerSideProps = async (ctx) => {
 
     // Assignment of values
     const articles = Response[0]
+    const banner = Response[3]
+    const worktimeHead = Response[4].worktime_head
 
+    const phoneCommon = '8 999 999 99 99'
     return {
         props: {
             articles,
+            banner,
+            worktimeHead,
+            phoneCommon,
         },
     }
 }

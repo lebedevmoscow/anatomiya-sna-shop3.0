@@ -1,0 +1,104 @@
+.city_choise
+    position: absolute
+    background-color: #0ca5d3
+    top: 40px
+    z-index: 2
+    padding: 20px 25px
+    box-sizing: border-box
+    border: 1px solid #e6e6e6
+    box-shadow: 1px 1px 10px rgba(30,30,30,.22)
+    font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+    color: #ffffff
+    transition: 0s all
+    overflow: hidden
+
+    .city_choise__moscow
+        margin-left: 15px
+        width: 150px
+        box-sizing: border-box
+        position: relative
+        li
+            &:first-child
+                color: #ffdb4d
+        &::before
+            content: ""
+            position: absolute
+            top: -26px
+            left: 20px
+            margin-bottom: -2px
+            border-color: transparent transparent #0ca5d3
+            border-style: solid
+            border-width: 0 6px 8px
+
+        &::after
+            content: ''
+            position: absolute
+            height: 98%
+            width: 1px
+            right: -20px
+            top: 0
+            background-color: #fff
+
+    .city_choise__sections
+        display: flex
+
+    .city_choise__title_section
+        font-size: 20px
+        font-weight: 600
+        margin-bottom: 20px
+
+    .city_choise__list
+        position: relative
+        margin-top: 20px
+        margin-bottom: 20px
+        &::before
+            content: ''
+            position: absolute
+            left: -15px
+            height: 100%
+            width: 1px
+            background-color: #ffffff
+        li
+            cursor: pointer
+            opacity: 0.9
+            font-size: 13px
+            margin-bottom: 5px
+
+    .city_choise__regions
+        margin-left: 50px
+
+    .city_choise__lists
+        display: flex
+        flex-wrap: wrap
+        align-items: flex-start
+        align-content: flex-start
+        justify-content: space-between
+
+    .city_choise__column
+        width: 15%
+
+    .city_choise__wrapper
+        width: 189px
+
+    .city_choise__list_title
+        font-size: 16px
+        font-weight: 700
+        position: relative
+        &::after
+            content: ''
+            position: absolute
+            width: 180%
+            height: 2px
+            background-color: #ffdb4d
+            left: 50%
+            transform: translateX(-50%)
+            top: calc(100% + 5px)
+
+    .city_choise__cross
+        position: absolute
+        top: 15px
+        right: 15px
+        transition: 0.9s all
+        cursor: pointer
+        &:hover
+            transform: rotate(540deg)
