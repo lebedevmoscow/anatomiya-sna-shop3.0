@@ -11,7 +11,6 @@ const App = ({
     banner,
     worktimeHead,
     phoneCommon,
-    IsMobile,
     headerCatalog,
 }) => {
     // Breakpoints
@@ -19,6 +18,7 @@ const App = ({
 
     return (
         <div className="app">
+            <h1>Hello World</h1>
             {!breakpoint1023 && (
                 <Header
                     worktimeHead={worktimeHead}
@@ -37,14 +37,7 @@ const App = ({
 
 export default App
 
-export const getServerSideProps = async (ctx) => {
-    const UserAgent = ctx.req.headers['user-agent']
-    const UserAgent_MobileRegularExpression = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i
-
-    const IsMobile = UserAgent.match(UserAgent_MobileRegularExpression)
-        ? true
-        : false
-
+export const getStaticProps = async (ctx) => {
     // Fetching Data
     const URLS = [
         'https://www.anatomiyasna.ru/api/journal/article-list?mode=new&page=1&limit=6',
@@ -80,7 +73,6 @@ export const getServerSideProps = async (ctx) => {
     const phoneCommon = '8 (495) 287-87-95'
     return {
         props: {
-            IsMobile,
             articles,
             banner,
             worktimeHead,

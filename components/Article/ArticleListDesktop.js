@@ -13,7 +13,6 @@ import Article from './../Article/Article'
 const ArticleListDesktop = ({ articles }) => {
     // State
     const [LoadMore, SetLoadMore] = useState(false)
-    const [FirstPartOfList, SetFirstPartOfList] = useState(null)
     const [SecondPartOfList, SetSecondPartOfList] = useState(null)
 
     // Click Handlers
@@ -22,14 +21,6 @@ const ArticleListDesktop = ({ articles }) => {
     }
 
     // UseEffects
-    useEffect(() => {
-        const List = articles.map((article, index) => {
-            if (index > 2) return
-            return <Article article={article} key={index} />
-        })
-        SetFirstPartOfList(List)
-    }, [])
-
     useEffect(() => {
         if (LoadMore) {
             const List = articles.map((article, id) => {
@@ -52,7 +43,10 @@ const ArticleListDesktop = ({ articles }) => {
                     Статьи
                 </div>
                 <div className={articles_styles.articles__list}>
-                    {FirstPartOfList}
+                    {articles.map((article, index) => {
+                        if (index > 2) return
+                        return <Article article={article} key={index} />
+                    })}
                     <SlideDown
                         className={articles_styles.articles__slidedown}
                         closed={!LoadMore}
