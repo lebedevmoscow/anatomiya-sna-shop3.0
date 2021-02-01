@@ -13,7 +13,9 @@
     "next-images": "^1.7.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-hover-observer": "^2.1.1",
     "react-slidedown": "^2.4.5",
-    "sass": "^1.32.5"
+    "sass": "^1.32.5",
+    "uuid": "^8.3.2"
   }
 }

@@ -1,0 +1,153 @@
+.main_navigation
+    font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+    margin-top: 7px
+    position: relative
+    .main_navigation__list
+        display: flex
+        position: relative
+        div
+            &:last-child
+                li
+                    // padding-right: 30px
+        &::before
+            position: absolute
+            content: ''
+            width: 105%
+            left: 0
+            top: 0
+            transform: translate(-2.5%, 0px)
+            height: 1px
+            background-color: rgba(232, 232, 232, 0.75)
+            // background-color: red
+        &::after
+            position: absolute
+            content: ''
+            width: 105%
+            left: 0
+            top: 100%
+            transform: translate(-2.5%, 0px)
+            height: 1px
+            background-color: rgba(232, 232, 232, 0.75)
+        li
+            cursor: pointer
+            padding: 16px 9px 23px
+            padding-right: 33px
+            padding-left: 10px
+            text-align: center
+            text-transform: uppercase
+            line-height: 1
+            color: #444444
+            font-size: 13px
+            font-weight: 700
+            border-top: 4px solid transparent
+            border-left: 1px solid transparent
+            position: relative
+
+            &::after
+                display: none
+                content: ''
+                position: absolute
+                width: 0
+                height: 0
+                border-style: solid
+                border-width: 0 6px 8px 6px
+                border-color: transparent transparent #0ca5d3 transparent
+                top: 90%
+                left: 50%
+            &:first-child
+                flex: none
+                .trinagle
+                    border-color: transparent transparent #fff transparent
+
+            .arrow
+                top: 35%
+                right: 0
+                position: absolute
+                border: solid #575757
+                border-width: 0 1px 1px 0
+                margin-right: 17px
+                display: inline-block
+                padding: 2px
+                transform: rotate(45deg)
+
+        .main_navigation__sale_item
+            color: #fff
+            background-color: #f15b5b
+            width: 96px
+            box-sizing: border-box
+            position: relative
+            text-align: start
+            width: 97.78px
+
+            .arrow
+                margin-right: 18px
+                border-color: #ffffff
+                opacity: 0.8
+
+        div
+            border-top: 4px solid transparent
+            border-left: 1px solid transparent
+            &:first-child
+                border-top: 4px solid #f15b5b
+                &:hover
+                    border-top: 4px solid #f15b5b
+            &:hover
+                box-shadow: 23px 10px 39px -26px rgba(0,0,0,0.75)
+                border-left: 1px solid rgba(232, 232, 232, 0.75)
+                border-top: 4px solid #0ca5d3
+
+    .main_navigation__sale_window
+        padding: 30px 40px
+        background-color: #fff
+        display: none
+        justify-content: space-between
+        box-shadow: 4px 7px 32px rgba(30,30,30,.31)
+        position: absolute
+        z-index: 2
+
+        .main_navigation__sale_window_title
+            color: #444
+            font-size: 16px
+            font-weight: 700
+            line-height: 1
+            position: relative
+            &::after
+                content: ''
+                position: absolute
+                width: 58px
+                top: calc(100% + 10px)
+                left: 0
+                height: 2px
+                background-color: #f15b5b
+
+        ul
+            margin-top: 30px
+            margin-right: 50px
+            position: relative
+            li
+                width: 90%
+                color: #444
+                font-size: 16px
+                line-height: 1.3
+                margin-bottom: 15px
+                &:hover
+                    color: #f15b5b
+
+        .main_navigation__sale_window_cross
+            cursor: pointer
+            position: absolute
+            right: 15px
+            top: 15px
+            font-size: 16px
+            transition: 0.5s all
+            color: #888
+            &:hover
+                transform: rotate(360deg)
+                color: #000
+
+@media screen and ( max-width: 1024px )
+
+    .main_navigation
+        .main_navigation__list
+            .main_navigation__sale_item
+                width: auto

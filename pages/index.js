@@ -2,10 +2,18 @@ import useMedia from './../hooks/useMedia'
 
 // React components
 import Header from './../components/Header'
+import MainNavigation from './../components/Nav/MainNavigation'
 import ArticleListDesktop from './../components/Article/ArticleListDesktop'
 import Footer from './../components/Footer/FooterDesktop'
 
-const App = ({ articles, banner, worktimeHead, phoneCommon }) => {
+const App = ({
+    articles,
+    banner,
+    worktimeHead,
+    phoneCommon,
+    IsMobile,
+    headerCatalog,
+}) => {
     // Breakpoints
     const breakpoint1023 = useMedia(1023)
 
@@ -18,8 +26,11 @@ const App = ({ articles, banner, worktimeHead, phoneCommon }) => {
                     phoneCommon={phoneCommon}
                 />
             )}
+            {!breakpoint1023 && (
+                <MainNavigation headerCatalog={headerCatalog} />
+            )}
             <ArticleListDesktop articles={articles} />
-            {!breakpoint1023 && <Footer />}
+            <Footer />
         </div>
     )
 }
@@ -50,7 +61,11 @@ export const getServerSideProps = async (ctx) => {
     let Response = {}
     await Promise.all(
         URLS.map(async (url) => {
-            return fetch(url).then((resp) => resp.json())
+            return fetch(url).then((resp) => {
+                if (resp && resp.status !== 404) {
+                    return resp.json()
+                } else return null
+            })
         })
     ).then((res) => {
         Response = res
@@ -58,16 +73,19 @@ export const getServerSideProps = async (ctx) => {
 
     // Assignment of values
     const articles = Response[0]
+    const headerCatalog = Response[2]
     const banner = Response[3]
     const worktimeHead = Response[4].worktime_head
 
     const phoneCommon = '8 (495) 287-87-95'
     return {
         props: {
+            IsMobile,
             articles,
             banner,
             worktimeHead,
             phoneCommon,
+            headerCatalog,
         },
     }
 }
