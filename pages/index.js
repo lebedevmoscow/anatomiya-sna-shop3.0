@@ -61,7 +61,7 @@ export const getServerSideProps = async (ctx) => {
     const banner = Response[3]
     const worktimeHead = Response[4].worktime_head
 
-    const phoneCommon = '8 999 999 99 99'
+    const phoneCommon = '8 (495) 287-87-95'
     return {
         props: {
             articles,
