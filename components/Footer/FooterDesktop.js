@@ -1,19 +1,20 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 // Styles
 import footer_styles from './../../styles/components/Footer/FooterDesktop.module.sass'
 import common_styles from './../../styles/common.module.sass'
 
 // Images
-// import VKImage from './../../assets/vk.png'
-// import FBImage from './../../assets/fb.png'
-// import MasterCardImage from './../../assets/mastercard.png'
-// import VisaImage from './../../assets/visa.png'
-// import YandexMoneyImage from './../../assets/yandex-money.png'
-// import WebMoneyImage from './../../assets/webmoney.png'
-// import QiwiImage from './../../assets/qiwi.png'
-// import MirImage from './../../assets/mir.png'
-// import PayKeeperImage from './../../assets/paykeeper.png'
+import VKImage from './../../assets/vk.png'
+import FBImage from './../../assets/fb.png'
+import MasterCardImage from './../../assets/mastercard.png'
+import VisaImage from './../../assets/visa.png'
+import YandexMoneyImage from './../../assets/yandex-money.png'
+import WebMoneyImage from './../../assets/webmoney.png'
+import QiwiImage from './../../assets/qiwi.png'
+import MirImage from './../../assets/mir.png'
+import PayKeeperImage from './../../assets/paykeeper.png'
 
 const Footer = () => {
     return (
@@ -326,19 +327,27 @@ const Footer = () => {
                                         footer_styles.footer__socials_list_item
                                     }
                                 >
-                                    {/* <Link href="/">
-                                        <a>
-                                            <img src={VKImage}></img>
-                                        </a>
-                                    </Link> */}
-                                </li>
-                                {/* <li className="footer__socials_list_item">
                                     <Link href="/">
                                         <a>
-                                            <img src={FBImage}></img>
+                                            <Image
+                                                src={VKImage}
+                                                width={35}
+                                                height={35}
+                                            />
                                         </a>
                                     </Link>
-                                </li> */}
+                                </li>
+                                <li className="footer__socials_list_item">
+                                    <Link href="/">
+                                        <a>
+                                            <Image
+                                                src={FBImage}
+                                                width={35}
+                                                height={35}
+                                            />
+                                        </a>
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
                         <div className={footer_styles.footer__payments_methods}>
@@ -354,27 +363,83 @@ const Footer = () => {
                                     footer_styles.footer__payments_methods_list
                                 }
                             >
-                                {/* <li className="footer__payments_methods-list-item">
-                                    <img src={MasterCardImage}></img>
+                                <li
+                                    className={
+                                        footer_styles.footer__payments_methods_list_item
+                                    }
+                                >
+                                    <Image
+                                        src={MasterCardImage}
+                                        width={23}
+                                        height={18}
+                                    />
                                 </li>
-                                <li className="footer__payments-methods-list-item">
-                                    <img src={VisaImage}></img>
+                                <li
+                                    className={
+                                        footer_styles.footer__payments_methods_list_item
+                                    }
+                                >
+                                    <Image
+                                        src={VisaImage}
+                                        width={23}
+                                        height={18}
+                                    />
                                 </li>
-                                <li className="footer__payments-methods-list-item">
-                                    <img src={YandexMoneyImage}></img>
+                                <li
+                                    className={
+                                        footer_styles.footer__payments_methods_list_item
+                                    }
+                                >
+                                    <Image
+                                        src={YandexMoneyImage}
+                                        width={23}
+                                        height={18}
+                                    />
                                 </li>
-                                <li className="footer__payments-methods-list-item">
-                                    <img src={WebMoneyImage}></img>
+                                <li
+                                    className={
+                                        footer_styles.footer__payments_methods_list_item
+                                    }
+                                >
+                                    <Image
+                                        src={WebMoneyImage}
+                                        width={23}
+                                        height={18}
+                                    />
                                 </li>
-                                <li className="footer__payments-methods-list-item">
-                                    <img src={QiwiImage}></img>
+                                <li
+                                    className={
+                                        footer_styles.footer__payments_methods_list_item
+                                    }
+                                >
+                                    <Image
+                                        src={QiwiImage}
+                                        width={23}
+                                        height={18}
+                                    />
                                 </li>
-                                <li className="footer__payments-methods-list-item">
-                                    <img src={MirImage}></img>
+                                <li
+                                    className={
+                                        footer_styles.footer__payments_methods_list_item
+                                    }
+                                >
+                                    <Image
+                                        src={MirImage}
+                                        width={23}
+                                        height={18}
+                                    />
                                 </li>
-                                <li className="footer__payments-methods-list-item">
-                                    <img src={PayKeeperImage}></img>
-                                </li> */}
+                                <li
+                                    className={
+                                        footer_styles.footer__payments_methods_list_item
+                                    }
+                                >
+                                    <Image
+                                        src={PayKeeperImage}
+                                        width={23}
+                                        height={18}
+                                    />
+                                </li>
                             </ul>
                         </div>
                     </div>
