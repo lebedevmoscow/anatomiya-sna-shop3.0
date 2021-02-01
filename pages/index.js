@@ -1,65 +1,52 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+// React components
+import ArticleListDesktop from './../components/Article/ArticleListDesktop'
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+const App = ({ articles }) => {
+    return (
+        <div className="app">
+            <ArticleListDesktop articles={articles} />
         </div>
-      </main>
+    )
+}
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+export default App
+
+export const getServerSideProps = async (ctx) => {
+    const UserAgent = ctx.req.headers['user-agent']
+    const UserAgent_MobileRegularExpression = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i
+
+    const IsMobile = UserAgent.match(UserAgent_MobileRegularExpression)
+        ? true
+        : false
+
+    // Fetching Data
+    const URLS = [
+        'https://www.anatomiyasna.ru/api/journal/article-list?mode=new&page=1&limit=6',
+        'https://www.anatomiyasna.ru/api/mainPage/sales/',
+        'https://www.anatomiyasna.ru/api/menu/headerCatalog/',
+        'https://anatomiyasna.ru/api/parameters/saleBanner/',
+        'https://www.anatomiyasna.ru/api/parameters/all/',
+        'https://www.anatomiyasna.ru/api/menu/mobileCatalogMenu/',
+        'https://anatomiyasna.ru/api/menu/mobileMenu/',
+        'https://anatomiyasna.ru/api/region/getRegions/',
+    ]
+
+    // Parallel requests
+    let Response = {}
+    await Promise.all(
+        URLS.map(async (url) => {
+            return fetch(url).then((resp) => resp.json())
+        })
+    ).then((res) => {
+        Response = res
+    })
+
+    // Assignment of values
+    const articles = Response[0]
+
+    return {
+        props: {
+            articles,
+        },
+    }
 }
