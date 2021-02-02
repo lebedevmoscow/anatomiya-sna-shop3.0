@@ -1,0 +1,101 @@
+.good_item
+    cursor: pointer
+    color: #fff
+    line-height: 1
+    background-repeat: no-repeat
+    background-position: 50% 0
+    background-size: cover
+    height: 250px
+    text-shadow: 0 0 32px rgba(0,0,0,.13)
+    position: relative
+    display: block
+    // flex: 0 0 15.5%
+    width: 181.97px
+    margin-right: 1.4%
+    margin-bottom: 16px
+    font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+    &:nth-child(6n)
+        margin-right: 0
+
+    &:hover
+        // .good_item__shadow
+        //     opacity: 0.3
+        .good_item__onhover
+            opacity: 1
+        .good_item__title
+            opacity: 0
+
+    .good_item__shadow
+        position: absolute
+        height: 100%
+        width: 100%
+        z-index: 1
+        background: #000
+        transition: 0.3s all
+        opacity: 0
+
+    .good_item__title
+        opacity: 1
+        transition: 0.3s all
+        padding: 0px 13px
+        font-size: 22px
+        font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+        font-weight: 700
+        color: #fff
+        margin-top: 165px
+    .good_item__onhover
+
+        opacity: 0
+        padding: 0px 13px
+        transition: all .3s ease
+        position: absolute
+        left: 0
+        right: 0
+        top: 0
+        bottom: 0
+        background: rgba(25,25,25,.25)
+        padding: 18px 13px 58px
+        display: flex
+        flex-direction: column
+        justify-content: flex-end
+        &::before
+            content: ""
+            position: absolute
+            left: 12px
+            right: 12px
+            top: 18px
+            bottom: 18px
+            border: 1px solid #168aab
+
+    .good_item__onhover_title
+
+        position: relative
+        display: block
+        font-size: 22px
+        font-weight: 700
+        text-align: center
+        padding-bottom: 22px
+        margin-bottom: 22px
+
+        &::after
+            content: ''
+            position: absolute
+            width: 30%
+            height: 2px
+            left: 50%
+            top: calc(100%)
+            transform: translateX(-50%)
+            background-color: #168aab
+
+    .good_item__onhover_amount
+        display: block
+        font-size: 14px
+        font-weight: 400
+        line-height: 1
+        letter-spacing: 1.4px
+        text-align: center
+
+@media screen and ( max-width: 1024px )
+
+    .good_item
+        width: 15.5%

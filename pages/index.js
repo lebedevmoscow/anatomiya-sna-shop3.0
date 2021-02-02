@@ -14,7 +14,10 @@ import ArticleListDesktop from './../components/Article/ArticleListDesktop'
 import Footer from './../components/Footer/FooterDesktop'
 import MobileBurgerMenu from './../components/Mobile/MobileBurgerMenu'
 import MobileMenuCatalog from './../components/Mobile/MobileMenuCatalog'
+import MattrassFilter from './../components/Filters/MattrassFilter'
+import HelpPickUp from './../components/Banners/HelpPickUp'
 import ProductListForDesktop from './../components/Products/IndexPageProductListForDesktop'
+import CatalogList from './../components/Catalog/CatalogList'
 
 // Experemental
 // const MobileMenuCatalogNoSSR = dynamic(
@@ -38,9 +41,12 @@ const App = ({
     filterAPIData,
     filterProductsCount,
     products,
+    mobileCatalogs,
 }) => {
     // Breakpoints
     const breakpoint1023 = useMedia(1023)
+
+    console.log('products', products)
 
     return (
         <div className="app">
@@ -65,7 +71,7 @@ const App = ({
                 banner={null}
                 mobilemenuCatalogs={mobilemenuCatalogs}
             />
-            {/* <div className={common_styles.container}>
+            <div className={common_styles.container}>
                 <div className={common_styles.index_page_filters}>
                     <HelpPickUp />
                     {!breakpoint1023 && (
@@ -75,19 +81,17 @@ const App = ({
                         />
                     )}
                 </div>
-            </div> */}
-            <MattrassFilterNoSSR
-                filterAPIData={filterAPIData}
-                filterProductsCount={filterProductsCount}
-            />
-            <div className={common_styles.container}>
-                <div className={common_styles.index_page_products}>
-                    <div className={common_styles.index_page_products__title}>
-                        ИНТЕРНЕТ-МАГАЗИН МАТРАСОВ АНАТОМИЯ СНА
+            </div>
+
+            {/* <div className={common_styles.container}>
+                <div className="index_page_products">
+                    <div className="index_page_products__title">
                         <ProductListForDesktop products={products} />
                     </div>
                 </div>
-            </div>
+            </div> */}
+            <CatalogList mobileCatalogs={mobileCatalogs} />
+
             <ArticleListDesktop articles={articles} />
             {!breakpoint1023 && <Footer />}
         </div>
@@ -109,7 +113,8 @@ export const getStaticProps = async (ctx) => {
         'https://anatomiyasna.ru/api/region/getRegions/',
         'https://www.anatomiyasna.ru/api/filter/filterModel/?slug=matrasy',
         'https://anatomiyasna.ru/api/filter/filtredProducts/?slug=matrasy',
-        'https://www.anatomiyasna.ru/api/mainPage/popularProducts/',
+        'https://anatomiyasna.ru/api/productService/getPopularProductModels/?firstPrice=true',
+        'https://www.anatomiyasna.ru/api/mainPage/catalogs/',
     ]
 
     // Parallel requests
@@ -136,22 +141,8 @@ export const getStaticProps = async (ctx) => {
     const regions = Response[7]
     const filterAPIData = Response[8]
     const filterProductsIds = Response[9]
-    const productsIds = Response[10]
-
-    let ids = []
-
-    for (let i = 0; i < productsIds.length; i++) {
-        if (i !== productsIds.length - 1) {
-            ids.push(`products[]=${productsIds[i]}&`)
-        } else {
-            ids.push(`products[]=${productsIds[i]}`)
-        }
-    }
-    const productSubUrl = ids.join('')
-    const productsURLReq = await fetch(
-        `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
-    )
-    const products = await productsURLReq.json()
+    const products = Response[10]
+    const mobileCatalogs = Response[11]
 
     const phoneCommon = '8 (495) 287-87-95'
     const filterProductsCount = filterProductsIds.length
@@ -168,6 +159,7 @@ export const getStaticProps = async (ctx) => {
             filterAPIData,
             filterProductsCount,
             products,
+            mobileCatalogs,
         },
     }
 }

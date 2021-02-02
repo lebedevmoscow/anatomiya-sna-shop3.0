@@ -9,24 +9,27 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
     AddProductToFavoriteList,
     RemoveProductFromFavoriteList,
-} from './../../../actions/FavoritesProductsList'
+} from './../../actions/FavoritesProductsList'
 
 import {
     AddProductToCompareList,
     RemoveProductFromCompareList,
-} from './../../../actions/CompareProductsList'
+} from './../../actions/CompareProductsList'
 
 // Experemental
-import useMediaQuery from './../hooks/../../../hooks/useMedia'
+import useMediaQuery from './../../hooks/useMedia'
 
 // Images
-import StatsImage from './../../../assets/svg/stats.svg'
-import HeartImage from './../../../assets/svg/heart.svg'
-import WhiteHeartImage from './../../../assets/svg/white-heart.svg'
-import WhiteStats from './../../../assets/svg/white-stats.svg'
+import StatsImage from './../../assets/svg/stats.svg'
+import HeartImage from './../../assets/svg/heart.svg'
+import WhiteHeartImage from './../../assets/svg/white-heart.svg'
+import WhiteStats from './../../assets/svg/white-stats.svg'
 
 // React Components
-import SaleOnProductCard from './../SaleOnProductCard'
+// import SaleOnProductCard from './../SaleOnProductCard'
+import Popups from './../Popups/PopupsOnProductCard'
+
+import card_styles from './../../styles/components/Products/IndexPageProductCard.module.sass'
 
 const EqualHeightElement = dynamic(
     () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
@@ -43,7 +46,7 @@ const ProductCard = ({
     SeriesTitle,
     MainImage,
     Prices,
-    listSales,
+    ListSalesList,
     key,
     Id,
     DefaultSize,
@@ -197,52 +200,52 @@ const ProductCard = ({
         }
     }, [CompareListRedux])
 
-    useEffect(() => {
-        if (hasWindow) {
-            if (PriceDiff !== 0) {
-                const percent =
-                    100 - Math.round((PriceDiscount * 100) / PriceBasic)
-                setFirstPopup(
-                    <div style={{ marginRight: '5px' }}>
-                        <SaleOnProductCard
-                            first={true}
-                            key={0}
-                            Title={`-${percent}%`}
-                            Slug={null}
-                            Text={null}
-                            dontShow={true}
-                            BorderColor={'#E71616'}
-                            BackgroundColor={'#E71616'}
-                            TextColor={'#fff'}
-                            index={0}
-                        />
-                    </div>
-                )
-            }
+    // useEffect(() => {
+    //     if (hasWindow) {
+    //         if (PriceDiff !== 0) {
+    //             const percent =
+    //                 100 - Math.round((PriceDiscount * 100) / PriceBasic)
+    //             setFirstPopup(
+    //                 <div style={{ marginRight: '5px' }}>
+    //                     <SaleOnProductCard
+    //                         first={true}
+    //                         key={0}
+    //                         Title={`-${percent}%`}
+    //                         Slug={null}
+    //                         Text={null}
+    //                         dontShow={true}
+    //                         BorderColor={'#E71616'}
+    //                         BackgroundColor={'#E71616'}
+    //                         TextColor={'#fff'}
+    //                         index={0}
+    //                     />
+    //                 </div>
+    //             )
+    //         }
 
-            if (PriceDiff === 0) {
-                setFirstPopup(
-                    <div style={{ marginRight: '5px' }}>
-                        <SaleOnProductCard
-                            first={true}
-                            dontShow={!listSales[0].Text ? true : false}
-                            onClickHandler={() => {
-                                setShowLoadMore((p) => !p)
-                            }}
-                            key={0}
-                            Title={listSales[0].Title}
-                            Slug={listSales[0].Slug}
-                            Text={listSales[0].Text}
-                            BorderColor={listSales[0].BorderColor}
-                            BackgroundColor={listSales[0].BackgroundColor}
-                            TextColor={listSales[0].TextColor}
-                            index={0}
-                        />
-                    </div>
-                )
-            }
-        }
-    }, [hasWindow, closed])
+    //         if (PriceDiff === 0) {
+    //             setFirstPopup(
+    //                 <div style={{ marginRight: '5px' }}>
+    //                     <SaleOnProductCard
+    //                         first={true}
+    //                         dontShow={!listSales[0].Text ? true : false}
+    //                         onClickHandler={() => {
+    //                             setShowLoadMore((p) => !p)
+    //                         }}
+    //                         key={0}
+    //                         Title={listSales[0].Title}
+    //                         Slug={listSales[0].Slug}
+    //                         Text={listSales[0].Text}
+    //                         BorderColor={listSales[0].BorderColor}
+    //                         BackgroundColor={listSales[0].BackgroundColor}
+    //                         TextColor={listSales[0].TextColor}
+    //                         index={0}
+    //                     />
+    //                 </div>
+    //             )
+    //         }
+    //     }
+    // }, [hasWindow, closed])
 
     // Объект window
     const hasWindow = typeof window !== 'undefined'
@@ -253,8 +256,8 @@ const ProductCard = ({
     const [showLoadMore, setShowLoadMore] = useState(true)
 
     return (
-        <div key={key} className="product-card">
-            <div className="product-card__popups">
+        <div key={key} className={card_styles.product_card}>
+            {/* <div className="product_card__popups">
                 {firstPopup}
                 {showLoadMore &&
                     ((PriceDiff !== 0 &&
@@ -263,11 +266,11 @@ const ProductCard = ({
                         (PriceDiff === 0 &&
                             firstPopup !== null &&
                             listSales.length >= 2)) && (
-                        <div className="product-card__load-more-wrapper">
+                        <div className="product_card__load-more-wrapper">
                             <div
                                 ref={loadMoreRef}
                                 onClick={onLoadMoreClickHandler}
-                                className="product-card__popup product-card__popup-load-more"
+                                className="product_card__popup product_card__popup-load-more"
                             >
                                 <span>
                                     <svg className="arrow">
@@ -279,7 +282,7 @@ const ProductCard = ({
                     )}
 
                 <SlideDown
-                    className="product-card__fulllpopuplist"
+                    className="product_card__fulllpopuplist"
                     closed={closed}
                 >
                     <ul>
@@ -308,7 +311,7 @@ const ProductCard = ({
                                 'load-more-hidden'
                             )
                         }}
-                        className="product-card__popup product-card__popup-last-child product-card__fulllpopuplist-inner-card"
+                        className="product_card__popup product_card__popup-last-child product_card__fulllpopuplist-inner-card"
                     >
                         <span>
                             <svg viewBox="0 0 24 24">
@@ -317,17 +320,22 @@ const ProductCard = ({
                         </span>
                     </div>
                 </SlideDown>
-            </div>
-            <div className="product-card__wrap-1">
+            </div> */}
+            <div className={card_styles.product_card__wrap_1}>
                 <a target="_blank" rel="noreferrer">
-                    <img className="product-card__image" src={MainImage} />
+                    <img
+                        className={card_styles.product_card__image}
+                        src={MainImage}
+                    />
                 </a>
                 <a target="_blank" rel="noreferrer">
-                    <h6 className="product-card__smalltext">{CatalogType}</h6>
+                    <h6 className={card_styles.product_card__smalltext}>
+                        {CatalogType}
+                    </h6>
                 </a>
                 <EqualHeightElement name="Title">
                     <a target="_blank" rel="noreferrer">
-                        <h4 className="product-card__productname">
+                        <h4 className={card_styles.product_card__productname}>
                             {(BrandTitle || '') +
                                 ' ' +
                                 (SeriesTitle || '') +
@@ -337,30 +345,52 @@ const ProductCard = ({
                     </a>
                 </EqualHeightElement>
             </div>
-            <div className="product-card__wrap-2">
+            <div className={card_styles.product_card__wrap_2}>
                 <a>
-                    <div className="product-card__price-section">
-                        <div className="product-card__price">
+                    <div className={card_styles.product_card__price_section}>
+                        <div className={card_styles.product_card__price}>
                             {PriceDiff !== 0 && (
-                                <div className="product-card__price-discount">
-                                    <div className="product-card__price-prev">
+                                <div
+                                    className={
+                                        card_styles.product_card__price_discount
+                                    }
+                                >
+                                    <div
+                                        className={
+                                            card_styles.product_card__price_prev
+                                        }
+                                    >
                                         <span>
                                             {PriceBasic}
-                                            <div className="product-card__price-diff">
+                                            <div
+                                                className={
+                                                    card_styles.product_card__price_diff
+                                                }
+                                            >
                                                 -{PriceDiff}
                                             </div>
                                         </span>
                                     </div>
                                 </div>
                             )}
-                            <div className="product-card__price-current">
+                            <div
+                                className={
+                                    card_styles.product_card__price_current
+                                }
+                            >
                                 {PriceDiscount} Руб.
                                 {/* 222 Руб. */}
                             </div>
                         </div>
-                        <div className="product-card__stats-buttons-section">
+                        <div
+                            className={
+                                card_styles.product_card__stats_buttons_section
+                            }
+                        >
                             <div
-                                className="product-card__stats-button"
+                                className={
+                                    card_styles.product_card__stats_button
+                                }
                                 style={
                                     isCompared
                                         ? {
@@ -375,7 +405,7 @@ const ProductCard = ({
                             >
                                 <div
                                     ref={compareRef}
-                                    className="product-card__button__popup product-card__stats-button__popup"
+                                    className={`${card_styles.product_card__button__popup} ${card_styles.product_card__stats_button__popup}`}
                                 >
                                     Товар добавлен в{' '}
                                     <Link href="/">Сравнение!</Link>
@@ -394,7 +424,9 @@ const ProductCard = ({
                                 )}
                             </div>
                             <div
-                                className="product-card__stats-button"
+                                className={
+                                    card_styles.product_card__stats_button
+                                }
                                 style={
                                     isFavorite
                                         ? {
@@ -409,7 +441,7 @@ const ProductCard = ({
                             >
                                 <div
                                     ref={favoriteRef}
-                                    className="product-card__button__popup product-card__stats-button__popup"
+                                    className={`${card_styles.product_card__button__popup} ${card_styles.product_card__stats_button__popup}`}
                                 >
                                     Товар добавлен в{' '}
                                     <Link href="/">Избранное!</Link>
@@ -431,7 +463,9 @@ const ProductCard = ({
                     </div>
                 </a>
                 <a>
-                    <button className="product-card__button">Подробнее</button>
+                    <button className={card_styles.product_card__button}>
+                        Подробнее
+                    </button>
                 </a>
             </div>
         </div>
