@@ -14,6 +14,7 @@
     "next-redux-wrapper": "^6.0.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-equal-height": "^1.1.1",
     "react-hover-observer": "^2.1.1",
     "react-lazyload": "^3.1.0",
     "react-range": "^1.8.7",

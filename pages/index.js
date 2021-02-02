@@ -14,8 +14,7 @@ import ArticleListDesktop from './../components/Article/ArticleListDesktop'
 import Footer from './../components/Footer/FooterDesktop'
 import MobileBurgerMenu from './../components/Mobile/MobileBurgerMenu'
 import MobileMenuCatalog from './../components/Mobile/MobileMenuCatalog'
-import HelpPickUp from './../components/Banners/HelpPickUp'
-import MattrassFilter from './../components/Filters/MattrassFilter'
+import ProductListForDesktop from './../components/Products/IndexPageProductListForDesktop'
 
 // Experemental
 // const MobileMenuCatalogNoSSR = dynamic(
@@ -38,6 +37,7 @@ const App = ({
     regions,
     filterAPIData,
     filterProductsCount,
+    products,
 }) => {
     // Breakpoints
     const breakpoint1023 = useMedia(1023)
@@ -80,6 +80,14 @@ const App = ({
                 filterAPIData={filterAPIData}
                 filterProductsCount={filterProductsCount}
             />
+            <div className={common_styles.container}>
+                <div className={common_styles.index_page_products}>
+                    <div className={common_styles.index_page_products__title}>
+                        ИНТЕРНЕТ-МАГАЗИН МАТРАСОВ АНАТОМИЯ СНА
+                        <ProductListForDesktop products={products} />
+                    </div>
+                </div>
+            </div>
             <ArticleListDesktop articles={articles} />
             {!breakpoint1023 && <Footer />}
         </div>
@@ -101,6 +109,7 @@ export const getStaticProps = async (ctx) => {
         'https://anatomiyasna.ru/api/region/getRegions/',
         'https://www.anatomiyasna.ru/api/filter/filterModel/?slug=matrasy',
         'https://anatomiyasna.ru/api/filter/filtredProducts/?slug=matrasy',
+        'https://www.anatomiyasna.ru/api/mainPage/popularProducts/',
     ]
 
     // Parallel requests
@@ -127,6 +136,22 @@ export const getStaticProps = async (ctx) => {
     const regions = Response[7]
     const filterAPIData = Response[8]
     const filterProductsIds = Response[9]
+    const productsIds = Response[10]
+
+    let ids = []
+
+    for (let i = 0; i < productsIds.length; i++) {
+        if (i !== productsIds.length - 1) {
+            ids.push(`products[]=${productsIds[i]}&`)
+        } else {
+            ids.push(`products[]=${productsIds[i]}`)
+        }
+    }
+    const productSubUrl = ids.join('')
+    const productsURLReq = await fetch(
+        `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
+    )
+    const products = await productsURLReq.json()
 
     const phoneCommon = '8 (495) 287-87-95'
     const filterProductsCount = filterProductsIds.length
@@ -142,6 +167,7 @@ export const getStaticProps = async (ctx) => {
             regions,
             filterAPIData,
             filterProductsCount,
+            products,
         },
     }
 }

@@ -656,7 +656,7 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                                 />
                                 <span
                                     className={
-                                        filter_styles.filter_stylesmain_filter__checkmark
+                                        filter_styles.main_filter__checkmark
                                     }
                                 ></span>
                                 <h6>Новинка</h6>
