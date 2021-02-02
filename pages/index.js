@@ -98,7 +98,7 @@ const App = ({
             <ArticleListDesktop articles={articles} />
             <ReviewList reviews={reviews} />
             <SalesList sales={sales} />
-            <AboutMattrasses mattrassesText={mattrassesText} />
+            {/* <AboutMattrasses mattrassesText={mattrassesText} /> */}
             {!breakpoint1023 && <Footer />}
         </div>
     )
@@ -122,7 +122,7 @@ export const getStaticProps = async (ctx) => {
         'https://anatomiyasna.ru/api/productService/getPopularProductModels/?firstPrice=true',
         'https://www.anatomiyasna.ru/api/mainPage/catalogs/',
         'https://www.anatomiyasna.ru/api/mainPage/shopResponses/',
-        'https://anatomiyasna.ru/api/mainPage/text/',
+        // 'https://anatomiyasna.ru/api/mainPage/text/',
     ]
 
     // Parallel requests
@@ -157,7 +157,7 @@ export const getStaticProps = async (ctx) => {
     const products = Response[10]
     const mobileCatalogs = Response[11]
     const reviews = Response[12]
-    const mattrassesText = Response[13]
+    // const mattrassesText = Response[13]
 
     const phoneCommon = '8 (495) 287-87-95'
     const filterProductsCount = filterProductsIds.length
@@ -177,7 +177,7 @@ export const getStaticProps = async (ctx) => {
             mobileCatalogs,
             reviews,
             sales,
-            mattrassesText,
+            // mattrassesText,
         },
     }
 }
