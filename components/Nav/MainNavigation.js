@@ -11,17 +11,23 @@ import SelectorFilter from './SelectorFilter'
 export const UtilComponent = ({ isHovering, proto, close }) => {
     const hasWindow = typeof window !== 'undefined'
 
+    const handle = () => {
+        if (!isHovering && hasWindow) {
+            close()
+        }
+    }
+
     useEffect(() => {
         if (isHovering && hasWindow) {
             proto()
         }
 
         if (hasWindow) {
-            document.addEventListener('click', () => {
-                if (!isHovering && hasWindow) {
-                    close()
-                }
-            })
+            document.addEventListener('click', handle)
+        }
+
+        return () => {
+            document.removeEventListener('click', handle)
         }
     }, [isHovering, hasWindow])
     return null
@@ -46,7 +52,7 @@ const MainNavigation = ({ headerCatalog }) => {
     const onOutSaleHandler = () => {
         setUpdateFilter((p) => ++p)
 
-        if (saleRef) {
+        if (saleRef.current) {
             saleRef.current.style.display = 'none'
             setCategoryActive(null)
         }
@@ -61,7 +67,7 @@ const MainNavigation = ({ headerCatalog }) => {
 
     // On click handlers
     const onSalesCrossClickHandler = () => {
-        if (saleRef) {
+        if (saleRef.current) {
             saleRef.current.style.display = 'none'
         }
     }

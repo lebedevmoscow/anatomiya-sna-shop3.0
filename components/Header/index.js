@@ -8,7 +8,7 @@ import MainHeader from './MainHeader'
 
 const Header = ({ worktimeHead, phoneCommon, banner }) => {
     return (
-        <header>
+        <header className={common_styels.header}>
             <div className={common_styels.util_container}>
                 <AdvertBanner banner={banner} />
             </div>

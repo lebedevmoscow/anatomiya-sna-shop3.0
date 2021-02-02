@@ -1,0 +1,56 @@
+.help_pick_up
+    background-image: url('./../../../assets/help-pickup-mattress.png')
+    background-repeat: no-repeat
+    background-size: cover
+    width: 270px
+    border-radius: 6px
+    font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+    display: flex
+    flex-direction: column
+    justify-content: flex-end
+
+    .help_pick_up__content
+        padding: 18px 30px
+
+    .help_pick_up__desc
+        font-size: 18px
+        color: #fff
+        line-height: 1.3
+        font-weight: 700
+        margin-bottom: 26px
+
+    .help_pick_up__title
+        color: #fff
+        font-size: 41px
+        font-weight: 700
+        line-height: 1
+        margin-bottom: 20px
+
+    .help_pick_up__btn
+        position: relative
+        cursor: pointer
+        color: #444444
+        line-height: 1
+        box-shadow: 1px 3px 7px rgba(0,0,0,.19)
+        background-color: #ffdb4d
+        display: block
+        padding: 16px 20px
+        letter-spacing: .45px
+        font-weight: 400
+        font-size: 18px
+        width: 100%
+        border: none
+        border-radius: 6px
+        font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+
+        &::after
+            position: absolute
+            top: 50%
+            right: 7%
+            transform: translate(0, -50%)
+            content: ''
+            width: 0
+            height: 0
+            border-style: solid
+            border-width: 6px 0 6px 8.4px
+            border-color: transparent transparent transparent #444444

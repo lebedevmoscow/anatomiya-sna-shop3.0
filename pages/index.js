@@ -1,10 +1,26 @@
+import { useState, useEffect } from 'react'
 import useMedia from './../hooks/useMedia'
+import LazyLoad from 'react-lazyload'
+// Experemental
+// import dynamic from 'next/dynamic'
+
+// Styles
+import common_styles from './../styles/common.module.sass'
 
 // React components
 import Header from './../components/Header'
 import MainNavigation from './../components/Nav/MainNavigation'
 import ArticleListDesktop from './../components/Article/ArticleListDesktop'
 import Footer from './../components/Footer/FooterDesktop'
+import MobileBurgerMenu from './../components/Mobile/MobileBurgerMenu'
+import MobileMenuCatalog from './../components/Mobile/MobileMenuCatalog'
+import HelpPickUp from './../components/Banners/HelpPickUp'
+
+// Experemental
+// const MobileMenuCatalogNoSSR = dynamic(
+//     () => import('./../components/Mobile/MobileMenuCatalog'),
+//     { ssr: false }
+// )
 
 const App = ({
     articles,
@@ -12,25 +28,51 @@ const App = ({
     worktimeHead,
     phoneCommon,
     headerCatalog,
+    mobilemenuCatalogs,
+    mobileMenu,
+    regions,
+    filterAPIData,
 }) => {
     // Breakpoints
     const breakpoint1023 = useMedia(1023)
-
+    const breakpoint768 = useMedia(768)
     return (
         <div className="app">
-            <h1>Hello World</h1>
+            {breakpoint768 && (
+                <MobileBurgerMenu
+                    mobilemenuCatalogs={mobilemenuCatalogs}
+                    mobileMenu={mobileMenu}
+                    regions={regions}
+                />
+            )}
             {!breakpoint1023 && (
                 <Header
                     worktimeHead={worktimeHead}
-                    banner={banner}
+                    banner={null}
                     phoneCommon={phoneCommon}
                 />
             )}
             {!breakpoint1023 && (
                 <MainNavigation headerCatalog={headerCatalog} />
             )}
+
+            {/* <MobileMenuCatalogNoSSR
+                banner={null}
+                mobilemenuCatalogs={mobilemenuCatalogs}
+            /> */}
+            {breakpoint1023 && (
+                <MobileMenuCatalog
+                    banner={null}
+                    mobilemenuCatalogs={mobilemenuCatalogs}
+                />
+            )}
+            <div className={common_styles.container}>
+                <div className={common_styles.index_page_filters}>
+                    <HelpPickUp />
+                </div>
+            </div>
             <ArticleListDesktop articles={articles} />
-            <Footer />
+            {!breakpoint1023 && <Footer />}
         </div>
     )
 }
@@ -48,6 +90,7 @@ export const getStaticProps = async (ctx) => {
         'https://www.anatomiyasna.ru/api/menu/mobileCatalogMenu/',
         'https://anatomiyasna.ru/api/menu/mobileMenu/',
         'https://anatomiyasna.ru/api/region/getRegions/',
+        'https://www.anatomiyasna.ru/api/filter/filterModel/?slug=matrasy',
     ]
 
     // Parallel requests
@@ -69,6 +112,10 @@ export const getStaticProps = async (ctx) => {
     const headerCatalog = Response[2]
     const banner = Response[3]
     const worktimeHead = Response[4].worktime_head
+    const mobilemenuCatalogs = Response[5]
+    const mobileMenu = Response[6]
+    const regions = Response[7]
+    const filterAPIData = Response[8]
 
     const phoneCommon = '8 (495) 287-87-95'
     return {
@@ -78,6 +125,10 @@ export const getStaticProps = async (ctx) => {
             worktimeHead,
             phoneCommon,
             headerCatalog,
+            mobilemenuCatalogs,
+            mobileMenu,
+            regions,
+            filterAPIData,
         },
     }
 }

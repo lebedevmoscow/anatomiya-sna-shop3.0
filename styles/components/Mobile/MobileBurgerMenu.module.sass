@@ -1,0 +1,299 @@
+.mobile_nav_menu__wrapper
+    position: relative
+
+.mobile_burger_menu_catalog__labels
+    font-size: 18px
+    text-align: center
+    padding-top: 10px
+    padding-bottom: 10px
+    background-color: #0ca5d3
+
+    .arrow_left
+        position: absolute
+        left: 30px
+        top: 15px
+        border: solid #ffffff
+        border-width: 0 1px 1px 0
+        display: inline-block
+        padding: 3px
+        transform: scale(1.8) rotate(135deg)
+
+.mobile_nav_menu__labels_left_title
+    font-size: 19px
+    font-weight: 600
+    color: #ffffff
+    padding-top: 11px
+    margin-left: 35px
+
+.mobile_nav_menu__catalog
+    position: fixed
+    opacity: 1
+    z-index: 11
+    font-family: Lato, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif
+    color: #ffffff
+    background-color: #ffffff
+    width: 100vw
+    height: 100%
+    top: 0
+    bottom: 0
+    overflow: scroll
+
+.mobile_nav_menu
+    background-color: #0ca5d3
+    font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+    box-sizing: border-box
+    position: relative
+    z-index: 10
+    // overflow-y: hidden !important
+    overflow: hidden !important
+    .mobile_nav_menu__labels
+        transition: 0.3s all
+        // overflow-y: hidden
+        overflow: hidden !important
+        display: flex
+        position: fixed
+        width: 100%
+        top: 0
+        left: 0
+        justify-content: space-between
+        z-index: 2
+        padding-bottom: 9px
+        background-color: #0ca5d3
+        // margin-left: 0px
+
+    .mobile_nav_menu__labels_left
+        margin-left: 20px
+
+    .mobile_nav_menu__labels_left_burger
+        cursor: pointer
+        position: relative
+        top: -1px
+        span
+            position: relative
+            height: 1.5px
+            width: 24px
+            background: #fff
+            display: block
+            top: 20px
+            cursor: pointer
+            transition: 0.3s all
+            &::before
+                top: -8px
+                content: ""
+                position: absolute
+                left: 50%
+                margin-left: -12px
+                height: 1.5px
+                width: 24px
+                background: #fff
+                transition: all .3s ease
+            &::after
+                content: ""
+                position: absolute
+                left: 50%
+                margin-left: -12px
+                top: 8px
+                height: 1.5px
+                width: 24px
+                background: #fff
+                transition: all .3s ease
+
+    .burger_opened
+        span
+            background-color: transparent
+            &::after
+                transform: translateY(-9px) rotate(-45deg)
+            &::before
+                transform: translateY(7px) rotate(45deg)
+
+    .mobile_nav_menu__labels_right
+        margin-top: 6px
+        margin-right: 13px
+
+    .mobile_nav_menu__labels_right_list
+        display: flex
+        align-items: center
+        transform: translateY(1px)
+        li
+            &:nth-child(2)
+                margin-right: 5px
+            &:last-child
+                img
+                    transform: scale(1.28)
+            img
+                display: block
+                width: 25.5px
+                height: 25.5px
+                margin-right: 12px
+
+    .mobile_nav_menu__list
+        width: 100%
+        position: relative
+        margin-top: 47px
+        z-index: 1
+
+    .mobile_nav_menu__fixed
+        top: 0
+        bottom: 0
+        overflow-y: scroll !important
+        position: fixed
+        z-index: 1
+        width: 100vw
+        height: 100%
+        margin-left: -15px
+        background-color: #0ca5d3
+        transition: 0.3s all
+        // display: none
+        opacity: 0
+        visibility: hidden
+
+    .opened
+        visibility: visible
+        opacity: 1
+        // display: block
+
+    .mobile_nav_menu__btn
+        background-color: #ffdb4d
+        box-shadow: 1px 3px 7px rgba(0,0,0,.19)
+        font-size: 18px
+        color: #444444
+        width: 92%
+        border: 2px solid #0ca5d3
+        display: block
+        margin: 0 auto
+        border-radius: 6px
+        margin-top: 30px
+        margin-bottom: 20px
+        padding: 11px 20px
+
+    .mobile_nav_menu__list_item
+        display: flex
+        align-items: center
+        position: relative
+        margin-top: 11.5px
+        margin-left: 27px
+        &:first-child
+            margin-top: 40px
+        &::after
+            content: ''
+            width: 80%
+            position: absolute
+            height: 1px
+            left: 50px
+            top: 116%
+            background-color: #ffffff
+            opacity: 0.5
+        span
+            margin-left: 12px
+            font-size: 15px
+            color: #ffffff
+        img
+            transform: translateY(1px)
+            display: block
+            width: 36px
+            height: 36px
+
+        .arrow_right
+            position: absolute
+            right: 27px
+            border: solid #ffffff
+            opacity: 0.8
+            opacity: 0.9
+            border-width: 0 2px 2px 0
+            display: inline-block
+            padding: 3px
+            margin-left: 5px
+            transform: rotate(-45deg) translateY(2px) scale(0.9)
+
+    .mobile_nav_menu__hint
+        color: #ffffff
+        font-size: 14px
+        text-align: center
+        margin-bottom: 20px
+
+    .mobile_nav_menu__loc
+        position: relative
+        transform: translateX(-10px)
+        svg
+            height: 20px
+            width: 20px
+            fill: #ffffff
+            transform: rotate(-35deg)
+            path
+                transform: scale(0.035)
+
+    .mobile_nav_menu__choise
+        display: flex
+        align-items: center
+        justify-content: center
+        color: #ffffff
+        margin-bottom: 30px
+        .town
+            border-bottom: 1px dotted #ffffff
+
+        .arrow_down
+            border: solid #ffffff
+            margin-left: 5px
+            border-width: 0 2px 2px 0
+            display: inline-block
+            padding: 3px
+            opacity: 0.8
+            transform: scale(0.7) rotate(45deg)
+
+    .mobile_nav_menu__phone
+        display: flex
+        justify-content: center
+        margin-bottom: 15px
+        span
+            line-height: 20px
+            font-size: 18px
+            color: #ffffff
+            font-weight: 700
+        img
+            display: block
+            width: 20px
+            height: 20px
+
+    .mobile_nav_menu__socials
+        display: flex
+        justify-content: center
+        position: relative
+        &::after
+            content: ''
+            width: 95%
+            position: absolute
+            height: 1px
+            top: calc(100% + 20px)
+            left: 50%
+            transform: translateX(-50%)
+            background-color: #ffffff
+
+        li
+            margin-right: 10px
+            &:last-child
+                margin-right: 0
+
+    .mobile_nav_menu__copy
+        margin-top: 40px
+        color: #ffffff
+        text-align: center
+        margin-bottom: 20px
+        span
+            font-size: 14px
+            margin-top: 7px
+            display: block
+        a
+            color: #ffffff
+
+    .mobile_nav_menu__full
+        padding: 10px 20px
+        width: 80%
+        text-align: center
+        margin: 20px auto
+        font-size: 18px
+        box-shadow: 1px 3px 7px rgba(0,0,0,.19)
+        display: block
+        color: #444444
+        background-color: #fff
+        border-radius: 5px
+        border: 1px solid #0ca5d3

@@ -8,6 +8,11 @@ module.exports = withImages({
         includePaths: [path.join(__dirname, 'styles')],
     },
     images: {
-        domains: ['assets.example.com', 'storage.yandexcloud.net'],
+        domains: [
+            'assets.example.com',
+            'storage.yandexcloud.net',
+            'anatomiyasna.ru',
+            'www.anatomiyasna.ru',
+        ],
     },
 })

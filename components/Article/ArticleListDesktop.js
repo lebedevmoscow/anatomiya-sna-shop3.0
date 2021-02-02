@@ -23,10 +23,6 @@ const ArticleListDesktop = ({ articles }) => {
     // UseEffects
     useEffect(() => {
         if (LoadMore) {
-            const List = articles.map((article, id) => {
-                if (id > 2) return
-                return <Article article={article} key={id} />
-            })
             const NewList = articles.map((article, id) => {
                 if (id < 3) return
                 return <Article article={article} key={id} />
