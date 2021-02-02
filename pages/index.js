@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import useMedia from './../hooks/useMedia'
 import LazyLoad from 'react-lazyload'
 // Experemental
-// import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic'
 
 // Styles
 import common_styles from './../styles/common.module.sass'
@@ -15,12 +15,17 @@ import Footer from './../components/Footer/FooterDesktop'
 import MobileBurgerMenu from './../components/Mobile/MobileBurgerMenu'
 import MobileMenuCatalog from './../components/Mobile/MobileMenuCatalog'
 import HelpPickUp from './../components/Banners/HelpPickUp'
+import MattrassFilter from './../components/Filters/MattrassFilter'
 
 // Experemental
 // const MobileMenuCatalogNoSSR = dynamic(
 //     () => import('./../components/Mobile/MobileMenuCatalog'),
 //     { ssr: false }
 // )
+const MattrassFilterNoSSR = dynamic(
+    () => import('./../components/NOSSR/MattrassFilter'),
+    { ssr: false }
+)
 
 const App = ({
     articles,
@@ -32,45 +37,49 @@ const App = ({
     mobileMenu,
     regions,
     filterAPIData,
+    filterProductsCount,
 }) => {
     // Breakpoints
     const breakpoint1023 = useMedia(1023)
-    const breakpoint768 = useMedia(768)
+
     return (
         <div className="app">
-            {breakpoint768 && (
-                <MobileBurgerMenu
-                    mobilemenuCatalogs={mobilemenuCatalogs}
-                    mobileMenu={mobileMenu}
-                    regions={regions}
-                />
-            )}
-            {!breakpoint1023 && (
-                <Header
-                    worktimeHead={worktimeHead}
-                    banner={null}
-                    phoneCommon={phoneCommon}
-                />
-            )}
+            <MobileBurgerMenu
+                mobilemenuCatalogs={mobilemenuCatalogs}
+                mobileMenu={mobileMenu}
+                regions={regions}
+            />
+            <Header
+                worktimeHead={worktimeHead}
+                banner={null}
+                phoneCommon={phoneCommon}
+            />
             {!breakpoint1023 && (
                 <MainNavigation headerCatalog={headerCatalog} />
             )}
-
             {/* <MobileMenuCatalogNoSSR
                 banner={null}
                 mobilemenuCatalogs={mobilemenuCatalogs}
             /> */}
-            {breakpoint1023 && (
-                <MobileMenuCatalog
-                    banner={null}
-                    mobilemenuCatalogs={mobilemenuCatalogs}
-                />
-            )}
-            <div className={common_styles.container}>
+            <MobileMenuCatalog
+                banner={null}
+                mobilemenuCatalogs={mobilemenuCatalogs}
+            />
+            {/* <div className={common_styles.container}>
                 <div className={common_styles.index_page_filters}>
                     <HelpPickUp />
+                    {!breakpoint1023 && (
+                        <MattrassFilter
+                            filterAPIData={filterAPIData}
+                            filterProductsCount={filterProductsCount}
+                        />
+                    )}
                 </div>
-            </div>
+            </div> */}
+            <MattrassFilterNoSSR
+                filterAPIData={filterAPIData}
+                filterProductsCount={filterProductsCount}
+            />
             <ArticleListDesktop articles={articles} />
             {!breakpoint1023 && <Footer />}
         </div>
@@ -91,6 +100,7 @@ export const getStaticProps = async (ctx) => {
         'https://anatomiyasna.ru/api/menu/mobileMenu/',
         'https://anatomiyasna.ru/api/region/getRegions/',
         'https://www.anatomiyasna.ru/api/filter/filterModel/?slug=matrasy',
+        'https://anatomiyasna.ru/api/filter/filtredProducts/?slug=matrasy',
     ]
 
     // Parallel requests
@@ -116,8 +126,10 @@ export const getStaticProps = async (ctx) => {
     const mobileMenu = Response[6]
     const regions = Response[7]
     const filterAPIData = Response[8]
+    const filterProductsIds = Response[9]
 
     const phoneCommon = '8 (495) 287-87-95'
+    const filterProductsCount = filterProductsIds.length
     return {
         props: {
             articles,
@@ -129,6 +141,7 @@ export const getStaticProps = async (ctx) => {
             mobileMenu,
             regions,
             filterAPIData,
+            filterProductsCount,
         },
     }
 }

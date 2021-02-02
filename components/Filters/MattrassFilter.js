@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
 import { Range, getTrackBackground } from 'react-range'
-import findProducts from './../../../../actions/IndexPageMainFilter'
-import LoadingSpinner from './../../../UI/LoadingSpinners/IndexPageFilterLoadingSpinner'
-import { GenerateURLFromIndexPageFilter } from './../../../../utils/GenerateURLFromIndexPageFilter'
+import findProducts from './../../actions/IndexPageMainFilter'
+// import LoadingSpinner from './../../../UI/LoadingSpinners/IndexPageFilterLoadingSpinner'
+import { GenerateURLFromIndexPageFilter } from './../../utils/GenerateURLFromIndexPageFilter'
+
+import filter_styles from './../../styles/components/Filters/MattrassFilter.module.sass'
 
 const MainFilter = ({ filterAPIData, filterProductsCount }) => {
     const options = filterAPIData.size
@@ -134,8 +136,8 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
     useEffect(() => {
         setSelector(
             <Select
-                className="main-filter__selector"
-                classNamePrefix="main-filter__selector--inner"
+                className="main_filter__selector"
+                classNamePrefix="main_filter__selector--inner"
                 placeholder="Все"
                 options={options}
                 isSearchable={false}
@@ -150,8 +152,8 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
 
         setWeightSelector(
             <Select
-                className="main-filter__selector"
-                classNamePrefix="main-filter__selector--inner"
+                className="main_filter__selector"
+                classNamePrefix="main_filter__selector--inner"
                 placeholder="Все"
                 options={weightOptions}
                 isSearchable={false}
@@ -233,25 +235,27 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
     }, [url])
 
     return (
-        <div className="main-filter">
-            <div className="main-filter__filtername">
+        <div className={filter_styles.main_filter}>
+            <div className={filter_styles.main_filter__filtername}>
                 Подбор матраса по параметрам
             </div>
 
-            <div className="main-filter__content">
-                <div className="main-filter__leftside">
-                    <div className="main-filter__filter">
-                        <div className="main-filter__title">Цена (руб.)</div>
-                        <div className="main-filter__filters">
+            <div className={filter_styles.main_filter__content}>
+                <div className={filter_styles.main_filter__leftside}>
+                    <div className={filter_styles.main_filter__filter}>
+                        <div className={filter_styles.main_filter__title}>
+                            Цена (руб.)
+                        </div>
+                        <div className={filter_styles.main_filter__filters}>
                             <input
-                                className="main-filter__input main-filter__first-input"
+                                className={`${filter_styles.main_filter__input} ${filter_styles.main_filter__first_input}`}
                                 placeholder={values[0]
                                     .toString()
                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
                             ></input>
                             <span> - </span>
                             <input
-                                className="main-filter__input main-filter__second-input"
+                                className={`${filter_styles.main_filter__input} ${filter_styles.main_filter__second_input}`}
                                 placeholder={values[1]
                                     .toString()
                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
@@ -326,29 +330,33 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                             }}
                         />
                     </div>
-                    <div className="main-filter__filter">
-                        <div className="main-filter__title">Размер (см.)</div>
-                        {/* <div className="main-filter__selector--inner__control--menu-is-open"></div> */}
+                    <div className={filter_styles.main_filter__filter}>
+                        <div className={filter_styles.main_filter__title}>
+                            Размер (см.)
+                        </div>
+                        {/* <div className="main_filter__selector--inner__control--menu-is-open"></div> */}
                         {selector !== null && selector}
                     </div>
-                    <div className="main-filter__filter">
-                        <div className="main-filter__title">
+                    <div className={filter_styles.main_filter__filter}>
+                        <div className={filter_styles.main_filter__title}>
                             Макс. вес одного спящего
                         </div>
                         {weightSelector !== null && weightSelector}
                     </div>
-                    <div className="main-filter__filter">
-                        <div className="main-filter__title">Высота, см.</div>
-                        <div className="main-filter__filters">
+                    <div className={filter_styles.main_filter__filter}>
+                        <div className={filter_styles.main_filter__title}>
+                            Высота, см.
+                        </div>
+                        <div className={filter_styles.main_filter__filters}>
                             <input
-                                className="main-filter__input main-filter__first-input"
+                                className={`${filter_styles.main_filter__input} ${filter_styles.main_filter__first_input}`}
                                 placeholder={values2[0]
                                     .toString()
                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
                             ></input>
                             <span> - </span>
                             <input
-                                className="main-filter__input main-filter__second-input"
+                                className={`${filter_styles.main_filter__input} ${filter_styles.main_filter__second_input}`}
                                 placeholder={values2[1]
                                     .toString()
                                     .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
@@ -424,15 +432,27 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                         />
                     </div>
                 </div>
-                <div className="main-filter__centerside">
-                    <div className="main-filter__filter">
-                        <div className="main-filter__title">
+                <div className={filter_styles.main_filter__centerside}>
+                    <div className={filter_styles.main_filter__filter}>
+                        <div className={filter_styles.main_filter__title}>
                             <span>Жесткость верх</span>
-                            <div className="main-filter__title-popup">
-                                <svg className="main-filter__title-popup-svg">
+                            <div
+                                className={
+                                    filter_styles.main_filter__title_popup
+                                }
+                            >
+                                <svg
+                                    className={
+                                        filter_styles.main_filter__title_popup_svg
+                                    }
+                                >
                                     <path d="M11 7v3c3 0 5-1 5 1s-3 4-3 6v2c6 0 2-1 5-4 1-1 2-3 2-5s-1-3-3-4c-3 0-4 1-6 1zM12 22c0 1 1 3 3 3 1 0 2-1 2-3 0-3-5-3-5 0z"></path>
                                 </svg>
-                                <div className="main-filter__title-popup-text">
+                                <div
+                                    className={
+                                        filter_styles.main_filter__title_popup_text
+                                    }
+                                >
                                     Жесткость верхней стороны определяется
                                     составом матраса. Разная жесткость сторон
                                     подходит для тех, кто не определился с
@@ -446,13 +466,15 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="main-filter__wrapper">
+                        <div className={filter_styles.main_filter__wrapper}>
                             {rigidityUpProperty.checkboxes.map(
                                 (checkbox, id) => {
                                     return (
                                         <label
                                             key={id}
-                                            className="main-filter__checkbox-container"
+                                            className={
+                                                filter_styles.main_filter__checkbox_container
+                                            }
                                         >
                                             <input
                                                 onChange={() => {
@@ -462,7 +484,11 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                                                 }}
                                                 type="checkbox"
                                             />
-                                            <span className="main-filter__checkmark"></span>
+                                            <span
+                                                className={
+                                                    filter_styles.main_filter__checkmark
+                                                }
+                                            ></span>
                                             <h6>{checkbox.label}</h6>
                                         </label>
                                     )
@@ -470,14 +496,28 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                             )}
                         </div>
                     </div>
-                    <div className="main-filter__filter">
-                        <div className="main-filter__title">
+                    <div className={filter_styles.main_filter__filter}>
+                        <div className={filter_styles.main_filter__title}>
                             <span>Жесткость низ</span>
-                            <div className="main-filter__title-popup">
-                                <svg className="main-filter__title-popup-svg">
+                            <div
+                                className={
+                                    filter_styles.main_filter__titl_popup
+                                }
+                            >
+                                <svg
+                                    style={{ display: 'none' }}
+                                    className={
+                                        filter_styles.main_filter__title_popup_svg
+                                    }
+                                >
                                     <path d="M11 7v3c3 0 5-1 5 1s-3 4-3 6v2c6 0 2-1 5-4 1-1 2-3 2-5s-1-3-3-4c-3 0-4 1-6 1zM12 22c0 1 1 3 3 3 1 0 2-1 2-3 0-3-5-3-5 0z"></path>
                                 </svg>
-                                <div className="main-filter__title-popup-text">
+                                <div
+                                    style={{ display: 'none' }}
+                                    className={
+                                        filter_styles.main_filter__title_popup_text
+                                    }
+                                >
                                     Жесткость нижней стороны определяется
                                     составом матраса. От жесткости нижней
                                     стороны зависит качество и комфорт Вашего
@@ -486,13 +526,15 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="main-filter__wrapper">
+                        <div className={filter_styles.main_filter__wrapper}>
                             {rigidityDownProperty.checkboxes.map(
                                 (checkbox, id) => {
                                     return (
                                         <label
                                             key={id}
-                                            className="main-filter__checkbox-container"
+                                            className={
+                                                filter_styles.main_filter__checkbox_container
+                                            }
                                         >
                                             <input
                                                 onChange={() => {
@@ -503,7 +545,11 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                                                 value={checkbox.value}
                                                 type="checkbox"
                                             />
-                                            <span className="main-filter__checkmark"></span>
+                                            <span
+                                                className={
+                                                    filter_styles.main_filter__checkmark
+                                                }
+                                            ></span>
                                             <h6>{checkbox.label}</h6>
                                         </label>
                                     )
@@ -512,15 +558,27 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                         </div>
                     </div>
                 </div>
-                <div className="main-filter__rightside">
-                    <div className="main-filter__filter">
-                        <div className="main-filter__title">
+                <div className={filter_styles.main_filter__rightside}>
+                    <div className={filter_styles.main_filter__filter}>
+                        <div className={filter_styles.main_filter__title}>
                             <span>Тип конструкции</span>
-                            <div className="main-filter__title-popup">
-                                <svg className="main-filter__title-popup-svg">
+                            <div
+                                className={
+                                    filter_styles.main_filter__title_popup
+                                }
+                            >
+                                <svg
+                                    className={
+                                        filter_styles.main_filter__title_popup_svg
+                                    }
+                                >
                                     <path d="M11 7v3c3 0 5-1 5 1s-3 4-3 6v2c6 0 2-1 5-4 1-1 2-3 2-5s-1-3-3-4c-3 0-4 1-6 1zM12 22c0 1 1 3 3 3 1 0 2-1 2-3 0-3-5-3-5 0z"></path>
                                 </svg>
-                                <div className="main-filter__title-popup-text">
+                                <div
+                                    className={
+                                        filter_styles.main_filter__title_popup_text
+                                    }
+                                >
                                     Конструкция матраса определяет степень
                                     поддержки тела во время сна, а также его
                                     ортопедические и анатомические свойства. От
@@ -529,13 +587,15 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="main-filter__wrapper">
+                        <div className={filter_styles.main_filter__wrapper}>
                             {typeOfConstruction.checkboxes.map(
                                 (checkbox, id) => {
                                     return (
                                         <label
                                             key={id}
-                                            className="main-filter__checkbox-container"
+                                            className={
+                                                filter_styles.main_filter__checkbox_container
+                                            }
                                         >
                                             <input
                                                 onChange={() => {
@@ -545,7 +605,11 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                                                 }}
                                                 type="checkbox"
                                             />
-                                            <span className="main-filter__checkmark"></span>
+                                            <span
+                                                className={
+                                                    filter_styles.main_filter__checkmark
+                                                }
+                                            ></span>
                                             <h6>{checkbox.label}</h6>
                                         </label>
                                     )
@@ -554,50 +618,90 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                         </div>
                     </div>
 
-                    <div className="main-filter__filter wrong-filter">
-                        <div className="main-filter__title">Опции</div>
-                        <div className="main-filter__wrapper">
-                            <label className="main-filter__checkbox-container">
+                    <div
+                        className={`${filter_styles.main_filter__filter} ${filter_styles.wrong_filter}`}
+                    >
+                        <div className={filter_styles.main_filter__title}>
+                            Опции
+                        </div>
+                        <div className={filter_styles.main_filter__wrapper}>
+                            <label
+                                className={
+                                    filter_styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input
                                     onChange={() => {
                                         onOptionTypeClickHandler('discount')
                                     }}
                                     type="checkbox"
                                 />
-                                <span className="main-filter__checkmark"></span>
+                                <span
+                                    className={
+                                        filter_styles.main_filter__checkmark
+                                    }
+                                ></span>
                                 <h6>Скидка</h6>
                             </label>
-                            <label className="main-filter__checkbox-container">
+                            <label
+                                className={
+                                    filter_styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input
                                     onChange={() => {
                                         onOptionTypeClickHandler('newest')
                                     }}
                                     type="checkbox"
                                 />
-                                <span className="main-filter__checkmark"></span>
+                                <span
+                                    className={
+                                        filter_styles.filter_stylesmain_filter__checkmark
+                                    }
+                                ></span>
                                 <h6>Новинка</h6>
                             </label>
-                            <label className="main-filter__checkbox-container">
+                            <label
+                                className={
+                                    filter_styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input
                                     onChange={() => {
                                         onOptionTypeClickHandler('gift')
                                     }}
                                     type="checkbox"
                                 />
-                                <span className="main-filter__checkmark"></span>
+                                <span
+                                    className={
+                                        filter_styles.main_filter__checkmark
+                                    }
+                                ></span>
                                 <h6>Подарок</h6>
                             </label>
-                            <label className="main-filter__checkbox-container">
+                            <label
+                                className={
+                                    filter_styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input
                                     onChange={() => {
                                         onOptionTypeClickHandler('recommended')
                                     }}
                                     type="checkbox"
                                 />
-                                <span className="main-filter__checkmark"></span>
+                                <span
+                                    className={
+                                        filter_styles.main_filter__checkmark
+                                    }
+                                ></span>
                                 <h6>Выбор покупателей</h6>
                             </label>
-                            <label className="main-filter__checkbox-container">
+                            <label
+                                className={
+                                    filter_styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input
                                     onChange={() => {
                                         onOptionTypeClickHandler(
@@ -606,16 +710,20 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                                     }}
                                     type="checkbox"
                                 />
-                                <span className="main-filter__checkmark"></span>
+                                <span
+                                    className={
+                                        filter_styles.main_filter__checkmark
+                                    }
+                                ></span>
                                 <h6>Бесплатная доставка</h6>
                             </label>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="main-filter__result">
-                <div className="main-filter__result-count">
-                    {reduxCount.loading && (
+            <div className={filter_styles.main_filter__result}>
+                <div className={filter_styles.main_filter__result_count}>
+                    {/* {reduxCount.loading && (
                         <LoadingSpinner
                             width={'20px'}
                             height={'20px'}
@@ -624,7 +732,7 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                             marginTop={'-30px'}
                             className="loader-style-inner1"
                         />
-                    )}
+                    )} */}
                     {!reduxCount.loading && (
                         <span>
                             Найдено{' '}
@@ -638,7 +746,7 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                 </div>
                 <div
                     onClick={onButtonClickHandler}
-                    className="btn yellow-btn main-filter__button"
+                    className={`${filter_styles.btn} ${filter_styles.yellow_btn} ${filter_styles.main_filter__button}`}
                 >
                     {/* {reduxCount.loading ? (
                         <LoadingSpinner

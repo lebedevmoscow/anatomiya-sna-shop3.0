@@ -1,6 +1,7 @@
 .mobile_menu
     margin-top: 1px
     font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+    display: none
     .mobile_menu__item
         display: flex
         align-items: center
@@ -31,3 +32,7 @@
     display: block
     width: 100%
     margin-top: 40px
+
+@media screen and ( max-width: 768px )
+    .mobile_menu
+        display: block

@@ -1,5 +1,6 @@
 .mobile_nav_menu__wrapper
     position: relative
+    display: none
 
 .mobile_burger_menu_catalog__labels
     font-size: 18px
@@ -297,3 +298,7 @@
         background-color: #fff
         border-radius: 5px
         border: 1px solid #0ca5d3
+
+@media screen and ( max-width: 768px )
+    .mobile_nav_menu__wrapper
+        display: block
