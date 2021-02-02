@@ -19,6 +19,8 @@ import HelpPickUp from './../components/Banners/HelpPickUp'
 import ProductListForDesktop from './../components/Products/IndexPageProductListForDesktop'
 import CatalogList from './../components/Catalog/CatalogList'
 import ReviewList from './../components/Reviews/ReviewList'
+import SalesList from './../components/Sales/SalesList'
+import AboutMattrasses from './../components/AboutMattrasses'
 
 // Experemental
 // const MobileMenuCatalogNoSSR = dynamic(
@@ -44,11 +46,11 @@ const App = ({
     products,
     mobileCatalogs,
     reviews,
+    sales,
+    mattrassesText,
 }) => {
     // Breakpoints
     const breakpoint1023 = useMedia(1023)
-
-    console.log('products', products)
 
     return (
         <div className="app">
@@ -95,6 +97,8 @@ const App = ({
             <CatalogList mobileCatalogs={mobileCatalogs} />
             <ArticleListDesktop articles={articles} />
             <ReviewList reviews={reviews} />
+            <SalesList sales={sales} />
+            <AboutMattrasses mattrassesText={mattrassesText} />
             {!breakpoint1023 && <Footer />}
         </div>
     )
@@ -106,7 +110,7 @@ export const getStaticProps = async (ctx) => {
     // Fetching Data
     const URLS = [
         'https://www.anatomiyasna.ru/api/journal/article-list?mode=new&page=1&limit=6',
-        'https://www.anatomiyasna.ru/api/mainPage/sales/',
+        'https://www.anatomiyasna.ru/api/sale/sale-list/',
         'https://www.anatomiyasna.ru/api/menu/headerCatalog/',
         'https://anatomiyasna.ru/api/parameters/saleBanner/',
         'https://www.anatomiyasna.ru/api/parameters/all/',
@@ -118,15 +122,20 @@ export const getStaticProps = async (ctx) => {
         'https://anatomiyasna.ru/api/productService/getPopularProductModels/?firstPrice=true',
         'https://www.anatomiyasna.ru/api/mainPage/catalogs/',
         'https://www.anatomiyasna.ru/api/mainPage/shopResponses/',
+        'https://anatomiyasna.ru/api/mainPage/text/',
     ]
 
     // Parallel requests
     let Response = {}
     await Promise.all(
-        URLS.map(async (url) => {
+        URLS.map(async (url, index) => {
             return fetch(url).then((resp) => {
                 if (resp && resp.status !== 404) {
-                    return resp.json()
+                    if (index === 13) {
+                        return resp.text()
+                    } else {
+                        return resp.json()
+                    }
                 } else return null
             })
         })
@@ -136,6 +145,7 @@ export const getStaticProps = async (ctx) => {
 
     // Assignment of values
     const articles = Response[0]
+    const sales = Response[1]
     const headerCatalog = Response[2]
     const banner = Response[3]
     const worktimeHead = Response[4].worktime_head
@@ -147,6 +157,7 @@ export const getStaticProps = async (ctx) => {
     const products = Response[10]
     const mobileCatalogs = Response[11]
     const reviews = Response[12]
+    const mattrassesText = Response[13]
 
     const phoneCommon = '8 (495) 287-87-95'
     const filterProductsCount = filterProductsIds.length
@@ -165,6 +176,8 @@ export const getStaticProps = async (ctx) => {
             products,
             mobileCatalogs,
             reviews,
+            sales,
+            mattrassesText,
         },
     }
 }

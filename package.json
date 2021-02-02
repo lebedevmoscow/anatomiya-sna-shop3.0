@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@svgr/webpack": "^5.5.0",
+    "fast-xml-parser": "^3.17.6",
+    "html-react-parser": "^1.2.4",
+    "moment": "^2.29.1",
     "next": "10.0.6",
     "next-images": "^1.7.0",
     "next-redux-wrapper": "^6.0.2",
