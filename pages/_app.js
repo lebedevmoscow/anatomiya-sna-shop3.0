@@ -3,6 +3,9 @@ import '../styles/globals.css'
 // Third party styles
 import 'react-slidedown/lib/slidedown.css'
 
+// Styles
+import './../styles/unmoduled.sass'
+
 // Redux
 import { createWrapper } from 'next-redux-wrapper'
 import { Provider } from 'react-redux'

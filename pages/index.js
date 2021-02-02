@@ -18,16 +18,17 @@ import MattrassFilter from './../components/Filters/MattrassFilter'
 import HelpPickUp from './../components/Banners/HelpPickUp'
 import ProductListForDesktop from './../components/Products/IndexPageProductListForDesktop'
 import CatalogList from './../components/Catalog/CatalogList'
+import ReviewList from './../components/Reviews/ReviewList'
 
 // Experemental
 // const MobileMenuCatalogNoSSR = dynamic(
 //     () => import('./../components/Mobile/MobileMenuCatalog'),
 //     { ssr: false }
 // )
-const MattrassFilterNoSSR = dynamic(
-    () => import('./../components/NOSSR/MattrassFilter'),
-    { ssr: false }
-)
+// const MattrassFilterNoSSR = dynamic(
+//     () => import('./../components/NOSSR/MattrassFilter'),
+//     { ssr: false }
+// )
 
 const App = ({
     articles,
@@ -42,6 +43,7 @@ const App = ({
     filterProductsCount,
     products,
     mobileCatalogs,
+    reviews,
 }) => {
     // Breakpoints
     const breakpoint1023 = useMedia(1023)
@@ -91,8 +93,8 @@ const App = ({
                 </div>
             </div> */}
             <CatalogList mobileCatalogs={mobileCatalogs} />
-
             <ArticleListDesktop articles={articles} />
+            <ReviewList reviews={reviews} />
             {!breakpoint1023 && <Footer />}
         </div>
     )
@@ -115,6 +117,7 @@ export const getStaticProps = async (ctx) => {
         'https://anatomiyasna.ru/api/filter/filtredProducts/?slug=matrasy',
         'https://anatomiyasna.ru/api/productService/getPopularProductModels/?firstPrice=true',
         'https://www.anatomiyasna.ru/api/mainPage/catalogs/',
+        'https://www.anatomiyasna.ru/api/mainPage/shopResponses/',
     ]
 
     // Parallel requests
@@ -143,6 +146,7 @@ export const getStaticProps = async (ctx) => {
     const filterProductsIds = Response[9]
     const products = Response[10]
     const mobileCatalogs = Response[11]
+    const reviews = Response[12]
 
     const phoneCommon = '8 (495) 287-87-95'
     const filterProductsCount = filterProductsIds.length
@@ -160,6 +164,7 @@ export const getStaticProps = async (ctx) => {
             filterProductsCount,
             products,
             mobileCatalogs,
+            reviews,
         },
     }
 }
