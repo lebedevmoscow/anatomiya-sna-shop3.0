@@ -5,6 +5,7 @@ import 'react-slidedown/lib/slidedown.css'
 
 // Styles
 import './../styles/unmoduled.sass'
+import './../styles/spinners.css'
 
 // Redux
 import { createWrapper } from 'next-redux-wrapper'

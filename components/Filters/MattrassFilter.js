@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
 import { Range, getTrackBackground } from 'react-range'
 import findProducts from './../../actions/IndexPageMainFilter'
-// import LoadingSpinner from './../../../UI/LoadingSpinners/IndexPageFilterLoadingSpinner'
+import LoadingSpinner from './../Spinners/MattrassFilterSpinner'
 import { GenerateURLFromIndexPageFilter } from './../../utils/GenerateURLFromIndexPageFilter'
 
 import filter_styles from './../../styles/components/Filters/MattrassFilter.module.sass'
@@ -723,7 +723,7 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
             </div>
             <div className={filter_styles.main_filter__result}>
                 <div className={filter_styles.main_filter__result_count}>
-                    {/* {reduxCount.loading && (
+                    {reduxCount.loading && (
                         <LoadingSpinner
                             width={'20px'}
                             height={'20px'}
@@ -732,7 +732,7 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
                             marginTop={'-30px'}
                             className="loader-style-inner1"
                         />
-                    )} */}
+                    )}
                     {!reduxCount.loading && (
                         <span>
                             Найдено{' '}
