@@ -139,7 +139,7 @@ const App = ({
             <Assuracnes assurances={assurances} /> */}
             {/* <Subscribe /> */}
             <MobileFooter />
-            {/* {!breakpoint1023 && <Footer />} */}
+            <Footer />
         </div>
     )
 }

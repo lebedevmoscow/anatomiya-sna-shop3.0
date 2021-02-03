@@ -3,7 +3,6 @@ import Image from 'next/image'
 
 // Styles
 import footer_styles from './../../styles/components/Footer/FooterDesktop.module.sass'
-import common_styles from './../../styles/common.module.sass'
 
 // Images
 import VKImage from './../../assets/vk.png'
@@ -19,7 +18,7 @@ import PayKeeperImage from './../../assets/paykeeper.png'
 const Footer = () => {
     return (
         <div className={footer_styles.footer__wrapper}>
-            <div className={common_styles.container}>
+            <div className={footer_styles.container}>
                 <div className={footer_styles.footer}>
                     <div className={footer_styles.footer__left}>
                         <div className={footer_styles.footer__info}>
@@ -446,7 +445,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className={footer_styles.copyright}>
-                <div className={common_styles.container}>
+                <div className={footer_styles.container}>
                     2020 ©{' '}
                     <Link href="/">
                         <a>Анатомия сна.</a>
