@@ -16,7 +16,7 @@ import MobileBurgerMenu from './../components/Mobile/MobileBurgerMenu'
 import MobileMenuCatalog from './../components/Mobile/MobileMenuCatalog'
 import MattrassFilter from './../components/Filters/MattrassFilter'
 import HelpPickUp from './../components/Banners/HelpPickUp'
-import ProductListForDesktop from './../components/Products/IndexPageProductListForDesktop'
+// import ProductListForDesktop from './../components/Products/IndexPageProductListForDesktop'
 import CatalogList from './../components/Catalog/CatalogList'
 import ReviewList from './../components/Reviews/ReviewList'
 
@@ -28,6 +28,30 @@ import ReviewList from './../components/Reviews/ReviewList'
 // const MattrassFilterNoSSR = dynamic(
 //     () => import('./../components/NOSSR/MattrassFilter'),
 //     { ssr: false }
+// )
+
+// const ArticleListDesktop = dynamic(
+//     () => import('./../components/Article/ArticleListDesktop'),
+//     {
+//         loading: () => <></>,
+//     }
+// )
+
+// const ReviewList = dynamic(() => import('./../components/Reviews/ReviewList'), {
+//     loading: () => <></>,
+// })
+
+// const HelpPickUp = dynamic(() => import('./../components/Banners/HelpPickUp'), {
+//     loading: () => <></>,
+//     ssr: false,
+// })
+
+// const MattrassFilter = dynamic(
+//     () => import('./../components/Filters/MattrassFilter'),
+//     {
+//         loading: () => <></>,
+//         ssr: false,
+//     }
 // )
 
 const App = ({
