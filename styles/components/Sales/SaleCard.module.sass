@@ -1,0 +1,111 @@
+.sale_item__wrapper
+
+    // width: 370.97px
+    // height: 207.73px
+    // border-radius: 6px
+    // position: relative
+    .sale_item
+        width: 370.97px
+        height: 207.73px
+        border-radius: 6px
+        position: relative
+
+    .sale_item__date
+        display: inline-block
+        background-color: #0ca5d3
+            // background-color: red
+        padding: 6px 10px 6px 10px
+        border-radius: 6px
+        line-height: 1
+        font-weight: 400
+        font-size: 11px
+        margin-top: 15px
+        margin-left: 15px
+        color: #ffffff
+        img
+            display: inline-block
+            margin-right: 10px
+
+    .sale_item__tillend
+        display: inline-block
+        position: absolute
+        top: 90%
+        right: 3%
+        color: #fff
+        transform: translate(-3%, -90%)
+        background-color: #0ca5d3
+        padding: 6px 10px 6px 10px
+        border-radius: 6px
+        line-height: 1
+        font-weight: 400
+
+    .sale_item__tillend_small_text
+        font-size: 10px
+        text-align: center
+
+    .sale_item__counter
+        margin-top: 5px
+        display: flex
+        justify-content: center
+
+    .sale_item__number
+        display: block
+        font-size: 20px
+        text-align: center
+
+    .sale_item__date_string
+        display: block
+        font-size: 10px
+
+    .sale_item__title
+        width: 370.97px
+        color: #444
+        font-size: 20px
+        height: 44px
+        margin-top: 30px
+        line-height: 1.1
+        font-weight: 400
+
+@media screen and ( max-width: 1120px )
+
+    .sales
+        .sales__btn
+            margin-top: 170px
+
+@media screen and ( max-width: 1024px )
+
+    .sale_item__wrapper
+        .sale_item__tillend
+            top: 75%
+
+        .sale_item__title
+            width: 100%
+            margin-top: 35px
+
+        .sales__disclaimer
+            width: 95%
+
+@media screen and ( max-width: 768px )
+
+    .sale_item__wrapper
+        .sale_item
+            height: 145.73px
+
+    .sales
+        .sales__btn
+            margin-top: 70px
+
+@media screen and ( max-width: 720px )
+
+    .sale_item__wrapper
+        .sale_item__tillend
+            top: 90%
+
+@media screen and ( max-width: 450px )
+
+    .sales
+        .sales__btn
+            margin-top: 0
+        .sales__list
+            .sale_item__wrapper
+                margin-bottom: 70px !important
