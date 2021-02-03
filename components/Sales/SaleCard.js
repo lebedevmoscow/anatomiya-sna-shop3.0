@@ -40,7 +40,7 @@ const Sale = ({ sale }) => {
             <div
                 className={card_styles.sale_item}
                 style={{
-                    // background: `url(${sale.image}) no-repeat`,
+                    background: `url(${sale.image}) no-repeat`,
                     backgroundSize: `${backgroundSizeType}`,
                     backgroundPosition: 'top center',
                     // backgroundSize: 'contain',

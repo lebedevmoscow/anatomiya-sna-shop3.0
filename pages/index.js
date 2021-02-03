@@ -83,6 +83,7 @@ const App = ({
 }) => {
     // Breakpoints
     const breakpoint1023 = useMedia(1023)
+    const breakpoint600 = useMedia(600)
 
     return (
         <div className="app">
@@ -107,17 +108,20 @@ const App = ({
                 banner={null}
                 mobilemenuCatalogs={mobilemenuCatalogs}
             />
-            <div className={common_styles.container}>
-                <div className={common_styles.index_page_filters}>
-                    <HelpPickUp />
-                    {!breakpoint1023 && (
-                        <MattrassFilter
-                            filterAPIData={filterAPIData}
-                            filterProductsCount={filterProductsCount}
-                        />
-                    )}
+
+            {!breakpoint600 && (
+                <div className={common_styles.container}>
+                    <div className={common_styles.index_page_filters}>
+                        <HelpPickUp />
+                        {!breakpoint1023 && (
+                            <MattrassFilter
+                                filterAPIData={filterAPIData}
+                                filterProductsCount={filterProductsCount}
+                            />
+                        )}
+                    </div>
                 </div>
-            </div>
+            )}
 
             {/* <div className={common_styles.container}>
                 <div className="index_page_products">

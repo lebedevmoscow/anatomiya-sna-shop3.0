@@ -209,7 +209,7 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
                                 <li ref={cartIconRef}>
                                     <Image
                                         src={CartIcon}
-                                        width={25.5}
+                                        width={40.5}
                                         height={25.5}
                                     />
                                 </li>

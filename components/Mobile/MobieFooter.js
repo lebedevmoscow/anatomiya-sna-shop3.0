@@ -145,7 +145,7 @@ const MobileFooter = () => {
                             </Link>{' '}
                             Все права защищены.
                         </div>
-                        <div
+                        {/* <div
                             className={
                                 footer_styles.copyright_mobile__go_to_full
                             }
@@ -155,7 +155,7 @@ const MobileFooter = () => {
                             >
                                 Полная версия сайта
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

@@ -16,6 +16,30 @@
         flex-wrap: wrap
         justify-content: space-between
 
+@media screen and ( max-width: 1250px )
+
+    .reviews
+        .review
+            width: 24%
+            .review__text
+                width: auto
+                font-size: 10px
+
+@media screen and ( max-width: 1023px )
+
+    .reviews
+        .reviews__list
+            flex-wrap: wrap
+        .review
+            width: 32%
+            // &:last-child
+            //     display: none
+            .review__text
+                font-size: 13px
+
+            .review__section_name
+                font-size: 19px
+
 @media screen and ( max-width: 768px )
 
     .reviews
@@ -25,9 +49,25 @@
                 &:last-child
                     display: none
 
+@media screen and ( max-width: 720px )
+
+    .reviews
+        .review
+            width: 49%
+            &:last-child
+                // display: none
+            &:nth-child(3)
+                // display: none
+
 @media screen and ( max-width: 450px )
 
     .reviews
-        .reviews__list
-            .review
-                margin-bottom: 30px
+        .review__section_name
+            margin-top: 10px
+            font-size: 24px
+            text-align: center
+
+    // .reviews
+    //     .reviews__list
+    //         .review
+    //             margin-bottom: 30px
