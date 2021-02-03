@@ -10,18 +10,18 @@ import common_styles from './../styles/common.module.sass'
 // React components
 import Header from './../components/Header'
 import MainNavigation from './../components/Nav/MainNavigation'
-import ArticleListDesktop from './../components/Article/ArticleListDesktop'
+// import ArticleListDesktop from './../components/Article/ArticleListDesktop'
 import Footer from './../components/Footer/FooterDesktop'
-import MobileBurgerMenu from './../components/Mobile/MobileBurgerMenu'
-import MobileMenuCatalog from './../components/Mobile/MobileMenuCatalog'
-import MattrassFilter from './../components/Filters/MattrassFilter'
-import HelpPickUp from './../components/Banners/HelpPickUp'
+// import MobileBurgerMenu from './../components/Mobile/MobileBurgerMenu'
+// import MobileMenuCatalog from './../components/Mobile/MobileMenuCatalog'
+// import MattrassFilter from './../components/Filters/MattrassFilter'
+// import HelpPickUp from './../components/Banners/HelpPickUp'
 // import ProductListForDesktop from './../components/Products/IndexPageProductListForDesktop'
-import CatalogList from './../components/Catalog/CatalogList'
-import ReviewList from './../components/Reviews/ReviewList'
-import SalesList from './../components/Sales/SalesList'
-import AboutMattrasses from './../components/AboutMattrasses'
-import Assuracnes from './../components/Assurances'
+// import CatalogList from './../components/Catalog/CatalogList'
+// import ReviewList from './../components/Reviews/ReviewList'
+// import SalesList from './../components/Sales/SalesList'
+// import AboutMattrasses from './../components/AboutMattrasses'
+// import Assuracnes from './../components/Assurances'
 import Subscribe from './../components/Subscribe'
 import MobileFooter from './../components/Mobile/MobieFooter'
 
@@ -87,11 +87,12 @@ const App = ({
 
     return (
         <div className="app">
-            <MobileBurgerMenu
+            <h1>Hello world</h1>
+            {/* <MobileBurgerMenu
                 mobilemenuCatalogs={mobilemenuCatalogs}
                 mobileMenu={mobileMenu}
                 regions={regions}
-            />
+            /> */}
             <Header
                 worktimeHead={worktimeHead}
                 banner={null}
@@ -104,7 +105,7 @@ const App = ({
                 banner={null}
                 mobilemenuCatalogs={mobilemenuCatalogs}
             /> */}
-            <MobileMenuCatalog
+            {/* <MobileMenuCatalog
                 banner={null}
                 mobilemenuCatalogs={mobilemenuCatalogs}
             />
@@ -121,7 +122,7 @@ const App = ({
                         )}
                     </div>
                 </div>
-            )}
+            )} */}
 
             {/* <div className={common_styles.container}>
                 <div className="index_page_products">
@@ -130,15 +131,15 @@ const App = ({
                     </div>
                 </div>
             </div> */}
-            <CatalogList mobileCatalogs={mobileCatalogs} />
+            {/* <CatalogList mobileCatalogs={mobileCatalogs} />
             <ArticleListDesktop articles={articles} />
-            <ReviewList reviews={reviews} />
-            <SalesList sales={sales} />
-            <AboutMattrasses mattrassesText={mattrassesText} />
-            <Assuracnes assurances={assurances} />
-            <Subscribe />
+            <ReviewList reviews={reviews} /> */}
+            {/* <SalesList sales={sales} /> */}
+            {/* <AboutMattrasses mattrassesText={mattrassesText} />
+            <Assuracnes assurances={assurances} /> */}
+            {/* <Subscribe /> */}
             <MobileFooter />
-            {!breakpoint1023 && <Footer />}
+            {/* {!breakpoint1023 && <Footer />} */}
         </div>
     )
 }
@@ -162,7 +163,7 @@ export const getStaticProps = async (ctx) => {
         'https://www.anatomiyasna.ru/api/mainPage/catalogs/',
         'https://www.anatomiyasna.ru/api/mainPage/shopResponses/',
         'https://www.anatomiyasna.ru/api/sale/sale-list/',
-        'https://anatomiyasna.ru/api/mainPage/text/',
+        // 'https://anatomiyasna.ru/api/mainPage/text/',
     ]
 
     // Parallel requests
@@ -197,8 +198,8 @@ export const getStaticProps = async (ctx) => {
     const mobileCatalogs = Response[11]
     const reviews = Response[12]
     const sales = Response[13]
-    const mattrassesText = Response[14]
-    const assurances = Response[4].main_page_warranty_text
+    // const mattrassesText = Response[14]
+    // const assurances = Response[4].main_page_warranty_text
 
     const phoneCommon = '8 (495) 287-87-95'
     const filterProductsCount = filterProductsIds.length
@@ -218,8 +219,8 @@ export const getStaticProps = async (ctx) => {
             mobileCatalogs,
             reviews,
             sales,
-            mattrassesText,
-            assurances,
+            // mattrassesText,
+            // assurances,
         },
     }
 }

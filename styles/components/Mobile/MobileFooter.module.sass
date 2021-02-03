@@ -1,6 +1,7 @@
 .mobile_footer__wrapper
     background-color: #f7f9fb
     font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+    display: none
 
     .mobile_footer
         padding-top: 30px
@@ -105,3 +106,15 @@
         border-radius: 5px
         background-color: #fff
         width: 320px
+
+.container
+    max-width: 1234px
+    margin: 0 auto
+    padding: 0 30px
+    width: 100%
+    box-sizing: border-box
+
+@media screen and ( max-width: 450px )
+
+    .mobile_footer__wrapper
+        display: block
