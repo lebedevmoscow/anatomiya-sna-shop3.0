@@ -23,6 +23,7 @@ import SalesList from './../components/Sales/SalesList'
 import AboutMattrasses from './../components/AboutMattrasses'
 import Assuracnes from './../components/Assurances'
 import Subscribe from './../components/Subscribe'
+import MobileFooter from './../components/Mobile/MobieFooter'
 
 // Experemental
 // const MobileMenuCatalogNoSSR = dynamic(
@@ -132,6 +133,7 @@ const App = ({
             <AboutMattrasses mattrassesText={mattrassesText} />
             <Assuracnes assurances={assurances} />
             <Subscribe />
+            <MobileFooter />
             {!breakpoint1023 && <Footer />}
         </div>
     )
