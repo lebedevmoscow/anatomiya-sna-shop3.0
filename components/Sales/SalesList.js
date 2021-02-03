@@ -4,7 +4,6 @@ import useMediaQuery from './../../hooks/useMedia'
 import Sale from './SaleCard'
 import LoadMoreButton from './../Button/LoadMoreButton'
 
-import common_styles from './../../styles/common.module.sass'
 import list_styles from './../../styles/components/Sales/SalesList.module.sass'
 
 const IndexPageSales = ({ sales }) => {
@@ -44,7 +43,7 @@ const IndexPageSales = ({ sales }) => {
     }, [loadedMore])
 
     return (
-        <div className={common_styles.container}>
+        <div className={list_styles.container}>
             <div className={list_styles.sales}>
                 <div className={list_styles.sales__section_name}>Акции</div>
                 <div className={list_styles.sales__list}>

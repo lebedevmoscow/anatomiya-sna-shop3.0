@@ -1,5 +1,11 @@
+import { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+
+// Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { init as favoriteInit } from './../../actions/FavoritesProductsList'
+import { init as compareInit } from './../../actions/CompareProductsList'
 
 import mainheader_styles from './../../styles/components/Header/MainHeader.module.sass'
 
@@ -17,6 +23,15 @@ import Searchbar from './../Search/Search'
 
 const MainHeader = ({ phoneCommon }) => {
     const hasWindow = typeof window !== 'undefined'
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (hasWindow) {
+            // Init function to grab all procuts from favorite list
+            dispatch(favoriteInit())
+            dispatch(compareInit())
+        }
+    }, [hasWindow])
 
     return (
         <div className={mainheader_styles.main_header}>

@@ -10,24 +10,28 @@ import common_styles from './../styles/common.module.sass'
 // React components
 import Header from './../components/Header'
 import MainNavigation from './../components/Nav/MainNavigation'
-// import ArticleListDesktop from './../components/Article/ArticleListDesktop'
+import ArticleListDesktop from './../components/Article/ArticleListDesktop'
 import Footer from './../components/Footer/FooterDesktop'
-// import MobileBurgerMenu from './../components/Mobile/MobileBurgerMenu'
-// import MobileMenuCatalog from './../components/Mobile/MobileMenuCatalog'
-// import MattrassFilter from './../components/Filters/MattrassFilter'
-// import HelpPickUp from './../components/Banners/HelpPickUp'
-// import ProductListForDesktop from './../components/Products/IndexPageProductListForDesktop'
-// import CatalogList from './../components/Catalog/CatalogList'
-// import ReviewList from './../components/Reviews/ReviewList'
-// import SalesList from './../components/Sales/SalesList'
-// import AboutMattrasses from './../components/AboutMattrasses'
-// import Assuracnes from './../components/Assurances'
+import MobileBurgerMenu from './../components/Mobile/MobileBurgerMenu'
+import MobileMenuCatalog from './../components/Mobile/MobileMenuCatalog'
+import MattrassFilter from './../components/Filters/MattrassFilter'
+import HelpPickUp from './../components/Banners/HelpPickUp'
+import ProductListForDesktop from './../components/Products/IndexPageProductListForDesktop'
+import CatalogList from './../components/Catalog/CatalogList'
+import ReviewList from './../components/Reviews/ReviewList'
+import SalesList from './../components/Sales/SalesList'
+import AboutMattrasses from './../components/AboutMattrasses'
+import Assuracnes from './../components/Assurances'
 import Subscribe from './../components/Subscribe'
 import MobileFooter from './../components/Mobile/MobieFooter'
 
 // Experemental
-// const MobileMenuCatalogNoSSR = dynamic(
-//     () => import('./../components/Mobile/MobileMenuCatalog'),
+// const IndexLazyLoad = dynamic(
+//     () => import('./../components/NOSSR/IndexLazyLoad'),
+//     { ssr: false }
+// )
+// const ProductListForDesktop = dynamic(
+//     () => import('./../components/Products/IndexPageProductListForDesktop'),
 //     { ssr: false }
 // )
 // const MattrassFilterNoSSR = dynamic(
@@ -36,7 +40,7 @@ import MobileFooter from './../components/Mobile/MobieFooter'
 // )
 
 // const SalesList = dynamic(() => import('./../components/Sales/SalesList'), {
-//     ssr: true,
+//     ssr: false,
 // })
 
 // const ArticleListDesktop = dynamic(
@@ -78,21 +82,24 @@ const App = ({
     mobileCatalogs,
     reviews,
     sales,
-    mattrassesText,
-    assurances,
+    // mattrassesText,
+    // assurances,
 }) => {
     // Breakpoints
+    // const hasWindow = typeof window !== 'undefined'
+    // const [filter, setFilter] = useState(null)
+
     const breakpoint1023 = useMedia(1023)
+    const breakpoint720 = useMedia(720)
     const breakpoint600 = useMedia(600)
 
     return (
         <div className="app">
-            <h1>Hello world</h1>
-            {/* <MobileBurgerMenu
+            <MobileBurgerMenu
                 mobilemenuCatalogs={mobilemenuCatalogs}
                 mobileMenu={mobileMenu}
                 regions={regions}
-            /> */}
+            />
             <Header
                 worktimeHead={worktimeHead}
                 banner={null}
@@ -101,17 +108,15 @@ const App = ({
             {!breakpoint1023 && (
                 <MainNavigation headerCatalog={headerCatalog} />
             )}
-            {/* <MobileMenuCatalogNoSSR
-                banner={null}
-                mobilemenuCatalogs={mobilemenuCatalogs}
-            /> */}
-            {/* <MobileMenuCatalog
+            <MobileMenuCatalog
                 banner={null}
                 mobilemenuCatalogs={mobilemenuCatalogs}
             />
 
             {!breakpoint600 && (
-                <div className={common_styles.container}>
+                <div
+                    className={`${common_styles.container} ${common_styles.header} `}
+                >
                     <div className={common_styles.index_page_filters}>
                         <HelpPickUp />
                         {!breakpoint1023 && (
@@ -122,22 +127,19 @@ const App = ({
                         )}
                     </div>
                 </div>
-            )} */}
-
-            {/* <div className={common_styles.container}>
-                <div className="index_page_products">
-                    <div className="index_page_products__title">
-                        <ProductListForDesktop products={products} />
-                    </div>
-                </div>
-            </div> */}
-            {/* <CatalogList mobileCatalogs={mobileCatalogs} />
+            )}
+            <div className={common_styles.container}>
+                {!breakpoint720 && (
+                    <ProductListForDesktop products={products} />
+                )}
+            </div>
+            <CatalogList mobileCatalogs={mobileCatalogs} />
             <ArticleListDesktop articles={articles} />
-            <ReviewList reviews={reviews} /> */}
-            {/* <SalesList sales={sales} /> */}
-            {/* <AboutMattrasses mattrassesText={mattrassesText} />
-            <Assuracnes assurances={assurances} /> */}
-            {/* <Subscribe /> */}
+            <ReviewList reviews={reviews} />
+            <SalesList sales={sales} />
+            <AboutMattrasses />
+            <Assuracnes />
+            <Subscribe />
             <MobileFooter />
             <Footer />
         </div>

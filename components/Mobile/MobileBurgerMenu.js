@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import menu_styles from './../../styles/components/Mobile/MobileBurgerMenu.module.sass'
-import common_styles from './../../styles/common.module.sass'
 
 // Icons
 import SearchIcon from './../../assets/svg/white-search.svg'
@@ -120,7 +119,7 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
                     <span>Каталог</span>
                 </div>
                 <div
-                    className={`${common_styles.container} ${menu_styles.mobile_menu_сontainer}`}
+                    className={`${menu_styles.container} ${menu_styles.mobile_menu_сontainer}`}
                 >
                     <div className={menu_styles.mobile_menu}>
                         <ul className={menu_styles.mobile_menu__list}>
@@ -155,7 +154,7 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
             </div>
             <div className={menu_styles.mobile_nav_menu}>
                 <div
-                    className={`${common_styles.container} ${menu_styles.mobile_menu_container}`}
+                    className={`${menu_styles.container} ${menu_styles.mobile_menu_container}`}
                 >
                     <div
                         ref={burgerLabelsRef}

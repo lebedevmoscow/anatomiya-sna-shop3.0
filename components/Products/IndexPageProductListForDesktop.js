@@ -1,20 +1,16 @@
-import React from 'react'
-import { v4 as uuidv4 } from 'uuid'
-
 // React Components
 import ProductCard from './IndexPageProductCard'
 
-// import ProductCard from './../ProductCard'
-import dynamic from 'next/dynamic'
-import Popups from './../Popups/PopupsOnProductCard'
+// import dynamic from 'next/dynamic'
+// import Popups from './../Popups/PopupsOnProductCard'
 import { GetPopupsList } from './../../utils/GetPopupsList'
 
 import list_styles from './../../styles/components/Products/IndexPageProductListForDesktop.module.sass'
 
-const EqualHeight = dynamic(
-    () => import('react-equal-height').then((mod) => mod.EqualHeight),
-    { ssr: false }
-)
+// const EqualHeight = dynamic(
+//     () => import('react-equal-height').then((mod) => mod.EqualHeight),
+//     { ssr: false }
+// )
 
 const ProductListForDesktop = ({ products }) => {
     const render = () => {
@@ -37,10 +33,7 @@ const ProductListForDesktop = ({ products }) => {
                     Title={product.Title}
                     Slug={product.Slug}
                     CatalogType={product.CatalogType}
-                    MainImage={
-                        'https://www.anatomiyasna.ru' +
-                        product.MainImage.FilePath
-                    }
+                    MainImage={product.MainImage.FilePath}
                     BrandTitle={product.BrandTitle}
                     SeriesTitle={product.SeriesTitle}
                     Price={4600}
@@ -52,16 +45,18 @@ const ProductListForDesktop = ({ products }) => {
                     ListSalesList={ListSalesList}
                 />
             )
-            if (temp % 5 === 0) {
-                renderedList.push(
-                    <EqualHeight key={uuidv4()}>{tempArr}</EqualHeight>
-                )
-                tempArr = []
-                temp = 0
-            }
+            // if (temp % 5 === 0) {
+            //     renderedList
+            //         .push
+            //         // <EqualHeight key={uuidv4()}>{tempArr}</EqualHeight>
+            //         ()
+            //     tempArr = []
+            //     temp = 0
+            // }
         })
 
-        return renderedList
+        // return renderedList
+        return tempArr
     }
 
     return (

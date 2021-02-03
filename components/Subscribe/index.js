@@ -1,19 +1,12 @@
 import Link from 'next/link'
-import useMediaQuery from './../../hooks/useMedia'
-import Mails, { sub } from './../../assets/mails.png'
+import Mails from './../../assets/mails.png'
 
 import subscribe_styles from './../../styles/components/Subscribe/index.module.sass'
-import common_styles from './../../styles/common.module.sass'
 
 const Subscribe = () => {
-    // Breakpoints
-    const breakpoint1023 = useMediaQuery(1023)
-
-    const display = !breakpoint1023 ? 'block' : 'none'
-
     return (
-        <div style={{ display }} className={subscribe_styles.subscribe}>
-            <div className={common_styles.container}>
+        <div className={subscribe_styles.subscribe}>
+            <div className={subscribe_styles.container}>
                 <div className={subscribe_styles.subscribe__list}>
                     <div className={subscribe_styles.subscribe__left}>
                         <div className={subscribe_styles.subscribe__title}>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { SlideDown } from 'react-slidedown'
 import dynamic from 'next/dynamic'
@@ -27,14 +28,13 @@ import WhiteStats from './../../assets/svg/white-stats.svg'
 
 // React Components
 // import SaleOnProductCard from './../SaleOnProductCard'
-import Popups from './../Popups/PopupsOnProductCard'
+// import Popups from './../Popups/PopupsOnProductCard'
 
 import card_styles from './../../styles/components/Products/IndexPageProductCard.module.sass'
 
-const EqualHeightElement = dynamic(
-    () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
-    { ssr: false }
-)
+const Popups = dynamic(() => import('./../Popups/PopupsOnProductCard'), {
+    ssr: false,
+})
 
 const ProductCard = ({
     cn,
@@ -200,53 +200,6 @@ const ProductCard = ({
         }
     }, [CompareListRedux])
 
-    // useEffect(() => {
-    //     if (hasWindow) {
-    //         if (PriceDiff !== 0) {
-    //             const percent =
-    //                 100 - Math.round((PriceDiscount * 100) / PriceBasic)
-    //             setFirstPopup(
-    //                 <div style={{ marginRight: '5px' }}>
-    //                     <SaleOnProductCard
-    //                         first={true}
-    //                         key={0}
-    //                         Title={`-${percent}%`}
-    //                         Slug={null}
-    //                         Text={null}
-    //                         dontShow={true}
-    //                         BorderColor={'#E71616'}
-    //                         BackgroundColor={'#E71616'}
-    //                         TextColor={'#fff'}
-    //                         index={0}
-    //                     />
-    //                 </div>
-    //             )
-    //         }
-
-    //         if (PriceDiff === 0) {
-    //             setFirstPopup(
-    //                 <div style={{ marginRight: '5px' }}>
-    //                     <SaleOnProductCard
-    //                         first={true}
-    //                         dontShow={!listSales[0].Text ? true : false}
-    //                         onClickHandler={() => {
-    //                             setShowLoadMore((p) => !p)
-    //                         }}
-    //                         key={0}
-    //                         Title={listSales[0].Title}
-    //                         Slug={listSales[0].Slug}
-    //                         Text={listSales[0].Text}
-    //                         BorderColor={listSales[0].BorderColor}
-    //                         BackgroundColor={listSales[0].BackgroundColor}
-    //                         TextColor={listSales[0].TextColor}
-    //                         index={0}
-    //                     />
-    //                 </div>
-    //             )
-    //         }
-    //     }
-    // }, [hasWindow, closed])
-
     // Объект window
     const hasWindow = typeof window !== 'undefined'
 
@@ -257,93 +210,31 @@ const ProductCard = ({
 
     return (
         <div key={key} className={card_styles.product_card}>
-            {/* <div className="product_card__popups">
-                {firstPopup}
-                {showLoadMore &&
-                    ((PriceDiff !== 0 &&
-                        firstPopup !== null &&
-                        listSales.length >= 1) ||
-                        (PriceDiff === 0 &&
-                            firstPopup !== null &&
-                            listSales.length >= 2)) && (
-                        <div className="product_card__load-more-wrapper">
-                            <div
-                                ref={loadMoreRef}
-                                onClick={onLoadMoreClickHandler}
-                                className="product_card__popup product_card__popup-load-more"
-                            >
-                                <span>
-                                    <svg className="arrow">
-                                        <path d="M19 9.14q0 .179-.14.316l-6.538 6.407Q12.182 16 12 16t-.322-.137L5.14 9.456Q5 9.32 5 9.14q0-.178.14-.316l.701-.687Q5.981 8 6.164 8q.182 0 .322.137L12 13.541l5.514-5.404q.14-.137.322-.137.183 0 .323.137l.7.687q.141.138.141.316z"></path>
-                                    </svg>
-                                </span>
-                            </div>
-                        </div>
-                    )}
-
-                <SlideDown
-                    className="product_card__fulllpopuplist"
-                    closed={closed}
-                >
-                    <ul>
-                        {listSales.map((sale, index) => {
-                            if (index === 0 && PriceDiff === 0) return
-                            return (
-                                <SaleOnProductCard
-                                    dontShow={!listSales[0].Text ? true : false}
-                                    key={uuidv4()}
-                                    mobile={mobile}
-                                    Title={sale.Title}
-                                    Slug={sale.Slug}
-                                    Text={sale.Text}
-                                    BorderColor={sale.BorderColor}
-                                    BackgroundColor={sale.BackgroundColor}
-                                    TextColor={sale.TextColor}
-                                    index={index}
-                                />
-                            )
-                        })}
-                    </ul>
-                    <div
-                        onClick={() => {
-                            setClosed((p) => !p)
-                            loadMoreRef.current.classList.toggle(
-                                'load-more-hidden'
-                            )
-                        }}
-                        className="product_card__popup product_card__popup-last-child product_card__fulllpopuplist-inner-card"
-                    >
-                        <span>
-                            <svg viewBox="0 0 24 24">
-                                <path d="M18.984 6.422L13.406 12l5.578 5.578-1.406 1.406L12 13.406l-5.578 5.578-1.406-1.406L10.594 12 5.016 6.422l1.406-1.406L12 10.594l5.578-5.578z"></path>
-                            </svg>
-                        </span>
-                    </div>
-                </SlideDown>
-            </div> */}
+            <Popups ListSalesList={ListSalesList} />
             <div className={card_styles.product_card__wrap_1}>
                 <a target="_blank" rel="noreferrer">
-                    <img
+                    <Image src={MainImage} width={208} height={130} />
+                    {/* <img
                         className={card_styles.product_card__image}
                         src={MainImage}
-                    />
+                    /> */}
                 </a>
                 <a target="_blank" rel="noreferrer">
                     <h6 className={card_styles.product_card__smalltext}>
                         {CatalogType}
                     </h6>
                 </a>
-                <EqualHeightElement name="Title">
-                    <a target="_blank" rel="noreferrer">
-                        <h4 className={card_styles.product_card__productname}>
-                            {(BrandTitle || '') +
-                                ' ' +
-                                (SeriesTitle || '') +
-                                ' ' +
-                                (Title || '')}
-                        </h4>
-                    </a>
-                </EqualHeightElement>
+                {/* <EqualHeightElement name="Title"> */}
+                <a target="_blank" rel="noreferrer">
+                    <h4 className={card_styles.product_card__productname}>
+                        {(BrandTitle || '') +
+                            ' ' +
+                            (SeriesTitle || '') +
+                            ' ' +
+                            (Title || '')}
+                    </h4>
+                </a>
+                {/* </EqualHeightElement> */}
             </div>
             <div className={card_styles.product_card__wrap_2}>
                 <a>

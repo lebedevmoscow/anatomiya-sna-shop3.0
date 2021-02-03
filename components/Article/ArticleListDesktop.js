@@ -3,7 +3,6 @@ import { SlideDown } from 'react-slidedown'
 import useMedia from './../../hooks/useMedia'
 
 // Styles
-import common from './../../styles/common.module.sass'
 import articles_styles from './../../styles/components/Article/ArticleList.module.sass'
 
 // React Components
@@ -11,6 +10,8 @@ import LoadMoreButton from './../Button/LoadMoreButton'
 import Article from './../Article/Article'
 
 const ArticleListDesktop = ({ articles }) => {
+    const breakpoint450 = useMedia(450)
+
     // State
     const [LoadMore, SetLoadMore] = useState(false)
     const [SecondPartOfList, SetSecondPartOfList] = useState(null)
@@ -33,7 +34,7 @@ const ArticleListDesktop = ({ articles }) => {
     }, [LoadMore])
 
     return (
-        <div className={common.container}>
+        <div className={articles_styles.container}>
             <div className={articles_styles.articles}>
                 <div className={articles_styles.articles__section_name}>
                     Статьи
@@ -41,7 +42,11 @@ const ArticleListDesktop = ({ articles }) => {
                 <div className={articles_styles.articles__list}>
                     {articles.map((article, index) => {
                         if (index > 2) return
-                        return <Article article={article} key={index} />
+                        if (breakpoint450 && index === 0) {
+                            return <Article article={article} key={index} />
+                        } else if (!breakpoint450) {
+                            return <Article article={article} key={index} />
+                        }
                     })}
                     <SlideDown
                         className={articles_styles.articles__slidedown}

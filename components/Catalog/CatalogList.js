@@ -1,19 +1,12 @@
 import { useState, useEffect } from 'react'
 
-// EXPEREMENTAL
-import useMediaQuery from './../../hooks/useMedia'
-
 import CatalogCard from './CatalogCard'
 import LoadMoreButton from './../Button/LoadMoreButton'
 import SlideDown from 'react-slidedown'
 
-import common_styles from './../../styles/common.module.sass'
 import catalog_styles from './../../styles/components/Catalog/CatalogList.module.sass'
 
 const CatalogList = ({ mobileCatalogs }) => {
-    const breakpoint1023 = useMediaQuery(1023)
-    const display = !breakpoint1023 ? 'block' : 'none'
-
     const [isEnd, setIsEnd] = useState(false)
     const [index, setIndex] = useState(12)
     const [to, setTo] = useState(2)
@@ -86,28 +79,8 @@ const CatalogList = ({ mobileCatalogs }) => {
         }
     }, [loadMore])
 
-    const renderList = () => {
-        const lst = []
-        for (let i = 0; i < list.length; i++) {
-            for (let j = 0; j < list[i].data.length; j++) {
-                if (!list[i].data[j]) lst.push(null)
-                else
-                    lst.push(
-                        <CatalogCard
-                            title={list[i].data[j].catalogTitle}
-                            slug={list[i].data[j].catalogSlug}
-                            img={list[i].data[j].catalogImage}
-                            count={list[i].data[j].productCount}
-                        />
-                    )
-            }
-        }
-        // return lst
-        setAnimatedList(lst)
-    }
-
     return (
-        <div style={{ display }} className={common_styles.container}>
+        <div className={catalog_styles.container}>
             <div className={catalog_styles.goods_catalog}>
                 <div className={catalog_styles.goods_catalog__section_name}>
                     Каталог товаров

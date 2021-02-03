@@ -1,18 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import useMediaQuery from './../../hooks/useMedia'
 
 // Styles
 import menu_styles from './../../styles/components/Mobile/MobileMenuCatalog.module.sass'
-import common_styles from './../../styles/common.module.sass'
 
 const MobileMenuCatalog = ({ banner, mobilemenuCatalogs }) => {
-    // Breakpoints
-    const breakpoint720 = useMediaQuery(720)
-
     return (
         <>
-            {breakpoint720 && banner && (
+            {banner && (
                 <Link href={'/' + banner.slug}>
                     <a>
                         <Image
@@ -24,7 +19,7 @@ const MobileMenuCatalog = ({ banner, mobilemenuCatalogs }) => {
                     </a>
                 </Link>
             )}
-            <div className={common_styles.container}>
+            <div className={menu_styles.container}>
                 <div className={menu_styles.mobile_menu}>
                     <ul className={menu_styles.mobile_menu__list}>
                         {mobilemenuCatalogs.map((catalog, index) => {

@@ -28,6 +28,7 @@ const PopupOnProductCard = ({ ListSaleItem, index }) => {
                 borderRadius: '5px',
                 marginTop: '5px',
                 cursor: 'pointer',
+                zIndex: 10 - index,
             }}
             key={index}
             onClick={() => SetPopupIsClosed(false)}
@@ -75,7 +76,16 @@ const PopupsOnProductCard = ({ ListSalesList }) => {
                 className={`${popups_styles.product_card__popup} ${popups_styles.product_card__popup_load_more}`}
             >
                 <span>
-                    <svg className={popups_styles.arrow}>
+                    <svg
+                        style={{
+                            width: '20px',
+                            height: '20px',
+                            transform:
+                                'scale(0.6) rotate(270deg) translate(4px, -6px)',
+                            fill: '#0CA5D3',
+                        }}
+                        className={popups_styles.arrow}
+                    >
                         <path d="M19 9.14q0 .179-.14.316l-6.538 6.407Q12.182 16 12 16t-.322-.137L5.14 9.456Q5 9.32 5 9.14q0-.178.14-.316l.701-.687Q5.981 8 6.164 8q.182 0 .322.137L12 13.541l5.514-5.404q.14-.137.322-.137.183 0 .323.137l.7.687q.141.138.141.316z"></path>
                     </svg>
                 </span>
@@ -98,6 +108,7 @@ const PopupsOnProductCard = ({ ListSalesList }) => {
                 </ul>
                 <div
                     onClick={() => SetIsClosed(true)}
+                    style={{ boxSizing: 'border-box' }}
                     className={`${popups_styles.product_card__popup} ${popups_styles.product_card__popup_last_child} ${popups_styles.product_card__fulllpopuplist_inner_card}`}
                 >
                     <span>

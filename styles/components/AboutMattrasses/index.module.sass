@@ -1,0 +1,130 @@
+.container
+    max-width: 1234px
+    margin: 0 auto
+    padding: 0 30px
+    width: 100%
+    box-sizing: border-box
+
+.about_mattrasses_text
+    display: flex
+    justify-content: space-between
+    margin-top: 55px
+    font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+    .about_mattrasses_text__left
+        p
+            font-size: 15px
+            color: #444
+            line-height: 1.3
+            margin-bottom: 20px
+
+.about_mattrasses
+    font-family: Lato, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif
+    margin-top: 55px
+    .about_mattrasses__section_name
+        font-size: 32px
+        color: #444
+
+    .about_mattrasses__list
+        display: flex
+        justify-content: space-between
+        flex-wrap: wrap
+        margin-top: 40px
+    .about_mattrasses__item
+        width: 557px
+        display: flex
+        margin-bottom: 50px
+
+    .about_mattrasses__text
+        margin-left: 30px
+
+    .about_mattrasses__image
+        display: block
+        width: 100%
+        height: 91px
+
+    .about_mattrasses__title
+        font-size: 24px
+        line-height: 1
+        margin-bottom: 18px
+        color: #444
+
+    .about_mattrasses__desc
+        line-height: 1.3
+        font-size: 13px
+        color: #444
+
+@media screen and ( max-width: 1250px )
+
+    .about_mattrasses_text
+        .about_mattrasses_text__left
+            width: 50%
+            p
+                font-size: 12px
+
+    .about_mattrasses
+        .about_mattrasses__section_name
+            font-size: 20px
+        .about_mattrasses__item
+            width: 50%
+
+        .about_mattrasses__title
+            font-size: 16px
+
+@media screen and ( max-width: 1023px )
+
+    .about_mattrasses_text
+        .about_mattrasses_text__left
+            width: 70%
+            p
+                font-size: 15px
+        .about_mattrasses_text__right img
+            display: block
+            width: 250px
+            height: 88.88px
+
+    .about_mattrasses
+
+        .about_mattrasses__item
+            width: auto
+        .about_mattrasses__image
+            width: 170px
+            height: auto
+
+        .about_mattrasses__title
+            font-size: 24px
+
+@media screen and ( max-width: 720px )
+
+    .about_mattrasses_text
+        display: block
+        margin-top: 30px
+
+        .about_mattrasses_text__left
+            width: 100%
+        .about_mattrasses_text__right
+            .about_mattrasses_text__image
+                width: 100%
+                height: 160px
+                margin: 0 auto
+
+    .about_mattrasses
+        .about_mattrasses__text
+            margin-left: 10px
+        .about_mattrasses__list
+            .about_mattrasses__item
+                margin-bottom: 25px
+
+            .about_mattrasses__image
+                width: 100px
+                height: 53px
+
+            .about_mattrasses__title
+                font-size: 18px
+                margin-bottom: 9px
+
+@media screen and ( max-width: 450px )
+
+    .about_mattrasses_text
+        .about_mattrasses_text__right
+            .about_mattrasses_text__image
+                height: auto
