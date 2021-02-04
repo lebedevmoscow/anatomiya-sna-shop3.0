@@ -1,15 +1,19 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
+import useMedia from './../../hooks/useMedia'
+
 // Styles
 import menu_styles from './../../styles/components/Mobile/MobileMenuCatalog.module.sass'
 
 const MobileMenuCatalog = ({ banner, mobilemenuCatalogs }) => {
+    const breakpoint769 = useMedia(769)
+
     return (
         <>
-            {banner && (
+            {banner && breakpoint769 && (
                 <Link href={'/' + banner.slug}>
-                    <a>
+                    <a style={{ display: 'block', marginTop: '43px' }}>
                         <Image
                             className={menu_styles.mobile_menu__mini_banner}
                             src={'https://anatomiyasna.ru' + banner.image}
