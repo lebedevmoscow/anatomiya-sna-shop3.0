@@ -24,6 +24,7 @@ import AboutMattrasses from './../components/AboutMattrasses'
 import Assuracnes from './../components/Assurances'
 import Subscribe from './../components/Subscribe'
 import MobileFooter from './../components/Mobile/MobieFooter'
+import SwiperAssurenaces from './../components/Mobile/MobileAssurances'
 
 // Experemental
 // const IndexLazyLoad = dynamic(
@@ -140,6 +141,7 @@ const App = ({
             <SalesList sales={sales} />
             <AboutMattrasses />
             <Assuracnes />
+            <SwiperAssurenaces />
             <Subscribe />
             <MobileFooter />
             <Footer />

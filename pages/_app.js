@@ -3,6 +3,7 @@ import '../styles/globals.css'
 // Third party styles
 import 'react-slidedown/lib/slidedown.css'
 import 'reactjs-popup/dist/index.css'
+import 'swiper/swiper-bundle.css'
 
 // Styles
 import './../styles/unmoduled.sass'
