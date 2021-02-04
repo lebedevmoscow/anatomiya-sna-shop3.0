@@ -288,6 +288,29 @@
         img
             transform: scale(0.6)
 
+@media screen and ( max-width: 1023px )
+
+    .product_card
+        width: 33%
+        margin-right: 3px
+        &:nth-child(3n)
+            margin-right: 0
+
+        .product_card__stats_buttons_section
+            display: none
+
+        .product_card__price
+            margin: 0 auto
+
+        .product_card__smalltext
+            text-align: center
+
+        .product_card__productname
+            text-align: center
+
+    .product_card__stats_buttons_section
+        display: none
+
 @media screen and ( max-width: 768px )
 
     .product_card__popup_load_more
