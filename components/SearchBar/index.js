@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 
 import SearchIcon from './../../assets/svg/searchicon.svg'
-import styles from './../../styles/components/SearchBar/index.module.sass'
+import styles from './../../styles/components/SearchBar/index.sass'
 
 const Searchbar = ({ open, blur }) => {
     const inputRef = useRef(null)

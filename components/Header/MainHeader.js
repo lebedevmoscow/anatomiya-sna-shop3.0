@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Popup from 'reactjs-popup'
 import { SlideDown } from 'react-slidedown'
+import InputMask from 'react-input-mask'
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
@@ -33,6 +34,8 @@ const MainHeader = ({ phoneCommon }) => {
     const FavoriteListRedux = useSelector(
         (store) => store.FavoritesProductsListReducer
     )
+    const [list, setList] = useState(null)
+    const [searchBarIsOpen, setSearchBarIsOpen] = useState(false)
     const [callMePopupIsClosed, setCallMePopupIsClosed] = useState(true)
     const [favoriteListPopupIsClosed, setFavoriteListPopupIsClosed] = useState(
         true
@@ -41,6 +44,20 @@ const MainHeader = ({ phoneCommon }) => {
         true
     )
 
+    const onSearchBarClickHandler = () => {
+        setSearchBarIsOpen(true)
+        if (hasWindow) {
+            setList(document.querySelectorAll('.main-header > div'))
+        }
+    }
+
+    const onSearchBarBlur = () => {
+        for (let i = 0; i < list.length; i++) {
+            list[i].style.opacity = '1'
+        }
+        setSearchBarIsOpen(false)
+    }
+
     useEffect(() => {
         if (hasWindow) {
             // Init function to grab all procuts from favorite list
@@ -48,6 +65,14 @@ const MainHeader = ({ phoneCommon }) => {
             dispatch(compareInit())
         }
     }, [hasWindow])
+
+    useEffect(() => {
+        if (list) {
+            for (let i = 0; i < list.length; i++) {
+                list[i].style.opacity = '0.4'
+            }
+        }
+    }, [list])
 
     return (
         <div className={mainheader_styles.main_header}>
@@ -78,7 +103,69 @@ const MainHeader = ({ phoneCommon }) => {
                 <h6>{phoneCommon}</h6>
             </div>
             <div className={mainheader_styles.main_header__callme}>
-                <span>Перезвоните мне</span>
+                <Popup
+                    trigger={<span>Перезвоните мне</span>}
+                    onOpen={() => setCallMePopupIsClosed(false)}
+                    position="top left"
+                    closeOnDocumentClick={true}
+                >
+                    <SlideDown
+                        className={mainheader_styles.main_header__callme_popup}
+                        closed={callMePopupIsClosed}
+                    >
+                        <div
+                            className={
+                                mainheader_styles.main_header__callme_popup__inner
+                            }
+                        >
+                            <div
+                                className={
+                                    mainheader_styles.main_header__callme_popup__title
+                                }
+                            >
+                                Ваш телефон:
+                            </div>
+                            <div
+                                className={
+                                    mainheader_styles.main_header__callme_popup__form
+                                }
+                            >
+                                <InputMask
+                                    placeholder={'+7 (___) ___ __ __'}
+                                    mask="+7 (999) 999 99 99"
+                                    maskChar="_"
+                                />
+                            </div>
+                            <button
+                                className={
+                                    mainheader_styles.main_header__callme_popup__button
+                                }
+                            >
+                                Перезвоните мне
+                            </button>
+                            <div
+                                className={
+                                    mainheader_styles.main_header__callme_popup__policy
+                                }
+                            >
+                                * Нажимая на кнопку вы соглашаетесь на{' '}
+                                <Link href="/">
+                                    <a>обработку персональных данных</a>
+                                </Link>
+                            </div>
+                            <div
+                                onClick={() => {
+                                    setCallMePopupIsClosed(true)
+                                }}
+                                className={
+                                    mainheader_styles.main_header__callme_popup__cross
+                                }
+                            >
+                                X
+                            </div>
+                        </div>
+                    </SlideDown>
+                </Popup>
             </div>
             <div
                 className={mainheader_styles.main_header__search}
@@ -89,7 +176,7 @@ const MainHeader = ({ phoneCommon }) => {
                 <Image src={SearchSVG} height={30} width={30} />
                 <span>Поиск</span>
             </div>
-            {/* <Searchbar blur={() => {}} open={() => {}} /> */}
+            <Searchbar blur={onSearchBarBlur} open={searchBarIsOpen} />
             <div className={mainheader_styles.main_header__icons_wrapper}>
                 <div className={mainheader_styles.main_header__option_icon}>
                     <Image src={TimeSVG} height={35} width={35} />
