@@ -1,6 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import Popup from 'reactjs-popup'
+import { SlideDown } from 'react-slidedown'
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
@@ -24,6 +26,20 @@ import Searchbar from './../Search/Search'
 const MainHeader = ({ phoneCommon }) => {
     const hasWindow = typeof window !== 'undefined'
     const dispatch = useDispatch()
+
+    const CompareListRedux = useSelector(
+        (store) => store.CompareProductsListReducer
+    )
+    const FavoriteListRedux = useSelector(
+        (store) => store.FavoritesProductsListReducer
+    )
+    const [callMePopupIsClosed, setCallMePopupIsClosed] = useState(true)
+    const [favoriteListPopupIsClosed, setFavoriteListPopupIsClosed] = useState(
+        true
+    )
+    const [compareListPopupIsClosed, setComparelistPopupIsClosed] = useState(
+        true
+    )
 
     useEffect(() => {
         if (hasWindow) {
@@ -79,10 +95,268 @@ const MainHeader = ({ phoneCommon }) => {
                     <Image src={TimeSVG} height={35} width={35} />
                 </div>
                 <div className={mainheader_styles.main_header__option_icon}>
-                    <Image src={StatsSVG} height={35} width={35} />
+                    {CompareListRedux.total &&
+                        CompareListRedux.total.length !== 0 && (
+                            <div
+                                className={
+                                    mainheader_styles.main_header__option_popup__empty_block
+                                }
+                            >
+                                {CompareListRedux.total.length}
+                            </div>
+                        )}
+                    <Popup
+                        trigger={
+                            <Image src={StatsSVG} height={35} width={35} />
+                        }
+                        onOpen={() => setComparelistPopupIsClosed(false)}
+                        position="top left"
+                        closeOnDocumentClick={true}
+                    >
+                        <SlideDown
+                            className={
+                                mainheader_styles.main_header__option_popup
+                            }
+                            closed={compareListPopupIsClosed}
+                        >
+                            <div
+                                className={
+                                    mainheader_styles.main_header__option_popup__inner
+                                }
+                            >
+                                {CompareListRedux.total &&
+                                    CompareListRedux.total.length === 0 && (
+                                        <div
+                                            className={
+                                                mainheader_styles.main_header__option_popup__empty_blocks
+                                            }
+                                        >
+                                            Вы еще не добавили товары в
+                                            сравнение
+                                        </div>
+                                    )}
+                                {CompareListRedux.total.length !== 0 &&
+                                    CompareListRedux.total.map((item, id) => {
+                                        return (
+                                            <div
+                                                key={id}
+                                                className={
+                                                    mainheader_styles.main_header__option_popup__product_block
+                                                }
+                                            >
+                                                <div
+                                                    className={
+                                                        mainheader_styles.main_header__compare_popup__product_block__left
+                                                    }
+                                                >
+                                                    <img
+                                                        style={{
+                                                            width: '56px',
+                                                            height: '36px',
+                                                        }}
+                                                        src={item.ProductImage}
+                                                        className={
+                                                            mainheader_styles.main_header__option_popup__product_block__image
+                                                        }
+                                                    ></img>
+                                                </div>
+                                                <div>
+                                                    <div
+                                                        className={
+                                                            mainheader_styles.main_header__option_popup__product_block__smalltext
+                                                        }
+                                                    >
+                                                        {
+                                                            item.ProductCatalogType
+                                                        }
+                                                    </div>
+                                                    <div
+                                                        className={
+                                                            mainheader_styles.main_header__option_popup__product_block__title
+                                                        }
+                                                    >
+                                                        {item.ProductBrandTitle +
+                                                            ' ' +
+                                                            item.ProductSeriesTitle +
+                                                            ' ' +
+                                                            item.ProductTitle}
+                                                    </div>
+                                                    <div
+                                                        className={
+                                                            mainheader_styles.main_header__option_popup__product_block__size
+                                                        }
+                                                    >
+                                                        {item.ProductSizeTitle}
+                                                    </div>
+                                                    <div
+                                                        className={
+                                                            mainheader_styles.main_header__option_popup__product_block__price
+                                                        }
+                                                    >
+                                                        <strong>
+                                                            {item.ProductPrice}
+                                                        </strong>
+                                                        <span> Руб.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+
+                                {CompareListRedux.total.length !== 0 && (
+                                    <button
+                                        className={
+                                            mainheader_styles.main_header__popup_button
+                                        }
+                                    >
+                                        Перейти
+                                    </button>
+                                )}
+                                <div
+                                    onClick={() => {
+                                        setComparelistPopupIsClosed(true)
+                                    }}
+                                    className={
+                                        mainheader_styles.main_header__popup_cross
+                                    }
+                                >
+                                    X
+                                </div>
+                            </div>
+                        </SlideDown>
+                    </Popup>
                 </div>
                 <div className={mainheader_styles.main_header__option_icon}>
-                    <Image src={HeartSVG} height={35} width={35} />
+                    {FavoriteListRedux.total &&
+                        FavoriteListRedux.total.length !== 0 && (
+                            <div
+                                className={
+                                    mainheader_styles.main_header__option_icon__count
+                                }
+                            >
+                                {FavoriteListRedux.total.length}
+                            </div>
+                        )}
+                    <Popup
+                        trigger={
+                            <Image src={HeartSVG} height={35} width={35} />
+                        }
+                        onOpen={() => setFavoriteListPopupIsClosed(false)}
+                        position="top left"
+                        closeOnDocumentClick={true}
+                    >
+                        <SlideDown
+                            className={
+                                mainheader_styles.main_header__option_popup
+                            }
+                            closed={favoriteListPopupIsClosed}
+                        >
+                            <div
+                                className={
+                                    mainheader_styles.main_header__option_popup__inner
+                                }
+                            >
+                                {FavoriteListRedux.total &&
+                                    FavoriteListRedux.total.length === 0 && (
+                                        <div
+                                            className={
+                                                mainheader_styles.main_header__option_popup__empty_block
+                                            }
+                                        >
+                                            Вы еще не добавили товары в
+                                            сравнение
+                                        </div>
+                                    )}
+                                {FavoriteListRedux.total.length !== 0 &&
+                                    FavoriteListRedux.total.map((item, id) => {
+                                        return (
+                                            <div
+                                                key={id}
+                                                className={
+                                                    mainheader_styles.main_header__option_popup__product_block
+                                                }
+                                            >
+                                                <div
+                                                    className={
+                                                        mainheader_styles.main_header__favorite_popup__product_block__left
+                                                    }
+                                                >
+                                                    <img
+                                                        style={{
+                                                            width: '56px',
+                                                            height: '36px',
+                                                        }}
+                                                        src={item.ProductImage}
+                                                        className={
+                                                            mainheader_styles.main_header__option_popup__product_block__image
+                                                        }
+                                                    ></img>
+                                                </div>
+                                                <div>
+                                                    <div
+                                                        className={
+                                                            mainheader_styles.main_header__option_popup__product_block__smalltext
+                                                        }
+                                                    >
+                                                        {
+                                                            item.ProductCatalogType
+                                                        }
+                                                    </div>
+                                                    <div
+                                                        className={
+                                                            mainheader_styles.main_header__option_popup__product_block__title
+                                                        }
+                                                    >
+                                                        {item.ProductBrandTitle +
+                                                            ' ' +
+                                                            item.ProductSeriesTitle +
+                                                            ' ' +
+                                                            item.ProductTitle}
+                                                    </div>
+                                                    <div
+                                                        className={
+                                                            mainheader_styles.main_header__option_popup__product_block__size
+                                                        }
+                                                    >
+                                                        {item.ProductSizeTitle}
+                                                    </div>
+                                                    <div
+                                                        className={
+                                                            mainheader_styles.main_header__option_popup__product_block__price
+                                                        }
+                                                    >
+                                                        <strong>
+                                                            {item.ProductPrice}
+                                                        </strong>
+                                                        <span> Руб.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+
+                                {FavoriteListRedux.total.length !== 0 && (
+                                    <button
+                                        className={
+                                            mainheader_styles.main_header__popup_button
+                                        }
+                                    >
+                                        Перейти
+                                    </button>
+                                )}
+                                <div
+                                    onClick={() => {
+                                        setFavoriteListPopupIsClosed(true)
+                                    }}
+                                    className={
+                                        mainheader_styles.main_header__popup_cross
+                                    }
+                                >
+                                    X
+                                </div>
+                            </div>
+                        </SlideDown>
+                    </Popup>
                 </div>
                 <div className={mainheader_styles.main_header__option_icon}>
                     <Image src={CartSVG} height={35} width={42} />
