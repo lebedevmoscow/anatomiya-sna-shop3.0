@@ -17,7 +17,7 @@ import QiwiImage from './../../assets/qiwi.png'
 import MirImage from './../../assets/mir.png'
 import PayKeeperImage from './../../assets/paykeeper.png'
 
-// import MobileBurgerMenuChoiseCity from './../MobileBurgerMenuChoiseCity'
+import MobileBurgerMenuChoiseCity from './../Mobile/MobileBurgerMenuChoiseCity'
 
 import footer_styles from './../../styles/components/Mobile/MobileFooter.module.sass'
 // import common_styles from './../../styles/common.module.sass'
@@ -28,6 +28,10 @@ const MobileFooter = () => {
 
     return (
         <>
+            <MobileBurgerMenuChoiseCity
+                onCloseCityList={() => setOpenCityChoise(false)}
+                className={openCityChoise ? '' : 'closed'}
+            />
             <div className={footer_styles.mobile_footer__wrapper}>
                 <div
                     className={`${footer_styles.container} ${footer_styles.first_container}`}

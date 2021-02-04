@@ -12,7 +12,7 @@ import CartIcon from './../../assets/svg/white-cart.svg'
 import VK from './../../assets/vk.png'
 import FB from './../../assets/fb.png'
 
-// import MobileBurgerMenuChoiseCity from './../MobileBurgerMenuChoiseCity'
+import MobileBurgerMenuChoiseCity from './../Mobile/MobileBurgerMenuChoiseCity'
 // import SearchBar from './../UI/Searchbar'
 
 let lastScrollNavigateArrow = 0
@@ -34,6 +34,8 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
 
         burgerRef.current.classList.toggle(`${menu_styles.burger_opened}`)
     }
+
+    console.log('regions', regions)
 
     useEffect(() => {
         document.addEventListener('scroll', () => {
@@ -99,11 +101,11 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
 
     return (
         <div className={menu_styles.mobile_nav_menu__wrapper}>
-            {/* <MobileBurgerMenuChoiseCity
+            <MobileBurgerMenuChoiseCity
                 regions={regions}
                 onCloseCityList={onCloseCityList}
                 className={openChoiseCity ? '' : 'closed'}
-            /> */}
+            />
             <div
                 style={
                     !catalogOpen ? { display: 'none' } : { display: 'block' }

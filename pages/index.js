@@ -103,14 +103,14 @@ const App = ({
             />
             <Header
                 worktimeHead={worktimeHead}
-                banner={banner}
+                banner={null}
                 phoneCommon={phoneCommon}
             />
             {!breakpoint1023 && (
                 <MainNavigation headerCatalog={headerCatalog} />
             )}
             <MobileMenuCatalog
-                banner={banner}
+                banner={null}
                 mobilemenuCatalogs={mobilemenuCatalogs}
             />
 
