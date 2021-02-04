@@ -134,8 +134,9 @@ const App = ({
                 )}
             </div>
             <CatalogList mobileCatalogs={mobileCatalogs} />
-            <ArticleListDesktop articles={articles} />
             <ReviewList reviews={reviews} />
+
+            <ArticleListDesktop articles={articles} />
             <SalesList sales={sales} />
             <AboutMattrasses />
             <Assuracnes />
