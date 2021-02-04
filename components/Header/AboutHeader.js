@@ -25,7 +25,7 @@ const AboutHeader = ({ worktimeHead }) => {
                 <h6>Москва</h6>
                 <span></span>
             </div>
-            {/* <CityChoiseDesktop closed={Closed} setClosed={SetClosed} /> */}
+            <CityChoiseDesktop closed={Closed} setClosed={SetClosed} />
             <div className={aboutheader_styles.about_header__worktime}>
                 Время работы: {worktimeHead}
             </div>
