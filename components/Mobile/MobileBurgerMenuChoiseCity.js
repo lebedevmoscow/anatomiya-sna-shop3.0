@@ -1,3 +1,5 @@
+import styles from './../../styles/components/Mobile/MobileCityChoise.module.sass'
+
 const MobileBurgerMenuChoiseCity = ({
     onCloseCityList,
     className,
@@ -6,15 +8,16 @@ const MobileBurgerMenuChoiseCity = ({
     const onRegionItemClickHandler = (target) => {
         if (hasWindow) {
             const list = document.querySelectorAll(
-                '.mobile-burger-menu-city-choise__region-item'
+                '.' + styles.mobile_burger_menu_city_choise__region_item
             )
             for (let i = 0; i < list.length; i++) {
                 if (
                     list[i].querySelector(
-                        '.mobile-burger-menu-city-choise__grand-letter'
+                        '.' +
+                            styles.mobile_burger_menu_city_choise__grand_letter
                     ).innerHTML === target
                 ) {
-                    list[i].classList.toggle('region-item-opened')
+                    list[i].classList.toggle(styles.region_item_opened)
                 }
             }
         }
@@ -25,25 +28,44 @@ const MobileBurgerMenuChoiseCity = ({
     return (
         <div
             style={{ display: 'block' }}
-            className={`mobile-burger-menu-city-choise mobile-burger-menu-city-choise--${className}`}
+            className={`${styles.mobile_burger_menu_city_choise} mobile_burger_menu_city_choise__${className}`}
         >
-            <div className="container">
-                <div className="mobile-burger-menu-city-choise__labels">
-                    <i onClick={onCloseCityList} className="arrow-left"></i>
+            <div className={styles.container}>
+                <div className={styles.mobile_burger_menu_city_choise__labels}>
+                    <i
+                        onClick={onCloseCityList}
+                        className={styles.arrow_left}
+                    ></i>
                     <span>Выбор города</span>
                 </div>
-                <div className="mobile-burger-menu-city-choise__title">
+                <div className={styles.mobile_burger_menu_city_choise__title}>
                     Москва и МО
                 </div>
-                <ul className="mobile-burger-menu-city-choise__moscow-list">
+                <ul
+                    className={
+                        styles.mobile_burger_menu_city_choise__moscow_list
+                    }
+                >
                     {regions &&
                         regions.moscow.map((region, id) => {
                             return (
-                                <li>
-                                    <label className="main-filter__checkbox-container">
+                                <li key={id}>
+                                    <label
+                                        className={
+                                            styles.main_filter__checkbox_container
+                                        }
+                                    >
                                         <input type="checkbox" />
-                                        <span className="main-filter__checkmark"></span>
-                                        <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                        <span
+                                            className={
+                                                styles.main_filter__checkmark
+                                            }
+                                        ></span>
+                                        <div
+                                            className={
+                                                styles.mobile_burger_menu_city_choise__moscow_city_name
+                                            }
+                                        >
                                             {region.title}
                                         </div>
                                     </label>
@@ -51,43 +73,95 @@ const MobileBurgerMenuChoiseCity = ({
                             )
                         })}
                 </ul>
-                <div className="mobile-burger-menu-city-choise__title">
+                <div className={styles.mobile_burger_menu_city_choise__title}>
                     Регионы
                 </div>
                 {/* {regions.other.map((region, id) => {
                     return <div className="mobile-burger-menu-city-choise__region-item" onClick={() => region}></div>
                 })} */}
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('А')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         А
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Ангарск
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Архангельск
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Астрахань
                                 </div>
                             </label>
@@ -95,36 +169,88 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('Б')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         Б
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Барнаул
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Белгород
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Брянск
                                 </div>
                             </label>
@@ -132,63 +258,157 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('В')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         В
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Владивосток
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Владикавказ
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Владимир
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Волгоград
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Вологда
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Воронеж
                                 </div>
                             </label>
@@ -196,18 +416,42 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('Е')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         Е
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Екатеринбург
                                 </div>
                             </label>
@@ -215,27 +459,65 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('И')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         И
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Иваново
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Ижевск
                                 </div>
                             </label>
@@ -243,99 +525,249 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('К')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         К
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Казань
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Калининград
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Калуга
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Кемерово
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Киров
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Кострома
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Краснодар
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Красноярск
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Курган
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Курск
                                 </div>
                             </label>
@@ -343,18 +775,42 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('Л')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         Л
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Липецк
                                 </div>
                             </label>
@@ -362,27 +818,65 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('М')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         М
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Магнитогорск
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Мурманск
                                 </div>
                             </label>
@@ -390,45 +884,111 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('Н')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         Н
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Набережные Челны
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Нижний Новгород
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Новокузнецск
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Новосибирск
                                 </div>
                             </label>
@@ -436,36 +996,88 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('О')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         О
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Омск
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Орёл
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Оренбург
                                 </div>
                             </label>
@@ -473,36 +1085,88 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('П')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         П
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Пенза
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Пермь
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Петрозаводск
                                 </div>
                             </label>
@@ -510,27 +1174,65 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('Р')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         Р
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Ростов-на-Дону
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Рязань
                                 </div>
                             </label>
@@ -538,90 +1240,226 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('С')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         С
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Самара
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Санкт-Петербург
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Саратов
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Севастополь
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Симферополь
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Смоленск
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Сочи
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Ставрополь
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Сургут
                                 </div>
                             </label>
@@ -629,63 +1467,157 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('Т')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         Т
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Тамбов
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Тверь
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Тольятти
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Томск
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Тула
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Тюмень
                                 </div>
                             </label>
@@ -693,27 +1625,65 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('У')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         У
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Ульяновск
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Уфа
                                 </div>
                             </label>
@@ -721,18 +1691,42 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('Х')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         Х
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Хабаровск
                                 </div>
                             </label>
@@ -740,45 +1734,111 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('Ч')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         Ч
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Чебоксары
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Челябинск
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Череповец
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Чита
                                 </div>
                             </label>
@@ -786,27 +1846,65 @@ const MobileBurgerMenuChoiseCity = ({
                     </ul>
                 </div>
                 <div
-                    className="mobile-burger-menu-city-choise__region-item"
+                    className={
+                        styles.mobile_burger_menu_city_choise__region_item
+                    }
                     onClick={() => onRegionItemClickHandler('Р')}
                 >
-                    <div className="mobile-burger-menu-city-choise__grand-letter">
+                    <div
+                        className={
+                            styles.mobile_burger_menu_city_choise__grand_letter
+                        }
+                    >
                         Я
                     </div>
-                    <ul className="mobile-burger-menu-city-choise__region-list">
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__region_list
+                        }
+                    >
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Якутск
                                 </div>
                             </label>
                         </li>
-                        <li className="mobile-burger-menu-city-choise__region-list-item">
-                            <label className="main-filter__checkbox-container">
+                        <li
+                            className={
+                                styles.mobile_burger_menu_city_choise__region_list_item
+                            }
+                        >
+                            <label
+                                className={
+                                    styles.main_filter__checkbox_container
+                                }
+                            >
                                 <input type="checkbox"></input>
-                                <span className="main-filter__checkmark"></span>
-                                <div className="mobile-burger-menu-city-choise__moscow-city-name">
+                                <span
+                                    className={styles.main_filter__checkmark}
+                                ></span>
+                                <div
+                                    className={
+                                        styles.mobile_burger_menu_city_choise__moscow_city_name
+                                    }
+                                >
                                     Ярославль
                                 </div>
                             </label>

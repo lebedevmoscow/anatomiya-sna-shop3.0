@@ -1,5 +1,10 @@
-import PNG from './../../assets/about-mattrasses-text.png'
-import MattrassImage from './../../assets/mattrass2.jpeg'
+import PNG from './../../assets/about-mattrasses-text.webp'
+import MattrassImage1 from './../../assets/mattrasses/premialnye-matrasy-anatomiya-sna.webp'
+import MattrassImage2 from './../../assets/mattrasses/toppery-anatomiya-sna_1.webp'
+import MattrassImage3 from './../../assets/mattrasses/klassicheskie-matrasy-anatomiya-sna.webp'
+import MattrassImage4 from './../../assets/mattrasses/detskie-matrasy-anatomiya-sna.webp'
+import MattrassImage5 from './../../assets/mattrasses/nedorogie-matrasy-anatomiya-sna.webp'
+import MattrassImage6 from './../../assets/mattrasses/ortopedicheskie-matrasy-anatomiya-sna.webp'
 
 import styles from './../../styles/components/AboutMattrasses/index.module.sass'
 
@@ -48,7 +53,7 @@ const IndexPageAboutMattrassesText = () => {
                         <div className={styles.about_mattrasses__item}>
                             <img
                                 className={styles.about_mattrasses__image}
-                                src={MattrassImage}
+                                src={MattrassImage1}
                             ></img>
                             <div className={styles.about_mattrasses__text}>
                                 <div className={styles.about_mattrasses__title}>
@@ -64,98 +69,103 @@ const IndexPageAboutMattrassesText = () => {
                                 </div>
                             </div>
                         </div>
+
                         <div className={styles.about_mattrasses__item}>
                             <img
                                 className={styles.about_mattrasses__image}
-                                src={MattrassImage}
+                                src={MattrassImage3}
                             ></img>
                             <div className={styles.about_mattrasses__text}>
                                 <div className={styles.about_mattrasses__title}>
-                                    Премиум
+                                    Классические
                                 </div>
                                 <div className={styles.about_mattrasses__desc}>
-                                    Выбирают те, кому важны личный комфорт и
-                                    спокойствие. В линейке при изготовлении
-                                    используются гипоаллергенные
-                                    высококачественные материалы. Отдельный
-                                    раздел посвящен ортопедическим товарам,
-                                    обеспечивающим здоровый сон.
+                                    Традиционная конструкция матрасов на
+                                    пружинах или поролоне. Представлены
+                                    различными производителями по доступным
+                                    ценам. Продукция соответствует стандартам,
+                                    отличается высокими потребительскими
+                                    качествами. Большое разнообразие товаров
+                                    позволит найти необходимое, соответствующую
+                                    персональным запросам, в том числе, по
+                                    уровню жесткости, используемым материалам,
+                                    наличию пружинного блока.
                                 </div>
                             </div>
                         </div>
                         <div className={styles.about_mattrasses__item}>
                             <img
                                 className={styles.about_mattrasses__image}
-                                src={MattrassImage}
+                                src={MattrassImage2}
                             ></img>
                             <div className={styles.about_mattrasses__text}>
                                 <div className={styles.about_mattrasses__title}>
-                                    Премиум
+                                    Топеры
                                 </div>
                                 <div className={styles.about_mattrasses__desc}>
-                                    Выбирают те, кому важны личный комфорт и
-                                    спокойствие. В линейке при изготовлении
-                                    используются гипоаллергенные
-                                    высококачественные материалы. Отдельный
-                                    раздел посвящен ортопедическим товарам,
-                                    обеспечивающим здоровый сон.
+                                    Обеспечат комфортный ночной отдых даже в
+                                    самом неудобном месте. Прекрасно
+                                    располагается поверх мягкой мебели и создает
+                                    уютное место для ночного отдыха. Не
+                                    требовательны в уходе, просты в
+                                    эксплуатации, обладают высокой
+                                    гигроскопичностью.
                                 </div>
                             </div>
                         </div>
                         <div className={styles.about_mattrasses__item}>
                             <img
                                 className={styles.about_mattrasses__image}
-                                src={MattrassImage}
+                                src={MattrassImage4}
                             ></img>
                             <div className={styles.about_mattrasses__text}>
                                 <div className={styles.about_mattrasses__title}>
-                                    Премиум
+                                    Детские
                                 </div>
                                 <div className={styles.about_mattrasses__desc}>
-                                    Выбирают те, кому важны личный комфорт и
-                                    спокойствие. В линейке при изготовлении
-                                    используются гипоаллергенные
-                                    высококачественные материалы. Отдельный
-                                    раздел посвящен ортопедическим товарам,
-                                    обеспечивающим здоровый сон.
+                                    Для детей разного возраста, как для
+                                    новорожденных, младенцев, так и детей более
+                                    старшего возраста, вплоть до подростков.
+                                    Продукция из качественных материалов,
+                                    соответствующих стандартам, при ее
+                                    изготовлении соблюдались необходимые нормы,
+                                    она соответствует ГОСТу и СанПину.
                                 </div>
                             </div>
                         </div>
                         <div className={styles.about_mattrasses__item}>
                             <img
                                 className={styles.about_mattrasses__image}
-                                src={MattrassImage}
+                                src={MattrassImage5}
                             ></img>
                             <div className={styles.about_mattrasses__text}>
                                 <div className={styles.about_mattrasses__title}>
-                                    Премиум
+                                    Детские
                                 </div>
                                 <div className={styles.about_mattrasses__desc}>
-                                    Выбирают те, кому важны личный комфорт и
-                                    спокойствие. В линейке при изготовлении
-                                    используются гипоаллергенные
-                                    высококачественные материалы. Отдельный
-                                    раздел посвящен ортопедическим товарам,
-                                    обеспечивающим здоровый сон.
+                                    Несмотря на невысокую стоимость,
+                                    характеризуются высокой надежностью,
+                                    долговечностью. Располагая лишь небольшой
+                                    суммой можно подобрать качественную
+                                    продукцию.
                                 </div>
                             </div>
                         </div>
                         <div className={styles.about_mattrasses__item}>
                             <img
                                 className={styles.about_mattrasses__image}
-                                src={MattrassImage}
+                                src={MattrassImage6}
                             ></img>
                             <div className={styles.about_mattrasses__text}>
                                 <div className={styles.about_mattrasses__title}>
-                                    Премиум
+                                    Ортопедические
                                 </div>
                                 <div className={styles.about_mattrasses__desc}>
-                                    Выбирают те, кому важны личный комфорт и
-                                    спокойствие. В линейке при изготовлении
-                                    используются гипоаллергенные
-                                    высококачественные материалы. Отдельный
-                                    раздел посвящен ортопедическим товарам,
-                                    обеспечивающим здоровый сон.
+                                    Предназначены для сна, подстраиваются под
+                                    анатомическую форму, запоминают его.
+                                    Обеспечивают спокойный сон даже с больной
+                                    спиной или натруженными травмированными
+                                    мышцами.
                                 </div>
                             </div>
                         </div>
