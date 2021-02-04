@@ -73,3 +73,22 @@
                     top: 100%
             a:first-child
                 margin-left: 0px
+
+@media screen and ( max-width: 1120px )
+
+    .about_header
+        justify-content: space-between
+        .about_header__list
+            width: auto
+        &::after
+            width: 100vw
+            left: 50%
+            transform: translateX(-50%)
+
+        .about_header__location h6
+            font-size: 11px
+        .about_header__worktime
+            font-size: 11px
+            margin-left: 0
+        .about_header__list ul a li
+            font-size: 11px

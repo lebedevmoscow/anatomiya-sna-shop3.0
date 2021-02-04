@@ -146,6 +146,20 @@
                 transform: rotate(360deg)
                 color: #000
 
+@media screen and ( max-width: 1120px )
+
+    .main_navigation
+        .main_navigation__list::before
+            width: 100vw
+            left: 50%
+            transform: translateX(-50%)
+        .main_navigation__list::after
+            width: 100vw
+            left: 50%
+            transform: translateX(-50%)
+        .main_navigation__list li
+            font-size: 10px
+
 @media screen and ( max-width: 1024px )
 
     .main_navigation

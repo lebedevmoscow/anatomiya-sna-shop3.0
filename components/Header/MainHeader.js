@@ -44,11 +44,21 @@ const MainHeader = ({ phoneCommon }) => {
                 </a>
             </Link>
             <div className={mainheader_styles.main_header__phone}>
-                <Image src={PhoneSVG} height={33.21} width={33.21} />
+                <Image
+                    src={PhoneSVG}
+                    height={33.21}
+                    width={33.21}
+                    className={mainheader_styles.main_header__phone__image}
+                />
                 <h6>{phoneCommon}</h6>
             </div>
             <div className={mainheader_styles.main_header__phone}>
-                <Image src={PhoneSVG} height={33.21} width={33.21} />
+                <Image
+                    src={PhoneSVG}
+                    height={33.21}
+                    width={33.21}
+                    className={mainheader_styles.main_header__phone__image}
+                />
                 <h6>{phoneCommon}</h6>
             </div>
             <div className={mainheader_styles.main_header__callme}>
