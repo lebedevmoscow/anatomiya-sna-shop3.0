@@ -106,9 +106,7 @@ const MainHeader = ({ phoneCommon }) => {
                             </div>
                         )}
                     <Popup
-                        trigger={
-                            <Image src={StatsSVG} height={35} width={35} />
-                        }
+                        trigger={<img src={StatsSVG} />}
                         onOpen={() => setComparelistPopupIsClosed(false)}
                         position="top left"
                         closeOnDocumentClick={true}
@@ -238,9 +236,7 @@ const MainHeader = ({ phoneCommon }) => {
                             </div>
                         )}
                     <Popup
-                        trigger={
-                            <Image src={HeartSVG} height={35} width={35} />
-                        }
+                        trigger={<img src={HeartSVG} />}
                         onOpen={() => setFavoriteListPopupIsClosed(false)}
                         position="top left"
                         closeOnDocumentClick={true}

@@ -2,6 +2,7 @@ import '../styles/globals.css'
 
 // Third party styles
 import 'react-slidedown/lib/slidedown.css'
+import 'reactjs-popup/dist/index.css'
 
 // Styles
 import './../styles/unmoduled.sass'
