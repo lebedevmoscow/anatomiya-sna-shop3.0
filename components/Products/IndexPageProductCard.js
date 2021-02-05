@@ -32,6 +32,11 @@ import WhiteStats from './../../assets/svg/white-stats.svg'
 
 import card_styles from './../../styles/components/Products/IndexPageProductCard.module.sass'
 
+// const EqualHeightElement = dynamic(
+//     () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
+//     { ssr: false }
+// )
+
 const Popups = dynamic(() => import('./../Popups/PopupsOnProductCard'), {
     ssr: false,
 })
@@ -239,9 +244,13 @@ const ProductCard = ({
             <div className={card_styles.product_card__wrap_2}>
                 <a>
                     <div className={card_styles.product_card__price_section}>
-                        <div className={card_styles.product_card__price}>
+                        <div
+                            style={{ position: 'relative', top: '5px' }}
+                            className={card_styles.product_card__price}
+                        >
                             {PriceDiff !== 0 && (
                                 <div
+                                    style={{ position: 'absolute' }}
                                     className={
                                         card_styles.product_card__price_discount
                                     }

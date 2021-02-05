@@ -137,8 +137,9 @@ const App = ({
             <CatalogList mobileCatalogs={mobileCatalogs} />
             <ReviewList reviews={reviews} />
 
-            <ArticleListDesktop articles={articles} />
             <SalesList sales={sales} />
+            <ArticleListDesktop articles={articles} />
+
             <AboutMattrasses />
             <Assuracnes />
             <SwiperAssurenaces />

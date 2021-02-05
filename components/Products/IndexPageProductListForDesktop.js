@@ -2,6 +2,7 @@
 import ProductCard from './IndexPageProductCard'
 
 // import dynamic from 'next/dynamic'
+// import { v4 as uuidv4 } from 'uuid'
 // import Popups from './../Popups/PopupsOnProductCard'
 import { GetPopupsList } from './../../utils/GetPopupsList'
 
@@ -46,10 +47,9 @@ const ProductListForDesktop = ({ products }) => {
                 />
             )
             // if (temp % 5 === 0) {
-            //     renderedList
-            //         .push
-            //         // <EqualHeight key={uuidv4()}>{tempArr}</EqualHeight>
-            //         ()
+            //     renderedList.push(
+            //         <EqualHeight key={uuidv4()}>{tempArr}</EqualHeight>
+            //     )
             //     tempArr = []
             //     temp = 0
             // }
@@ -61,6 +61,9 @@ const ProductListForDesktop = ({ products }) => {
 
     return (
         <div className={list_styles.product_list_wrapper}>
+            <div className={list_styles.product_list_section_name}>
+                ИНТЕРНЕТ-МАГАЗИН МАТРАСОВ АНАТОМИЯ СНА
+            </div>
             <div className={list_styles.product_list_desktop}>{render()}</div>
         </div>
     )

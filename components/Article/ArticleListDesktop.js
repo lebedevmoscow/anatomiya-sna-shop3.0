@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { SlideDown } from 'react-slidedown'
 import useMedia from './../../hooks/useMedia'
+import dynamic from 'next/dynamic'
 
 // Styles
 import articles_styles from './../../styles/components/Article/ArticleList.module.sass'
@@ -9,11 +10,17 @@ import articles_styles from './../../styles/components/Article/ArticleList.modul
 import LoadMoreButton from './../Button/LoadMoreButton'
 import Article from './../Article/Article'
 
+const EqualHeight = dynamic(
+    () => import('react-equal-height').then((mod) => mod.EqualHeight),
+    { ssr: false }
+)
+
 const ArticleListDesktop = ({ articles }) => {
     const breakpoint450 = useMedia(450)
 
     // State
     const [LoadMore, SetLoadMore] = useState(false)
+    const [FirstPartOfList, SetFirstPartOfList] = useState(null)
     const [SecondPartOfList, SetSecondPartOfList] = useState(null)
 
     // Click Handlers
@@ -22,6 +29,20 @@ const ArticleListDesktop = ({ articles }) => {
     }
 
     // UseEffects
+
+    useEffect(() => {
+        const arr = []
+        articles.map((article, index) => {
+            if (index > 2) return
+            if (breakpoint450 && index === 0) {
+                return arr.push(<Article article={article} key={index} />)
+            } else if (!breakpoint450) {
+                return arr.push(<Article article={article} key={index} />)
+            }
+        })
+        SetFirstPartOfList(<EqualHeight>{arr}</EqualHeight>)
+    }, [])
+
     useEffect(() => {
         if (LoadMore) {
             const NewList = articles.map((article, id) => {
@@ -29,7 +50,8 @@ const ArticleListDesktop = ({ articles }) => {
                 return <Article article={article} key={id} />
             })
 
-            SetSecondPartOfList(NewList)
+            // SetSecondPartOfList(NewList)
+            SetSecondPartOfList(<EqualHeight>{NewList}</EqualHeight>)
         }
     }, [LoadMore])
 
@@ -40,14 +62,7 @@ const ArticleListDesktop = ({ articles }) => {
                     Статьи
                 </div>
                 <div className={articles_styles.articles__list}>
-                    {articles.map((article, index) => {
-                        if (index > 2) return
-                        if (breakpoint450 && index === 0) {
-                            return <Article article={article} key={index} />
-                        } else if (!breakpoint450) {
-                            return <Article article={article} key={index} />
-                        }
-                    })}
+                    {FirstPartOfList}
                     <SlideDown
                         className={articles_styles.articles__slidedown}
                         closed={!LoadMore}

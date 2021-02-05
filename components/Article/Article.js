@@ -1,11 +1,17 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 
 // Assets
 // import EyeSVG from './../../assets/svg/eye.svg'
 
 // Styles
 import article_styles from './../../styles/components/Article/Article.module.sass'
+
+const EqualHeightElement = dynamic(
+    () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
+    { ssr: false }
+)
 
 const Article = ({ article }) => {
     return (
@@ -19,9 +25,11 @@ const Article = ({ article }) => {
                         src={article.Image}
                     />
 
-                    <div className={article_styles.article__title}>
-                        {article.Title}
-                    </div>
+                    <EqualHeightElement name="ArticleTitle">
+                        <div className={article_styles.article__title}>
+                            {article.Title}
+                        </div>
+                    </EqualHeightElement>
                     <div className={article_styles.aritcle__author}>
                         <Image
                             src={article.AuthorImage}
