@@ -120,7 +120,7 @@ const Footer = () => {
                         </div>
                         <div className={footer_styles.footer__for_catalogs}>
                             <div className={footer_styles.footer__list_title}>
-                                Покупателям
+                                Каталоги
                             </div>
                             <div className={footer_styles.footer__lists}>
                                 <ul className={footer_styles.footer__list}>

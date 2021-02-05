@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import styles from './../../styles/components/Assurances/index.module.sass'
 
 // SVGs
@@ -9,6 +11,7 @@ import Factory from './../../assets/svg/factory.svg'
 import Blank from './../../assets/svg/blank.svg'
 import Control from './../../assets/svg/list.svg'
 import PersonalData from './../../assets/svg/security-personal-data.svg'
+import Banner from './../../assets/assurances-banner.jpg'
 
 const IndexPageAssurances = () => {
     return (
@@ -92,6 +95,16 @@ const IndexPageAssurances = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div
+                style={{
+                    position: 'relative',
+                    width: '100%',
+                    height: '117px',
+                    marginBottom: '85px',
+                }}
+            >
+                <Image src={Banner} layout="fill" />
             </div>
         </div>
     )
