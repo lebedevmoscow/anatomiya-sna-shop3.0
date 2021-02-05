@@ -1,0 +1,102 @@
+.catalog_composition_filter
+    .mobile_burger_menu_city_choise::after
+        opacity: 0.5
+
+    .mobile_burger_menu_city_choise__labels
+        position: relative
+        span
+            margin-left: 0
+            font-size: 18px
+            text-align: center
+            position: absolute
+            left: 50%
+            transform: translateX(-50%)
+
+    .mobile_burger_menu_city_choise__moscow_list
+        margin-left: 10px
+
+        li
+            font-size: 15px
+            position: relative
+            margin-top: 30px
+            .arrow_right
+                position: absolute
+                right: 15px
+                border: solid #ffffff
+                border-width: 0 2px 2px 0
+                display: inline-block
+                padding: 3px
+                transform: rotate(-45deg)
+
+            &:first-child
+                margin-top: 15px
+            &::after
+                content: ''
+                position: absolute
+                top: calc(100% + 15px)
+                left: 0
+                width: 100%
+                height: 1px
+                background-color: #fff
+                opacity: 0.5
+
+.mobile_burger_menu_city_choise__closed
+    opacity: 0
+    visibility: hidden
+
+.mobile_burger_menu_city_choise
+    position: fixed
+    opacity: 1
+    z-index: 11
+    font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+    color: #ffffff
+    background-color: #0ca5d3
+    width: 100vw
+    height: 100%
+    top: 0
+    bottom: 0
+    overflow: scroll
+    &::after
+        content: ''
+        position: absolute
+        height: 1px
+        width: 100%
+        top: 40px
+        left: 0
+        background-color: #fff
+    .arrow_left
+        border: solid #ffffff
+        border-width: 0 1px 1px 0
+        display: inline-block
+        padding: 3px
+        transform: scale(1.8) rotate(135deg)
+
+    .mobile_burger_menu_city_choise__moscow_list
+        margin-left: 20px
+        padding-bottom: 10px
+        li
+            font-size: 20px
+
+    .mobile_burger_menu_city_choise__labels
+        padding-bottom: 20px
+        margin-left: 5px
+        margin-top: 8px
+
+        span
+            display: inline-block
+            position: relative
+            top: 2.5px
+            margin-left: 20px
+            font-size: 20px
+
+.container
+    max-width: 1234px
+    margin: 0 auto
+    padding: 0 30px
+    width: 100%
+    box-sizing: border-box
+
+@media screen and ( max-width: 720px )
+
+    .container
+        padding: 0 15px

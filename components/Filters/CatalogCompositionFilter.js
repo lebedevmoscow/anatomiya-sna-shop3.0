@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import styles from './../../styles/components/Filters/CatalogCompositionFilter.module.sass'
+
 const CatalogCompositionFilter = ({
     title,
     onClose,
@@ -283,29 +285,44 @@ const CatalogCompositionFilter = ({
     }
 
     return (
-        <div className="catalog-composition-filter">
+        <div className={styles.catalog_composition_filter}>
             <div
-                className={`mobile-burger-menu-city-choise mobile-burger-menu-city-choise--${className}`}
+                className={`${styles.mobile_burger_menu_city_choise} mobile_burger_menu_city_choise__${className}`}
             >
-                <div className="container">
+                <div className={styles.container}>
                     {additionalData.length === 0 && (
-                        <div className="mobile-burger-menu-city-choise__labels">
-                            <i onClick={onClose} className="arrow-left"></i>
+                        <div
+                            className={
+                                styles.mobile_burger_menu_city_choise__labels
+                            }
+                        >
+                            <i
+                                onClick={onClose}
+                                className={styles.arrow_left}
+                            ></i>
                             <span>{title}</span>
                         </div>
                     )}
                     {additionalData.length !== 0 && (
-                        <div className="mobile-burger-menu-city-choise__labels">
+                        <div
+                            className={
+                                styles.mobile_burger_menu_city_choise__labels
+                            }
+                        >
                             <i
                                 onClick={() => {
                                     setAdditionalData([])
                                 }}
-                                className="arrow-left"
+                                className={styles.arrow_left}
                             ></i>
                             <span>{additionalModalTitle}</span>
                         </div>
                     )}
-                    <ul className="mobile-burger-menu-city-choise__moscow-list">
+                    <ul
+                        className={
+                            styles.mobile_burger_menu_city_choise__moscow_list
+                        }
+                    >
                         {additionalData.length === 0 &&
                             dataList.map((element, index) => {
                                 return (
@@ -318,7 +335,7 @@ const CatalogCompositionFilter = ({
                                         }}
                                     >
                                         <span>{element}</span>
-                                        <i className="arrow-right"></i>
+                                        <i className={styles.arrow_right}></i>
                                     </li>
                                 )
                             })}

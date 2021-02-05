@@ -244,12 +244,12 @@ const CatalogPage = ({
                 dataList={presetFilterData}
                 title={presetFilterTitle}
             />
-            {/* <CatalogCompositionFilter
+            <CatalogCompositionFilter
                 title={'Каталог'}
                 className={compositionPresetFilterIsOpen ? '' : 'closed'}
                 onClose={() => setCompositionPresetFilterIsOpen(false)}
                 dataList={initialCompositionFilterData}
-            /> */}
+            />
             {/* {breakpoint720 && (
                 <img className="mobile-menu__mini-banner" src={banner}></img>
             )} */}
