@@ -14,6 +14,7 @@ import MobileBurgerMenu from './../../components/Mobile/MobileBurgerMenu'
 import CatalogPresetFilter from './../../components/Filters/CatalogPresentFilter'
 import CatalogCompositionFilter from './../../components/Filters/CatalogCompositionFilter'
 import CatalogLeftMobile from './../../components/Mobile/CatalogLeftMobile'
+import CatalogProductList from './../../components/Products/CatalogProductList'
 
 import common_styles from './../../styles/common.module.sass'
 
@@ -25,6 +26,11 @@ const CatalogPage = ({
     mobilemenuCatalogs,
     mobileMenu,
     regions,
+    assurances,
+    filterAPIData,
+    catalogSlug,
+    subCatalogSlug,
+    products,
 }) => {
     // Vars
     const initialCompositionFilterData = [
@@ -238,30 +244,46 @@ const CatalogPage = ({
             {!breakpoint1023 && (
                 <MainNavigation headerCatalog={headerCatalog} />
             )}
-            <CatalogPresetFilter
-                onClose={() => setPresetFilterIsOpen(false)}
-                className={presetFilterIsOpen ? '' : 'closed'}
-                dataList={presetFilterData}
-                title={presetFilterTitle}
-            />
-            <CatalogCompositionFilter
-                title={'Каталог'}
-                className={compositionPresetFilterIsOpen ? '' : 'closed'}
-                onClose={() => setCompositionPresetFilterIsOpen(false)}
-                dataList={initialCompositionFilterData}
-            />
+            {breakpoint768 && (
+                <CatalogPresetFilter
+                    onClose={() => setPresetFilterIsOpen(false)}
+                    className={presetFilterIsOpen ? '' : 'closed'}
+                    dataList={presetFilterData}
+                    title={presetFilterTitle}
+                />
+            )}
+            {breakpoint768 && (
+                <CatalogCompositionFilter
+                    title={'Каталог'}
+                    className={compositionPresetFilterIsOpen ? '' : 'closed'}
+                    onClose={() => setCompositionPresetFilterIsOpen(false)}
+                    dataList={initialCompositionFilterData}
+                />
+            )}
             {/* {breakpoint720 && (
                 <img className="mobile-menu__mini-banner" src={banner}></img>
             )} */}
-            <div className={common_styles.container}>
-                <CatalogLeftMobile
-                    onCompositionClick={onCloseCompositionFilterClickHandler}
-                    onMainFilterClick={onMainMobileFilterClickHandler}
-                    onClick={onPresetFilterClickHandler}
-                    updateViewType={setViewType}
+            {breakpoint1023 && (
+                <div className={common_styles.container}>
+                    <CatalogLeftMobile
+                        onCompositionClick={
+                            onCloseCompositionFilterClickHandler
+                        }
+                        onMainFilterClick={onMainMobileFilterClickHandler}
+                        onClick={onPresetFilterClickHandler}
+                        updateViewType={setViewType}
+                        viewType={viewType}
+                    />
+                </div>
+            )}
+            {breakpoint1023 && (
+                <CatalogProductList
+                    firstLoadProducts={products}
+                    stylesForViewType={stylesForViewType}
                     viewType={viewType}
                 />
-            </div>
+            )}
+
             <Subscribe />
             <Footer />
         </div>
@@ -278,12 +300,12 @@ export const getServerSideProps = async (ctx) => {
         'https://anatomiyasna.ru/api/parameters/saleBanner/',
         'https://www.anatomiyasna.ru/api/menu/headerCatalog/',
         'https://www.anatomiyasna.ru/api/parameters/all/',
-        // `https://www.anatomiyasna.ru/api/filter/filterModel/?slug=${ctx.params.catalog}`,
-        // `https://anatomiyasna.ru/api/filter/filtredProducts/?slug=${ctx.params.catalog}`,
+        `https://www.anatomiyasna.ru/api/filter/filterModel/?slug=${ctx.params.catalog}`,
+        `https://anatomiyasna.ru/api/filter/filtredProducts/?slug=${ctx.params.catalog}`,
     ]
 
     let response = {}
-    let products = {}
+    // let products = {}
 
     await Promise.all(
         URLS.map((url) => fetch(url).then((resp) => resp.json()))
@@ -301,28 +323,28 @@ export const getServerSideProps = async (ctx) => {
     const assurances = response[5].main_page_warranty_text
 
     const headerCatalog = response[4]
-    // const filterAPIData = response[6]
-    // const filterProductsIds = response[7]
+    const filterAPIData = response[6]
+    const filterProductsIds = response[7]
 
     // const filterAPIData = response[0]
     // const filterProductsIds = response[1]
 
     // console.log('filterProductsIds', filterProductsIds)
 
-    // let ids = []
-    // for (let i = 0; i < 21; i++) {
-    //     if (i !== filterProductsIds.length - 1) {
-    //         ids.push(`products[]=${filterProductsIds[i]}&`)
-    //     } else {
-    //         ids.push(`products[]=${filterProductsIds[i]}`)
-    //     }
-    // }
-    // const productSubUrl = ids.join('')
+    let ids = []
+    for (let i = 0; i < 21; i++) {
+        if (i !== filterProductsIds.length - 1) {
+            ids.push(`products[]=${filterProductsIds[i]}&`)
+        } else {
+            ids.push(`products[]=${filterProductsIds[i]}`)
+        }
+    }
+    const productSubUrl = ids.join('')
 
-    // const productsURLReq = await fetch(
-    //     `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
-    // )
-    // const products = await productsURLReq.json()
+    const productsURLReq = await fetch(
+        `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
+    )
+    const products = await productsURLReq.json()
 
     return {
         props: {
@@ -334,7 +356,7 @@ export const getServerSideProps = async (ctx) => {
             worktimeHead,
             headerCatalog,
             assurances,
-            // filterAPIData,
+            filterAPIData,
             catalogSlug: ctx.params.catalog,
             subCatalogSlug: null,
             products,
