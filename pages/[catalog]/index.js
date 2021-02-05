@@ -277,11 +277,13 @@ const CatalogPage = ({
                 </div>
             )}
             {breakpoint1023 && (
-                <CatalogProductList
-                    firstLoadProducts={products}
-                    stylesForViewType={stylesForViewType}
-                    viewType={viewType}
-                />
+                <div className={common_styles.container}>
+                    <CatalogProductList
+                        firstLoadProducts={products}
+                        stylesForViewType={stylesForViewType}
+                        viewType={viewType}
+                    />
+                </div>
             )}
 
             <Subscribe />

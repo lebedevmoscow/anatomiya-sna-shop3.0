@@ -16,8 +16,6 @@ const CatalogProductListForDesktop = ({
     firstLoadProducts,
     desktopViewType,
 }) => {
-    console.log('firstLoadProducts', firstLoadProducts)
-
     const listSales = [
         {
             Title: 'Выбор покупателей',
@@ -57,7 +55,7 @@ const CatalogProductListForDesktop = ({
     const [List, SetList] = useState([])
     useEffect(() => {
         SetList(render())
-    }, [])
+    }, [stylesForViewType, stylesForDesktopViewType])
 
     const render = () => {
         let ElemenetsArray = []

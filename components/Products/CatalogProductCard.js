@@ -63,7 +63,68 @@ const CatalogProductCard = ({
     oldMax,
     catalogSlug,
     subCatalogSlug,
+    stylesForViewType,
+    stylesForDesktopViewType,
+    viewType,
 }) => {
+    const [viewTypeStyles, setViewTypeStyles] = useState({
+        catalog_product_card: {},
+        catalog_product_card__image: {},
+        catalog_product_card__info_button: {},
+        catalog_product_card__info_wrap: {},
+        catalog_product_card__materials_list_item_img: {},
+        catalog_product_card__stat_block: {},
+        catalog_product_card__stat_block_image: {},
+        catalog_product_card__stats_buttons: {},
+    })
+    useEffect(() => {
+        const viewTypeStylesClone = {
+            catalog_product_card:
+                (stylesForViewType && stylesForViewType.catalog_product_card) ||
+                (stylesForDesktopViewType &&
+                    stylesForDesktopViewType.catalog_product_card),
+            catalog_product_card__image:
+                (stylesForViewType &&
+                    stylesForViewType.catalog_product_card__image) ||
+                (stylesForDesktopViewType &&
+                    stylesForDesktopViewType.catalog_product_card__image),
+            catalog_product_card__info_button:
+                (stylesForViewType &&
+                    stylesForViewType.catalog_product_card__info_button) ||
+                (stylesForDesktopViewType &&
+                    stylesForDesktopViewType.catalog_product_card__info_button),
+            catalog_product_card__info_wrap:
+                (stylesForViewType &&
+                    stylesForViewType.catalog_product_card__info_wrap) ||
+                (stylesForDesktopViewType &&
+                    stylesForDesktopViewType.catalog_product_card__info_wrap),
+            catalog_product_card__materials_list_item_img:
+                (stylesForViewType &&
+                    stylesForViewType.catalog_product_card__materials_list_item_img) ||
+                (stylesForDesktopViewType &&
+                    stylesForDesktopViewType.catalog_product_card__materials_list_item_img),
+            catalog_product_card__stat_block:
+                (stylesForViewType &&
+                    stylesForViewType.catalog_product_card__stat_block) ||
+                (stylesForDesktopViewType &&
+                    catalog_product_card__materials_list_item_img),
+            catalog_product_card__stat_block_image:
+                stylesForViewType.catalog_product_card__stat_block_image ||
+                (stylesForDesktopViewType &&
+                    stylesForDesktopViewType.catalog_product_card__materials_list_item_img),
+
+            catalog_product_card__stats_buttons:
+                (stylesForViewType &&
+                    stylesForViewType.catalog_product_card__stats_buttons) ||
+                (stylesForDesktopViewType &&
+                    stylesForDesktopViewType.catalog_product_card__stats_buttons),
+        }
+
+        setViewTypeStyles(viewTypeStylesClone)
+
+        console.log('viewTypeStylesClone', viewTypeStylesClone)
+    }, [stylesForViewType, stylesForDesktopViewType])
+
     // Redux
     const dispatch = useDispatch()
     const FavoriteListRedux = useSelector(
@@ -372,15 +433,30 @@ const CatalogProductCard = ({
               )
 
     return (
-        <div className={styles.catalog_product_card}>
+        <div
+            style={viewTypeStyles.catalog_product_card}
+            className={styles.catalog_product_card}
+        >
             {/* <PopupsOnProductCard key={uuidv4()} ListSalesList={ListSalesList} /> */}
-            <div
-                className={`${styles.catalog_product_card__desktop_view_type__single} ${styles.catalog_product_card__desktop_view_type__single__first}`}
-            >
-                <img
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div
+                    style={{
+                        height: viewType === 'single' ? '208px' : '113px',
+                        width: '100%',
+                        position: 'relative',
+                    }}
+                    className="image-wrapper"
+                >
+                    <Image
+                        // className={styles.catalog_product_card__image}
+                        layout="fill"
+                        src={MainImage.FilePath}
+                    />
+                </div>
+                {/* <img
                     className={styles.catalog_product_card__image}
                     src={MainImage.FilePath}
-                ></img>
+                ></img> */}
                 <div className={styles.catalog_product_card__smalltext}>
                     Купить {CatalogType}
                 </div>

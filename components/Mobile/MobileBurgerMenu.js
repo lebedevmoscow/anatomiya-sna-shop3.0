@@ -35,8 +35,6 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
         burgerRef.current.classList.toggle(`${menu_styles.burger_opened}`)
     }
 
-    console.log('regions', regions)
-
     useEffect(() => {
         document.addEventListener('scroll', () => {
             const st = window.pageYOffset
