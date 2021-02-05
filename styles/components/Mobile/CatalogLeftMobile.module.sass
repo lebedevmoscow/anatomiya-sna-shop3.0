@@ -1,0 +1,251 @@
+.catalog_left_mobile
+    font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+    .catalog_left_mobile__title
+        font-size: 20px
+        margin-top: 15px
+        color: #444444
+        text-transform: uppercase
+
+    .catalog_left_mobile__filters_list
+        margin-top: 15px
+        .catalog_left_mobile__filters_list_item
+            font-size: 14px
+            border: 1px solid #0ca5d3
+            padding: 11px 10px
+            text-align: center
+            line-height: 1
+            color: #444444
+            border-radius: 5px
+
+        .catalog_left_mobile__filters_list_item__more
+            box-sizing: border-box
+            height: 38px
+            span
+                display: block
+                width: 18px
+                height: 4px
+                margin-top: 5px
+                background-color: #dadada
+                position: relative
+                &::before
+                    content: ''
+                    position: absolute
+                    left: 0
+                    top: -7px
+                    width: 18px
+                    height: 4px
+                    background-color: #dadada
+                &::after
+                    content: ''
+                    position: absolute
+                    left: 0
+                    top: 7px
+                    width: 18px
+                    height: 4px
+                    background-color: #dadada
+
+    .swiper_slide
+        width: auto
+
+    .first_line
+        width: 20px
+        height: 7px
+        display: flex
+        justify-content: space-between
+
+    .second_line
+        margin-top: 5px
+        width: 20px
+        height: 7px
+        display: flex
+        justify-content: space-between
+
+    .square
+        display: block
+        background: #dadada
+        height: 8px
+        width: 8px
+
+    .catalog_left_mobile__url
+        margin-top: 15px
+
+    .catalog_left_mobile__popular_filters_list
+        margin-top: 10px
+        .catalog_left_mobile__popular_filters_list_item__first_child
+            margin-top: 4px
+            box-sizing: border-box
+            height: 26px
+            font-size: 15px
+
+        .catalog_left_mobile__popular_filters_list_item
+            font-size: 14px
+            color: #444444
+            border: 1px solid #0ca5d3
+            padding: 5px 10px
+            border-radius: 5px
+
+        .swiper_slide
+            width: auto
+
+    .catalog_left_mobile__main_filters
+        display: flex
+        justify-content: space-between
+        margin-top: 15px
+
+    .catalog_left_mobile__main_filter
+        display: flex
+        align-items: center
+        font-size: 14px
+        color: #ffffff
+        background-color: #0ca5d3
+        text-align: center
+        border-radius: 5px
+        position: relative
+
+    .filter_mobile_btn__icon
+        position: absolute
+        top: 50%
+        width: 24px
+        height: 14px
+        margin-top: -7px
+        left: 8px
+        span
+            position: absolute
+            left: 0
+            right: 0
+            height: 1px
+            background: #fff
+
+        .filter_mobile_btn__icon_1
+            &::before
+                content: ""
+                position: absolute
+                top: -3px
+                width: 5px
+                height: 5px
+                border: 1px solid #fff
+                background: #0ca5d3
+                border-radius: 100%
+                right: 4px
+                z-index: 1
+        .filter_mobile_btn__icon_2
+            margin-top: 7px
+            &::before
+                content: ""
+                position: absolute
+                top: -3px
+                width: 5px
+                height: 5px
+                border: 1px solid #fff
+                background: #0ca5d3
+                border-radius: 100%
+                z-index: 1
+                left: 4px
+        .filter_mobile_btn__icon_3
+            margin-top: 14px
+            &::before
+                content: ""
+                position: absolute
+                top: -3px
+                width: 5px
+                height: 5px
+                border: 1px solid #fff
+                background: #0ca5d3
+                border-radius: 100%
+                z-index: 1
+                right: 6px
+
+    .filter_mobile_count
+        border-radius: 100%
+        background-color: #fff
+        color: #0ca5d3
+        height: 20px
+        width: 20px
+        line-height: 20px
+        margin-right: 10px
+
+    .catalog_left_mobile__price_order
+        // margin-left: 7.5px
+        padding: 12px 12px
+        border: 1px solid #e71616
+        border-radius: 5px
+        text-align: center
+        color: #444444
+        font-size: 14px
+
+    .filter_mobile_text
+        padding: 13px 5px 13px 38px
+
+    .catalog_left_mobile__view_type_block
+        height: 40px
+        width: 40px
+        border: 1px solid #0ca5d3
+        border-radius: 4px
+        text-align: center
+
+    .catalog_left_mobile__view_type_block__by_two_card
+        position: relative
+        top: 26%
+        left: 28%
+        box-sizing: border-box
+        .big_square
+            box-sizing: border-box
+            width: 18px
+            background: none
+            border: 2px solid #dadada
+            height: 13px
+            border-radius: 2px
+            position: absolute
+            left: 0
+            right: 0
+            top: 0
+        .line
+            border: 1px solid #dadada
+            border-radius: 2px
+            background: none
+            box-sizing: border-box
+            position: absolute
+            left: 0
+            right: 0
+            top: 15px
+            height: 2px
+            width: 18px
+
+@media screen and ( max-width: 769px)
+
+    .catalog_left_mobile
+        .catalog_left_mobile__filters_list
+            .catalog_left_mobile__filters_list_item
+                width: 168.95px
+                // &:first-child
+                //     width: auto
+            .catalog_left_mobile__filters_list_item__more
+                width: auto
+
+        .catalog_left_mobile__main__filters
+            margin-right: 0
+            // .swiper-slide
+            //     margin-right: 0 !important
+            .catalog_left_mobile__main_filter
+                display: none
+            .catalog_left_mobile__view_type_block
+                display: none
+            .catalog_left_mobile__price_order
+                width: auto
+
+@media screen and (max-width: 450px)
+
+    .catalog_left_mobile
+        .catalog_left_mobile__filters_list
+            .catalog_left_mobile__filters_list_item
+                width: auto
+            .catalog_left_mobile__filters_list_item__more
+                width: auto
+
+        .catalog_left_mobile__main_filters
+            .catalog_left_mobile__main_filter
+                display: flex
+            .catalog_left_mobile__view_type_block
+                display: block
+            .catalog_left_mobile__price_order
+                width: auto
