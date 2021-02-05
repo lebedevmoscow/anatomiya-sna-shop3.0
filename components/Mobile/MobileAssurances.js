@@ -131,7 +131,7 @@ const GoodsWithSwiper = () => {
         <div style={{ display }} className={styles.container}>
             <div className={styles.goods_catalog}>
                 <div className={styles.goods_catalog__section_name}>
-                    Каталог товаров
+                    Мы гарантируем
                 </div>
                 <div className="goods_catalog__list">{list}</div>
             </div>

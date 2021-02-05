@@ -6,6 +6,8 @@ import DateImage from './../../assets/date.png'
 import card_styles from './../../styles/components/Sales/SaleCard.module.sass'
 
 const Sale = ({ sale }) => {
+    console.log('sale', sale)
+
     // Breakpoints
     const breakpoint1250 = useMediaQuery(1250)
     const breakpoint720 = useMediaQuery(720)
@@ -99,10 +101,12 @@ const Sale = ({ sale }) => {
                 </div>
             </div>
             <div className={card_styles.sale_item__title}>{sale.title}</div>
-            <div
-                ref={salesDisclaimerRef}
-                className={card_styles.sales__disclaimer}
-            ></div>
+            {sale.annotation && (
+                <div
+                    ref={salesDisclaimerRef}
+                    className={card_styles.sales__disclaimer}
+                ></div>
+            )}
         </div>
     )
     return null

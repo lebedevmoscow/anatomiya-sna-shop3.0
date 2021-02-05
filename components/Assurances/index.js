@@ -1,5 +1,7 @@
 import Image from 'next/image'
 
+import useMedia from './../../hooks/useMedia'
+
 import styles from './../../styles/components/Assurances/index.module.sass'
 
 // SVGs
@@ -14,6 +16,8 @@ import PersonalData from './../../assets/svg/security-personal-data.svg'
 import Banner from './../../assets/assurances-banner.jpg'
 
 const IndexPageAssurances = () => {
+    const breakpoint768 = useMedia(768)
+
     return (
         <div className={styles.container}>
             <div className={styles.assurances}>
@@ -96,16 +100,18 @@ const IndexPageAssurances = () => {
                     </div>
                 </div>
             </div>
-            <div
-                style={{
-                    position: 'relative',
-                    width: '100%',
-                    height: '117px',
-                    marginBottom: '85px',
-                }}
-            >
-                <Image src={Banner} layout="fill" />
-            </div>
+            {!breakpoint768 && (
+                <div
+                    style={{
+                        position: 'relative',
+                        width: '100%',
+                        height: '117px',
+                        marginBottom: '85px',
+                    }}
+                >
+                    <Image src={Banner} layout="fill" />
+                </div>
+            )}
         </div>
     )
 }

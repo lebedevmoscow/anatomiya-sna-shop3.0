@@ -205,12 +205,16 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
                                         height={25.5}
                                     />
                                 </li>
-                                <li ref={cartIconRef}>
-                                    <Image
+                                <li
+                                    style={{ marginRight: 0 }}
+                                    ref={cartIconRef}
+                                >
+                                    <img src={CartIcon}></img>
+                                    {/* <Image
                                         src={CartIcon}
                                         width={40.5}
                                         height={25.5}
-                                    />
+                                    /> */}
                                 </li>
                             </ul>
                         </div>
@@ -289,21 +293,21 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
                             <span className={menu_styles.town}>Москва</span>
                             <span className={menu_styles.arrow_down}></span>
                         </div>
-                        {/* <div className="mobile_nav_menu__phone">
+                        <div className={menu_styles.mobile_nav_menu__phone}>
                             <img src={PhoneIcon}></img>
                             <span>8 (495) 287-87-95</span>
                         </div>
-                        <div className="mobile_nav_menu__hint">
+                        <div className={menu_styles.mobile_nav_menu__hint}>
                             Горячая линия
                         </div>
-                        <div className="mobile_nav_menu__phone">
+                        <div className={menu_styles.mobile_nav_menu__phone}>
                             <img src={PhoneIcon}></img>
                             <span>8 (800) 777-54-17</span>
                         </div>
-                        <div className="mobile_nav_menu__hint">
+                        <div className={menu_styles.mobile_nav_menu__hint}>
                             Мы в соц сетях:
                         </div>
-                        <ul className="mobile_nav_menu__socials">
+                        <ul className={menu_styles.mobile_nav_menu__socials}>
                             <li>
                                 <img src={VK}></img>
                             </li>
@@ -311,7 +315,7 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
                                 <img src={FB}></img>
                             </li>
                         </ul>
-                        <div className="mobile_nav_menu__copy">
+                        <div className={menu_styles.mobile_nav_menu__copy}>
                             <span>
                                 2020 ©{' '}
                                 <Link href="/">
@@ -319,7 +323,7 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
                                 </Link>
                             </span>
                             <span>Все права защищены.</span>
-                        </div> */}
+                        </div>
                         {/* <div className="mobile_nav_menu__full">
                             Полная версия сайта
                         </div> */}
