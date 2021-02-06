@@ -21,6 +21,7 @@ import CatalogHelpPickUp from '../../components/Catalog/CatalogHelpPickUp'
 import CatalogMobileReview from './../../components/Reviews/CatalogMobileReviews'
 import CatalogLeftFilter from '../../components/Filters/CatalogLeftFilter'
 import CatalogRight from '../../components/Catalog/CatalogRight'
+import CatalogMainFilter from './../../components/Filters/CatalogMobileMainFilter'
 
 import common_styles from './../../styles/pages/catalog.module.sass'
 
@@ -270,6 +271,14 @@ const CatalogPage = ({
                     dataList={initialCompositionFilterData}
                 />
             )}
+            <CatalogMainFilter
+                className={mainMobileFilterIsOpen ? '' : 'closed'}
+                // className={'closed'}
+                onClose={() => {
+                    setMainMobileFilterIsOpen(false)
+                }}
+                title={'Подбор по параметрам'}
+            />
             {/* {breakpoint720 && (
                 <img className="mobile-menu__mini-banner" src={banner}></img>
             )} */}
@@ -299,17 +308,17 @@ const CatalogPage = ({
                 <div style={{ marginTop: '5px' }}>
                     <LoadMoreButton firstText={'Показать еще +20'} />
                 </div>
-            )}
+            )}{' '}
             {IsMobile && breakpoint1023 && (
                 <div className={common_styles.mobile_catalog_pagination}>
                     <CatalogPagination />
                 </div>
             )}
-            {IsMobile && breakpoint1023 && (
+            {/* {IsMobile && breakpoint1023 && (
                 <div className={common_styles.mobile_help_pickup}>
                     <CatalogHelpPickUp />
                 </div>
-            )}
+            )} */}
             {IsMobile && breakpoint1023 && (
                 <>
                     <div className={common_styles.catalog_mobile_reviews_title}>
@@ -373,8 +382,6 @@ export const getServerSideProps = async (ctx) => {
 
     let response = {}
     // let products = {}
-
-    console.log('ctx.params.catalog', ctx.params.catalog)
 
     await Promise.all(
         URLS.map((url) => fetch(url).then((resp) => resp.json()))

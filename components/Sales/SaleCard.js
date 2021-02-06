@@ -6,8 +6,6 @@ import DateImage from './../../assets/date.png'
 import card_styles from './../../styles/components/Sales/SaleCard.module.sass'
 
 const Sale = ({ sale }) => {
-    console.log('sale', sale)
-
     // Breakpoints
     const breakpoint1250 = useMediaQuery(1250)
     const breakpoint720 = useMediaQuery(720)
