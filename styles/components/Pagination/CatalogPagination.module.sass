@@ -1,0 +1,71 @@
+
+.catalog_pagination
+    font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+    display: flex
+    align-items: center
+    margin-top: 20px
+
+    .catalog_pagination__pages_list
+        display: flex
+
+    .catalog_pagination__pages_list_item
+        cursor: pointer
+        color: #444444
+        font-size: 15px
+        min-width: 10px
+        border-bottom: 2px dotted #0ca5d3
+        line-height: 21px
+        text-align: center
+        margin: 0 13px
+
+    .active
+        color: #0ca5d3
+
+    .catalog_pagination__pages_dots
+        font-size: 15px
+
+    .catalog_pagination__last_page_number
+        cursor: pointer
+        color: #444444
+        font-size: 15px
+        min-width: 10px
+        border-bottom: 2px dotted #0ca5d3
+        line-height: 21px
+        text-align: center
+        margin: 0 13px
+
+    .catalog_pagination__next_button
+        cursor: pointer
+        position: relative
+        font-size: 15px
+        text-align: center
+        min-width: 94px
+        width: 105px
+        height: 26px
+        line-height: 24px
+        border: 1px solid #e6e6e6
+        background: transparent
+        border-radius: 4px
+        margin-left: 10px
+        padding-right: 27px
+        padding-left: 14px
+        color: #444444
+        &::after
+            content: ""
+            position: absolute
+            top: 50%
+            margin-top: -1px
+            width: 5px
+            height: 3px
+            background: url('./../../../assets/arrow.png') 50% no-repeat
+            background-size: 100% 100%
+            right: 15px
+            transform: rotate(-90deg)
+
+.mobile_catalog_pagination
+    padding-bottom: 40px
+
+@media screen and ( max-width: 450px )
+
+    .mobile_catalog_pagination
+        padding-bottom: 0px

@@ -15,8 +15,11 @@ import CatalogPresetFilter from './../../components/Filters/CatalogPresentFilter
 import CatalogCompositionFilter from './../../components/Filters/CatalogCompositionFilter'
 import CatalogLeftMobile from './../../components/Mobile/CatalogLeftMobile'
 import CatalogProductList from './../../components/Products/CatalogProductList'
+import LoadMoreButton from './../../components/Button/LoadMoreButton'
+import CatalogPagination from '../../components/Pagination/CatalogPagination'
+import CatalogHelpPickUp from '../../components/Catalog/CatalogHelpPickUp'
 
-import common_styles from './../../styles/common.module.sass'
+import common_styles from './../../styles/pages/catalog.module.sass'
 
 const CatalogPage = ({
     banner,
@@ -285,7 +288,21 @@ const CatalogPage = ({
                     />
                 </div>
             )}
-
+            {breakpoint1023 && (
+                <div style={{ marginTop: '5px' }}>
+                    <LoadMoreButton firstText={'Показать еще +20'} />
+                </div>
+            )}
+            {breakpoint1023 && (
+                <div className={common_styles.mobile_catalog_pagination}>
+                    <CatalogPagination />
+                </div>
+            )}
+            {breakpoint1023 && (
+                <div className={common_styles.mobile_help_pickup}>
+                    <CatalogHelpPickUp />
+                </div>
+            )}
             <Subscribe />
             <Footer />
         </div>
@@ -308,6 +325,8 @@ export const getServerSideProps = async (ctx) => {
 
     let response = {}
     // let products = {}
+
+    console.log('ctx.params.catalog', ctx.params.catalog)
 
     await Promise.all(
         URLS.map((url) => fetch(url).then((resp) => resp.json()))
