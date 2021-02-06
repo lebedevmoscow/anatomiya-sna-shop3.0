@@ -19,6 +19,7 @@ import LoadMoreButton from './../../components/Button/LoadMoreButton'
 import CatalogPagination from '../../components/Pagination/CatalogPagination'
 import CatalogHelpPickUp from '../../components/Catalog/CatalogHelpPickUp'
 import CatalogMobileReview from './../../components/Reviews/CatalogMobileReviews'
+import CatalogLeftFilter from '../../components/Filters/CatalogLeftFilter'
 
 import common_styles from './../../styles/pages/catalog.module.sass'
 
@@ -315,6 +316,12 @@ const CatalogPage = ({
                         <CatalogMobileReview />
                     </div>
                 </>
+            )}
+            {/* Here will be assurances swiper */}
+            {!breakpoint1023 && (
+                <div className={common_styles.catalog}>
+                    <CatalogLeftFilter filterAPIData={filterAPIData} />
+                </div>
             )}
             <Subscribe />
             <Footer />
