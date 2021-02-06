@@ -20,6 +20,7 @@ import CatalogPagination from '../../components/Pagination/CatalogPagination'
 import CatalogHelpPickUp from '../../components/Catalog/CatalogHelpPickUp'
 import CatalogMobileReview from './../../components/Reviews/CatalogMobileReviews'
 import CatalogLeftFilter from '../../components/Filters/CatalogLeftFilter'
+import CatalogRight from '../../components/Catalog/CatalogRight'
 
 import common_styles from './../../styles/pages/catalog.module.sass'
 
@@ -319,8 +320,16 @@ const CatalogPage = ({
             )}
             {/* Here will be assurances swiper */}
             {!breakpoint1023 && (
-                <div className={common_styles.catalog}>
-                    <CatalogLeftFilter filterAPIData={filterAPIData} />
+                <div className={common_styles.container}>
+                    <div className={common_styles.catalog}>
+                        <CatalogLeftFilter filterAPIData={filterAPIData} />
+                        <CatalogRight
+                            firstLoadProducts={products}
+                            updateViewType={setDesktopViewType}
+                            desktopViewType={desktopViewType}
+                            stylesForDesktopViewType={stylesForDesktopViewType}
+                        />
+                    </div>
                 </div>
             )}
             <Subscribe />
