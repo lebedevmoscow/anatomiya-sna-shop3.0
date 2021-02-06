@@ -82,9 +82,6 @@ const CatalogProductCard = ({
         catalog_product_card__stats_buttons: {},
     })
     useEffect(() => {
-        console.log('mobile', stylesForViewType)
-        console.log('desktop', stylesForDesktopViewType)
-
         const viewTypeStylesClone = {
             catalog_product_card:
                 (stylesForViewType && stylesForViewType.catalog_product_card) ||
