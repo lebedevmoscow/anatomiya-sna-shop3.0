@@ -37,6 +37,7 @@ const CatalogPage = ({
     catalogSlug,
     subCatalogSlug,
     products,
+    IsMobile,
 }) => {
     // Vars
     const initialCompositionFilterData = [
@@ -272,7 +273,7 @@ const CatalogPage = ({
             {/* {breakpoint720 && (
                 <img className="mobile-menu__mini-banner" src={banner}></img>
             )} */}
-            {breakpoint1023 && (
+            {IsMobile && breakpoint1023 && (
                 <div className={common_styles.container}>
                     <CatalogLeftMobile
                         onCompositionClick={
@@ -285,7 +286,7 @@ const CatalogPage = ({
                     />
                 </div>
             )}
-            {breakpoint1023 && (
+            {IsMobile && breakpoint1023 && (
                 <div className={common_styles.container}>
                     <CatalogProductList
                         firstLoadProducts={products}
@@ -294,22 +295,22 @@ const CatalogPage = ({
                     />
                 </div>
             )}
-            {breakpoint1023 && (
+            {IsMobile && breakpoint1023 && (
                 <div style={{ marginTop: '5px' }}>
                     <LoadMoreButton firstText={'Показать еще +20'} />
                 </div>
             )}
-            {breakpoint1023 && (
+            {IsMobile && breakpoint1023 && (
                 <div className={common_styles.mobile_catalog_pagination}>
                     <CatalogPagination />
                 </div>
             )}
-            {breakpoint1023 && (
+            {IsMobile && breakpoint1023 && (
                 <div className={common_styles.mobile_help_pickup}>
                     <CatalogHelpPickUp />
                 </div>
             )}
-            {breakpoint1023 && (
+            {IsMobile && breakpoint1023 && (
                 <>
                     <div className={common_styles.catalog_mobile_reviews_title}>
                         Отзывы на кровати
@@ -322,7 +323,7 @@ const CatalogPage = ({
                 </>
             )}
             {/* Here will be assurances swiper */}
-            {!breakpoint1023 && (
+            {!IsMobile && !breakpoint1023 && (
                 <div className={common_styles.container}>
                     <div className={common_styles.catalog}>
                         <CatalogLeftFilter filterAPIData={filterAPIData} />
@@ -344,6 +345,8 @@ const CatalogPage = ({
 export default CatalogPage
 
 export const getServerSideProps = async (ctx) => {
+    const userAgent = ctx.req.headers['user-agent']
+
     const URLS = [
         'https://www.anatomiyasna.ru/api/menu/mobileCatalogMenu/',
         'https://anatomiyasna.ru/api/menu/mobileMenu/',
@@ -354,6 +357,16 @@ export const getServerSideProps = async (ctx) => {
         `https://www.anatomiyasna.ru/api/filter/filterModel/?slug=${ctx.params.catalog}`,
         `https://anatomiyasna.ru/api/filter/filtredProducts/?slug=${ctx.params.catalog}`,
     ]
+
+    const regex = /Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/
+
+    let IsMobile = null
+
+    if (userAgent.match(regex)) {
+        IsMobile = true
+    } else {
+        IsMobile = false
+    }
 
     let response = {}
     // let products = {}
@@ -413,6 +426,7 @@ export const getServerSideProps = async (ctx) => {
             catalogSlug: ctx.params.catalog,
             subCatalogSlug: null,
             products,
+            IsMobile,
         },
     }
 }
