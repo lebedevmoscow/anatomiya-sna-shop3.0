@@ -107,9 +107,10 @@ const CatalogProductCard = ({
                 (stylesForViewType &&
                     stylesForViewType.catalog_product_card__stat_block) ||
                 (stylesForDesktopViewType &&
-                    catalog_product_card__materials_list_item_img),
+                    stylesForDesktopViewType.catalog_product_card__materials_list_item_img),
             catalog_product_card__stat_block_image:
-                stylesForViewType.catalog_product_card__stat_block_image ||
+                (stylesForViewType &&
+                    stylesForViewType.catalog_product_card__stat_block_image) ||
                 (stylesForDesktopViewType &&
                     stylesForDesktopViewType.catalog_product_card__materials_list_item_img),
 

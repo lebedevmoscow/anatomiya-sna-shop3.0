@@ -1,7 +1,7 @@
 import React from 'react'
 
 import CatalogTopFilter from './../Filters/CatalogTopFilter'
-// import CatalogProductListForDesktop from './../CatalogProductListForDesktop'
+import CatalogProductListForDesktop from './../Products/CatalogProductList'
 // import LoadMoreButton from './../Buttons/LoadMoreButton'
 // import CatalogPagination from './../CatalogPagination'
 // import CatalogHelpPickUp from './../CatalogHelpPickUp'
@@ -22,12 +22,12 @@ const CatalogRight = ({
                 updateViewType={updateViewType}
                 desktopViewType={desktopViewType}
             />
-            {/* <CatalogProductListForDesktop
+            <CatalogProductListForDesktop
                 desktopViewType={desktopViewType}
                 stylesForDesktopViewType={stylesForDesktopViewType}
                 firstLoadProducts={firstLoadProducts}
             />
-            <div className="catalog-right__load-more-button">
+            {/* <div className="catalog-right__load-more-button">
                 <LoadMoreButton />
             </div>
             <CatalogPagination />
