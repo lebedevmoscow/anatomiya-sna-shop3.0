@@ -18,6 +18,7 @@ import CatalogProductList from './../../components/Products/CatalogProductList'
 import LoadMoreButton from './../../components/Button/LoadMoreButton'
 import CatalogPagination from '../../components/Pagination/CatalogPagination'
 import CatalogHelpPickUp from '../../components/Catalog/CatalogHelpPickUp'
+import CatalogMobileReview from './../../components/Reviews/CatalogMobileReviews'
 
 import common_styles from './../../styles/pages/catalog.module.sass'
 
@@ -302,6 +303,18 @@ const CatalogPage = ({
                 <div className={common_styles.mobile_help_pickup}>
                     <CatalogHelpPickUp />
                 </div>
+            )}
+            {breakpoint1023 && (
+                <>
+                    <div className={common_styles.catalog_mobile_reviews_title}>
+                        Отзывы на кровати
+                    </div>
+                    <div className={common_styles.catalog_mobile_reviews}>
+                        <CatalogMobileReview />
+                        <CatalogMobileReview />
+                        <CatalogMobileReview />
+                    </div>
+                </>
             )}
             <Subscribe />
             <Footer />
