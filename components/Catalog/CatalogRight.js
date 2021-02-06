@@ -15,6 +15,9 @@ const CatalogRight = ({
     stylesForDesktopViewType,
     desktopViewType,
     firstLoadProducts,
+    catalogSlug,
+    oldMin,
+    oldMax,
 }) => {
     return (
         <div className={styles.catalog_right}>
@@ -23,9 +26,12 @@ const CatalogRight = ({
                 desktopViewType={desktopViewType}
             />
             <CatalogProductListForDesktop
+                catalogSlug={catalogSlug}
                 desktopViewType={desktopViewType}
                 stylesForDesktopViewType={stylesForDesktopViewType}
                 firstLoadProducts={firstLoadProducts}
+                oldMin={oldMin}
+                oldMax={oldMax}
             />
             {/* <div className="catalog-right__load-more-button">
                 <LoadMoreButton />

@@ -43,11 +43,6 @@ const EqualHeightElement = dynamic(
     { ssr: false }
 )
 
-const EqualHeightConsumer = dynamic(
-    () => import('react-equal-height').then((mod) => mod.EqualHeightConsumer),
-    { ssr: false }
-)
-
 const CatalogProductCard = ({
     BrandTitle,
     SeriesTitle,
@@ -63,7 +58,7 @@ const CatalogProductCard = ({
     oldMin,
     oldMax,
     catalogSlug,
-    subCatalogSlug,
+    subCatalogSlug = null,
     stylesForViewType,
     stylesForDesktopViewType,
     viewType,
@@ -287,6 +282,8 @@ const CatalogProductCard = ({
                 autoFocus={false}
             />
         )
+
+        console.log('SizeID', SizeID)
 
         dispatch(SelectSize(data.value, data.label))
         dispatch(

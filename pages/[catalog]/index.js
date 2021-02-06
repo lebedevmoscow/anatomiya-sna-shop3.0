@@ -328,10 +328,13 @@ const CatalogPage = ({
                     <div className={common_styles.catalog}>
                         <CatalogLeftFilter filterAPIData={filterAPIData} />
                         <CatalogRight
+                            oldMin={filterAPIData.price.min}
+                            oldMax={filterAPIData.price.max}
                             firstLoadProducts={products}
                             updateViewType={setDesktopViewType}
                             desktopViewType={desktopViewType}
                             stylesForDesktopViewType={stylesForDesktopViewType}
+                            catalogSlug={catalogSlug}
                         />
                     </div>
                 </div>
