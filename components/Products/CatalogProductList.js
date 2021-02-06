@@ -55,7 +55,7 @@ const CatalogProductListForDesktop = ({
     const [List, SetList] = useState([])
     useEffect(() => {
         SetList(render())
-    }, [stylesForViewType, stylesForDesktopViewType])
+    }, [stylesForViewType, stylesForDesktopViewType, firstLoadProducts])
 
     const render = () => {
         let ElemenetsArray = []

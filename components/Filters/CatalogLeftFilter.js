@@ -16,64 +16,7 @@ const CatalogLeftFilter = ({ filterAPIData }) => {
         filterAPIData.price.max,
     ])
     const [sizeSelector, setSizeSelector] = useState(null)
-    const [closeStatus, setCloseStatus] = useState([
-        {
-            title: 'Цена (руб.)',
-            closed: false,
-        },
-        {
-            title: 'Размер (см.)',
-            closed: false,
-        },
-        {
-            title: 'Материал отделки',
-            closed: true,
-        },
-        {
-            title: 'Комплектация',
-            closed: false,
-        },
-        {
-            title: 'Декор',
-            closed: false,
-        },
-        {
-            title: 'Цвет',
-            closed: false,
-        },
-        {
-            title: 'Стиль',
-            closed: false,
-        },
-        {
-            title: 'Тип',
-            closed: true,
-        },
-        {
-            title: 'Изголовье',
-            closed: true,
-        },
-        {
-            title: 'Матрас',
-            closed: false,
-        },
-        {
-            title: 'Изножье',
-            closed: true,
-        },
-        {
-            title: 'Производитель',
-            closed: true,
-        },
-        {
-            title: 'Страна бренда',
-            closed: true,
-        },
-        {
-            title: 'Возможные опции',
-            closed: true,
-        },
-    ])
+    const [closeStatus, setCloseStatus] = useState([])
 
     const colourStyles = {
         control: (styles) => ({ ...styles, backgroundColor: 'white' }),
@@ -116,10 +59,26 @@ const CatalogLeftFilter = ({ filterAPIData }) => {
     }
 
     useEffect(() => {
+        const clone = []
+        properties.map((prop, index) => {
+            clone.push({ title: prop.title, closed: prop.minimised })
+        })
+
+        if (filterAPIData.colors && filterAPIData.colors.length > 0) {
+            clone.push({ title: 'Цвет', closed: false })
+        }
+
+        if (filterAPIData.size && filterAPIData.size.length > 0) {
+            clone.push({ title: 'Размер (см.)', closed: false })
+        }
+
+        clone.push({ title: 'Цена (руб.)', closed: false })
+        setCloseStatus(clone)
+
         setSizeSelector(
             <Select
-                className={styles.catalog_left_filter__selector}
-                classNamePrefix={styles.catalog_left_filter__selector_inner}
+                className="main_filter__selector"
+                classNamePrefix="main_filter__selector--inner"
                 placeholder="Все"
                 styles={colourStyles}
                 options={options}
@@ -244,14 +203,11 @@ const CatalogLeftFilter = ({ filterAPIData }) => {
                     styles.catalog_left_filter__tab_wrapper
                 } ${setClass('Размер (см.)')}`}
             >
-                <div
-                    onClick={() => OnCloseFilterClickHandler('Размер (см.)')}
-                    className={styles.catalog_left_filter__tab_wrapper_title}
-                >
+                <div className={styles.catalog_left_filter__tab_wrapper_title}>
                     <span className={styles.arrow}></span>
                     <span
                         onClick={() =>
-                            OnCloseFilterClickHandler(property.title)
+                            OnCloseFilterClickHandler('Размер (см.)')
                         }
                         className={styles.text}
                     >
@@ -295,54 +251,71 @@ const CatalogLeftFilter = ({ filterAPIData }) => {
                                 styles.catalog_left_filter__tab_wrapper_inner
                             }
                         >
-                            <ul
-                                className={
-                                    styles.catalog_left_filter__tab_options
-                                }
-                            >
-                                {property.checkboxes &&
-                                    property.checkboxes.map(
-                                        (checkbox, index) => {
-                                            if (checkbox.productCount !== 0) {
-                                                return (
-                                                    <li
-                                                        key={index}
-                                                        className={
-                                                            styles.catalog_left_filter__tab_options_item
-                                                        }
-                                                    >
-                                                        <label
+                            {property.select && (
+                                <Select
+                                    className="main_filter__selector"
+                                    classNamePrefix="main_filter__selector--inner"
+                                    placeholder="Все"
+                                    styles={colourStyles}
+                                    options={property.select}
+                                    isSearchable={false}
+                                    autoFocus={false}
+                                />
+                            )}
+                            {property.checkboxes &&
+                                property.checkboxes.length !== 0 && (
+                                    <ul
+                                        className={
+                                            styles.catalog_left_filter__tab_options
+                                        }
+                                    >
+                                        {property.checkboxes.map(
+                                            (checkbox, index) => {
+                                                if (
+                                                    checkbox.productCount !== 0
+                                                ) {
+                                                    return (
+                                                        <li
+                                                            key={index}
                                                             className={
-                                                                styles.catalog_left_filter__checkbox_container
+                                                                styles.catalog_left_filter__tab_options_item
                                                             }
                                                         >
-                                                            <input type="checkbox" />
-                                                            <span
+                                                            <label
                                                                 className={
-                                                                    styles.catalog_left_filter__checkmark
-                                                                }
-                                                            ></span>
-                                                            <h6>
-                                                                {checkbox.label}
-                                                            </h6>
-                                                            <span
-                                                                className={
-                                                                    styles.amount
+                                                                    styles.catalog_left_filter__checkbox_container
                                                                 }
                                                             >
-                                                                (
-                                                                {
-                                                                    checkbox.productCount
-                                                                }
-                                                                )
-                                                            </span>
-                                                        </label>
-                                                    </li>
-                                                )
+                                                                <input type="checkbox" />
+                                                                <span
+                                                                    className={
+                                                                        styles.catalog_left_filter__checkmark
+                                                                    }
+                                                                ></span>
+                                                                <h6>
+                                                                    {
+                                                                        checkbox.label
+                                                                    }
+                                                                </h6>
+                                                                <span
+                                                                    className={
+                                                                        styles.amount
+                                                                    }
+                                                                >
+                                                                    (
+                                                                    {
+                                                                        checkbox.productCount
+                                                                    }
+                                                                    )
+                                                                </span>
+                                                            </label>
+                                                        </li>
+                                                    )
+                                                }
                                             }
-                                        }
-                                    )}
-                            </ul>
+                                        )}
+                                    </ul>
+                                )}
                         </div>
                     </div>
                 )
