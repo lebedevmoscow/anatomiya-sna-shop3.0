@@ -231,6 +231,9 @@ const CatalogPage = ({
                 popup_ul: {
                     flexDirection: 'row',
                 },
+                catalog_product_card__materials_list_item_img: {
+                    width: '20px',
+                },
             })
         }
     }, [desktopViewType])

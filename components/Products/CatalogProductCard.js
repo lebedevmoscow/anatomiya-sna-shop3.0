@@ -6,6 +6,7 @@ import { SlideDown } from 'react-slidedown'
 import Select from 'react-select'
 import { v4 as uuidv4 } from 'uuid'
 import Skeleton from '@material-ui/lab/Skeleton'
+import useMedia from './../../hooks/useMedia'
 
 import PopupsOnProductCard from './../Popups/PopupsOnProductCard'
 
@@ -66,7 +67,10 @@ const CatalogProductCard = ({
     stylesForViewType,
     stylesForDesktopViewType,
     viewType,
+    desktopViewType,
 }) => {
+    const breakpoint769 = useMedia(769)
+
     const [viewTypeStyles, setViewTypeStyles] = useState({
         catalog_product_card: {},
         catalog_product_card__image: {},
@@ -78,6 +82,9 @@ const CatalogProductCard = ({
         catalog_product_card__stats_buttons: {},
     })
     useEffect(() => {
+        console.log('mobile', stylesForViewType)
+        console.log('desktop', stylesForDesktopViewType)
+
         const viewTypeStylesClone = {
             catalog_product_card:
                 (stylesForViewType && stylesForViewType.catalog_product_card) ||
@@ -107,12 +114,12 @@ const CatalogProductCard = ({
                 (stylesForViewType &&
                     stylesForViewType.catalog_product_card__stat_block) ||
                 (stylesForDesktopViewType &&
-                    stylesForDesktopViewType.catalog_product_card__materials_list_item_img),
+                    stylesForDesktopViewType.stylesForViewType),
             catalog_product_card__stat_block_image:
                 (stylesForViewType &&
                     stylesForViewType.catalog_product_card__stat_block_image) ||
                 (stylesForDesktopViewType &&
-                    stylesForDesktopViewType.catalog_product_card__materials_list_item_img),
+                    stylesForDesktopViewType.catalog_product_card__stat_block_image),
 
             catalog_product_card__stats_buttons:
                 (stylesForViewType &&
@@ -122,8 +129,6 @@ const CatalogProductCard = ({
         }
 
         setViewTypeStyles(viewTypeStylesClone)
-
-        console.log('viewTypeStylesClone', viewTypeStylesClone)
     }, [stylesForViewType, stylesForDesktopViewType])
 
     // Redux
@@ -440,20 +445,45 @@ const CatalogProductCard = ({
         >
             {/* <PopupsOnProductCard key={uuidv4()} ListSalesList={ListSalesList} /> */}
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <div
-                    style={{
-                        height: viewType === 'single' ? '208px' : '113px',
-                        width: '100%',
-                        position: 'relative',
-                    }}
-                    className="image-wrapper"
-                >
-                    <Image
-                        // className={styles.catalog_product_card__image}
-                        layout="fill"
-                        src={MainImage.FilePath}
-                    />
-                </div>
+                {breakpoint769 && (
+                    <div
+                        style={{
+                            height: viewType === 'single' ? '208px' : '113px',
+                            width: '100%',
+                            position: 'relative',
+                        }}
+                        className="image-wrapper"
+                    >
+                        <Image
+                            // className={styles.catalog_product_card__image}
+                            layout="fill"
+                            src={MainImage.FilePath}
+                        />
+                    </div>
+                )}
+                {!breakpoint769 && (
+                    <div
+                        style={{
+                            height:
+                                desktopViewType === 'several'
+                                    ? '172px'
+                                    : '172px',
+                            width:
+                                desktopViewType === 'several'
+                                    ? '272px'
+                                    : '272px',
+                            position: 'relative',
+                            marginBottom: '32px',
+                        }}
+                        className="image-wrapper"
+                    >
+                        <Image
+                            // className={styles.catalog_product_card__image}
+                            layout="fill"
+                            src={MainImage.FilePath}
+                        />
+                    </div>
+                )}
                 {/* <img
                     className={styles.catalog_product_card__image}
                     src={MainImage.FilePath}
@@ -464,21 +494,16 @@ const CatalogProductCard = ({
 
                 <EqualHeightElement name="CatalogProductCard">
                     <div className={styles.catalog_product_card__title}>
-                        <EqualHeightConsumer>
-                            {(context) => {
-                                {
-                                    BrandTitle +
-                                        ' ' +
-                                        (SeriesTitle || '') +
-                                        ' ' +
-                                        Title
-                                }
-                            }}
-                        </EqualHeightConsumer>
+                        {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title}
                     </div>
                 </EqualHeightElement>
             </div>
             <div
+                style={
+                    !breakpoint769 && desktopViewType === 'single'
+                        ? { order: 3, width: '276px' }
+                        : {}
+                }
                 className={`${styles.catalog_product_card__desktop_view_type__single} ${styles.catalog_product_card__desktop_view_type__single__third}`}
             >
                 <div className={styles.catalog_product_card__price_block}>
@@ -585,6 +610,7 @@ const CatalogProductCard = ({
                         </div>
                     </div>
                 </div>
+                <span className={styles.line}></span>
                 <div className={styles.catalog_product_card__selector_block}>
                     <div
                         className={styles.catalog_product_card__selector_title}
@@ -602,6 +628,62 @@ const CatalogProductCard = ({
                         {SizeSelector}
                     </div>
                 </div>
+                <span className={styles.line}></span>
+
+                <div
+                    style={
+                        !breakpoint769 && desktopViewType === 'single'
+                            ? { display: 'block' }
+                            : { display: 'none' }
+                    }
+                >
+                    <div className={styles.catalog_product_card__info_wrap}>
+                        <button
+                            className={styles.catalog_product_card__info_button}
+                        >
+                            Подробнее
+                        </button>
+                        <div
+                            className={
+                                styles.catalog_product_card__stats_buttons
+                            }
+                        ></div>
+                    </div>
+
+                    <div
+                        className={styles.catalog_product_card__delivery_block}
+                    >
+                        <img
+                            src={CarImage}
+                            className={
+                                styles.catalog_product_card__delivery_image
+                            }
+                        ></img>
+
+                        <div
+                            className={
+                                styles.catalog_product_card__delivery_info
+                            }
+                        >
+                            <span className={styles.when}>
+                                доставим
+                                <span className={styles.blue}> 25.01.2021</span>
+                            </span>
+                            <span className={styles.price}>
+                                доставка{' '}
+                                <span className={styles.blue}>1500 руб.</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                style={
+                    !breakpoint769 && desktopViewType === 'single'
+                        ? { order: 2, width: '280px' }
+                        : {}
+                }
+            >
                 <div className={styles.catalog_product_card__materials}>
                     <ul className={styles.catalog_product_card__materials_list}>
                         <li
@@ -609,24 +691,46 @@ const CatalogProductCard = ({
                                 styles.catalog_product_card__materials_list_item
                             }
                         >
-                            <img src={Material1}></img>
+                            <Image
+                                style={
+                                    viewTypeStyles.catalog_product_card__materials_list_item_img
+                                }
+                                src={Material1}
+                                height={25}
+                                width={25}
+                            />
                         </li>
                         <li
                             className={
                                 styles.catalog_product_card__materials_list_item
                             }
                         >
-                            <img src={Material2}></img>
+                            <Image
+                                style={
+                                    viewTypeStyles.catalog_product_card__materials_list_item_img
+                                }
+                                src={Material2}
+                                height={25}
+                                width={25}
+                            />
                         </li>
                         <li
                             className={
                                 styles.catalog_product_card__materials_list_item
                             }
                         >
-                            <img src={Material3}></img>
+                            <Image
+                                style={
+                                    viewTypeStyles.catalog_product_card__materials_list_item_img
+                                }
+                                src={Material3}
+                                height={25}
+                                width={25}
+                            />
                         </li>
                     </ul>
                 </div>
+                <span className={styles.line}></span>
                 <div className={styles.catalog_product_card__info_block}>
                     <ul className={styles.catalog_product_card__info_list}>
                         {Properties.map((property, id) => {
@@ -661,32 +765,51 @@ const CatalogProductCard = ({
                         })}
                     </ul>
                 </div>
-                <div className={styles.catalog_product_card__info_wrap}>
-                    <button
-                        className={styles.catalog_product_card__info_button}
-                    >
-                        Подробнее
-                    </button>
+
+                <div
+                    style={
+                        !breakpoint769 && desktopViewType === 'single'
+                            ? { display: 'none' }
+                            : { display: 'block' }
+                    }
+                >
+                    <div className={styles.catalog_product_card__info_wrap}>
+                        <button
+                            className={styles.catalog_product_card__info_button}
+                        >
+                            Подробнее
+                        </button>
+                        <div
+                            className={
+                                styles.catalog_product_card__stats_buttons
+                            }
+                        ></div>
+                    </div>
+
                     <div
-                        className={styles.catalog_product_card__stats_buttons}
-                    ></div>
-                </div>
+                        className={styles.catalog_product_card__delivery_block}
+                    >
+                        <img
+                            src={CarImage}
+                            className={
+                                styles.catalog_product_card__delivery_image
+                            }
+                        ></img>
 
-                <div className={styles.catalog_product_card__delivery_block}>
-                    <img
-                        src={CarImage}
-                        className={styles.catalog_product_card__delivery_image}
-                    ></img>
-
-                    <div className={styles.catalog_product_card__delivery_info}>
-                        <span className={styles.when}>
-                            доставим
-                            <span className={styles.blue}> 25.01.2021</span>
-                        </span>
-                        <span className={styles.price}>
-                            доставка{' '}
-                            <span className={styles.blue}>1500 руб.</span>
-                        </span>
+                        <div
+                            className={
+                                styles.catalog_product_card__delivery_info
+                            }
+                        >
+                            <span className={styles.when}>
+                                доставим
+                                <span className={styles.blue}> 25.01.2021</span>
+                            </span>
+                            <span className={styles.price}>
+                                доставка{' '}
+                                <span className={styles.blue}>1500 руб.</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
