@@ -2,11 +2,11 @@ import React from 'react'
 
 import CatalogTopFilter from './../Filters/CatalogTopFilter'
 import CatalogProductListForDesktop from './../Products/CatalogProductList'
-// import LoadMoreButton from './../Buttons/LoadMoreButton'
-// import CatalogPagination from './../CatalogPagination'
-// import CatalogHelpPickUp from './../CatalogHelpPickUp'
-// import CatalogReviewList from './../CatalogReviewList'
-// import IndexPageAssurances from './../../../components/IndexPageAssurances'
+import LoadMoreButton from './../Button/LoadMoreButton'
+import CatalogPagination from './../Pagination/CatalogPagination'
+import CatalogHelpPickUp from './../Catalog/CatalogHelpPickUp'
+import CatalogReviewList from './../Reviews/CatalogDesktopReviewList'
+import IndexPageAssurances from './../Assurances'
 
 import styles from './../../styles/components/Catalog/CatalogRight.module.sass'
 
@@ -33,13 +33,13 @@ const CatalogRight = ({
                 oldMin={oldMin}
                 oldMax={oldMax}
             />
-            {/* <div className="catalog-right__load-more-button">
-                <LoadMoreButton />
+            <div className={styles.catalog_right__load_more_button}>
+                <LoadMoreButton firstText={'Показать еще +21'} />
             </div>
             <CatalogPagination />
             <CatalogHelpPickUp />
             <CatalogReviewList />
-            <IndexPageAssurances catalog={true} container={false} /> */}
+            <IndexPageAssurances catalog={true} container={false} />
         </div>
     )
 }

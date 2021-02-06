@@ -141,7 +141,7 @@ const App = ({
             <ArticleListDesktop articles={articles} />
 
             <AboutMattrasses />
-            <Assuracnes />
+            <Assuracnes container={true} />
             <SwiperAssurenaces />
             <Subscribe />
             <MobileFooter />

@@ -15,17 +15,20 @@ import Control from './../../assets/svg/list.svg'
 import PersonalData from './../../assets/svg/security-personal-data.svg'
 import Banner from './../../assets/assurances-banner.jpg'
 
-const IndexPageAssurances = () => {
+const IndexPageAssurances = ({ catalog, container = false }) => {
     const breakpoint768 = useMedia(768)
 
     return (
-        <div className={styles.container}>
+        <div className={container === true && styles.container}>
             <div className={styles.assurances}>
                 <div className={styles.assurances__section_name}>
                     Мы гарантируем
                 </div>
                 <div className={styles.assurances__list}>
-                    <div className={styles.assurances__item}>
+                    <div
+                        style={catalog ? { width: '25%' } : {}}
+                        className={styles.assurances__item}
+                    >
                         <img
                             src={CarSVG}
                             className={styles.assurances__image}
@@ -34,7 +37,10 @@ const IndexPageAssurances = () => {
                             Оперативная доставка и удобные способы оплаты
                         </div>
                     </div>
-                    <div className={styles.assurances__item}>
+                    <div
+                        style={catalog ? { width: '25%' } : {}}
+                        className={styles.assurances__item}
+                    >
                         <img
                             src={Like}
                             className={styles.assurances__image}
@@ -44,7 +50,10 @@ const IndexPageAssurances = () => {
                             соответствии закона.
                         </div>
                     </div>
-                    <div className={styles.assurances__item}>
+                    <div
+                        style={catalog ? { width: '25%' } : {}}
+                        className={styles.assurances__item}
+                    >
                         <img
                             src={Factory}
                             className={styles.assurances__image}
@@ -53,7 +62,10 @@ const IndexPageAssurances = () => {
                             Широкий ассортимент
                         </div>
                     </div>
-                    <div className={styles.assurances__item}>
+                    <div
+                        style={catalog ? { width: '25%' } : {}}
+                        className={styles.assurances__item}
+                    >
                         <img
                             src={Control}
                             className={styles.assurances__image}
@@ -62,7 +74,10 @@ const IndexPageAssurances = () => {
                             Контроль качества товаров
                         </div>
                     </div>
-                    <div className={styles.assurances__item}>
+                    <div
+                        style={catalog ? { width: '25%' } : {}}
+                        className={styles.assurances__item}
+                    >
                         <img
                             src={CertificateSVG}
                             className={styles.assurances__image}
@@ -71,7 +86,10 @@ const IndexPageAssurances = () => {
                             Сертифицированная продукция
                         </div>
                     </div>
-                    <div className={styles.assurances__item}>
+                    <div
+                        style={catalog ? { width: '25%' } : {}}
+                        className={styles.assurances__item}
+                    >
                         <img
                             src={Gift}
                             className={styles.assurances__image}
@@ -80,7 +98,10 @@ const IndexPageAssurances = () => {
                             Скидки и подарочные сертификаты
                         </div>
                     </div>
-                    <div className={styles.assurances__item}>
+                    <div
+                        style={catalog ? { width: '25%' } : {}}
+                        className={styles.assurances__item}
+                    >
                         <img
                             src={Blank}
                             className={styles.assurances__image}
@@ -89,7 +110,10 @@ const IndexPageAssurances = () => {
                             Нестандартная продукция
                         </div>
                     </div>
-                    <div className={styles.assurances__item}>
+                    <div
+                        style={catalog ? { width: '25%' } : {}}
+                        className={styles.assurances__item}
+                    >
                         <img
                             src={PersonalData}
                             className={styles.assurances__image}
@@ -100,7 +124,7 @@ const IndexPageAssurances = () => {
                     </div>
                 </div>
             </div>
-            {!breakpoint768 && (
+            {!breakpoint768 && !catalog && (
                 <div
                     style={{
                         position: 'relative',
