@@ -405,8 +405,8 @@ const CatalogProductCard = ({
                     Size.label = data.label
                     SetInitialSelectedSize(Size)
                 }}
-                className={styles.catalog_product_card__selector}
-                classNamePrefix={styles.catalog_product_card__selector__inner}
+                className="main_filter__selector"
+                classNamePrefix="main_filter__selector--inner"
                 placeholder={InitialSelectedSize.label}
                 styles={colourStyles}
                 options={OptionsForSelect}
