@@ -8,6 +8,8 @@ import CatalogTopFilter from './../Filters/CatalogTopFilter'
 // import CatalogReviewList from './../CatalogReviewList'
 // import IndexPageAssurances from './../../../components/IndexPageAssurances'
 
+import styles from './../../styles/components/Catalog/CatalogRight.module.sass'
+
 const CatalogRight = ({
     updateViewType,
     stylesForDesktopViewType,
@@ -15,7 +17,7 @@ const CatalogRight = ({
     firstLoadProducts,
 }) => {
     return (
-        <div className="catalog-right">
+        <div className={styles.catalog_right}>
             <CatalogTopFilter
                 updateViewType={updateViewType}
                 desktopViewType={desktopViewType}
