@@ -149,24 +149,24 @@ const CatalogProductCard = ({
             FavoriteRef.current.style.display = 'block'
 
             const Price =
-                InitialSize[0].length !== 0
+                InitialSize.length !== 0
                     ? InitialSize[0].PriceDiscount
                     : Prices[0].PriceDiscount
             const PriceId =
-                InitialSize[0].length !== 0 ? InitialSize[0].Id : Prices[0].Id
+                InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
             const SizeSlug =
-                InitialSize[0].length !== 0
+                InitialSize.length !== 0
                     ? InitialSize[0].SizeSlug
                     : CurrentSize.value
             const SizeLabel =
-                InitialSize[0].length !== 0
+                InitialSize.length !== 0
                     ? InitialSize[0].SizeTitle
                     : CurrentSize.label
 
             dispatch(
                 AddProductToFavoriteList(
                     Id,
-                    'https://anatomiyasna.ru' + MainImage.FilePath,
+                    MainImage.FilePath,
                     CatalogType,
                     BrandTitle,
                     SeriesTitle,
@@ -185,7 +185,7 @@ const CatalogProductCard = ({
             dispatch(
                 RemoveProductFromFavoriteList(
                     Id,
-                    'https://anatomiyasna.ru' + MainImage.FilePath,
+                    MainImage.FilePath,
                     CatalogType,
                     BrandTitle,
                     SeriesTitle,
@@ -204,24 +204,24 @@ const CatalogProductCard = ({
             setIsCompared(true)
             CompareRef.current.style.display = 'block'
             const Price =
-                InitialSize[0].length !== 0
+                InitialSize.length !== 0
                     ? InitialSize[0].PriceDiscount
                     : Prices[0].PriceDiscount
             const PriceId =
-                InitialSize[0].length !== 0 ? InitialSize[0].Id : Prices[0].Id
+                InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
             const SizeSlug =
-                InitialSize[0].length !== 0
+                InitialSize.length !== 0
                     ? InitialSize[0].SizeSlug
                     : CurrentSize.value
             const SizeLabel =
-                InitialSize[0].length !== 0
+                InitialSize.length !== 0
                     ? InitialSize[0].SizeTitle
                     : CurrentSize.label
 
             dispatch(
                 AddProductToCompareList(
                     Id,
-                    'https://anatomiyasna.ru' + MainImage.FilePath,
+                    MainImage.FilePath,
                     CatalogType,
                     BrandTitle,
                     SeriesTitle,
@@ -240,7 +240,7 @@ const CatalogProductCard = ({
             dispatch(
                 RemoveProductFromCompareList(
                     Id,
-                    'https://anatomiyasna.ru' + MainImage.FilePath,
+                    MainImage.FilePath,
                     CatalogType,
                     BrandTitle,
                     SeriesTitle,

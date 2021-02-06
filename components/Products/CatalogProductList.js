@@ -74,6 +74,8 @@ const CatalogProductListForDesktop = ({
                             }
                         }
 
+                        console.log('InitialSize', InitialSize)
+
                         ElemenetsArray.push(
                             <CatalogProductCard
                                 catalogSlug={catalogSlug}
