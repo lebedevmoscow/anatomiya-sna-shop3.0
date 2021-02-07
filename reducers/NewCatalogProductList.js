@@ -2,12 +2,14 @@ import {
     CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING,
     CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_ERROR,
     CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SUCCESS,
+    CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY,
 } from './../actions/NewCatalogProductList'
 
 const initialState = {
     loading: false,
     error: null,
     newProducts: [],
+    emptyIndex: 1,
 }
 
 const CatalogProductListReducer = (state = initialState, action) => {
@@ -33,6 +35,16 @@ const CatalogProductListReducer = (state = initialState, action) => {
                 error: null,
                 loading: false,
                 newProducts: { ...action.payload },
+            }
+        }
+
+        case CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY: {
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                newProducts: [],
+                emptyIndex: state.emptyIndex + 1,
             }
         }
 

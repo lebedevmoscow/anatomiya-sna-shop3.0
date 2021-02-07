@@ -6,6 +6,7 @@ import {
 const initialState = {
     selectedSizeSlug: null,
     selectedSizeTitle: null,
+    selectedSizeId: null,
 }
 
 const SelectedSizeReducer = (state = initialState, action) => {
@@ -17,6 +18,7 @@ const SelectedSizeReducer = (state = initialState, action) => {
                 ...state,
                 selectedSizeSlug: action.payload.SizeSlug,
                 selectedSizeTitle: action.payload.SizeTitle,
+                selectedSizeId: action.payload.SizeID,
             }
         }
         default:

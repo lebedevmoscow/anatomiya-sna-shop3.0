@@ -25,7 +25,10 @@ import {
 import {
     LoadProductsBySize,
     LoadProductsByButtonClick,
+    CATALOG_PRODUCT_LIST_SET_EMPTY,
 } from './../../actions/CatalogProductList'
+
+import { CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY } from './../../actions/NewCatalogProductList'
 import { SelectSize } from './../../actions/SelectedSize'
 
 import CarImage from './../../assets/svg/car.svg'
@@ -288,7 +291,9 @@ const CatalogProductCard = ({
 
         console.log('SizeID', SizeID)
 
-        dispatch(SelectSize(data.value, data.label))
+        dispatch({ type: CATALOG_PRODUCT_LIST_SET_EMPTY })
+        dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY })
+        dispatch(SelectSize(data.value, data.label, SizeID))
         dispatch(
             LoadProductsBySize(
                 SizeID,

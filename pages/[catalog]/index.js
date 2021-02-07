@@ -348,6 +348,7 @@ const CatalogPage = ({
                             desktopViewType={desktopViewType}
                             stylesForDesktopViewType={stylesForDesktopViewType}
                             catalogSlug={catalogSlug}
+                            subCatalogSlug={subCatalogSlug}
                             filterProductsIds={filterProductsIds}
                         />
                     </div>

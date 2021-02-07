@@ -21,13 +21,18 @@ const CatalogRight = ({
     desktopViewType,
     firstLoadProducts,
     catalogSlug,
+    subCatalogSlug = null,
     oldMin,
     oldMax,
     filterProductsIds,
 }) => {
     const [productList, setProductList] = useState(firstLoadProducts)
+
+    const [firstProductList, setFirstProductList] = useState([])
+
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
+    const [list, setList] = useState([])
 
     const dispatch = useDispatch()
     const CatalogProductListReducer = useSelector(
@@ -36,57 +41,89 @@ const CatalogRight = ({
     const NewCatalogProductListReducer = useSelector(
         (store) => store.NewCatalogProductListReducer
     )
+    const SelectedSizeReducer = useSelector(
+        (store) => store.SelectedSizeReducer
+    )
 
     const onButtonClickHandler = () => {
-        dispatch(LoadProductsByButtonClick(filterProductsIds, page))
+        dispatch(
+            LoadProductsByButtonClick(
+                filterProductsIds,
+                page,
+                SelectedSizeReducer.selectedSizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax
+            )
+        )
         setPage((prev) => ++prev)
     }
+
+    useEffect(() => {
+        setFirstProductList(
+            <CatalogProductListForDesktop
+                catalogSlug={catalogSlug}
+                desktopViewType={desktopViewType}
+                stylesForDesktopViewType={stylesForDesktopViewType}
+                firstLoadProducts={productList}
+                oldMin={oldMin}
+                oldMax={oldMax}
+                filterProductsIds={filterProductsIds}
+            />
+        )
+    }, [])
 
     useEffect(() => {
         dispatch({
             type: CATALOG_PRODUCT_LIST_SUCCESS,
             payload: firstLoadProducts,
         })
-    }, [])
+        setList(
+            <>
+                {data.map((d, index) => {
+                    console.log('d', d)
+                    return (
+                        <CatalogProductListForDesktop
+                            key={index}
+                            catalogSlug={catalogSlug}
+                            desktopViewType={desktopViewType}
+                            stylesForDesktopViewType={stylesForDesktopViewType}
+                            firstLoadProducts={d}
+                            oldMin={oldMin}
+                            oldMax={oldMax}
+                            filterProductsIds={filterProductsIds}
+                            newProducts={true}
+                        />
+                    )
+                })}
+            </>
+        )
+    }, [data])
 
-    // useEffect(() => {
-    //     if (CatalogProductListReducer.newProducts.length !== 0) {
-    //         const clone = productList.ShortProductModels.concat()
-    //         const newClone = [
-    //             ...clone,
-    //             ...CatalogProductListReducer.newProducts.ShortProductModels,
-    //         ]
-    //         const res = {
-    //             GiftLabels: productList.GiftLabels,
-    //             SaleLabels: productList.SaleLabels,
-    //             ShortProductModels: newClone,
-    //         }
-    //         setProductList(res)
-    //     }
-    // }, [CatalogProductListReducer.newProducts])
+    useEffect(() => {
+        if (CatalogProductListReducer.products.length !== 0) {
+            setFirstProductList(
+                <CatalogProductListForDesktop
+                    catalogSlug={catalogSlug}
+                    desktopViewType={desktopViewType}
+                    stylesForDesktopViewType={stylesForDesktopViewType}
+                    firstLoadProducts={CatalogProductListReducer.products}
+                    oldMin={oldMin}
+                    oldMax={oldMax}
+                    filterProductsIds={filterProductsIds}
+                />
+            )
+        }
+    }, [CatalogProductListReducer.products])
 
-    // useEffect(() => {
-    //     console.log(
-    //         'CatalogProductListReducer.newProducts',
-    //         CatalogProductListReducer.newProducts
-    //     )
-
-    //     if (CatalogProductListReducer.newProducts.length !== 0) {
-    //         const clone = newProductList.concat()
-    //         clone.push(
-    //             <CatalogProductListForDesktop
-    //                 catalogSlug={catalogSlug}
-    //                 desktopViewType={desktopViewType}
-    //                 stylesForDesktopViewType={stylesForDesktopViewType}
-    //                 firstLoadProducts={CatalogProductListReducer.newProducts}
-    //                 oldMin={oldMin}
-    //                 oldMax={oldMax}
-    //                 filterProductsIds={filterProductsIds}
-    //             />
-    //         )
-    //         setNewProductList(clone)
-    //     }
-    // }, [CatalogProductListReducer.newProducts])
+    useEffect(() => {
+        if (CatalogProductListReducer.emptyIndex !== 0) {
+            setPage(1)
+            setData[[]]
+            setList([])
+        }
+    }, [CatalogProductListReducer.emptyIndex])
 
     useEffect(() => {
         if (NewCatalogProductListReducer.newProducts.length !== 0) {
@@ -102,7 +139,7 @@ const CatalogRight = ({
                 updateViewType={updateViewType}
                 desktopViewType={desktopViewType}
             />
-            <CatalogProductListForDesktop
+            {/* <CatalogProductListForDesktop
                 catalogSlug={catalogSlug}
                 desktopViewType={desktopViewType}
                 stylesForDesktopViewType={stylesForDesktopViewType}
@@ -123,9 +160,13 @@ const CatalogRight = ({
                         oldMin={oldMin}
                         oldMax={oldMax}
                         filterProductsIds={filterProductsIds}
+                        newProducts={true}
                     />
                 )
-            })}
+            })} */}
+            {firstProductList}
+
+            {list}
             <div
                 onClick={onButtonClickHandler}
                 className={styles.catalog_right__load_more_button}
