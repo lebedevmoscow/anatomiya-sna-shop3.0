@@ -411,7 +411,7 @@ export const getServerSideProps = async (ctx) => {
     // const filterAPIData = response[0]
     // const filterProductsIds = response[1]
 
-    // console.log('filterProductsIds', filterProductsIds)
+    // console.logductsIds)
 
     let ids = []
     for (let i = 0; i < 21; i++) {

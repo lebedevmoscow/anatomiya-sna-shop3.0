@@ -59,7 +59,6 @@ const CatalogProductCard = ({
     Properties,
     Prices,
     Slug,
-    ListSalesList,
     InitialSize = [],
     oldMin,
     oldMax,
@@ -137,7 +136,7 @@ const CatalogProductCard = ({
     const CompareListRedux = useSelector(
         (store) => store.CompareProductsListReducer
     )
-    // const SelectedSizeRedux = useSelector((store) => store.SelectedSizeReducer)
+    const SelectedSizeRedux = useSelector((store) => store.SelectedSizeReducer)
 
     // Refs
     const FavoriteRef = useRef(null)
@@ -147,6 +146,9 @@ const CatalogProductCard = ({
         value: '',
         labal: '',
     })
+    const [placeholderSize, setPlaceholderSize] = useState(
+        InitialSelectedSize.label
+    )
 
     // Handler
     const onAddToFavoriteClickHandler = () => {
@@ -281,7 +283,7 @@ const CatalogProductCard = ({
                 }}
                 className={styles.catalog_product_card__selector}
                 classNamePrefix={styles.catalog_product_card__selector__inner}
-                placeholder={InitialSelectedSize.label}
+                placeholder={placeholderSize}
                 styles={colourStyles}
                 options={OptionsForSelect}
                 isSearchable={false}
@@ -415,14 +417,17 @@ const CatalogProductCard = ({
                 }}
                 className="main_filter__selector"
                 classNamePrefix="main_filter__selector--inner"
-                placeholder={InitialSelectedSize.label}
+                placeholder={
+                    SelectedSizeRedux.selectedSizeTitle ||
+                    OptionsForSelect[0].label
+                }
                 styles={colourStyles}
                 options={OptionsForSelect}
                 isSearchable={false}
                 autoFocus={false}
             />
         )
-    }, [OptionsForSelect, InitialSelectedSize])
+    }, [OptionsForSelect, InitialSelectedSize, SelectedSizeRedux])
 
     const [LastSelector, SetLastSelector] = useState(null)
     const [isFavorite, setIsFavorite] = useState(false)

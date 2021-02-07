@@ -82,7 +82,7 @@ const CatalogProductListForDesktop = ({
 
             if (Temp !== 0 && Temp % 3 === 0) {
                 EqualHeightArray.push(
-                    <EqualHeight>{ElemenetsArray}</EqualHeight>
+                    <EqualHeight key={product.Id}>{ElemenetsArray}</EqualHeight>
                 )
                 ElemenetsArray = []
                 Temp = 0
