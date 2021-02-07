@@ -41,10 +41,6 @@ const CatalogMainFilter = ({ className, title, onClose }) => {
         )
     }, [])
 
-    useEffect(() => {
-        console.log('className changed', className)
-    }, [className])
-
     const options = [
         { value: '190*60', label: '190*60' },
         { value: '190*60', label: '190*60' },
@@ -208,7 +204,6 @@ const CatalogMainFilter = ({ className, title, onClose }) => {
                     >
                         <i
                             onClick={() => {
-                                console.log('click')
                                 onClose()
                             }}
                             className={styles.arrow_left}

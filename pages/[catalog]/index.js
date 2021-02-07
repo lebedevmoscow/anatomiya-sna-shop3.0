@@ -42,6 +42,7 @@ const CatalogPage = ({
     subCatalogSlug,
     products,
     IsMobile,
+    filterProductsIds,
 }) => {
     // Vars
     const initialCompositionFilterData = [
@@ -347,6 +348,7 @@ const CatalogPage = ({
                             desktopViewType={desktopViewType}
                             stylesForDesktopViewType={stylesForDesktopViewType}
                             catalogSlug={catalogSlug}
+                            filterProductsIds={filterProductsIds}
                         />
                     </div>
                 </div>
@@ -420,8 +422,6 @@ export const getServerSideProps = async (ctx) => {
     }
     const productSubUrl = ids.join('')
 
-    console.log('productSubUrl', productSubUrl)
-
     const productsURLReq = await fetch(
         `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
     )
@@ -442,6 +442,7 @@ export const getServerSideProps = async (ctx) => {
             subCatalogSlug: null,
             products,
             IsMobile,
+            filterProductsIds,
         },
     }
 }

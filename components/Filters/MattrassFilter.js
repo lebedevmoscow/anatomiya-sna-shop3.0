@@ -26,14 +26,7 @@ const MainFilter = ({ filterAPIData, filterProductsCount }) => {
         dispatch(
             findProducts(url, filterAPIData.price.min, filterAPIData.price.max)
         )
-        console.log(
-            'FinalURL',
-            GenerateURLFromIndexPageFilter(
-                url,
-                filterAPIData.price.min,
-                filterAPIData.price.max
-            )
-        )
+
         SetFinalUrl(
             GenerateURLFromIndexPageFilter(
                 url,

@@ -5,7 +5,6 @@ import { Range, getTrackBackground } from 'react-range'
 import styles from './../../styles/components/Filters/CatalogLeftFilter.module.sass'
 
 const CatalogLeftFilter = ({ filterAPIData }) => {
-    console.log('filterAPIData', filterAPIData)
     const options = filterAPIData.size
     const weightOptions = filterAPIData.properties[0].select
     const properties = filterAPIData.properties

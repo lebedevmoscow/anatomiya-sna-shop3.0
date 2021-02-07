@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetPopupsList } from './../../utils/GetPopupsList'
 
 import styles from './../../styles/components/Products/CatalogProductList.module.sass'
+import { SignalCellularNoSimOutlined } from '@material-ui/icons'
 
 const EqualHeight = dynamic(
     () => import('react-equal-height').then((mod) => mod.EqualHeight),
@@ -37,16 +38,15 @@ const CatalogProductListForDesktop = ({
     // Объект window
     const hasWindow = typeof window !== 'undefined'
 
-    // Ширина экрана
-    const width = hasWindow ? window.innerWidth : null
-
     const [List, SetList] = useState([])
 
     useEffect(() => {
+        console.log('3')
         SetList(render())
     }, [stylesForViewType, stylesForDesktopViewType, firstLoadProducts])
 
     useEffect(() => {
+        console.log('1')
         if (
             CatalogProductListReducer.products &&
             CatalogProductListReducer.products.length !== 0 &&
@@ -73,8 +73,6 @@ const CatalogProductListForDesktop = ({
                                 InitialSize.push(product.Prices[i])
                             }
                         }
-
-                        console.log('InitialSize', InitialSize)
 
                         ElemenetsArray.push(
                             <CatalogProductCard
@@ -114,9 +112,14 @@ const CatalogProductListForDesktop = ({
                 )
             SetList(EqualHeightArray)
         }
-    }, [CatalogProductListReducer, SelectedSizeRedux])
+    }, [
+        CatalogProductListReducer.products,
+        CatalogProductListReducer,
+        SelectedSizeRedux,
+    ])
 
     const render = () => {
+        console.log('2')
         let ElemenetsArray = []
         let EqualHeightArray = []
         let Temp = 0

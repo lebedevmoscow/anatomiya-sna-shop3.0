@@ -22,7 +22,10 @@ import {
     AddProductToCompareList,
     RemoveProductFromCompareList,
 } from './../../actions/CompareProductsList'
-import { LoadProductsBySize } from './../../actions/CatalogProductList'
+import {
+    LoadProductsBySize,
+    LoadProductsByButtonClick,
+} from './../../actions/CatalogProductList'
 import { SelectSize } from './../../actions/SelectedSize'
 
 import CarImage from './../../assets/svg/car.svg'
