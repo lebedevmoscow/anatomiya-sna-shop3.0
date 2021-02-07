@@ -1,6 +1,6 @@
 import styles from './../../styles/components/Pagination/CatalogPagination.module.sass'
 
-const CatalogPagination = () => {
+const CatalogPagination = ({ onGoForwardButtonClickHandler }) => {
     return (
         <div className={styles.catalog_pagination}>
             <ul className={styles.catalog_pagination__pages_list}>
@@ -26,7 +26,10 @@ const CatalogPagination = () => {
             <div className={styles.catalog_pagination__last_page_number}>
                 64
             </div>
-            <button className={styles.catalog_pagination__next_button}>
+            <button
+                onClick={onGoForwardButtonClickHandler}
+                className={styles.catalog_pagination__next_button}
+            >
                 Вперед
             </button>
         </div>

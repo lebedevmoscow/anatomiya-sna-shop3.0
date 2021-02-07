@@ -10,7 +10,11 @@ import IndexPageAssurances from './../Assurances'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { CATALOG_PRODUCT_LIST_SUCCESS } from './../../actions/CatalogProductList'
+import {
+    CATALOG_PRODUCT_LIST_SUCCESS,
+    CATALOG_PRODUCT_LIST_SET_EMPTY,
+} from './../../actions/CatalogProductList'
+import { CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY } from './../../actions/NewCatalogProductList'
 import { LoadProductsByButtonClick } from './../../actions/NewCatalogProductList'
 
 import styles from './../../styles/components/Catalog/CatalogRight.module.sass'
@@ -33,6 +37,7 @@ const CatalogRight = ({
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
     const [list, setList] = useState([])
+    const [lastClick, setLastClick] = useState('showMore')
 
     const dispatch = useDispatch()
     const CatalogProductListReducer = useSelector(
@@ -46,6 +51,23 @@ const CatalogRight = ({
     )
 
     const onButtonClickHandler = () => {
+        dispatch(
+            LoadProductsByButtonClick(
+                filterProductsIds,
+                page,
+                SelectedSizeReducer.selectedSizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax
+            )
+        )
+        setPage((prev) => ++prev)
+    }
+
+    const onGoForwardButtonClickHandler = () => {
+        setData([])
+        setList([])
         dispatch(
             LoadProductsByButtonClick(
                 filterProductsIds,
@@ -118,7 +140,6 @@ const CatalogRight = ({
 
     useEffect(() => {
         if (CatalogProductListReducer.emptyIndex !== 0) {
-            console.log('go')
             setPage(1)
             setData([])
             setList([])
@@ -127,7 +148,6 @@ const CatalogRight = ({
 
     useEffect(() => {
         if (NewCatalogProductListReducer.emptyIndex !== 0) {
-            console.log('go')
             setPage(1)
             setData([])
             setList()
@@ -136,9 +156,26 @@ const CatalogRight = ({
 
     useEffect(() => {
         if (NewCatalogProductListReducer.newProducts.length !== 0) {
-            const clone = data.concat()
-            clone.push(NewCatalogProductListReducer.newProducts)
-            setData(clone)
+            if (lastClick === 'showMore') {
+                console.log('here')
+                const clone = data.concat()
+                clone.push(NewCatalogProductListReducer.newProducts)
+                setData(clone)
+            } else {
+                setFirstProductList(
+                    <CatalogProductListForDesktop
+                        catalogSlug={catalogSlug}
+                        desktopViewType={desktopViewType}
+                        stylesForDesktopViewType={stylesForDesktopViewType}
+                        firstLoadProducts={
+                            NewCatalogProductListReducer.newProducts
+                        }
+                        oldMin={oldMin}
+                        oldMax={oldMax}
+                        filterProductsIds={filterProductsIds}
+                    />
+                )
+            }
         }
     }, [NewCatalogProductListReducer.newProducts])
 
@@ -174,15 +211,23 @@ const CatalogRight = ({
                 )
             })} */}
             {firstProductList}
-
             {list}
             <div
-                onClick={onButtonClickHandler}
+                onClick={() => {
+                    onButtonClickHandler()
+                    setLastClick('showMore')
+                }}
                 className={styles.catalog_right__load_more_button}
             >
                 <LoadMoreButton firstText={'Показать еще +21'} />
             </div>
-            <CatalogPagination />
+            <div onClick={() => setLastClick('forward')}>
+                <CatalogPagination
+                    onGoForwardButtonClickHandler={
+                        onGoForwardButtonClickHandler
+                    }
+                />
+            </div>
             <CatalogHelpPickUp />
             <CatalogReviewList />
             <IndexPageAssurances catalog={true} container={false} />
