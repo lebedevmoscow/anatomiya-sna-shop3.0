@@ -725,40 +725,43 @@ const CatalogProductCard = ({
                     </ul>
                 </div>
                 <span className={styles.line}></span>
-                <div className={styles.catalog_product_card__info_block}>
-                    <ul className={styles.catalog_product_card__info_list}>
-                        {Properties.map((property, id) => {
-                            return (
-                                <li
-                                    key={id}
-                                    className={
-                                        styles.catalog_product_card__info_list_item
-                                    }
-                                >
-                                    <div
+
+                <EqualHeightElement name="CatalogProductCard__options">
+                    <div className={styles.catalog_product_card__info_block}>
+                        <ul className={styles.catalog_product_card__info_list}>
+                            {Properties.map((property, id) => {
+                                return (
+                                    <li
+                                        key={id}
                                         className={
-                                            styles.catalog_product_card__info_list_item_title
+                                            styles.catalog_product_card__info_list_item
                                         }
                                     >
-                                        {property.PropertyTitle}
-                                    </div>
-                                    <span
-                                        className={
-                                            styles.catalog_product_card__info_list_item_delimiter
-                                        }
-                                    ></span>
-                                    <div
-                                        className={
-                                            styles.catalog_product_card__info_list_item_material
-                                        }
-                                    >
-                                        {property.Value}
-                                    </div>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </div>
+                                        <div
+                                            className={
+                                                styles.catalog_product_card__info_list_item_title
+                                            }
+                                        >
+                                            {property.PropertyTitle}
+                                        </div>
+                                        <span
+                                            className={
+                                                styles.catalog_product_card__info_list_item_delimiter
+                                            }
+                                        ></span>
+                                        <div
+                                            className={
+                                                styles.catalog_product_card__info_list_item_material
+                                            }
+                                        >
+                                            {property.Value}
+                                        </div>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                </EqualHeightElement>
 
                 <div
                     style={

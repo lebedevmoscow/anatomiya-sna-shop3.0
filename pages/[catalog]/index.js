@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react'
-
-// Redux
-import { useSelector } from 'react-redux'
-
+import dynamic from 'next/dynamic'
 import useMedia from './../../hooks/useMedia'
 
 // React components
@@ -24,6 +21,12 @@ import CatalogRight from '../../components/Catalog/CatalogRight'
 import CatalogMainFilter from './../../components/Filters/CatalogMobileMainFilter'
 
 import common_styles from './../../styles/pages/catalog.module.sass'
+
+// Experemental
+// const CatalogProductList = dynamic(
+//     () => import('./../../components/Products/CatalogProductList'),
+//     { ssr: false }
+// )
 
 const CatalogPage = ({
     banner,
@@ -248,7 +251,7 @@ const CatalogPage = ({
                 regions={regions}
             />
             <Header
-                banner={banner}
+                banner={null}
                 phoneCommon={phoneCommon}
                 worktimeHead={worktimeHead}
             />
@@ -348,7 +351,7 @@ const CatalogPage = ({
                     </div>
                 </div>
             )}
-            <Subscribe />
+            {/* <Subscribe /> */}
             <Footer />
         </div>
     )
@@ -416,6 +419,8 @@ export const getServerSideProps = async (ctx) => {
         }
     }
     const productSubUrl = ids.join('')
+
+    console.log('productSubUrl', productSubUrl)
 
     const productsURLReq = await fetch(
         `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
