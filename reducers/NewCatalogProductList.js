@@ -1,37 +1,38 @@
-// Constants
 import {
-    CATALOG_PRODUCT_LIST_LOADING,
-    CATALOG_PRODUCT_LIST_SUCCESS,
-    CATALOG_PRODUCT_LIST_ERROR,
-} from './../actions/CatalogProductList'
+    CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING,
+    CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_ERROR,
+    CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SUCCESS,
+} from './../actions/NewCatalogProductList'
 
 const initialState = {
-    products: [],
     loading: false,
     error: null,
+    newProducts: [],
 }
 
 const CatalogProductListReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CATALOG_PRODUCT_LIST_LOADING: {
+        case CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING: {
             return {
                 ...state,
                 loading: true,
             }
         }
-        case CATALOG_PRODUCT_LIST_SUCCESS: {
+
+        case CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_ERROR: {
             return {
                 ...state,
                 loading: false,
-                products: action.payload,
+                error: action.payload,
             }
         }
 
-        case CATALOG_PRODUCT_LIST_ERROR: {
+        case CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SUCCESS: {
             return {
                 ...state,
+                error: null,
                 loading: false,
-                products: action.payload,
+                newProducts: { ...action.payload },
             }
         }
 

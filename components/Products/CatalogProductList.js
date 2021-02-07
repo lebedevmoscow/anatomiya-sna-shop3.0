@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetPopupsList } from './../../utils/GetPopupsList'
 
 import styles from './../../styles/components/Products/CatalogProductList.module.sass'
-import { SignalCellularNoSimOutlined } from '@material-ui/icons'
 
 const EqualHeight = dynamic(
     () => import('react-equal-height').then((mod) => mod.EqualHeight),
@@ -45,78 +44,78 @@ const CatalogProductListForDesktop = ({
         SetList(render())
     }, [stylesForViewType, stylesForDesktopViewType, firstLoadProducts])
 
-    useEffect(() => {
-        console.log('1')
-        if (
-            CatalogProductListReducer.products &&
-            CatalogProductListReducer.products.length !== 0 &&
-            !CatalogProductListReducer.loading
-        ) {
-            let ElemenetsArray = []
-            let EqualHeightArray = []
-            let Temp = 0
+    // useEffect(() => {
+    //     console.log('1')
+    //     if (
+    //         CatalogProductListReducer.products &&
+    //         CatalogProductListReducer.products.length !== 0 &&
+    //         !CatalogProductListReducer.loading
+    //     ) {
+    //         let ElemenetsArray = []
+    //         let EqualHeightArray = []
+    //         let Temp = 0
 
-            CatalogProductListReducer.products.ShortProductModels &&
-                CatalogProductListReducer.products.ShortProductModels.map(
-                    (product, index) => {
-                        const ListSalesList = GetPopupsList(
-                            firstLoadProducts.SaleLabels,
-                            product.Prices[0].SaleIds
-                        )
+    //         CatalogProductListReducer.products.ShortProductModels &&
+    //             CatalogProductListReducer.products.ShortProductModels.map(
+    //                 (product, index) => {
+    //                     const ListSalesList = GetPopupsList(
+    //                         firstLoadProducts.SaleLabels,
+    //                         product.Prices[0].SaleIds
+    //                     )
 
-                        const InitialSize = []
-                        for (let i = 0; i < product.Prices.length; i++) {
-                            if (
-                                product.Prices[i].SizeSlug ===
-                                SelectedSizeRedux.selectedSizeSlug
-                            ) {
-                                InitialSize.push(product.Prices[i])
-                            }
-                        }
+    //                     const InitialSize = []
+    //                     for (let i = 0; i < product.Prices.length; i++) {
+    //                         if (
+    //                             product.Prices[i].SizeSlug ===
+    //                             SelectedSizeRedux.selectedSizeSlug
+    //                         ) {
+    //                             InitialSize.push(product.Prices[i])
+    //                         }
+    //                     }
 
-                        ElemenetsArray.push(
-                            <CatalogProductCard
-                                catalogSlug={catalogSlug}
-                                InitialSize={InitialSize}
-                                ListSalesList={ListSalesList}
-                                ProductLabels={product.ProductLabels}
-                                BrandTitle={product.BrandTitle}
-                                SeriesTitle={product.SeriesTitle}
-                                Title={product.Title}
-                                Slug={product.Slug}
-                                MainImage={product.MainImage}
-                                CatalogType={product.CatalogType}
-                                Properties={product.Properties}
-                                Id={product.Id}
-                                key={uuidv4()}
-                                Prices={product.Prices}
-                                catalogSlug={catalogSlug}
-                                subCatalogSlug={subCatalogSlug}
-                                oldMin={oldMin}
-                                oldMax={oldMax}
-                            />
-                        )
+    //                     ElemenetsArray.push(
+    //                         <CatalogProductCard
+    //                             catalogSlug={catalogSlug}
+    //                             InitialSize={InitialSize}
+    //                             ListSalesList={ListSalesList}
+    //                             ProductLabels={product.ProductLabels}
+    //                             BrandTitle={product.BrandTitle}
+    //                             SeriesTitle={product.SeriesTitle}
+    //                             Title={product.Title}
+    //                             Slug={product.Slug}
+    //                             MainImage={product.MainImage}
+    //                             CatalogType={product.CatalogType}
+    //                             Properties={product.Properties}
+    //                             Id={product.Id}
+    //                             key={uuidv4()}
+    //                             Prices={product.Prices}
+    //                             catalogSlug={catalogSlug}
+    //                             subCatalogSlug={subCatalogSlug}
+    //                             oldMin={oldMin}
+    //                             oldMax={oldMax}
+    //                         />
+    //                     )
 
-                        Temp++
+    //                     Temp++
 
-                        if (Temp !== 0 && Temp % 3 === 0) {
-                            EqualHeightArray.push(
-                                <EqualHeight key={uuidv4()}>
-                                    {ElemenetsArray}
-                                </EqualHeight>
-                            )
-                            ElemenetsArray = []
-                            Temp = 0
-                        }
-                    }
-                )
-            SetList(EqualHeightArray)
-        }
-    }, [
-        CatalogProductListReducer.products,
-        CatalogProductListReducer,
-        SelectedSizeRedux,
-    ])
+    //                     if (Temp !== 0 && Temp % 3 === 0) {
+    //                         EqualHeightArray.push(
+    //                             <EqualHeight key={uuidv4()}>
+    //                                 {ElemenetsArray}
+    //                             </EqualHeight>
+    //                         )
+    //                         ElemenetsArray = []
+    //                         Temp = 0
+    //                     }
+    //                 }
+    //             )
+    //         SetList(EqualHeightArray)
+    //     }
+    // }, [
+    //     CatalogProductListReducer.products,
+    //     CatalogProductListReducer,
+    //     SelectedSizeRedux,
+    // ])
 
     const render = () => {
         console.log('2')

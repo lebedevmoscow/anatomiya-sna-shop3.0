@@ -10,10 +10,8 @@ import IndexPageAssurances from './../Assurances'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import {
-    LoadProductsByButtonClick,
-    CATALOG_PRODUCT_LIST_SUCCESS,
-} from './../../actions/CatalogProductList'
+import { CATALOG_PRODUCT_LIST_SUCCESS } from './../../actions/CatalogProductList'
+import { LoadProductsByButtonClick } from './../../actions/NewCatalogProductList'
 
 import styles from './../../styles/components/Catalog/CatalogRight.module.sass'
 
@@ -34,6 +32,9 @@ const CatalogRight = ({
     const dispatch = useDispatch()
     const CatalogProductListReducer = useSelector(
         (store) => store.CatalogProductListReducer
+    )
+    const NewCatalogProductListReducer = useSelector(
+        (store) => store.NewCatalogProductListReducer
     )
 
     const onButtonClickHandler = () => {
@@ -88,12 +89,12 @@ const CatalogRight = ({
     // }, [CatalogProductListReducer.newProducts])
 
     useEffect(() => {
-        if (CatalogProductListReducer.newProducts.length !== 0) {
+        if (NewCatalogProductListReducer.newProducts.length !== 0) {
             const clone = data.concat()
-            clone.push(CatalogProductListReducer.newProducts)
+            clone.push(NewCatalogProductListReducer.newProducts)
             setData(clone)
         }
-    }, [CatalogProductListReducer.newProducts])
+    }, [NewCatalogProductListReducer.newProducts])
 
     return (
         <div className={styles.catalog_right}>
@@ -101,7 +102,7 @@ const CatalogRight = ({
                 updateViewType={updateViewType}
                 desktopViewType={desktopViewType}
             />
-            {/* <CatalogProductListForDesktop
+            <CatalogProductListForDesktop
                 catalogSlug={catalogSlug}
                 desktopViewType={desktopViewType}
                 stylesForDesktopViewType={stylesForDesktopViewType}
@@ -109,7 +110,7 @@ const CatalogRight = ({
                 oldMin={oldMin}
                 oldMax={oldMax}
                 filterProductsIds={filterProductsIds}
-            /> */}
+            />
             {data.map((d, index) => {
                 console.log('d', d)
                 return (
