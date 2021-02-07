@@ -65,13 +65,30 @@ const CatalogRight = ({
         setPage((prev) => ++prev)
     }
 
+    const onPageClickHandler = (p) => {
+        setData([])
+        setList([])
+        dispatch(
+            LoadProductsByButtonClick(
+                filterProductsIds,
+                p,
+                SelectedSizeReducer.selectedSizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax
+            )
+        )
+        setPage(p)
+    }
+
     const onGoForwardButtonClickHandler = () => {
         setData([])
         setList([])
         dispatch(
             LoadProductsByButtonClick(
                 filterProductsIds,
-                page,
+                page + 1,
                 SelectedSizeReducer.selectedSizeId,
                 catalogSlug,
                 subCatalogSlug,
@@ -80,6 +97,23 @@ const CatalogRight = ({
             )
         )
         setPage((prev) => ++prev)
+    }
+
+    const onGoBackdButtonClickHandler = () => {
+        setData([])
+        setList([])
+        dispatch(
+            LoadProductsByButtonClick(
+                filterProductsIds,
+                page - 1,
+                SelectedSizeReducer.selectedSizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax
+            )
+        )
+        setPage((prev) => --prev)
     }
 
     useEffect(() => {
@@ -223,9 +257,13 @@ const CatalogRight = ({
             </div>
             <div onClick={() => setLastClick('forward')}>
                 <CatalogPagination
+                    onPageClickHandler={onPageClickHandler}
+                    current={page}
+                    amount={Math.floor(filterProductsIds.length / 21) - 1}
                     onGoForwardButtonClickHandler={
                         onGoForwardButtonClickHandler
                     }
+                    onGoBackdButtonClickHandler={onGoBackdButtonClickHandler}
                 />
             </div>
             <CatalogHelpPickUp />

@@ -47,7 +47,6 @@ export const LoadProductsByButtonClick = (
 
             let ids = []
             for (let i = 21 * page; i < 21 * page * 2; i++) {
-                console.log('i', i)
                 if (i !== resIds.length - 1) {
                     ids.push(`products[]=${resIds[i]}&`)
                 } else {
@@ -78,10 +77,11 @@ export const LoadProductsByButtonClick = (
         try {
             let ids = []
             for (let i = 21 * page; i < 21 * page + 21; i++) {
-                if (i !== productsIds.length - 1) {
+                if (i < productsIds.length - 1) {
+                    console.log('i', i)
                     ids.push(`products[]=${productsIds[i]}&`)
                 } else {
-                    ids.push(`products[]=${productsIds[i]}`)
+                    return
                 }
             }
 
