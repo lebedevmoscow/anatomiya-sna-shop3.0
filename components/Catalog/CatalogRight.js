@@ -82,7 +82,6 @@ const CatalogRight = ({
         setList(
             <>
                 {data.map((d, index) => {
-                    console.log('d', d)
                     return (
                         <CatalogProductListForDesktop
                             key={index}
@@ -119,11 +118,21 @@ const CatalogRight = ({
 
     useEffect(() => {
         if (CatalogProductListReducer.emptyIndex !== 0) {
+            console.log('go')
             setPage(1)
-            setData[[]]
+            setData([])
             setList([])
         }
     }, [CatalogProductListReducer.emptyIndex])
+
+    useEffect(() => {
+        if (NewCatalogProductListReducer.emptyIndex !== 0) {
+            console.log('go')
+            setPage(1)
+            setData([])
+            setList()
+        }
+    }, [NewCatalogProductListReducer.emptyIndex])
 
     useEffect(() => {
         if (NewCatalogProductListReducer.newProducts.length !== 0) {

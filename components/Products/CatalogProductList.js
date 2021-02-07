@@ -28,16 +28,6 @@ const CatalogProductListForDesktop = ({
     oldMax,
     newProducts = false,
 }) => {
-    const dispatch = useDispatch()
-    const SelectedSizeRedux = useSelector((store) => store.SelectedSizeReducer)
-    const CatalogProductListReducer = useSelector(
-        (store) => store.CatalogProductListReducer
-    )
-    const [IsLoading, SetIsLoading] = useState(true)
-
-    // Объект window
-    const hasWindow = typeof window !== 'undefined'
-
     const [List, SetList] = useState([])
 
     useEffect(() => {
@@ -91,33 +81,7 @@ const CatalogProductListForDesktop = ({
         return EqualHeightArray
     }
 
-    return (
-        <div className={styles.catalog_product_list_for_desktop}>
-            {/* <EqualHeight>
-                {firstLoadProducts.ShortProductModels.map((product) => {
-                    return (
-                        <CatalogProductCard
-                            BrandTitle={product.BrandTitle}
-                            SeriesTitle={product.SeriesTitle}
-                            Title={product.Title}
-                            Slug={product.Slug}
-                            MainImage={product.MainImage}
-                            stylesForViewType={stylesForViewType}
-                            stylesForDesktopViewType={stylesForDesktopViewType}
-                            viewType={viewType}
-                            desktopViewType={desktopViewType}
-                            CatalogType={product.CatalogType}
-                            Properties={product.Properties}
-                            listSales={listSales}
-                            Id={product.Id}
-                            key={product.Id}
-                        />
-                    )
-                })}
-            </EqualHeight> */}
-            {List}
-        </div>
-    )
+    return <div className={styles.catalog_product_list_for_desktop}>{List}</div>
 }
 
 export default CatalogProductListForDesktop
