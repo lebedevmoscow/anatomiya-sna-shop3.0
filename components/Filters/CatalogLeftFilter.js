@@ -7,8 +7,9 @@ import styles from './../../styles/components/Filters/CatalogLeftFilter.module.s
 const CatalogLeftFilter = ({ filterAPIData }) => {
     const options = filterAPIData.size
     const weightOptions = filterAPIData.properties[0].select
-    const properties = filterAPIData.properties
+    const properties = filterAPIData.properties.concat()
     const colors = filterAPIData.colors
+    const [filterStatus, setFilterStatus] = useState([])
 
     const [prices, setPrices] = useState([
         filterAPIData.price.min,
@@ -85,8 +86,34 @@ const CatalogLeftFilter = ({ filterAPIData }) => {
                 autoFocus={false}
             />
         )
+
+        const filter_status = []
+        for (let i = 0; i < properties.length; i++) {
+            let clone = []
+            if (
+                properties[i].checkboxes &&
+                properties[i].checkboxes.length !== 0
+            ) {
+                for (let j = 0; j < properties[i].checkboxes.length; j++) {
+                    if (properties[i].checkboxes[j].productCount !== 0) {
+                        clone.push({
+                            property: properties[i].checkboxes[j],
+                            status: 'closed',
+                        })
+                    }
+                }
+            }
+            filter_status.push({ filter: properties[i], inner: clone })
+            clone = []
+        }
+        setFilterStatus(filter_status)
+
         return () => setSizeSelector(null)
     }, [])
+
+    useEffect(() => {
+        console.log('filterStatus', filterStatus)
+    }, [filterStatus])
 
     return (
         <div className={styles.catalog_left_filter}>
@@ -269,13 +296,58 @@ const CatalogLeftFilter = ({ filterAPIData }) => {
                                         }
                                     >
                                         {property.checkboxes.map(
-                                            (checkbox, index) => {
+                                            (checkbox, index2) => {
                                                 if (
                                                     checkbox.productCount !== 0
                                                 ) {
                                                     return (
                                                         <li
-                                                            key={index}
+                                                            onClick={() => {
+                                                                const clone = filterStatus.concat()
+                                                                if (
+                                                                    clone[index]
+                                                                        .inner[
+                                                                        index2
+                                                                    ] ===
+                                                                    'closed'
+                                                                ) {
+                                                                    clone[
+                                                                        index
+                                                                    ].inner[
+                                                                        index2
+                                                                    ] = {
+                                                                        property:
+                                                                            properties[
+                                                                                i
+                                                                            ]
+                                                                                .checkboxes[
+                                                                                j
+                                                                            ],
+                                                                        status:
+                                                                            'opened',
+                                                                    }
+                                                                } else {
+                                                                    clone[
+                                                                        index
+                                                                    ].inner[
+                                                                        index2
+                                                                    ] = {
+                                                                        property:
+                                                                            properties[
+                                                                                index
+                                                                            ]
+                                                                                .checkboxes[
+                                                                                index2
+                                                                            ],
+                                                                        status:
+                                                                            'closed',
+                                                                    }
+                                                                }
+                                                                setFilterStatus(
+                                                                    clone
+                                                                )
+                                                            }}
+                                                            key={index2}
                                                             className={
                                                                 styles.catalog_left_filter__tab_options_item
                                                             }
