@@ -44,7 +44,7 @@ export const LoadProductsByButtonClick = (
             console.log('4')
 
             let ids = []
-            for (let i = 21 * page; i < 21 * page * 2; i++) {
+            for (let i = 21 * page; i < 21 * page + 21; i++) {
                 if (i !== resIds.length - 1) {
                     ids.push(`products[]=${resIds[i]}&`)
                 } else {
@@ -59,7 +59,6 @@ export const LoadProductsByButtonClick = (
             const products = await productsURLReq.json()
 
             // const products = {}
-            console.log('5')
             dispatch({
                 type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SUCCESS,
                 payload: products,

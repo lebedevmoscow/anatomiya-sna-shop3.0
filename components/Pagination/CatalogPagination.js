@@ -23,7 +23,7 @@ const CatalogPagination = ({
         }
         if (current >= 4 && current <= amount && current !== amount - 3) {
             const clone = []
-            clone.push('1')
+            clone.push(1)
             clone.push('...')
             clone.push(current - 1)
             clone.push(current)
@@ -34,7 +34,7 @@ const CatalogPagination = ({
         }
         if (current >= amount - 3) {
             const clone = []
-            clone.push('1')
+            clone.push(1)
             clone.push('...')
             clone.push(amount - 4)
             clone.push(amount - 3)

@@ -191,11 +191,14 @@ const CatalogRight = ({
     useEffect(() => {
         if (NewCatalogProductListReducer.newProducts.length !== 0) {
             if (lastClick === 'showMore') {
-                console.log('here')
                 const clone = data.concat()
                 clone.push(NewCatalogProductListReducer.newProducts)
                 setData(clone)
             } else {
+                console.log(
+                    'NewCatalogProductListReducer.newProducts',
+                    NewCatalogProductListReducer.newProducts
+                )
                 setFirstProductList(
                     <CatalogProductListForDesktop
                         catalogSlug={catalogSlug}
