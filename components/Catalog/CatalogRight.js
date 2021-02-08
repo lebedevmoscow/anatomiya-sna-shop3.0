@@ -246,15 +246,17 @@ const CatalogRight = ({
             })} */}
             {firstProductList}
             {list}
-            <div
-                onClick={() => {
-                    onButtonClickHandler()
-                    setLastClick('showMore')
-                }}
-                className={styles.catalog_right__load_more_button}
-            >
-                <LoadMoreButton firstText={'Показать еще +21'} />
-            </div>
+            {page !== Math.floor(filterProductsIds.length / 21) && (
+                <div
+                    onClick={() => {
+                        onButtonClickHandler()
+                        setLastClick('showMore')
+                    }}
+                    className={styles.catalog_right__load_more_button}
+                >
+                    <LoadMoreButton firstText={'Показать еще +21'} />
+                </div>
+            )}
             <div onClick={() => setLastClick('forward')}>
                 <CatalogPagination
                     onPageClickHandler={onPageClickHandler}
