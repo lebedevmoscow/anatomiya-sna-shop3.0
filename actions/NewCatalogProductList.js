@@ -22,10 +22,8 @@ export const LoadProductsByButtonClick = (
     dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING })
 
     let finalUrl = false
-    console.log('1')
     if (selectedSizeId) {
         try {
-            console.log('2')
             const mainUrl = 'https://www.anatomiyasna.ru'
             const subUrl = !subCatalogSlug
                 ? `/api/filter/filtredProducts/?slug=${catalogSlug}`
@@ -76,12 +74,23 @@ export const LoadProductsByButtonClick = (
     } else {
         try {
             let ids = []
-            for (let i = 21 * page; i < 21 * page + 21; i++) {
-                if (i < productsIds.length - 1) {
-                    console.log('i', i)
-                    ids.push(`products[]=${productsIds[i]}&`)
-                } else {
-                    return
+            if (page > 1) {
+                for (let i = 21 * page; i < 21 * page + 21; i++) {
+                    if (i < productsIds.length - 1) {
+                        console.log('i', i)
+                        ids.push(`products[]=${productsIds[i]}&`)
+                    } else {
+                        return
+                    }
+                }
+            } else if (page === 1) {
+                for (let i = 0; i < 21; i++) {
+                    if (i < productsIds.length - 1) {
+                        console.log('i', i)
+                        ids.push(`products[]=${productsIds[i]}&`)
+                    } else {
+                        return
+                    }
                 }
             }
 
