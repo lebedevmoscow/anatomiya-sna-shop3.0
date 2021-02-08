@@ -1,3 +1,5 @@
+import { SELECTED_SIZE_SET_AMOUNT } from './SelectedSize'
+
 export const CATALOG_PRODUCT_LIST_LOADING = 'CATALOG_PRODUCT_LIST_LOADING'
 export const CATALOG_PRODUCT_LIST_SUCCESS = 'CATALOG_PRODUCT_LIST_SUCCESS'
 export const CATALOG_PRODUCT_LIST_ERROR = 'CATALOG_PRODUCT_LIST_ERROR'
@@ -28,6 +30,8 @@ export const LoadProductsBySize = (
     try {
         const reqIds = await fetch(finalUrl)
         const resIds = await reqIds.json()
+
+        dispatch({ type: SELECTED_SIZE_SET_AMOUNT, payload: resIds.length })
 
         let ids = []
         for (let i = 0; i < 21; i++) {

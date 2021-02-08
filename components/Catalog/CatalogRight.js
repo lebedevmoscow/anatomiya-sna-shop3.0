@@ -36,6 +36,9 @@ const CatalogRight = ({
 
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
+    const [amount, setAmount] = useState(
+        Math.floor(filterProductsIds.length / 21)
+    )
     const [list, setList] = useState([])
     const [lastClick, setLastClick] = useState('showMore')
 
@@ -71,7 +74,7 @@ const CatalogRight = ({
         dispatch(
             LoadProductsByButtonClick(
                 filterProductsIds,
-                p,
+                SelectedSizeReducer.amount ? p - 1 : p,
                 SelectedSizeReducer.selectedSizeId,
                 catalogSlug,
                 subCatalogSlug,
@@ -155,6 +158,12 @@ const CatalogRight = ({
             </>
         )
     }, [data])
+
+    useEffect(() => {
+        if (SelectedSizeReducer.amount !== null) {
+            setAmount(Math.floor(SelectedSizeReducer.amount / 21) - 1)
+        }
+    }, [SelectedSizeReducer.amount])
 
     useEffect(() => {
         if (CatalogProductListReducer.products.length !== 0) {
@@ -264,7 +273,7 @@ const CatalogRight = ({
                 <CatalogPagination
                     onPageClickHandler={onPageClickHandler}
                     current={page}
-                    amount={Math.floor(filterProductsIds.length / 21)}
+                    amount={amount}
                     onGoForwardButtonClickHandler={
                         onGoForwardButtonClickHandler
                     }
