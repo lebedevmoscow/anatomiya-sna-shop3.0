@@ -80,7 +80,7 @@ export const LoadProductsByButtonClick = (
                         console.log('i', i)
                         ids.push(`products[]=${productsIds[i]}&`)
                     } else {
-                        return
+                        break
                     }
                 }
             } else if (page === 1) {
@@ -89,7 +89,7 @@ export const LoadProductsByButtonClick = (
                         console.log('i', i)
                         ids.push(`products[]=${productsIds[i]}&`)
                     } else {
-                        return
+                        break
                     }
                 }
             }

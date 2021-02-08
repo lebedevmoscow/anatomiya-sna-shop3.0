@@ -259,7 +259,7 @@ const CatalogRight = ({
                 <CatalogPagination
                     onPageClickHandler={onPageClickHandler}
                     current={page}
-                    amount={Math.floor(filterProductsIds.length / 21) - 1}
+                    amount={Math.floor(filterProductsIds.length / 21)}
                     onGoForwardButtonClickHandler={
                         onGoForwardButtonClickHandler
                     }
