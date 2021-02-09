@@ -4,23 +4,25 @@ import { Range, getTrackBackground } from 'react-range'
 
 import styles from './../../styles/components/Filters/CatalogMobileMobileFilter.module.sass'
 
-const CatalogMainFilter = ({ className, title, onClose }) => {
+const CatalogMainFilter = ({ className, title, onClose, filterAPIData }) => {
+    const properties = filterAPIData.properties.concat()
+
     // Refs
     const priceRef = useRef(null)
     const sizeRef = useRef(null)
     const gabaritWidthRef = useRef(null)
     const gabaritLengthRef = useRef(null)
     const materialRef = useRef(null)
-    const complectationRef = useRef(null)
-    const decorRef = useRef(null)
-    const styleRef = useRef(null)
-    const colorRef = useRef(null)
-    const typeRef = useRef(null)
-    const headboardRef = useRef(null)
-    const footboardRef = useRef(null)
-    const manufacturerRef = useRef(null)
-    const countryBrand = useRef(null)
-    const additionalOptionsRef = useRef(null)
+    // const complectationRef = useRef(null)
+    // const decorRef = useRef(null)
+    // const styleRef = useRef(null)
+    // const colorRef = useRef(null)
+    // const typeRef = useRef(null)
+    // const headboardRef = useRef(null)
+    // const footboardRef = useRef(null)
+    // const manufacturerRef = useRef(null)
+    // const countryBrand = useRef(null)
+    // const additionalOptionsRef = useRef(null)
 
     const [prices, setPrices] = useState([5170, 89590])
     const [widths, setWidths] = useState([90, 215])
@@ -51,130 +53,130 @@ const CatalogMainFilter = ({ className, title, onClose }) => {
     ]
 
     const onListItemClickHandler = (title, e) => {
-        switch (title) {
-            case 'Цена (руб.)':
-                setTimeout(() => {
-                    priceRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
-                break
+        // switch (title) {
+        //     case 'Цена (руб.)':
+        //         setTimeout(() => {
+        //             priceRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
+        //         break
 
-            case 'Размер (см.)':
-                setTimeout(() => {
-                    sizeRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
-                break
+        //     case 'Размер (см.)':
+        //         setTimeout(() => {
+        //             sizeRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
+        //         break
 
-            case 'Габарит кровати ширина (см.)':
-                setTimeout(() => {
-                    gabaritWidthRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
-                break
+        //     case 'Габарит кровати ширина (см.)':
+        //         setTimeout(() => {
+        //             gabaritWidthRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
+        //         break
 
-            case 'Габарит кровати длина (см.)':
-                setTimeout(() => {
-                    gabaritLengthRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
-                break
+        //     case 'Габарит кровати длина (см.)':
+        //         setTimeout(() => {
+        //             gabaritLengthRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
+        //         break
 
-            case 'Материал отделки':
-                setTimeout(() => {
-                    materialRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
-                break
+        //     case 'Материал отделки':
+        //         setTimeout(() => {
+        //             materialRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
+        //         break
 
-            case 'Комплектация':
-                setTimeout(() => {
-                    complectationRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start',
-                        inline: 'nearest',
-                    })
-                }, 0)
-                break
+        //     case 'Комплектация':
+        //         setTimeout(() => {
+        //             complectationRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //                 block: 'start',
+        //                 inline: 'nearest',
+        //             })
+        //         }, 0)
+        //         break
 
-            case 'Декор':
-                setTimeout(() => {
-                    decorRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
-                break
+        //     case 'Декор':
+        //         setTimeout(() => {
+        //             decorRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
+        //         break
 
-            case 'Стиль':
-                setTimeout(() => {
-                    styleRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
-                break
+        //     case 'Стиль':
+        //         setTimeout(() => {
+        //             styleRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
+        //         break
 
-            case 'Цвет':
-                setTimeout(() => {
-                    colorRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
-                break
+        //     case 'Цвет':
+        //         setTimeout(() => {
+        //             colorRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
+        //         break
 
-            case 'Тип':
-                setTimeout(() => {
-                    typeRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
-                break
+        //     case 'Тип':
+        //         setTimeout(() => {
+        //             typeRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
+        //         break
 
-            case 'Изголовье':
-                setTimeout(() => {
-                    headboardRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
-                break
+        //     case 'Изголовье':
+        //         setTimeout(() => {
+        //             headboardRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
+        //         break
 
-            case 'Изножье':
-                setTimeout(() => {
-                    footboardRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
-                break
+        //     case 'Изножье':
+        //         setTimeout(() => {
+        //             footboardRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
+        //         break
 
-            case 'Производитель':
-                setTimeout(() => {
-                    manufacturerRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
+        //     case 'Производитель':
+        //         setTimeout(() => {
+        //             manufacturerRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
 
-            case 'Страна бренд':
-                setTimeout(() => {
-                    countryBrand.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
-                break
+        //     case 'Страна бренд':
+        //         setTimeout(() => {
+        //             countryBrand.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
+        //         break
 
-            case 'Возможные опции':
-                setTimeout(() => {
-                    additionalOptionsRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-                }, 0)
-                break
-            default:
-                break
-        }
+        //     case 'Возможные опции':
+        //         setTimeout(() => {
+        //             additionalOptionsRef.current.scrollIntoView({
+        //                 behavior: 'smooth',
+        //             })
+        //         }, 0)
+        //         break
+        //     default:
+        //         break
+        // }
 
         if (title === titleOfAdditionalMenu) {
             if (
@@ -467,6 +469,7 @@ const CatalogMainFilter = ({ className, title, onClose }) => {
                                 </div>
                             )}
                         </li>
+
                         <li
                             className={styles.li}
                             onClick={(e) =>
@@ -584,23 +587,31 @@ const CatalogMainFilter = ({ className, title, onClose }) => {
                                 </div>
                             )}
                         </li>
-                        <li
-                            className={styles.li}
-                            onClick={(e) =>
-                                onListItemClickHandler('Материал отделки', e)
-                            }
-                        >
-                            <div ref={materialRef} className={styles.wrapper}>
-                                <div className={styles.wrap1}>
-                                    <span className={styles.text}>
-                                        Материал отделки
-                                    </span>
-                                </div>
-                                <div className={styles.wrap2}>
-                                    <span className={styles.plus}>+</span>
-                                </div>
-                            </div>
-                            {titleOfAdditionalMenu === 'Материал отделки' && (
+
+                        {properties.map((prop, index) => {
+                            return (
+                                <li
+                                    className={styles.li}
+                                    onClick={(e) =>
+                                        onListItemClickHandler(prop.title, e)
+                                    }
+                                >
+                                    <div
+                                        ref={materialRef}
+                                        className={styles.wrapper}
+                                    >
+                                        <div className={styles.wrap1}>
+                                            <span className={styles.text}>
+                                                {prop.title}
+                                            </span>
+                                        </div>
+                                        <div className={styles.wrap2}>
+                                            <span className={styles.plus}>
+                                                +
+                                            </span>
+                                        </div>
+                                    </div>
+                                    {/* {titleOfAdditionalMenu === 'Материал отделки' && (
                                 <div className={styles.checkbox_block}>
                                     <ul
                                         className={
@@ -629,1916 +640,98 @@ const CatalogMainFilter = ({ className, title, onClose }) => {
                                                 </span>
                                             </label>
                                         </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>ЛДСП/экокожа</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>ЛДСП/ткань</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Металл</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Экокожа</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Ткань</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Сосна</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Сосна/Ткань</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Металл/Гевея</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Берёза</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Бук</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Бук/Экокожа</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Дуб</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Дуб/Экокожа</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>МЛПД</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Ясень</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
                                     </ul>
                                 </div>
-                            )}
-                        </li>
-                        <li
-                            className={styles.li}
-                            onClick={(e) =>
-                                onListItemClickHandler('Комплектация', e)
-                            }
-                        >
-                            <div
-                                ref={complectationRef}
-                                className={styles.wrapper}
-                            >
-                                <div className={styles.wrap1}>
-                                    <span className={styles.text}>
-                                        Комплектация
-                                    </span>
-                                </div>
-                                <div className={styles.wrap2}>
-                                    <span className={styles.plus}>+</span>
-                                </div>
-                            </div>
-                            {titleOfAdditionalMenu === 'Комплектация' && (
-                                <div className={styles.checkbox_block}>
-                                    <ul
-                                        className={
-                                            styles.catalog_left_filter__tab_options
-                                        }
-                                    >
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
+                            )} */}
+                                    {titleOfAdditionalMenu === prop.title && (
+                                        <div className={styles.checkbox_block}>
+                                            <ul
                                                 className={
-                                                    styles.catalog_left_filter__checkbox_container
+                                                    styles.catalog_left_filter__tab_options
                                                 }
                                             >
-                                                <input type="checkbox" />
-                                                <span
+                                                {/* <li
                                                     className={
-                                                        styles.catalog_left_filter__checkmark
+                                                        styles.catalog_left_filter__tab_options_item
                                                     }
-                                                ></span>
-                                                <h6>С основанием</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>На высоких ножках</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>На низких ножках</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            )}
-                        </li>
-                        <li
-                            className={styles.li}
-                            onClick={(e) => onListItemClickHandler('Декор', e)}
-                        >
-                            <div ref={decorRef} className={styles.wrapper}>
-                                <div className={styles.wrap1}>
-                                    <span className={styles.text}>Декор</span>
-                                </div>
-                                <div className={styles.wrap2}>
-                                    <span className={styles.plus}>+</span>
-                                </div>
-                            </div>
-                            {titleOfAdditionalMenu === 'Декор' && (
-                                <div className={styles.checkbox_block}>
-                                    <ul
-                                        className={
-                                            styles.catalog_left_filter__tab_options
-                                        }
-                                    >
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Без декора</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>С элементами ковки</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>С резными элементами</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>С кристаллами</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>С узорами</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            )}
-                        </li>
-                        <li
-                            className={styles.li}
-                            onClick={(e) => onListItemClickHandler('Стиль', e)}
-                        >
-                            <div ref={styleRef} className={styles.wrapper}>
-                                <div className={styles.wrap1}>
-                                    <span className={styles.text}>Стиль</span>
-                                </div>
-                                <div className={styles.wrap2}>
-                                    <span className={styles.plus}>+</span>
-                                </div>
-                            </div>
-                            {titleOfAdditionalMenu === 'Стиль' && (
-                                <div className={styles.checkbox_block}>
-                                    <ul
-                                        className={
-                                            styles.catalog_left_filter__tab_options
-                                        }
-                                    >
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Прованс</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Современный</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Классический</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Дизайнерский</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Восточный</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            )}
-                        </li>
-                        <li
-                            className={styles.li}
-                            onClick={(e) => onListItemClickHandler('Цвет', e)}
-                        >
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    paddingTop: '15px',
-                                }}
-                                ref={colorRef}
-                                className={styles.wrapper__colored}
-                            >
-                                <div className={styles.wrap1}>
-                                    <span className={styles.text}>Цвет</span>
-                                </div>
-                                <div className={styles.wrap2}>
-                                    <span className={styles.plus}>+</span>
-                                </div>
-                            </div>
-                            {titleOfAdditionalMenu === 'Цвет' && (
-                                <div className={styles.checkbox_block}>
-                                    <ul
-                                        className={
-                                            styles.catalog_left_filter__tab_options
-                                        }
-                                    >
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={`${catalog_left_filter__checkmark} ${styles.white}`}
-                                                ></span>
-                                                <h6>Белый</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={`${catalog_left_filter__checkmark} ${styles.biege}`}
-                                                ></span>
-                                                <h6>Бежевый</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={`${catalog_left_filter__checkmark} ${styles.yellow}`}
                                                 >
-                                                    Желтый
-                                                </span>
-                                                <h6>Желтый</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span></span>
-                                                <h6>Золото</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={`${catalog_left_filter__checkmark} ${styles.brown}`}
-                                                ></span>
-                                                <h6>Коричневый</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={`${catalog_left_filter__checkmark} ${styles.grey}`}
-                                                ></span>
-                                                <h6>Серый</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={`${catalog_left_filter__checkmark} ${styles.black}`}
-                                                ></span>
-                                                <h6>Черный</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={`${catalog_left_filter__checkmark} ${styles.burgundy}`}
-                                                ></span>
-                                                <h6>Бордовый</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={`${catalog_left_filter__checkmark} ${styles.silver}`}
-                                                ></span>
-                                                <h6>Серебро</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            )}
-                        </li>
-                        <li
-                            className={styles.li}
-                            onClick={(e) => onListItemClickHandler('Тип', e)}
-                        >
-                            <div ref={typeRef} className={styles.wrapper}>
-                                <div className={styles.wrap1}>
-                                    <span className={styles.text}>Тип</span>
-                                </div>
-                                <div className={styles.wrap2}>
-                                    <span className={styles.plus}>+</span>
-                                </div>
-                            </div>
-                            {titleOfAdditionalMenu === 'Тип' && (
-                                <div className={styles.checkbox_block}>
-                                    <ul
-                                        className={
-                                            styles.catalog_left_filter__tab_options
-                                        }
-                                    >
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
+                                                    <label
+                                                        className={
+                                                            styles.catalog_left_filter__checkbox_container
+                                                        }
+                                                    >
+                                                        <input type="checkbox" />
+                                                        <span
+                                                            className={
+                                                                styles.catalog_left_filter__checkmark
+                                                            }
+                                                        ></span>
+                                                        <h6>ЛДСП</h6>
+                                                        <span
+                                                            className={
+                                                                styles.amount
+                                                            }
+                                                        >
+                                                            (48)
+                                                        </span>
+                                                    </label>
+                                                </li> */}
+
+                                                {/* {prop.map((prop2, index2) => {
+                                                    return (
+                                                        <li
+                                                            className={
+                                                                styles.catalog_left_filter__tab_options_item
+                                                            }
+                                                        ></li>
+                                                    )
+                                                })} */}
+                                                {prop.checkboxes.map(
+                                                    (prop2, index2) => {
+                                                        return (
+                                                            <li
+                                                                className={
+                                                                    styles.catalog_left_filter__tab_options_item
+                                                                }
+                                                            >
+                                                                <label
+                                                                    className={
+                                                                        styles.catalog_left_filter__checkbox_container
+                                                                    }
+                                                                >
+                                                                    <input type="checkbox" />
+                                                                    <span
+                                                                        className={
+                                                                            styles.catalog_left_filter__checkmark
+                                                                        }
+                                                                    ></span>
+                                                                    <h6>
+                                                                        {
+                                                                            prop2.label
+                                                                        }
+                                                                    </h6>
+                                                                    <span
+                                                                        className={
+                                                                            styles.amount
+                                                                        }
+                                                                    >
+                                                                        (
+                                                                        {
+                                                                            prop2.productCount
+                                                                        }
+                                                                        )
+                                                                    </span>
+                                                                </label>
+                                                            </li>
+                                                        )
                                                     }
-                                                ></span>
-                                                <h6>Металлические</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Кованые</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Железные</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Софа</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Тахты</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Кушетки</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            )}
-                        </li>
-                        <li
-                            className={styles.li}
-                            onClick={(e) =>
-                                onListItemClickHandler('Изголовье', e)
-                            }
-                        >
-                            <div ref={headboardRef} className={styles.wrapper}>
-                                <div className={styles.wrap1}>
-                                    <span className={styles.text}>
-                                        Изголовье
-                                    </span>
-                                </div>
-                                <div className={styles.wrap2}>
-                                    <span className={styles.plus}>+</span>
-                                </div>
-                            </div>
-                            {titleOfAdditionalMenu === 'Изголовье' && (
-                                <div className={styles.checkbox_block}>
-                                    <ul
-                                        className={
-                                            styles.catalog_left_filter__tab_options
-                                        }
-                                    >
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Твердое</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Кованное</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Металлическое</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Изогнутое</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Прямое</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Низкое</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>С элементами ковки</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>С кристаллами</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            )}
-                        </li>
-                        <li
-                            className={styles.li}
-                            onClick={(e) =>
-                                onListItemClickHandler('Изножье', e)
-                            }
-                        >
-                            <div ref={footboardRef} className={styles.wrapper}>
-                                <div className={styles.wrap1}>
-                                    <span className={styles.text}>Изножье</span>
-                                </div>
-                                <div className={styles.wrap2}>
-                                    <span className={styles.plus}>+</span>
-                                </div>
-                            </div>
-                            {titleOfAdditionalMenu === 'Изножье' && (
-                                <div className={styles.checkbox_block}>
-                                    <ul
-                                        className={
-                                            styles.catalog_left_filter__tab_options
-                                        }
-                                    >
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Низкое</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Без изножья</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Высокое</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Твердое</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Кованое</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Металлическое</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Изогнутое</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Прямое</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>С элементами ковки</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>По запросу</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            )}
-                        </li>
-                        <li
-                            className={styles.li}
-                            onClick={(e) =>
-                                onListItemClickHandler('Производитель', e)
-                            }
-                        >
-                            <div
-                                ref={manufacturerRef}
-                                className={styles.wrapper}
-                            >
-                                <div className={styles.wrap1}>
-                                    <span className={styles.text}>
-                                        Производитель
-                                    </span>
-                                </div>
-                                <div className={styles.wrap2}>
-                                    <span className={styles.plus}>+</span>
-                                </div>
-                            </div>
-                            {titleOfAdditionalMenu === 'Производитель' && (
-                                <div className={styles.checkbox_block}>
-                                    <ul
-                                        className={
-                                            styles.catalog_left_filter__tab_options
-                                        }
-                                    >
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Орматек</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Райтон</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>DreamLine</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Стиллмет</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Woodville</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Alitte</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            )}
-                        </li>
-                        <li
-                            className={styles.li}
-                            onClick={(e) =>
-                                onListItemClickHandler('Страна бренд', e)
-                            }
-                        >
-                            <div ref={countryBrand} className={styles.wrapper}>
-                                <div className={styles.wrap1}>
-                                    <span className={styles.text}>
-                                        Страна бренд
-                                    </span>
-                                </div>
-                                <div className={styles.wrap2}>
-                                    <span className={styles.plus}>+</span>
-                                </div>
-                            </div>
-                            {titleOfAdditionalMenu === 'Страна бренд' && (
-                                <div className={styles.checkbox_block}>
-                                    <ul
-                                        className={
-                                            styles.catalog_left_filter__tab_options
-                                        }
-                                    >
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Российские</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Малайзия</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>На низких ножках</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            )}
-                        </li>
-                        <li
-                            className={styles.li}
-                            onClick={(e) =>
-                                onListItemClickHandler('Возможные опции', e)
-                            }
-                        >
-                            <div
-                                ref={additionalOptionsRef}
-                                className={styles.wrapper}
-                            >
-                                <div className={styles.wrap1}>
-                                    <span className={styles.text}>
-                                        Возможные опции
-                                    </span>
-                                </div>
-                                <div className={styles.wrap2}>
-                                    <span className={styles.plus}>+</span>
-                                </div>
-                            </div>
-                            {titleOfAdditionalMenu === 'Возможные опции' && (
-                                <div className={styles.checkbox_block}>
-                                    <ul
-                                        className={
-                                            styles.catalog_left_filter__tab_options
-                                        }
-                                    >
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Выдвижные ящики</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>
-                                                    Ортопедическое основание
-                                                </h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>1 или 2 спинки на выбор</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>Высокое изножье</h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                        <li
-                                            className={
-                                                styles.catalog_left_filter__tab_options_item
-                                            }
-                                        >
-                                            <label
-                                                className={
-                                                    styles.catalog_left_filter__checkbox_container
-                                                }
-                                            >
-                                                <input type="checkbox" />
-                                                <span
-                                                    className={
-                                                        styles.catalog_left_filter__checkmark
-                                                    }
-                                                ></span>
-                                                <h6>
-                                                    Изготовление без изголовья
-                                                </h6>
-                                                <span className={styles.amount}>
-                                                    (48)
-                                                </span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            )}
-                        </li>
+                                                )}
+                                            </ul>
+                                        </div>
+                                    )}
+                                </li>
+                            )
+                        })}
                     </ul>
                     <div className={styles.catalog_modal_buttons}>
                         <button

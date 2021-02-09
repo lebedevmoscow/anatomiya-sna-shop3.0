@@ -286,7 +286,7 @@ const CatalogPage = ({
             )}
             <CatalogMainFilter
                 className={mainMobileFilterIsOpen ? '' : 'closed'}
-                // className={'closed'}
+                filterAPIData={filterAPIData}
                 onClose={() => {
                     setMainMobileFilterIsOpen(false)
                 }}
