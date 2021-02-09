@@ -60,7 +60,6 @@ const CatalogMobileProductList = ({
     )
 
     const onButtonClickHandler = () => {
-        console.log('lastClick', lastClick)
         if (lastClick !== 'filter') {
             if (
                 CatalogCommonReducer.filters &&
@@ -75,10 +74,12 @@ const CatalogMobileProductList = ({
                         subCatalogSlug,
                         oldMin,
                         oldMax,
-                        CatalogCommonReducer.filters
+                        CatalogCommonReducer.filters,
+                        true
                     )
                 )
             } else {
+                console.log('PAGE PAGE PAGE', page)
                 dispatch(
                     LoadProductsByButtonClick(
                         filterProductsIds,
@@ -115,42 +116,126 @@ const CatalogMobileProductList = ({
     const onGoForwardButtonClickHandler = () => {
         setData([])
         setList([])
-        dispatch(
-            LoadProductsByButtonClick(
-                filterProductsIds,
-                page + 1,
-                SelectedSizeReducer.selectedSizeId,
-                catalogSlug,
-                subCatalogSlug,
-                oldMin,
-                oldMax
-            )
-        )
+        let temp = page + 1
+        setPage((prev) => ++prev)
 
-        setPage((prev) => {
-            dispatch(catalogSetPage(prev + 1))
-            return ++prev
-        })
+        if (
+            CatalogCommonReducer.filters &&
+            CatalogCommonReducer.filters.length !== 0
+        ) {
+            console.log('temp', temp)
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    temp,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    CatalogCommonReducer.filters
+                )
+            )
+        } else {
+            dispatch(
+                LoadProductsByButtonClick(
+                    filterProductsIds,
+                    SelectedSizeReducer.amount ? temp - 1 : temp,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax
+                )
+            )
+        }
+
+        console.log('on page click handler')
+
+        dispatch(catalogSetPage(temp))
+
+        // setData([])
+        // setList([])
+        // dispatch(
+        //     LoadProductsByButtonClick(
+        //         filterProductsIds,
+        //         page + 1,
+        //         SelectedSizeReducer.selectedSizeId,
+        //         catalogSlug,
+        //         subCatalogSlug,
+        //         oldMin,
+        //         oldMax
+        //     )
+        // )
+
+        // setPage((prev) => {
+        //     dispatch(catalogSetPage(prev + 1))
+        //     return ++prev
+        // })
+
+        // dispatch(catalogSetPage(p))
     }
 
     const onGoBackdButtonClickHandler = () => {
         setData([])
         setList([])
-        dispatch(
-            LoadProductsByButtonClick(
-                filterProductsIds,
-                page - 1,
-                SelectedSizeReducer.selectedSizeId,
-                catalogSlug,
-                subCatalogSlug,
-                oldMin,
-                oldMax
+        let temp = page - 1
+        setPage((prev) => --prev)
+
+        if (
+            CatalogCommonReducer.filters &&
+            CatalogCommonReducer.filters.length !== 0
+        ) {
+            console.log('temp', temp)
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    temp,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    CatalogCommonReducer.filters
+                )
             )
-        )
-        setPage((prev) => {
-            dispatch(catalogSetPage(prev - 1))
-            return --prev
-        })
+        } else {
+            dispatch(
+                LoadProductsByButtonClick(
+                    filterProductsIds,
+                    SelectedSizeReducer.amount ? temp - 1 : temp,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax
+                )
+            )
+        }
+
+        console.log('on page click handler')
+
+        dispatch(catalogSetPage(temp))
+
+        // setData([])
+        // setList([])
+        // dispatch(
+        //     LoadProductsByButtonClick(
+        //         filterProductsIds,
+        //         page - 1,
+        //         SelectedSizeReducer.selectedSizeId,
+        //         catalogSlug,
+        //         subCatalogSlug,
+        //         oldMin,
+        //         oldMax
+        //     )
+        // )
+        // setPage((prev) => {
+        //     dispatch(catalogSetPage(prev - 1))
+        //     return --prev
+        // })
+
+        // dispatch(catalogSetPage(p - 1))
     }
 
     const onPageClickHandler = (p) => {
@@ -235,7 +320,16 @@ const CatalogMobileProductList = ({
     }, [data])
 
     useEffect(() => {
+        setPage(CatalogCommonReducer.page)
+    }, [CatalogCommonReducer.page])
+
+    useEffect(() => {
         if (SelectedSizeReducer.amount !== null) {
+            console.log(
+                'new amount',
+                Math.ceil(SelectedSizeReducer.amount / 21)
+            )
+            console.log('current', page)
             setAmount(Math.ceil(SelectedSizeReducer.amount / 21))
         }
     }, [SelectedSizeReducer.amount])
@@ -274,20 +368,14 @@ const CatalogMobileProductList = ({
     }, [NewCatalogProductListReducer.emptyIndex])
 
     useEffect(() => {
-        console.log('useEffect1')
         if (NewCatalogProductListReducer.newProducts.length !== 0) {
-            console.log('1')
             if (lastClick === 'showMore') {
-                console.log('2')
                 const clone = data.concat()
                 clone.push(NewCatalogProductListReducer.newProducts)
                 setData(clone)
             } else if (lastClick === 'filter') {
-                console.log('3')
-                // console.log(
-                //     'NewCatalogProductListReducer.newProducts',
-                //     NewCatalogProductListReducer.newProducts
-                // )
+                console.log('asas', NewCatalogProductListReducer.newProducts)
+                // setTimeout(() => {
                 setFirstProductList(
                     <CatalogProductList
                         catalogSlug={catalogSlug}
@@ -299,8 +387,8 @@ const CatalogMobileProductList = ({
                         filterProductsIds={filterProductsIds}
                     />
                 )
+                // }, 1000)
             } else {
-                console.log('4')
                 console.log(
                     'NewCatalogProductListReducer.newProducts',
                     NewCatalogProductListReducer.newProducts
@@ -321,12 +409,11 @@ const CatalogMobileProductList = ({
     }, [NewCatalogProductListReducer.newProducts])
 
     useEffect(() => {
-        console.log('dada', lastClick)
         if (lastClick === 'showMore') {
             onButtonClickHandler()
         }
+        // if (lastClick === '')
     }, [lastClick])
-
     return (
         <>
             {firstProductList}

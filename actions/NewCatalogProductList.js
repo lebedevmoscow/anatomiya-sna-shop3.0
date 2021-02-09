@@ -117,7 +117,8 @@ export const LoadByFilters = (
     subCatalogSlug,
     oldMin,
     oldMax,
-    filters
+    filters,
+    IsMobile = false
 ) => async (dispatch) => {
     // dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING })
 

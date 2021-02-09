@@ -459,7 +459,10 @@ export const getServerSideProps = async (ctx) => {
     // console.logductsIds)
 
     let ids = []
-    for (let i = 0; i < 21; i++) {
+
+    const index = IsMobile ? 20 : 21
+
+    for (let i = 0; i < index; i++) {
         if (i !== filterProductsIds.length - 1) {
             ids.push(`products[]=${filterProductsIds[i]}&`)
         } else {
