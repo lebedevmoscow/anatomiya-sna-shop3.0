@@ -176,6 +176,8 @@ const CatalogRight = ({
             dispatch(catalogSetPage(prev + 1))
             return ++prev
         })
+
+        dispatch(catalogSetPage(p))
     }
 
     const onGoBackdButtonClickHandler = () => {
@@ -196,6 +198,8 @@ const CatalogRight = ({
             dispatch(catalogSetPage(prev - 1))
             return --prev
         })
+
+        dispatch(catalogSetPage(p - 1))
     }
 
     useEffect(() => {
