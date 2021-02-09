@@ -19,6 +19,7 @@ import CatalogMobileReview from './../../components/Reviews/CatalogMobileReviews
 import CatalogLeftFilter from '../../components/Filters/CatalogLeftFilter'
 import CatalogRight from '../../components/Catalog/CatalogRight'
 import CatalogMainFilter from './../../components/Filters/CatalogMobileMainFilter'
+import CatalogMobileProductList from './../../components/Mobile/CatalogMobileProductList'
 
 import common_styles from './../../styles/pages/catalog.module.sass'
 
@@ -104,7 +105,8 @@ const CatalogPage = ({
     // Use Effects
     useEffect(() => {
         if (breakpoint768) {
-            setViewType('single')
+            // setViewType('single')
+            setViewType('several')
         } else if (!breakpoint768) {
             setDesktopViewType('several')
         }
@@ -305,16 +307,36 @@ const CatalogPage = ({
                     />
                 </div>
             )}
-            {IsMobile && breakpoint1023 && (
+            {IsMobile && breakpoint1023 && products && (
                 <div className={common_styles.container}>
-                    <CatalogProductList
+                    {console.log('products', products)}
+                    <CatalogMobileProductList
+                        catalogSlug={catalogSlug}
+                        subCatalogSlug={subCatalogSlug}
                         firstLoadProducts={products}
                         stylesForViewType={stylesForViewType}
                         viewType={viewType}
+                        filterAPIData={filterAPIData}
+                        filterProductsIds={filterProductsIds}
+                        newProducts={true}
+                        lastClick={lastClick}
+                        setLastClick={setLastClick}
+                        IsMobile={IsMobile}
                     />
+                    {/* <CatalogProductList
+                        catalogSlug={catalogSlug}
+                        subCatalogSlug={subCatalogSlug}
+                        firstLoadProducts={products}
+                        stylesForViewType={stylesForViewType}
+                        viewType={viewType}
+                        oldMin={filterAPIData.price.min}
+                        oldMax={filterAPIData.price.max}
+                        filterProductsIds={filterProductsIds}
+                        newProducts={true}
+                    /> */}
                 </div>
             )}
-            {IsMobile && breakpoint1023 && (
+            {/* {IsMobile && breakpoint1023 && (
                 <div style={{ marginTop: '5px' }}>
                     <LoadMoreButton firstText={'Показать еще +20'} />
                 </div>
@@ -323,7 +345,7 @@ const CatalogPage = ({
                 <div className={common_styles.mobile_catalog_pagination}>
                     <CatalogPagination />
                 </div>
-            )}
+            )} */}
             {/* {IsMobile && breakpoint1023 && (
                 <div className={common_styles.mobile_help_pickup}>
                     <CatalogHelpPickUp />
