@@ -160,46 +160,126 @@ const CatalogRight = ({
     const onGoForwardButtonClickHandler = () => {
         setData([])
         setList([])
-        dispatch(
-            LoadProductsByButtonClick(
-                filterProductsIds,
-                page + 1,
-                SelectedSizeReducer.selectedSizeId,
-                catalogSlug,
-                subCatalogSlug,
-                oldMin,
-                oldMax
+        let temp = page + 1
+        setPage((prev) => ++prev)
+
+        if (
+            CatalogCommonReducer.filters &&
+            CatalogCommonReducer.filters.length !== 0
+        ) {
+            console.log('temp', temp)
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    temp,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    CatalogCommonReducer.filters
+                )
             )
-        )
+        } else {
+            dispatch(
+                LoadProductsByButtonClick(
+                    filterProductsIds,
+                    SelectedSizeReducer.amount ? temp - 1 : temp,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax
+                )
+            )
+        }
 
-        setPage((prev) => {
-            dispatch(catalogSetPage(prev + 1))
-            return ++prev
-        })
+        console.log('on page click handler')
 
-        dispatch(catalogSetPage(p))
+        dispatch(catalogSetPage(temp))
+
+        // setData([])
+        // setList([])
+        // dispatch(
+        //     LoadProductsByButtonClick(
+        //         filterProductsIds,
+        //         page + 1,
+        //         SelectedSizeReducer.selectedSizeId,
+        //         catalogSlug,
+        //         subCatalogSlug,
+        //         oldMin,
+        //         oldMax
+        //     )
+        // )
+
+        // setPage((prev) => {
+        //     dispatch(catalogSetPage(prev + 1))
+        //     return ++prev
+        // })
+
+        // dispatch(catalogSetPage(p))
     }
 
     const onGoBackdButtonClickHandler = () => {
         setData([])
         setList([])
-        dispatch(
-            LoadProductsByButtonClick(
-                filterProductsIds,
-                page - 1,
-                SelectedSizeReducer.selectedSizeId,
-                catalogSlug,
-                subCatalogSlug,
-                oldMin,
-                oldMax
-            )
-        )
-        setPage((prev) => {
-            dispatch(catalogSetPage(prev - 1))
-            return --prev
-        })
+        let temp = page - 1
+        setPage((prev) => --prev)
 
-        dispatch(catalogSetPage(p - 1))
+        if (
+            CatalogCommonReducer.filters &&
+            CatalogCommonReducer.filters.length !== 0
+        ) {
+            console.log('temp', temp)
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    temp,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    CatalogCommonReducer.filters
+                )
+            )
+        } else {
+            dispatch(
+                LoadProductsByButtonClick(
+                    filterProductsIds,
+                    SelectedSizeReducer.amount ? temp - 1 : temp,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax
+                )
+            )
+        }
+
+        console.log('on page click handler')
+
+        dispatch(catalogSetPage(temp))
+
+        // setData([])
+        // setList([])
+        // dispatch(
+        //     LoadProductsByButtonClick(
+        //         filterProductsIds,
+        //         page - 1,
+        //         SelectedSizeReducer.selectedSizeId,
+        //         catalogSlug,
+        //         subCatalogSlug,
+        //         oldMin,
+        //         oldMax
+        //     )
+        // )
+        // setPage((prev) => {
+        //     dispatch(catalogSetPage(prev - 1))
+        //     return --prev
+        // })
+
+        // dispatch(catalogSetPage(p - 1))
     }
 
     useEffect(() => {
