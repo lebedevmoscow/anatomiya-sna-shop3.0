@@ -78,6 +78,10 @@ const CatalogPage = ({
 
     const [lastClick, setLastClick] = useState(null)
 
+    useEffect(() => {
+        console.log('1111111')
+    }, [lastClick])
+
     // Click Handlers
     const onPresetFilterClickHandler = (title, data) => {
         setPresetFilterTitle(title)

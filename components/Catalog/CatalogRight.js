@@ -67,7 +67,6 @@ const CatalogRight = ({
         console.log('click', lastClick)
         if (lastClick !== 'filter') {
             if (CatalogCommonReducer.filters.length !== 0) {
-                console.log('1')
                 dispatch(
                     LoadByFilters(
                         filterProductsIds,
@@ -80,6 +79,7 @@ const CatalogRight = ({
                         CatalogCommonReducer.filters
                     )
                 )
+                console.log('1')
             } else {
                 console.log('2')
                 dispatch(
@@ -301,6 +301,7 @@ const CatalogRight = ({
     }, [NewCatalogProductListReducer.newProducts])
 
     useEffect(() => {
+        console.log('lastClick', lastClick)
         if (lastClick === 'showMore') {
             onButtonClickHandler()
         }
@@ -342,7 +343,11 @@ const CatalogRight = ({
             {page !== Math.floor(filterProductsIds.length / 21) && (
                 <div
                     onClick={() => {
+                        console.log('click suka')
                         setLastClick('showMore')
+                        if (lastClick === 'showMore') {
+                            onButtonClickHandler()
+                        }
                     }}
                     className={styles.catalog_right__load_more_button}
                 >

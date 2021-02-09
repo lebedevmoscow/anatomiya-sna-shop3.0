@@ -161,36 +161,41 @@ export const LoadByFilters = (
 
         console.log('resIds', resIds)
 
-        if (page !== 1) {
-            for (let i = 21 * (page - 1); i < 21 * (page - 1) + 21; i++) {
-                console.log('i', i)
-                if (i !== resIds.length - 1) {
-                    ids.push(`products[]=${resIds[i]}&`)
-                } else {
-                    break
+        if (21 * (page - 1) >= resIds.length) {
+            return
+        } else {
+            if (page !== 1) {
+                for (let i = 21 * (page - 1); i < 21 * (page - 1) + 21; i++) {
+                    console.log('i resIds.length', i, resIds.length)
+                    if (i !== resIds.length) {
+                        ids.push(`products[]=${resIds[i]}&`)
+                    } else {
+                        console.log('breaking')
+                        break
+                    }
+                }
+            } else if (page === 1) {
+                for (let i = 0; i < 21; i++) {
+                    if (i !== resIds.length) {
+                        ids.push(`products[]=${resIds[i]}&`)
+                    } else {
+                        break
+                    }
                 }
             }
-        } else if (page === 1) {
-            for (let i = 0; i < 21; i++) {
-                if (i !== resIds.length - 1) {
-                    ids.push(`products[]=${resIds[i]}&`)
-                } else {
-                    break
-                }
-            }
+
+            const productSubUrl = ids.join('')
+            const productsURLReq = await fetch(
+                `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
+            )
+            const products = await productsURLReq.json()
+
+            // const products = {}
+            dispatch({
+                type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SUCCESS,
+                payload: products,
+            })
         }
-
-        const productSubUrl = ids.join('')
-        const productsURLReq = await fetch(
-            `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
-        )
-        const products = await productsURLReq.json()
-
-        // const products = {}
-        dispatch({
-            type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SUCCESS,
-            payload: products,
-        })
     } catch (e) {
         console.log(
             'Cannot load products on catalog page due button click. Error: ',
