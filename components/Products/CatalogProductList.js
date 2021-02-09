@@ -39,7 +39,9 @@ const CatalogProductListForDesktop = ({
         let EqualHeightArray = []
         let Temp = 0
 
-        firstLoadProducts.ShortProductModels.map((product) => {
+        const length = firstLoadProducts.ShortProductModels.length
+
+        firstLoadProducts.ShortProductModels.map((product, index) => {
             const ListSalesList = GetPopupsList(
                 firstLoadProducts.SaleLabels,
                 product.Prices[0].SaleIds
@@ -70,13 +72,38 @@ const CatalogProductListForDesktop = ({
 
             Temp++
 
-            if (Temp !== 0 && Temp % 3 === 0) {
-                EqualHeightArray.push(
-                    <EqualHeight key={product.Id}>{ElemenetsArray}</EqualHeight>
-                )
-                ElemenetsArray = []
-                Temp = 0
+            if (length < 21) {
+                if (
+                    length - 1 === index &&
+                    (Temp % 3 === 1 || Temp % 3 === 2)
+                ) {
+                    console.log('poof')
+                    EqualHeightArray.push(
+                        <EqualHeight key={product.Id}>
+                            {ElemenetsArray}
+                        </EqualHeight>
+                    )
+                }
+            } else {
+                console.log('index', index)
+                console.log('length', length)
+                if (Temp !== 0 && Temp % 3 === 0) {
+                    EqualHeightArray.push(
+                        <EqualHeight key={product.Id}>
+                            {ElemenetsArray}
+                        </EqualHeight>
+                    )
+                    ElemenetsArray = []
+                    Temp = 0
+                }
             }
+            // if (Temp !== 0 && Temp % 3 === 0) {
+            //     EqualHeightArray.push(
+            //         <EqualHeight key={product.Id}>{ElemenetsArray}</EqualHeight>
+            //     )
+            //     ElemenetsArray = []
+            //     Temp = 0
+            // }
         })
         return EqualHeightArray
     }
