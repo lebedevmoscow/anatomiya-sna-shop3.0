@@ -239,6 +239,10 @@ const CatalogRight = ({
     }, [data])
 
     useEffect(() => {
+        setPage(CatalogCommonReducer.page)
+    }, [CatalogCommonReducer.page])
+
+    useEffect(() => {
         if (SelectedSizeReducer.amount !== null) {
             console.log(
                 'new amount',

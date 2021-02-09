@@ -5,6 +5,7 @@ import { Range, getTrackBackground } from 'react-range'
 import { useSelector, useDispatch } from 'react-redux'
 import {
     CATALOG_SET_FILTERS,
+    catalogSetPage,
     catalogSetFilters,
 } from './../../actions/CatalogCommon.js'
 import { LoadByFilters } from './../../actions/NewCatalogProductList'
@@ -85,6 +86,7 @@ const CatalogLeftFilter = ({
 
     const onFilterClickHandler = (mainIndex, title) => {
         const clone = filterStatus.concat()
+        dispatch(catalogSetPage(1))
 
         setLastClick('filter')
 

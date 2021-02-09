@@ -28,26 +28,25 @@ const CatalogPagination = ({
             }
 
             setPagList(clone)
-        } else if (
-            current >= 4 &&
-            current <= amount &&
-            current !== amount - 3
-        ) {
+        } else if (current >= 4 && current <= amount && current <= amount - 2) {
+            console.log('else if')
             const clone = []
             clone.push(1)
             clone.push('...')
             clone.push(current - 1)
             clone.push(current)
-            clone.push(current + 1)
-            clone.push('...')
+            if (current + 1 !== amount) {
+                clone.push(current + 1)
+                clone.push('...')
+            }
+
             clone.push(amount)
             setPagList(clone)
-        } else if (current >= amount - 3) {
+        } else if (current >= amount - 2) {
+            console.log('current >= amount - 3')
             const clone = []
             clone.push(1)
             clone.push('...')
-            clone.push(amount - 4)
-            clone.push(amount - 3)
             clone.push(amount - 2)
             clone.push(amount - 1)
             clone.push(amount)
