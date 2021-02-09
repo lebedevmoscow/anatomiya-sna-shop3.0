@@ -9,17 +9,17 @@ const initialState = {
 }
 
 const CatalogCommonReducer = (state = initialState, action) => {
-    switch (action.payload) {
+    switch (action.type) {
+        case CATALOG_SET_FILTERS: {
+            return {
+                ...state,
+                filters: action.payload.concat(),
+            }
+        }
         case CATALOG_SET_PAGE: {
             return {
                 ...state,
                 page: action.payload,
-            }
-        }
-        case CATALOG_SET_FILTERS: {
-            return {
-                ...state,
-                filters: action.payload,
             }
         }
         default: {

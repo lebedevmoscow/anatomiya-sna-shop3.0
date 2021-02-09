@@ -64,23 +64,41 @@ const CatalogRight = ({
     )
 
     const onButtonClickHandler = () => {
+        console.log('click', lastClick)
         if (lastClick !== 'filter') {
-            dispatch(
-                LoadProductsByButtonClick(
-                    filterProductsIds,
-                    page,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax
+            if (CatalogCommonReducer.filters.length !== 0) {
+                console.log('1')
+                dispatch(
+                    LoadByFilters(
+                        filterProductsIds,
+                        page + 1,
+                        SelectedSizeReducer.selectedSizeId,
+                        catalogSlug,
+                        subCatalogSlug,
+                        oldMin,
+                        oldMax,
+                        CatalogCommonReducer.filters
+                    )
                 )
-            )
+            } else {
+                console.log('2')
+                dispatch(
+                    LoadProductsByButtonClick(
+                        filterProductsIds,
+                        page,
+                        SelectedSizeReducer.selectedSizeId,
+                        catalogSlug,
+                        subCatalogSlug,
+                        oldMin,
+                        oldMax
+                    )
+                )
+            }
         } else {
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
-                    page,
+                    page + 1,
                     SelectedSizeReducer.selectedSizeId,
                     catalogSlug,
                     subCatalogSlug,
@@ -282,6 +300,12 @@ const CatalogRight = ({
         }
     }, [NewCatalogProductListReducer.newProducts])
 
+    useEffect(() => {
+        if (lastClick === 'showMore') {
+            onButtonClickHandler()
+        }
+    }, [lastClick])
+
     return (
         <div className={styles.catalog_right}>
             <CatalogTopFilter
@@ -318,7 +342,6 @@ const CatalogRight = ({
             {page !== Math.floor(filterProductsIds.length / 21) && (
                 <div
                     onClick={() => {
-                        onButtonClickHandler()
                         setLastClick('showMore')
                     }}
                     className={styles.catalog_right__load_more_button}
