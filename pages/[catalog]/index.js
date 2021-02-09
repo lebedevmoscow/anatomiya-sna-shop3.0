@@ -277,6 +277,7 @@ const CatalogPage = ({
             )}
             {breakpoint768 && (
                 <CatalogCompositionFilter
+                    filterAPIData={filterAPIData}
                     title={'Каталог'}
                     className={compositionPresetFilterIsOpen ? '' : 'closed'}
                     onClose={() => setCompositionPresetFilterIsOpen(false)}

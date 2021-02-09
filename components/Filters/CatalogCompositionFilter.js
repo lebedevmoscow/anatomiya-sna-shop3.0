@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import styles from './../../styles/components/Filters/CatalogCompositionFilter.module.sass'
 
@@ -7,11 +7,26 @@ const CatalogCompositionFilter = ({
     onClose,
     className,
     dataList = [],
+    filterAPIData,
 }) => {
+    const properties = filterAPIData.properties.concat()
+
     const [additionalData, setAdditionalData] = useState([])
     const [additionalModalTitle, setAdditionalModalTitle] = useState(null)
 
     const onAdditionalModalClickHandler = (element) => {
+        for (let i = 0; i < properties.length; i++) {
+            if (properties[i].title === element) {
+                const arr = []
+                if (
+                    properties[i].checkboxes &&
+                    properties[i].checkboxes.length > 0
+                ) {
+                    arr.push(properties[i].checkboxes[j])
+                }
+            }
+        }
+
         switch (element) {
             case 'Размер':
                 setAdditionalData([
@@ -324,25 +339,28 @@ const CatalogCompositionFilter = ({
                         }
                     >
                         {additionalData.length === 0 &&
-                            dataList.map((element, index) => {
+                            properties.map((prop, index) => {
                                 return (
                                     <li
                                         key={index}
                                         onClick={() => {
                                             onAdditionalModalClickHandler(
-                                                element
+                                                prop.title
                                             )
                                         }}
                                     >
-                                        <span>{element}</span>
+                                        <span>{prop.title}</span>
                                         <i className={styles.arrow_right}></i>
                                     </li>
                                 )
                             })}
-                        {additionalData.length !== 0 &&
+
+                        {/* TODO */}
+
+                        {/* {additionalData.length !== 0 &&
                             additionalData.map((element, index) => {
                                 return <li key={index}>{element}</li>
-                            })}
+                            })} */}
                     </ul>
                 </div>
             </div>

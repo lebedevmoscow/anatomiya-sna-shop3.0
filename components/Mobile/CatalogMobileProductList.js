@@ -112,6 +112,88 @@ const CatalogMobileProductList = ({
         })
     }
 
+    const onGoForwardButtonClickHandler = () => {
+        setData([])
+        setList([])
+        dispatch(
+            LoadProductsByButtonClick(
+                filterProductsIds,
+                page + 1,
+                SelectedSizeReducer.selectedSizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax
+            )
+        )
+
+        setPage((prev) => {
+            dispatch(catalogSetPage(prev + 1))
+            return ++prev
+        })
+    }
+
+    const onGoBackdButtonClickHandler = () => {
+        setData([])
+        setList([])
+        dispatch(
+            LoadProductsByButtonClick(
+                filterProductsIds,
+                page - 1,
+                SelectedSizeReducer.selectedSizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax
+            )
+        )
+        setPage((prev) => {
+            dispatch(catalogSetPage(prev - 1))
+            return --prev
+        })
+    }
+
+    const onPageClickHandler = (p) => {
+        setData([])
+        setList([])
+        console.log('p', p)
+        setPage(p)
+
+        if (
+            CatalogCommonReducer.filters &&
+            CatalogCommonReducer.filters.length !== 0
+        ) {
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    p,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    CatalogCommonReducer.filters
+                )
+            )
+        } else {
+            dispatch(
+                LoadProductsByButtonClick(
+                    filterProductsIds,
+                    SelectedSizeReducer.amount ? p - 1 : p,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax
+                )
+            )
+        }
+
+        console.log('on page click handler')
+
+        dispatch(catalogSetPage(p))
+    }
+
     useEffect(() => {
         setFirstProductList(
             <CatalogProductList
@@ -250,7 +332,7 @@ const CatalogMobileProductList = ({
     }, [lastClick])
 
     return (
-        <div className={common_styles.container}>
+        <>
             {firstProductList}
             {list}
             <div
@@ -265,10 +347,18 @@ const CatalogMobileProductList = ({
             >
                 <LoadMoreButton firstText={'Показать еще'} />
             </div>
-            <div className={common_styles.mobile_catalog_pagination}>
-                <CatalogPagination />
-            </div>
-        </div>
+            {/* <div className={common_styles.mobile_catalog_pagination}>
+                <CatalogPagination
+                    onPageClickHandler={onPageClickHandler}
+                    current={page}
+                    amount={amount}
+                    onGoForwardButtonClickHandler={
+                        onGoForwardButtonClickHandler
+                    }
+                    onGoBackdButtonClickHandler={onGoBackdButtonClickHandler}
+                />
+            </div> */}
+        </>
     )
 }
 
