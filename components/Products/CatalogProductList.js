@@ -77,7 +77,6 @@ const CatalogProductListForDesktop = ({
                     length - 1 === index &&
                     (Temp % 3 === 1 || Temp % 3 === 2)
                 ) {
-                    console.log('poof')
                     EqualHeightArray.push(
                         <EqualHeight key={product.Id}>
                             {ElemenetsArray}
@@ -85,8 +84,6 @@ const CatalogProductListForDesktop = ({
                     )
                 }
             } else {
-                console.log('index', index)
-                console.log('length', length)
                 if (Temp !== 0 && Temp % 3 === 0) {
                     EqualHeightArray.push(
                         <EqualHeight key={product.Id}>

@@ -14,14 +14,25 @@ const CatalogPagination = ({
     const renderPaginationSystem = () => {
         if (current < 4) {
             const clone = []
-            for (let i = 1; i < 6; i++) {
-                clone.push(i)
+
+            if (amount < 6) {
+                for (let i = 1; i < amount + 1; i++) {
+                    clone.push(i)
+                }
+            } else {
+                for (let i = 1; i < 6; i++) {
+                    clone.push(i)
+                }
+                clone.push('...')
+                clone.push(amount)
             }
-            clone.push('...')
-            clone.push(amount)
+
             setPagList(clone)
-        }
-        if (current >= 4 && current <= amount && current !== amount - 3) {
+        } else if (
+            current >= 4 &&
+            current <= amount &&
+            current !== amount - 3
+        ) {
             const clone = []
             clone.push(1)
             clone.push('...')
@@ -31,8 +42,7 @@ const CatalogPagination = ({
             clone.push('...')
             clone.push(amount)
             setPagList(clone)
-        }
-        if (current >= amount - 3) {
+        } else if (current >= amount - 3) {
             const clone = []
             clone.push(1)
             clone.push('...')

@@ -240,6 +240,11 @@ const CatalogRight = ({
 
     useEffect(() => {
         if (SelectedSizeReducer.amount !== null) {
+            console.log(
+                'new amount',
+                Math.ceil(SelectedSizeReducer.amount / 21)
+            )
+            console.log('current', page)
             setAmount(Math.ceil(SelectedSizeReducer.amount / 21))
         }
     }, [SelectedSizeReducer.amount])
