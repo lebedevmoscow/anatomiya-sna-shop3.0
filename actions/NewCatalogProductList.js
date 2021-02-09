@@ -1,3 +1,5 @@
+import { SELECTED_SIZE_SET_AMOUNT } from './SelectedSize'
+
 export const CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING =
     'CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING'
 
@@ -69,7 +71,7 @@ export const LoadProductsByButtonClick = (
         try {
             let ids = []
             if (page > 1) {
-                for (let i = 21 * page; i < 21 * page + 21; i++) {
+                for (let i = 21 * (page - 1); i < 21 * (page - 1) + 21; i++) {
                     if (i < productsIds.length - 1) {
                         ids.push(`products[]=${productsIds[i]}&`)
                     } else {
@@ -159,6 +161,7 @@ export const LoadByFilters = (
 
         let ids = []
 
+        dispatch({ type: SELECTED_SIZE_SET_AMOUNT, payload: resIds.length })
         console.log('resIds', resIds)
 
         if (21 * (page - 1) >= resIds.length) {

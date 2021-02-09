@@ -65,7 +65,10 @@ const CatalogRight = ({
 
     const onButtonClickHandler = () => {
         if (lastClick !== 'filter') {
-            if (CatalogCommonReducer.filters.length !== 0) {
+            if (
+                CatalogCommonReducer.filters &&
+                CatalogCommonReducer.filters.length !== 0
+            ) {
                 dispatch(
                     LoadByFilters(
                         filterProductsIds,
@@ -79,10 +82,11 @@ const CatalogRight = ({
                     )
                 )
             } else {
+                console.log('PAGE PAGE PAGE', page)
                 dispatch(
                     LoadProductsByButtonClick(
                         filterProductsIds,
-                        page,
+                        page === 1 ? page + 1 : page + 2,
                         SelectedSizeReducer.selectedSizeId,
                         catalogSlug,
                         subCatalogSlug,
@@ -233,7 +237,7 @@ const CatalogRight = ({
 
     useEffect(() => {
         if (SelectedSizeReducer.amount !== null) {
-            setAmount(Math.floor(SelectedSizeReducer.amount / 21) - 1)
+            setAmount(Math.ceil(SelectedSizeReducer.amount / 21))
         }
     }, [SelectedSizeReducer.amount])
 
