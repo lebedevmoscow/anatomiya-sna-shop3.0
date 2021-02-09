@@ -3,6 +3,7 @@ import Select from 'react-select'
 import { Range, getTrackBackground } from 'react-range'
 
 import { useSelector, useDispatch } from 'react-redux'
+import { CATALOG_SET_FILTERS } from './../../actions/CatalogCommon.js'
 import { LoadByFilters } from './../../actions/NewCatalogProductList'
 
 import styles from './../../styles/components/Filters/CatalogLeftFilter.module.sass'
@@ -14,6 +15,7 @@ const CatalogLeftFilter = ({
     filterProductsIds,
     catalogSlug,
     subCatalogSlug,
+    setLastClick,
 }) => {
     const dispatch = useDispatch()
 
@@ -82,6 +84,8 @@ const CatalogLeftFilter = ({
     const onFilterClickHandler = (mainIndex, title) => {
         const clone = filterStatus.concat()
 
+        setLastClick('filter')
+
         const n = []
         for (let i = 0; i < clone.length; i++) {
             for (let j = 0; j < clone[i].inner.length; j++) {
@@ -121,6 +125,7 @@ const CatalogLeftFilter = ({
         }
         console.log('againClone', againClone)
         // console.log('clone', clone)
+        dispatch({ type: CATALOG_SET_FILTERS, payload: againClone })
         setFilterStatus(againClone)
     }
 

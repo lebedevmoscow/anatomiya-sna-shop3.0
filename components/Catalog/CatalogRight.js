@@ -24,6 +24,8 @@ import { LoadProductsByButtonClick } from './../../actions/NewCatalogProductList
 import styles from './../../styles/components/Catalog/CatalogRight.module.sass'
 
 const CatalogRight = ({
+    lastClick,
+    setLastClick,
     updateViewType,
     stylesForDesktopViewType,
     desktopViewType,
@@ -44,9 +46,13 @@ const CatalogRight = ({
         Math.floor(filterProductsIds.length / 21)
     )
     const [list, setList] = useState([])
-    const [lastClick, setLastClick] = useState('showMore')
 
     const dispatch = useDispatch()
+
+    const CatalogCommonReducer = useSelector(
+        (store) => store.CatalogCommonReducer
+    )
+
     const CatalogProductListReducer = useSelector(
         (store) => store.CatalogProductListReducer
     )
@@ -58,17 +64,32 @@ const CatalogRight = ({
     )
 
     const onButtonClickHandler = () => {
-        dispatch(
-            LoadProductsByButtonClick(
-                filterProductsIds,
-                page,
-                SelectedSizeReducer.selectedSizeId,
-                catalogSlug,
-                subCatalogSlug,
-                oldMin,
-                oldMax
+        if (lastClick !== 'filter') {
+            dispatch(
+                LoadProductsByButtonClick(
+                    filterProductsIds,
+                    page,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax
+                )
             )
-        )
+        } else {
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    page,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    CatalogCommonReducer.filters
+                )
+            )
+        }
 
         setPage((prev) => {
             dispatch(catalogSetPage(prev + 1))
@@ -221,6 +242,24 @@ const CatalogRight = ({
                 const clone = data.concat()
                 clone.push(NewCatalogProductListReducer.newProducts)
                 setData(clone)
+            } else if (lastClick === 'filter') {
+                // console.log(
+                //     'NewCatalogProductListReducer.newProducts',
+                //     NewCatalogProductListReducer.newProducts
+                // )
+                setFirstProductList(
+                    <CatalogProductListForDesktop
+                        catalogSlug={catalogSlug}
+                        desktopViewType={desktopViewType}
+                        stylesForDesktopViewType={stylesForDesktopViewType}
+                        firstLoadProducts={
+                            NewCatalogProductListReducer.newProducts
+                        }
+                        oldMin={oldMin}
+                        oldMax={oldMax}
+                        filterProductsIds={filterProductsIds}
+                    />
+                )
             } else {
                 console.log(
                     'NewCatalogProductListReducer.newProducts',

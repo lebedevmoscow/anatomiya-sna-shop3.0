@@ -138,8 +138,14 @@ export const LoadByFilters = (
             url = url + '&filter[size]=' + selectedSizeId
         }
 
-        url = url + '&filter[price][selectedMin]=' + oldMin
-        url = url + '&filter[price][selectedMax]=' + oldMax
+        url =
+            url +
+            '&filter[price][selectedMin]=' +
+            oldMin.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+        url =
+            url +
+            '&filter[price][selectedMax]=' +
+            oldMax.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
         url = url + `&filter[price][oldMin]=${oldMin}`
         url = url + `&filter[price][oldMax]=${oldMax}`
 
@@ -163,38 +169,42 @@ export const LoadByFilters = (
         const reqIds = await fetch(finalUrl)
         const resIds = await reqIds.json()
         console.log('resIds', resIds)
+        console.log('PAGE', page)
 
-        // url = url + '&filter[size]=' + selectedSizeId
+        let ids = []
 
-        // finalUrl = mainUrl + subUrl + encodeURI(url)
+        if (page !== 1) {
+            for (let i = 21 * page; i < 21 * page + 21; i++) {
+                if (i !== resIds.length - 1) {
+                    ids.push(`products[]=${resIds[i]}&`)
+                } else {
+                    break
+                }
+            }
+        } else if (page === 1) {
+            for (let i = 0; i < 21; i++) {
+                if (i !== resIds.length - 1) {
+                    ids.push(`products[]=${resIds[i]}&`)
+                } else {
+                    break
+                }
+            }
+        }
 
-        // console.log('3')
+        const productSubUrl = ids.join('')
+        console.log('productSubUrl', productSubUrl)
+        const productsURLReq = await fetch(
+            `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
+        )
+        const products = await productsURLReq.json()
 
-        // const reqIds = await fetch(finalUrl)
-        // const resIds = await reqIds.json()
+        console.log('PRODUCTS', products)
 
-        // console.log('4')
-
-        // let ids = []
-        // for (let i = 21 * page; i < 21 * page + 21; i++) {
-        //     if (i !== resIds.length - 1) {
-        //         ids.push(`products[]=${resIds[i]}&`)
-        //     } else {
-        //         ids.push(`products[]=${resIds[i]}`)
-        //     }
-        // }
-        // const productSubUrl = ids.join('')
-        // console.log('productSubUrl', productSubUrl)
-        // const productsURLReq = await fetch(
-        //     `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
-        // )
-        // const products = await productsURLReq.json()
-
-        // // const products = {}
-        // dispatch({
-        //     type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SUCCESS,
-        //     payload: products,
-        // })
+        // const products = {}
+        dispatch({
+            type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SUCCESS,
+            payload: products,
+        })
     } catch (e) {
         console.log(
             'Cannot load products on catalog page due button click. Error: ',

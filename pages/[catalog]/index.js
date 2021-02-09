@@ -76,6 +76,8 @@ const CatalogPage = ({
         setCompositionPresetFilterIsOpen,
     ] = useState(false)
 
+    const [lastClick, setLastClick] = useState(null)
+
     // Click Handlers
     const onPresetFilterClickHandler = (title, data) => {
         setPresetFilterTitle(title)
@@ -340,6 +342,8 @@ const CatalogPage = ({
                 <div className={common_styles.container}>
                     <div className={common_styles.catalog}>
                         <CatalogLeftFilter
+                            lastClick={lastClick}
+                            setLastClick={setLastClick}
                             filterAPIData={filterAPIData}
                             oldMin={filterAPIData.price.min}
                             oldMax={filterAPIData.price.max}
@@ -348,6 +352,8 @@ const CatalogPage = ({
                             subCatalogSlug={subCatalogSlug}
                         />
                         <CatalogRight
+                            lastClick={lastClick}
+                            setLastClick={setLastClick}
                             oldMin={filterAPIData.price.min}
                             oldMax={filterAPIData.price.max}
                             firstLoadProducts={products}

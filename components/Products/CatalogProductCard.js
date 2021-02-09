@@ -501,7 +501,8 @@ const CatalogProductCard = ({
 
                 <EqualHeightElement name="CatalogProductCard">
                     <div className={styles.catalog_product_card__title}>
-                        {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title}
+                        {/* {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title} */}
+                        Id: {Id}
                     </div>
                 </EqualHeightElement>
             </div>

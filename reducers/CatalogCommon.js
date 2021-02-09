@@ -1,7 +1,11 @@
-import { CATALOG_SET_PAGE } from './../actions/CatalogCommon'
+import {
+    CATALOG_SET_PAGE,
+    CATALOG_SET_FILTERS,
+} from './../actions/CatalogCommon'
 
 const initialState = {
     page: 1,
+    filters: null,
 }
 
 const CatalogCommonReducer = (state = initialState, action) => {
@@ -10,6 +14,12 @@ const CatalogCommonReducer = (state = initialState, action) => {
             return {
                 ...state,
                 page: action.payload,
+            }
+        }
+        case CATALOG_SET_FILTERS: {
+            return {
+                ...state,
+                filters: action.payload,
             }
         }
         default: {
