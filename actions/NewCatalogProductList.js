@@ -113,3 +113,93 @@ export const LoadProductsByButtonClick = (
         }
     }
 }
+
+export const LoadByFilters = (
+    productsIds,
+    page,
+    selectedSizeId = null,
+    catalogSlug,
+    subCatalogSlug,
+    oldMin,
+    oldMax,
+    filters
+) => async (dispatch) => {
+    dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING })
+
+    let finalUrl = false
+    try {
+        const mainUrl = 'https://www.anatomiyasna.ru'
+        const subUrl = !subCatalogSlug
+            ? `/api/filter/filtredProducts/?slug=${catalogSlug}`
+            : `/api/filter/filtredProducts/?slug=${catalogSlug}/${subCatalogSlug}`
+        let url = ''
+
+        if (selectedSizeId) {
+            url = url + '&filter[size]=' + selectedSizeId
+        }
+
+        url = url + '&filter[price][selectedMin]=' + oldMin
+        url = url + '&filter[price][selectedMax]=' + oldMax
+        url = url + `&filter[price][oldMin]=${oldMin}`
+        url = url + `&filter[price][oldMax]=${oldMax}`
+
+        let sub = ''
+
+        for (let i = 0; i < filters.length; i++) {
+            for (let j = 0; j < filters[i].inner.length; j++) {
+                if (filters[i].inner[j].status === 'opened') {
+                    sub += `&filter[properties][${filters[i].filter.id}][]=${filters[i].inner[j].property.value}`
+                }
+            }
+        }
+        console.log('sub', sub)
+
+        console.log('URL', mainUrl + subUrl + url + sub)
+
+        const finalUrl = mainUrl + subUrl + encodeURI(url) + encodeURI(sub)
+
+        console.log('3')
+
+        const reqIds = await fetch(finalUrl)
+        const resIds = await reqIds.json()
+        console.log('resIds', resIds)
+
+        // url = url + '&filter[size]=' + selectedSizeId
+
+        // finalUrl = mainUrl + subUrl + encodeURI(url)
+
+        // console.log('3')
+
+        // const reqIds = await fetch(finalUrl)
+        // const resIds = await reqIds.json()
+
+        // console.log('4')
+
+        // let ids = []
+        // for (let i = 21 * page; i < 21 * page + 21; i++) {
+        //     if (i !== resIds.length - 1) {
+        //         ids.push(`products[]=${resIds[i]}&`)
+        //     } else {
+        //         ids.push(`products[]=${resIds[i]}`)
+        //     }
+        // }
+        // const productSubUrl = ids.join('')
+        // console.log('productSubUrl', productSubUrl)
+        // const productsURLReq = await fetch(
+        //     `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
+        // )
+        // const products = await productsURLReq.json()
+
+        // // const products = {}
+        // dispatch({
+        //     type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SUCCESS,
+        //     payload: products,
+        // })
+    } catch (e) {
+        console.log(
+            'Cannot load products on catalog page due button click. Error: ',
+            e.message || e
+        )
+        dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_ERROR })
+    }
+}

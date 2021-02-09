@@ -7,6 +7,7 @@ import CompareProductsListReducer from './CompareProductsList'
 import SelectedSizeReducer from './SelectedSize'
 import CatalogProductListReducer from './CatalogProductList'
 import NewCatalogProductListReducer from './NewCatalogProductList'
+import CatalogCommonReducer from './CatalogCommon'
 
 // Composition of reducers
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     SelectedSizeReducer,
     CatalogProductListReducer,
     NewCatalogProductListReducer,
+    CatalogCommonReducer,
 })
 
 export default rootReducer

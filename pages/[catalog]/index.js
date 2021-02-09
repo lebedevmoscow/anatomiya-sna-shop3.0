@@ -339,7 +339,14 @@ const CatalogPage = ({
             {!IsMobile && !breakpoint1023 && (
                 <div className={common_styles.container}>
                     <div className={common_styles.catalog}>
-                        <CatalogLeftFilter filterAPIData={filterAPIData} />
+                        <CatalogLeftFilter
+                            filterAPIData={filterAPIData}
+                            oldMin={filterAPIData.price.min}
+                            oldMax={filterAPIData.price.max}
+                            filterProductsIds={filterProductsIds}
+                            catalogSlug={catalogSlug}
+                            subCatalogSlug={subCatalogSlug}
+                        />
                         <CatalogRight
                             oldMin={filterAPIData.price.min}
                             oldMax={filterAPIData.price.max}

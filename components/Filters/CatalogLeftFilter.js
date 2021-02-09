@@ -2,9 +2,29 @@ import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { Range, getTrackBackground } from 'react-range'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { LoadByFilters } from './../../actions/NewCatalogProductList'
+
 import styles from './../../styles/components/Filters/CatalogLeftFilter.module.sass'
 
-const CatalogLeftFilter = ({ filterAPIData }) => {
+const CatalogLeftFilter = ({
+    filterAPIData,
+    oldMin,
+    oldMax,
+    filterProductsIds,
+    catalogSlug,
+    subCatalogSlug,
+}) => {
+    const dispatch = useDispatch()
+
+    const SelectedSizeReducer = useSelector(
+        (store) => store.SelectedSizeReducer
+    )
+    const CatalogCommonReducer = useSelector(
+        (store) => store.CatalogCommonReducer
+    )
+
+    const [click, setClick] = useState(0)
     const options = filterAPIData.size
     const weightOptions = filterAPIData.properties[0].select
     const properties = filterAPIData.properties.concat()
@@ -39,6 +59,7 @@ const CatalogLeftFilter = ({ filterAPIData }) => {
     }
 
     const OnCloseFilterClickHandler = (title) => {
+        console.log('OnCloseFilterClickHandler')
         const clone = closeStatus.concat()
         clone.map((element) => {
             if (title === element.title) {
@@ -56,6 +77,92 @@ const CatalogLeftFilter = ({ filterAPIData }) => {
             }
         }
         return ''
+    }
+
+    const onFilterClickHandler = (mainIndex, title) => {
+        const clone = filterStatus.concat()
+
+        const n = []
+        for (let i = 0; i < clone.length; i++) {
+            for (let j = 0; j < clone[i].inner.length; j++) {
+                if (clone[i].inner[j].property.label === title) {
+                    if (clone[i].inner[j].status === 'closed') {
+                        const clone2 = clone[i].inner.concat()
+                        clone2[j].status = 'opened'
+
+                        const finalClone = {
+                            filter: clone[i].filter,
+                            inner: clone2,
+                        }
+
+                        n.push(finalClone)
+                    } else {
+                        const clone2 = clone[i].inner.concat()
+                        clone2[j].status = 'closed'
+
+                        const finalClone = {
+                            filter: clone[i].filter,
+                            inner: clone2,
+                        }
+
+                        n.push(finalClone)
+                    }
+                }
+            }
+        }
+
+        let againClone = []
+        for (let i = 0; i < clone.length; i++) {
+            if (i === mainIndex) {
+                againClone.push(...n)
+            } else {
+                againClone.push(clone[i])
+            }
+        }
+        console.log('againClone', againClone)
+        // console.log('clone', clone)
+        setFilterStatus(againClone)
+    }
+
+    const renderCheckbox = (index, checkboxes) => {
+        // console.log('checkboxes', checkboxes)
+        // console.log('render')
+        const cb = []
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].productCount !== 0) {
+                cb.push(
+                    <li
+                        onClick={() => {
+                            if (click % 2 == 0) {
+                                onFilterClickHandler(index, i)
+                            }
+                            setClick((p) => ++p)
+                        }}
+                        key={i}
+                        className={styles.catalog_left_filter__tab_options_item}
+                    >
+                        <label
+                            className={
+                                styles.catalog_left_filter__checkbox_container
+                            }
+                        >
+                            <input type="checkbox" />
+                            <span
+                                className={
+                                    styles.catalog_left_filter__checkmark
+                                }
+                            ></span>
+                            <h6>{checkboxes[i].label}</h6>
+                            <span className={styles.amount}>
+                                ({checkboxes[i].productCount})
+                            </span>
+                        </label>
+                    </li>
+                )
+            }
+        }
+        return cb
     }
 
     useEffect(() => {
@@ -88,6 +195,31 @@ const CatalogLeftFilter = ({ filterAPIData }) => {
         )
 
         const filter_status = []
+        // properties.map((prop, index) => {
+        //     let clone = []
+        //     if (prop.checkboxes && prop.checkboxes.length !== 0) {
+        //         prop.checkboxes.map((prop2, index2) => {
+        //             if (prop2.productCount !== 0) {
+        //                 clone.push({
+        //                     property: prop2,
+        //                     status: 'closed',
+        //                 })
+        //             }
+        //         })
+        //         // for (let j = 0; j < properties[index].checkboxes.length; j++) {
+        //         //     if (prop[i].checkboxes[j].productCount !== 0) {
+        //         //         clone.push({
+        //         //             property: properties[i].checkboxes[j],
+        //         //             status: 'closed',
+        //         //         })
+        //         //     }
+        //         // }
+        //     }
+
+        //     filter_status.push({ filter: properties[i], inner: clone })
+        //     clone = []
+
+        // })
         for (let i = 0; i < properties.length; i++) {
             let clone = []
             if (
@@ -112,7 +244,21 @@ const CatalogLeftFilter = ({ filterAPIData }) => {
     }, [])
 
     useEffect(() => {
-        console.log('filterStatus', filterStatus)
+        if (click > 0) {
+            console.log('here')
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    CatalogCommonReducer.page,
+                    SelectedSizeReducer.sizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    filterStatus
+                )
+            )
+        }
     }, [filterStatus])
 
     return (
@@ -247,150 +393,126 @@ const CatalogLeftFilter = ({ filterAPIData }) => {
                 </div>
             </div>
 
-            {properties.map((property, index) => {
-                return (
-                    <div
-                        key={index}
-                        className={`${
-                            styles.catalog_left_filter__tab_wrapper
-                        } ${
-                            styles.catalog_left_filter__tab_wrapper__checkboxs
-                        } ${setClass(property.title)}`}
-                    >
+            {filterStatus.length > 0 &&
+                properties.map((property, index) => {
+                    return (
                         <div
-                            className={
-                                styles.catalog_left_filter__tab_wrapper_title
-                            }
+                            key={index}
+                            className={`${styles.catalog_left_filter__tab_wrapper} ${styles.catalog_left_filter__tab_wrapper__checkboxs} ${styles.opened}`}
                         >
-                            <span className={styles.arrow}></span>
-                            <span
-                                onClick={() =>
-                                    OnCloseFilterClickHandler(property.title)
+                            <div
+                                className={
+                                    styles.catalog_left_filter__tab_wrapper_title
                                 }
-                                className={styles.text}
                             >
-                                {property.title}
-                            </span>
-                        </div>
-                        <div
-                            className={
-                                styles.catalog_left_filter__tab_wrapper_inner
-                            }
-                        >
-                            {property.select && (
-                                <Select
-                                    className="main_filter__selector"
-                                    classNamePrefix="main_filter__selector--inner"
-                                    placeholder="Все"
-                                    styles={colourStyles}
-                                    options={property.select}
-                                    isSearchable={false}
-                                    autoFocus={false}
-                                />
-                            )}
-                            {property.checkboxes &&
-                                property.checkboxes.length !== 0 && (
-                                    <ul
-                                        className={
-                                            styles.catalog_left_filter__tab_options
-                                        }
-                                    >
-                                        {property.checkboxes.map(
-                                            (checkbox, index2) => {
-                                                if (
-                                                    checkbox.productCount !== 0
-                                                ) {
-                                                    return (
-                                                        <li
-                                                            onClick={() => {
-                                                                const clone = filterStatus.concat()
-                                                                if (
-                                                                    clone[index]
-                                                                        .inner[
-                                                                        index2
-                                                                    ] ===
-                                                                    'closed'
-                                                                ) {
-                                                                    clone[
-                                                                        index
-                                                                    ].inner[
-                                                                        index2
-                                                                    ] = {
-                                                                        property:
-                                                                            properties[
-                                                                                i
-                                                                            ]
-                                                                                .checkboxes[
-                                                                                j
-                                                                            ],
-                                                                        status:
-                                                                            'opened',
+                                <span className={styles.arrow}></span>
+                                <span
+                                    onClick={() =>
+                                        OnCloseFilterClickHandler(
+                                            property.title
+                                        )
+                                    }
+                                    className={styles.text}
+                                >
+                                    {property.title}
+                                </span>
+                            </div>
+                            <div
+                                className={
+                                    styles.catalog_left_filter__tab_wrapper_inner
+                                }
+                            >
+                                {property.select && (
+                                    <Select
+                                        className="main_filter__selector"
+                                        classNamePrefix="main_filter__selector--inner"
+                                        placeholder="Все"
+                                        styles={colourStyles}
+                                        options={property.select}
+                                        isSearchable={false}
+                                        autoFocus={false}
+                                    />
+                                )}
+                                {property.checkboxes &&
+                                    property.checkboxes.length !== 0 && (
+                                        <ul
+                                            className={
+                                                styles.catalog_left_filter__tab_options
+                                            }
+                                        >
+                                            {/* {property.checkboxes &&
+                                                renderCheckbox(
+                                                    index,
+                                                    property.checkboxes
+                                                )} */}
+
+                                            {property.checkboxes.map(
+                                                (checkbox, index2) => {
+                                                    if (
+                                                        checkbox.productCount !==
+                                                        0
+                                                    ) {
+                                                        return (
+                                                            <li
+                                                                onClick={() => {
+                                                                    if (
+                                                                        click %
+                                                                            2 ==
+                                                                        0
+                                                                    ) {
+                                                                        onFilterClickHandler(
+                                                                            index,
+                                                                            checkbox.label
+                                                                        )
                                                                     }
-                                                                } else {
-                                                                    clone[
-                                                                        index
-                                                                    ].inner[
-                                                                        index2
-                                                                    ] = {
-                                                                        property:
-                                                                            properties[
-                                                                                index
-                                                                            ]
-                                                                                .checkboxes[
-                                                                                index2
-                                                                            ],
-                                                                        status:
-                                                                            'closed',
-                                                                    }
-                                                                }
-                                                                setFilterStatus(
-                                                                    clone
-                                                                )
-                                                            }}
-                                                            key={index2}
-                                                            className={
-                                                                styles.catalog_left_filter__tab_options_item
-                                                            }
-                                                        >
-                                                            <label
+                                                                    setClick(
+                                                                        (p) =>
+                                                                            ++p
+                                                                    )
+                                                                }}
+                                                                key={index2}
                                                                 className={
-                                                                    styles.catalog_left_filter__checkbox_container
+                                                                    styles.catalog_left_filter__tab_options_item
                                                                 }
                                                             >
-                                                                <input type="checkbox" />
-                                                                <span
+                                                                <label
                                                                     className={
-                                                                        styles.catalog_left_filter__checkmark
-                                                                    }
-                                                                ></span>
-                                                                <h6>
-                                                                    {
-                                                                        checkbox.label
-                                                                    }
-                                                                </h6>
-                                                                <span
-                                                                    className={
-                                                                        styles.amount
+                                                                        styles.catalog_left_filter__checkbox_container
                                                                     }
                                                                 >
-                                                                    (
-                                                                    {
-                                                                        checkbox.productCount
-                                                                    }
-                                                                    )
-                                                                </span>
-                                                            </label>
-                                                        </li>
-                                                    )
+                                                                    <input type="checkbox" />
+                                                                    <span
+                                                                        className={
+                                                                            styles.catalog_left_filter__checkmark
+                                                                        }
+                                                                    ></span>
+                                                                    <h6>
+                                                                        {checkbox.label +
+                                                                            index2}
+                                                                    </h6>
+                                                                    <span
+                                                                        className={
+                                                                            styles.amount
+                                                                        }
+                                                                    >
+                                                                        (
+                                                                        {
+                                                                            checkbox.productCount
+                                                                        }
+                                                                        )
+                                                                    </span>
+                                                                </label>
+                                                            </li>
+                                                        )
+                                                    }
                                                 }
-                                            }
-                                        )}
-                                    </ul>
-                                )}
+                                            )}
+                                        </ul>
+                                    )}
+                            </div>
                         </div>
-                    </div>
-                )
-            })}
+                    )
+                })}
 
             {colors && colors.length !== 0 && (
                 <div

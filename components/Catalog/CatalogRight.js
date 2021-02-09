@@ -10,11 +10,15 @@ import IndexPageAssurances from './../Assurances'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
+import { catalogSetPage } from './../../actions/CatalogCommon'
 import {
     CATALOG_PRODUCT_LIST_SUCCESS,
     CATALOG_PRODUCT_LIST_SET_EMPTY,
 } from './../../actions/CatalogProductList'
-import { CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY } from './../../actions/NewCatalogProductList'
+import {
+    CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY,
+    LoadByFilters,
+} from './../../actions/NewCatalogProductList'
 import { LoadProductsByButtonClick } from './../../actions/NewCatalogProductList'
 
 import styles from './../../styles/components/Catalog/CatalogRight.module.sass'
@@ -65,7 +69,11 @@ const CatalogRight = ({
                 oldMax
             )
         )
-        setPage((prev) => ++prev)
+
+        setPage((prev) => {
+            dispatch(catalogSetPage(prev + 1))
+            return ++prev
+        })
     }
 
     const onPageClickHandler = (p) => {
@@ -82,6 +90,7 @@ const CatalogRight = ({
                 oldMax
             )
         )
+        dispatch(catalogSetPage(p))
         setPage(p)
     }
 
@@ -99,7 +108,11 @@ const CatalogRight = ({
                 oldMax
             )
         )
-        setPage((prev) => ++prev)
+
+        setPage((prev) => {
+            dispatch(catalogSetPage(prev + 1))
+            return ++prev
+        })
     }
 
     const onGoBackdButtonClickHandler = () => {
@@ -116,7 +129,10 @@ const CatalogRight = ({
                 oldMax
             )
         )
-        setPage((prev) => --prev)
+        setPage((prev) => {
+            dispatch(catalogSetPage(prev - 1))
+            return --prev
+        })
     }
 
     useEffect(() => {
@@ -183,6 +199,7 @@ const CatalogRight = ({
 
     useEffect(() => {
         if (CatalogProductListReducer.emptyIndex !== 0) {
+            dispatch(catalogSetPage(1))
             setPage(1)
             setData([])
             setList([])
@@ -191,6 +208,7 @@ const CatalogRight = ({
 
     useEffect(() => {
         if (NewCatalogProductListReducer.emptyIndex !== 0) {
+            dispatch(catalogSetPage(1))
             setPage(1)
             setData([])
             setList()
