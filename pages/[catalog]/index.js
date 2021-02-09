@@ -290,7 +290,12 @@ const CatalogPage = ({
                 onClose={() => {
                     setMainMobileFilterIsOpen(false)
                 }}
+                lastClick={lastClick}
+                setLastClick={setLastClick}
                 title={'Подбор по параметрам'}
+                filterProductsIds={filterProductsIds}
+                catalogSlug={catalogSlug}
+                subCatalogSlug={subCatalogSlug}
             />
             {/* {breakpoint720 && (
                 <img className="mobile-menu__mini-banner" src={banner}></img>

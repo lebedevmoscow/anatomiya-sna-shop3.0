@@ -132,47 +132,6 @@ const CatalogLeftFilter = ({
         setFilterStatus(againClone)
     }
 
-    const renderCheckbox = (index, checkboxes) => {
-        // console.log('checkboxes', checkboxes)
-        // console.log('render')
-        const cb = []
-
-        for (let i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].productCount !== 0) {
-                cb.push(
-                    <li
-                        onClick={() => {
-                            if (click % 2 == 0) {
-                                onFilterClickHandler(index, i)
-                            }
-                            setClick((p) => ++p)
-                        }}
-                        key={i}
-                        className={styles.catalog_left_filter__tab_options_item}
-                    >
-                        <label
-                            className={
-                                styles.catalog_left_filter__checkbox_container
-                            }
-                        >
-                            <input type="checkbox" />
-                            <span
-                                className={
-                                    styles.catalog_left_filter__checkmark
-                                }
-                            ></span>
-                            <h6>{checkboxes[i].label}</h6>
-                            <span className={styles.amount}>
-                                ({checkboxes[i].productCount})
-                            </span>
-                        </label>
-                    </li>
-                )
-            }
-        }
-        return cb
-    }
-
     useEffect(() => {
         const clone = []
         properties.map((prop, index) => {
@@ -203,31 +162,7 @@ const CatalogLeftFilter = ({
         )
 
         const filter_status = []
-        // properties.map((prop, index) => {
-        //     let clone = []
-        //     if (prop.checkboxes && prop.checkboxes.length !== 0) {
-        //         prop.checkboxes.map((prop2, index2) => {
-        //             if (prop2.productCount !== 0) {
-        //                 clone.push({
-        //                     property: prop2,
-        //                     status: 'closed',
-        //                 })
-        //             }
-        //         })
-        //         // for (let j = 0; j < properties[index].checkboxes.length; j++) {
-        //         //     if (prop[i].checkboxes[j].productCount !== 0) {
-        //         //         clone.push({
-        //         //             property: properties[i].checkboxes[j],
-        //         //             status: 'closed',
-        //         //         })
-        //         //     }
-        //         // }
-        //     }
 
-        //     filter_status.push({ filter: properties[i], inner: clone })
-        //     clone = []
-
-        // })
         for (let i = 0; i < properties.length; i++) {
             let clone = []
             if (

@@ -291,8 +291,6 @@ const CatalogMobileProductList = ({
                 setFirstProductList(
                     <CatalogProductList
                         catalogSlug={catalogSlug}
-                        desktopViewType={desktopViewType}
-                        stylesForDesktopViewType={stylesForDesktopViewType}
                         firstLoadProducts={
                             NewCatalogProductListReducer.newProducts
                         }
@@ -310,8 +308,6 @@ const CatalogMobileProductList = ({
                 setFirstProductList(
                     <CatalogProductList
                         catalogSlug={catalogSlug}
-                        desktopViewType={desktopViewType}
-                        stylesForDesktopViewType={stylesForDesktopViewType}
                         firstLoadProducts={
                             NewCatalogProductListReducer.newProducts
                         }
