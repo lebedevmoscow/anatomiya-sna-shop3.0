@@ -13,16 +13,6 @@ const CatalogMainFilter = ({ className, title, onClose, filterAPIData }) => {
     const gabaritWidthRef = useRef(null)
     const gabaritLengthRef = useRef(null)
     const materialRef = useRef(null)
-    // const complectationRef = useRef(null)
-    // const decorRef = useRef(null)
-    // const styleRef = useRef(null)
-    // const colorRef = useRef(null)
-    // const typeRef = useRef(null)
-    // const headboardRef = useRef(null)
-    // const footboardRef = useRef(null)
-    // const manufacturerRef = useRef(null)
-    // const countryBrand = useRef(null)
-    // const additionalOptionsRef = useRef(null)
 
     const [prices, setPrices] = useState([5170, 89590])
     const [widths, setWidths] = useState([90, 215])
@@ -53,132 +43,8 @@ const CatalogMainFilter = ({ className, title, onClose, filterAPIData }) => {
     ]
 
     const onListItemClickHandler = (title, e) => {
-        // switch (title) {
-        //     case 'Цена (руб.)':
-        //         setTimeout(() => {
-        //             priceRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-        //         break
-
-        //     case 'Размер (см.)':
-        //         setTimeout(() => {
-        //             sizeRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-        //         break
-
-        //     case 'Габарит кровати ширина (см.)':
-        //         setTimeout(() => {
-        //             gabaritWidthRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-        //         break
-
-        //     case 'Габарит кровати длина (см.)':
-        //         setTimeout(() => {
-        //             gabaritLengthRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-        //         break
-
-        //     case 'Материал отделки':
-        //         setTimeout(() => {
-        //             materialRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-        //         break
-
-        //     case 'Комплектация':
-        //         setTimeout(() => {
-        //             complectationRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //                 block: 'start',
-        //                 inline: 'nearest',
-        //             })
-        //         }, 0)
-        //         break
-
-        //     case 'Декор':
-        //         setTimeout(() => {
-        //             decorRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-        //         break
-
-        //     case 'Стиль':
-        //         setTimeout(() => {
-        //             styleRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-        //         break
-
-        //     case 'Цвет':
-        //         setTimeout(() => {
-        //             colorRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-        //         break
-
-        //     case 'Тип':
-        //         setTimeout(() => {
-        //             typeRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-        //         break
-
-        //     case 'Изголовье':
-        //         setTimeout(() => {
-        //             headboardRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-        //         break
-
-        //     case 'Изножье':
-        //         setTimeout(() => {
-        //             footboardRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-        //         break
-
-        //     case 'Производитель':
-        //         setTimeout(() => {
-        //             manufacturerRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-
-        //     case 'Страна бренд':
-        //         setTimeout(() => {
-        //             countryBrand.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-        //         break
-
-        //     case 'Возможные опции':
-        //         setTimeout(() => {
-        //             additionalOptionsRef.current.scrollIntoView({
-        //                 behavior: 'smooth',
-        //             })
-        //         }, 0)
-        //         break
-        //     default:
-        //         break
-        // }
-
         if (title === titleOfAdditionalMenu) {
+            console.log('e.target', e.target)
             if (
                 e.target.classList.contains(styles.plus) ||
                 e.target.classList.contains(styles.text) ||
