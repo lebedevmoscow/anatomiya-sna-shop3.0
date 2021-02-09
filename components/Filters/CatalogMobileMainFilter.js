@@ -203,6 +203,25 @@ const CatalogMainFilter = ({
         setTitleOfAdditionMenu(title)
     }
 
+    const getCheckedStyle = (index, title) => {
+        if (click % 2 === 0) {
+            const clone = filterStatus.concat()
+            const obj = clone[index].inner
+
+            for (let i = 0; i < obj.length; i++) {
+                const prop = obj[i].property
+                if (prop.label === title) {
+                    if (obj[i].status === 'closed') {
+                        return false
+                    } else {
+                        return true
+                    }
+                }
+            }
+            return false
+        }
+    }
+
     return (
         <div className={styles.catalog_main_mobile_filter}>
             <div
@@ -665,7 +684,13 @@ const CatalogMainFilter = ({
                                                                             styles.catalog_left_filter__checkbox_container
                                                                         }
                                                                     >
-                                                                        <input type="checkbox" />
+                                                                        <input
+                                                                            checked={getCheckedStyle(
+                                                                                index,
+                                                                                prop2.label
+                                                                            )}
+                                                                            type="checkbox"
+                                                                        />
                                                                         <span
                                                                             className={
                                                                                 styles.catalog_left_filter__checkmark

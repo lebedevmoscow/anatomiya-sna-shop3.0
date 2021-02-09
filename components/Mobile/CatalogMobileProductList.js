@@ -88,7 +88,8 @@ const CatalogMobileProductList = ({
                         catalogSlug,
                         subCatalogSlug,
                         oldMin,
-                        oldMax
+                        oldMax,
+                        true
                     )
                 )
             }
@@ -102,7 +103,8 @@ const CatalogMobileProductList = ({
                     subCatalogSlug,
                     oldMin,
                     oldMax,
-                    CatalogCommonReducer.filters
+                    CatalogCommonReducer.filters,
+                    true
                 )
             )
         }
@@ -133,7 +135,8 @@ const CatalogMobileProductList = ({
                     subCatalogSlug,
                     oldMin,
                     oldMax,
-                    CatalogCommonReducer.filters
+                    CatalogCommonReducer.filters,
+                    true
                 )
             )
         } else {
@@ -145,7 +148,8 @@ const CatalogMobileProductList = ({
                     catalogSlug,
                     subCatalogSlug,
                     oldMin,
-                    oldMax
+                    oldMax,
+                    true
                 )
             )
         }
@@ -196,7 +200,8 @@ const CatalogMobileProductList = ({
                     subCatalogSlug,
                     oldMin,
                     oldMax,
-                    CatalogCommonReducer.filters
+                    CatalogCommonReducer.filters,
+                    true
                 )
             )
         } else {
@@ -208,7 +213,8 @@ const CatalogMobileProductList = ({
                     catalogSlug,
                     subCatalogSlug,
                     oldMin,
-                    oldMax
+                    oldMax,
+                    true
                 )
             )
         }
@@ -257,7 +263,8 @@ const CatalogMobileProductList = ({
                     subCatalogSlug,
                     oldMin,
                     oldMax,
-                    CatalogCommonReducer.filters
+                    CatalogCommonReducer.filters,
+                    true
                 )
             )
         } else {
@@ -269,7 +276,8 @@ const CatalogMobileProductList = ({
                     catalogSlug,
                     subCatalogSlug,
                     oldMin,
-                    oldMax
+                    oldMax,
+                    true
                 )
             )
         }

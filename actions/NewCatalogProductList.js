@@ -19,11 +19,14 @@ export const LoadProductsByButtonClick = (
     catalogSlug,
     subCatalogSlug,
     oldMin,
-    oldMax
+    oldMax,
+    IsMobile = false
 ) => async (dispatch) => {
     dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING })
 
     let finalUrl = false
+    const index = IsMobile ? 20 : 21
+
     if (selectedSizeId) {
         try {
             const mainUrl = 'https://www.anatomiyasna.ru'
@@ -42,7 +45,7 @@ export const LoadProductsByButtonClick = (
             const resIds = await reqIds.json()
 
             let ids = []
-            for (let i = 21 * page; i < 21 * page + 21; i++) {
+            for (let i = index * page; i < index * page + index; i++) {
                 if (i !== resIds.length - 1) {
                     ids.push(`products[]=${resIds[i]}&`)
                 } else {
@@ -71,7 +74,11 @@ export const LoadProductsByButtonClick = (
         try {
             let ids = []
             if (page > 1) {
-                for (let i = 21 * (page - 1); i < 21 * (page - 1) + 21; i++) {
+                for (
+                    let i = index * (page - 1);
+                    i < index * (page - 1) + index;
+                    i++
+                ) {
                     if (i < productsIds.length - 1) {
                         ids.push(`products[]=${productsIds[i]}&`)
                     } else {
@@ -79,7 +86,7 @@ export const LoadProductsByButtonClick = (
                     }
                 }
             } else if (page === 1) {
-                for (let i = 0; i < 21; i++) {
+                for (let i = 0; i < index; i++) {
                     if (i < productsIds.length - 1) {
                         ids.push(`products[]=${productsIds[i]}&`)
                     } else {
@@ -165,12 +172,18 @@ export const LoadByFilters = (
         dispatch({ type: SELECTED_SIZE_SET_AMOUNT, payload: resIds.length })
         console.log('resIds', resIds)
 
-        if (21 * (page - 1) >= resIds.length) {
+        const index = IsMobile ? 20 : 21
+
+        if (index * (page - 1) >= resIds.length) {
             return
         } else {
             if (page !== 1) {
                 console.log('PAGE = ', page)
-                for (let i = 21 * (page - 1); i < 21 * (page - 1) + 21; i++) {
+                for (
+                    let i = index * (page - 1);
+                    i < index * (page - 1) + index;
+                    i++
+                ) {
                     console.log('i resIds.length', i, resIds.length)
                     if (i !== resIds.length) {
                         ids.push(`products[]=${resIds[i]}&`)
@@ -181,7 +194,7 @@ export const LoadByFilters = (
                 }
             } else if (page === 1) {
                 console.log('PAGE = 1')
-                for (let i = 0; i < 21; i++) {
+                for (let i = 0; i < index; i++) {
                     if (i !== resIds.length) {
                         ids.push(`products[]=${resIds[i]}&`)
                     } else {

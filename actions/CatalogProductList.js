@@ -10,8 +10,10 @@ export const LoadProductsBySize = (
     slug,
     subCatalogSlug = null,
     oldMin,
-    oldMax
+    oldMax,
+    IsMobile = false
 ) => async (dispatch) => {
+    const index = IsMobile ? 20 : 21
     dispatch({ type: CATALOG_PRODUCT_LIST_LOADING })
 
     const mainUrl = 'https://www.anatomiyasna.ru'
@@ -34,8 +36,8 @@ export const LoadProductsBySize = (
         dispatch({ type: SELECTED_SIZE_SET_AMOUNT, payload: resIds.length })
 
         let ids = []
-        for (let i = 0; i < 21; i++) {
-            if (i !== 20) {
+        for (let i = 0; i < index; i++) {
+            if (i !== index - 1) {
                 ids.push(`products[]=${resIds[i]}&`)
             } else {
                 ids.push(`products[]=${resIds[i]}`)
