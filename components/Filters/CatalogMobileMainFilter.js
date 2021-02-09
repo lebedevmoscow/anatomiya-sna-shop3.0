@@ -171,7 +171,8 @@ const CatalogMainFilter = ({
                     subCatalogSlug,
                     oldMin,
                     oldMax,
-                    filterStatus
+                    filterStatus,
+                    true
                 )
             )
         }
