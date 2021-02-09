@@ -64,7 +64,6 @@ const CatalogRight = ({
     )
 
     const onButtonClickHandler = () => {
-        console.log('click', lastClick)
         if (lastClick !== 'filter') {
             if (CatalogCommonReducer.filters.length !== 0) {
                 dispatch(
@@ -79,9 +78,7 @@ const CatalogRight = ({
                         CatalogCommonReducer.filters
                     )
                 )
-                console.log('1')
             } else {
-                console.log('2')
                 dispatch(
                     LoadProductsByButtonClick(
                         filterProductsIds,
@@ -118,19 +115,39 @@ const CatalogRight = ({
     const onPageClickHandler = (p) => {
         setData([])
         setList([])
-        dispatch(
-            LoadProductsByButtonClick(
-                filterProductsIds,
-                SelectedSizeReducer.amount ? p - 1 : p,
-                SelectedSizeReducer.selectedSizeId,
-                catalogSlug,
-                subCatalogSlug,
-                oldMin,
-                oldMax
-            )
-        )
-        dispatch(catalogSetPage(p))
+        console.log('p', p)
         setPage(p)
+
+        if (CatalogCommonReducer.filters.length !== 0) {
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    p,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    CatalogCommonReducer.filters
+                )
+            )
+        } else {
+            dispatch(
+                LoadProductsByButtonClick(
+                    filterProductsIds,
+                    SelectedSizeReducer.amount ? p - 1 : p,
+                    SelectedSizeReducer.selectedSizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax
+                )
+            )
+        }
+
+        console.log('on page click handler')
+
+        dispatch(catalogSetPage(p))
     }
 
     const onGoForwardButtonClickHandler = () => {
@@ -301,10 +318,10 @@ const CatalogRight = ({
     }, [NewCatalogProductListReducer.newProducts])
 
     useEffect(() => {
-        console.log('lastClick', lastClick)
         if (lastClick === 'showMore') {
             onButtonClickHandler()
         }
+        // if (lastClick === '')
     }, [lastClick])
 
     return (
@@ -343,7 +360,6 @@ const CatalogRight = ({
             {page !== Math.floor(filterProductsIds.length / 21) && (
                 <div
                     onClick={() => {
-                        console.log('click suka')
                         setLastClick('showMore')
                         if (lastClick === 'showMore') {
                             onButtonClickHandler()

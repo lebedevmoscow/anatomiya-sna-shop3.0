@@ -165,6 +165,7 @@ export const LoadByFilters = (
             return
         } else {
             if (page !== 1) {
+                console.log('PAGE = ', page)
                 for (let i = 21 * (page - 1); i < 21 * (page - 1) + 21; i++) {
                     console.log('i resIds.length', i, resIds.length)
                     if (i !== resIds.length) {
@@ -175,6 +176,7 @@ export const LoadByFilters = (
                     }
                 }
             } else if (page === 1) {
+                console.log('PAGE = 1')
                 for (let i = 0; i < 21; i++) {
                     if (i !== resIds.length) {
                         ids.push(`products[]=${resIds[i]}&`)
