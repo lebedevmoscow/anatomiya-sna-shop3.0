@@ -72,7 +72,7 @@ const CatalogProductListForDesktop = ({
 
             Temp++
 
-            if (length < 21) {
+            if (length < 21 && Temp % 3 !== 0) {
                 if (
                     length - 1 === index &&
                     (Temp % 3 === 1 || Temp % 3 === 2)
@@ -97,13 +97,13 @@ const CatalogProductListForDesktop = ({
                     Temp = 0
                 }
             }
-            // if (Temp !== 0 && Temp % 3 === 0) {
-            //     EqualHeightArray.push(
-            //         <EqualHeight key={product.Id}>{ElemenetsArray}</EqualHeight>
-            //     )
-            //     ElemenetsArray = []
-            //     Temp = 0
-            // }
+            if (Temp !== 0 && Temp % 3 === 0) {
+                EqualHeightArray.push(
+                    <EqualHeight key={product.Id}>{ElemenetsArray}</EqualHeight>
+                )
+                ElemenetsArray = []
+                Temp = 0
+            }
         })
         return EqualHeightArray
     }

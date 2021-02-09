@@ -285,23 +285,22 @@ const CatalogRight = ({
                 clone.push(NewCatalogProductListReducer.newProducts)
                 setData(clone)
             } else if (lastClick === 'filter') {
-                // console.log(
-                //     'NewCatalogProductListReducer.newProducts',
-                //     NewCatalogProductListReducer.newProducts
-                // )
-                setFirstProductList(
-                    <CatalogProductListForDesktop
-                        catalogSlug={catalogSlug}
-                        desktopViewType={desktopViewType}
-                        stylesForDesktopViewType={stylesForDesktopViewType}
-                        firstLoadProducts={
-                            NewCatalogProductListReducer.newProducts
-                        }
-                        oldMin={oldMin}
-                        oldMax={oldMax}
-                        filterProductsIds={filterProductsIds}
-                    />
-                )
+                console.log('asas', NewCatalogProductListReducer.newProducts)
+                setTimeout(() => {
+                    setFirstProductList(
+                        <CatalogProductListForDesktop
+                            catalogSlug={catalogSlug}
+                            desktopViewType={desktopViewType}
+                            stylesForDesktopViewType={stylesForDesktopViewType}
+                            firstLoadProducts={
+                                NewCatalogProductListReducer.newProducts
+                            }
+                            oldMin={oldMin}
+                            oldMax={oldMax}
+                            filterProductsIds={filterProductsIds}
+                        />
+                    )
+                }, 1000)
             } else {
                 console.log(
                     'NewCatalogProductListReducer.newProducts',
