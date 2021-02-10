@@ -91,7 +91,7 @@ const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
         : styles.catalog_top_filter__popular_list_item_show_less
     return (
         <div className={styles.catalog_top_filter}>
-            <Url />
+            <Url breadcrumbs={headers.breadcrumbs} />
             <div className={styles.catalog_top_filter__title}>
                 {headers.heading}
             </div>
