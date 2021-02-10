@@ -29,7 +29,6 @@ const CatalogPagination = ({
 
             setPagList(clone)
         } else if (current >= 4 && current <= amount && current <= amount - 2) {
-            console.log('else if')
             const clone = []
             clone.push(1)
             clone.push('...')
@@ -43,7 +42,6 @@ const CatalogPagination = ({
             clone.push(amount)
             setPagList(clone)
         } else if (current >= amount - 2) {
-            console.log('current >= amount - 3')
             const clone = []
             clone.push(1)
             clone.push('...')

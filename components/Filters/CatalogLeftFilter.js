@@ -261,6 +261,21 @@ const CatalogLeftFilter = ({
                         min={filterAPIData.price.min}
                         max={filterAPIData.price.max}
                         onChange={(v) => setPrices(v)}
+                        onFinalChange={() => {
+                            dispatch(
+                                LoadByFilters(
+                                    filterProductsIds,
+                                    CatalogCommonReducer.page,
+                                    SelectedSizeReducer.sizeId,
+                                    catalogSlug,
+                                    subCatalogSlug,
+                                    oldMin,
+                                    oldMax,
+                                    filterStatus,
+                                    prices
+                                )
+                            )
+                        }}
                         renderTrack={({ props, children }) => (
                             <div
                                 onMouseDown={props.onMouseDown}

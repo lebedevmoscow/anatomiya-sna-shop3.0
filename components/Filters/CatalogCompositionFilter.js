@@ -95,7 +95,6 @@ const CatalogCompositionFilter = ({
                             })}
                         {additionalData.length !== 0 &&
                             additionalData.map((element, index) => {
-                                console.log('el', element)
                                 return (
                                     <Link
                                         key={index}

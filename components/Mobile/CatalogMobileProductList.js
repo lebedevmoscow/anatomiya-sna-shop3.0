@@ -74,7 +74,6 @@ const CatalogMobileProductList = ({
                     )
                 )
             } else {
-                console.log('PAGE PAGE PAGE', page)
                 dispatch(
                     LoadProductsByButtonClick(
                         filterProductsIds,
@@ -120,7 +119,6 @@ const CatalogMobileProductList = ({
             CatalogCommonReducer.filters &&
             CatalogCommonReducer.filters.length !== 0
         ) {
-            console.log('temp', temp)
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -148,8 +146,6 @@ const CatalogMobileProductList = ({
                 )
             )
         }
-
-        console.log('on page click handler')
 
         dispatch(catalogSetPage(temp))
 
@@ -185,7 +181,6 @@ const CatalogMobileProductList = ({
             CatalogCommonReducer.filters &&
             CatalogCommonReducer.filters.length !== 0
         ) {
-            console.log('temp', temp)
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -214,8 +209,6 @@ const CatalogMobileProductList = ({
             )
         }
 
-        console.log('on page click handler')
-
         dispatch(catalogSetPage(temp))
 
         // setData([])
@@ -242,7 +235,6 @@ const CatalogMobileProductList = ({
     const onPageClickHandler = (p) => {
         setData([])
         setList([])
-        console.log('p', p)
         setPage(p)
 
         if (
@@ -276,8 +268,6 @@ const CatalogMobileProductList = ({
                 )
             )
         }
-
-        console.log('on page click handler')
 
         dispatch(catalogSetPage(p))
     }
@@ -332,17 +322,11 @@ const CatalogMobileProductList = ({
 
     useEffect(() => {
         if (SelectedSizeReducer.amount !== null) {
-            console.log(
-                'new amount',
-                Math.ceil(SelectedSizeReducer.amount / 21)
-            )
-            console.log('current', page)
             setAmount(Math.ceil(SelectedSizeReducer.amount / 21))
         }
     }, [SelectedSizeReducer.amount])
 
     useEffect(() => {
-        console.log('useEffect2')
         if (CatalogProductListReducer.products.length !== 0) {
             setFirstProductList(
                 <CatalogProductList
@@ -381,7 +365,6 @@ const CatalogMobileProductList = ({
                 clone.push(NewCatalogProductListReducer.newProducts)
                 setData(clone)
             } else if (lastClick === 'filter') {
-                console.log('asas', NewCatalogProductListReducer.newProducts)
                 // setTimeout(() => {
                 setFirstProductList(
                     <CatalogProductList
@@ -396,10 +379,6 @@ const CatalogMobileProductList = ({
                 )
                 // }, 1000)
             } else {
-                console.log(
-                    'NewCatalogProductListReducer.newProducts',
-                    NewCatalogProductListReducer.newProducts
-                )
                 setFirstProductList(
                     <CatalogProductList
                         catalogSlug={catalogSlug}
@@ -427,7 +406,6 @@ const CatalogMobileProductList = ({
             {list}
             <div
                 onClick={() => {
-                    console.log('button click')
                     setLastClick('showMore')
                     if (lastClick === 'showMore') {
                         onButtonClickHandler()

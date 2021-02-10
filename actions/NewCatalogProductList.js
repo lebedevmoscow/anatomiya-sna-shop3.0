@@ -142,36 +142,29 @@ export const LoadByFilters = (
             url = url + '&filter[size]=' + selectedSizeId
         }
 
-        // if (price) {
-        //     url +
-        //         '&filter[price][selectedMin]=' +
-        //         price[0]
-        //             .toString()
-        //             .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
-        //     url +
-        //         '&filter[price][selectedMax]=' +
-        //         price[1]
-        //             .toString()
-        //             .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
-        // } else {
-        //     url =
-        //         url +
-        //         '&filter[price][selectedMin]=' +
-        //         oldMin.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
-        //     url =
-        //         url +
-        //         '&filter[price][selectedMax]=' +
-        //         oldMax.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
-        // }
-
-        url =
-            url +
-            '&filter[price][selectedMin]=' +
-            oldMin.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
-        url =
-            url +
-            '&filter[price][selectedMax]=' +
-            oldMax.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+        if (price) {
+            url =
+                url +
+                '&filter[price][selectedMin]=' +
+                price[0]
+                    .toString()
+                    .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+            url =
+                url +
+                '&filter[price][selectedMax]=' +
+                price[1]
+                    .toString()
+                    .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+        } else {
+            url =
+                url +
+                '&filter[price][selectedMin]=' +
+                oldMin.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+            url =
+                url +
+                '&filter[price][selectedMax]=' +
+                oldMax.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+        }
 
         url = url + `&filter[price][oldMin]=${oldMin}`
         url = url + `&filter[price][oldMax]=${oldMax}`
@@ -188,13 +181,14 @@ export const LoadByFilters = (
 
         const finalUrl = mainUrl + subUrl + encodeURI(url) + encodeURI(sub)
 
+        console.log('final', finalUrl)
+
         const reqIds = await fetch(finalUrl)
         const resIds = await reqIds.json()
 
         let ids = []
 
         dispatch({ type: SELECTED_SIZE_SET_AMOUNT, payload: resIds.length })
-        console.log('resIds', resIds)
 
         const index = IsMobile ? 20 : 21
 
@@ -202,22 +196,18 @@ export const LoadByFilters = (
             return
         } else {
             if (page !== 1) {
-                console.log('PAGE = ', page)
                 for (
                     let i = index * (page - 1);
                     i < index * (page - 1) + index;
                     i++
                 ) {
-                    console.log('i resIds.length', i, resIds.length)
                     if (i !== resIds.length) {
                         ids.push(`products[]=${resIds[i]}&`)
                     } else {
-                        console.log('breaking')
                         break
                     }
                 }
             } else if (page === 1) {
-                console.log('PAGE = 1')
                 for (let i = 0; i < index; i++) {
                     if (i !== resIds.length) {
                         ids.push(`products[]=${resIds[i]}&`)

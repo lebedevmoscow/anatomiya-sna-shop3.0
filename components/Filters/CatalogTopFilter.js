@@ -84,7 +84,6 @@ const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
         const arr = []
         for (let i = 0; i < 6; i++) {
             if (i < headers.popularLinks.length) {
-                console.log('headers.popularLinks[i]', headers.popularLinks[i])
                 arr.push({
                     title: headers.popularLinks[i].title,
                     link: headers.popularLinks[i].link,

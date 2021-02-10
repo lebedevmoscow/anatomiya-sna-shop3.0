@@ -81,7 +81,6 @@ const CatalogRight = ({
                     )
                 )
             } else {
-                console.log('PAGE PAGE PAGE', page)
                 dispatch(
                     LoadProductsByButtonClick(
                         filterProductsIds,
@@ -118,7 +117,6 @@ const CatalogRight = ({
     const onPageClickHandler = (p) => {
         setData([])
         setList([])
-        console.log('p', p)
         setPage(p)
 
         if (
@@ -151,8 +149,6 @@ const CatalogRight = ({
             )
         }
 
-        console.log('on page click handler')
-
         dispatch(catalogSetPage(p))
     }
 
@@ -166,7 +162,6 @@ const CatalogRight = ({
             CatalogCommonReducer.filters &&
             CatalogCommonReducer.filters.length !== 0
         ) {
-            console.log('temp', temp)
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -192,8 +187,6 @@ const CatalogRight = ({
                 )
             )
         }
-
-        console.log('on page click handler')
 
         dispatch(catalogSetPage(temp))
 
@@ -229,7 +222,6 @@ const CatalogRight = ({
             CatalogCommonReducer.filters &&
             CatalogCommonReducer.filters.length !== 0
         ) {
-            console.log('temp', temp)
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -255,8 +247,6 @@ const CatalogRight = ({
                 )
             )
         }
-
-        console.log('on page click handler')
 
         dispatch(catalogSetPage(temp))
 
@@ -331,11 +321,6 @@ const CatalogRight = ({
 
     useEffect(() => {
         if (SelectedSizeReducer.amount !== null) {
-            console.log(
-                'new amount',
-                Math.ceil(SelectedSizeReducer.amount / 21)
-            )
-            console.log('current', page)
             setAmount(Math.ceil(SelectedSizeReducer.amount / 21))
         }
     }, [SelectedSizeReducer.amount])
@@ -375,17 +360,12 @@ const CatalogRight = ({
     }, [NewCatalogProductListReducer.emptyIndex])
 
     useEffect(() => {
-        console.log(
-            'NewCatalogProductListReducer.newProducts',
-            NewCatalogProductListReducer.newProducts
-        )
         if (NewCatalogProductListReducer.newProducts.length !== 0) {
             if (lastClick === 'showMore') {
                 const clone = data.concat()
                 clone.push(NewCatalogProductListReducer.newProducts)
                 setData(clone)
             } else if (lastClick === 'filter') {
-                console.log('asas', NewCatalogProductListReducer.newProducts)
                 // setTimeout(() => {
                 setFirstProductList(
                     <CatalogProductListForDesktop
@@ -402,10 +382,6 @@ const CatalogRight = ({
                 )
                 // }, 1000)
             } else {
-                console.log(
-                    'NewCatalogProductListReducer.newProducts',
-                    NewCatalogProductListReducer.newProducts
-                )
                 setFirstProductList(
                     <CatalogProductListForDesktop
                         catalogSlug={catalogSlug}
@@ -429,8 +405,6 @@ const CatalogRight = ({
         }
         // if (lastClick === '')
     }, [lastClick])
-
-    console.log('SelectedSizeReducer.amount', SelectedSizeReducer.amount)
 
     return (
         <div className={styles.catalog_right}>

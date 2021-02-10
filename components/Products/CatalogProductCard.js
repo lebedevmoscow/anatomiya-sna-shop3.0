@@ -292,8 +292,6 @@ const CatalogProductCard = ({
             />
         )
 
-        console.log('SizeID', SizeID)
-
         dispatch({ type: CATALOG_PRODUCT_LIST_SET_EMPTY })
         dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY })
         dispatch(SelectSize(data.value, data.label, SizeID))

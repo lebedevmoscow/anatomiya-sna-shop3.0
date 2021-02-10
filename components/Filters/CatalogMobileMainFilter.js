@@ -101,7 +101,6 @@ const CatalogMainFilter = ({
                 againClone.push(clone[i])
             }
         }
-        console.log('clone', clone)
         // dispatch({ type: CATALOG_SET_FILTERS, payload: againClone })
 
         dispatch(catalogSetFilters(againClone))
@@ -189,7 +188,6 @@ const CatalogMainFilter = ({
 
     const onListItemClickHandler = (title, e) => {
         if (title === titleOfAdditionalMenu) {
-            console.log('e.target', e.target)
             if (
                 e.target.classList.contains(styles.plus) ||
                 e.target.classList.contains(styles.text) ||
