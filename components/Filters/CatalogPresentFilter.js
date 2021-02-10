@@ -1,6 +1,8 @@
+import Link from 'next/link'
 import styles from './../../styles/components/Filters/CatalogPresentFilter.module.sass'
 
 const CatalogPresetFilter = ({ onClose, className, title, dataList = [] }) => {
+    console.log('dataList', dataList)
     return (
         <div
             className={`${styles.mobile_burger_menu_city_choise} mobile_burger_menu_city_choise__${className}`}
@@ -16,7 +18,13 @@ const CatalogPresetFilter = ({ onClose, className, title, dataList = [] }) => {
                     }
                 >
                     {dataList.map((element) => {
-                        return <li>{element}</li>
+                        return (
+                            <Link href={'http://localhost:3000' + element.url}>
+                                <a>
+                                    <li>{element.title}</li>
+                                </a>
+                            </Link>
+                        )
                     })}
                 </ul>
             </div>
