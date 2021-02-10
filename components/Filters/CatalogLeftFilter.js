@@ -199,7 +199,8 @@ const CatalogLeftFilter = ({
                     subCatalogSlug,
                     oldMin,
                     oldMax,
-                    filterStatus
+                    filterStatus,
+                    prices
                 )
             )
         }

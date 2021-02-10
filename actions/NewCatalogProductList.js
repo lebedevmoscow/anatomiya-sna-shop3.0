@@ -125,6 +125,7 @@ export const LoadByFilters = (
     oldMin,
     oldMax,
     filters,
+    price,
     IsMobile = false
 ) => async (dispatch) => {
     // dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING })
@@ -141,6 +142,28 @@ export const LoadByFilters = (
             url = url + '&filter[size]=' + selectedSizeId
         }
 
+        // if (price) {
+        //     url +
+        //         '&filter[price][selectedMin]=' +
+        //         price[0]
+        //             .toString()
+        //             .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+        //     url +
+        //         '&filter[price][selectedMax]=' +
+        //         price[1]
+        //             .toString()
+        //             .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+        // } else {
+        //     url =
+        //         url +
+        //         '&filter[price][selectedMin]=' +
+        //         oldMin.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+        //     url =
+        //         url +
+        //         '&filter[price][selectedMax]=' +
+        //         oldMax.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+        // }
+
         url =
             url +
             '&filter[price][selectedMin]=' +
@@ -149,6 +172,7 @@ export const LoadByFilters = (
             url +
             '&filter[price][selectedMax]=' +
             oldMax.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+
         url = url + `&filter[price][oldMin]=${oldMin}`
         url = url + `&filter[price][oldMax]=${oldMax}`
 

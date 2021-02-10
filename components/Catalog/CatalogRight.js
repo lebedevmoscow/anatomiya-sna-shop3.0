@@ -430,6 +430,8 @@ const CatalogRight = ({
         // if (lastClick === '')
     }, [lastClick])
 
+    console.log('SelectedSizeReducer.amount', SelectedSizeReducer.amount)
+
     return (
         <div className={styles.catalog_right}>
             <CatalogTopFilter
@@ -439,7 +441,7 @@ const CatalogRight = ({
             />
             {firstProductList}
             {list}
-            {page !== Math.floor(filterProductsIds.length / 21) && (
+            {page !== Math.ceil(filterProductsIds.length / 21) && (
                 <div
                     onClick={() => {
                         setLastClick('showMore')
