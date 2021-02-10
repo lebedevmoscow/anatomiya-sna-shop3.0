@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 import Url from './../../components/URLComponent'
 
@@ -23,54 +23,31 @@ const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
         'Новинка',
     ])
 
-    const [popularList, setPopularList] = useState([
-        'Двуспальные',
-        'Недорого',
-        'Трансформер',
-        'Подъемные',
-        'С матрасом',
-        'Односпальные',
-    ])
+    const [popularList, setPopularList] = useState([])
 
     const onShowMoreClickHandler = (title) => {
         if (title === 'popular' && !isPopularShowMore) {
             const clone = popularList.concat()
-            const n = [
-                'С ящиками',
-                'Изголовье кровати',
-                'Двухъярусные',
-                'Аскона',
-                'Мягкие',
-                'Белые',
-                '140x200',
-                '160x200',
-                '200x200',
-                'Из дерева',
-                'Большие',
-                'Распродажа',
-                'Железные',
-                'Тахта',
-                'Малогаборитные',
-                'Круглые',
-                'Угловые',
-                'Орматек',
-                'На заказ',
-                '90x200',
-            ]
+
+            const n = []
+            for (let i = 6; i < headers.popularLinks.length; i++) {
+                if (i < headers.popularLinks.length) {
+                    n.push(headers.popularLinks[i].title)
+                }
+            }
+
             const result = [...clone, ...n]
             setIsPopularShowMore((p) => !p)
             setPopularList(result)
         }
 
         if (title === 'popular' && isPopularShowMore) {
-            const n = [
-                'Двуспальные',
-                'Недорого',
-                'Трансформер',
-                'Подъемные',
-                'С матрасом',
-                'Односпальные',
-            ]
+            const n = []
+            for (let i = 0; i < 6; i++) {
+                if (i < headers.popularLinks.length) {
+                    n.push(headers.popularLinks[i].title)
+                }
+            }
             setIsPopularShowMore((p) => !p)
             setPopularList(n)
         }
@@ -95,6 +72,17 @@ const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
             setSortByList(n)
         }
     }
+
+    useEffect(() => {
+        const arr = []
+        for (let i = 0; i < 6; i++) {
+            console.log('headers.popularLinks[i].title', headers.popularLinks)
+            if (i < headers.popularLinks.length) {
+                arr.push(headers.popularLinks[i].title)
+            }
+        }
+        setPopularList(arr)
+    }, [])
 
     const onSortByClickHandler = (e) => {}
 
@@ -175,10 +163,10 @@ const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
                             }
                         >
                             <span className={styles.wrapper}>
-                                {isPopularShowMore && (
+                                {isSortByShowMore && (
                                     <span className={styles.cross}></span>
                                 )}
-                                {!isPopularShowMore && (
+                                {!isSortByShowMore && (
                                     <span className={styles.arrow}></span>
                                 )}
                             </span>
