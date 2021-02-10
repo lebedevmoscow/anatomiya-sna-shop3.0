@@ -44,6 +44,7 @@ const CatalogPage = ({
     products,
     IsMobile,
     filterProductsIds,
+    headers,
 }) => {
     // Vars
     const initialCompositionFilterData = [
@@ -384,6 +385,7 @@ const CatalogPage = ({
                             subCatalogSlug={subCatalogSlug}
                         />
                         <CatalogRight
+                            headers={headers}
                             lastClick={lastClick}
                             setLastClick={setLastClick}
                             oldMin={filterAPIData.price.min}
@@ -419,6 +421,7 @@ export const getServerSideProps = async (ctx) => {
         'https://www.anatomiyasna.ru/api/parameters/all/',
         `https://www.anatomiyasna.ru/api/filter/filterModel/?slug=${ctx.params.catalog}`,
         `https://anatomiyasna.ru/api/filter/filtredProducts/?slug=${ctx.params.catalog}`,
+        `https://anatomiyasna.ru/api/pageData/getPageData/?slug=${ctx.params.catalog}`,
     ]
 
     const regex = /Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/
@@ -452,6 +455,7 @@ export const getServerSideProps = async (ctx) => {
     const headerCatalog = response[4]
     const filterAPIData = response[6]
     const filterProductsIds = response[7]
+    const headers = response[8]
 
     // const filterAPIData = response[0]
     // const filterProductsIds = response[1]
@@ -478,6 +482,7 @@ export const getServerSideProps = async (ctx) => {
 
     return {
         props: {
+            headers,
             mobilemenuCatalogs,
             mobileMenu,
             regions,

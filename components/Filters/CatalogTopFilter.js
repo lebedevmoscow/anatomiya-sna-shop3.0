@@ -4,7 +4,7 @@ import Url from './../../components/URLComponent'
 
 import styles from './../../styles/components/Filters/CatalogTopFilter.module.sass'
 
-const CatalogTopFilter = ({ updateViewType, desktopViewType }) => {
+const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
     const barFirstRef = useRef(null)
     const barSecondRef = useRef(null)
 
@@ -104,7 +104,9 @@ const CatalogTopFilter = ({ updateViewType, desktopViewType }) => {
     return (
         <div className={styles.catalog_top_filter}>
             <Url />
-            <div className={styles.catalog_top_filter__title}>Кровати</div>
+            <div className={styles.catalog_top_filter__title}>
+                {headers.heading}
+            </div>
             <div className={styles.catalog_top_filter__list_wrapper}>
                 <div className={styles.catalog_top_filter__before_list}>
                     Популярное:

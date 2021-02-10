@@ -35,9 +35,8 @@ const CatalogRight = ({
     oldMin,
     oldMax,
     filterProductsIds,
+    headers,
 }) => {
-    const [productList, setProductList] = useState(firstLoadProducts)
-
     const [firstProductList, setFirstProductList] = useState([])
 
     const [data, setData] = useState([])
@@ -283,18 +282,22 @@ const CatalogRight = ({
     }
 
     useEffect(() => {
+        setAmount(Math.floor(filterProductsIds.length / 21))
+    }, [filterProductsIds])
+
+    useEffect(() => {
         setFirstProductList(
             <CatalogProductListForDesktop
                 catalogSlug={catalogSlug}
                 desktopViewType={desktopViewType}
                 stylesForDesktopViewType={stylesForDesktopViewType}
-                firstLoadProducts={productList}
+                firstLoadProducts={firstLoadProducts}
                 oldMin={oldMin}
                 oldMax={oldMax}
                 filterProductsIds={filterProductsIds}
             />
         )
-    }, [])
+    }, [firstLoadProducts, filterProductsIds])
 
     useEffect(() => {
         dispatch({
@@ -426,34 +429,10 @@ const CatalogRight = ({
     return (
         <div className={styles.catalog_right}>
             <CatalogTopFilter
+                headers={headers}
                 updateViewType={updateViewType}
                 desktopViewType={desktopViewType}
             />
-            {/* <CatalogProductListForDesktop
-                catalogSlug={catalogSlug}
-                desktopViewType={desktopViewType}
-                stylesForDesktopViewType={stylesForDesktopViewType}
-                firstLoadProducts={productList}
-                oldMin={oldMin}
-                oldMax={oldMax}
-                filterProductsIds={filterProductsIds}
-            />
-            {data.map((d, index) => {
-                console.log('d', d)
-                return (
-                    <CatalogProductListForDesktop
-                        key={index}
-                        catalogSlug={catalogSlug}
-                        desktopViewType={desktopViewType}
-                        stylesForDesktopViewType={stylesForDesktopViewType}
-                        firstLoadProducts={d}
-                        oldMin={oldMin}
-                        oldMax={oldMax}
-                        filterProductsIds={filterProductsIds}
-                        newProducts={true}
-                    />
-                )
-            })} */}
             {firstProductList}
             {list}
             {page !== Math.floor(filterProductsIds.length / 21) && (
