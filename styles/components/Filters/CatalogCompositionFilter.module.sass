@@ -14,31 +14,20 @@
 
     .mobile_burger_menu_city_choise__moscow_list
         margin-left: 10px
-
+        padding-bottom: 10px
         li
+            padding: 14px 0
+            color: #fff
             font-size: 15px
             position: relative
-            margin-top: 30px
-            .arrow_right
-                position: absolute
-                right: 15px
-                border: solid #ffffff
-                border-width: 0 2px 2px 0
-                display: inline-block
-                padding: 3px
-                transform: rotate(-45deg)
-
-            &:first-child
-                margin-top: 15px
             &::after
                 content: ''
                 position: absolute
-                top: calc(100% + 15px)
-                left: 0
                 width: 100%
                 height: 1px
-                background-color: #fff
-                opacity: 0.5
+                background-color: rgba(255, 255, 255, 0.5)
+                left: 0
+                bottom: 0
 
 .mobile_burger_menu_city_choise__closed
     opacity: 0
@@ -75,6 +64,7 @@
         margin-left: 10px
         padding-bottom: 10px
         li
+            color: #fff
             font-size: 15px
 
     .mobile_burger_menu_city_choise__labels

@@ -278,6 +278,7 @@ const CatalogPage = ({
             )}
             {breakpoint768 && (
                 <CatalogCompositionFilter
+                    headers={headers}
                     filterAPIData={filterAPIData}
                     title={'Каталог'}
                     className={compositionPresetFilterIsOpen ? '' : 'closed'}
