@@ -31,6 +31,7 @@ const CatalogMobileProductList = ({
     newProducts,
     lastClick,
     setLastClick,
+    headers,
 }) => {
     const oldMin = filterAPIData.price.min
     const oldMax = filterAPIData.price.max
@@ -56,7 +57,7 @@ const CatalogMobileProductList = ({
     const [page, setPage] = useState(1)
     const [list, setList] = useState([])
     const [amount, setAmount] = useState(
-        Math.floor(filterProductsIds.length / 21)
+        Math.ceil(filterProductsIds.length / 21)
     )
 
     const onButtonClickHandler = () => {
@@ -301,7 +302,11 @@ const CatalogMobileProductList = ({
                 newProducts={newProducts}
             />
         )
-    }, [])
+    }, [firstLoadProducts, filterProductsIds])
+
+    useEffect(() => {
+        setAmount(Math.ceil(filterProductsIds.length / 21))
+    }, [filterProductsIds])
 
     useEffect(() => {
         dispatch({

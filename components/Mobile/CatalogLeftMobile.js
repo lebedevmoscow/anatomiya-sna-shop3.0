@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import URL from './../../components/URLComponent'
+import Link from 'next/link'
 
 import styles from './../../styles/components/Mobile/CatalogLeftMobile.module.sass'
 
@@ -9,6 +10,7 @@ const CatalogLeftMobile = ({
     onMainFilterClick,
     updateViewType,
     viewType,
+    headers,
 }) => {
     return (
         <div className={styles.catalog_left_mobile}>
@@ -39,6 +41,7 @@ const CatalogLeftMobile = ({
                             <span></span>
                         </div>
                     </SwiperSlide>
+
                     <SwiperSlide>
                         <div
                             onClick={() =>
@@ -425,7 +428,6 @@ const CatalogLeftMobile = ({
                     resistance={true}
                     resistanceRatio={0}
                     slidesPerView={'auto'}
-                    // slidesPerView={4}
                     spaceBetween={5}
                     autoHeight={false}
                 >
@@ -438,240 +440,42 @@ const CatalogLeftMobile = ({
                             Популярное:
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Двуспальные
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Недорого
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Трансформер
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Подъемные
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Односпальные
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            С ящиками
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Двуспальные
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Изголовье кровати
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Двухярусные
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Аскона
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Мягкие
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Белые
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            140х200
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            160х200
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            200х200
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Из дерева
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Большие
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Распродажа
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Железные
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Тахта
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Малогабаритные
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Круглые
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Угловые
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            Орматек
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            На заказ
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <div
-                            className={
-                                styles.catalog_left_mobile__popular_filters_list_item
-                            }
-                        >
-                            90х200
-                        </div>
-                    </SwiperSlide>
+                    {headers.popularLinks.length > 0 &&
+                        headers.popularLinks.map((link, index) => {
+                            return (
+                                <SwiperSlide key={index}>
+                                    <Link href={link.link}>
+                                        <a>
+                                            <div
+                                                className={
+                                                    styles.catalog_left_mobile__popular_filters_list_item
+                                                }
+                                            >
+                                                {link.title}
+                                            </div>
+                                        </a>
+                                    </Link>
+                                </SwiperSlide>
+                            )
+                        })}
+                    {headers.childes.length > 0 &&
+                        headers.childes.map((link, index) => {
+                            return (
+                                <SwiperSlide key={index}>
+                                    <Link href={link.link}>
+                                        <a>
+                                            <div
+                                                className={
+                                                    styles.catalog_left_mobile__popular_filters_list_item
+                                                }
+                                            >
+                                                {link.title}
+                                            </div>
+                                        </a>
+                                    </Link>
+                                </SwiperSlide>
+                            )
+                        })}
                 </Swiper>
 
                 <Swiper
@@ -769,53 +573,10 @@ const CatalogLeftMobile = ({
                                 className={
                                     styles.catalog_left_mobile__view_type_block__by_one_card
                                 }
-                            >
-                                {/* <div className="first-line">
-                                    <span className="square"></span>
-                                    <span className="square"></span>
-                                </div>
-                                <div className="second-line">
-                                    <span className="square"></span>
-                                    <span className="square"></span>
-                                </div> */}
-                            </div>
+                            ></div>
                         </div>
                     </SwiperSlide>
                 </Swiper>
-
-                {/* <div className="catalog_left_mobile__main-filters">
-                    <div
-                        onClick={onMainFilterClick}
-                        className="catalog_left_mobile__main-filter"
-                    >
-                        <div className="filter-mobile-btn__icon">
-                            <span className="filter-mobile-btn__icon-1"></span>
-                            <span className="filter-mobile-btn__icon-2"></span>
-                            <span className="filter-mobile-btn__icon-3"></span>
-                        </div>
-                        <div className="filter-mobile-text">Фильтр</div>
-                        <div className="filter-mobile-count">1</div>
-                    </div>
-                    <div className="catalog_left_mobile__price-order">
-                        По возрастанию цены
-                    </div>
-                    <div className="catalog_left_mobile__view-type-block">
-                        <div className="catalog_left_mobile__view-type-block--by-two-card">
-                            <span className="big-square"></span>
-                            <span className="line"></span>
-                        </div>
-                        <div className="catalog_left_mobile__view-type-block--by-one-card">
-                            <div className="first-line">
-                                <span className="square"></span>
-                                <span className="square"></span>
-                            </div>
-                            <div className="second-line">
-                                <span className="square"></span>
-                                <span className="square"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
             </div>
         </div>
     )

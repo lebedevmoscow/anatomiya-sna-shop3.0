@@ -304,6 +304,7 @@ const CatalogPage = ({
             {IsMobile && breakpoint1023 && (
                 <div className={common_styles.container}>
                     <CatalogLeftMobile
+                        headers={headers}
                         onCompositionClick={
                             onCloseCompositionFilterClickHandler
                         }

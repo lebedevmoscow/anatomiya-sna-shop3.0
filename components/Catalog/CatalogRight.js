@@ -42,7 +42,7 @@ const CatalogRight = ({
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
     const [amount, setAmount] = useState(
-        Math.floor(filterProductsIds.length / 21)
+        Math.ceil(filterProductsIds.length / 21)
     )
     const [list, setList] = useState([])
 
@@ -282,7 +282,7 @@ const CatalogRight = ({
     }
 
     useEffect(() => {
-        setAmount(Math.floor(filterProductsIds.length / 21))
+        setAmount(Math.ceil(filterProductsIds.length / 21))
     }, [filterProductsIds])
 
     useEffect(() => {
