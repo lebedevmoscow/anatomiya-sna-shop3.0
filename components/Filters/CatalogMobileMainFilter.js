@@ -50,7 +50,10 @@ const CatalogMainFilter = ({
     const gabaritLengthRef = useRef(null)
     const materialRef = useRef(null)
 
-    const [prices, setPrices] = useState([5170, 89590])
+    const [prices, setPrices] = useState([
+        filterAPIData.price.min,
+        filterAPIData.price.max,
+    ])
     const [widths, setWidths] = useState([90, 215])
     const [lengths, setLengths] = useState([200, 248])
     const [sizeSelector, setSizeSelector] = useState(null)
@@ -171,20 +174,14 @@ const CatalogMainFilter = ({
                     oldMin,
                     oldMax,
                     filterStatus,
+                    prices,
                     true
                 )
             )
         }
     }, [filterStatus])
 
-    const options = [
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-    ]
+    const options = filterAPIData.size
 
     const onListItemClickHandler = (title, e) => {
         if (title === titleOfAdditionalMenu) {
@@ -294,10 +291,25 @@ const CatalogMainFilter = ({
                                     <Range
                                         draggableTrack
                                         values={prices}
-                                        step={1000}
-                                        min={5170}
-                                        max={89590}
+                                        step={500}
+                                        min={filterAPIData.price.min}
+                                        max={filterAPIData.price.max}
                                         onChange={(v) => setPrices(v)}
+                                        onFinalChange={() => {
+                                            dispatch(
+                                                LoadByFilters(
+                                                    filterProductsIds,
+                                                    CatalogCommonReducer.page,
+                                                    SelectedSizeReducer.sizeId,
+                                                    catalogSlug,
+                                                    subCatalogSlug,
+                                                    oldMin,
+                                                    oldMax,
+                                                    filterStatus,
+                                                    prices
+                                                )
+                                            )
+                                        }}
                                         renderTrack={({ props, children }) => (
                                             <div
                                                 onMouseDown={props.onMouseDown}
@@ -308,27 +320,38 @@ const CatalogMainFilter = ({
                                                     ...props.style,
                                                     height: '36px',
                                                     display: 'flex',
-                                                    width: '100%',
+                                                    width: '97%',
+                                                    height: '4px',
+                                                    margin: '24px auto 0 auto',
+                                                    paddingBottom: '6px',
                                                 }}
                                             >
                                                 <div
                                                     ref={props.ref}
                                                     style={{
                                                         height: '5px',
-                                                        width: '100%',
+                                                        width: '97%',
                                                         borderRadius: '4px',
+                                                        height: '4px',
                                                         background: getTrackBackground(
                                                             {
                                                                 values: prices,
                                                                 colors: [
                                                                     '#ccc',
-                                                                    '#548BF4',
+                                                                    '#30ACD7',
                                                                     '#ccc',
                                                                 ],
-                                                                min: 5170,
-                                                                max: 89590,
+                                                                min:
+                                                                    filterAPIData
+                                                                        .price
+                                                                        .min,
+                                                                max:
+                                                                    filterAPIData
+                                                                        .price
+                                                                        .max,
                                                             }
                                                         ),
+                                                        margin: '0 auto',
                                                         alignSelf: 'center',
                                                     }}
                                                 >
@@ -369,7 +392,7 @@ const CatalogMainFilter = ({
                                 </div>
                                 <div className={styles.wrap2}>
                                     <span className={styles.yellow}>
-                                        90*200
+                                        {options[0].label}
                                     </span>
                                     <span className={styles.plus}>+</span>
                                 </div>
@@ -377,241 +400,6 @@ const CatalogMainFilter = ({
                             {titleOfAdditionalMenu === 'Размер (см.)' && (
                                 <div className={styles.selector_block}>
                                     {sizeSelector}
-                                </div>
-                            )}
-                        </li>
-                        <li
-                            className={styles.selector_block}
-                            onClick={(e) =>
-                                onListItemClickHandler(
-                                    'Габарит кровати ширина (см.)',
-                                    e
-                                )
-                            }
-                        >
-                            <div
-                                ref={gabaritWidthRef}
-                                className={styles.wrapper}
-                            >
-                                <div className={styles.wrap1}>
-                                    <span className={styles.text}>
-                                        Габарит кровати ширина (см.)
-                                    </span>
-                                </div>
-                                <div className={styles.wrap2}>
-                                    <span className={styles.yellow}>
-                                        от 90 до 215
-                                    </span>
-                                    <span className={styles.plus}>+</span>
-                                </div>
-                            </div>
-                            {titleOfAdditionalMenu ===
-                                'Габарит кровати ширина (см.)' && (
-                                <div className={styles.range_block}>
-                                    <div
-                                        className={
-                                            styles.catalog_left_filter__input_wrapper
-                                        }
-                                    >
-                                        <input
-                                            className={`${styles.catalog_left_filter__input} ${styles.catalog_left_filter__input__first}`}
-                                            placeholder={widths[0]
-                                                .toString()
-                                                .replace(
-                                                    /\B(?=(\d{3})+(?!\d))/g,
-                                                    ' '
-                                                )}
-                                        ></input>
-                                        <input
-                                            className={`${styles.catalog_left_filter__input} ${styles.catalog_left_filter__input__first}`}
-                                            placeholder={widths[1]
-                                                .toString()
-                                                .replace(
-                                                    /\B(?=(\d{3})+(?!\d))/g,
-                                                    ' '
-                                                )}
-                                        ></input>
-                                    </div>
-
-                                    <Range
-                                        draggableTrack
-                                        values={widths}
-                                        step={1}
-                                        min={90}
-                                        max={215}
-                                        onChange={(w) => setWidths(w)}
-                                        renderTrack={({ props, children }) => (
-                                            <div
-                                                onMouseDown={props.onMouseDown}
-                                                onTouchStart={
-                                                    props.onTouchStart
-                                                }
-                                                style={{
-                                                    ...props.style,
-                                                    height: '36px',
-                                                    display: 'flex',
-                                                    width: '100%',
-                                                }}
-                                            >
-                                                <div
-                                                    ref={props.ref}
-                                                    style={{
-                                                        height: '5px',
-                                                        width: '100%',
-                                                        borderRadius: '4px',
-                                                        background: getTrackBackground(
-                                                            {
-                                                                values: widths,
-                                                                colors: [
-                                                                    '#ccc',
-                                                                    '#548BF4',
-                                                                    '#ccc',
-                                                                ],
-                                                                min: 90,
-                                                                max: 215,
-                                                            }
-                                                        ),
-                                                        alignSelf: 'center',
-                                                    }}
-                                                >
-                                                    {children}
-                                                </div>
-                                            </div>
-                                        )}
-                                        renderThumb={({ props, isDragged }) => (
-                                            <div
-                                                {...props}
-                                                style={{
-                                                    ...props.style,
-                                                    outline: 'none',
-                                                    cursor: 'pointer',
-                                                    height: '20px',
-                                                    width: '12px',
-                                                    border: '1px solid #FFDB4D',
-                                                    borderRadius: '30%',
-                                                    backgroundColor: '#FFDB4D',
-                                                }}
-                                            ></div>
-                                        )}
-                                    />
-                                </div>
-                            )}
-                        </li>
-
-                        <li
-                            className={styles.li}
-                            onClick={(e) =>
-                                onListItemClickHandler(
-                                    'Габарит кровати длина (см.)',
-                                    e
-                                )
-                            }
-                        >
-                            <div
-                                ref={gabaritLengthRef}
-                                className={styles.wrapper}
-                            >
-                                <div className={styles.wrap1}>
-                                    <span className={styles.text}>
-                                        Габарит кровати длина (см.)
-                                    </span>
-                                </div>
-                                <div className={styles.wrap2}>
-                                    <span className={styles.yellow}>
-                                        от 200 до 248
-                                    </span>
-                                    <span className={styles.plus}>+</span>
-                                </div>
-                            </div>
-                            {titleOfAdditionalMenu ===
-                                'Габарит кровати длина (см.)' && (
-                                <div className={styles.range_block}>
-                                    <div
-                                        className={
-                                            styles.catalog_left_filter__input_wrapper
-                                        }
-                                    >
-                                        <input
-                                            className={`${styles.catalog_left_filter__input} ${styles.catalog_left_filter__input__first}`}
-                                            placeholder={lengths[0]
-                                                .toString()
-                                                .replace(
-                                                    /\B(?=(\d{3})+(?!\d))/g,
-                                                    ' '
-                                                )}
-                                        ></input>
-                                        <input
-                                            className={`${styles.catalog_left_filter__input} ${styles.catalog_left_filter__input__first}`}
-                                            placeholder={lengths[1]
-                                                .toString()
-                                                .replace(
-                                                    /\B(?=(\d{3})+(?!\d))/g,
-                                                    ' '
-                                                )}
-                                        ></input>
-                                    </div>
-
-                                    <Range
-                                        draggableTrack
-                                        values={lengths}
-                                        step={1}
-                                        min={200}
-                                        max={248}
-                                        onChange={(l) => setLengths(l)}
-                                        renderTrack={({ props, children }) => (
-                                            <div
-                                                onMouseDown={props.onMouseDown}
-                                                onTouchStart={
-                                                    props.onTouchStart
-                                                }
-                                                style={{
-                                                    ...props.style,
-                                                    height: '36px',
-                                                    display: 'flex',
-                                                    width: '100%',
-                                                }}
-                                            >
-                                                <div
-                                                    ref={props.ref}
-                                                    style={{
-                                                        height: '5px',
-                                                        width: '100%',
-                                                        borderRadius: '4px',
-                                                        background: getTrackBackground(
-                                                            {
-                                                                values: lengths,
-                                                                colors: [
-                                                                    '#ccc',
-                                                                    '#548BF4',
-                                                                    '#ccc',
-                                                                ],
-                                                                min: 200,
-                                                                max: 248,
-                                                            }
-                                                        ),
-                                                        alignSelf: 'center',
-                                                    }}
-                                                >
-                                                    {children}
-                                                </div>
-                                            </div>
-                                        )}
-                                        renderThumb={({ props, isDragged }) => (
-                                            <div
-                                                {...props}
-                                                style={{
-                                                    ...props.style,
-                                                    outline: 'none',
-                                                    cursor: 'pointer',
-                                                    height: '20px',
-                                                    width: '12px',
-                                                    border: '1px solid #FFDB4D',
-                                                    borderRadius: '30%',
-                                                    backgroundColor: '#FFDB4D',
-                                                }}
-                                            ></div>
-                                        )}
-                                    />
                                 </div>
                             )}
                         </li>
