@@ -17,7 +17,9 @@ const CatalogLeftMobile = ({
             <div className={styles.catalog_left_mobile__url}>
                 <URL />
             </div>
-            <div className={styles.catalog_left_mobile__title}>Кровати</div>
+            <div className={styles.catalog_left_mobile__title}>
+                {headers.heading}
+            </div>
             <div className={styles.catalog_left_mobile__filters}>
                 <Swiper
                     className={

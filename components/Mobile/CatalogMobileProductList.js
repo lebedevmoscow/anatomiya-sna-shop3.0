@@ -8,15 +8,9 @@ import CatalogPagination from './../Pagination/CatalogPagination'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 
-import {
-    CATALOG_PRODUCT_LIST_SUCCESS,
-    CATALOG_PRODUCT_LIST_SET_EMPTY,
-} from './../../actions/CatalogProductList'
+import { CATALOG_PRODUCT_LIST_SUCCESS } from './../../actions/CatalogProductList'
 
-import {
-    CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY,
-    LoadByFilters,
-} from './../../actions/NewCatalogProductList'
+import { LoadByFilters } from './../../actions/NewCatalogProductList'
 import { catalogSetPage } from './../../actions/CatalogCommon'
 import { LoadProductsByButtonClick } from './../../actions/NewCatalogProductList'
 
@@ -57,7 +51,7 @@ const CatalogMobileProductList = ({
     const [page, setPage] = useState(1)
     const [list, setList] = useState([])
     const [amount, setAmount] = useState(
-        Math.ceil(filterProductsIds.length / 21)
+        Math.ceil(filterProductsIds.length / 20)
     )
 
     const onButtonClickHandler = () => {
@@ -305,7 +299,7 @@ const CatalogMobileProductList = ({
     }, [firstLoadProducts, filterProductsIds])
 
     useEffect(() => {
-        setAmount(Math.ceil(filterProductsIds.length / 21))
+        setAmount(Math.ceil(filterProductsIds.length / 20))
     }, [filterProductsIds])
 
     useEffect(() => {
@@ -443,7 +437,7 @@ const CatalogMobileProductList = ({
             >
                 <LoadMoreButton firstText={'Показать еще'} />
             </div>
-            {/* <div className={common_styles.mobile_catalog_pagination}>
+            <div className={common_styles.mobile_catalog_pagination}>
                 <CatalogPagination
                     onPageClickHandler={onPageClickHandler}
                     current={page}
@@ -453,7 +447,7 @@ const CatalogMobileProductList = ({
                     }
                     onGoBackdButtonClickHandler={onGoBackdButtonClickHandler}
                 />
-            </div> */}
+            </div>
         </>
     )
 }
