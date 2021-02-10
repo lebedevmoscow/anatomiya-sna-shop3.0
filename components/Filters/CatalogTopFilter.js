@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import Link from 'next/link'
 
 import Url from './../../components/URLComponent'
 
@@ -32,7 +33,10 @@ const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
             const n = []
             for (let i = 6; i < headers.popularLinks.length; i++) {
                 if (i < headers.popularLinks.length) {
-                    n.push(headers.popularLinks[i].title)
+                    n.push({
+                        title: headers.popularLinks[i].title,
+                        link: headers.popularLinks[i].link,
+                    })
                 }
             }
 
@@ -45,7 +49,10 @@ const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
             const n = []
             for (let i = 0; i < 6; i++) {
                 if (i < headers.popularLinks.length) {
-                    n.push(headers.popularLinks[i].title)
+                    n.push({
+                        title: headers.popularLinks[i].title,
+                        link: headers.popularLinks[i].link,
+                    })
                 }
             }
             setIsPopularShowMore((p) => !p)
@@ -76,9 +83,12 @@ const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
     useEffect(() => {
         const arr = []
         for (let i = 0; i < 6; i++) {
-            console.log('headers.popularLinks[i].title', headers.popularLinks)
             if (i < headers.popularLinks.length) {
-                arr.push(headers.popularLinks[i].title)
+                console.log('headers.popularLinks[i]', headers.popularLinks[i])
+                arr.push({
+                    title: headers.popularLinks[i].title,
+                    link: headers.popularLinks[i].link,
+                })
             }
         }
         setPopularList(arr)
@@ -102,14 +112,16 @@ const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
                 <ul className={styles.catalog_top_filter__popular_list}>
                     {popularList.map((element, index) => {
                         return (
-                            <li
-                                key={index}
-                                className={
-                                    styles.catalog_top_filter__popular_list_item
-                                }
-                            >
-                                <a href="#">{element}</a>
-                            </li>
+                            <Link href={'http://localhost:3000' + element.link}>
+                                <li
+                                    key={index}
+                                    className={
+                                        styles.catalog_top_filter__popular_list_item
+                                    }
+                                >
+                                    <a href="#">{element.title}</a>
+                                </li>
+                            </Link>
                         )
                     })}
                     <li
