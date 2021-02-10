@@ -375,6 +375,10 @@ const CatalogRight = ({
     }, [NewCatalogProductListReducer.emptyIndex])
 
     useEffect(() => {
+        console.log(
+            'NewCatalogProductListReducer.newProducts',
+            NewCatalogProductListReducer.newProducts
+        )
         if (NewCatalogProductListReducer.newProducts.length !== 0) {
             if (lastClick === 'showMore') {
                 const clone = data.concat()

@@ -68,6 +68,7 @@ const CatalogProductCard = ({
     stylesForDesktopViewType,
     viewType,
     desktopViewType,
+    ListSalesList,
 }) => {
     const breakpoint769 = useMedia(769)
 
@@ -450,7 +451,7 @@ const CatalogProductCard = ({
             style={viewTypeStyles.catalog_product_card}
             className={styles.catalog_product_card}
         >
-            {/* <PopupsOnProductCard key={uuidv4()} ListSalesList={ListSalesList} /> */}
+            <PopupsOnProductCard key={uuidv4()} ListSalesList={ListSalesList} />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {breakpoint769 && (
                     <div
