@@ -89,14 +89,14 @@ const PopupsOnProductCard = ({ ListSalesList, SalePercent, IsMobile }) => {
                               opacity: '1',
                               display: 'block',
                               position: 'absolute',
-                              right: '-30px',
+                              right: !IsMobile ? '-30px' : 'auto',
                           }
                         : {
                               marginBottom: '5px',
                               opacity: '0',
                               display: 'none',
                               position: 'absolute',
-                              right: '-30px',
+                              right: !IsMobile ? '-30px' : '0px',
                           }
                 }
                 className={`${popups_styles.product_card__popup} ${popups_styles.product_card__popup_load_more}`}
