@@ -434,8 +434,6 @@ const CatalogProductCard = ({
 
     // Variables for render
 
-    console.log('InitialSize', InitialSize)
-
     const Price =
         InitialSize.length !== 0
             ? InitialSize[0].PriceDiscount.toString().replace(
@@ -458,8 +456,6 @@ const CatalogProductCard = ({
             : Prices[0].PriceBasic
 
     const PriceDiff = PriceOld - PriceRaw
-
-    console.log('PriceDiff', PriceDiff)
 
     const DeliveryObject =
         InitialSize.length !== 0 ? InitialSize[0].Delivery : Prices[0].Delivery

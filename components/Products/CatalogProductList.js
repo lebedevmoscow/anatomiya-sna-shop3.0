@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // Utils functions
 import { GetPopupsList } from './../../utils/GetPopupsList'
+import { GetOptionsList } from './../../utils/GetOptionsList'
 
 import styles from './../../styles/components/Products/CatalogProductList.module.sass'
 
@@ -58,6 +59,12 @@ const CatalogProductListForDesktop = ({
                     InitialSize.push(product.Prices[i])
                 }
             }
+
+            const OptionsList = GetOptionsList(
+                product.Prices[0].OptionIds,
+                firstLoadProducts.Options
+            )
+            console.log('OptionsList', OptionsList)
 
             ElemenetsArray.push(
                 <CatalogProductCard
