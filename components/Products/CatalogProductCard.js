@@ -70,8 +70,6 @@ const CatalogProductCard = ({
     desktopViewType,
     ListSalesList,
 }) => {
-    console.log('title', BrandTitle, SeriesTitle, Title, Prices, InitialSize)
-
     const breakpoint769 = useMedia(769)
 
     const [viewTypeStyles, setViewTypeStyles] = useState({

@@ -1,11 +1,33 @@
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { LoadByFilters } from './../../actions/NewCatalogProductList'
+
 import Url from './../../components/URLComponent'
 
 import styles from './../../styles/components/Filters/CatalogTopFilter.module.sass'
 
-const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
+const CatalogTopFilter = ({
+    updateViewType,
+    desktopViewType,
+    headers,
+    filterProductsIds,
+    catalogSlug,
+    subCatalogSlug,
+    oldMin,
+    oldMax,
+}) => {
+    const SelectedSizeReducer = useSelector(
+        (store) => store.SelectedSizeReducer
+    )
+    const CatalogCommonReducer = useSelector(
+        (store) => store.CatalogCommonReducer
+    )
+
+    const dispatch = useDispatch()
+
     const barFirstRef = useRef(null)
     const barSecondRef = useRef(null)
 
@@ -15,7 +37,16 @@ const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
 
     const [isPopularShowMore, setIsPopularShowMore] = useState(false)
     const [isSortByShowMore, setIsSortByShowMore] = useState(false)
+    const [sortType, setSortType] = useState([
+        { title: 'Популярности', isActive: false, sort: null },
+        { title: 'Цене', isActive: true, sort: 'down-to-up' },
+        { title: 'Дате доставки', isActive: false, sort: null },
+        { title: 'Скидка', isActive: false, sort: null },
+        { title: 'Новинка', isActive: false, sort: null },
+        { title: 'Подарок', isActive: false, sort: null },
+    ])
 
+    const [clicks, setClicks] = useState(0)
     const [sortByList, setSortByList] = useState([
         'Популярности',
         'Цене',
@@ -93,7 +124,43 @@ const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
         setPopularList(arr)
     }, [])
 
-    const onSortByClickHandler = (e) => {}
+    useEffect(() => {
+        if (clicks > 0) {
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    CatalogCommonReducer.page,
+                    SelectedSizeReducer.sizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    CatalogCommonReducer.filters,
+                    null,
+                    null,
+                    sortType
+                )
+            )
+        }
+    }, [sortType])
+
+    const onSortByClickHandler = (title) => {
+        const clone = sortType.concat()
+        for (let i = 0; i < clone.length; i++) {
+            if (title === 'Цене') {
+                if (clone[i].sort === 'up-to-down') {
+                    clone[i].sort = 'down-to-up'
+                } else if (clone[i].sort === 'down-to-up') {
+                    clone[i].sort = 'up-to-down'
+                }
+            } else {
+                if (clone[i].title === title && title !== 'Цене') {
+                    clone[i].isActive = !clone[i].isActive
+                }
+            }
+        }
+        setSortType(clone)
+    }
 
     const showmoreClassname = isPopularShowMore
         ? styles.catalog_top_filter__popular_list_item_show_more
@@ -154,12 +221,15 @@ const CatalogTopFilter = ({ updateViewType, desktopViewType, headers }) => {
                             return (
                                 <li
                                     key={index}
-                                    onClick={onSortByClickHandler}
+                                    onClick={() => {
+                                        onSortByClickHandler(element)
+                                        setClicks((p) => ++p)
+                                    }}
                                     className={
                                         styles.catalog_top_filter__sortby_list_item
                                     }
                                 >
-                                    <a href="#">{element}</a>
+                                    {element}
                                 </li>
                             )
                         })}

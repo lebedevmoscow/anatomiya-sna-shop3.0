@@ -320,7 +320,6 @@ const CatalogPage = ({
             )}
             {IsMobile && breakpoint1023 && products && (
                 <div className={common_styles.container}>
-                    {console.log('products', products)}
                     <CatalogMobileProductList
                         catalogSlug={catalogSlug}
                         subCatalogSlug={subCatalogSlug}

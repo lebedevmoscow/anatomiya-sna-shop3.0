@@ -70,6 +70,9 @@ const CatalogMobileProductList = ({
                         oldMin,
                         oldMax,
                         CatalogCommonReducer.filters,
+                        null,
+                        null,
+                        null,
                         true
                     )
                 )
@@ -98,6 +101,9 @@ const CatalogMobileProductList = ({
                     oldMin,
                     oldMax,
                     CatalogCommonReducer.filters,
+                    null,
+                    null,
+                    null,
                     true
                 )
             )
@@ -129,6 +135,9 @@ const CatalogMobileProductList = ({
                     oldMin,
                     oldMax,
                     CatalogCommonReducer.filters,
+                    null,
+                    null,
+                    null,
                     true
                 )
             )
@@ -191,6 +200,9 @@ const CatalogMobileProductList = ({
                     oldMin,
                     oldMax,
                     CatalogCommonReducer.filters,
+                    null,
+                    null,
+                    null,
                     true
                 )
             )
@@ -251,6 +263,9 @@ const CatalogMobileProductList = ({
                     oldMin,
                     oldMax,
                     CatalogCommonReducer.filters,
+                    null,
+                    null,
+                    null,
                     true
                 )
             )

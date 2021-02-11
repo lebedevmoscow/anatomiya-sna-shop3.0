@@ -127,9 +127,12 @@ export const LoadByFilters = (
     filters,
     price = null,
     size,
+    sortType,
     IsMobile = false
 ) => async (dispatch) => {
     // dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING })
+
+    console.log('sortType', sortType)
 
     let finalUrl = false
     try {
@@ -171,15 +174,71 @@ export const LoadByFilters = (
                 oldMax.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
         }
 
+        if (sortType) {
+            for (let i = 0; i < sortType.length; i++) {
+                if (
+                    sortType[i].title === 'Цене' ||
+                    sortType[i].title === 'Популярности'
+                ) {
+                    if (
+                        sortType[i].title === 'Цене' &&
+                        sortType[i].sort &&
+                        sortType[i].sort === 'up-to-down'
+                    ) {
+                        url = url + '&filter[sorting]=price_up'
+                    } else if (
+                        sortType[i].title === 'Цене' &&
+                        sortType[i].sort &&
+                        sortType[i].sort === 'down-to-up'
+                    ) {
+                        url = url + '&filter[sorting]=price_down'
+                    } else if (
+                        sortType[i].title === 'Популярности' &&
+                        sortType[i].isActive === true
+                    ) {
+                        url = url + '&filter[sorting]=popular'
+                    }
+                } else {
+                    if (
+                        sortType[i].title === 'Дате доставки' &&
+                        sortType[i].isActive
+                    ) {
+                        url = url + `&filter[selectedFlags][]=deliverySorting`
+                    }
+                    if (
+                        sortType[i].title === 'Скидка' &&
+                        sortType[i].isActive
+                    ) {
+                        console.log('Скидка')
+                        url = url + `&filter[selectedFlags][]=discount`
+                    }
+                    if (
+                        sortType[i].title === 'Новинка' &&
+                        sortType[i].isActive
+                    ) {
+                        url = url + `&filter[selectedFlags][]=newest`
+                    }
+                    if (
+                        sortType[i].title === 'Бесплатная доставка' &&
+                        sortType[i].isActive
+                    ) {
+                        url = url + `&filter[selectedFlags][]=free_delivery`
+                    }
+                }
+            }
+        }
+
         url = url + `&filter[price][oldMin]=${oldMin}`
         url = url + `&filter[price][oldMax]=${oldMax}`
 
         let sub = ''
 
-        for (let i = 0; i < filters.length; i++) {
-            for (let j = 0; j < filters[i].inner.length; j++) {
-                if (filters[i].inner[j].status === 'opened') {
-                    sub += `&filter[properties][${filters[i].filter.id}][]=${filters[i].inner[j].property.value}`
+        if (filters) {
+            for (let i = 0; i < filters.length; i++) {
+                for (let j = 0; j < filters[i].inner.length; j++) {
+                    if (filters[i].inner[j].status === 'opened') {
+                        sub += `&filter[properties][${filters[i].filter.id}][]=${filters[i].inner[j].property.value}`
+                    }
                 }
             }
         }

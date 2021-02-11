@@ -175,6 +175,8 @@ const CatalogMainFilter = ({
                     oldMax,
                     filterStatus,
                     prices,
+                    null,
+                    null,
                     true
                 )
             )

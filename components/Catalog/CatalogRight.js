@@ -409,9 +409,14 @@ const CatalogRight = ({
     return (
         <div className={styles.catalog_right}>
             <CatalogTopFilter
+                catalogSlug={catalogSlug}
+                subCatalogSlug={subCatalogSlug}
+                oldMin={oldMin}
+                oldMax={oldMax}
                 headers={headers}
                 updateViewType={updateViewType}
                 desktopViewType={desktopViewType}
+                filterProductsIds={filterProductsIds}
             />
             {firstProductList}
             {list}

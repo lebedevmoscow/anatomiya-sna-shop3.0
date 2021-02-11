@@ -17,8 +17,6 @@ const PopupOnProductCard = ({ ListSaleItem, index, isSale }) => {
         }
     }, [Close])
 
-    console.log('isSale', ListSaleItem)
-
     if (isSale) {
         return (
             <li
