@@ -39,11 +39,11 @@ const CatalogTopFilter = ({
     const [isSortByShowMore, setIsSortByShowMore] = useState(false)
     const [sortType, setSortType] = useState([
         { title: 'Популярности', isActive: false, sort: null },
-        { title: 'Цене', isActive: true, sort: 'down-to-up' },
+        { title: 'Цене', isActive: true, sort: 'up-to-down' },
         { title: 'Дате доставки', isActive: false, sort: null },
         { title: 'Скидка', isActive: false, sort: null },
         { title: 'Новинка', isActive: false, sort: null },
-        { title: 'Подарок', isActive: false, sort: null },
+        { title: 'Бесплатная доставка', isActive: false, sort: null },
     ])
 
     const [clicks, setClicks] = useState(0)
@@ -141,6 +141,7 @@ const CatalogTopFilter = ({
                     sortType
                 )
             )
+            console.log('sortType', sortType)
         }
     }, [sortType])
 
@@ -148,13 +149,30 @@ const CatalogTopFilter = ({
         const clone = sortType.concat()
         for (let i = 0; i < clone.length; i++) {
             if (title === 'Цене') {
+                for (let j = 0; j < clone.length; j++) {
+                    if (clone[j].title === 'Популярности') {
+                        clone[j].isActive = false
+                    }
+                }
+                clone[i].isActive = true
                 if (clone[i].sort === 'up-to-down') {
                     clone[i].sort = 'down-to-up'
                 } else if (clone[i].sort === 'down-to-up') {
                     clone[i].sort = 'up-to-down'
                 }
+            } else if (title === 'Популярности') {
+                clone[i].isActive = !clone[i].isActive
+                for (let j = 0; j < clone.length; j++) {
+                    if (clone[j].title === 'Цене') {
+                        clone[j].isActive = false
+                    }
+                }
             } else {
-                if (clone[i].title === title && title !== 'Цене') {
+                if (
+                    clone[i].title === title &&
+                    title !== 'Цене' &&
+                    title !== 'Популярности'
+                ) {
                     clone[i].isActive = !clone[i].isActive
                 }
             }
@@ -218,6 +236,21 @@ const CatalogTopFilter = ({
                     </div>
                     <ul className={styles.catalog_top_filter__sortby_list}>
                         {sortByList.map((element, index) => {
+                            let additionalClassName = ''
+                            if (
+                                (element === 'Популярности' ||
+                                    element === 'Цене') &&
+                                sortType[index].isActive
+                            ) {
+                                additionalClassName = styles.red_border
+                            } else if (
+                                (element !== 'Популярности' ||
+                                    element !== 'Цене') &&
+                                sortType[index].isActive
+                            ) {
+                                additionalClassName = styles.blue_border
+                            }
+
                             return (
                                 <li
                                     key={index}
@@ -226,7 +259,9 @@ const CatalogTopFilter = ({
                                         setClicks((p) => ++p)
                                     }}
                                     className={
-                                        styles.catalog_top_filter__sortby_list_item
+                                        styles.catalog_top_filter__sortby_list_item +
+                                        ' ' +
+                                        additionalClassName
                                     }
                                 >
                                     {element}
