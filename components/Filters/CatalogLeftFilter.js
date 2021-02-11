@@ -32,7 +32,6 @@ const CatalogLeftFilter = ({
 
     const [click, setClick] = useState(0)
     const options = filterAPIData.size
-    const weightOptions = filterAPIData.properties[0].select
     const properties = filterAPIData.properties.concat()
     const colors = filterAPIData.colors
     const [filterStatus, setFilterStatus] = useState([])
@@ -43,6 +42,8 @@ const CatalogLeftFilter = ({
     ])
     const [sizeSelector, setSizeSelector] = useState(null)
     const [closeStatus, setCloseStatus] = useState([])
+
+    const [selectedSize, setSelectedSize] = useState(null)
 
     const colourStyles = {
         control: (styles) => ({ ...styles, backgroundColor: 'white' }),
@@ -156,6 +157,9 @@ const CatalogLeftFilter = ({
                 className="main_filter__selector"
                 classNamePrefix="main_filter__selector--inner"
                 placeholder="Все"
+                onChange={(data) => {
+                    setSelectedSize({ label: data.label, value: data.value })
+                }}
                 styles={colourStyles}
                 options={options}
                 isSearchable={false}
@@ -187,6 +191,25 @@ const CatalogLeftFilter = ({
 
         return () => setSizeSelector(null)
     }, [])
+
+    useEffect(() => {
+        if (selectedSize) {
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    CatalogCommonReducer.page,
+                    SelectedSizeReducer.sizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    filterStatus,
+                    prices,
+                    selectedSize
+                )
+            )
+        }
+    }, [selectedSize])
 
     useEffect(() => {
         if (click > 0) {

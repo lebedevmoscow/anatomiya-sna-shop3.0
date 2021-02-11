@@ -64,7 +64,6 @@ const CatalogProductListForDesktop = ({
                 product.Prices[0].OptionIds,
                 firstLoadProducts.Options
             )
-            console.log('OptionsList', OptionsList)
 
             ElemenetsArray.push(
                 <CatalogProductCard

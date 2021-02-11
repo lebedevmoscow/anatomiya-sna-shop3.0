@@ -125,7 +125,8 @@ export const LoadByFilters = (
     oldMin,
     oldMax,
     filters,
-    price,
+    price = null,
+    size,
     IsMobile = false
 ) => async (dispatch) => {
     // dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING })
@@ -138,8 +139,12 @@ export const LoadByFilters = (
             : `/api/filter/filtredProducts/?slug=${catalogSlug}/${subCatalogSlug}`
         let url = ''
 
-        if (selectedSizeId) {
-            url = url + '&filter[size]=' + selectedSizeId
+        if (selectedSizeId || size) {
+            if (selectedSizeId) {
+                url = url + '&filter[size]=' + selectedSizeId
+            } else if (size) {
+                url = url + '&filter[size]=' + size.value
+            }
         }
 
         if (price) {
