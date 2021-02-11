@@ -447,6 +447,11 @@ const CatalogProductCard = ({
                   ' '
               )
 
+    const PriceRaw =
+        InitialSize.length !== 0
+            ? InitialSize[0].PriceDiscount
+            : Prices[0].PriceDiscount
+
     return (
         <div
             style={viewTypeStyles.catalog_product_card}
@@ -530,7 +535,7 @@ const CatalogProductCard = ({
                                 styles.catalog_product_card__price_credit
                             }
                         >
-                            В рассрочку от 862 руб/мес
+                            В рассрочку от {Math.ceil(PriceRaw / 6)} руб/мес
                         </div>
                     </div>
                     <div
