@@ -452,6 +452,25 @@ const CatalogProductCard = ({
             ? InitialSize[0].PriceDiscount
             : Prices[0].PriceDiscount
 
+    const DeliveryObject =
+        InitialSize.length !== 0 ? InitialSize[0].Delivery : Prices[0].Delivery
+
+    const DeliveryPrice =
+        DeliveryObject && DeliveryObject.Price
+            ? parseInt(DeliveryObject.Price, 10) + ' руб.'
+            : 'бесплатно'
+
+    let DeliveryDate
+    if (DeliveryObject.Days === 0) {
+        DeliveryDate = 'сегодня'
+    } else if (DeliveryObject.Days === 1) {
+        DeliveryDate = 'завтра'
+    } else if (DeliveryObject.Days > 1 && DeliveryObject.Days < 62) {
+        DeliveryDate = DeliveryObject.Date
+    } else {
+        DeliveryDate = 'на заказ'
+    }
+
     return (
         <div
             style={viewTypeStyles.catalog_product_card}
@@ -682,11 +701,13 @@ const CatalogProductCard = ({
                         >
                             <span className={styles.when}>
                                 доставим
-                                <span className={styles.blue}> 25.01.2021</span>
+                                <span className={styles.blue}> </span>
                             </span>
                             <span className={styles.price}>
                                 доставка{' '}
-                                <span className={styles.blue}>1500 руб.</span>
+                                <span className={styles.blue}>
+                                    {DeliveryPrice} руб.
+                                </span>
                             </span>
                         </div>
                     </div>
@@ -821,11 +842,16 @@ const CatalogProductCard = ({
                         >
                             <span className={styles.when}>
                                 доставим
-                                <span className={styles.blue}> 25.01.2021</span>
+                                <span className={styles.blue}>
+                                    {' '}
+                                    {DeliveryDate}
+                                </span>
                             </span>
                             <span className={styles.price}>
                                 доставка{' '}
-                                <span className={styles.blue}>1500 руб.</span>
+                                <span className={styles.blue}>
+                                    {DeliveryPrice}
+                                </span>
                             </span>
                         </div>
                     </div>
