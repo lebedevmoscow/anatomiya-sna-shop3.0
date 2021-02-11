@@ -311,7 +311,12 @@ const CatalogProductCard = ({
 
     // Style for react-select
     const colourStyles = {
-        control: (styles) => ({ ...styles, backgroundColor: 'white' }),
+        control: (styles) => ({
+            ...styles,
+            backgroundColor: 'white',
+            padding: '7px 0px 7px 7px',
+            textAlign: 'center',
+        }),
         option: (styles, { isFocused }) => {
             return {
                 ...styles,
@@ -319,13 +324,21 @@ const CatalogProductCard = ({
                 color: isFocused ? 'white' : '',
             }
         },
+        placeholder: (styles) => {
+            return {
+                ...styles,
+                left: '16%',
+            }
+        },
         menuList: (styles) => {
             return {
                 ...styles,
+                position: 'relative',
                 border: '1px solid #0CA5D3',
                 borderRadius: '5px',
                 fontFamily: 'Arial, sans-serif',
                 fontSize: '14px',
+                zIndex: 100,
             }
         },
     }
