@@ -299,6 +299,7 @@ const CatalogMobileProductList = ({
                 oldMax={filterAPIData.price.max}
                 filterProductsIds={filterProductsIds}
                 newProducts={newProducts}
+                IsMobile={true}
             />
         )
     }, [firstLoadProducts, filterProductsIds])
@@ -324,6 +325,7 @@ const CatalogMobileProductList = ({
                             oldMax={oldMax}
                             filterProductsIds={filterProductsIds}
                             newProducts={true}
+                            IsMobile={true}
                         />
                     )
                 })}
@@ -350,6 +352,7 @@ const CatalogMobileProductList = ({
                     oldMin={oldMin}
                     oldMax={oldMax}
                     filterProductsIds={filterProductsIds}
+                    IsMobile={true}
                 />
             )
         }
@@ -390,6 +393,7 @@ const CatalogMobileProductList = ({
                         oldMin={oldMin}
                         oldMax={oldMax}
                         filterProductsIds={filterProductsIds}
+                        IsMobile={true}
                     />
                 )
                 // }, 1000)
@@ -403,6 +407,7 @@ const CatalogMobileProductList = ({
                         oldMin={oldMin}
                         oldMax={oldMax}
                         filterProductsIds={filterProductsIds}
+                        IsMobile={true}
                     />
                 )
             }

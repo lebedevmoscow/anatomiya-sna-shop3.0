@@ -73,7 +73,7 @@ const PopupOnProductCard = ({ ListSaleItem, index, isSale }) => {
     )
 }
 
-const PopupsOnProductCard = ({ ListSalesList, SalePercent }) => {
+const PopupsOnProductCard = ({ ListSalesList, SalePercent, IsMobile }) => {
     const Ref = useRef(null)
     const [IsClosed, SetIsClosed] = useState(true)
 
@@ -126,11 +126,13 @@ const PopupsOnProductCard = ({ ListSalesList, SalePercent }) => {
                 />
             )}
 
-            <PopupOnProductCard
-                ListSaleItem={ListSalesList[0]}
-                index={0}
-                key={uuidv4()}
-            />
+            {!IsMobile && (
+                <PopupOnProductCard
+                    ListSaleItem={ListSalesList[0]}
+                    index={0}
+                    key={uuidv4()}
+                />
+            )}
 
             <SlideDown
                 className={popups_styles.product_card__fulllpopuplist}
@@ -138,7 +140,7 @@ const PopupsOnProductCard = ({ ListSalesList, SalePercent }) => {
             >
                 <ul>
                     {ListSalesList.map((ListSaleItem, index) => {
-                        if (index === 0) return
+                        if (!IsMobile && index === 0) return
                         return (
                             <PopupOnProductCard
                                 ListSaleItem={ListSaleItem}

@@ -69,6 +69,7 @@ const CatalogProductCard = ({
     viewType,
     desktopViewType,
     ListSalesList,
+    IsMobile,
 }) => {
     const breakpoint769 = useMedia(769)
 
@@ -493,6 +494,7 @@ const CatalogProductCard = ({
                 SalePercent={SalePercent}
                 key={uuidv4()}
                 ListSalesList={ListSalesList}
+                IsMobile={IsMobile}
             />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {breakpoint769 && (

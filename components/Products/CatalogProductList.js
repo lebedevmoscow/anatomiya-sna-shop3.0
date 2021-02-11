@@ -28,6 +28,7 @@ const CatalogProductListForDesktop = ({
     oldMin,
     oldMax,
     newProducts = false,
+    IsMobile = false,
 }) => {
     const SelectedSizeRedux = useSelector((store) => store.SelectedSizeReducer)
 
@@ -67,6 +68,7 @@ const CatalogProductListForDesktop = ({
 
             ElemenetsArray.push(
                 <CatalogProductCard
+                    IsMobile={IsMobile}
                     InitialSize={InitialSize}
                     catalogSlug={catalogSlug}
                     BrandTitle={product.BrandTitle}
