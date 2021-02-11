@@ -28,6 +28,8 @@ const CatalogProductListForDesktop = ({
     oldMax,
     newProducts = false,
 }) => {
+    const SelectedSizeRedux = useSelector((store) => store.SelectedSizeReducer)
+
     const [List, SetList] = useState([])
 
     useEffect(() => {
@@ -47,8 +49,19 @@ const CatalogProductListForDesktop = ({
                 product.Prices[0].SaleIds
             )
 
+            const InitialSize = []
+            for (let i = 0; i < product.Prices.length; i++) {
+                if (
+                    product.Prices[i].SizeSlug ===
+                    SelectedSizeRedux.selectedSizeSlug
+                ) {
+                    InitialSize.push(product.Prices[i])
+                }
+            }
+
             ElemenetsArray.push(
                 <CatalogProductCard
+                    InitialSize={InitialSize}
                     catalogSlug={catalogSlug}
                     BrandTitle={product.BrandTitle}
                     SeriesTitle={product.SeriesTitle}

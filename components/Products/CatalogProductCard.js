@@ -433,6 +433,9 @@ const CatalogProductCard = ({
     const [isCompared, setIsCompared] = useState(false)
 
     // Variables for render
+
+    console.log('InitialSize', InitialSize)
+
     const Price =
         InitialSize.length !== 0
             ? InitialSize[0].PriceDiscount.toString().replace(
@@ -500,8 +503,8 @@ const CatalogProductCard = ({
 
                 <EqualHeightElement name="CatalogProductCard">
                     <div className={styles.catalog_product_card__title}>
-                        {/* {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title} */}
-                        Id: {Id}
+                        {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title}
+                        {/* Id: {Id} */}
                     </div>
                 </EqualHeightElement>
             </div>
