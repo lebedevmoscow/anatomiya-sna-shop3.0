@@ -272,6 +272,10 @@ const CatalogRight = ({
     }
 
     useEffect(() => {
+        console.log('catalog right desktopViewType update', desktopViewType)
+    }, [desktopViewType])
+
+    useEffect(() => {
         setAmount(Math.ceil(filterProductsIds.length / 21))
     }, [filterProductsIds])
 
@@ -287,7 +291,12 @@ const CatalogRight = ({
                 filterProductsIds={filterProductsIds}
             />
         )
-    }, [firstLoadProducts, filterProductsIds])
+    }, [
+        firstLoadProducts,
+        filterProductsIds,
+        desktopViewType,
+        stylesForDesktopViewType,
+    ])
 
     useEffect(() => {
         dispatch({
@@ -313,7 +322,7 @@ const CatalogRight = ({
                 })}
             </>
         )
-    }, [data])
+    }, [data, desktopViewType])
 
     useEffect(() => {
         setPage(CatalogCommonReducer.page)
@@ -339,7 +348,11 @@ const CatalogRight = ({
                 />
             )
         }
-    }, [CatalogProductListReducer.products])
+    }, [
+        CatalogProductListReducer.products,
+        desktopViewType,
+        stylesForDesktopViewType,
+    ])
 
     useEffect(() => {
         if (CatalogProductListReducer.emptyIndex !== 0) {
@@ -397,7 +410,11 @@ const CatalogRight = ({
                 )
             }
         }
-    }, [NewCatalogProductListReducer.newProducts])
+    }, [
+        NewCatalogProductListReducer.newProducts,
+        desktopViewType,
+        stylesForDesktopViewType,
+    ])
 
     useEffect(() => {
         if (lastClick === 'showMore') {

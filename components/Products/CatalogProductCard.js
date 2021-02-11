@@ -67,7 +67,7 @@ const CatalogProductCard = ({
     stylesForViewType,
     stylesForDesktopViewType,
     viewType,
-    desktopViewType,
+    desktopViewType = 'several',
     ListSalesList,
     IsMobile,
 }) => {
@@ -84,6 +84,7 @@ const CatalogProductCard = ({
         catalog_product_card__stats_buttons: {},
     })
     useEffect(() => {
+        console.log('CHANGE111')
         const viewTypeStylesClone = {
             catalog_product_card:
                 (stylesForViewType && stylesForViewType.catalog_product_card) ||
@@ -128,7 +129,7 @@ const CatalogProductCard = ({
         }
 
         setViewTypeStyles(viewTypeStylesClone)
-    }, [stylesForViewType, stylesForDesktopViewType])
+    }, [stylesForViewType, stylesForDesktopViewType, desktopViewType])
 
     // Redux
     const dispatch = useDispatch()
@@ -520,6 +521,13 @@ const CatalogProductCard = ({
         InitialSize.length !== 0
             ? InitialSize[0].Delivery.InStock
             : Prices[0].Delivery.InStock
+
+    useEffect(() => {
+        console.log(
+            'desktopViewTypedesktopViewTypedesktopViewType',
+            desktopViewType
+        )
+    }, [desktopViewType])
 
     return (
         <div
@@ -929,57 +937,63 @@ const CatalogProductCard = ({
                                 </div>
                             )}
 
-                            <div
-                                className={
-                                    styles.catalog_product_card__info_wrap
-                                }
-                            >
-                                <button
-                                    className={
-                                        styles.catalog_product_card__info_button
-                                    }
-                                >
-                                    Подробнее
-                                </button>
+                            {desktopViewType === 'several' && (
                                 <div
                                     className={
-                                        styles.catalog_product_card__stats_buttons
+                                        styles.catalog_product_card__info_wrap
                                     }
-                                ></div>
-                            </div>
+                                >
+                                    <button
+                                        className={
+                                            styles.catalog_product_card__info_button
+                                        }
+                                    >
+                                        Подробнее
+                                    </button>
+                                    <div
+                                        className={
+                                            styles.catalog_product_card__stats_buttons
+                                        }
+                                    ></div>
+                                </div>
+                            )}
                         </EqualHeightElement>
                     </div>
 
-                    <div
-                        className={styles.catalog_product_card__delivery_block}
-                    >
-                        <img
-                            src={CarImage}
-                            className={
-                                styles.catalog_product_card__delivery_image
-                            }
-                        ></img>
-
+                    {desktopViewType === 'several' && (
                         <div
                             className={
-                                styles.catalog_product_card__delivery_info
+                                styles.catalog_product_card__delivery_block
                             }
                         >
-                            <span className={styles.when}>
-                                доставим
-                                <span className={styles.blue}>
-                                    {' '}
-                                    {DeliveryDate}
+                            <img
+                                src={CarImage}
+                                className={
+                                    styles.catalog_product_card__delivery_image
+                                }
+                            ></img>
+
+                            <div
+                                className={
+                                    styles.catalog_product_card__delivery_info
+                                }
+                            >
+                                <span className={styles.when}>
+                                    доставим
+                                    <span className={styles.blue}>
+                                        {' '}
+                                        {DeliveryDate}
+                                    </span>
                                 </span>
-                            </span>
-                            <span className={styles.price}>
-                                доставка{' '}
-                                <span className={styles.blue}>
-                                    {DeliveryPrice}
+                                <span className={styles.price}>
+                                    доставка{' '}
+                                    <span className={styles.blue}>
+                                        {DeliveryPrice}
+                                    </span>
                                 </span>
-                            </span>
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </div>

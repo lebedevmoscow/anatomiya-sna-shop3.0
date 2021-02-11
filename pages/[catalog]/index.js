@@ -65,11 +65,9 @@ const CatalogPage = ({
     ]
 
     // State
-    console.log('products CATALOG', products)
-
     const [stylesForViewType, setStylesForViewType] = useState({})
     const [stylesForDesktopViewType, setStylesForDesktopViewType] = useState({})
-    const [desktopViewType, setDesktopViewType] = useState(null)
+    const [desktopViewType, setDesktopViewType] = useState('several')
     const [viewType, setViewType] = useState(null)
     const [mainMobileFilterIsOpen, setMainMobileFilterIsOpen] = useState(false)
     const [presetFilterIsOpen, setPresetFilterIsOpen] = useState(false)
@@ -191,7 +189,9 @@ const CatalogPage = ({
     }, [viewType])
 
     useEffect(() => {
+        console.log('UPDATE UPDATEUPDATEUPDATE')
         if (desktopViewType === 'single') {
+            console.log('SINGLE')
             setStylesForDesktopViewType({
                 catalog_product_card: {
                     display: 'flex',
@@ -220,9 +220,8 @@ const CatalogPage = ({
                     flexDirection: 'column',
                 },
             })
-        }
-
-        if (desktopViewType === 'several') {
+        } else if (desktopViewType === 'several') {
+            console.log('SEVERAL')
             setStylesForDesktopViewType({
                 catalog_product_card: {
                     width: '30.5%',

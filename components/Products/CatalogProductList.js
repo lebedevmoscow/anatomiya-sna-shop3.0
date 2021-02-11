@@ -35,6 +35,17 @@ const CatalogProductListForDesktop = ({
     const [List, SetList] = useState([])
 
     useEffect(() => {
+        console.log(
+            'catalog product list desktopViewType update',
+            desktopViewType
+        )
+    }, [desktopViewType])
+
+    useEffect(() => {
+        console.log(' catalog product list stylesForDesktopViewType')
+    }, [stylesForDesktopViewType])
+
+    useEffect(() => {
         if (!IsMobile) {
             SetList(render())
         } else {
