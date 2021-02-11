@@ -32,6 +32,7 @@ const PopupOnProductCard = ({ ListSaleItem, index, isSale }) => {
                     cursor: 'pointer',
                     zIndex: 10 - index,
                     listStyle: 'none',
+                    width: 'fit-content',
                 }}
                 key={index}
             >
@@ -53,6 +54,7 @@ const PopupOnProductCard = ({ ListSaleItem, index, isSale }) => {
                 cursor: 'pointer',
                 zIndex: 10 - index,
                 listStyle: 'none',
+                width: 'fit-content',
             }}
             key={index}
             onClick={() => SetPopupIsClosed(false)}
@@ -73,12 +75,24 @@ const PopupOnProductCard = ({ ListSaleItem, index, isSale }) => {
     )
 }
 
-const PopupsOnProductCard = ({ ListSalesList, SalePercent, IsMobile }) => {
+const PopupsOnProductCard = ({
+    ListSalesList,
+    SalePercent,
+    IsMobile,
+    desktopViewType,
+}) => {
     const Ref = useRef(null)
     const [IsClosed, SetIsClosed] = useState(true)
 
     return (
-        <div className={popups_styles.product_card__popups}>
+        <div
+            style={
+                desktopViewType === 'single'
+                    ? { left: '1%', flexDirection: 'column', width: 'auto' }
+                    : {}
+            }
+            className={popups_styles.product_card__popups}
+        >
             <div
                 ref={Ref}
                 onClick={() => SetIsClosed(false)}
@@ -137,8 +151,15 @@ const PopupsOnProductCard = ({ ListSalesList, SalePercent, IsMobile }) => {
             <SlideDown
                 className={popups_styles.product_card__fulllpopuplist}
                 closed={IsClosed}
+                style={desktopViewType === 'single' ? { width: '200px' } : {}}
             >
-                <ul>
+                <ul
+                    style={
+                        desktopViewType === 'single'
+                            ? { flexDirection: 'column' }
+                            : {}
+                    }
+                >
                     {ListSalesList.map((ListSaleItem, index) => {
                         if (!IsMobile && index === 0) return
                         return (

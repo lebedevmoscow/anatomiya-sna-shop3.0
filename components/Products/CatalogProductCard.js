@@ -539,6 +539,7 @@ const CatalogProductCard = ({
                 key={uuidv4()}
                 ListSalesList={ListSalesList}
                 IsMobile={IsMobile}
+                desktopViewType={desktopViewType}
             />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {breakpoint769 && (
