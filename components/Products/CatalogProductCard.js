@@ -478,6 +478,9 @@ const CatalogProductCard = ({
         DeliveryDate = 'на заказ'
     }
 
+    const SalePercent =
+        PriceDiff !== 0 ? Math.floor(100 - (PriceRaw * 100) / PriceOld) : null
+
     const InStock =
         InitialSize.length !== 0
             ? InitialSize[0].Delivery.InStock
@@ -488,7 +491,11 @@ const CatalogProductCard = ({
             style={viewTypeStyles.catalog_product_card}
             className={styles.catalog_product_card}
         >
-            <PopupsOnProductCard key={uuidv4()} ListSalesList={ListSalesList} />
+            <PopupsOnProductCard
+                SalePercent={SalePercent}
+                key={uuidv4()}
+                ListSalesList={ListSalesList}
+            />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {breakpoint769 && (
                     <div

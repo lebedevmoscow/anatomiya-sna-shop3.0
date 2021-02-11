@@ -6,7 +6,7 @@ import OutsideClickHandler from 'react-outside-click-handler'
 
 import popups_styles from './../../styles/components/Popups/Popups.module.sass'
 
-const PopupOnProductCard = ({ ListSaleItem, index }) => {
+const PopupOnProductCard = ({ ListSaleItem, index, isSale }) => {
     const [PopupIsClosed, SetPopupIsClosed] = useState(true)
     const [Close, SetClose] = useState(0)
 
@@ -16,6 +16,31 @@ const PopupOnProductCard = ({ ListSaleItem, index }) => {
             SetClose(0)
         }
     }, [Close])
+
+    console.log('isSale', ListSaleItem)
+
+    if (isSale) {
+        return (
+            <li
+                style={{
+                    border: `1px solid #e71616`,
+                    backgroundColor: '#e71616',
+                    color: '#fff',
+                    padding: '4px 10px',
+                    fontSize: '14px',
+                    borderRadius: '5px',
+                    marginTop: '5px',
+                    marginRight: '5px',
+                    cursor: 'pointer',
+                    zIndex: 10 - index,
+                    listStyle: 'none',
+                }}
+                key={index}
+            >
+                {ListSaleItem}
+            </li>
+        )
+    }
 
     return (
         <li
@@ -50,7 +75,7 @@ const PopupOnProductCard = ({ ListSaleItem, index }) => {
     )
 }
 
-const PopupsOnProductCard = ({ ListSalesList }) => {
+const PopupsOnProductCard = ({ ListSalesList, SalePercent }) => {
     const Ref = useRef(null)
     const [IsClosed, SetIsClosed] = useState(true)
 
@@ -93,6 +118,15 @@ const PopupsOnProductCard = ({ ListSalesList }) => {
                     </svg>
                 </span>
             </div>
+
+            {SalePercent && (
+                <PopupOnProductCard
+                    isSale={true}
+                    ListSaleItem={SalePercent + '%'}
+                    index={0}
+                    key={uuidv4()}
+                />
+            )}
 
             <PopupOnProductCard
                 ListSaleItem={ListSalesList[0]}
