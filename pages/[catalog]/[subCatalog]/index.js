@@ -1,27 +1,27 @@
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import useMedia from './../../hooks/useMedia'
+import useMedia from './../../../hooks/useMedia'
 
 // React components
-import Header from './../../components/Header'
-import MainNavigation from './../../components/Nav/MainNavigation'
-import Subscribe from './../../components/Subscribe'
-import Footer from './../../components/Footer/FooterDesktop'
-import MobileBurgerMenu from './../../components/Mobile/MobileBurgerMenu'
-import CatalogPresetFilter from './../../components/Filters/CatalogPresentFilter'
-import CatalogCompositionFilter from './../../components/Filters/CatalogCompositionFilter'
-import CatalogLeftMobile from './../../components/Mobile/CatalogLeftMobile'
-import CatalogProductList from './../../components/Products/CatalogProductList'
-import LoadMoreButton from './../../components/Button/LoadMoreButton'
-import CatalogPagination from '../../components/Pagination/CatalogPagination'
-import CatalogHelpPickUp from '../../components/Catalog/CatalogHelpPickUp'
-import CatalogMobileReview from './../../components/Reviews/CatalogMobileReviews'
-import CatalogLeftFilter from '../../components/Filters/CatalogLeftFilter'
-import CatalogRight from '../../components/Catalog/CatalogRight'
-import CatalogMainFilter from './../../components/Filters/CatalogMobileMainFilter'
-import CatalogMobileProductList from './../../components/Mobile/CatalogMobileProductList'
+import Header from './../../../components/Header'
+import MainNavigation from './../../../components/Nav/MainNavigation'
+import Subscribe from './../../../components/Subscribe'
+import Footer from './../../../components/Footer/FooterDesktop'
+import MobileBurgerMenu from './../../../components/Mobile/MobileBurgerMenu'
+import CatalogPresetFilter from './../../../components/Filters/CatalogPresentFilter'
+import CatalogCompositionFilter from './../../../components/Filters/CatalogCompositionFilter'
+import CatalogLeftMobile from './../../../components/Mobile/CatalogLeftMobile'
+import CatalogProductList from './../../../components/Products/CatalogProductList'
+import LoadMoreButton from './../../../components/Button/LoadMoreButton'
+import CatalogPagination from '../../../components/Pagination/CatalogPagination'
+import CatalogHelpPickUp from '../../../components/Catalog/CatalogHelpPickUp'
+import CatalogMobileReview from './../../../components/Reviews/CatalogMobileReviews'
+import CatalogLeftFilter from '../../../components/Filters/CatalogLeftFilter'
+import CatalogRight from '../../../components/Catalog/CatalogRight'
+import CatalogMainFilter from './../../../components/Filters/CatalogMobileMainFilter'
+import CatalogMobileProductList from './../../../components/Mobile/CatalogMobileProductList'
 
-import common_styles from './../../styles/pages/catalog.module.sass'
+import common_styles from './../../../styles/pages/catalog.module.sass'
 
 // Experemental
 // const CatalogProductList = dynamic(
@@ -65,7 +65,7 @@ const CatalogPage = ({
     ]
 
     // State
-    console.log('products CATALOG', products)
+    console.log('products SUBCATALOG', products)
 
     const [stylesForViewType, setStylesForViewType] = useState({})
     const [stylesForDesktopViewType, setStylesForDesktopViewType] = useState({})
@@ -423,9 +423,9 @@ export const getServerSideProps = async (ctx) => {
         'https://anatomiyasna.ru/api/parameters/saleBanner/',
         'https://www.anatomiyasna.ru/api/menu/headerCatalog/',
         'https://www.anatomiyasna.ru/api/parameters/all/',
-        `https://www.anatomiyasna.ru/api/filter/filterModel/?slug=${ctx.params.catalog}`,
-        `https://anatomiyasna.ru/api/filter/filtredProducts/?slug=${ctx.params.catalog}`,
-        `https://anatomiyasna.ru/api/pageData/getPageData/?slug=${ctx.params.catalog}`,
+        `https://www.anatomiyasna.ru/api/filter/filterModel/?slug=${ctx.params.catalog}/${ctx.params.subCatalog}`,
+        `https://anatomiyasna.ru/api/filter/filtredProducts/?slug=${ctx.params.catalog}/${ctx.params.subCatalog}`,
+        `https://anatomiyasna.ru/api/pageData/getPageData/?slug=${ctx.params.catalog}/${ctx.params.subCatalog}`,
     ]
 
     const regex = /Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/
@@ -482,10 +482,6 @@ export const getServerSideProps = async (ctx) => {
     const productsURLReq = await fetch(
         `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
     )
-    console.log(
-        'URL',
-        `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
-    )
     const products = await productsURLReq.json()
 
     return {
@@ -501,7 +497,7 @@ export const getServerSideProps = async (ctx) => {
             assurances,
             filterAPIData,
             catalogSlug: ctx.params.catalog,
-            subCatalogSlug: null,
+            subCatalogSlug: ctx.params.subCatalog,
             products,
             IsMobile,
             filterProductsIds,
