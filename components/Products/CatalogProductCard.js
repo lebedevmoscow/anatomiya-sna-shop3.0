@@ -371,9 +371,16 @@ const CatalogProductCard = ({
                 label: Prices[0].SizeTitle,
             })
         }
-
         Prices.map((price) => {
-            clone.push({ value: price.SizeSlug, label: price.SizeTitle })
+            const additonal =
+                price.OverallWidth && price.OverallLength
+                    ? ` (габ. ${price.OverallWidth}*${price.OverallLength})`
+                    : ''
+
+            clone.push({
+                value: price.SizeSlug,
+                label: price.SizeTitle + additonal,
+            })
         })
         SetOptionsForSelect(clone)
     }, [InitialSize.length])
