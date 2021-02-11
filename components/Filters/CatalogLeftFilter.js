@@ -470,8 +470,9 @@ const CatalogLeftFilter = ({
                                                                         }
                                                                     ></span>
                                                                     <h6>
-                                                                        {checkbox.label +
-                                                                            index2}
+                                                                        {
+                                                                            checkbox.label
+                                                                        }
                                                                     </h6>
                                                                     <span
                                                                         className={
