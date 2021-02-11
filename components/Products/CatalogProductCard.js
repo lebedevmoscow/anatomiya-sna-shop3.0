@@ -152,6 +152,8 @@ const CatalogProductCard = ({
         InitialSelectedSize.label
     )
 
+    const [title, setTitle] = useState(null)
+
     // Handler
     const onAddToFavoriteClickHandler = () => {
         if (!isFavorite) {
@@ -340,6 +342,20 @@ const CatalogProductCard = ({
     })
 
     // Use Effects
+
+    useEffect(() => {
+        setTitle(
+            <EqualHeightElement name="CatalogProductCard">
+                <div
+                    style={PriceDiff !== 0 ? { marginBottom: '10px' } : {}}
+                    className={styles.catalog_product_card__title}
+                >
+                    {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title}
+                    {/* Id: {Id} */}
+                </div>
+            </EqualHeightElement>
+        )
+    }, [])
 
     // Init Data for react-select
     useEffect(() => {
@@ -544,15 +560,7 @@ const CatalogProductCard = ({
                     Купить {CatalogType}
                 </div>
 
-                <EqualHeightElement name="CatalogProductCard">
-                    <div
-                        style={PriceDiff !== 0 ? { marginBottom: '10px' } : {}}
-                        className={styles.catalog_product_card__title}
-                    >
-                        {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title}
-                        {/* Id: {Id} */}
-                    </div>
-                </EqualHeightElement>
+                {title}
             </div>
             <div
                 style={
