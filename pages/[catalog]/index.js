@@ -65,6 +65,8 @@ const CatalogPage = ({
     ]
 
     // State
+    console.log('products', products)
+
     const [stylesForViewType, setStylesForViewType] = useState({})
     const [stylesForDesktopViewType, setStylesForDesktopViewType] = useState({})
     const [desktopViewType, setDesktopViewType] = useState(null)
