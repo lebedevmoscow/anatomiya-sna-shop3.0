@@ -26,6 +26,37 @@
         span
             position: relative
 
+    .catalog_product_card__instockblock
+        text-align: center
+
+    .catalogproductcard__stock > div
+        display: flex
+        flex-direction: column
+        justify-content: flex-end
+
+    .catalog_product_card__instockblock__icon
+        position: relative
+        display: inline-block
+        vertical-align: middle
+        width: 14px
+        height: 14px
+        border-radius: 100%
+        background: #00a651
+        font-size: 15px
+        color: #444
+        margin-top: -2px
+        &::after
+            content: ""
+            position: absolute
+            left: 0
+            top: -2px
+            width: 8px
+            height: 4px
+            margin: 5px 0 0 3px
+            border-bottom: 1px solid #fff
+            border-left: 1px solid #fff
+            transform: rotate(-50deg)
+
     .product_card__price_diff
         white-space: nowrap
         background-color: #00a651

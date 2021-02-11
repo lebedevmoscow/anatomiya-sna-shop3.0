@@ -70,6 +70,8 @@ const CatalogProductCard = ({
     desktopViewType,
     ListSalesList,
 }) => {
+    console.log('title', BrandTitle, SeriesTitle, Title, Prices, InitialSize)
+
     const breakpoint769 = useMedia(769)
 
     const [viewTypeStyles, setViewTypeStyles] = useState({
@@ -476,6 +478,11 @@ const CatalogProductCard = ({
         DeliveryDate = 'на заказ'
     }
 
+    const InStock =
+        InitialSize.length !== 0
+            ? InitialSize[0].Delivery.InStock
+            : Prices[0].Delivery.InStock
+
     return (
         <div
             style={viewTypeStyles.catalog_product_card}
@@ -852,23 +859,60 @@ const CatalogProductCard = ({
                 </EqualHeightElement>
 
                 <div
-                    style={
-                        !breakpoint769 && desktopViewType === 'single'
-                            ? { display: 'none' }
-                            : { display: 'block' }
-                    }
+                    style={{
+                        display: 'flex',
+                        flexDirection: ' column',
+                        justifyContent: 'space-between',
+                    }}
                 >
-                    <div className={styles.catalog_product_card__info_wrap}>
-                        <button
-                            className={styles.catalog_product_card__info_button}
-                        >
-                            Подробнее
-                        </button>
-                        <div
-                            className={
-                                styles.catalog_product_card__stats_buttons
-                            }
-                        ></div>
+                    <div className={styles.catalogproductcard__stock}>
+                        <EqualHeightElement name="CatalogProductCard__stock">
+                            {InStock && (
+                                <div
+                                    className={
+                                        styles.catalog_product_card__instockblock
+                                    }
+                                >
+                                    {InStock && (
+                                        <span
+                                            style={
+                                                !InStock ? { opacity: 0 } : {}
+                                            }
+                                            className={
+                                                styles.catalog_product_card__instockblock__icon
+                                            }
+                                        ></span>
+                                    )}{' '}
+                                    <span
+                                        style={!InStock ? { opacity: 0 } : {}}
+                                        className={
+                                            styles.catalog_product_card__instockblock__text
+                                        }
+                                    >
+                                        {InStock ? 'Есть в наличии' : ''}
+                                    </span>
+                                </div>
+                            )}
+
+                            <div
+                                className={
+                                    styles.catalog_product_card__info_wrap
+                                }
+                            >
+                                <button
+                                    className={
+                                        styles.catalog_product_card__info_button
+                                    }
+                                >
+                                    Подробнее
+                                </button>
+                                <div
+                                    className={
+                                        styles.catalog_product_card__stats_buttons
+                                    }
+                                ></div>
+                            </div>
+                        </EqualHeightElement>
                     </div>
 
                     <div
