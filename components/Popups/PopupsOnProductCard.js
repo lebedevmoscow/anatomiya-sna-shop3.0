@@ -29,6 +29,7 @@ const PopupOnProductCard = ({ ListSaleItem, index }) => {
                 marginTop: '5px',
                 cursor: 'pointer',
                 zIndex: 10 - index,
+                listStyle: 'none',
             }}
             key={index}
             onClick={() => SetPopupIsClosed(false)}
@@ -65,12 +66,14 @@ const PopupsOnProductCard = ({ ListSalesList }) => {
                               opacity: '1',
                               display: 'block',
                               position: 'absolute',
+                              right: '-30px',
                           }
                         : {
                               marginBottom: '5px',
                               opacity: '0',
                               display: 'none',
                               position: 'absolute',
+                              right: '-30px',
                           }
                 }
                 className={`${popups_styles.product_card__popup} ${popups_styles.product_card__popup_load_more}`}
@@ -91,12 +94,19 @@ const PopupsOnProductCard = ({ ListSalesList }) => {
                 </span>
             </div>
 
+            <PopupOnProductCard
+                ListSaleItem={ListSalesList[0]}
+                index={0}
+                key={uuidv4()}
+            />
+
             <SlideDown
                 className={popups_styles.product_card__fulllpopuplist}
                 closed={IsClosed}
             >
                 <ul>
                     {ListSalesList.map((ListSaleItem, index) => {
+                        if (index === 0) return
                         return (
                             <PopupOnProductCard
                                 ListSaleItem={ListSaleItem}

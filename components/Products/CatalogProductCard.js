@@ -452,6 +452,15 @@ const CatalogProductCard = ({
             ? InitialSize[0].PriceDiscount
             : Prices[0].PriceDiscount
 
+    const PriceOld =
+        InitialSize.length !== 0
+            ? InitialSize[0].PriceBasic
+            : Prices[0].PriceBasic
+
+    const PriceDiff = PriceOld - PriceRaw
+
+    console.log('PriceDiff', PriceDiff)
+
     const DeliveryObject =
         InitialSize.length !== 0 ? InitialSize[0].Delivery : Prices[0].Delivery
 
@@ -526,7 +535,10 @@ const CatalogProductCard = ({
                 </div>
 
                 <EqualHeightElement name="CatalogProductCard">
-                    <div className={styles.catalog_product_card__title}>
+                    <div
+                        style={PriceDiff !== 0 ? { marginBottom: '10px' } : {}}
+                        className={styles.catalog_product_card__title}
+                    >
                         {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title}
                         {/* Id: {Id} */}
                     </div>
@@ -540,110 +552,148 @@ const CatalogProductCard = ({
                 }
                 className={`${styles.catalog_product_card__desktop_view_type__single} ${styles.catalog_product_card__desktop_view_type__single__third}`}
             >
-                <div className={styles.catalog_product_card__price_block}>
-                    <div
-                        className={
-                            styles.catalog_product_card__price_block_left
-                        }
-                    >
-                        <div className={styles.catalog_product_card__price}>
-                            {Price} Руб.
-                        </div>
+                <EqualHeightElement name="CatalogProductCard__Price">
+                    <div className={styles.catalog_product_card__price_block}>
                         <div
                             className={
-                                styles.catalog_product_card__price_credit
+                                styles.catalog_product_card__price_block_left
                             }
                         >
-                            В рассрочку от {Math.ceil(PriceRaw / 6)} руб/мес
+                            {PriceDiff !== 0 && (
+                                <div
+                                    style={{
+                                        position: 'absolute',
+                                    }}
+                                    className={
+                                        styles.product_card__price_discount
+                                    }
+                                >
+                                    <div
+                                        className={
+                                            styles.product_card__price_prev
+                                        }
+                                    >
+                                        <span>
+                                            {PriceOld}
+                                            <div
+                                                className={
+                                                    styles.product_card__price_diff
+                                                }
+                                            >
+                                                -
+                                                {PriceDiff.toString().replace(
+                                                    /\B(?=(\d{3})+(?!\d))/g,
+                                                    ' '
+                                                )}
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            )}
+                            <div className={styles.catalog_product_card__price}>
+                                {Price} Руб.
+                            </div>
+                            <div
+                                className={
+                                    styles.catalog_product_card__price_credit
+                                }
+                            >
+                                В рассрочку от {Math.ceil(PriceRaw / 6)} руб/мес
+                            </div>
                         </div>
-                    </div>
-                    <div
-                        className={
-                            styles.catalog_product_card__price_block_right
-                        }
-                    >
+
                         <div
-                            className={styles.catalog_product_card__stat_block}
-                            style={
-                                isCompared
-                                    ? {
-                                          backgroundColor: '#0ca5d3',
-                                          borderColor: '#0ca5d3',
-                                      }
-                                    : {}
+                            className={
+                                styles.catalog_product_card__price_block_right
                             }
-                            onClick={() => {
-                                onAddToCompareClickHandler()
-                            }}
                         >
                             <div
-                                className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
-                                ref={CompareRef}
+                                className={
+                                    styles.catalog_product_card__stat_block
+                                }
+                                style={
+                                    isCompared
+                                        ? {
+                                              backgroundColor: '#0ca5d3',
+                                              borderColor: '#0ca5d3',
+                                          }
+                                        : {}
+                                }
+                                onClick={() => {
+                                    onAddToCompareClickHandler()
+                                }}
                             >
-                                Товар добавлен в{' '}
-                                <Link href="/">Сравнение!</Link>
+                                <div
+                                    className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                                    ref={CompareRef}
+                                >
+                                    Товар добавлен в{' '}
+                                    <Link href="/">Сравнение!</Link>
+                                </div>
+                                {isCompared && (
+                                    <img
+                                        src={WhiteStats}
+                                        alt="statimage"
+                                        className={
+                                            styles.catalog_product_card__stat_block_image
+                                        }
+                                    ></img>
+                                )}
+                                {!isCompared && (
+                                    <img
+                                        src={StatsImage}
+                                        alt="stat-image"
+                                        className={
+                                            styles.catalog_product_card__stat_block_image
+                                        }
+                                    ></img>
+                                )}
                             </div>
-                            {isCompared && (
-                                <img
-                                    src={WhiteStats}
-                                    alt="statimage"
-                                    className={
-                                        styles.catalog_product_card__stat_block_image
-                                    }
-                                ></img>
-                            )}
-                            {!isCompared && (
-                                <img
-                                    src={StatsImage}
-                                    alt="stat-image"
-                                    className={
-                                        styles.catalog_product_card__stat_block_image
-                                    }
-                                ></img>
-                            )}
-                        </div>
-                        <div
-                            style={
-                                isFavorite
-                                    ? {
-                                          backgroundColor: '#0ca5d3',
-                                          borderColor: '#0ca5d3',
-                                      }
-                                    : {}
-                            }
-                            onClick={() => {
-                                onAddToFavoriteClickHandler()
-                            }}
-                            className={styles.catalog_product_card__stat_block}
-                        >
                             <div
-                                ref={FavoriteRef}
-                                className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                                style={
+                                    isFavorite
+                                        ? {
+                                              backgroundColor: '#0ca5d3',
+                                              borderColor: '#0ca5d3',
+                                          }
+                                        : {}
+                                }
+                                onClick={() => {
+                                    onAddToFavoriteClickHandler()
+                                }}
+                                className={
+                                    styles.catalog_product_card__stat_block
+                                }
                             >
-                                Товар добавлен в{' '}
-                                <Link href="/">Избранное!</Link>
+                                <div
+                                    ref={FavoriteRef}
+                                    className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                                >
+                                    Товар добавлен в{' '}
+                                    <Link href="/">Избранное!</Link>
+                                </div>
+                                {isFavorite && (
+                                    <img
+                                        src={WhiteHeartImage}
+                                        className={
+                                            styles.catalog_product_card__stat_block_image
+                                        }
+                                        alt="stat-image"
+                                    ></img>
+                                )}
+                                {!isFavorite && (
+                                    <img
+                                        src={HeartImage}
+                                        alt="stat-image"
+                                        className={
+                                            styles.catalog_product_card__stat_block_image
+                                        }
+                                    ></img>
+                                )}
                             </div>
-                            {isFavorite && (
-                                <img
-                                    src={WhiteHeartImage}
-                                    className={
-                                        styles.catalog_product_card__stat_block_image
-                                    }
-                                    alt="stat-image"
-                                ></img>
-                            )}
-                            {!isFavorite && (
-                                <img
-                                    src={HeartImage}
-                                    alt="stat-image"
-                                    className={
-                                        styles.catalog_product_card__stat_block_image
-                                    }
-                                ></img>
-                            )}
                         </div>
                     </div>
-                </div>
+                </EqualHeightElement>
                 <span className={styles.line}></span>
                 <div className={styles.catalog_product_card__selector_block}>
                     <div
