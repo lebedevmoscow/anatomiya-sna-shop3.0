@@ -36,6 +36,7 @@ const CatalogRight = ({
     oldMax,
     filterProductsIds,
     headers,
+    articles,
 }) => {
     const [firstProductList, setFirstProductList] = useState([])
 
@@ -278,6 +279,7 @@ const CatalogRight = ({
     useEffect(() => {
         setFirstProductList(
             <CatalogProductListForDesktop
+                articles={articles}
                 catalogSlug={catalogSlug}
                 desktopViewType={desktopViewType}
                 stylesForDesktopViewType={stylesForDesktopViewType}
@@ -304,6 +306,7 @@ const CatalogRight = ({
                 {data.map((d, index) => {
                     return (
                         <CatalogProductListForDesktop
+                            articles={articles}
                             key={index}
                             catalogSlug={catalogSlug}
                             desktopViewType={desktopViewType}
@@ -334,6 +337,7 @@ const CatalogRight = ({
         if (CatalogProductListReducer.products.length !== 0) {
             setFirstProductList(
                 <CatalogProductListForDesktop
+                    articles={articles}
                     catalogSlug={catalogSlug}
                     desktopViewType={desktopViewType}
                     stylesForDesktopViewType={stylesForDesktopViewType}
@@ -378,6 +382,7 @@ const CatalogRight = ({
                 // setTimeout(() => {
                 setFirstProductList(
                     <CatalogProductListForDesktop
+                        articles={articles}
                         catalogSlug={catalogSlug}
                         desktopViewType={desktopViewType}
                         stylesForDesktopViewType={stylesForDesktopViewType}
@@ -393,6 +398,7 @@ const CatalogRight = ({
             } else {
                 setFirstProductList(
                     <CatalogProductListForDesktop
+                        articles={articles}
                         catalogSlug={catalogSlug}
                         desktopViewType={desktopViewType}
                         stylesForDesktopViewType={stylesForDesktopViewType}

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import CatalogProductCard from './CatalogProductCard'
+import ArticleListCatalog from './../Article/ArticleListCatalog'
+import { v4 as uuidv4 } from 'uuid'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,6 +30,7 @@ const CatalogProductListForDesktop = ({
     oldMax,
     newProducts = false,
     IsMobile = false,
+    articles,
 }) => {
     const SelectedSizeRedux = useSelector((store) => store.SelectedSizeReducer)
 
@@ -41,12 +44,19 @@ const CatalogProductListForDesktop = ({
         }
     }, [stylesForViewType, stylesForDesktopViewType, firstLoadProducts])
 
+    let subIndex = 0
+
     const render = () => {
         let ElemenetsArray = []
         let EqualHeightArray = []
         let Temp = 0
 
         const length = firstLoadProducts.ShortProductModels.length
+
+        const rand = Math.floor(
+            (Math.random() * firstLoadProducts.ShortProductModels.length) / 3
+        )
+        console.log('rand', rand)
 
         firstLoadProducts.ShortProductModels.map((product, index) => {
             const ListSalesList = GetPopupsList(
@@ -110,6 +120,14 @@ const CatalogProductListForDesktop = ({
                 }
             } else {
                 if (Temp !== 0 && Temp % 3 === 0) {
+                    subIndex++
+                    if (subIndex === rand) {
+                        EqualHeightArray.push(
+                            <EqualHeight key={uuidv4()}>
+                                <ArticleListCatalog list={articles} />
+                            </EqualHeight>
+                        )
+                    }
                     EqualHeightArray.push(
                         <EqualHeight key={product.Id}>
                             {ElemenetsArray}

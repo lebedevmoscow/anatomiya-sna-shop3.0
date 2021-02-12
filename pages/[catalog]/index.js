@@ -45,6 +45,7 @@ const CatalogPage = ({
     IsMobile,
     filterProductsIds,
     headers,
+    articles,
 }) => {
     // Vars
     const initialCompositionFilterData = [
@@ -396,6 +397,7 @@ const CatalogPage = ({
                             catalogSlug={catalogSlug}
                             subCatalogSlug={subCatalogSlug}
                             filterProductsIds={filterProductsIds}
+                            articles={articles}
                         />
                     </div>
                 </div>
@@ -477,10 +479,13 @@ export const getServerSideProps = async (ctx) => {
     const productsURLReq = await fetch(
         `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
     )
-    console.log(
-        'URL',
-        `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
+
+    const articlesUrl = encodeURI(
+        `https://www.anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=1`
     )
+    const articlesReq = await fetch(articlesUrl)
+    const articles = await articlesReq.json()
+
     const products = await productsURLReq.json()
 
     return {
@@ -500,6 +505,7 @@ export const getServerSideProps = async (ctx) => {
             products,
             IsMobile,
             filterProductsIds,
+            articles,
         },
     }
 }
