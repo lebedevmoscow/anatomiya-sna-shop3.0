@@ -189,9 +189,7 @@ const CatalogPage = ({
     }, [viewType])
 
     useEffect(() => {
-        console.log('UPDATE UPDATEUPDATEUPDATE')
         if (desktopViewType === 'single') {
-            console.log('SINGLE')
             setStylesForDesktopViewType({
                 catalog_product_card: {
                     display: 'flex',
@@ -221,7 +219,6 @@ const CatalogPage = ({
                 },
             })
         } else if (desktopViewType === 'several') {
-            console.log('SEVERAL')
             setStylesForDesktopViewType({
                 catalog_product_card: {
                     width: '30.5%',

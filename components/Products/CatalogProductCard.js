@@ -70,6 +70,7 @@ const CatalogProductCard = ({
     desktopViewType = 'several',
     ListSalesList,
     IsMobile,
+    OptionsList,
 }) => {
     const breakpoint769 = useMedia(769)
 
@@ -84,7 +85,6 @@ const CatalogProductCard = ({
         catalog_product_card__stats_buttons: {},
     })
     useEffect(() => {
-        console.log('CHANGE111')
         const viewTypeStylesClone = {
             catalog_product_card:
                 (stylesForViewType && stylesForViewType.catalog_product_card) ||
@@ -522,13 +522,6 @@ const CatalogProductCard = ({
             ? InitialSize[0].Delivery.InStock
             : Prices[0].Delivery.InStock
 
-    useEffect(() => {
-        console.log(
-            'desktopViewTypedesktopViewTypedesktopViewType',
-            desktopViewType
-        )
-    }, [desktopViewType])
-
     return (
         <div
             style={viewTypeStyles.catalog_product_card}
@@ -819,48 +812,49 @@ const CatalogProductCard = ({
             >
                 <div className={styles.catalog_product_card__materials}>
                     <ul className={styles.catalog_product_card__materials_list}>
-                        <li
-                            className={
-                                styles.catalog_product_card__materials_list_item
-                            }
-                        >
-                            <Image
-                                style={
-                                    viewTypeStyles.catalog_product_card__materials_list_item_img
+                        {OptionsList &&
+                            OptionsList.map((opt, index) => {
+                                if (
+                                    index > 5 &&
+                                    index != OptionsList.length - 1
+                                ) {
+                                    return
+                                } else if (
+                                    index > 5 &&
+                                    index === OptionsList.length - 1
+                                ) {
+                                    return (
+                                        <li
+                                            key={index}
+                                            className={
+                                                styles.catalog_product_card__materials_list_item
+                                            }
+                                        >
+                                            + {OptionsList.length - 5} цвета
+                                        </li>
+                                    )
                                 }
-                                src={Material1}
-                                height={25}
-                                width={25}
-                            />
-                        </li>
-                        <li
-                            className={
-                                styles.catalog_product_card__materials_list_item
-                            }
-                        >
-                            <Image
-                                style={
-                                    viewTypeStyles.catalog_product_card__materials_list_item_img
-                                }
-                                src={Material2}
-                                height={25}
-                                width={25}
-                            />
-                        </li>
-                        <li
-                            className={
-                                styles.catalog_product_card__materials_list_item
-                            }
-                        >
-                            <Image
-                                style={
-                                    viewTypeStyles.catalog_product_card__materials_list_item_img
-                                }
-                                src={Material3}
-                                height={25}
-                                width={25}
-                            />
-                        </li>
+                                return (
+                                    <li
+                                        key={index}
+                                        className={
+                                            styles.catalog_product_card__materials_list_item
+                                        }
+                                    >
+                                        <Image
+                                            style={
+                                                viewTypeStyles.catalog_product_card__materials_list_item_img
+                                            }
+                                            src={
+                                                'https://www.anatomiyasna.ru' +
+                                                opt.data.Image.FilePath
+                                            }
+                                            height={25}
+                                            width={25}
+                                        />
+                                    </li>
+                                )
+                            })}
                     </ul>
                 </div>
                 <span className={styles.line}></span>

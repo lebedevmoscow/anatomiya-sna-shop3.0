@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import dynamic from 'next/dynamic'
 import useMedia from './../../../hooks/useMedia'
 
 // React components
@@ -65,11 +64,9 @@ const CatalogPage = ({
     ]
 
     // State
-    console.log('products SUBCATALOG', products)
-
     const [stylesForViewType, setStylesForViewType] = useState({})
     const [stylesForDesktopViewType, setStylesForDesktopViewType] = useState({})
-    const [desktopViewType, setDesktopViewType] = useState(null)
+    const [desktopViewType, setDesktopViewType] = useState('several')
     const [viewType, setViewType] = useState(null)
     const [mainMobileFilterIsOpen, setMainMobileFilterIsOpen] = useState(false)
     const [presetFilterIsOpen, setPresetFilterIsOpen] = useState(false)
@@ -220,9 +217,7 @@ const CatalogPage = ({
                     flexDirection: 'column',
                 },
             })
-        }
-
-        if (desktopViewType === 'several') {
+        } else if (desktopViewType === 'several') {
             setStylesForDesktopViewType({
                 catalog_product_card: {
                     width: '30.5%',
@@ -320,7 +315,6 @@ const CatalogPage = ({
             )}
             {IsMobile && breakpoint1023 && products && (
                 <div className={common_styles.container}>
-                    {console.log('products', products)}
                     <CatalogMobileProductList
                         catalogSlug={catalogSlug}
                         subCatalogSlug={subCatalogSlug}
@@ -480,6 +474,10 @@ export const getServerSideProps = async (ctx) => {
     const productSubUrl = ids.join('')
 
     const productsURLReq = await fetch(
+        `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
+    )
+    console.log(
+        'URL',
         `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
     )
     const products = await productsURLReq.json()

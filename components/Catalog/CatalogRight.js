@@ -272,10 +272,6 @@ const CatalogRight = ({
     }
 
     useEffect(() => {
-        console.log('catalog right desktopViewType update', desktopViewType)
-    }, [desktopViewType])
-
-    useEffect(() => {
         setAmount(Math.ceil(filterProductsIds.length / 21))
     }, [filterProductsIds])
 

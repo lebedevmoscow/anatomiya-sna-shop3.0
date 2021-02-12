@@ -35,17 +35,6 @@ const CatalogProductListForDesktop = ({
     const [List, SetList] = useState([])
 
     useEffect(() => {
-        console.log(
-            'catalog product list desktopViewType update',
-            desktopViewType
-        )
-    }, [desktopViewType])
-
-    useEffect(() => {
-        console.log(' catalog product list stylesForDesktopViewType')
-    }, [stylesForDesktopViewType])
-
-    useEffect(() => {
         if (!IsMobile) {
             SetList(render())
         } else {
@@ -83,6 +72,7 @@ const CatalogProductListForDesktop = ({
 
             ElemenetsArray.push(
                 <CatalogProductCard
+                    OptionsList={OptionsList}
                     IsMobile={IsMobile}
                     InitialSize={InitialSize}
                     catalogSlug={catalogSlug}
@@ -171,6 +161,7 @@ const CatalogProductListForDesktop = ({
 
             ElemenetsArray.push(
                 <CatalogProductCard
+                    OptionsList={OptionsList}
                     IsMobile={IsMobile}
                     InitialSize={InitialSize}
                     catalogSlug={catalogSlug}

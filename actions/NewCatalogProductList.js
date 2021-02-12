@@ -132,8 +132,6 @@ export const LoadByFilters = (
 ) => async (dispatch) => {
     // dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING })
 
-    console.log('sortType', sortType)
-
     let finalUrl = false
     try {
         const mainUrl = 'https://www.anatomiyasna.ru'
@@ -209,7 +207,6 @@ export const LoadByFilters = (
                         sortType[i].title === 'Скидка' &&
                         sortType[i].isActive
                     ) {
-                        console.log('Скидка')
                         url = url + `&filter[selectedFlags][]=discount`
                     }
                     if (

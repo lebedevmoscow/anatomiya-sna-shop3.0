@@ -141,12 +141,12 @@ const CatalogTopFilter = ({
                     sortType
                 )
             )
-            console.log('sortType', sortType)
         }
     }, [sortType])
 
     const onSortByClickHandler = (title) => {
         const clone = sortType.concat()
+
         for (let i = 0; i < clone.length; i++) {
             if (title === 'Цене') {
                 for (let j = 0; j < clone.length; j++) {
@@ -154,17 +154,21 @@ const CatalogTopFilter = ({
                         clone[j].isActive = false
                     }
                 }
-                clone[i].isActive = true
-                if (clone[i].sort === 'up-to-down') {
-                    clone[i].sort = 'down-to-up'
-                } else if (clone[i].sort === 'down-to-up') {
-                    clone[i].sort = 'up-to-down'
+                if (clone[i].title === 'Цене') {
+                    clone[i].isActive = true
+                    if (clone[i].sort === 'up-to-down') {
+                        clone[i].sort = 'down-to-up'
+                    } else if (clone[i].sort === 'down-to-up') {
+                        clone[i].sort = 'up-to-down'
+                    }
                 }
             } else if (title === 'Популярности') {
-                clone[i].isActive = !clone[i].isActive
-                for (let j = 0; j < clone.length; j++) {
-                    if (clone[j].title === 'Цене') {
-                        clone[j].isActive = false
+                if (clone[i].title === 'Популярности') {
+                    clone[i].isActive = !clone[i].isActive
+                    for (let j = 0; j < clone.length; j++) {
+                        if (clone[j].title === 'Цене') {
+                            clone[j].isActive = false
+                        }
                     }
                 }
             } else {
