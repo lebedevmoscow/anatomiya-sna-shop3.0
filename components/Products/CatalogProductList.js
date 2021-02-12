@@ -31,9 +31,16 @@ const CatalogProductListForDesktop = ({
     newProducts = false,
     IsMobile = false,
     articles,
+    headers,
 }) => {
     const SelectedSizeRedux = useSelector((store) => store.SelectedSizeReducer)
+    const CatalogCommonReducer = useSelector(
+        (store) => store.CatalogCommonReducer
+    )
 
+    const [Articles, SetArticles] = useState(
+        <ArticleListCatalog list={articles} />
+    )
     const [List, SetList] = useState([])
 
     useEffect(() => {
@@ -43,6 +50,24 @@ const CatalogProductListForDesktop = ({
             SetList(renderMobile())
         }
     }, [stylesForViewType, stylesForDesktopViewType, firstLoadProducts])
+
+    useEffect(() => {
+        if (CatalogCommonReducer.page !== 1) {
+            const req = async () => {
+                const r = await fetch(
+                    `https://anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=${CatalogCommonReducer.page}`
+                )
+                const res = await r.json()
+                console.log('res', res)
+                console.log(
+                    'url',
+                    `https://anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=${CatalogCommonReducer.page}`
+                )
+                SetArticles(<ArticleListCatalog list={res} />)
+            }
+            req()
+        }
+    }, [CatalogCommonReducer.page])
 
     let subIndex = 0
 
@@ -123,9 +148,7 @@ const CatalogProductListForDesktop = ({
                     subIndex++
                     if (subIndex === rand) {
                         EqualHeightArray.push(
-                            <EqualHeight key={uuidv4()}>
-                                <ArticleListCatalog list={articles} />
-                            </EqualHeight>
+                            <EqualHeight key={uuidv4()}>{Articles}</EqualHeight>
                         )
                     }
                     EqualHeightArray.push(

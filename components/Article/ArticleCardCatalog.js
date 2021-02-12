@@ -1,7 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 
 import styles from './../../styles/components/Article/ArticleCardCatalog.module.sass'
+
+const EqualHeightElement = dynamic(
+    () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
+    { ssr: false }
+)
 
 const ArticleCardCatalog = ({ data }) => {
     console.log('data', data)
@@ -11,22 +17,31 @@ const ArticleCardCatalog = ({ data }) => {
                 <a>
                     <div
                         className={styles.article_catalog_column__image_wrapper}
+                        style={{
+                            height: '167px',
+                            width: '298px',
+                            position: 'relative',
+                        }}
                     >
                         <Image
                             className={styles.article_catalog_column__image}
-                            width={298}
-                            height={167}
+                            // width={298}
+                            // height={167}
+                            layout={'fill'}
                             src={data.Image}
                         />
                     </div>
                     <div className={styles.article_catalog_column__text}>
-                        <div
-                            className={
-                                styles.article_catalog_column__text_title
-                            }
-                        >
-                            {data.Title}
-                        </div>
+                        <EqualHeightElement name="catalog__title">
+                            <div
+                                className={
+                                    styles.article_catalog_column__text_title
+                                }
+                            >
+                                {data.Title}
+                            </div>
+                        </EqualHeightElement>
+
                         <div
                             className={
                                 styles.article_catalog_column__text_author

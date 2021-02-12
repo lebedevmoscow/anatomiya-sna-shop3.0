@@ -279,6 +279,7 @@ const CatalogRight = ({
     useEffect(() => {
         setFirstProductList(
             <CatalogProductListForDesktop
+                headers={headers}
                 articles={articles}
                 catalogSlug={catalogSlug}
                 desktopViewType={desktopViewType}
@@ -306,6 +307,7 @@ const CatalogRight = ({
                 {data.map((d, index) => {
                     return (
                         <CatalogProductListForDesktop
+                            headers={headers}
                             articles={articles}
                             key={index}
                             catalogSlug={catalogSlug}
@@ -337,6 +339,7 @@ const CatalogRight = ({
         if (CatalogProductListReducer.products.length !== 0) {
             setFirstProductList(
                 <CatalogProductListForDesktop
+                    headers={headers}
                     articles={articles}
                     catalogSlug={catalogSlug}
                     desktopViewType={desktopViewType}
@@ -382,6 +385,7 @@ const CatalogRight = ({
                 // setTimeout(() => {
                 setFirstProductList(
                     <CatalogProductListForDesktop
+                        headers={headers}
                         articles={articles}
                         catalogSlug={catalogSlug}
                         desktopViewType={desktopViewType}
@@ -398,6 +402,7 @@ const CatalogRight = ({
             } else {
                 setFirstProductList(
                     <CatalogProductListForDesktop
+                        headers={headers}
                         articles={articles}
                         catalogSlug={catalogSlug}
                         desktopViewType={desktopViewType}
