@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import CatalogProductCard from './CatalogProductCard'
-import { v4 as uuidv4 } from 'uuid'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'

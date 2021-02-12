@@ -857,7 +857,9 @@ const CatalogProductCard = ({
                             })}
                     </ul>
                 </div>
-                <span className={styles.line}></span>
+                {OptionsList && OptionsList.length > 0 && (
+                    <span className={styles.line}></span>
+                )}
 
                 <EqualHeightElement name="CatalogProductCard__options">
                     <div className={styles.catalog_product_card__info_block}>
