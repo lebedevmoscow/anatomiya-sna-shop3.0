@@ -104,7 +104,6 @@ const CatalogMainFilter = ({
                 againClone.push(clone[i])
             }
         }
-        // dispatch({ type: CATALOG_SET_FILTERS, payload: againClone })
 
         dispatch(catalogSetFilters(againClone))
         setFilterStatus(againClone)
@@ -201,6 +200,23 @@ const CatalogMainFilter = ({
         setTitleOfAdditionMenu(title)
     }
 
+    const getActiveFilters = (filterTitle) => {
+        const data = []
+        for (let i = 0; i < filterStatus.length; i++) {
+            if (filterStatus[i].filter.title === filterTitle) {
+                for (let j = 0; j < filterStatus[i].inner.length; j++) {
+                    if (filterStatus[i].inner[j].status === 'opened') {
+                        console.log('opened')
+                        data.push(
+                            <p>{filterStatus[i].inner[j].property.label} ,</p>
+                        )
+                    }
+                }
+            }
+        }
+        return data
+    }
+
     const getCheckedStyle = (index, title) => {
         if (click % 2 === 0) {
             const clone = filterStatus.concat()
@@ -258,7 +274,8 @@ const CatalogMainFilter = ({
                                 </div>
                                 <div className={styles.wrap2}>
                                     <span className={styles.yellow}>
-                                        от 5170 до 89590
+                                        от {filterAPIData.price.min} до{' '}
+                                        {filterAPIData.price.max}
                                     </span>
                                     <span className={styles.plus}>+</span>
                                 </div>
@@ -425,6 +442,9 @@ const CatalogMainFilter = ({
                                             </span>
                                         </div>
                                         <div className={styles.wrap2}>
+                                            <span className={styles.yellow}>
+                                                {getActiveFilters(prop.title)}
+                                            </span>
                                             <span className={styles.plus}>
                                                 +
                                             </span>
