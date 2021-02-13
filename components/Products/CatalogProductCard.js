@@ -882,7 +882,9 @@ const CatalogProductCard = ({
                                                 styles.catalog_product_card__materials_list_item
                                             }
                                         >
-                                            + {OptionsList.length - 5} цвета
+                                            <span>
+                                                + {OptionsList.length - 5} цвета
+                                            </span>
                                         </li>
                                     )
                                 }
@@ -894,15 +896,12 @@ const CatalogProductCard = ({
                                         }
                                     >
                                         <Image
-                                            style={
-                                                viewTypeStyles.catalog_product_card__materials_list_item_img
-                                            }
                                             src={
                                                 'https://www.anatomiyasna.ru' +
                                                 opt.data.Image.FilePath
                                             }
-                                            height={25}
-                                            width={25}
+                                            height={IsMobile ? 12.5 : 25}
+                                            width={IsMobile ? 12.5 : 25}
                                         />
                                     </li>
                                 )
