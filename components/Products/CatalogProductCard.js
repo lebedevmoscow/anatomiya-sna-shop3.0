@@ -594,14 +594,10 @@ const CatalogProductCard = ({
                         }}
                         className="image-wrapper"
                     >
-                        <Image
-                            // className={styles.catalog_product_card__image}
-                            layout="fill"
-                            src={MainImage.FilePath}
-                        />
+                        <Image layout="fill" src={MainImage.FilePath} />
                     </div>
                 )}
-                {!breakpoint769 && (
+                {!breakpoint769 && !IsMobile && (
                     <div
                         style={{
                             height:
@@ -617,17 +613,14 @@ const CatalogProductCard = ({
                         }}
                         className="image-wrapper"
                     >
-                        <Image
-                            // className={styles.catalog_product_card__image}
-                            layout="fill"
-                            src={MainImage.FilePath}
-                        />
+                        <Image layout="fill" src={MainImage.FilePath} />
                     </div>
                 )}
-                {/* <img
-                    className={styles.catalog_product_card__image}
-                    src={MainImage.FilePath}
-                ></img> */}
+
+                {!breakpoint769 && IsMobile && (
+                    <Image layout="fill" src={MainImage.FilePath} />
+                )}
+
                 <div className={styles.catalog_product_card__smalltext}>
                     Купить {CatalogType}
                 </div>
