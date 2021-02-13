@@ -4,6 +4,7 @@ import common_styles from './../../styles/common.module.sass'
 import CatalogProductList from './../Products/CatalogProductList'
 import LoadMoreButton from './../Button/LoadMoreButton'
 import CatalogPagination from './../Pagination/CatalogPagination'
+import ArticleCatalogSwiperList from './../Article/ArticleCatalogSwiperList'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,6 +27,7 @@ const CatalogMobileProductList = ({
     lastClick,
     setLastClick,
     headers,
+    articles,
 }) => {
     const oldMin = filterAPIData.price.min
     const oldMax = filterAPIData.price.max
@@ -423,6 +425,7 @@ const CatalogMobileProductList = ({
     return (
         <>
             {firstProductList}
+            <ArticleCatalogSwiperList list={articles} />
             {list}
             <div
                 onClick={() => {

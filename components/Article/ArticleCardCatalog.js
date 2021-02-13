@@ -9,7 +9,7 @@ const EqualHeightElement = dynamic(
     { ssr: false }
 )
 
-const ArticleCardCatalog = ({ data }) => {
+const ArticleCardCatalog = ({ data, mobile = false }) => {
     console.log('data', data)
     return (
         <div className={styles.article_catalog_column}>
@@ -17,11 +17,19 @@ const ArticleCardCatalog = ({ data }) => {
                 <a>
                     <div
                         className={styles.article_catalog_column__image_wrapper}
-                        style={{
-                            height: '167px',
-                            width: '298px',
-                            position: 'relative',
-                        }}
+                        style={
+                            !mobile
+                                ? {
+                                      height: '167px',
+                                      width: '298px',
+                                      position: 'relative',
+                                  }
+                                : {
+                                      height: '167px',
+                                      width: '278px',
+                                      position: 'relative',
+                                  }
+                        }
                     >
                         <Image
                             className={styles.article_catalog_column__image}

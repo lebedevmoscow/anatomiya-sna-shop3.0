@@ -329,6 +329,7 @@ const CatalogPage = ({
                         lastClick={lastClick}
                         setLastClick={setLastClick}
                         IsMobile={IsMobile}
+                        articles={articles}
                     />
                     {/* <CatalogProductList
                         catalogSlug={catalogSlug}
