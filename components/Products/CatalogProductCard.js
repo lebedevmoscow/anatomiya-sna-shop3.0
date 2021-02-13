@@ -278,6 +278,7 @@ const CatalogProductCard = ({
 
         SetLastSelector(
             <Select
+                isDisabled={OptionsForSelect.length === 1 ? true : false}
                 onChange={(data) => {
                     SetCurrentSize(data)
                     OnSelectSize(data)
@@ -312,12 +313,25 @@ const CatalogProductCard = ({
 
     // Style for react-select
     const colourStyles = {
-        control: (styles) => ({
-            ...styles,
-            backgroundColor: 'white',
-            padding: '7px 0px 7px 7px',
-            textAlign: 'center',
-        }),
+        control: (styles) => {
+            if (OptionsForSelect.length > 1) {
+                return {
+                    ...styles,
+                    backgroundColor: 'white',
+                    padding: '7px 0px 7px 7px',
+                    textAlign: 'center',
+                }
+            } else {
+                return {
+                    ...styles,
+                    backgroundColor: '#F5F5F5',
+                    color: '#888',
+                    border: '1px solid #ccc !important',
+                    padding: '7px 0px 7px 7px',
+                    textAlign: 'center',
+                }
+            }
+        },
         option: (styles, { isFocused }) => {
             return {
                 ...styles,
@@ -329,6 +343,32 @@ const CatalogProductCard = ({
             return {
                 ...styles,
                 left: '16%',
+            }
+        },
+        dropdownIndicator: (styles) => {
+            if (OptionsForSelect.length === 1) {
+                return {
+                    ...styles,
+                    visibility: 'hidden',
+                }
+            } else {
+                return {
+                    ...styles,
+                    visibility: 'visible',
+                }
+            }
+        },
+        indicatorSeparator: (styles) => {
+            if (OptionsForSelect.length === 1) {
+                return {
+                    ...styles,
+                    visibility: 'hidden',
+                }
+            } else {
+                return {
+                    ...styles,
+                    visibility: 'visible',
+                }
             }
         },
         menuList: (styles) => {
@@ -444,6 +484,7 @@ const CatalogProductCard = ({
     useEffect(() => {
         SetSizeSelector(
             <Select
+                isDisabled={OptionsForSelect.length === 1 ? true : false}
                 onChange={(data) => {
                     SetCurrentSize(data)
                     OnSelectSize(data)
