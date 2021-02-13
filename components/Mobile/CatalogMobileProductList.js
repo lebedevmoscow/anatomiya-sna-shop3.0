@@ -330,7 +330,7 @@ const CatalogMobileProductList = ({
                 IsMobile={true}
             />
         )
-    }, [firstLoadProducts, filterProductsIds])
+    }, [firstLoadProducts, filterProductsIds, viewType, stylesForViewType])
 
     useEffect(() => {
         setAmount(Math.ceil(filterProductsIds.length / 20))
@@ -354,12 +354,14 @@ const CatalogMobileProductList = ({
                             filterProductsIds={filterProductsIds}
                             newProducts={true}
                             IsMobile={true}
+                            stylesForViewType={stylesForViewType}
+                            viewType={viewType}
                         />
                     )
                 })}
             </>
         )
-    }, [data])
+    }, [data, viewType, stylesForViewType])
 
     useEffect(() => {
         setPage(CatalogCommonReducer.page)
@@ -381,6 +383,8 @@ const CatalogMobileProductList = ({
                     oldMax={oldMax}
                     filterProductsIds={filterProductsIds}
                     IsMobile={true}
+                    stylesForViewType={stylesForViewType}
+                    viewType={viewType}
                 />
             )
         }
@@ -422,6 +426,8 @@ const CatalogMobileProductList = ({
                         oldMax={oldMax}
                         filterProductsIds={filterProductsIds}
                         IsMobile={true}
+                        stylesForViewType={stylesForViewType}
+                        viewType={viewType}
                     />
                 )
                 // }, 1000)
@@ -436,6 +442,8 @@ const CatalogMobileProductList = ({
                         oldMax={oldMax}
                         filterProductsIds={filterProductsIds}
                         IsMobile={true}
+                        stylesForViewType={stylesForViewType}
+                        viewType={viewType}
                     />
                 )
             }

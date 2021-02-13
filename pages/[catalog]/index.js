@@ -291,7 +291,7 @@ const CatalogPage = ({
                 onClose={() => {
                     setMainMobileFilterIsOpen(false)
                 }}
-                lastClick={lastClick}
+                viewType={viewType}
                 setLastClick={setLastClick}
                 title={'Подбор по параметрам'}
                 filterProductsIds={filterProductsIds}

@@ -148,7 +148,7 @@ const CatalogProductListForDesktop = ({
             } else {
                 if (Temp !== 0 && Temp % 3 === 0) {
                     subIndex++
-                    if (subIndex === rand) {
+                    if (subIndex === rand && articles.length >= 3) {
                         EqualHeightArray.push(
                             <EqualHeight key={uuidv4()}>{Articles}</EqualHeight>
                         )

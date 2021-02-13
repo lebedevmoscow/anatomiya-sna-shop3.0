@@ -3,10 +3,16 @@ import { SlideDown } from 'react-slidedown'
 import { v4 as uuidv4 } from 'uuid'
 import PopupsTextOnProductCard from './PopupsTextOnProductCard'
 import OutsideClickHandler from 'react-outside-click-handler'
+import Modal from './../Modal'
 
 import popups_styles from './../../styles/components/Popups/Popups.module.sass'
 
-const PopupOnProductCard = ({ ListSaleItem, index, isSale }) => {
+const PopupOnProductCard = ({
+    ListSaleItem,
+    index,
+    isSale,
+    Mobile = false,
+}) => {
     const [PopupIsClosed, SetPopupIsClosed] = useState(true)
     const [Close, SetClose] = useState(0)
 
@@ -42,36 +48,50 @@ const PopupOnProductCard = ({ ListSaleItem, index, isSale }) => {
     }
 
     return (
-        <li
-            style={{
-                border: `1px solid ${ListSaleItem.data.BorderColor}`,
-                backgroundColor: ListSaleItem.data.BackgroundColor,
-                color: ListSaleItem.data.TextColor,
-                padding: '4px 10px',
-                fontSize: '14px',
-                borderRadius: '5px',
-                marginTop: '5px',
-                cursor: 'pointer',
-                zIndex: 10 - index,
-                listStyle: 'none',
-                width: 'fit-content',
-            }}
-            key={index}
-            onClick={() => SetPopupIsClosed(false)}
-        >
-            {ListSaleItem.data.Title}
-            <OutsideClickHandler
-                onOutsideClick={() => {
-                    SetPopupIsClosed(true)
-                }}
-            >
-                <PopupsTextOnProductCard
-                    ListSaleItem={ListSaleItem}
-                    PopupIsClosed={PopupIsClosed}
-                    SetClose={SetClose}
+        <>
+            {/* Modals */}
+            {Mobile && (
+                <Modal
+                    title={ListSaleItem.data.Title}
+                    text={ListSaleItem.data.Text}
+                    onClose={() => SetPopupIsClosed(true)}
+                    closed={PopupIsClosed}
                 />
-            </OutsideClickHandler>
-        </li>
+            )}
+
+            <li
+                style={{
+                    border: `1px solid ${ListSaleItem.data.BorderColor}`,
+                    backgroundColor: ListSaleItem.data.BackgroundColor,
+                    color: ListSaleItem.data.TextColor,
+                    padding: '4px 10px',
+                    fontSize: '14px',
+                    borderRadius: '5px',
+                    marginTop: '5px',
+                    cursor: 'pointer',
+                    zIndex: 10 - index,
+                    listStyle: 'none',
+                    width: 'fit-content',
+                }}
+                key={index}
+                onClick={() => SetPopupIsClosed(false)}
+            >
+                {ListSaleItem.data.Title}
+                {!Mobile && (
+                    <OutsideClickHandler
+                        onOutsideClick={() => {
+                            SetPopupIsClosed(true)
+                        }}
+                    >
+                        <PopupsTextOnProductCard
+                            ListSaleItem={ListSaleItem}
+                            PopupIsClosed={PopupIsClosed}
+                            SetClose={SetClose}
+                        />
+                    </OutsideClickHandler>
+                )}
+            </li>
+        </>
     )
 }
 
@@ -142,6 +162,7 @@ const PopupsOnProductCard = ({
 
             {!IsMobile && (
                 <PopupOnProductCard
+                    Mobile={IsMobile}
                     ListSaleItem={ListSalesList[0]}
                     index={0}
                     key={uuidv4()}
@@ -164,6 +185,7 @@ const PopupsOnProductCard = ({
                         if (!IsMobile && index === 0) return
                         return (
                             <PopupOnProductCard
+                                Mobile={IsMobile}
                                 ListSaleItem={ListSaleItem}
                                 index={index}
                                 key={uuidv4()}

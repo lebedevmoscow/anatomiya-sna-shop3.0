@@ -21,6 +21,8 @@ const CatalogMainFilter = ({
     catalogSlug,
     subCatalogSlug,
     filterProductsIds,
+    stylesForViewType,
+    viewType,
 }) => {
     const oldMin = filterAPIData.price.min
     const oldMax = filterAPIData.price.max

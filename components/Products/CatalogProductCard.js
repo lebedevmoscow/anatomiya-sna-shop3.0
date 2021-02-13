@@ -345,6 +345,7 @@ const CatalogProductCard = ({
             return {
                 ...styles,
                 left: '16%',
+                textAlign: 'center',
             }
         },
         dropdownIndicator: (styles) => {
@@ -859,6 +860,7 @@ const CatalogProductCard = ({
                 </div>
             </div>
             <div
+                className={styles.equalhight__wrapper}
                 style={
                     !breakpoint769 && desktopViewType === 'single'
                         ? { order: 2, width: '280px' }
