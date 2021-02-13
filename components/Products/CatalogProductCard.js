@@ -318,7 +318,8 @@ const CatalogProductCard = ({
                 return {
                     ...styles,
                     backgroundColor: 'white',
-                    padding: '7px 0px 7px 7px',
+                    padding: !IsMobile ? '7px 0px 7px 7px' : '1px 0',
+                    fontSize: IsMobile ? '12px' : '',
                     textAlign: 'center',
                 }
             } else {
@@ -327,7 +328,7 @@ const CatalogProductCard = ({
                     backgroundColor: '#F5F5F5',
                     color: '#888',
                     border: '1px solid #ccc !important',
-                    padding: '7px 0px 7px 7px',
+                    padding: !IsMobile ? '7px 0px 7px 7px' : '1px 0',
                     textAlign: 'center',
                 }
             }
@@ -359,6 +360,13 @@ const CatalogProductCard = ({
             }
         },
         indicatorSeparator: (styles) => {
+            if (IsMobile) {
+                return {
+                    ...styles,
+                    visibility: 'hidden',
+                }
+            }
+
             if (OptionsForSelect.length === 1) {
                 return {
                     ...styles,
