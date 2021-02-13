@@ -650,9 +650,18 @@ const CatalogProductCard = ({
                         >
                             {PriceDiff !== 0 && (
                                 <div
-                                    style={{
-                                        position: 'absolute',
-                                    }}
+                                    style={
+                                        !IsMobile
+                                            ? {
+                                                  position: 'absolute',
+                                              }
+                                            : {
+                                                  position: 'absolute',
+                                                  left: '50%',
+                                                  transform:
+                                                      'translateX(-100%)',
+                                              }
+                                    }
                                     className={
                                         styles.product_card__price_discount
                                     }
