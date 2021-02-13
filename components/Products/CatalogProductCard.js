@@ -328,6 +328,7 @@ const CatalogProductCard = ({
                     backgroundColor: '#F5F5F5',
                     color: '#888',
                     border: '1px solid #ccc !important',
+                    fontSize: IsMobile ? '12px' : '',
                     padding: !IsMobile ? '7px 0px 7px 7px' : '1px 0',
                     textAlign: 'center',
                 }
