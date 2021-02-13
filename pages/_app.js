@@ -6,6 +6,7 @@ import 'reactjs-popup/dist/index.css'
 import 'swiper/swiper-bundle.css'
 
 // Styles
+import './../styles/fonts.sass'
 import './../styles/unmoduled.sass'
 import './../styles/spinners.css'
 

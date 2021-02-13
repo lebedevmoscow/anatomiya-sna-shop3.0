@@ -614,7 +614,10 @@ const CatalogProductCard = ({
                                         }
                                     >
                                         <span>
-                                            {PriceOld}
+                                            {PriceOld.toString().replace(
+                                                /\B(?=(\d{3})+(?!\d))/g,
+                                                ' '
+                                            )}
                                             <div
                                                 className={
                                                     styles.product_card__price_diff
