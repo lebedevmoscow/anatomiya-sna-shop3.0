@@ -129,7 +129,8 @@ export const LoadByFilters = (
     size,
     sortType,
     IsMobile = false,
-    colors = null
+    colors = null,
+    selectedActive
 ) => async (dispatch) => {
     // dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING })
 
@@ -224,6 +225,13 @@ export const LoadByFilters = (
                     }
                 }
             }
+        }
+
+        if (selectedActive) {
+            console.log('da')
+            url =
+                url +
+                `&filter[properties][${selectedActive.id}]=${selectedActive.data.value}`
         }
 
         if (colors) {

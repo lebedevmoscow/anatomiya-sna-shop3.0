@@ -236,6 +236,7 @@ const CatalogLeftFilter = ({
                 }
 
                 const obj = {
+                    id: filterAPIData.properties[i].id,
                     label: filterAPIData.properties[i].title,
                     initial: filterAPIData.properties[i].select[0],
                     update: 0,
@@ -494,10 +495,29 @@ const CatalogLeftFilter = ({
                                     classNamePrefix="main_filter__smain_filter__selectorelector--inner"
                                     placeholder="Все"
                                     onChange={(data) => {
-                                        // setSelectedSize({
-                                        //     label: data.label,
-                                        //     value: data.value,
-                                        // })
+                                        const obj = {
+                                            origin: selectedActive,
+                                            data,
+                                            id: select.id,
+                                        }
+                                        dispatch(
+                                            LoadByFilters(
+                                                filterProductsIds,
+                                                CatalogCommonReducer.page,
+                                                SelectedSizeReducer.sizeId,
+                                                catalogSlug,
+                                                subCatalogSlug,
+                                                oldMin,
+                                                oldMax,
+                                                filterStatus,
+                                                prices,
+                                                selectedSize,
+                                                null,
+                                                false,
+                                                activeColors,
+                                                obj
+                                            )
+                                        )
                                     }}
                                     styles={colourStyles}
                                     options={select.data}
