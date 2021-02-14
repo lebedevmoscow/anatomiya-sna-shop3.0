@@ -128,7 +128,8 @@ export const LoadByFilters = (
     price = null,
     size,
     sortType,
-    IsMobile = false
+    IsMobile = false,
+    colors = null
 ) => async (dispatch) => {
     // dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING })
 
@@ -222,6 +223,13 @@ export const LoadByFilters = (
                         url = url + `&filter[selectedFlags][]=free_delivery`
                     }
                 }
+            }
+        }
+
+        if (colors) {
+            for (let i = 0; i < colors.length; i++) {
+                // console.log('colors', colors[i])
+                url = url + `&filter[colors][]=${colors[i]}`
             }
         }
 

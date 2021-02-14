@@ -237,6 +237,28 @@ const CatalogLeftFilter = ({
     }, [selectedSize])
 
     useEffect(() => {
+        if (activeColors.length > 0) {
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    CatalogCommonReducer.page,
+                    SelectedSizeReducer.sizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    filterStatus,
+                    prices,
+                    selectedSize,
+                    null,
+                    false,
+                    activeColors
+                )
+            )
+        }
+    }, [activeColors])
+
+    useEffect(() => {
         if (click > 0) {
             dispatch(
                 LoadByFilters(
