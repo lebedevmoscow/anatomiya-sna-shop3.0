@@ -239,66 +239,108 @@ const CatalogMainFilter = ({
         }
     }
 
+    const [sortType, setSortType] = useState([
+        { title: 'По популярности', status: 'disabled' },
+        { title: 'По убыванию цены', status: 'disabled' },
+        { title: 'По возрастанию цены', status: 'disabled' },
+        { title: 'Со скидкой', status: 'disabled' },
+        { title: 'Новинка', status: 'disabled' },
+        { title: 'С подарком', status: 'disabled' },
+        { title: 'Выбор покупателей', status: 'disabled' },
+        { title: 'Бесплатная доставка', status: 'disabled' },
+    ])
+
+    const onSortClickHandler = (title) => {
+        console.log('title', title)
+
+        const clone = sortType.concat()
+
+        if (title === 'По популярности') {
+            clone[0].status = 'active'
+            clone[1].status = 'disabled'
+            clone[2].status = 'disabled'
+        }
+        if (title === 'По убыванию цены') {
+            clone[0].status = 'disabled'
+            clone[1].status = 'active'
+            clone[2].status = 'disabled'
+        }
+        if (title === 'По возрастанию цены') {
+            clone[0].status = 'disabled'
+            clone[1].status = 'disabled'
+            clone[2].status = 'active'
+        }
+        if (title === 'Со скидкой') {
+            if (clone[3].status === 'disabled') {
+                clone[3].status = 'active'
+            } else {
+                clone[3].status = 'disabled'
+            }
+        }
+        if (title === 'Новинка') {
+            if (clone[4].status === 'disabled') {
+                clone[4].status = 'active'
+            } else {
+                clone[4].status = 'disabled'
+            }
+        }
+        if (title === 'С подарком') {
+            if (clone[5].status === 'disabled') {
+                clone[5].status = 'active'
+            } else {
+                clone[5].status = 'disabled'
+            }
+        }
+        if (title === 'Выбор покупателей') {
+            if (clone[6].status === 'disabled') {
+                clone[6].status = 'active'
+            } else {
+                clone[6].status = 'disabled'
+            }
+        }
+        if (title === 'Бесплатная доставка') {
+            if (clone[7].status === 'disabled') {
+                clone[7].status = 'active'
+            } else {
+                clone[7].status = 'disabled'
+            }
+        }
+        setSortType(clone)
+    }
+
     const sortHTML = (
         <ul style={{ marginTop: '-15px' }} className={styles.sortmodal__ul}>
-            <li className={styles.sortmodal__li}>
-                <span className={styles.sortmodal__firstspan}>
-                    По популярности
-                </span>
-                <span className={styles.sortmodal__secondspan}>
-                    <span className={styles.sortmodal__inner}></span>
-                </span>
-            </li>
-            <li className={styles.sortmodal__li}>
-                <span className={styles.sortmodal__firstspan}>
-                    По убыванию цены
-                </span>
-                <span className={styles.sortmodal__secondspan}>
-                    <span className={styles.sortmodal__inner}></span>
-                </span>
-            </li>
-            <li className={styles.sortmodal__li}>
-                <span className={styles.sortmodal__firstspan}>
-                    По возрастанию цены
-                </span>
-                <span className={styles.sortmodal__secondspan}>
-                    <span className={styles.sortmodal__inner}></span>
-                </span>
-            </li>
-            <li className={styles.sortmodal__li}>
-                <span className={styles.sortmodal__firstspan}>Со скидкой</span>
-                <span className={styles.sortmodal__secondspan}>
-                    <span className={styles.sortmodal__inner}></span>
-                </span>
-            </li>
-            <li className={styles.sortmodal__li}>
-                <span className={styles.sortmodal__firstspan}>Новинка</span>
-                <span className={styles.sortmodal__secondspan}>
-                    <span className={styles.sortmodal__inner}></span>
-                </span>
-            </li>
-            <li className={styles.sortmodal__li}>
-                <span className={styles.sortmodal__firstspan}>С подарком</span>
-                <span className={styles.sortmodal__secondspan}>
-                    <span className={styles.sortmodal__inner}></span>
-                </span>
-            </li>
-            <li className={styles.sortmodal__li}>
-                <span className={styles.sortmodal__firstspan}>
-                    Выбор покупателей
-                </span>
-                <span className={styles.sortmodal__secondspan}>
-                    <span className={styles.sortmodal__inner}></span>
-                </span>
-            </li>
-            <li className={styles.sortmodal__li}>
-                <span className={styles.sortmodal__firstspan}>
-                    Бесплатная доставка
-                </span>
-                <span className={styles.sortmodal__secondspan}>
-                    <span className={styles.sortmodal__inner}></span>
-                </span>
-            </li>
+            {sortType.map((s, index) => {
+                let innerClassName = ''
+                for (let i = 0; i < sortType.length; i++) {
+                    if (
+                        sortType[i].title === s.title &&
+                        sortType[i].status === 'active'
+                    ) {
+                        innerClassName = styles.sortmodal__active
+                    }
+                }
+                return (
+                    <li
+                        onClick={() => onSortClickHandler(s.title)}
+                        key={index}
+                        className={styles.sortmodal__li}
+                    >
+                        <span className={styles.sortmodal__firstspan}>
+                            {s.title}
+                        </span>
+                        <span className={styles.sortmodal__secondspan}>
+                            <span
+                                className={
+                                    styles.sortmodal__inner +
+                                    ' ' +
+                                    innerClassName
+                                }
+                            ></span>
+                        </span>
+                    </li>
+                )
+            })}
         </ul>
     )
 
