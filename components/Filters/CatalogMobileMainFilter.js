@@ -672,6 +672,7 @@ const CatalogMainFilter = ({
 
                         {properties.map((prop, index) => {
                             if (prop.select && prop.select.length > 0) return
+                            if (prop.range) return
                             return (
                                 <li
                                     key={index}
