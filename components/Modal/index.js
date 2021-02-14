@@ -1,6 +1,6 @@
 import styles from './../../styles/components/Modal/index.module.sass'
 
-const Modal = ({ title, closed, text, onClose }) => {
+const Modal = ({ title, closed, text, onClose, html }) => {
     return (
         <div
             style={closed ? { display: 'none' } : { display: 'block' }}
@@ -21,7 +21,7 @@ const Modal = ({ title, closed, text, onClose }) => {
                         ></i>
                         <span>{title}</span>
                     </div>
-                    <div className={styles.text}>{text}</div>
+                    <div className={styles.text}>{text || html}</div>
                     <div className={styles.buttons}>
                         <button className={styles.button__more}>
                             Подробнее

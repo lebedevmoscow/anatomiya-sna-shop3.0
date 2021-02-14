@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Select from 'react-select'
 import { Range, getTrackBackground } from 'react-range'
+import Modal from './../Modal'
 
 import styles from './../../styles/components/Filters/CatalogMobileMobileFilter.module.sass'
 
@@ -238,8 +239,79 @@ const CatalogMainFilter = ({
         }
     }
 
+    const sortHTML = (
+        <ul style={{ marginTop: '-15px' }} className={styles.sortmodal__ul}>
+            <li className={styles.sortmodal__li}>
+                <span className={styles.sortmodal__firstspan}>
+                    По популярности
+                </span>
+                <span className={styles.sortmodal__secondspan}>
+                    <span className={styles.sortmodal__inner}></span>
+                </span>
+            </li>
+            <li className={styles.sortmodal__li}>
+                <span className={styles.sortmodal__firstspan}>
+                    По убыванию цены
+                </span>
+                <span className={styles.sortmodal__secondspan}>
+                    <span className={styles.sortmodal__inner}></span>
+                </span>
+            </li>
+            <li className={styles.sortmodal__li}>
+                <span className={styles.sortmodal__firstspan}>
+                    По возрастанию цены
+                </span>
+                <span className={styles.sortmodal__secondspan}>
+                    <span className={styles.sortmodal__inner}></span>
+                </span>
+            </li>
+            <li className={styles.sortmodal__li}>
+                <span className={styles.sortmodal__firstspan}>Со скидкой</span>
+                <span className={styles.sortmodal__secondspan}>
+                    <span className={styles.sortmodal__inner}></span>
+                </span>
+            </li>
+            <li className={styles.sortmodal__li}>
+                <span className={styles.sortmodal__firstspan}>Новинка</span>
+                <span className={styles.sortmodal__secondspan}>
+                    <span className={styles.sortmodal__inner}></span>
+                </span>
+            </li>
+            <li className={styles.sortmodal__li}>
+                <span className={styles.sortmodal__firstspan}>С подарком</span>
+                <span className={styles.sortmodal__secondspan}>
+                    <span className={styles.sortmodal__inner}></span>
+                </span>
+            </li>
+            <li className={styles.sortmodal__li}>
+                <span className={styles.sortmodal__firstspan}>
+                    Выбор покупателей
+                </span>
+                <span className={styles.sortmodal__secondspan}>
+                    <span className={styles.sortmodal__inner}></span>
+                </span>
+            </li>
+            <li className={styles.sortmodal__li}>
+                <span className={styles.sortmodal__firstspan}>
+                    Бесплатная доставка
+                </span>
+                <span className={styles.sortmodal__secondspan}>
+                    <span className={styles.sortmodal__inner}></span>
+                </span>
+            </li>
+        </ul>
+    )
+
     return (
         <div className={styles.catalog_main_mobile_filter}>
+            {/* Modals */}
+            <Modal
+                title={'Сортировать по:'}
+                closed={false}
+                onClose={() => {}}
+                html={sortHTML}
+            />
+
             <div
                 className={`${styles.mobile_burger_menu_city_choise}  mobile-main-filter__${className}`}
             >

@@ -60,6 +60,71 @@
             position: relative
             z-index: 10
 
+    .sortmodal__ul
+        flex-direction: column
+        align-items: stretch
+        flex-wrap: wrap
+        margin: 0
+        padding: 0
+        list-style: none
+        display: flex
+
+    .sortmodal__li
+        display: flex
+        justify-content: space-between
+        color: #fff
+        border-color: hsla(0,0%,100%,.5)
+        position: relative
+        font-size: 14px
+        font-weight: 400
+        line-height: 1
+        width: 100%
+        padding: 15px 0
+        border: none
+        border-bottom: 1px solid hsla(0,0%,100%,.5)
+        margin-left: 0
+        border-radius: 0
+
+    .sortmodal__firstspan
+        border-color: transparent
+        border: none
+        margin: 0
+        display: inline-block
+        color: #fff
+        font-size: 14px
+        font-weight: 400
+
+    .sortmodal__secondspan
+        display: block
+        position: absolute
+        right: 0
+        top: 50%
+        margin-top: -12px
+        width: 50px
+        height: 24px
+        border: 1px solid #fff
+        background: hsla(0,0%,100%,.5)
+        border-radius: 12px
+
+    .sortmodal__inner
+        transform: translateX(26px)
+        background: #ffdb4d
+        content: ""
+        position: absolute
+        left: -23px
+        top: 2px
+        width: 18px
+        height: 18px
+        border-radius: 100%
+        background: #fff
+        transition: transform .3s ease
+        font-size: 14px
+        font-weight: 400
+
+    .sortmodal__active
+        background: #ffdb4d
+        left: 2px
+
     .wrapper
         width: 100%
         display: flex
