@@ -21,6 +21,8 @@ const CatalogLeftFilter = ({
     subCatalogSlug,
     setLastClick,
 }) => {
+    console.log('filterAPIData', filterAPIData)
+
     const dispatch = useDispatch()
 
     const SelectedSizeReducer = useSelector(
@@ -42,10 +44,9 @@ const CatalogLeftFilter = ({
     ])
     const [sizeSelector, setSizeSelector] = useState(null)
     const [closeStatus, setCloseStatus] = useState([])
-
     const [selectedSize, setSelectedSize] = useState(null)
-
     const [activeColors, setActiveColors] = useState([])
+    const [selectedActive, setSelectedActive] = useState([])
 
     const colourStyles = {
         control: (styles) => ({ ...styles, backgroundColor: 'white' }),
@@ -214,6 +215,42 @@ const CatalogLeftFilter = ({
         }
         setFilterStatus(filter_status)
 
+        const a = []
+        for (let i = 0; i < filterAPIData.properties.length; i++) {
+            if (
+                filterAPIData.properties[i].select &&
+                filterAPIData.properties[i].select.length > 0
+            ) {
+                const selectedData = []
+
+                for (
+                    let j = 0;
+                    j < filterAPIData.properties[i].select.length;
+                    j++
+                ) {
+                    if (
+                        filterAPIData.properties[i].select[j].productCount > 0
+                    ) {
+                        selectedData.push(filterAPIData.properties[i].select[j])
+                    }
+                }
+
+                const obj = {
+                    label: filterAPIData.properties[i].title,
+                    initial: filterAPIData.properties[i].select[0],
+                    update: 0,
+                    data: selectedData,
+                }
+
+                a.push(obj)
+            }
+        }
+        if (a.length > 0) {
+            setSelectedActive(a)
+        }
+
+        console.log('a', a)
+
         return () => setSizeSelector(null)
     }, [])
 
@@ -230,7 +267,10 @@ const CatalogLeftFilter = ({
                     oldMax,
                     filterStatus,
                     prices,
-                    selectedSize
+                    selectedSize,
+                    null,
+                    false,
+                    activeColors
                 )
             )
         }
@@ -270,7 +310,11 @@ const CatalogLeftFilter = ({
                     oldMin,
                     oldMax,
                     filterStatus,
-                    prices
+                    prices,
+                    selectedSize,
+                    null,
+                    false,
+                    activeColors
                 )
             )
         }
@@ -423,8 +467,51 @@ const CatalogLeftFilter = ({
                 </div>
             </div>
 
+            {selectedActive &&
+                selectedActive.length > 0 &&
+                selectedActive.map((select, index) => {
+                    console.log('select', select)
+                    return (
+                        <div
+                            key={index}
+                            className={`${styles.catalog_left_filter__tab_wrapper} ${styles.opened}`}
+                        >
+                            <div
+                                className={
+                                    styles.catalog_left_filter__tab_wrapper_title
+                                }
+                            >
+                                <span className={styles.arrow}></span>
+                                <span className={styles.text}>
+                                    {select.label}
+                                </span>
+                            </div>
+                            <div
+                                className={`${styles.catalog_left_filter__tab_wrapper_inner} ${styles.catalog_left_filter__tab_wrapper_inner__size}`}
+                            >
+                                <Select
+                                    className=""
+                                    classNamePrefix="main_filter__smain_filter__selectorelector--inner"
+                                    placeholder="Все"
+                                    onChange={(data) => {
+                                        // setSelectedSize({
+                                        //     label: data.label,
+                                        //     value: data.value,
+                                        // })
+                                    }}
+                                    styles={colourStyles}
+                                    options={select.data}
+                                    isSearchable={false}
+                                    autoFocus={false}
+                                />
+                            </div>
+                        </div>
+                    )
+                })}
+
             {filterStatus.length > 0 &&
                 properties.map((property, index) => {
+                    if (property.select) return
                     return (
                         <div
                             key={index}
@@ -452,7 +539,7 @@ const CatalogLeftFilter = ({
                                     styles.catalog_left_filter__tab_wrapper_inner
                                 }
                             >
-                                {property.select && (
+                                {/* {property.select && (
                                     <Select
                                         className="main_filter__selector"
                                         classNamePrefix="main_filter__selector--inner"
@@ -462,7 +549,7 @@ const CatalogLeftFilter = ({
                                         isSearchable={false}
                                         autoFocus={false}
                                     />
-                                )}
+                                )} */}
                                 {property.checkboxes &&
                                     property.checkboxes.length !== 0 && (
                                         <ul
