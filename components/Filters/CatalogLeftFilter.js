@@ -491,8 +491,8 @@ const CatalogLeftFilter = ({
                                 className={`${styles.catalog_left_filter__tab_wrapper_inner} ${styles.catalog_left_filter__tab_wrapper_inner__size}`}
                             >
                                 <Select
-                                    className=""
-                                    classNamePrefix="main_filter__smain_filter__selectorelector--inner"
+                                    className="main_filter__selector"
+                                    classNamePrefix="main_filter__selector--inner"
                                     placeholder="Все"
                                     onChange={(data) => {
                                         const obj = {
