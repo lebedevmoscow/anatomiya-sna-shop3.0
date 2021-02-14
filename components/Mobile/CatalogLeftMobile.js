@@ -1,6 +1,11 @@
+import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import URL from './../../components/URLComponent'
 import Link from 'next/link'
+import Modal from './../Modal'
+
+import { useSelector, useDispatch } from 'react-redux'
+import { catalogSetTopFilter } from './../../actions/CatalogCommon'
 
 import styles from './../../styles/components/Mobile/CatalogLeftMobile.module.sass'
 
@@ -12,8 +17,124 @@ const CatalogLeftMobile = ({
     viewType,
     headers,
 }) => {
+    const dispatch = useDispatch()
+
+    const [sortType, setSortType] = useState([
+        { title: 'По популярности', status: 'disabled' },
+        { title: 'По убыванию цены', status: 'disabled' },
+        { title: 'По возрастанию цены', status: 'disabled' },
+        { title: 'Со скидкой', status: 'disabled' },
+        { title: 'Новинка', status: 'disabled' },
+        { title: 'С подарком', status: 'disabled' },
+        { title: 'Выбор покупателей', status: 'disabled' },
+        { title: 'Бесплатная доставка', status: 'disabled' },
+    ])
+
+    const onSortClickHandler = (title) => {
+        console.log('title', title)
+
+        const clone = sortType.concat()
+
+        if (title === 'По популярности') {
+            clone[0].status = 'active'
+            clone[1].status = 'disabled'
+            clone[2].status = 'disabled'
+        }
+        if (title === 'По убыванию цены') {
+            clone[0].status = 'disabled'
+            clone[1].status = 'active'
+            clone[2].status = 'disabled'
+        }
+        if (title === 'По возрастанию цены') {
+            clone[0].status = 'disabled'
+            clone[1].status = 'disabled'
+            clone[2].status = 'active'
+        }
+        if (title === 'Со скидкой') {
+            if (clone[3].status === 'disabled') {
+                clone[3].status = 'active'
+            } else {
+                clone[3].status = 'disabled'
+            }
+        }
+        if (title === 'Новинка') {
+            if (clone[4].status === 'disabled') {
+                clone[4].status = 'active'
+            } else {
+                clone[4].status = 'disabled'
+            }
+        }
+        if (title === 'С подарком') {
+            if (clone[5].status === 'disabled') {
+                clone[5].status = 'active'
+            } else {
+                clone[5].status = 'disabled'
+            }
+        }
+        if (title === 'Выбор покупателей') {
+            if (clone[6].status === 'disabled') {
+                clone[6].status = 'active'
+            } else {
+                clone[6].status = 'disabled'
+            }
+        }
+        if (title === 'Бесплатная доставка') {
+            if (clone[7].status === 'disabled') {
+                clone[7].status = 'active'
+            } else {
+                clone[7].status = 'disabled'
+            }
+        }
+        dispatch(catalogSetTopFilter(clone))
+        setSortType(clone)
+    }
+
+    const sortHTML = (
+        <ul style={{ marginTop: '-15px' }} className={styles.sortmodal__ul}>
+            {sortType.map((s, index) => {
+                let innerClassName = ''
+                for (let i = 0; i < sortType.length; i++) {
+                    if (
+                        sortType[i].title === s.title &&
+                        sortType[i].status === 'active'
+                    ) {
+                        innerClassName = styles.sortmodal__active
+                    }
+                }
+                return (
+                    <li
+                        onClick={() => onSortClickHandler(s.title)}
+                        key={index}
+                        className={styles.sortmodal__li}
+                    >
+                        <span className={styles.sortmodal__firstspan}>
+                            {s.title}
+                        </span>
+                        <span className={styles.sortmodal__secondspan}>
+                            <span
+                                className={
+                                    styles.sortmodal__inner +
+                                    ' ' +
+                                    innerClassName
+                                }
+                            ></span>
+                        </span>
+                    </li>
+                )
+            })}
+        </ul>
+    )
+
+    const [ModalIsClosed, SetModalIsClosed] = useState(true)
     return (
         <div className={styles.catalog_left_mobile}>
+            {/* Modals */}
+            <Modal
+                title={'Сортировать по:'}
+                closed={ModalIsClosed}
+                onClose={() => SetModalIsClosed(true)}
+                html={sortHTML}
+            />
             <div className={styles.catalog_left_mobile__url}>
                 <URL />
             </div>
@@ -159,7 +280,7 @@ const CatalogLeftMobile = ({
                             <div className={styles.filter_mobile_count}>1</div>
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide onClick={() => SetModalIsClosed(false)}>
                         <div
                             className={styles.catalog_left_mobile__price_order}
                         >

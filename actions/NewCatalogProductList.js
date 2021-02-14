@@ -130,7 +130,8 @@ export const LoadByFilters = (
     sortType,
     IsMobile = false,
     colors = null,
-    selectedActive
+    selectedActive,
+    topFilter = []
 ) => async (dispatch) => {
     // dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING })
 
@@ -227,12 +228,65 @@ export const LoadByFilters = (
             }
         }
 
-        if (selectedActive) {
-            console.log('da')
-            url =
-                url +
-                `&filter[properties][${selectedActive.id}]=${selectedActive.data.value}`
+        if (topFilter.length > 0) {
+            for (let i = 0; i < topFilter.length; i++) {
+                console.log('topFilter[i]', topFilter[i])
+                if (
+                    topFilter[i].title === 'По популярности' &&
+                    topFilter[i].status === 'active'
+                ) {
+                    url = url + '&filter[sorting]=popular'
+                }
+                if (
+                    topFilter[i].title === 'По убыванию цены' &&
+                    topFilter[i].status === 'active'
+                ) {
+                    url = url + '&filter[sorting]=price_down'
+                }
+                if (
+                    topFilter[i].title === 'По возрастанию цены' &&
+                    topFilter[i].status === 'active'
+                ) {
+                    url = url + '&filter[sorting]=price_up'
+                }
+                if (
+                    topFilter[i].title === 'Со скидкой' &&
+                    topFilter[i].status === 'active'
+                ) {
+                    url = url + '&filter[selectedFlags][]=discount'
+                }
+                if (
+                    topFilter[i].title === 'Новинка' &&
+                    topFilter[i].status === 'active'
+                ) {
+                    url = url + '&filter[selectedFlags][]=newest'
+                }
+                if (
+                    topFilter[i].title === 'С подарком' &&
+                    topFilter[i].status === 'active'
+                ) {
+                    url = url + '&filter[selectedFlags][]=gift'
+                }
+                if (
+                    topFilter[i].title === 'Выбор покупателей' &&
+                    topFilter[i].status === 'active'
+                ) {
+                    url = url + '&filter[selectedFlags][]=recommended'
+                }
+                if (
+                    topFilter[i].title === 'Бесплатная доставка' &&
+                    topFilter[i].status === 'active'
+                ) {
+                    url = url + '&filter[selectedFlags][]=free_delivery'
+                }
+            }
         }
+
+        // if (selectedActive) {
+        //     url =
+        //         url +
+        //         `&filter[properties][${selectedActive.id}]=${selectedActive.data.value}`
+        // }
 
         if (colors) {
             for (let i = 0; i < colors.length; i++) {
