@@ -47,6 +47,7 @@ const CatalogLeftFilter = ({
     const [selectedSize, setSelectedSize] = useState(null)
     const [activeColors, setActiveColors] = useState([])
     const [selectedActive, setSelectedActive] = useState([])
+    const [rangeActive, setRangeActive] = useState([])
 
     const colourStyles = {
         control: (styles) => ({ ...styles, backgroundColor: 'white' }),
@@ -249,8 +250,6 @@ const CatalogLeftFilter = ({
         if (a.length > 0) {
             setSelectedActive(a)
         }
-
-        console.log('a', a)
 
         return () => setSizeSelector(null)
     }, [])
@@ -532,6 +531,7 @@ const CatalogLeftFilter = ({
             {filterStatus.length > 0 &&
                 properties.map((property, index) => {
                     if (property.select) return
+                    if (property.range) return
                     return (
                         <div
                             key={index}
@@ -559,17 +559,6 @@ const CatalogLeftFilter = ({
                                     styles.catalog_left_filter__tab_wrapper_inner
                                 }
                             >
-                                {/* {property.select && (
-                                    <Select
-                                        className="main_filter__selector"
-                                        classNamePrefix="main_filter__selector--inner"
-                                        placeholder="Все"
-                                        styles={colourStyles}
-                                        options={property.select}
-                                        isSearchable={false}
-                                        autoFocus={false}
-                                    />
-                                )} */}
                                 {property.checkboxes &&
                                     property.checkboxes.length !== 0 && (
                                         <ul
@@ -577,12 +566,6 @@ const CatalogLeftFilter = ({
                                                 styles.catalog_left_filter__tab_options
                                             }
                                         >
-                                            {/* {property.checkboxes &&
-                                                renderCheckbox(
-                                                    index,
-                                                    property.checkboxes
-                                                )} */}
-
                                             {property.checkboxes.map(
                                                 (checkbox, index2) => {
                                                     if (

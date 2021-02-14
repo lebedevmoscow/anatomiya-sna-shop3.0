@@ -64,6 +64,7 @@ const CatalogMainFilter = ({
     const [closeStatus, setCloseStatus] = useState([])
     const [filterStatus, setFilterStatus] = useState([])
     const [click, setClick] = useState(0)
+    const [selectedActive, setSelectedActive] = useState([])
 
     const [selectedSize, setSelectedSize] = useState(null)
 
@@ -165,6 +166,43 @@ const CatalogMainFilter = ({
             filter_status.push({ filter: properties[i], inner: clone })
             clone = []
         }
+
+        const a = []
+        for (let i = 0; i < filterAPIData.properties.length; i++) {
+            if (
+                filterAPIData.properties[i].select &&
+                filterAPIData.properties[i].select.length > 0
+            ) {
+                const selectedData = []
+
+                for (
+                    let j = 0;
+                    j < filterAPIData.properties[i].select.length;
+                    j++
+                ) {
+                    if (
+                        filterAPIData.properties[i].select[j].productCount > 0
+                    ) {
+                        selectedData.push(filterAPIData.properties[i].select[j])
+                    }
+                }
+
+                const obj = {
+                    id: filterAPIData.properties[i].id,
+                    label: filterAPIData.properties[i].title,
+                    initial: filterAPIData.properties[i].select[0],
+                    update: 0,
+                    data: selectedData,
+                }
+
+                a.push(obj)
+            }
+        }
+        if (a.length > 0) {
+            setSelectedActive(a)
+        }
+
+        console.log('a', a)
 
         setFilterStatus(filter_status)
     }, [])
@@ -557,7 +595,8 @@ const CatalogMainFilter = ({
                                 </div>
                                 <div className={styles.wrap2}>
                                     <span className={styles.yellow}>
-                                        {selectedSize.label}
+                                        {(selectedSize && selectedSize.label) ||
+                                            ''}
                                     </span>
                                     <span className={styles.plus}>+</span>
                                 </div>
@@ -569,7 +608,70 @@ const CatalogMainFilter = ({
                             )}
                         </li>
 
+                        {console.log('selectedActive', selectedActive)}
+                        {selectedActive &&
+                            selectedActive.length > 0 &&
+                            selectedActive.map((select, index) => {
+                                return (
+                                    <li key={index} className={styles.li}>
+                                        <div className={styles.wrapper}>
+                                            <div className={styles.wrap1}>
+                                                <span className={styles.text}>
+                                                    {select.label}
+                                                </span>
+                                            </div>
+                                            <div className={styles.wrap2}>
+                                                <span className={styles.yellow}>
+                                                    {/* {(selectedSize &&
+                                                        selectedSize.label) ||
+                                                        ''} */}
+                                                </span>
+                                                <span className={styles.plus}>
+                                                    +
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className={styles.selector_block}>
+                                            <Select
+                                                className="main_filter__selector"
+                                                classNamePrefix="main_filter__selector--inner"
+                                                placeholder="Все"
+                                                onChange={(data) => {
+                                                    const obj = {
+                                                        origin: selectedActive,
+                                                        data,
+                                                        id: select.id,
+                                                    }
+                                                    dispatch(
+                                                        LoadByFilters(
+                                                            filterProductsIds,
+                                                            CatalogCommonReducer.page,
+                                                            SelectedSizeReducer.sizeId,
+                                                            catalogSlug,
+                                                            subCatalogSlug,
+                                                            oldMin,
+                                                            oldMax,
+                                                            filterStatus,
+                                                            prices,
+                                                            selectedSize,
+                                                            null,
+                                                            false,
+                                                            null,
+                                                            obj
+                                                        )
+                                                    )
+                                                }}
+                                                options={select.data}
+                                                isSearchable={false}
+                                                autoFocus={false}
+                                            />
+                                        </div>
+                                    </li>
+                                )
+                            })}
+
                         {properties.map((prop, index) => {
+                            if (prop.select && prop.select.length > 0) return
                             return (
                                 <li
                                     key={index}
@@ -603,76 +705,80 @@ const CatalogMainFilter = ({
                                                     styles.catalog_left_filter__tab_options
                                                 }
                                             >
-                                                {prop.checkboxes.map(
-                                                    (prop2, index2) => {
-                                                        if (
-                                                            prop2.productCount !==
-                                                            0
-                                                        ) {
-                                                            return (
-                                                                <li
-                                                                    key={index2}
-                                                                    className={
-                                                                        styles.catalog_left_filter__tab_options_item
-                                                                    }
-                                                                    onClick={() => {
-                                                                        if (
-                                                                            click %
-                                                                                2 ==
-                                                                            0
-                                                                        ) {
-                                                                            onFilterClickHandler(
-                                                                                index,
-                                                                                prop2.label
-                                                                            )
+                                                {prop &&
+                                                    prop.checkboxes.map(
+                                                        (prop2, index2) => {
+                                                            if (
+                                                                prop2.productCount !==
+                                                                0
+                                                            ) {
+                                                                return (
+                                                                    <li
+                                                                        key={
+                                                                            index2
                                                                         }
-                                                                        setClick(
-                                                                            (
-                                                                                p
-                                                                            ) =>
-                                                                                ++p
-                                                                        )
-                                                                    }}
-                                                                >
-                                                                    <label
                                                                         className={
-                                                                            styles.catalog_left_filter__checkbox_container
+                                                                            styles.catalog_left_filter__tab_options_item
                                                                         }
+                                                                        onClick={() => {
+                                                                            if (
+                                                                                click %
+                                                                                    2 ==
+                                                                                0
+                                                                            ) {
+                                                                                onFilterClickHandler(
+                                                                                    index,
+                                                                                    prop2.label
+                                                                                )
+                                                                            }
+                                                                            setClick(
+                                                                                (
+                                                                                    p
+                                                                                ) =>
+                                                                                    ++p
+                                                                            )
+                                                                        }}
                                                                     >
-                                                                        <input
-                                                                            checked={getCheckedStyle(
-                                                                                index,
-                                                                                prop2.label
-                                                                            )}
-                                                                            type="checkbox"
-                                                                        />
-                                                                        <span
+                                                                        <label
                                                                             className={
-                                                                                styles.catalog_left_filter__checkmark
-                                                                            }
-                                                                        ></span>
-                                                                        <h6>
-                                                                            {
-                                                                                prop2.label
-                                                                            }
-                                                                        </h6>
-                                                                        <span
-                                                                            className={
-                                                                                styles.amount
+                                                                                styles.catalog_left_filter__checkbox_container
                                                                             }
                                                                         >
-                                                                            (
-                                                                            {
-                                                                                prop2.productCount
-                                                                            }
-                                                                            )
-                                                                        </span>
-                                                                    </label>
-                                                                </li>
-                                                            )
+                                                                            <input
+                                                                                checked={getCheckedStyle(
+                                                                                    index,
+                                                                                    prop2.label
+                                                                                )}
+                                                                                type="checkbox"
+                                                                            />
+                                                                            <span
+                                                                                className={
+                                                                                    styles.catalog_left_filter__checkmark
+                                                                                }
+                                                                            ></span>
+                                                                            <h6>
+                                                                                {
+                                                                                    prop2.label
+                                                                                }
+                                                                            </h6>
+                                                                            <span
+                                                                                className={
+                                                                                    styles.amount
+                                                                                }
+                                                                            >
+                                                                                (
+                                                                                {
+                                                                                    prop2.productCount
+                                                                                }
+
+                                                                                )
+                                                                            </span>
+                                                                        </label>
+                                                                    </li>
+                                                                )
+                                                            }
                                                         }
-                                                    }
-                                                )}
+                                                    )}
                                             </ul>
                                         </div>
                                     )}
