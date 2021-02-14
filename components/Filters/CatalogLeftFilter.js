@@ -45,6 +45,8 @@ const CatalogLeftFilter = ({
 
     const [selectedSize, setSelectedSize] = useState(null)
 
+    const [activeColors, setActiveColors] = useState([])
+
     const colourStyles = {
         control: (styles) => ({ ...styles, backgroundColor: 'white' }),
         option: (styles, { data, isFocused }) => {
@@ -63,6 +65,29 @@ const CatalogLeftFilter = ({
                 fontSize: '14px',
             }
         },
+    }
+
+    const onColorClick = (title) => {
+        const clone = activeColors.concat()
+        for (let i = 0; i < colors.length; i++) {
+            if (colors[i].label === title) {
+                let flag = false
+                for (let j = 0; j < clone.length; j++) {
+                    if (colors[i].value === clone[j]) {
+                        flag = true
+                    }
+                }
+                if (!flag) {
+                    console.log('push')
+                    clone.push(colors[i].value)
+                } else if (flag) {
+                    console.log('rm')
+                    clone.splice(i, 1)
+                }
+            }
+        }
+        setActiveColors(clone)
+        console.log('clone', clone)
     }
 
     const OnCloseFilterClickHandler = (title) => {
@@ -532,6 +557,12 @@ const CatalogLeftFilter = ({
                                         className={
                                             styles.catalog_left_filter__tab_options_item
                                         }
+                                        onClick={() => {
+                                            if (click % 2 === 0) {
+                                                onColorClick(color.label)
+                                            }
+                                            setClick((p) => ++p)
+                                        }}
                                     >
                                         <label
                                             className={
