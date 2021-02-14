@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import useMeida from './../../hooks/useMedia'
 
 import styles from './../../styles/components/Pagination/CatalogPagination.module.sass'
 
@@ -9,6 +10,7 @@ const CatalogPagination = ({
     current,
     onPageClickHandler,
 }) => {
+    const breakpoint769 = useMeida(769)
     const [pagList, setPagList] = useState([])
 
     const renderPaginationSystem = () => {
