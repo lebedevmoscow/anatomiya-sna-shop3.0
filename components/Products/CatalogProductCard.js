@@ -1013,6 +1013,91 @@ const CatalogProductCard = ({
                         </EqualHeightElement>
                     </div>
 
+                    {breakpoint769 && (
+                        <div className={styles.mobile__btns}>
+                            <div
+                                style={
+                                    isCompared
+                                        ? {
+                                              backgroundColor: '#0ca5d3',
+                                              borderColor: '#0ca5d3',
+                                          }
+                                        : {}
+                                }
+                                onClick={() => {
+                                    onAddToCompareClickHandler()
+                                }}
+                                className={styles.mobile__btns__item}
+                            >
+                                <div
+                                    className={
+                                        styles.mobile__btns__image_wrapper
+                                    }
+                                >
+                                    {isCompared && (
+                                        <Image
+                                            src={WhiteStats}
+                                            width={25}
+                                            height={25}
+                                            className={
+                                                styles.mobile__btns__image
+                                            }
+                                        />
+                                    )}
+                                    {!isCompared && (
+                                        <Image
+                                            src={StatsImage}
+                                            width={25}
+                                            height={25}
+                                            className={
+                                                styles.mobile__btns__image
+                                            }
+                                        />
+                                    )}
+                                </div>
+                            </div>
+                            <div
+                                style={
+                                    isFavorite
+                                        ? {
+                                              backgroundColor: '#0ca5d3',
+                                              borderColor: '#0ca5d3',
+                                          }
+                                        : {}
+                                }
+                                onClick={() => onAddToFavoriteClickHandler()}
+                                className={styles.mobile__btns__item}
+                            >
+                                <div
+                                    className={
+                                        styles.mobile__btns__image_wrapper
+                                    }
+                                >
+                                    {isFavorite && (
+                                        <Image
+                                            src={WhiteHeartImage}
+                                            width={25}
+                                            height={25}
+                                            className={
+                                                styles.mobile__btns__image
+                                            }
+                                        />
+                                    )}
+                                    {!isFavorite && (
+                                        <Image
+                                            src={HeartImage}
+                                            width={25}
+                                            height={25}
+                                            className={
+                                                styles.mobile__btns__image
+                                            }
+                                        />
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     {desktopViewType === 'several' && (
                         <div
                             className={

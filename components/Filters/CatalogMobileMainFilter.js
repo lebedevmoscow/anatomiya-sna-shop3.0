@@ -204,6 +204,7 @@ const CatalogMainFilter = ({
             setSelectedActive(a)
         }
 
+        console.log('filter_status', filter_status)
         setFilterStatus(filter_status)
     }, [])
 
@@ -302,21 +303,31 @@ const CatalogMainFilter = ({
         setTitleOfAdditionMenu(title)
     }
 
-    const getActiveFilters = (filterTitle) => {
-        const data = []
-        for (let i = 0; i < filterStatus.length; i++) {
-            if (filterStatus[i].filter.title === filterTitle) {
-                for (let j = 0; j < filterStatus[i].inner.length; j++) {
-                    if (filterStatus[i].inner[j].status === 'opened') {
-                        console.log('opened')
-                        data.push(
-                            <p>{filterStatus[i].inner[j].property.label} ,</p>
-                        )
-                    }
+    const getActiveFilters = (index) => {
+        if (filterStatus.length > 0) {
+            const data = []
+
+            const obj = filterStatus[index]
+            for (let i = 0; i < obj.inner.length; i++) {
+                if (obj.inner[i].status === 'opened') {
+                    console.log('obj.inner[i]', obj.inner[i])
+                    data.push(<p>{obj.inner[i].property.label} ,</p>)
                 }
             }
+
+            // for (let i = 0; i < filterStatus.length; i++) {
+            //     if (filterStatus[i].filter.title === filterTitle) {
+            //         for (let j = 0; j < filterStatus[i].inner.length; j++) {
+            //             if (filterStatus[i].inner[j].status === 'opened') {
+            //                 data.push(
+            //                     <p>{filterStatus[i].inner[j].property.label} ,</p>
+            //                 )
+            //             }
+            //         }
+            //     }
+            // }
+            return data
         }
-        return data
     }
 
     const getCheckedStyle = (index, title) => {
@@ -592,6 +603,11 @@ const CatalogMainFilter = ({
                         {properties.map((prop, index) => {
                             if (prop.select && prop.select.length > 0) return
                             if (prop.range) return
+                            if (
+                                prop.title === 'Жесткость низ' ||
+                                prop.title === 'Жесткость верх'
+                            )
+                                return
                             return (
                                 <li
                                     key={index}
@@ -611,7 +627,7 @@ const CatalogMainFilter = ({
                                         </div>
                                         <div className={styles.wrap2}>
                                             <span className={styles.yellow}>
-                                                {getActiveFilters(prop.title)}
+                                                {getActiveFilters(index)}
                                             </span>
                                             <span className={styles.plus}>
                                                 +
