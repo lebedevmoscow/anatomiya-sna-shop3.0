@@ -65,6 +65,8 @@ const CatalogMainFilter = ({
     const [filterStatus, setFilterStatus] = useState([])
     const [click, setClick] = useState(0)
 
+    const [selectedSize, setSelectedSize] = useState(null)
+
     const onFilterClickHandler = (mainIndex, title) => {
         const clone = filterStatus.concat()
 
@@ -118,6 +120,9 @@ const CatalogMainFilter = ({
                 className="main_filter__selector"
                 classNamePrefix="main_filter__selector--inner"
                 placeholder="Все"
+                onChange={(data) => {
+                    setSelectedSize({ label: data.label, value: data.value })
+                }}
                 options={options}
                 isSearchable={false}
                 autoFocus={false}
@@ -177,6 +182,7 @@ const CatalogMainFilter = ({
                     oldMax,
                     filterStatus,
                     prices,
+                    selectedSize,
                     null,
                     null,
                     true
@@ -184,6 +190,29 @@ const CatalogMainFilter = ({
             )
         }
     }, [filterStatus])
+
+    useEffect(() => {
+        if (selectedSize) {
+            console.log('dis')
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    CatalogCommonReducer.page,
+                    SelectedSizeReducer.sizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    filterStatus,
+                    prices,
+                    selectedSize,
+                    null,
+                    false,
+                    null
+                )
+            )
+        }
+    }, [selectedSize])
 
     const options = filterAPIData.size
 
@@ -347,12 +376,12 @@ const CatalogMainFilter = ({
     return (
         <div className={styles.catalog_main_mobile_filter}>
             {/* Modals */}
-            <Modal
+            {/* <Modal
                 title={'Сортировать по:'}
                 closed={false}
                 onClose={() => {}}
                 html={sortHTML}
-            />
+            /> */}
 
             <div
                 className={`${styles.mobile_burger_menu_city_choise}  mobile-main-filter__${className}`}
@@ -441,7 +470,8 @@ const CatalogMainFilter = ({
                                                     oldMin,
                                                     oldMax,
                                                     filterStatus,
-                                                    prices
+                                                    prices,
+                                                    selectedSize
                                                 )
                                             )
                                         }}
@@ -527,7 +557,7 @@ const CatalogMainFilter = ({
                                 </div>
                                 <div className={styles.wrap2}>
                                     <span className={styles.yellow}>
-                                        {options[0].label}
+                                        {selectedSize.label}
                                     </span>
                                     <span className={styles.plus}>+</span>
                                 </div>
