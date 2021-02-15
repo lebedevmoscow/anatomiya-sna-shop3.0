@@ -386,22 +386,21 @@ const CatalogMainFilter = ({
     }
 
     const getCheckedStyle = (index, title) => {
-        if (click % 2 === 0) {
-            const clone = filterStatus.concat()
-            const obj = clone[index].inner
+        const clone = filterStatus.concat()
+        const obj = clone[index].inner
 
-            for (let i = 0; i < obj.length; i++) {
-                const prop = obj[i].property
-                if (prop.label === title) {
-                    if (obj[i].status === 'closed') {
-                        return false
-                    } else {
-                        return true
-                    }
+        for (let i = 0; i < obj.length; i++) {
+            const prop = obj[i].property
+            if (prop.label === title) {
+                if (obj[i].status === 'closed') {
+                    return false
+                } else {
+                    console.log('TRUEEEE')
+                    return true
                 }
             }
-            return false
         }
+        return false
     }
 
     const getCheckedStyleForColor = (val) => {
@@ -691,13 +690,6 @@ const CatalogMainFilter = ({
                             if (prop.select && prop.select.length > 0) return
                             if (prop.range) return
 
-                            let d
-                            if (
-                                prop.title === 'Жесткость низ' ||
-                                prop.title === 'Жесткость верх'
-                            ) {
-                                d = getActiveFilters(index)
-                            }
                             return (
                                 <li
                                     key={uuidv4()}
@@ -716,9 +708,9 @@ const CatalogMainFilter = ({
                                             </span>
                                         </div>
                                         <div className={styles.wrap2}>
-                                            <span className={styles.yellow}>
-                                                {d}
-                                            </span>
+                                            <span
+                                                className={styles.yellow}
+                                            ></span>
                                             <span className={styles.plus}>
                                                 +
                                             </span>
@@ -745,16 +737,10 @@ const CatalogMainFilter = ({
                                                                             styles.catalog_left_filter__tab_options_item
                                                                         }
                                                                         onClick={() => {
-                                                                            if (
-                                                                                click %
-                                                                                    2 ==
-                                                                                0
-                                                                            ) {
-                                                                                onFilterClickHandler(
-                                                                                    index,
-                                                                                    prop2.label
-                                                                                )
-                                                                            }
+                                                                            onFilterClickHandler(
+                                                                                index,
+                                                                                prop2.label
+                                                                            )
                                                                             setClick(
                                                                                 (
                                                                                     p
@@ -769,7 +755,7 @@ const CatalogMainFilter = ({
                                                                             }
                                                                         >
                                                                             <input
-                                                                                checked={getCheckedStyle(
+                                                                                defaultChecked={getCheckedStyle(
                                                                                     index,
                                                                                     prop2.label
                                                                                 )}
