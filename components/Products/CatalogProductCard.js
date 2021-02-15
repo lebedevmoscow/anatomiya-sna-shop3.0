@@ -921,6 +921,7 @@ const CatalogProductCard = ({
                     <div className={styles.catalog_product_card__info_block}>
                         <ul className={styles.catalog_product_card__info_list}>
                             {Properties.map((property, id) => {
+                                const floored = parseInt(property.Value, 10)
                                 return (
                                     <li
                                         key={id}
@@ -945,7 +946,9 @@ const CatalogProductCard = ({
                                                 styles.catalog_product_card__info_list_item_material
                                             }
                                         >
-                                            {property.Value}
+                                            {isNaN(floored)
+                                                ? property.Value
+                                                : floored}
                                         </div>
                                     </li>
                                 )
