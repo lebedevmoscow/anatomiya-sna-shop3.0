@@ -71,6 +71,7 @@ const CatalogProductCard = ({
     ListSalesList,
     IsMobile,
     OptionsList,
+    Labels,
 }) => {
     const breakpoint769 = useMedia(769)
 
@@ -575,6 +576,7 @@ const CatalogProductCard = ({
             className={styles.catalog_product_card}
         >
             <PopupsOnProductCard
+                Labels={Labels}
                 SalePercent={SalePercent}
                 key={uuidv4()}
                 ListSalesList={ListSalesList}

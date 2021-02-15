@@ -8,10 +8,11 @@ import Modal from './../Modal'
 import popups_styles from './../../styles/components/Popups/Popups.module.sass'
 
 const PopupOnProductCard = ({
-    ListSaleItem,
+    ListSaleItem = null,
     index,
     isSale,
     Mobile = false,
+    ListLabel = null,
 }) => {
     const [PopupIsClosed, SetPopupIsClosed] = useState(true)
     const [Close, SetClose] = useState(0)
@@ -47,52 +48,84 @@ const PopupOnProductCard = ({
         )
     }
 
-    return (
-        <>
-            {/* Modals */}
-            {Mobile && (
-                <Modal
-                    title={ListSaleItem.data.Title}
-                    text={ListSaleItem.data.Text}
-                    onClose={() => SetPopupIsClosed(true)}
-                    closed={PopupIsClosed}
-                />
-            )}
-
-            <li
-                style={{
-                    border: `1px solid ${ListSaleItem.data.BorderColor}`,
-                    backgroundColor: ListSaleItem.data.BackgroundColor,
-                    color: ListSaleItem.data.TextColor,
-                    padding: '4px 10px',
-                    fontSize: '14px',
-                    borderRadius: '5px',
-                    marginTop: '5px',
-                    cursor: 'pointer',
-                    zIndex: 10 - index,
-                    listStyle: 'none',
-                    width: 'fit-content',
-                }}
-                key={index}
-                onClick={() => SetPopupIsClosed(false)}
-            >
-                {ListSaleItem.data.Title}
-                {!Mobile && (
-                    <OutsideClickHandler
-                        onOutsideClick={() => {
-                            SetPopupIsClosed(true)
-                        }}
-                    >
-                        <PopupsTextOnProductCard
-                            ListSaleItem={ListSaleItem}
-                            PopupIsClosed={PopupIsClosed}
-                            SetClose={SetClose}
-                        />
-                    </OutsideClickHandler>
+    if (ListSaleItem) {
+        return (
+            <>
+                {/* Modals */}
+                {Mobile && (
+                    <Modal
+                        title={ListSaleItem.data.Title}
+                        text={ListSaleItem.data.Text}
+                        onClose={() => SetPopupIsClosed(true)}
+                        closed={PopupIsClosed}
+                    />
                 )}
-            </li>
-        </>
-    )
+
+                <li
+                    style={{
+                        border: `1px solid ${ListSaleItem.data.BorderColor}`,
+                        backgroundColor: ListSaleItem.data.BackgroundColor,
+                        color: ListSaleItem.data.TextColor,
+                        padding: '4px 10px',
+                        fontSize: '14px',
+                        borderRadius: '5px',
+                        marginTop: '5px',
+                        cursor: 'pointer',
+                        zIndex: 10 - index,
+                        listStyle: 'none',
+                        width: 'fit-content',
+                    }}
+                    key={index}
+                    onClick={() => SetPopupIsClosed(false)}
+                >
+                    {ListSaleItem.data.Title}
+                    {!Mobile && (
+                        <OutsideClickHandler
+                            onOutsideClick={() => {
+                                SetPopupIsClosed(true)
+                            }}
+                        >
+                            <PopupsTextOnProductCard
+                                ListSaleItem={ListSaleItem}
+                                PopupIsClosed={PopupIsClosed}
+                                SetClose={SetClose}
+                            />
+                        </OutsideClickHandler>
+                    )}
+                </li>
+            </>
+        )
+    }
+    if (ListLabel) {
+        console.log('ListLabel', ListLabel)
+        return (
+            <>
+                {/* Modals */}
+                {/* {Mobile && <Modal title={ListSaleItem.Title} />} */}
+
+                <li
+                    style={{
+                        border: `1px solid ${ListLabel.BorderColor}`,
+                        backgroundColor: ListLabel.BackgroundColor,
+                        color: ListLabel.TextColor,
+                        padding: '4px 10px',
+                        fontSize: '14px',
+                        borderRadius: '5px',
+                        marginTop: '5px',
+                        cursor: 'pointer',
+                        zIndex: 1,
+                        listStyle: 'none',
+                        width: 'fit-content',
+                        cursor: 'default',
+                    }}
+                    key={index}
+                    onClick={() => SetPopupIsClosed(false)}
+                >
+                    {ListLabel.Title}
+                </li>
+            </>
+        )
+    }
 }
 
 const PopupsOnProductCard = ({
@@ -100,6 +133,7 @@ const PopupsOnProductCard = ({
     SalePercent,
     IsMobile,
     desktopViewType,
+    Labels = [],
 }) => {
     const Ref = useRef(null)
     const [IsClosed, SetIsClosed] = useState(true)
@@ -192,6 +226,19 @@ const PopupsOnProductCard = ({
                             />
                         )
                     })}
+                    {Labels.length > 0 &&
+                        Labels.map((label, index) => {
+                            return (
+                                <PopupOnProductCard
+                                    Mobile={IsMobile}
+                                    // ListSaleItem={ListSaleItem}
+                                    isSale={false}
+                                    ListLabel={label}
+                                    index={index}
+                                    key={uuidv4()}
+                                />
+                            )
+                        })}
                 </ul>
                 <div
                     onClick={() => SetIsClosed(true)}

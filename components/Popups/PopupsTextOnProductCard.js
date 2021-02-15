@@ -3,7 +3,16 @@ import { SlideDown } from 'react-slidedown'
 
 import popups_styles from './../../styles/components/Popups/Popups.module.sass'
 
-const PopupsTextOnProductCard = ({ ListSaleItem, PopupIsClosed, SetClose }) => {
+const PopupsTextOnProductCard = ({
+    ListSaleItem,
+    PopupIsClosed,
+    SetClose,
+    DontShowText = false,
+}) => {
+    if (DontShowText) {
+        return
+    }
+
     return (
         <SlideDown
             className={popups_styles.popups_text_on_product_card}

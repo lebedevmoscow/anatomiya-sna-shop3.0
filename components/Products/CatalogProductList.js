@@ -100,6 +100,8 @@ const CatalogProductListForDesktop = ({
                 }
             }
 
+            const Labels = product.ProductLabels
+
             const OptionsList = GetOptionsList(
                 product.Prices[0].OptionIds,
                 firstLoadProducts.Options
@@ -128,6 +130,7 @@ const CatalogProductListForDesktop = ({
                     Prices={product.Prices}
                     oldMin={oldMin}
                     oldMax={oldMax}
+                    Labels={Labels}
                 />
             )
 
