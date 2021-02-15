@@ -56,6 +56,7 @@ const CatalogLeftFilter = ({
                 color: isFocused ? 'white' : '',
             }
         },
+
         menuList: (styles, { data }) => {
             return {
                 ...styles,
@@ -539,6 +540,7 @@ const CatalogLeftFilter = ({
                 properties.map((property, index) => {
                     if (property.select) return
                     if (property.range) return
+                    console.log('property', property)
                     return (
                         <div
                             key={index}
@@ -564,6 +566,27 @@ const CatalogLeftFilter = ({
                                 >
                                     {property.title}
                                 </span>
+                                {property.description && (
+                                    <span className={styles.question}>
+                                        <svg
+                                            viewBox="0 0 30 30"
+                                            xmlns="https://www.w3.org/2000/svg"
+                                        >
+                                            <path d="M11 7v3c3 0 5-1 5 1s-3 4-3 6v2c6 0 2-1 5-4 1-1 2-3 2-5s-1-3-3-4c-3 0-4 1-6 1zM12 22c0 1 1 3 3 3 1 0 2-1 2-3 0-3-5-3-5 0z"></path>
+                                        </svg>
+                                        <span className={styles.info_block}>
+                                            Конструкция матраса определяет
+                                            степень поддержки тела во время сна,
+                                            а также его ортопедические и
+                                            анатомические свойства. От выбора
+                                            типа конструкции матраса зависит его
+                                            функциональное назначение.
+                                        </span>
+                                    </span>
+                                )}
+                                <div
+                                    className={styles.catalog_left_filter__info}
+                                ></div>
                             </div>
                             <div
                                 className={

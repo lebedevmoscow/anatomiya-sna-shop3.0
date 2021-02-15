@@ -28,6 +28,58 @@
             height: 1px
             width: 100%
 
+    .info_block
+        position: absolute
+        background: #30acd7
+        color: #fff
+        top: auto
+        bottom: 50%
+        left: calc(100% + 11px)
+        z-index: 100
+        transform: translateY(50%)
+        width: 280px
+        padding: 20px 30px
+        box-sizing: border-box
+        box-shadow: 1px 1px 10px rgb(30 30 30 / 22%)
+        font-size: 14px
+        font-weight: 400
+        line-height: 1.3
+        border-radius: 5px
+        display: none
+
+    .question
+        display: block
+        width: 20px
+        height: 20px
+        position: relative
+        top: 5px
+        right: -5px
+        // border: 1px solid #f0f0f0
+        border: 1px solid #f0f0f0
+        border-radius: 100%
+        margin-top: -10px
+        &::after
+            border-color: transparent #30acd7 transparent transparent
+            bottom: auto
+            top: 50%
+            left: auto
+            right: -12px
+            border-width: 6px 8px 6px 0
+            transform: translateY(-50%)
+            width: 0
+            height: 0
+            content: ''
+            border-style: solid
+            position: absolute
+            display: none
+        svg
+            fill: #f0f0f0
+        &:hover
+            &::after
+                display: block
+            .info_block
+                display: block
+
     .price_filter
         margin-top: 0
 

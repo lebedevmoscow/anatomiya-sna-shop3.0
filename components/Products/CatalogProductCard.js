@@ -321,6 +321,7 @@ const CatalogProductCard = ({
                     padding: !IsMobile ? '7px 0px 7px 7px' : '1px 0',
                     fontSize: IsMobile ? '12px' : '',
                     textAlign: 'center',
+                    height: '50px',
                 }
             } else {
                 return {
@@ -331,7 +332,13 @@ const CatalogProductCard = ({
                     fontSize: IsMobile ? '12px' : '',
                     padding: !IsMobile ? '7px 0px 7px 7px' : '1px 0',
                     textAlign: 'center',
+                    height: '50px',
                 }
+            }
+        },
+        container: (styles) => {
+            return {
+                ...styles,
             }
         },
         option: (styles, { isFocused }) => {
@@ -359,27 +366,15 @@ const CatalogProductCard = ({
                 return {
                     ...styles,
                     visibility: 'visible',
+                    position: 'absolute',
+                    right: '0px',
                 }
             }
         },
         indicatorSeparator: (styles) => {
-            if (IsMobile) {
-                return {
-                    ...styles,
-                    visibility: 'hidden',
-                }
-            }
-
-            if (OptionsForSelect.length === 1) {
-                return {
-                    ...styles,
-                    visibility: 'hidden',
-                }
-            } else {
-                return {
-                    ...styles,
-                    visibility: 'visible',
-                }
+            return {
+                ...styles,
+                display: 'none',
             }
         },
         menuList: (styles) => {
