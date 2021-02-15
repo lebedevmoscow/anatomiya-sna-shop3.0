@@ -474,7 +474,9 @@ const CatalogLeftFilter = ({
                     return (
                         <div
                             key={index}
-                            className={`${styles.catalog_left_filter__tab_wrapper} ${styles.opened}`}
+                            className={`${
+                                styles.catalog_left_filter__tab_wrapper
+                            } ${setClass(select.label)}`}
                         >
                             <div
                                 className={
@@ -482,7 +484,12 @@ const CatalogLeftFilter = ({
                                 }
                             >
                                 <span className={styles.arrow}></span>
-                                <span className={styles.text}>
+                                <span
+                                    onClick={() =>
+                                        OnCloseFilterClickHandler(select.label)
+                                    }
+                                    className={styles.text}
+                                >
                                     {select.label}
                                 </span>
                             </div>
@@ -535,7 +542,11 @@ const CatalogLeftFilter = ({
                     return (
                         <div
                             key={index}
-                            className={`${styles.catalog_left_filter__tab_wrapper} ${styles.catalog_left_filter__tab_wrapper__checkboxs} ${styles.opened}`}
+                            className={`${
+                                styles.catalog_left_filter__tab_wrapper
+                            } ${
+                                styles.catalog_left_filter__tab_wrapper__checkboxs
+                            } ${setClass(property.title)}`}
                         >
                             <div
                                 className={
