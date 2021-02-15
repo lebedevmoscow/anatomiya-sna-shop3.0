@@ -291,9 +291,10 @@ const CatalogLeftFilter = ({
                     filterStatus,
                     prices,
                     selectedSize,
-                    null,
+                    CatalogCommonReducer.desktopTopFilter,
                     false,
-                    activeColors
+                    activeColor,
+                    selectedActive
                 )
             )
         }
@@ -312,9 +313,10 @@ const CatalogLeftFilter = ({
                 filterStatus,
                 prices,
                 selectedSize,
-                null,
+                CatalogCommonReducer.desktopTopFilter,
                 false,
-                activeColors
+                activeColors,
+                selectedActive
             )
         )
     }, [activeColors])
@@ -333,13 +335,37 @@ const CatalogLeftFilter = ({
                     filterStatus,
                     prices,
                     selectedSize,
-                    null,
+                    CatalogCommonReducer.desktopTopFilter,
                     false,
-                    activeColors
+                    activeColors,
+                    selectedActive
                 )
             )
         }
     }, [filterStatus])
+
+    useEffect(() => {
+        if (CatalogCommonReducer.desktopTopFilter.length > 0) {
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    CatalogCommonReducer.page,
+                    SelectedSizeReducer.sizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    filterStatus,
+                    prices,
+                    selectedSize,
+                    CatalogCommonReducer.desktopTopFilter,
+                    false,
+                    activeColors,
+                    selectedActive
+                )
+            )
+        }
+    }, [CatalogCommonReducer.desktopTopFilter])
 
     return (
         <div className={styles.catalog_left_filter}>
@@ -407,7 +433,12 @@ const CatalogLeftFilter = ({
                                     oldMin,
                                     oldMax,
                                     filterStatus,
-                                    prices
+                                    prices,
+                                    selectedSize,
+                                    null,
+                                    CatalogCommonReducer.desktopTopFilter,
+                                    activeColors,
+                                    selectedActive
                                 )
                             )
                         }}
@@ -538,7 +569,7 @@ const CatalogLeftFilter = ({
                                                 filterStatus,
                                                 prices,
                                                 selectedSize,
-                                                null,
+                                                CatalogCommonReducer.desktopTopFilter,
                                                 false,
                                                 activeColors,
                                                 obj

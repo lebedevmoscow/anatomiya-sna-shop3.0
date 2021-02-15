@@ -4,6 +4,7 @@ import {
     CATALOG_SET_IDS,
     CATALOG_SET_TOP_FILTER,
     CATALOG_SET_TOP_RESET,
+    CATALOG_SET_TOP_FILTER_DESKTOP,
 } from './../actions/CatalogCommon'
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
     filters: null,
     ids: [],
     topfilter: [],
+    desktopTopFilter: [],
 }
 
 const CatalogCommonReducer = (state = initialState, action) => {
@@ -46,6 +48,12 @@ const CatalogCommonReducer = (state = initialState, action) => {
                 filters: null,
                 ids: [],
                 topfilter: [],
+            }
+        }
+        case CATALOG_SET_TOP_FILTER_DESKTOP: {
+            return {
+                ...state,
+                desktopTopFilter: action.payload,
             }
         }
         default: {

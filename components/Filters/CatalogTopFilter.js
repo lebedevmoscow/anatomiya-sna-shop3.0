@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
+import { CATALOG_SET_TOP_FILTER_DESKTOP } from './../../actions/CatalogCommon'
 import { LoadByFilters } from './../../actions/NewCatalogProductList'
 
 import Url from './../../components/URLComponent'
@@ -126,21 +127,25 @@ const CatalogTopFilter = ({
 
     useEffect(() => {
         if (clicks > 0) {
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    CatalogCommonReducer.page,
-                    SelectedSizeReducer.sizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    CatalogCommonReducer.filters,
-                    null,
-                    null,
-                    sortType
-                )
-            )
+            dispatch({
+                type: CATALOG_SET_TOP_FILTER_DESKTOP,
+                payload: sortType,
+            })
+            // dispatch(
+            //     LoadByFilters(
+            //         filterProductsIds,
+            //         CatalogCommonReducer.page,
+            //         SelectedSizeReducer.sizeId,
+            //         catalogSlug,
+            //         subCatalogSlug,
+            //         oldMin,
+            //         oldMax,
+            //         CatalogCommonReducer.filters,
+            //         null,
+            //         null,
+            //         sortType
+            //     )
+            // )
         }
     }, [sortType])
 
