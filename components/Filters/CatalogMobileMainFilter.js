@@ -207,6 +207,10 @@ const CatalogMainFilter = ({
 
     useEffect(() => {
         if (click > 0) {
+            console.log(
+                'CatalogCommonReducer.topFilter',
+                CatalogCommonReducer.topfilter
+            )
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -223,7 +227,7 @@ const CatalogMainFilter = ({
                     null,
                     true,
                     selectedActive,
-                    CatalogCommonReducer.topFilter
+                    CatalogCommonReducer.topfilter
                 )
             )
         }
@@ -271,7 +275,7 @@ const CatalogMainFilter = ({
                     false,
                     null,
                     selectedActive,
-                    CatalogCommonReducer.topFilter
+                    CatalogCommonReducer.topfilter
                 )
             )
         }
@@ -565,6 +569,10 @@ const CatalogMainFilter = ({
                                                             data,
                                                             id: select.id,
                                                         }
+                                                        console.log(
+                                                            'CatalogCommonReducer.topFilter',
+                                                            CatalogCommonReducer.topfilter
+                                                        )
                                                         dispatch(
                                                             LoadByFilters(
                                                                 filterProductsIds,
@@ -578,9 +586,10 @@ const CatalogMainFilter = ({
                                                                 prices,
                                                                 selectedSize,
                                                                 null,
-                                                                false,
+                                                                true,
                                                                 null,
-                                                                obj
+                                                                obj,
+                                                                CatalogCommonReducer.topfilter
                                                             )
                                                         )
                                                     }}

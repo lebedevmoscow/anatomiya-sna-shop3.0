@@ -284,11 +284,11 @@ export const LoadByFilters = (
             }
         }
 
-        // if (selectedActive) {
-        //     url =
-        //         url +
-        //         `&filter[properties][${selectedActive.id}]=${selectedActive.data.value}`
-        // }
+        if (selectedActive) {
+            url =
+                url +
+                `&filter[properties][${selectedActive.id}]=${selectedActive.data.value}`
+        }
 
         if (colors) {
             for (let i = 0; i < colors.length; i++) {
