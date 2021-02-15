@@ -284,7 +284,8 @@ export const LoadByFilters = (
             }
         }
 
-        if (selectedActive) {
+        if (selectedActive && selectedActive.length > 0) {
+            console.log('selectedActive ACTION', selectedActive)
             url =
                 url +
                 `&filter[properties][${selectedActive.id}]=${selectedActive.data.value}`

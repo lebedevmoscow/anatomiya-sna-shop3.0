@@ -142,8 +142,21 @@ const CatalogMainFilter = ({
                 }
             }
         }
-        console.log('clone', clone)
         setActiveColors(clone)
+    }
+
+    const getYellowTextForColor = () => {
+        const clone = activeColors.concat()
+
+        const d = []
+        for (let i = 0; i < colors.length; i++) {
+            for (let j = 0; j < clone.length; j++) {
+                if (colors[i].value === clone[i]) {
+                    d.push(`${colors[i].label}, `)
+                }
+            }
+        }
+        return d
     }
 
     useEffect(() => {
@@ -304,13 +317,37 @@ const CatalogMainFilter = ({
                     selectedSize,
                     null,
                     false,
-                    null,
+                    activeColors,
                     selectedActive,
                     CatalogCommonReducer.topfilter
                 )
             )
         }
     }, [selectedSize])
+
+    useEffect(() => {
+        if (activeColors) {
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    CatalogCommonReducer.page,
+                    SelectedSizeReducer.sizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    filterStatus,
+                    prices,
+                    selectedSize,
+                    null,
+                    false,
+                    activeColors,
+                    selectedActive,
+                    CatalogCommonReducer.topfilter
+                )
+            )
+        }
+    }, [activeColors])
 
     const options = filterAPIData.size
 
@@ -462,7 +499,12 @@ const CatalogMainFilter = ({
                                                     oldMax,
                                                     filterStatus,
                                                     prices,
-                                                    selectedSize
+                                                    selectedSize,
+                                                    null,
+                                                    false,
+                                                    activeColors,
+                                                    selectedActive,
+                                                    CatalogCommonReducer.topfilter
                                                 )
                                             )
                                         }}
@@ -626,7 +668,7 @@ const CatalogMainFilter = ({
                                                                 selectedSize,
                                                                 null,
                                                                 true,
-                                                                null,
+                                                                activeColors,
                                                                 obj,
                                                                 CatalogCommonReducer.topfilter
                                                             )
@@ -779,7 +821,9 @@ const CatalogMainFilter = ({
                                         </span>
                                     </div>
                                     <div className={styles.wrap2}>
-                                        <span className={styles.yellow}></span>
+                                        <span className={styles.yellow}>
+                                            {getYellowTextForColor()}
+                                        </span>
                                         <span className={styles.plus}>+</span>
                                     </div>
                                 </div>
