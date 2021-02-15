@@ -22,7 +22,7 @@ const PopupsTextOnProductCard = ({
                     position: 'absolute',
                     backgroundColor: '#0ca5d3',
                     overflow: 'hidden',
-                    width: '96%',
+                    width: '280px',
                     left: '0',
                     borderRadius: '4px',
                 }}
@@ -69,7 +69,7 @@ const PopupsTextOnProductCard = ({
                     position: 'absolute',
                     backgroundColor: '#0ca5d3',
                     overflow: 'hidden',
-                    width: '96%',
+                    width: '280px',
                     left: '0',
                     borderRadius: '4px',
                 }}
