@@ -31,8 +31,6 @@ const CatalogLeftMobile = ({
     ])
 
     const onSortClickHandler = (title) => {
-        console.log('title', title)
-
         const clone = sortType.concat()
 
         if (title === 'По популярности') {

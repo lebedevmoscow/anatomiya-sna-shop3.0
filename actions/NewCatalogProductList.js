@@ -176,6 +176,7 @@ export const LoadByFilters = (
         }
 
         if (sortType) {
+            console.log('sortType', sortType)
             for (let i = 0; i < sortType.length; i++) {
                 if (
                     sortType[i].title === 'Цене' ||
@@ -183,20 +184,25 @@ export const LoadByFilters = (
                 ) {
                     if (
                         sortType[i].title === 'Цене' &&
+                        sortType[i].isActive &&
                         sortType[i].sort &&
                         sortType[i].sort === 'up-to-down'
                     ) {
+                        console.log('1')
                         url = url + '&filter[sorting]=price_up'
                     } else if (
                         sortType[i].title === 'Цене' &&
+                        sortType[i].isActive &&
                         sortType[i].sort &&
                         sortType[i].sort === 'down-to-up'
                     ) {
+                        console.log('2')
                         url = url + '&filter[sorting]=price_down'
                     } else if (
                         sortType[i].title === 'Популярности' &&
-                        sortType[i].isActive === true
+                        sortType[i].isActive
                     ) {
+                        console.log('3')
                         url = url + '&filter[sorting]=popular'
                     }
                 } else {
@@ -230,7 +236,6 @@ export const LoadByFilters = (
 
         if (topFilter.length > 0) {
             for (let i = 0; i < topFilter.length; i++) {
-                console.log('topFilter[i]', topFilter[i])
                 if (
                     topFilter[i].title === 'По популярности' &&
                     topFilter[i].status === 'active'
@@ -290,7 +295,7 @@ export const LoadByFilters = (
 
         if (colors) {
             for (let i = 0; i < colors.length; i++) {
-                // console.log('colors', colors[i])
+                // ('colors', colors[i])
                 url = url + `&filter[colors][]=${colors[i]}`
             }
         }
@@ -313,7 +318,6 @@ export const LoadByFilters = (
         const finalUrl = mainUrl + subUrl + encodeURI(url) + encodeURI(sub)
 
         console.log('final', finalUrl)
-
         const reqIds = await fetch(finalUrl)
         const resIds = await reqIds.json()
 

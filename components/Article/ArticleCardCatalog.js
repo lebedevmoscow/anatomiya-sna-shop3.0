@@ -10,7 +10,6 @@ const EqualHeightElement = dynamic(
 )
 
 const ArticleCardCatalog = ({ data, mobile = false }) => {
-    console.log('data', data)
     return (
         <div className={styles.article_catalog_column}>
             <Link href={'https://anatomiyasna.ru/journal/' + data.Slug}>

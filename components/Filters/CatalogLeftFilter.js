@@ -21,8 +21,6 @@ const CatalogLeftFilter = ({
     subCatalogSlug,
     setLastClick,
 }) => {
-    console.log('filterAPIData', filterAPIData)
-
     const dispatch = useDispatch()
 
     const SelectedSizeReducer = useSelector(
@@ -80,16 +78,13 @@ const CatalogLeftFilter = ({
                     }
                 }
                 if (!flag) {
-                    console.log('push')
                     clone.push(colors[i].value)
                 } else if (flag) {
-                    console.log('rm')
                     clone.splice(i, 1)
                 }
             }
         }
         setActiveColors(clone)
-        console.log('clone', clone)
     }
 
     const OnCloseFilterClickHandler = (title) => {
@@ -155,8 +150,6 @@ const CatalogLeftFilter = ({
                 againClone.push(clone[i])
             }
         }
-        // console.log('clone', clone)
-        // dispatch({ type: CATALOG_SET_FILTERS, payload: againClone })
 
         dispatch(catalogSetFilters(againClone))
         setFilterStatus(againClone)
@@ -470,7 +463,6 @@ const CatalogLeftFilter = ({
             {selectedActive &&
                 selectedActive.length > 0 &&
                 selectedActive.map((select, index) => {
-                    console.log('select', select)
                     return (
                         <div
                             key={index}

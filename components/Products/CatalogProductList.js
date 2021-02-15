@@ -59,7 +59,6 @@ const CatalogProductListForDesktop = ({
                         `https://anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=${CatalogCommonReducer.page}`
                     )
                     const res = await r.json()
-                    console.log('res', res)
                     console.log(
                         'url',
                         `https://anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=${CatalogCommonReducer.page}`
@@ -84,7 +83,6 @@ const CatalogProductListForDesktop = ({
             (Math.random() * firstLoadProducts.ShortProductModels.length) / 3 +
                 3
         )
-        console.log('rand', rand)
 
         firstLoadProducts.ShortProductModels.map((product, index) => {
             const ListSalesList = GetPopupsList(

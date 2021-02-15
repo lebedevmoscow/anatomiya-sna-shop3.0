@@ -73,8 +73,6 @@ const CatalogMainFilter = ({
 
         setLastClick('filter')
 
-        console.log('mainIndex', mainIndex)
-
         const n = []
         for (let i = 0; i < clone.length; i++) {
             for (let j = 0; j < clone[i].inner.length; j++) {
@@ -204,7 +202,6 @@ const CatalogMainFilter = ({
             setSelectedActive(a)
         }
 
-        console.log('filter_status', filter_status)
         setFilterStatus(filter_status)
     }, [])
 
@@ -233,10 +230,6 @@ const CatalogMainFilter = ({
     }, [filterStatus])
 
     useEffect(() => {
-        console.log(
-            'CatalogCommonReducer.topFilter',
-            CatalogCommonReducer.topfilter
-        )
         if (CatalogCommonReducer.topfilter.length > 0) {
             dispatch(
                 LoadByFilters(
@@ -262,7 +255,6 @@ const CatalogMainFilter = ({
 
     useEffect(() => {
         if (selectedSize) {
-            console.log('dis')
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -310,7 +302,6 @@ const CatalogMainFilter = ({
             const obj = filterStatus[index]
             for (let i = 0; i < obj.inner.length; i++) {
                 if (obj.inner[i].status === 'opened') {
-                    console.log('obj.inner[i]', obj.inner[i])
                     data.push(<p>{obj.inner[i].property.label} ,</p>)
                 }
             }
@@ -538,7 +529,6 @@ const CatalogMainFilter = ({
                             )}
                         </li>
 
-                        {console.log('selectedActive', selectedActive)}
                         {selectedActive &&
                             selectedActive.length > 0 &&
                             selectedActive.map((select, index) => {

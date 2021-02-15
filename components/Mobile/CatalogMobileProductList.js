@@ -297,13 +297,11 @@ const CatalogMobileProductList = ({
     useEffect(() => {
         if (CatalogCommonReducer.page !== 1) {
             const req = async () => {
-                console.log('headers', headers)
                 if (headers) {
                     const r = await fetch(
                         `https://anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=${CatalogCommonReducer.page}`
                     )
                     const res = await r.json()
-                    console.log('res', res)
                     console.log(
                         'url',
                         `https://anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=${CatalogCommonReducer.page}`

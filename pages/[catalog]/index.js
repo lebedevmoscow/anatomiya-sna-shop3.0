@@ -81,10 +81,6 @@ const CatalogPage = ({
 
     const [lastClick, setLastClick] = useState(null)
 
-    // useEffect(() => {
-    //     console.log('1111111')
-    // }, [lastClick])
-
     // Click Handlers
     const onPresetFilterClickHandler = (title, data) => {
         setPresetFilterTitle(title)
@@ -459,11 +455,6 @@ export const getServerSideProps = async (ctx) => {
     const filterAPIData = response[6]
     const filterProductsIds = response[7]
     const headers = response[8]
-
-    // const filterAPIData = response[0]
-    // const filterProductsIds = response[1]
-
-    // console.logductsIds)
 
     let ids = []
 
