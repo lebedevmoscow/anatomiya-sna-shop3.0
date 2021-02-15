@@ -44,6 +44,8 @@ const PopupOnProductCard = ({
                     width: 'fit-content',
                 }}
                 onClick={() => {
+                    console.log('click')
+                    SetClose(1)
                     SetPopupIsClosed((p) => !p)
                 }}
                 key={index}
@@ -124,6 +126,10 @@ const PopupOnProductCard = ({
                     }}
                     key={index}
                     onClick={() => {
+                        console.log('click')
+                        if (!PopupIsClosed) {
+                        }
+
                         SetPopupIsClosed((p) => !p)
                     }}
                 >
@@ -169,6 +175,7 @@ const PopupOnProductCard = ({
                     }}
                     key={index}
                     onClick={() => {
+                        console.log('click')
                         SetPopupIsClosed((p) => !p)
                     }}
                 >
