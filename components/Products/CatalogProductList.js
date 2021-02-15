@@ -81,7 +81,8 @@ const CatalogProductListForDesktop = ({
         const length = firstLoadProducts.ShortProductModels.length
 
         const rand = Math.floor(
-            (Math.random() * firstLoadProducts.ShortProductModels.length) / 3
+            (Math.random() * firstLoadProducts.ShortProductModels.length) / 3 +
+                3
         )
         console.log('rand', rand)
 
