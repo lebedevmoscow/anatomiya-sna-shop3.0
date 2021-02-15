@@ -32,7 +32,7 @@ const CatalogLeftMobile = ({
 
     const getActiveSortTypeCount = () => {
         let count = 0
-        for (let i = 0; i < sortType.length; i++) {
+        for (let i = 3; i < sortType.length; i++) {
             if (sortType[i].status === 'active') {
                 count++
             }
@@ -315,7 +315,12 @@ const CatalogLeftMobile = ({
                         <div
                             className={styles.catalog_left_mobile__price_order}
                         >
-                            {getMainActiveSortType()}
+                            {<span>{getMainActiveSortType()}</span>}{' '}
+                            {getActiveSortTypeCount() !== 0 && (
+                                <span className={styles.red_count}>
+                                    {getActiveSortTypeCount()}
+                                </span>
+                            )}
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
