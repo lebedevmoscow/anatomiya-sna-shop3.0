@@ -307,6 +307,7 @@ export const LoadByFilters = (
             for (let i = 0; i < filters.length; i++) {
                 for (let j = 0; j < filters[i].inner.length; j++) {
                     if (filters[i].inner[j].status === 'opened') {
+                        console.log('filters[i]', filters[i])
                         sub += `&filter[properties][${filters[i].filter.id}][]=${filters[i].inner[j].property.value}`
                     }
                 }
@@ -314,8 +315,8 @@ export const LoadByFilters = (
         }
 
         const finalUrl = mainUrl + subUrl + encodeURI(url) + encodeURI(sub)
+        console.log('finalUrl', finalUrl)
 
-        console.log('final', finalUrl)
         const reqIds = await fetch(finalUrl)
         const resIds = await reqIds.json()
 

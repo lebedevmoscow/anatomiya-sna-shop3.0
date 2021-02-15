@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import Select from 'react-select'
 import { Range, getTrackBackground } from 'react-range'
 import Modal from './../Modal'
+import { v4 as uuidv4 } from 'uuid'
 
 import styles from './../../styles/components/Filters/CatalogMobileMobileFilter.module.sass'
 
@@ -372,9 +373,12 @@ const CatalogMainFilter = ({
             const data = []
 
             const obj = filterStatus[index]
+            console.log('obj', obj, index)
             for (let i = 0; i < obj.inner.length; i++) {
                 if (obj.inner[i].status === 'opened') {
-                    data.push(<p>{obj.inner[i].property.label} ,</p>)
+                    data.push(
+                        <p key={uuidv4()}>{obj.inner[i].property.label} ,</p>
+                    )
                 }
             }
             return data
@@ -686,18 +690,21 @@ const CatalogMainFilter = ({
                         {properties.map((prop, index) => {
                             if (prop.select && prop.select.length > 0) return
                             if (prop.range) return
+
+                            let d
                             if (
                                 prop.title === 'Жесткость низ' ||
                                 prop.title === 'Жесткость верх'
-                            )
-                                return
+                            ) {
+                                d = getActiveFilters(index)
+                            }
                             return (
                                 <li
-                                    key={index}
+                                    key={uuidv4()}
                                     className={styles.li}
-                                    onClick={(e) =>
+                                    onClick={(e) => {
                                         onListItemClickHandler(prop.title, e)
-                                    }
+                                    }}
                                 >
                                     <div
                                         ref={materialRef}
@@ -710,7 +717,7 @@ const CatalogMainFilter = ({
                                         </div>
                                         <div className={styles.wrap2}>
                                             <span className={styles.yellow}>
-                                                {getActiveFilters(index)}
+                                                {d}
                                             </span>
                                             <span className={styles.plus}>
                                                 +
@@ -733,9 +740,7 @@ const CatalogMainFilter = ({
                                                             ) {
                                                                 return (
                                                                     <li
-                                                                        key={
-                                                                            index2
-                                                                        }
+                                                                        key={uuidv4()}
                                                                         className={
                                                                             styles.catalog_left_filter__tab_options_item
                                                                         }
