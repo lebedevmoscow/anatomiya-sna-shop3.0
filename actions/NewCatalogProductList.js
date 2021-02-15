@@ -41,6 +41,8 @@ export const LoadProductsByButtonClick = (
             url = url + `&filter[price][oldMax]=${oldMax}`
             finalUrl = mainUrl + subUrl + encodeURI(url)
 
+            console.log('finalUrl PAGINATION', finalUrl)
+
             const reqIds = await fetch(finalUrl)
             const resIds = await reqIds.json()
 
@@ -94,6 +96,8 @@ export const LoadProductsByButtonClick = (
                     }
                 }
             }
+
+            console.log('page ids', page, ids)
 
             const productSubUrl = ids.join('')
 

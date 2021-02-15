@@ -140,7 +140,7 @@ const CatalogRight = ({
             dispatch(
                 LoadProductsByButtonClick(
                     filterProductsIds,
-                    SelectedSizeReducer.amount ? p - 1 : p,
+                    p,
                     SelectedSizeReducer.selectedSizeId,
                     catalogSlug,
                     subCatalogSlug,
