@@ -540,6 +540,7 @@ const CatalogLeftFilter = ({
                 properties.map((property, index) => {
                     if (property.select) return
                     if (property.range) return
+                    if (index > 2) return
                     console.log('property', property)
                     return (
                         <div
@@ -575,18 +576,17 @@ const CatalogLeftFilter = ({
                                             <path d="M11 7v3c3 0 5-1 5 1s-3 4-3 6v2c6 0 2-1 5-4 1-1 2-3 2-5s-1-3-3-4c-3 0-4 1-6 1zM12 22c0 1 1 3 3 3 1 0 2-1 2-3 0-3-5-3-5 0z"></path>
                                         </svg>
                                         <span className={styles.info_block}>
-                                            Конструкция матраса определяет
-                                            степень поддержки тела во время сна,
-                                            а также его ортопедические и
-                                            анатомические свойства. От выбора
-                                            типа конструкции матраса зависит его
-                                            функциональное назначение.
+                                            {property.description}
                                         </span>
                                     </span>
                                 )}
-                                <div
-                                    className={styles.catalog_left_filter__info}
-                                ></div>
+                                {property.description && (
+                                    <div
+                                        className={
+                                            styles.catalog_left_filter__info
+                                        }
+                                    ></div>
+                                )}
                             </div>
                             <div
                                 className={
@@ -734,6 +734,139 @@ const CatalogLeftFilter = ({
                     </div>
                 </div>
             )}
+
+            {filterStatus.length > 0 &&
+                properties.map((property, index) => {
+                    if (property.select) return
+                    if (property.range) return
+                    if (index < 3) return
+                    console.log('property', property)
+                    return (
+                        <div
+                            key={index}
+                            className={`${
+                                styles.catalog_left_filter__tab_wrapper
+                            } ${
+                                styles.catalog_left_filter__tab_wrapper__checkboxs
+                            } ${setClass(property.title)}`}
+                        >
+                            <div
+                                className={
+                                    styles.catalog_left_filter__tab_wrapper_title
+                                }
+                            >
+                                <span className={styles.arrow}></span>
+                                <span
+                                    onClick={() =>
+                                        OnCloseFilterClickHandler(
+                                            property.title
+                                        )
+                                    }
+                                    className={styles.text}
+                                >
+                                    {property.title}
+                                </span>
+                                {property.description && (
+                                    <span className={styles.question}>
+                                        <svg
+                                            viewBox="0 0 30 30"
+                                            xmlns="https://www.w3.org/2000/svg"
+                                        >
+                                            <path d="M11 7v3c3 0 5-1 5 1s-3 4-3 6v2c6 0 2-1 5-4 1-1 2-3 2-5s-1-3-3-4c-3 0-4 1-6 1zM12 22c0 1 1 3 3 3 1 0 2-1 2-3 0-3-5-3-5 0z"></path>
+                                        </svg>
+                                        <span className={styles.info_block}>
+                                            {property.description}
+                                        </span>
+                                    </span>
+                                )}
+                                {property.description && (
+                                    <div
+                                        className={
+                                            styles.catalog_left_filter__info
+                                        }
+                                    ></div>
+                                )}
+                            </div>
+                            <div
+                                className={
+                                    styles.catalog_left_filter__tab_wrapper_inner
+                                }
+                            >
+                                {property.checkboxes &&
+                                    property.checkboxes.length !== 0 && (
+                                        <ul
+                                            className={
+                                                styles.catalog_left_filter__tab_options
+                                            }
+                                        >
+                                            {property.checkboxes.map(
+                                                (checkbox, index2) => {
+                                                    if (
+                                                        checkbox.productCount !==
+                                                        0
+                                                    ) {
+                                                        return (
+                                                            <li
+                                                                onClick={() => {
+                                                                    if (
+                                                                        click %
+                                                                            2 ==
+                                                                        0
+                                                                    ) {
+                                                                        onFilterClickHandler(
+                                                                            index,
+                                                                            checkbox.label
+                                                                        )
+                                                                    }
+                                                                    setClick(
+                                                                        (p) =>
+                                                                            ++p
+                                                                    )
+                                                                }}
+                                                                key={index2}
+                                                                className={
+                                                                    styles.catalog_left_filter__tab_options_item
+                                                                }
+                                                            >
+                                                                <label
+                                                                    className={
+                                                                        styles.catalog_left_filter__checkbox_container
+                                                                    }
+                                                                >
+                                                                    <input type="checkbox" />
+                                                                    <span
+                                                                        className={
+                                                                            styles.catalog_left_filter__checkmark
+                                                                        }
+                                                                    ></span>
+                                                                    <h6>
+                                                                        {
+                                                                            checkbox.label
+                                                                        }
+                                                                    </h6>
+                                                                    <span
+                                                                        className={
+                                                                            styles.amount
+                                                                        }
+                                                                    >
+                                                                        (
+                                                                        {
+                                                                            checkbox.productCount
+                                                                        }
+                                                                        )
+                                                                    </span>
+                                                                </label>
+                                                            </li>
+                                                        )
+                                                    }
+                                                }
+                                            )}
+                                        </ul>
+                                    )}
+                            </div>
+                        </div>
+                    )
+                })}
 
             <button className={styles.catalog_left_filter__reset_btn}>
                 <span>Сбросить</span>
