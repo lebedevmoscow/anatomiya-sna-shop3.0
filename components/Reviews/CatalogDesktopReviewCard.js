@@ -1,6 +1,5 @@
 import { useRef, useEffect } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { LightgalleryProvider } from 'react-lightgallery'
 import { LightgalleryItem } from 'react-lightgallery'
 
@@ -30,32 +29,9 @@ const CatalogReviewCard = ({ review }) => {
         }
     }, [videoRef.current])
 
-    // useEffect(() => {
-    //     if (
-    //         imagesRef.current &&
-    //         review.response.productResponseImages.length > 0
-    //     ) {
-    //         imagesRef.current.innerHTML = (
-    //             <LightgalleryProvider galleryClassName="review__gallery">
-    //                 {review.response.productResponseImages.map((el, index) => {
-    //                     return (
-    //                         <LightgalleryItem
-    //                             group="review"
-    //                             src={'https://anatomiyasna.ru' + el.image}
-    //                             key={index}
-    //                         >
-    //                             <Image
-    //                                 src={'https://anatomiyasna.ru' + el.image}
-    //                                 width={40}
-    //                                 height={40}
-    //                             />
-    //                         </LightgalleryItem>
-    //                     )
-    //                 })}
-    //             </LightgalleryProvider>
-    //         )
-    //     }
-    // }, [imagesRef.current])
+    const PriceDiff = Math.floor(
+        parseInt(review.priceBasic, 10) - parseInt(review.priceDiscount, 10)
+    )
 
     return (
         <div className={styles.catalog_review_card}>
@@ -66,12 +42,40 @@ const CatalogReviewCard = ({ review }) => {
                 <div className={styles.catalog_review_card__product_title}>
                     {review.productTitle}
                 </div>
-                <div className={styles.catalog_review_card__image}>
+                <div
+                    style={PriceDiff !== 0 ? { marginBottom: '30px' } : {}}
+                    className={styles.catalog_review_card__image}
+                >
                     <img
                         src={'https://anatomiyasna.ru' + review.productImage}
                     ></img>
                 </div>
                 <div className={styles.catalog_review_card__price}>
+                    {PriceDiff !== 0 && (
+                        <div
+                            style={{ position: 'absolute', top: '-10px' }}
+                            className={styles.product_card__price_discount}
+                        >
+                            <div className={styles.product_card__price_prev}>
+                                <span>
+                                    {Math.floor(review.priceBasic)
+                                        .toString()
+                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
+                                    <div
+                                        className={
+                                            styles.product_card__price_diff
+                                        }
+                                    >
+                                        -
+                                        {PriceDiff.toString().replace(
+                                            /\B(?=(\d{3})+(?!\d))/g,
+                                            ' '
+                                        )}
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    )}
                     {parseInt(review.priceDiscount, 10)
                         .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}{' '}
