@@ -344,7 +344,8 @@ const CatalogProductCard = ({
         placeholder: (styles) => {
             return {
                 ...styles,
-                left: '16%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
                 textAlign: 'center',
             }
         },
