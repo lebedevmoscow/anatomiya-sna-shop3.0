@@ -15,7 +15,6 @@ const PopupsTextOnProductCard = ({
     }
 
     if (GiftItem) {
-        console.log('GiftItem', GiftItem)
         return (
             <SlideDown
                 className={popups_styles.popups_text_on_product_card}

@@ -4,7 +4,7 @@ import { Range, getTrackBackground } from 'react-range'
 
 import { useSelector, useDispatch } from 'react-redux'
 import {
-    CATALOG_SET_FILTERS,
+    CATALOG_SET_TOP_RESET,
     catalogSetPage,
     catalogSetFilters,
 } from './../../actions/CatalogCommon.js'
@@ -86,6 +86,32 @@ const CatalogLeftFilter = ({
             }
         }
         setActiveColors(clone)
+    }
+
+    const onResetClickHandler = () => {
+        const filter_status = []
+
+        for (let i = 0; i < properties.length; i++) {
+            let clone = []
+            if (
+                properties[i].checkboxes &&
+                properties[i].checkboxes.length !== 0
+            ) {
+                for (let j = 0; j < properties[i].checkboxes.length; j++) {
+                    if (properties[i].checkboxes[j].productCount !== 0) {
+                        clone.push({
+                            property: properties[i].checkboxes[j],
+                            status: 'closed',
+                        })
+                    }
+                }
+            }
+            filter_status.push({ filter: properties[i], inner: clone })
+            clone = []
+        }
+
+        dispatch({ type: CATALOG_SET_TOP_RESET })
+        setFilterStatus(filter_status)
     }
 
     const OnCloseFilterClickHandler = (title) => {
@@ -274,25 +300,23 @@ const CatalogLeftFilter = ({
     }, [selectedSize])
 
     useEffect(() => {
-        if (activeColors.length > 0) {
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    CatalogCommonReducer.page,
-                    SelectedSizeReducer.sizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    filterStatus,
-                    prices,
-                    selectedSize,
-                    null,
-                    false,
-                    activeColors
-                )
+        dispatch(
+            LoadByFilters(
+                filterProductsIds,
+                CatalogCommonReducer.page,
+                SelectedSizeReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                filterStatus,
+                prices,
+                selectedSize,
+                null,
+                false,
+                activeColors
             )
-        }
+        )
     }, [activeColors])
 
     useEffect(() => {
@@ -861,7 +885,10 @@ const CatalogLeftFilter = ({
                     )
                 })}
 
-            <button className={styles.catalog_left_filter__reset_btn}>
+            <button
+                onClick={onResetClickHandler}
+                className={styles.catalog_left_filter__reset_btn}
+            >
                 <span>Сбросить</span>
                 <svg
                     viewBox="0 0 24 24"

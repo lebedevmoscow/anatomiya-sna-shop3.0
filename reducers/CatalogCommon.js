@@ -3,6 +3,7 @@ import {
     CATALOG_SET_FILTERS,
     CATALOG_SET_IDS,
     CATALOG_SET_TOP_FILTER,
+    CATALOG_SET_TOP_RESET,
 } from './../actions/CatalogCommon'
 
 const initialState = {
@@ -36,6 +37,15 @@ const CatalogCommonReducer = (state = initialState, action) => {
             return {
                 ...state,
                 topfilter: action.payload,
+            }
+        }
+        case CATALOG_SET_TOP_RESET: {
+            return {
+                ...state,
+                page: 1,
+                filters: null,
+                ids: [],
+                topfilter: [],
             }
         }
         default: {

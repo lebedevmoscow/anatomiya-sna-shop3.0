@@ -108,11 +108,6 @@ const CatalogProductListForDesktop = ({
                 firstLoadProducts.GiftLabels
             )
 
-            console.log(
-                'firstLoadProducts.GiftLabels',
-                firstLoadProducts.GiftLabels
-            )
-
             const OptionsList = GetOptionsList(
                 product.Prices[0].OptionIds,
                 firstLoadProducts.Options

@@ -251,10 +251,6 @@ const CatalogMainFilter = ({
 
     useEffect(() => {
         if (click > 0) {
-            console.log(
-                'CatalogCommonReducer.topFilter',
-                CatalogCommonReducer.topfilter
-            )
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
