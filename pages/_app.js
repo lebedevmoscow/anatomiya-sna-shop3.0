@@ -4,6 +4,7 @@ import '../styles/globals.css'
 import 'react-slidedown/lib/slidedown.css'
 import 'reactjs-popup/dist/index.css'
 import 'swiper/swiper-bundle.css'
+import 'lightgallery.js/dist/css/lightgallery.css'
 
 // Styles
 import './../styles/fonts.sass'

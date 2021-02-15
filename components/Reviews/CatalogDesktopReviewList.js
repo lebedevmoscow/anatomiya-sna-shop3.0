@@ -4,16 +4,16 @@ import CatalogReviewCard from './CatalogDesktopReviewCard'
 
 import styles from './../../styles/components/Reviews/CatalogDesktopReviewList.module.sass'
 
-const CatalogReviewList = () => {
+const CatalogReviewList = ({ headers }) => {
     const [reviewList, setReviewList] = useState([])
 
     useEffect(() => {
         setTimeout(() => {
-            setReviewList([
-                <CatalogReviewCard key={1} />,
-                <CatalogReviewCard key={2} />,
-                <CatalogReviewCard key={3} />,
-            ])
+            const d = []
+            headers.productResponses.map((review, index) => {
+                d.push(<CatalogReviewCard review={review} key={index} />)
+            })
+            setReviewList(d)
         }, 0)
     }, [])
 

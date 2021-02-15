@@ -510,7 +510,7 @@ const CatalogRight = ({
                 />
             </div>
             <CatalogHelpPickUp />
-            <CatalogReviewList />
+            <CatalogReviewList headers={headers} />
             <IndexPageAssurances catalog={true} container={false} />
         </div>
     )

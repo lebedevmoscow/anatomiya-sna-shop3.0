@@ -1,29 +1,85 @@
+import { useRef, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { LightgalleryProvider } from 'react-lightgallery'
+import { LightgalleryItem } from 'react-lightgallery'
 
-import BedImage from './../../assets/bed2.jpg'
+import moment from 'moment'
+
 import StarImage from './../../assets/star.png'
 import CalendarImage from './../../assets/date.png'
 
 import styles from './../../styles/components/Reviews/CatalogDesktopReviewCard.module.sass'
 
-const CatalogReviewCard = () => {
+const CatalogReviewCard = ({ review }) => {
+    console.log('review', review)
+    const renderStars = () => {
+        const stars = []
+        for (let i = 0; i < review.response.ratio; i++) {
+            stars.push(<Image src={StarImage} width={18} height={16} />)
+        }
+        return stars
+    }
+
+    const videoRef = useRef(null)
+    const imagesRef = useRef(null)
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.innerHTML = review.response.videoCode
+        }
+    }, [videoRef.current])
+
+    // useEffect(() => {
+    //     if (
+    //         imagesRef.current &&
+    //         review.response.productResponseImages.length > 0
+    //     ) {
+    //         imagesRef.current.innerHTML = (
+    //             <LightgalleryProvider galleryClassName="review__gallery">
+    //                 {review.response.productResponseImages.map((el, index) => {
+    //                     return (
+    //                         <LightgalleryItem
+    //                             group="review"
+    //                             src={'https://anatomiyasna.ru' + el.image}
+    //                             key={index}
+    //                         >
+    //                             <Image
+    //                                 src={'https://anatomiyasna.ru' + el.image}
+    //                                 width={40}
+    //                                 height={40}
+    //                             />
+    //                         </LightgalleryItem>
+    //                     )
+    //                 })}
+    //             </LightgalleryProvider>
+    //         )
+    //     }
+    // }, [imagesRef.current])
+
     return (
         <div className={styles.catalog_review_card}>
             <div className={styles.catalog_review_card__left}>
                 <div className={styles.catalog_review_card__product_smalltext}>
-                    Отзыв на кровать
+                    Отзыв на {review.catalogTitle}
                 </div>
                 <div className={styles.catalog_review_card__product_title}>
-                    BestMebelShop Олимп с ящиком
+                    {review.productTitle}
                 </div>
                 <div className={styles.catalog_review_card__image}>
-                    <img src={BedImage}></img>
+                    <img
+                        src={'https://anatomiyasna.ru' + review.productImage}
+                    ></img>
                 </div>
                 <div className={styles.catalog_review_card__price}>
-                    6 599 Руб.
+                    {parseInt(review.priceDiscount, 10)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}{' '}
+                    Руб.
                 </div>
                 <div className={styles.catalog_review_card__credit}>
-                    В рассрочку от 1 100 руб/мес
+                    В рассрочку от{' '}
+                    {Math.ceil(parseInt(review.priceDiscount, 10) / 6)} руб/мес
                 </div>
             </div>
             <div className={styles.catalog_review_card__right}>
@@ -36,23 +92,19 @@ const CatalogReviewCard = () => {
                         <div
                             className={styles.catalog_review_card__author_name}
                         >
-                            Владислав
+                            {review.response.author}
                         </div>
                         <div
                             className={styles.catalog_review_card__author_stars}
                         >
-                            <Image src={StarImage} width={18} height={16} />
-                            <Image src={StarImage} width={18} height={16} />
-                            <Image src={StarImage} width={18} height={16} />
-                            <Image src={StarImage} width={18} height={16} />
-                            <Image src={StarImage} width={18} height={16} />
+                            {renderStars()}
                         </div>
                         <div
                             className={
                                 styles.catalog_review_card__author_home_town
                             }
                         >
-                            Санкт-Петербург
+                            {review.response.city}
                         </div>
                     </div>
                     <div
@@ -61,16 +113,56 @@ const CatalogReviewCard = () => {
                         }
                     >
                         <img src={CalendarImage}></img>
-                        <span>16.12.2020</span>
+                        <span>
+                            {moment(review.response.createdAt.date).format(
+                                'DD/MM/YYYY'
+                            )}
+                        </span>
                     </div>
                 </div>
                 <div className={styles.catalog_review_card__text}>
-                    Заказывал эту кровать ребёнку в комнату. Ящик был необходим,
-                    так как его игрушки уже никуда не помещаются. За свою цену
-                    кровать просто идеальная. Ребенок спит с удовольствием
+                    {review.response.text}
                 </div>
+                {review.response.videoCode && (
+                    <div
+                        ref={videoRef}
+                        className={styles.catalog_review_card__video}
+                    ></div>
+                )}
+                {review.response.productResponseImages.length > 0 && (
+                    <div
+                        ref={imagesRef}
+                        className={styles.catalog_review_card__gallery}
+                    >
+                        <LightgalleryProvider galleryClassName="review__gallery">
+                            {review.response.productResponseImages.map(
+                                (el, index) => {
+                                    return (
+                                        <LightgalleryItem
+                                            group="review"
+                                            src={
+                                                'https://anatomiyasna.ru' +
+                                                el.image
+                                            }
+                                            key={index}
+                                        >
+                                            <Image
+                                                src={
+                                                    'https://anatomiyasna.ru' +
+                                                    el.image
+                                                }
+                                                width={40}
+                                                height={40}
+                                            />
+                                        </LightgalleryItem>
+                                    )
+                                }
+                            )}
+                        </LightgalleryProvider>
+                    </div>
+                )}
                 <div className={styles.catalog_reivew_card__period_of_use}>
-                    Период использования: <span>Менее месяца</span>
+                    Период использования: <span>{review.response.useTime}</span>
                 </div>
             </div>
         </div>
