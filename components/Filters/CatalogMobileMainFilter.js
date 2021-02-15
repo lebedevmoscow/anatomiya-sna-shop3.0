@@ -25,6 +25,8 @@ const CatalogMainFilter = ({
     stylesForViewType,
     viewType,
 }) => {
+    const colors = filterAPIData.colors
+
     const oldMin = filterAPIData.price.min
     const oldMax = filterAPIData.price.max
 
@@ -113,6 +115,35 @@ const CatalogMainFilter = ({
 
         dispatch(catalogSetFilters(againClone))
         setFilterStatus(againClone)
+    }
+
+    const [activeColors, setActiveColors] = useState([])
+
+    const onColorClick = (title) => {
+        if (!activeColors) return
+        const clone = activeColors.concat()
+
+        for (let i = 0; i < colors.length; i++) {
+            if (colors[i].label === title) {
+                let flag = false
+
+                let t = null
+                for (let j = 0; j < clone.length; j++) {
+                    if (clone[j] === colors[i].value) {
+                        console.log('j', j, clone)
+                        flag = true
+                        t = j
+                    }
+                }
+                if (!flag) {
+                    clone.push(colors[i].value)
+                } else if (flag) {
+                    clone.splice(t, 1)
+                }
+            }
+        }
+        console.log('clone', clone)
+        setActiveColors(clone)
     }
 
     useEffect(() => {
@@ -332,6 +363,15 @@ const CatalogMainFilter = ({
         }
     }
 
+    const getCheckedStyleForColor = (val) => {
+        for (let i = 0; i < activeColors.length; i++) {
+            if (activeColors[i] === val) {
+                return true
+            }
+        }
+        return false
+    }
+
     return (
         <div className={styles.catalog_main_mobile_filter}>
             <div
@@ -520,7 +560,6 @@ const CatalogMainFilter = ({
                                 </div>
                             )}
                         </li>
-
                         {selectedActive &&
                             selectedActive.length > 0 &&
                             selectedActive.map((select, index) => {
@@ -602,7 +641,6 @@ const CatalogMainFilter = ({
                                     </li>
                                 )
                             })}
-
                         {properties.map((prop, index) => {
                             if (prop.select && prop.select.length > 0) return
                             if (prop.range) return
@@ -724,6 +762,98 @@ const CatalogMainFilter = ({
                                 </li>
                             )
                         })}
+                        {colors && (
+                            <li
+                                className={styles.li}
+                                onClick={(e) =>
+                                    onListItemClickHandler('Цвет', e)
+                                }
+                            >
+                                <div
+                                    ref={materialRef}
+                                    className={styles.wrapper}
+                                >
+                                    <div className={styles.wrap1}>
+                                        <span className={styles.text}>
+                                            {'Цвет'}
+                                        </span>
+                                    </div>
+                                    <div className={styles.wrap2}>
+                                        <span className={styles.yellow}></span>
+                                        <span className={styles.plus}>+</span>
+                                    </div>
+                                </div>
+                                {titleOfAdditionalMenu === 'Цвет' && (
+                                    <div className={styles.checkbox_block}>
+                                        <ul
+                                            className={
+                                                styles.catalog_left_filter__tab_options
+                                            }
+                                        >
+                                            {colors.map((prop2, index2) => {
+                                                if (prop2.productCount !== 0) {
+                                                    return (
+                                                        <li
+                                                            key={index2}
+                                                            className={
+                                                                styles.catalog_left_filter__tab_options_item
+                                                            }
+                                                            onClick={() => {
+                                                                if (
+                                                                    click % 2 ==
+                                                                    0
+                                                                ) {
+                                                                    onColorClick(
+                                                                        prop2.label
+                                                                    )
+                                                                }
+                                                                setClick(
+                                                                    (p) => ++p
+                                                                )
+                                                            }}
+                                                        >
+                                                            <label
+                                                                className={
+                                                                    styles.catalog_left_filter__checkbox_container
+                                                                }
+                                                            >
+                                                                <input
+                                                                    checked={getCheckedStyleForColor(
+                                                                        prop2.value
+                                                                    )}
+                                                                    type="checkbox"
+                                                                />
+                                                                <span
+                                                                    className={
+                                                                        styles.catalog_left_filter__checkmark
+                                                                    }
+                                                                ></span>
+                                                                <h6>
+                                                                    {
+                                                                        prop2.label
+                                                                    }
+                                                                </h6>
+                                                                <span
+                                                                    className={
+                                                                        styles.amount
+                                                                    }
+                                                                >
+                                                                    (
+                                                                    {
+                                                                        prop2.productCount
+                                                                    }
+                                                                    )
+                                                                </span>
+                                                            </label>
+                                                        </li>
+                                                    )
+                                                }
+                                            })}{' '}
+                                        </ul>
+                                    </div>
+                                )}
+                            </li>
+                        )}
                     </ul>
                     <div className={styles.catalog_modal_buttons}>
                         <button
