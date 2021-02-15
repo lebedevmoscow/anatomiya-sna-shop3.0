@@ -45,6 +45,7 @@ const CatalogRight = ({
     const [amount, setAmount] = useState(
         Math.ceil(filterProductsIds.length / 21)
     )
+    const [dontShowButton, setDontShowButton] = useState(false)
     const [list, setList] = useState([])
 
     const dispatch = useDispatch()
@@ -302,6 +303,11 @@ const CatalogRight = ({
             type: CATALOG_PRODUCT_LIST_SUCCESS,
             payload: firstLoadProducts,
         })
+        if (data.length <= 21) {
+            setDontShowButton(true)
+        } else {
+            setDontShowButton(false)
+        }
         setList(
             <>
                 {data.map((d, index) => {
@@ -331,12 +337,22 @@ const CatalogRight = ({
 
     useEffect(() => {
         if (SelectedSizeReducer.amount !== null) {
+            if (SelectedSizeReducer.amount <= 21) {
+                setDontShowButton(true)
+            } else {
+                setDontShowButton(false)
+            }
             setAmount(Math.ceil(SelectedSizeReducer.amount / 21))
         }
     }, [SelectedSizeReducer.amount])
 
     useEffect(() => {
         if (CatalogProductListReducer.products.length !== 0) {
+            if (CatalogProductListReducer.products.length <= 21) {
+                setDontShowButton(true)
+            } else {
+                setDontShowButton(false)
+            }
             setFirstProductList(
                 <CatalogProductListForDesktop
                     headers={headers}
@@ -377,6 +393,11 @@ const CatalogRight = ({
 
     useEffect(() => {
         if (NewCatalogProductListReducer.newProducts.length !== 0) {
+            if (NewCatalogProductListReducer.newProducts.length <= 21) {
+                setDontShowButton(true)
+            } else {
+                setDontShowButton(false)
+            }
             if (lastClick === 'showMore') {
                 const clone = data.concat()
                 clone.push(NewCatalogProductListReducer.newProducts)
@@ -430,6 +451,25 @@ const CatalogRight = ({
         // if (lastClick === '')
     }, [lastClick])
 
+    useEffect(() => {
+        if (firstProductList.props) {
+            console.log(
+                'firstProductList.props.firstLoadProducts.ShortProductModels',
+                firstProductList.props.firstLoadProducts.ShortProductModels
+            )
+            if (
+                firstProductList.props.firstLoadProducts.ShortProductModels
+                    .length >= 21
+            ) {
+                setDontShowButton(false)
+            } else {
+                setDontShowButton(true)
+            }
+        } else {
+            setDontShowButton(false)
+        }
+    })
+
     return (
         <div className={styles.catalog_right}>
             <CatalogTopFilter
@@ -444,19 +484,20 @@ const CatalogRight = ({
             />
             {firstProductList}
             {list}
-            {page !== Math.ceil(filterProductsIds.length / 21) && (
-                <div
-                    onClick={() => {
-                        setLastClick('showMore')
-                        if (lastClick === 'showMore') {
-                            onButtonClickHandler()
-                        }
-                    }}
-                    className={styles.catalog_right__load_more_button}
-                >
-                    <LoadMoreButton firstText={'Показать еще +21'} />
-                </div>
-            )}
+            {!dontShowButton &&
+                page !== Math.ceil(filterProductsIds.length / 21) && (
+                    <div
+                        onClick={() => {
+                            setLastClick('showMore')
+                            if (lastClick === 'showMore') {
+                                onButtonClickHandler()
+                            }
+                        }}
+                        className={styles.catalog_right__load_more_button}
+                    >
+                        <LoadMoreButton firstText={'Показать еще +21'} />
+                    </div>
+                )}
             <div onClick={() => setLastClick('forward')}>
                 <CatalogPagination
                     onPageClickHandler={onPageClickHandler}
