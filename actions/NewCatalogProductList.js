@@ -176,7 +176,6 @@ export const LoadByFilters = (
         }
 
         if (sortType) {
-            console.log('sortType', sortType)
             for (let i = 0; i < sortType.length; i++) {
                 if (
                     sortType[i].title === 'Цене' ||
@@ -188,7 +187,6 @@ export const LoadByFilters = (
                         sortType[i].sort &&
                         sortType[i].sort === 'up-to-down'
                     ) {
-                        console.log('1')
                         url = url + '&filter[sorting]=price_up'
                     } else if (
                         sortType[i].title === 'Цене' &&
@@ -196,13 +194,11 @@ export const LoadByFilters = (
                         sortType[i].sort &&
                         sortType[i].sort === 'down-to-up'
                     ) {
-                        console.log('2')
                         url = url + '&filter[sorting]=price_down'
                     } else if (
                         sortType[i].title === 'Популярности' &&
                         sortType[i].isActive
                     ) {
-                        console.log('3')
                         url = url + '&filter[sorting]=popular'
                     }
                 } else {
@@ -235,6 +231,7 @@ export const LoadByFilters = (
         }
 
         if (topFilter.length > 0) {
+            console.log('topFilter', topFilter)
             for (let i = 0; i < topFilter.length; i++) {
                 if (
                     topFilter[i].title === 'По популярности' &&

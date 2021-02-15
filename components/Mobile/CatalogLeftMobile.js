@@ -22,13 +22,46 @@ const CatalogLeftMobile = ({
     const [sortType, setSortType] = useState([
         { title: 'По популярности', status: 'disabled' },
         { title: 'По убыванию цены', status: 'disabled' },
-        { title: 'По возрастанию цены', status: 'disabled' },
+        { title: 'По возрастанию цены', status: 'active' },
         { title: 'Со скидкой', status: 'disabled' },
         { title: 'Новинка', status: 'disabled' },
         { title: 'С подарком', status: 'disabled' },
         { title: 'Выбор покупателей', status: 'disabled' },
         { title: 'Бесплатная доставка', status: 'disabled' },
     ])
+
+    const getActiveSortTypeCount = () => {
+        let count = 0
+        for (let i = 0; i < sortType.length; i++) {
+            if (sortType[i].status === 'active') {
+                count++
+            }
+        }
+        return count
+    }
+
+    const getMainActiveSortType = () => {
+        for (let i = 0; i < sortType.length; i++) {
+            if (
+                sortType[i].title === 'По популярности' &&
+                sortType[i].status === 'active'
+            ) {
+                return sortType[i].title
+            }
+            if (
+                sortType[i].title === 'По убыванию цены' &&
+                sortType[i].status === 'active'
+            ) {
+                return sortType[i].title
+            }
+            if (
+                sortType[i].title === 'По возрастанию цены' &&
+                sortType[i].status === 'active'
+            ) {
+                return sortType[i].title
+            }
+        }
+    }
 
     const onSortClickHandler = (title) => {
         const clone = sortType.concat()
@@ -282,7 +315,7 @@ const CatalogLeftMobile = ({
                         <div
                             className={styles.catalog_left_mobile__price_order}
                         >
-                            По возрастанию цены
+                            {getMainActiveSortType()}
                         </div>
                     </SwiperSlide>
                     <SwiperSlide>
