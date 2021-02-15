@@ -19,12 +19,12 @@ const PopupOnProductCard = ({
     const [PopupIsClosed, SetPopupIsClosed] = useState(true)
     const [Close, SetClose] = useState(0)
 
-    useEffect(() => {
-        if (Close === 1) {
-            SetPopupIsClosed(true)
-            SetClose(0)
-        }
-    }, [Close])
+    // useEffect(() => {
+    //     if (Close === 1) {
+    //         SetPopupIsClosed(true)
+    //         SetClose(0)
+    //     }
+    // }, [Close])
 
     if (isSale) {
         return (
@@ -69,6 +69,12 @@ const PopupOnProductCard = ({
                 )}
 
                 <li
+                    onClick={() => {
+                        setTimeout(() => {
+                            console.log('true')
+                            SetPopupIsClosed((p) => !p)
+                        }, 10)
+                    }}
                     style={{
                         border: `1px solid ${ListSaleItem.data.BorderColor}`,
                         backgroundColor: ListSaleItem.data.BackgroundColor,
@@ -83,24 +89,23 @@ const PopupOnProductCard = ({
                         width: 'fit-content',
                     }}
                     key={index}
-                    onClick={() => {
-                        SetPopupIsClosed((p) => !p)
-                    }}
                 >
-                    {ListSaleItem.data.Title}
-                    {!Mobile && (
-                        <OutsideClickHandler
-                            onOutsideClick={() => {
-                                SetPopupIsClosed(true)
-                            }}
-                        >
+                    <OutsideClickHandler
+                        useCapture={true}
+                        onOutsideClick={(e) => {
+                            console.log('out')
+                            SetPopupIsClosed(true)
+                        }}
+                    >
+                        {ListSaleItem.data.Title}
+                        {!Mobile && (
                             <PopupsTextOnProductCard
                                 ListSaleItem={ListSaleItem}
                                 PopupIsClosed={PopupIsClosed}
                                 SetClose={SetClose}
                             />
-                        </OutsideClickHandler>
-                    )}
+                        )}
+                    </OutsideClickHandler>
                 </li>
             </>
         )
