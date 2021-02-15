@@ -68,6 +68,46 @@ const CatalogLeftFilter = ({
         },
     }
 
+    const [SizeSelectorStyles, SetSizeSelectorStyles] = useState({
+        control: (styles) => ({
+            ...styles,
+            backgroundColor: 'white',
+            height: '50px',
+        }),
+        dropdownIndicator: (styles) => {
+            return {
+                ...styles,
+                position: 'absolute',
+                right: '0px',
+            }
+        },
+        placeholder: () => {
+            return {
+                ...styles,
+                position: 'absolute',
+                left: '50%',
+                transform: 'translate(-50%, 0%)',
+            }
+        },
+        option: (styles, { data, isFocused }) => {
+            return {
+                ...styles,
+                backgroundColor: isFocused ? '#0CA5D3' : '',
+                color: isFocused ? 'white' : '',
+            }
+        },
+
+        menuList: (styles, { data }) => {
+            return {
+                ...styles,
+                border: '1px solid #0CA5D3',
+                borderRadius: '5px',
+                fontFamily: 'Arial, sans-serif',
+                fontSize: '14px',
+            }
+        },
+    })
+
     const onColorClick = (title) => {
         const clone = activeColors.concat()
         for (let i = 0; i < colors.length; i++) {
@@ -204,13 +244,61 @@ const CatalogLeftFilter = ({
 
         setSizeSelector(
             <Select
-                className="main_filter__selector"
+                className={`main_filter__selector`}
                 classNamePrefix="main_filter__selector--inner"
                 placeholder="Все"
                 onChange={(data) => {
+                    SetSizeSelectorStyles({
+                        control: (styles) => ({
+                            ...styles,
+                            backgroundColor: '#30ACD7',
+                            height: '50px',
+                        }),
+                        dropdownIndicator: (styles) => {
+                            return {
+                                ...styles,
+                                color: '#fff',
+                                position: 'absolute',
+                                right: '0px',
+                            }
+                        },
+                        placeholder: () => {
+                            return {
+                                ...styles,
+                                position: 'absolute',
+                                left: '50%',
+                                transform: 'translate(-50%, 0%)',
+                            }
+                        },
+                        option: (styles, { data, isFocused }) => {
+                            return {
+                                ...styles,
+                                backgroundColor: isFocused ? '#0CA5D3' : '',
+                                color: isFocused ? 'white' : '',
+                            }
+                        },
+                        singleValue: (styles) => {
+                            return {
+                                ...styles,
+                                color: '#fff',
+                                position: 'absolute',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                            }
+                        },
+                        menuList: (styles, { data }) => {
+                            return {
+                                ...styles,
+                                border: '1px solid #0CA5D3',
+                                borderRadius: '5px',
+                                fontFamily: 'Arial, sans-serif',
+                                fontSize: '14px',
+                            }
+                        },
+                    })
                     setSelectedSize({ label: data.label, value: data.value })
                 }}
-                styles={colourStyles}
+                styles={SizeSelectorStyles}
                 options={options}
                 isSearchable={false}
                 autoFocus={false}
@@ -275,7 +363,7 @@ const CatalogLeftFilter = ({
         }
 
         return () => setSizeSelector(null)
-    }, [])
+    }, [SizeSelectorStyles])
 
     useEffect(() => {
         if (selectedSize) {
@@ -293,7 +381,7 @@ const CatalogLeftFilter = ({
                     selectedSize,
                     CatalogCommonReducer.desktopTopFilter,
                     false,
-                    activeColor,
+                    activeColors,
                     selectedActive
                 )
             )
