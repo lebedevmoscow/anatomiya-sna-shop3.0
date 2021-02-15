@@ -305,18 +305,6 @@ const CatalogMainFilter = ({
                     data.push(<p>{obj.inner[i].property.label} ,</p>)
                 }
             }
-
-            // for (let i = 0; i < filterStatus.length; i++) {
-            //     if (filterStatus[i].filter.title === filterTitle) {
-            //         for (let j = 0; j < filterStatus[i].inner.length; j++) {
-            //             if (filterStatus[i].inner[j].status === 'opened') {
-            //                 data.push(
-            //                     <p>{filterStatus[i].inner[j].property.label} ,</p>
-            //                 )
-            //             }
-            //         }
-            //     }
-            // }
             return data
         }
     }
@@ -533,7 +521,16 @@ const CatalogMainFilter = ({
                             selectedActive.length > 0 &&
                             selectedActive.map((select, index) => {
                                 return (
-                                    <li key={index} className={styles.li}>
+                                    <li
+                                        onClick={(e) =>
+                                            onListItemClickHandler(
+                                                select.label,
+                                                e
+                                            )
+                                        }
+                                        key={index}
+                                        className={styles.li}
+                                    >
                                         <div className={styles.wrapper}>
                                             <div className={styles.wrap1}>
                                                 <span className={styles.text}>
@@ -551,41 +548,48 @@ const CatalogMainFilter = ({
                                                 </span>
                                             </div>
                                         </div>
-                                        <div className={styles.selector_block}>
-                                            <Select
-                                                className="main_filter__selector"
-                                                classNamePrefix="main_filter__selector--inner"
-                                                placeholder="Все"
-                                                onChange={(data) => {
-                                                    const obj = {
-                                                        origin: selectedActive,
-                                                        data,
-                                                        id: select.id,
-                                                    }
-                                                    dispatch(
-                                                        LoadByFilters(
-                                                            filterProductsIds,
-                                                            CatalogCommonReducer.page,
-                                                            SelectedSizeReducer.sizeId,
-                                                            catalogSlug,
-                                                            subCatalogSlug,
-                                                            oldMin,
-                                                            oldMax,
-                                                            filterStatus,
-                                                            prices,
-                                                            selectedSize,
-                                                            null,
-                                                            false,
-                                                            null,
-                                                            obj
+                                        {titleOfAdditionalMenu ===
+                                            select.label && (
+                                            <div
+                                                className={
+                                                    styles.selector_block
+                                                }
+                                            >
+                                                <Select
+                                                    className="main_filter__selector"
+                                                    classNamePrefix="main_filter__selector--inner"
+                                                    placeholder="Все"
+                                                    onChange={(data) => {
+                                                        const obj = {
+                                                            origin: selectedActive,
+                                                            data,
+                                                            id: select.id,
+                                                        }
+                                                        dispatch(
+                                                            LoadByFilters(
+                                                                filterProductsIds,
+                                                                CatalogCommonReducer.page,
+                                                                SelectedSizeReducer.sizeId,
+                                                                catalogSlug,
+                                                                subCatalogSlug,
+                                                                oldMin,
+                                                                oldMax,
+                                                                filterStatus,
+                                                                prices,
+                                                                selectedSize,
+                                                                null,
+                                                                false,
+                                                                null,
+                                                                obj
+                                                            )
                                                         )
-                                                    )
-                                                }}
-                                                options={select.data}
-                                                isSearchable={false}
-                                                autoFocus={false}
-                                            />
-                                        </div>
+                                                    }}
+                                                    options={select.data}
+                                                    isSearchable={false}
+                                                    autoFocus={false}
+                                                />
+                                            </div>
+                                        )}
                                     </li>
                                 )
                             })}
