@@ -121,7 +121,6 @@ const CatalogLeftFilter = ({
                     clone[i].inner[j].property.label === title &&
                     i === mainIndex
                 ) {
-                    console.log('da ravno ', clone[i].inner[j].property.label)
                     if (clone[i].inner[j].status === 'closed') {
                         const clone2 = clone[i].inner.concat()
                         clone2[j].status = 'opened'
@@ -147,8 +146,6 @@ const CatalogLeftFilter = ({
             }
         }
 
-        console.log('n', n)
-
         let againClone = []
         for (let i = 0; i < clone.length; i++) {
             if (i === mainIndex) {
@@ -159,7 +156,6 @@ const CatalogLeftFilter = ({
         }
 
         dispatch(catalogSetFilters(againClone))
-        console.log('againClone ', againClone)
         setFilterStatus(againClone)
     }
 
@@ -301,7 +297,6 @@ const CatalogLeftFilter = ({
 
     useEffect(() => {
         if (click > 0) {
-            console.log('filter', filterStatus)
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -541,7 +536,6 @@ const CatalogLeftFilter = ({
                     if (property.select) return
                     if (property.range) return
                     if (index > 2) return
-                    console.log('property', property)
                     return (
                         <div
                             key={index}
@@ -740,7 +734,6 @@ const CatalogLeftFilter = ({
                     if (property.select) return
                     if (property.range) return
                     if (index < 3) return
-                    console.log('property', property)
                     return (
                         <div
                             key={index}

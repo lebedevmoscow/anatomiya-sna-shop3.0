@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import PopupsTextOnProductCard from './PopupsTextOnProductCard'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Modal from './../Modal'
+import { capitalizeFirstLetter } from './../../utils/capitalizeFirstLetter'
 
 import popups_styles from './../../styles/components/Popups/Popups.module.sass'
 
@@ -13,6 +14,7 @@ const PopupOnProductCard = ({
     isSale,
     Mobile = false,
     ListLabel = null,
+    GiftLabel = null,
 }) => {
     const [PopupIsClosed, SetPopupIsClosed] = useState(true)
     const [Close, SetClose] = useState(0)
@@ -40,6 +42,9 @@ const PopupOnProductCard = ({
                     zIndex: 10 - index,
                     listStyle: 'none',
                     width: 'fit-content',
+                }}
+                onClick={() => {
+                    SetPopupIsClosed((p) => !p)
                 }}
                 key={index}
             >
@@ -76,7 +81,9 @@ const PopupOnProductCard = ({
                         width: 'fit-content',
                     }}
                     key={index}
-                    onClick={() => SetPopupIsClosed(false)}
+                    onClick={() => {
+                        SetPopupIsClosed((p) => !p)
+                    }}
                 >
                     {ListSaleItem.data.Title}
                     {!Mobile && (
@@ -96,8 +103,50 @@ const PopupOnProductCard = ({
             </>
         )
     }
+
+    if (GiftLabel) {
+        return (
+            <>
+                <li
+                    style={{
+                        border: `1px solid #bd2cd2`,
+                        backgroundColor: '#fff',
+                        color: '#000',
+                        padding: '4px 10px',
+                        fontSize: '14px',
+                        borderRadius: '5px',
+                        marginTop: '5px',
+                        cursor: 'pointer',
+                        zIndex: 2,
+                        listStyle: 'none',
+                        width: 'fit-content',
+                        cursor: 'pointer',
+                    }}
+                    key={index}
+                    onClick={() => {
+                        SetPopupIsClosed((p) => !p)
+                    }}
+                >
+                    {capitalizeFirstLetter(GiftLabel.data.Title) + ' в ПОДАРОК'}
+                    {!Mobile && (
+                        <OutsideClickHandler
+                            onOutsideClick={() => {
+                                SetPopupIsClosed(true)
+                            }}
+                        >
+                            <PopupsTextOnProductCard
+                                GiftItem={GiftLabel}
+                                PopupIsClosed={PopupIsClosed}
+                                SetClose={SetClose}
+                            />
+                        </OutsideClickHandler>
+                    )}
+                </li>
+            </>
+        )
+    }
+
     if (ListLabel) {
-        console.log('ListLabel', ListLabel)
         return (
             <>
                 {/* Modals */}
@@ -119,7 +168,9 @@ const PopupOnProductCard = ({
                         cursor: 'default',
                     }}
                     key={index}
-                    onClick={() => SetPopupIsClosed(false)}
+                    onClick={() => {
+                        SetPopupIsClosed((p) => !p)
+                    }}
                 >
                     {ListLabel.Title}
                 </li>
@@ -134,6 +185,7 @@ const PopupsOnProductCard = ({
     IsMobile,
     desktopViewType,
     Labels = [],
+    Gifts = [],
 }) => {
     const Ref = useRef(null)
     const [IsClosed, SetIsClosed] = useState(true)
@@ -234,6 +286,19 @@ const PopupsOnProductCard = ({
                                     // ListSaleItem={ListSaleItem}
                                     isSale={false}
                                     ListLabel={label}
+                                    index={index}
+                                    key={uuidv4()}
+                                />
+                            )
+                        })}
+
+                    {Gifts.length > 0 &&
+                        Gifts.map((gift, index) => {
+                            return (
+                                <PopupOnProductCard
+                                    Mobile={IsMobile}
+                                    isSale={false}
+                                    GiftLabel={gift}
                                     index={index}
                                     key={uuidv4()}
                                 />

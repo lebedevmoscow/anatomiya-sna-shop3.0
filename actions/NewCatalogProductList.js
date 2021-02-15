@@ -231,7 +231,6 @@ export const LoadByFilters = (
         }
 
         if (topFilter.length > 0) {
-            console.log('topFilter', topFilter)
             for (let i = 0; i < topFilter.length; i++) {
                 if (
                     topFilter[i].title === 'По популярности' &&
@@ -285,7 +284,6 @@ export const LoadByFilters = (
         }
 
         if (selectedActive && selectedActive.length > 0) {
-            console.log('selectedActive ACTION', selectedActive)
             url =
                 url +
                 `&filter[properties][${selectedActive.id}]=${selectedActive.data.value}`
@@ -307,7 +305,6 @@ export const LoadByFilters = (
             for (let i = 0; i < filters.length; i++) {
                 for (let j = 0; j < filters[i].inner.length; j++) {
                     if (filters[i].inner[j].status === 'opened') {
-                        console.log('filters[i]', filters[i])
                         sub += `&filter[properties][${filters[i].filter.id}][]=${filters[i].inner[j].property.value}`
                     }
                 }

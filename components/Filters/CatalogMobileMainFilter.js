@@ -131,7 +131,6 @@ const CatalogMainFilter = ({
                 let t = null
                 for (let j = 0; j < clone.length; j++) {
                     if (clone[j] === colors[i].value) {
-                        console.log('j', j, clone)
                         flag = true
                         t = j
                     }
@@ -373,7 +372,6 @@ const CatalogMainFilter = ({
             const data = []
 
             const obj = filterStatus[index]
-            console.log('obj', obj, index)
             for (let i = 0; i < obj.inner.length; i++) {
                 if (obj.inner[i].status === 'opened') {
                     data.push(

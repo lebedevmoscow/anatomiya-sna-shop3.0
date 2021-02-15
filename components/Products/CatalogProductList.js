@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // Utils functions
 import { GetPopupsList } from './../../utils/GetPopupsList'
 import { GetOptionsList } from './../../utils/GetOptionsList'
+import { GetGiftsList } from './../../utils/GetGiftList'
 
 import styles from './../../styles/components/Products/CatalogProductList.module.sass'
 
@@ -102,6 +103,16 @@ const CatalogProductListForDesktop = ({
 
             const Labels = product.ProductLabels
 
+            const Gifts = GetGiftsList(
+                product.Prices[0].GiftIds,
+                firstLoadProducts.GiftLabels
+            )
+
+            console.log(
+                'firstLoadProducts.GiftLabels',
+                firstLoadProducts.GiftLabels
+            )
+
             const OptionsList = GetOptionsList(
                 product.Prices[0].OptionIds,
                 firstLoadProducts.Options
@@ -131,6 +142,7 @@ const CatalogProductListForDesktop = ({
                     oldMin={oldMin}
                     oldMax={oldMax}
                     Labels={Labels}
+                    Gifts={Gifts}
                 />
             )
 

@@ -72,6 +72,7 @@ const CatalogProductCard = ({
     IsMobile,
     OptionsList,
     Labels,
+    Gifts,
 }) => {
     const breakpoint769 = useMedia(769)
 
@@ -582,6 +583,7 @@ const CatalogProductCard = ({
                 ListSalesList={ListSalesList}
                 IsMobile={IsMobile}
                 desktopViewType={desktopViewType}
+                Gifts={Gifts}
             />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {breakpoint769 && (
