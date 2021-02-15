@@ -45,7 +45,6 @@ const CatalogLeftFilter = ({
     const [selectedSize, setSelectedSize] = useState(null)
     const [activeColors, setActiveColors] = useState([])
     const [selectedActive, setSelectedActive] = useState([])
-    const [rangeActive, setRangeActive] = useState([])
 
     const colourStyles = {
         control: (styles) => ({ ...styles, backgroundColor: 'white' }),
@@ -113,15 +112,18 @@ const CatalogLeftFilter = ({
         for (let i = 0; i < colors.length; i++) {
             if (colors[i].label === title) {
                 let flag = false
+                let temp = null
                 for (let j = 0; j < clone.length; j++) {
                     if (colors[i].value === clone[j]) {
                         flag = true
+                        temp = j
                     }
                 }
                 if (!flag) {
                     clone.push(colors[i].value)
                 } else if (flag) {
-                    clone.splice(i, 1)
+                    console.log('ELSE clone i', clone, i)
+                    clone.splice(temp, 1)
                 }
             }
         }

@@ -97,8 +97,6 @@ export const LoadProductsByButtonClick = (
                 }
             }
 
-            console.log('page ids', page, ids)
-
             const productSubUrl = ids.join('')
 
             const productsURLReq = await fetch(
@@ -288,12 +286,11 @@ export const LoadByFilters = (
         }
 
         if (selectedActive && selectedActive.length > 0) {
-            url =
-                url +
-                `&filter[properties][${selectedActive.id}]=${selectedActive.data.value}`
+            console.log('selectedActive', selectedActive)
         }
 
         if (colors) {
+            console.log('COLORS', colors)
             for (let i = 0; i < colors.length; i++) {
                 // ('colors', colors[i])
                 url = url + `&filter[colors][]=${colors[i]}`
@@ -305,7 +302,7 @@ export const LoadByFilters = (
 
         let sub = ''
 
-        if (filters) {
+        if (filters && filters.length > 0) {
             for (let i = 0; i < filters.length; i++) {
                 for (let j = 0; j < filters[i].inner.length; j++) {
                     if (filters[i].inner[j].status === 'opened') {

@@ -93,7 +93,6 @@ const PopupOnProductCard = ({
                     <OutsideClickHandler
                         useCapture={true}
                         onOutsideClick={(e) => {
-                            console.log('out')
                             SetPopupIsClosed(true)
                         }}
                     >
