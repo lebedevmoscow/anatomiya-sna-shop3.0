@@ -357,16 +357,17 @@ const CatalogPage = ({
                 </div>
             )} */}
             {IsMobile && breakpoint1023 && (
-                <>
+                <div className={common_styles.container}>
                     <div className={common_styles.catalog_mobile_reviews_title}>
                         Отзывы на кровати
                     </div>
+
                     <div className={common_styles.catalog_mobile_reviews}>
-                        <CatalogMobileReview />
-                        <CatalogMobileReview />
-                        <CatalogMobileReview />
+                        {headers.productResponses.map((rev, index) => {
+                            return <CatalogMobileReview rev={rev} key={index} />
+                        })}
                     </div>
-                </>
+                </div>
             )}
             {/* Here will be assurances swiper */}
             {!IsMobile && !breakpoint1023 && (

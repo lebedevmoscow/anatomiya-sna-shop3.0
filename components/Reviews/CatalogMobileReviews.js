@@ -1,64 +1,109 @@
 import Image from 'next/image'
+import { useEffect, useRef } from 'react'
 
-import BedImage from './../../assets/bed2.jpg'
 import CalendarImage from './../../assets/date.png'
 import StarImage from './../../assets/star.png'
 
+import { LightgalleryProvider } from 'react-lightgallery'
+import { LightgalleryItem } from 'react-lightgallery'
+
+import moment from 'moment'
+
 import styles from './../../styles/components/Reviews/CatalogMobileReviws.module.sass'
 
-const CatalogMobileReviews = () => {
+const CatalogMobileReviews = ({ rev }) => {
+    const videoRef = useRef(null)
+    const renderStars = () => {
+        const d = []
+        for (let i = 0; i < rev.response.ratio; i++) {
+            d.push(<Image src={StarImage} width={16.83} height={16} />)
+        }
+        return d
+    }
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.innerHTML = rev.response.videoCode
+        }
+    }, [videoRef.current])
+
     return (
         <div className={styles.catalog_mobile_review_section}>
             <div className={styles.catalog_mobile_review_section__smalltext}>
-                Отзыв на кровать
+                Отзыв на {rev.catalogTitle}
             </div>
             <div className={styles.catalog_mobile_review_section__title}>
-                BestMebelShop Олимп с ящиком
+                {rev.productTitle}
             </div>
             <div className={styles.catalog_mobile_review_section__image}>
-                <Image src={BedImage} width={350} height={221.88} />
+                <Image
+                    layout={'fill'}
+                    src={'https://anatomiyasna.ru' + rev.productImage}
+                />
+                {/* //{' '} */}
+                {/* <img src={'https://anatomiyasna.ru' + rev.productImage}></img> */}
             </div>
             <div className={styles.catalog_mobile_review_section__price}>
-                6 599 Руб.
+                {parseInt(rev.priceDiscount, 10)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}{' '}
+                Руб.
             </div>
             <div className={styles.catalog_mobile_review_section__price_credit}>
-                В рассрочку от 1 100 руб/мес
+                В рассрочку от {Math.ceil(parseInt(rev.priceDiscount, 10) / 6)}{' '}
+                руб/мес
             </div>
             <div className={styles.catalog_mobile_review_section__author}>
                 <div
                     className={styles.catalog_mobile_review_section__authorname}
                 >
-                    Владислав
+                    {rev.response.author}
                 </div>
                 <div className={styles.catalog_mobile_review_section__date}>
                     <img className="image" src={CalendarImage}></img>
-                    <span>16.12.2020</span>
+                    <span>
+                        {moment(rev.response.createdAt.date).format(
+                            'DD/MM/YYYY'
+                        )}
+                    </span>
                 </div>
                 <div
                     className={
                         styles.catalog_mobile_review_section__review_from
                     }
                 >
-                    Отзыв предоставлен компанией yandex.ru
+                    Отзыв предоставлен компанией {rev.response.responseSource}
                 </div>
             </div>
             <div className={styles.catalog_mobile_review_section__rate}>
                 <div className={styles.catalog_mobile_review_section__stars}>
-                    <Image src={StarImage} width={16.83} height={16} />
-                    <Image src={StarImage} width={16.83} height={16} />
-                    <Image src={StarImage} width={16.83} height={16} />
-                    <Image src={StarImage} width={16.83} height={16} />
-                    <Image src={StarImage} width={16.83} height={16} />
+                    {renderStars()}
                 </div>
                 <div className={styles.catalog_mobile_review_section__opinion}>
-                    Рекомендую
+                    {rev.response.recommended ? (
+                        <span
+                            className={
+                                styles.catalog_mobile_review__recommended
+                            }
+                        >
+                            Рекомендую
+                        </span>
+                    ) : (
+                        <span
+                            className={
+                                styles.catalog_mobile_review__not_recommended
+                            }
+                        >
+                            Не рекомендую
+                        </span>
+                    )}
                 </div>
                 <div
                     className={
                         styles.catalog_mobile_review_section__period_of_use
                     }
                 >
-                    Период использования: менее месяца
+                    Период использования: {rev.response.useTime}
                 </div>
             </div>
             <div className={styles.catalog_mobile_review_section__pros}>
@@ -70,7 +115,7 @@ const CatalogMobileReviews = () => {
                         styles.catalog_mobile_review_section__review_text
                     }
                 >
-                    цена, качество
+                    {rev.response.advantages}
                 </div>
             </div>
             <div className={styles.catalog_mobile_review_section__cons}>
@@ -82,7 +127,7 @@ const CatalogMobileReviews = () => {
                         styles.catalog_mobile_review_section__review_text
                     }
                 >
-                    -
+                    {rev.response.disadvantages}
                 </div>
             </div>
             <div className={styles.catalog_mobile_review_section__comment}>
@@ -94,11 +139,45 @@ const CatalogMobileReviews = () => {
                         styles.catalog_mobile_review_section__review_text
                     }
                 >
-                    Заказывал эту кровать ребёнку в комнату. Ящик был необходим,
-                    так как его игрушки уже никуда не помещаются. За свою цену
-                    кровать просто идеальная. Ребенок спит с удовольствием
+                    {rev.response.text}
                 </div>
             </div>
+            {rev.response.videoCode && (
+                <div
+                    ref={videoRef}
+                    className={styles.catalog_review_card__video}
+                ></div>
+            )}
+            {rev.response.productResponseImages.length > 0 && (
+                <div className={styles.catalog_review_card__gallery}>
+                    <LightgalleryProvider galleryClassName="review__gallery">
+                        {rev.response.productResponseImages.map((el, index) => {
+                            return (
+                                <LightgalleryItem
+                                    group="review"
+                                    src={'https://anatomiyasna.ru' + el.image}
+                                    key={index}
+                                >
+                                    <div
+                                        className={
+                                            styles.catalog_review_card__gallery__item
+                                        }
+                                    >
+                                        <Image
+                                            src={
+                                                'https://anatomiyasna.ru' +
+                                                el.image
+                                            }
+                                            width={40}
+                                            height={40}
+                                        />
+                                    </div>
+                                </LightgalleryItem>
+                            )
+                        })}
+                    </LightgalleryProvider>
+                </div>
+            )}
             <span className={styles.catalog_mobile_review_section__line}></span>
         </div>
     )
