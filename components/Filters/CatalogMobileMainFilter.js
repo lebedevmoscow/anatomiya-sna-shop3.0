@@ -71,6 +71,7 @@ const CatalogMainFilter = ({
     const [filterStatus, setFilterStatus] = useState([])
     const [click, setClick] = useState(0)
     const [selectedActive, setSelectedActive] = useState([])
+    const [selectedActive2, setSelectedActive2] = useState([])
 
     const [selectedSize, setSelectedSize] = useState(null)
 
@@ -272,7 +273,7 @@ const CatalogMainFilter = ({
                 null,
                 true,
                 activeColors,
-                selectedActive,
+                selectedActive2,
                 CatalogCommonReducer.topfilter
             )
         )
@@ -295,7 +296,7 @@ const CatalogMainFilter = ({
                     null,
                     true,
                     activeColors,
-                    selectedActive,
+                    selectedActive2,
                     CatalogCommonReducer.topfilter
                 )
             )
@@ -319,7 +320,7 @@ const CatalogMainFilter = ({
                     null,
                     true,
                     activeColors,
-                    selectedActive,
+                    selectedActive2,
                     CatalogCommonReducer.topfilter
                 )
             )
@@ -344,7 +345,7 @@ const CatalogMainFilter = ({
                     null,
                     true,
                     activeColors,
-                    selectedActive,
+                    selectedActive2,
                     CatalogCommonReducer.topfilter
                 )
             )
@@ -352,7 +353,7 @@ const CatalogMainFilter = ({
     }, [activeColors])
 
     useEffect(() => {
-        if (selectedActive.length > 0) {
+        if (selectedActive2.length > 0) {
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -368,12 +369,12 @@ const CatalogMainFilter = ({
                     null,
                     true,
                     activeColors,
-                    selectedActive,
+                    selectedActive2,
                     CatalogCommonReducer.topfilter
                 )
             )
         }
-    }, [selectedActive])
+    }, [selectedActive2])
 
     const options = filterAPIData.size
 
@@ -424,6 +425,15 @@ const CatalogMainFilter = ({
             }
         }
         return false
+    }
+
+    const getYellowTextForSelect = (title) => {
+        console.log('title arr', title, selectedActive2)
+        for (let i = 0; i < selectedActive2.length; i++) {
+            if (selectedActive2[i].label === title) {
+                return selectedActive2[i].initial.label
+            }
+        }
     }
 
     const getCheckedStyleForColor = (val) => {
@@ -533,7 +543,7 @@ const CatalogMainFilter = ({
                                                     null,
                                                     false,
                                                     activeColors,
-                                                    selectedActive,
+                                                    selectedActive2,
                                                     CatalogCommonReducer.topfilter
                                                 )
                                             )
@@ -654,9 +664,9 @@ const CatalogMainFilter = ({
                                             </div>
                                             <div className={styles.wrap2}>
                                                 <span className={styles.yellow}>
-                                                    {/* {(selectedSize &&
-                                                        selectedSize.label) ||
-                                                        ''} */}
+                                                    {getYellowTextForSelect(
+                                                        select.label
+                                                    )}
                                                 </span>
                                                 <span className={styles.plus}>
                                                     +
@@ -682,9 +692,35 @@ const CatalogMainFilter = ({
                                                             update: 0,
                                                             data: data,
                                                         }
-                                                        const clone = selectedActive.concat()
-                                                        clone.push(prepared)
-                                                        setSelectedActive(clone)
+                                                        const clone = selectedActive2.concat()
+                                                        let flag = false
+                                                        let temp = null
+                                                        for (
+                                                            let i = 0;
+                                                            i <
+                                                            selectedActive2.length;
+                                                            i++
+                                                        ) {
+                                                            if (
+                                                                selectedActive2[
+                                                                    i
+                                                                ].label ===
+                                                                select.label
+                                                            ) {
+                                                                flag = true
+                                                                temp = i
+                                                            }
+                                                        }
+                                                        if (flag === true) {
+                                                            clone[
+                                                                temp
+                                                            ] = prepared
+                                                        } else {
+                                                            clone.push(prepared)
+                                                        }
+                                                        setSelectedActive2(
+                                                            clone
+                                                        )
 
                                                         // id: filterAPIData.properties[i].id,
                                                         // label: filterAPIData.properties[i].title,
