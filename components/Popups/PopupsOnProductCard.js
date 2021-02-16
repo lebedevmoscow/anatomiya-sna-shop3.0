@@ -276,7 +276,6 @@ const PopupsOnProductCard = ({
                             : {}
                     }
                 >
-                    {console.log('ListSalesList', ListSalesList)}
                     {ListSalesList.map((ListSaleItem, index) => {
                         if (!IsMobile && index === 0) return
                         return (
@@ -293,7 +292,7 @@ const PopupsOnProductCard = ({
                             return (
                                 <PopupOnProductCard
                                     Mobile={IsMobile}
-                                    ListSaleItem={ListSaleItem}
+                                    // ListSaleItem={ListSaleItem}
                                     isSale={false}
                                     ListLabel={label}
                                     index={index}

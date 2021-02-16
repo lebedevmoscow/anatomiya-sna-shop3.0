@@ -9,6 +9,7 @@ const CatalogPagination = ({
     amount,
     current,
     onPageClickHandler,
+    IsMobile = false,
 }) => {
     const breakpoint769 = useMeida(769)
     const [pagList, setPagList] = useState([])
@@ -100,12 +101,20 @@ const CatalogPagination = ({
                     5
                 </li> */}
             </ul>
-            {current !== amount && (
+            {!IsMobile && current !== amount && (
                 <button
                     onClick={onGoForwardButtonClickHandler}
                     className={styles.catalog_pagination__next_button}
                 >
                     Вперед
+                </button>
+            )}
+            {IsMobile && current !== amount && (
+                <button
+                    onClick={onGoForwardButtonClickHandler}
+                    className={styles.catalog_pagination__next_button__mobile}
+                >
+                    {'>'}
                 </button>
             )}
         </div>

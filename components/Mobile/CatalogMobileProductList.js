@@ -472,7 +472,7 @@ const CatalogMobileProductList = ({
                 <LoadMoreButton firstText={'Показать еще'} />
             </div>
             <div className={common_styles.mobile_catalog_pagination}>
-                {/* <CatalogPagination
+                <CatalogPagination
                     onPageClickHandler={onPageClickHandler}
                     current={page}
                     amount={amount}
@@ -480,7 +480,7 @@ const CatalogMobileProductList = ({
                         onGoForwardButtonClickHandler
                     }
                     onGoBackdButtonClickHandler={onGoBackdButtonClickHandler}
-                /> */}
+                />
             </div>
         </>
     )
