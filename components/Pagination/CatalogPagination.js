@@ -11,7 +11,6 @@ const CatalogPagination = ({
     onPageClickHandler,
     IsMobile = false,
 }) => {
-    const breakpoint769 = useMeida(769)
     const [pagList, setPagList] = useState([])
 
     const renderPaginationSystem = () => {
@@ -61,13 +60,19 @@ const CatalogPagination = ({
 
     return (
         <div className={styles.catalog_pagination}>
-            {current !== 1 && (
+            {!IsMobile && current !== 1 && (
                 <button
                     onClick={onGoBackdButtonClickHandler}
                     className={styles.catalog_pagination__next_button}
                 >
                     Назад
                 </button>
+            )}
+            {IsMobile && current !== 1 && (
+                <button
+                    onClick={onGoBackdButtonClickHandler}
+                    className={styles.catalog_pagination__prev_button_mobile}
+                ></button>
             )}
             <ul className={styles.catalog_pagination__pages_list}>
                 {pagList.map((pag, index) => {
@@ -112,10 +117,8 @@ const CatalogPagination = ({
             {IsMobile && current !== amount && (
                 <button
                     onClick={onGoForwardButtonClickHandler}
-                    className={styles.catalog_pagination__next_button__mobile}
-                >
-                    {'>'}
-                </button>
+                    className={styles.catalog_pagination__next_button_mobile}
+                ></button>
             )}
         </div>
     )

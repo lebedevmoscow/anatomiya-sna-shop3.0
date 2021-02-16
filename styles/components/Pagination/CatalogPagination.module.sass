@@ -62,12 +62,71 @@
             right: 15px
             transform: rotate(-90deg)
 
-    .catalog_pagination__next_button__mobile
+    .catalog_pagination__prev_button_mobile
+        text-decoration: none
+        color: #444
+        font-size: 0
+        width: 26px
+        padding-left: 11px
+        padding-right: 6px
+        margin-right: 6px
+        min-width: 0
+        height: 26px
+        line-height: 24px
+        border: 1px solid #e6e6e6
+        border-radius: 4px
+        text-align: center
+        position: relative
+        background-color: transparent
 
+        &::before
+            left: 9px
+            content: ""
+            position: absolute
+            top: 50%
+            margin-top: -1px
+            width: 5px
+            height: 3px
+            background: url('./../../../assets/arrow.png') 50% no-repeat
+            background-size: 100% 100%
+            transform: rotate(90deg)
+
+    .catalog_pagination__next_button_mobile
+        box-sizing: border-box
+        position: relative
+        text-decoration: none
+        color: #444
+        font-size: 0
+        width: 26px
+        padding-right: 11px
+        padding-left: 6px
+        margin-left: 6px
+        text-align: center
+        height: 26px
+        line-height: 24px
+        border: 1px solid #e6e6e6
+        border-radius: 4px
+        background-color: transparent
+        &::after
+            content: ""
+            position: absolute
+            top: 50%
+            margin-top: -1px
+            width: 5px
+            height: 3px
+            background: url('./../../../assets/arrow.png') 50% no-repeat
+            background-size: 100% 100%
+            transform: rotate(-90deg)
 .mobile_catalog_pagination
     padding-bottom: 40px
 
 @media screen and ( max-width: 450px )
+
+    .catalog_pagination
+        justify-content: space-between
+        ul
+            width: 100%
+            justify-content: space-between
 
     .mobile_catalog_pagination
         padding-bottom: 0px

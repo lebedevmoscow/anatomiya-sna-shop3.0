@@ -367,7 +367,7 @@ const CatalogMobileProductList = ({
 
     useEffect(() => {
         if (SelectedSizeReducer.amount !== null) {
-            setAmount(Math.ceil(SelectedSizeReducer.amount / 21))
+            setAmount(Math.ceil(SelectedSizeReducer.amount / 20))
         }
     }, [SelectedSizeReducer.amount])
 
@@ -473,6 +473,7 @@ const CatalogMobileProductList = ({
             </div>
             <div className={common_styles.mobile_catalog_pagination}>
                 <CatalogPagination
+                    IsMobile={true}
                     onPageClickHandler={onPageClickHandler}
                     current={page}
                     amount={amount}
