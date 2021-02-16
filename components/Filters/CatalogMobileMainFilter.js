@@ -712,9 +712,9 @@ const CatalogMainFilter = ({
                                             </span>
                                         </div>
                                         <div className={styles.wrap2}>
-                                            <span
-                                                className={styles.yellow}
-                                            ></span>
+                                            <span className={styles.yellow}>
+                                                {getActiveFilters(index)}
+                                            </span>
                                             <span className={styles.plus}>
                                                 +
                                             </span>
