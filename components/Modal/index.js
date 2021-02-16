@@ -19,7 +19,7 @@ const Modal = ({ title, closed, text, onClose, html }) => {
                             }}
                             className={styles.arrow_left}
                         ></i>
-                        <span>{title}</span>
+                        <span className={styles.modal_titel}>{title}</span>
                     </div>
                     <div className={styles.text}>{text || html}</div>
                     <div className={styles.buttons}>
