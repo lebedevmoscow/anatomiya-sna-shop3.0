@@ -929,7 +929,10 @@ const CatalogMainFilter = ({
                             }}
                             className={styles.catalog_modal_buttons__see_all}
                         >
-                            Посмотреть 613 предложений
+                            Посмотреть{' '}
+                            {CatalogCommonReducer.amount &&
+                                CatalogCommonReducer.amount}{' '}
+                            предложений
                         </button>
                         <button className={styles.catalog_modal_buttons__reset}>
                             Сбросить

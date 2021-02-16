@@ -8,6 +8,7 @@ import {
     CATALOG_SET_PRICE,
     CATALOG_SET_COLROS,
     CATALOG_SET_SELECTED_ACTIVE,
+    CATALOG_SET_AMOUNT,
 } from './../actions/CatalogCommon'
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
     price: null,
     colors: [],
     selectedActive: [],
+    amount: null,
 }
 
 const CatalogCommonReducer = (state = initialState, action) => {
@@ -78,6 +80,12 @@ const CatalogCommonReducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedActive: action.payload,
+            }
+        }
+        case CATALOG_SET_AMOUNT: {
+            return {
+                ...state,
+                amount: action.payload,
             }
         }
         default: {

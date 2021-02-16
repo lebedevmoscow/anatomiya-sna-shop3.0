@@ -7,6 +7,7 @@ export const CATALOG_SET_TOP_RESET = 'CATALOG_SET_TOP_RESET'
 export const CATALOG_SET_PRICE = 'CATALOG_SET_PRICE'
 export const CATALOG_SET_COLROS = 'CATALOG_SET_COLROS'
 export const CATALOG_SET_SELECTED_ACTIVE = 'CATALOG_SET_SELECTED_ACTIVE'
+export const CATALOG_SET_AMOUNT = 'CATALOG_SET_AMOUNT'
 
 export const catalogSetPage = (page) => async (dispatch) => {
     dispatch({ type: CATALOG_SET_PAGE, payload: page })

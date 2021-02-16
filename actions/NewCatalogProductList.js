@@ -1,4 +1,5 @@
 import { SELECTED_SIZE_SET_AMOUNT } from './SelectedSize'
+import { CATALOG_SET_AMOUNT } from './CatalogCommon'
 
 export const CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING =
     'CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_LOADING'
@@ -317,6 +318,8 @@ export const LoadByFilters = (
 
         const reqIds = await fetch(finalUrl)
         const resIds = await reqIds.json()
+
+        dispatch({ type: CATALOG_SET_AMOUNT, payload: resIds.length })
 
         let ids = []
 
