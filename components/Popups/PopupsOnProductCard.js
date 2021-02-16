@@ -39,7 +39,7 @@ const PopupOnProductCard = ({
                     marginTop: '5px',
                     marginRight: '5px',
                     cursor: 'pointer',
-                    zIndex: 10 - index,
+                    zIndex: 6 - index,
                     listStyle: 'none',
                     width: 'fit-content',
                 }}
@@ -82,7 +82,7 @@ const PopupOnProductCard = ({
                         borderRadius: '5px',
                         marginTop: '5px',
                         cursor: 'pointer',
-                        zIndex: 10 - index,
+                        zIndex: 6 - index,
                         listStyle: 'none',
                         width: 'fit-content',
                     }}

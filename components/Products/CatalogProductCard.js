@@ -324,6 +324,7 @@ const CatalogProductCard = ({
                     fontSize: IsMobile ? '12px' : '',
                     textAlign: 'center',
                     height: !IsMobile ? '50px' : '40px',
+                    zIndex: '11',
                 }
             } else {
                 return {
@@ -335,12 +336,15 @@ const CatalogProductCard = ({
                     padding: !IsMobile ? '7px 0px 7px 7px' : '1px 0',
                     textAlign: 'center',
                     height: !IsMobile ? '50px' : '40px',
+                    zIndex: '11',
                 }
             }
         },
+
         container: (styles) => {
             return {
                 ...styles,
+                zIndex: 11,
             }
         },
         option: (styles, { isFocused }) => {
@@ -378,6 +382,12 @@ const CatalogProductCard = ({
             return {
                 ...styles,
                 display: 'none',
+            }
+        },
+        menu: (styles) => {
+            return {
+                ...styles,
+                zIndex: 100,
             }
         },
         menuList: (styles) => {
@@ -633,7 +643,7 @@ const CatalogProductCard = ({
                 style={
                     !breakpoint769 && desktopViewType === 'single'
                         ? { order: 3, width: '276px' }
-                        : {}
+                        : { position: 'relative', zIndex: 7 }
                 }
                 className={`${styles.catalog_product_card__desktop_view_type__single} ${styles.catalog_product_card__desktop_view_type__single__third}`}
             >
