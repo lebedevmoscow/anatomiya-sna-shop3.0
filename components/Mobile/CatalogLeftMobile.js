@@ -19,6 +19,51 @@ const CatalogLeftMobile = ({
 }) => {
     const dispatch = useDispatch()
 
+    const CatalogCommonReducer = useSelector(
+        (store) => store.CatalogCommonReducer
+    )
+    const SelectedSizeReducer = useSelector(
+        (store) => store.SelectedSizeReducer
+    )
+
+    const [countActiveFilter, setCountActiveFilter] = useState(1)
+
+    useEffect(() => {
+        let c = 0
+        if (CatalogCommonReducer.filters.length > 0) {
+            console.log('FILTER COUNT', CatalogCommonReducer.filters)
+            for (let i = 0; i < CatalogCommonReducer.filters.length; i++) {
+                if (CatalogCommonReducer.filters[i].inner.length > 0) {
+                    for (
+                        let j = 0;
+                        j < CatalogCommonReducer.filters[i].inner.length;
+                        j++
+                    ) {
+                        if (
+                            CatalogCommonReducer.filters[i].inner[j].status !==
+                            'closed'
+                        ) {
+                            c++
+                        }
+                    }
+                }
+            }
+        }
+        if (CatalogCommonReducer.colors.length > 0) {
+            for (let i = 0; i < CatalogCommonReducer.colors.length; i++) {
+                c++
+            }
+        }
+
+        if (SelectedSizeReducer.selectedSizeSlug) {
+            c++
+        }
+
+        if (c === 0) c = 1
+        console.log('c', c)
+        setCountActiveFilter(c)
+    }, [CatalogCommonReducer])
+
     const [sortType, setSortType] = useState([
         { title: 'По популярности', status: 'disabled' },
         { title: 'По убыванию цены', status: 'disabled' },
@@ -308,7 +353,9 @@ const CatalogLeftMobile = ({
                             <div className={styles.filter_mobile_text}>
                                 Фильтр
                             </div>
-                            <div className={styles.filter_mobile_count}>1</div>
+                            <div className={styles.filter_mobile_count}>
+                                {countActiveFilter}
+                            </div>
                         </div>
                     </SwiperSlide>
                     <SwiperSlide onClick={() => SetModalIsClosed(false)}>
