@@ -44,7 +44,6 @@ const PopupOnProductCard = ({
                     width: 'fit-content',
                 }}
                 onClick={() => {
-                    console.log('click')
                     SetClose(1)
                     SetPopupIsClosed((p) => !p)
                 }}
@@ -71,7 +70,6 @@ const PopupOnProductCard = ({
                 <li
                     onClick={() => {
                         setTimeout(() => {
-                            console.log('true')
                             SetPopupIsClosed((p) => !p)
                         }, 10)
                     }}
@@ -130,7 +128,6 @@ const PopupOnProductCard = ({
                     }}
                     key={index}
                     onClick={() => {
-                        console.log('click')
                         if (!PopupIsClosed) {
                         }
 
@@ -160,7 +157,7 @@ const PopupOnProductCard = ({
         return (
             <>
                 {/* Modals */}
-                {/* {Mobile && <Modal title={ListSaleItem.Title} />} */}
+                {Mobile && <Modal title={ListSaleItem.Title} />}
 
                 <li
                     style={{
@@ -179,7 +176,6 @@ const PopupOnProductCard = ({
                     }}
                     key={index}
                     onClick={() => {
-                        console.log('click')
                         SetPopupIsClosed((p) => !p)
                     }}
                 >
@@ -216,16 +212,18 @@ const PopupsOnProductCard = ({
                 style={
                     IsClosed
                         ? {
+                              overflow: 'hidden !important',
                               marginBottom: '5px',
                               opacity: '1',
                               display: 'block',
                               position: 'absolute',
-                              right: !IsMobile ? '-30px' : 'auto',
+                              right: !IsMobile ? '-30px' : '-25px',
                           }
                         : {
+                              overflow: 'hidden !important',
                               marginBottom: '5px',
                               opacity: '0',
-                              display: 'none',
+                              display: 'none !important',
                               position: 'absolute',
                               right: !IsMobile ? '-30px' : '0px',
                           }
@@ -278,6 +276,7 @@ const PopupsOnProductCard = ({
                             : {}
                     }
                 >
+                    {console.log('ListSalesList', ListSalesList)}
                     {ListSalesList.map((ListSaleItem, index) => {
                         if (!IsMobile && index === 0) return
                         return (
@@ -294,7 +293,7 @@ const PopupsOnProductCard = ({
                             return (
                                 <PopupOnProductCard
                                     Mobile={IsMobile}
-                                    // ListSaleItem={ListSaleItem}
+                                    ListSaleItem={ListSaleItem}
                                     isSale={false}
                                     ListLabel={label}
                                     index={index}

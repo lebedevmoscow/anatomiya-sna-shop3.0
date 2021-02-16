@@ -41,8 +41,6 @@ export const LoadProductsByButtonClick = (
             url = url + `&filter[price][oldMax]=${oldMax}`
             finalUrl = mainUrl + subUrl + encodeURI(url)
 
-            console.log('finalUrl PAGINATION', finalUrl)
-
             const reqIds = await fetch(finalUrl)
             const resIds = await reqIds.json()
 
@@ -287,10 +285,6 @@ export const LoadByFilters = (
 
         if (selectedActive && selectedActive.length > 0) {
             for (let i = 0; i < selectedActive.length; i++) {
-                console.log(
-                    '&filter[properties][${selectedActive[i].id}]=${selectedActive[i].initial.value}',
-                    `&filter[properties][${selectedActive[i].id}]=${selectedActive[i].initial.value}`
-                )
                 url =
                     url +
                     `&filter[properties][${selectedActive[i].id}]=${selectedActive[i].initial.value}`
@@ -298,7 +292,6 @@ export const LoadByFilters = (
         }
 
         if (colors) {
-            console.log('COLORS', colors)
             for (let i = 0; i < colors.length; i++) {
                 url = url + `&filter[colors][]=${colors[i]}`
             }

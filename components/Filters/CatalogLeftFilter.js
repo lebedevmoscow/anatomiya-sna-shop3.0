@@ -122,7 +122,6 @@ const CatalogLeftFilter = ({
                 if (!flag) {
                     clone.push(colors[i].value)
                 } else if (flag) {
-                    console.log('ELSE clone i', clone, i)
                     clone.splice(temp, 1)
                 }
             }

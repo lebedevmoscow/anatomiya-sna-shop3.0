@@ -453,10 +453,6 @@ const CatalogRight = ({
 
     useEffect(() => {
         if (firstProductList.props) {
-            console.log(
-                'firstProductList.props.firstLoadProducts.ShortProductModels',
-                firstProductList.props.firstLoadProducts.ShortProductModels
-            )
             if (
                 firstProductList.props.firstLoadProducts.ShortProductModels
                     .length >= 21

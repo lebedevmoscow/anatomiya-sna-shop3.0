@@ -11,7 +11,6 @@ import CalendarImage from './../../assets/date.png'
 import styles from './../../styles/components/Reviews/CatalogDesktopReviewCard.module.sass'
 
 const CatalogReviewCard = ({ review }) => {
-    console.log('review', review)
     const renderStars = () => {
         const stars = []
         for (let i = 0; i < review.response.ratio; i++) {

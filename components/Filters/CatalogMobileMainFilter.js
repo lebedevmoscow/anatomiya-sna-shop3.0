@@ -254,8 +254,6 @@ const CatalogMainFilter = ({
     }, [])
 
     useEffect(() => {
-        console.log('filterStatus', filterStatus)
-
         dispatch(
             LoadByFilters(
                 filterProductsIds,
@@ -417,7 +415,6 @@ const CatalogMainFilter = ({
                 if (obj[i].status === 'closed') {
                     return false
                 } else {
-                    console.log('TRUEEEE')
                     return true
                 }
             }
@@ -627,7 +624,6 @@ const CatalogMainFilter = ({
                                 </div>
                             )}
                         </li>
-                        {console.log('selectedActive', selectedActive)}
                         {selectedActive &&
                             selectedActive.length > 0 &&
                             selectedActive.map((select, index) => {
