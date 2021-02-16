@@ -315,8 +315,11 @@ const PopupsOnProductCard = ({
                         })}
                 </ul>
                 <div
-                    onClick={() => SetIsClosed(true)}
-                    style={{ boxSizing: 'border-box' }}
+                    onClick={() => {
+                        SetIsClosed(true)
+                        console.log('da')
+                    }}
+                    style={{ boxSizing: 'border-box', zIndex: 9 }}
                     className={`${popups_styles.product_card__popup} ${popups_styles.product_card__popup_last_child} ${popups_styles.product_card__fulllpopuplist_inner_card}`}
                 >
                     <span>
