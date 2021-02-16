@@ -362,6 +362,7 @@ const CatalogProductCard = ({
             if (OptionsForSelect.length === 1) {
                 return {
                     ...styles,
+                    position: 'absolute',
                     visibility: 'hidden',
                 }
             } else {
