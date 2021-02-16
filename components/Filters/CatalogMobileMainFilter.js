@@ -26,6 +26,7 @@ const CatalogMainFilter = ({
     stylesForViewType,
     viewType,
 }) => {
+    console.log('filterAPIData', filterAPIData)
     const colors = filterAPIData.colors
 
     const oldMin = filterAPIData.price.min
@@ -79,7 +80,10 @@ const CatalogMainFilter = ({
         const n = []
         for (let i = 0; i < clone.length; i++) {
             for (let j = 0; j < clone[i].inner.length; j++) {
-                if (clone[i].inner[j].property.label === title) {
+                if (
+                    clone[i].inner[j].property.label === title &&
+                    i === mainIndex
+                ) {
                     if (clone[i].inner[j].status === 'closed') {
                         const clone2 = clone[i].inner.concat()
                         clone2[j].status = 'opened'
@@ -740,12 +744,6 @@ const CatalogMainFilter = ({
                                                                             onFilterClickHandler(
                                                                                 index,
                                                                                 prop2.label
-                                                                            )
-                                                                            setClick(
-                                                                                (
-                                                                                    p
-                                                                                ) =>
-                                                                                    ++p
                                                                             )
                                                                         }}
                                                                     >
