@@ -269,8 +269,8 @@ const CatalogMainFilter = ({
                 prices,
                 selectedSize,
                 null,
-                null,
                 true,
+                activeColors,
                 selectedActive,
                 CatalogCommonReducer.topfilter
             )
@@ -292,8 +292,8 @@ const CatalogMainFilter = ({
                     prices,
                     selectedSize,
                     null,
-                    null,
                     true,
+                    activeColors,
                     selectedActive,
                     CatalogCommonReducer.topfilter
                 )
@@ -316,7 +316,7 @@ const CatalogMainFilter = ({
                     prices,
                     selectedSize,
                     null,
-                    false,
+                    true,
                     activeColors,
                     selectedActive,
                     CatalogCommonReducer.topfilter
@@ -340,7 +340,7 @@ const CatalogMainFilter = ({
                     prices,
                     selectedSize,
                     null,
-                    false,
+                    true,
                     activeColors,
                     selectedActive,
                     CatalogCommonReducer.topfilter
@@ -348,6 +348,30 @@ const CatalogMainFilter = ({
             )
         }
     }, [activeColors])
+
+    useEffect(() => {
+        if (selectedActive.length > 0) {
+            dispatch(
+                LoadByFilters(
+                    filterProductsIds,
+                    CatalogCommonReducer.page,
+                    SelectedSizeReducer.sizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    filterStatus,
+                    prices,
+                    selectedSize,
+                    null,
+                    true,
+                    activeColors,
+                    selectedActive,
+                    CatalogCommonReducer.topfilter
+                )
+            )
+        }
+    }, [selectedActive])
 
     const options = filterAPIData.size
 
@@ -603,6 +627,7 @@ const CatalogMainFilter = ({
                                 </div>
                             )}
                         </li>
+                        {console.log('selectedActive', selectedActive)}
                         {selectedActive &&
                             selectedActive.length > 0 &&
                             selectedActive.map((select, index) => {
@@ -646,34 +671,45 @@ const CatalogMainFilter = ({
                                                     classNamePrefix="main_filter__selector--inner"
                                                     placeholder="Все"
                                                     onChange={(data) => {
-                                                        const obj = {
-                                                            origin: selectedActive,
-                                                            data,
+                                                        const prepared = {
                                                             id: select.id,
+                                                            label: select.label,
+                                                            initial: data,
+                                                            update: 0,
+                                                            data: data,
                                                         }
-                                                        console.log(
-                                                            'CatalogCommonReducer.topFilter',
-                                                            CatalogCommonReducer.topfilter
-                                                        )
-                                                        dispatch(
-                                                            LoadByFilters(
-                                                                filterProductsIds,
-                                                                CatalogCommonReducer.page,
-                                                                SelectedSizeReducer.sizeId,
-                                                                catalogSlug,
-                                                                subCatalogSlug,
-                                                                oldMin,
-                                                                oldMax,
-                                                                filterStatus,
-                                                                prices,
-                                                                selectedSize,
-                                                                null,
-                                                                true,
-                                                                activeColors,
-                                                                obj,
-                                                                CatalogCommonReducer.topfilter
-                                                            )
-                                                        )
+                                                        const clone = selectedActive.concat()
+                                                        clone.push(prepared)
+                                                        setSelectedActive(clone)
+
+                                                        // id: filterAPIData.properties[i].id,
+                                                        // label: filterAPIData.properties[i].title,
+                                                        // initial: filterAPIData.properties[i].select[0],
+                                                        // update: 0,
+                                                        // data: selectedData,
+
+                                                        // console.log(
+
+                                                        // )
+                                                        // dispatch(
+                                                        //     LoadByFilters(
+                                                        //         filterProductsIds,
+                                                        //         CatalogCommonReducer.page,
+                                                        //         SelectedSizeReducer.sizeId,
+                                                        //         catalogSlug,
+                                                        //         subCatalogSlug,
+                                                        //         oldMin,
+                                                        //         oldMax,
+                                                        //         filterStatus,
+                                                        //         prices,
+                                                        //         selectedSize,
+                                                        //         null,
+                                                        //         true,
+                                                        //         activeColors,
+                                                        //         obj,
+                                                        //         CatalogCommonReducer.topfilter
+                                                        //     )
+                                                        // )
                                                     }}
                                                     options={select.data}
                                                     isSearchable={false}

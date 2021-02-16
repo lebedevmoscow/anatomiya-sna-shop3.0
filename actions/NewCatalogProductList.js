@@ -286,13 +286,20 @@ export const LoadByFilters = (
         }
 
         if (selectedActive && selectedActive.length > 0) {
-            console.log('selectedActive', selectedActive)
+            for (let i = 0; i < selectedActive.length; i++) {
+                console.log(
+                    '&filter[properties][${selectedActive[i].id}]=${selectedActive[i].initial.value}',
+                    `&filter[properties][${selectedActive[i].id}]=${selectedActive[i].initial.value}`
+                )
+                url =
+                    url +
+                    `&filter[properties][${selectedActive[i].id}]=${selectedActive[i].initial.value}`
+            }
         }
 
         if (colors) {
             console.log('COLORS', colors)
             for (let i = 0; i < colors.length; i++) {
-                // ('colors', colors[i])
                 url = url + `&filter[colors][]=${colors[i]}`
             }
         }
