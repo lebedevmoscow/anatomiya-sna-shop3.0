@@ -9,6 +9,8 @@ import styles from './../../styles/components/Filters/CatalogMobileMobileFilter.
 import { useSelector, useDispatch } from 'react-redux'
 import {
     CATALOG_SET_FILTERS,
+    CATALOG_SET_PRICE,
+    CATALOG_SET_COLROS,
     catalogSetFilters,
 } from './../../actions/CatalogCommon.js'
 import { LoadByFilters } from './../../actions/NewCatalogProductList'
@@ -254,6 +256,7 @@ const CatalogMainFilter = ({
     }, [])
 
     useEffect(() => {
+        dispatch({ type: CATALOG_SET_FILTERS, payload: filterStatus })
         dispatch(
             LoadByFilters(
                 filterProductsIds,
@@ -325,6 +328,7 @@ const CatalogMainFilter = ({
 
     useEffect(() => {
         if (activeColors) {
+            dispatch({ type: CATALOG_SET_COLROS, payload: activeColors })
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -510,6 +514,10 @@ const CatalogMainFilter = ({
                                         max={filterAPIData.price.max}
                                         onChange={(v) => setPrices(v)}
                                         onFinalChange={() => {
+                                            dispatch({
+                                                type: CATALOG_SET_PRICE,
+                                                payload: prices,
+                                            })
                                             dispatch(
                                                 LoadByFilters(
                                                     filterProductsIds,

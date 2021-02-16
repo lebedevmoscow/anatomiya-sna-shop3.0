@@ -67,6 +67,22 @@ const CatalogMobileProductList = ({
                 CatalogCommonReducer.filters &&
                 CatalogCommonReducer.filters.length !== 0
             ) {
+                // filterProductsIds,
+                // CatalogCommonReducer.page,
+                // SelectedSizeReducer.sizeId,
+                // catalogSlug,
+                // subCatalogSlug,
+                // oldMin,
+                // oldMax,
+                // filterStatus,
+                // prices,
+                // selectedSize,
+                // null,
+                // true,
+                // activeColors,
+                // selectedActive,
+                // CatalogCommonReducer.topfilter
+
                 dispatch(
                     LoadByFilters(
                         filterProductsIds,
@@ -77,13 +93,17 @@ const CatalogMobileProductList = ({
                         oldMin,
                         oldMax,
                         CatalogCommonReducer.filters,
+                        CatalogCommonReducer.price,
                         null,
                         null,
-                        null,
-                        true
+                        true,
+                        CatalogCommonReducer.colors,
+                        CatalogCommonReducer.selectedActive,
+                        CatalogCommonReducer.topfilter
                     )
                 )
             } else {
+                // page === 1 ? page + 1 : page + 2,
                 dispatch(
                     LoadProductsByButtonClick(
                         filterProductsIds,
@@ -93,11 +113,19 @@ const CatalogMobileProductList = ({
                         subCatalogSlug,
                         oldMin,
                         oldMax,
-                        true
+                        CatalogCommonReducer.filters,
+                        CatalogCommonReducer.price,
+                        null,
+                        null,
+                        true,
+                        CatalogCommonReducer.colors,
+                        CatalogCommonReducer.selectedActive,
+                        CatalogCommonReducer.topfilter
                     )
                 )
             }
         } else {
+            // page + 1,
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -108,10 +136,13 @@ const CatalogMobileProductList = ({
                     oldMin,
                     oldMax,
                     CatalogCommonReducer.filters,
+                    CatalogCommonReducer.price,
                     null,
                     null,
-                    null,
-                    true
+                    true,
+                    CatalogCommonReducer.colors,
+                    CatalogCommonReducer.selectedActive,
+                    CatalogCommonReducer.topfilter
                 )
             )
         }
@@ -132,6 +163,7 @@ const CatalogMobileProductList = ({
             CatalogCommonReducer.filters &&
             CatalogCommonReducer.filters.length !== 0
         ) {
+            // temp,
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -149,6 +181,7 @@ const CatalogMobileProductList = ({
                 )
             )
         } else {
+            // SelectedSizeReducer.amount ? temp - 1 : temp,
             dispatch(
                 LoadProductsByButtonClick(
                     filterProductsIds,
@@ -197,6 +230,7 @@ const CatalogMobileProductList = ({
             CatalogCommonReducer.filters &&
             CatalogCommonReducer.filters.length !== 0
         ) {
+            // temp,
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -214,6 +248,7 @@ const CatalogMobileProductList = ({
                 )
             )
         } else {
+            // SelectedSizeReducer.amount ? temp - 1 : temp,
             dispatch(
                 LoadProductsByButtonClick(
                     filterProductsIds,
@@ -277,6 +312,7 @@ const CatalogMobileProductList = ({
                 )
             )
         } else {
+            // SelectedSizeReducer.amount ? p - 1 : p,
             dispatch(
                 LoadProductsByButtonClick(
                     filterProductsIds,

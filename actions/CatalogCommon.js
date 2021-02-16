@@ -4,6 +4,9 @@ export const CATALOG_SET_IDS = 'CATALOG_SET_IDS'
 export const CATALOG_SET_TOP_FILTER = 'CATALOG_SET_TOP_FILTER'
 export const CATALOG_SET_TOP_FILTER_DESKTOP = 'CATALOG_SET_TOP_FILTER_DESKTOP'
 export const CATALOG_SET_TOP_RESET = 'CATALOG_SET_TOP_RESET'
+export const CATALOG_SET_PRICE = 'CATALOG_SET_PRICE'
+export const CATALOG_SET_COLROS = 'CATALOG_SET_COLROS'
+export const CATALOG_SET_SELECTED_ACTIVE = 'CATALOG_SET_SELECTED_ACTIVE'
 
 export const catalogSetPage = (page) => async (dispatch) => {
     dispatch({ type: CATALOG_SET_PAGE, payload: page })

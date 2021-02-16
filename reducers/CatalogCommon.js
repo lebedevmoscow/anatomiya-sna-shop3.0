@@ -5,6 +5,9 @@ import {
     CATALOG_SET_TOP_FILTER,
     CATALOG_SET_TOP_RESET,
     CATALOG_SET_TOP_FILTER_DESKTOP,
+    CATALOG_SET_PRICE,
+    CATALOG_SET_COLROS,
+    CATALOG_SET_SELECTED_ACTIVE,
 } from './../actions/CatalogCommon'
 
 const initialState = {
@@ -13,6 +16,9 @@ const initialState = {
     ids: [],
     topfilter: [],
     desktopTopFilter: [],
+    price: null,
+    colors: [],
+    selectedActive: [],
 }
 
 const CatalogCommonReducer = (state = initialState, action) => {
@@ -54,6 +60,24 @@ const CatalogCommonReducer = (state = initialState, action) => {
             return {
                 ...state,
                 desktopTopFilter: action.payload,
+            }
+        }
+        case CATALOG_SET_PRICE: {
+            return {
+                ...state,
+                price: action.payload,
+            }
+        }
+        case CATALOG_SET_COLROS: {
+            return {
+                ...state,
+                colors: action.payload,
+            }
+        }
+        case CATALOG_SET_SELECTED_ACTIVE: {
+            return {
+                ...state,
+                selectedActive: action.payload,
             }
         }
         default: {
