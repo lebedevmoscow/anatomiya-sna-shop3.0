@@ -256,31 +256,25 @@ const CatalogMainFilter = ({
     useEffect(() => {
         console.log('filterStatus', filterStatus)
 
-        if (click > 0) {
-            console.log(
-                'CatalogCommonReducer.topFilter',
+        dispatch(
+            LoadByFilters(
+                filterProductsIds,
+                CatalogCommonReducer.page,
+                SelectedSizeReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                filterStatus,
+                prices,
+                selectedSize,
+                null,
+                null,
+                true,
+                selectedActive,
                 CatalogCommonReducer.topfilter
             )
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    CatalogCommonReducer.page,
-                    SelectedSizeReducer.sizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    filterStatus,
-                    prices,
-                    selectedSize,
-                    null,
-                    null,
-                    true,
-                    selectedActive,
-                    CatalogCommonReducer.topfilter
-                )
-            )
-        }
+        )
     }, [filterStatus])
 
     useEffect(() => {
