@@ -323,7 +323,7 @@ const CatalogProductCard = ({
                     padding: !IsMobile ? '7px 0px 7px 7px' : '1px 0',
                     fontSize: IsMobile ? '12px' : '',
                     textAlign: 'center',
-                    height: '50px',
+                    height: !IsMobile ? '50px' : '40px',
                 }
             } else {
                 return {
@@ -334,7 +334,7 @@ const CatalogProductCard = ({
                     fontSize: IsMobile ? '12px' : '',
                     padding: !IsMobile ? '7px 0px 7px 7px' : '1px 0',
                     textAlign: 'center',
-                    height: '50px',
+                    height: !IsMobile ? '50px' : '40px',
                 }
             }
         },
