@@ -174,16 +174,19 @@ const CatalogMobileProductList = ({
                     oldMin,
                     oldMax,
                     CatalogCommonReducer.filters,
+                    CatalogCommonReducer.price,
                     null,
                     null,
-                    null,
-                    true
+                    true,
+                    CatalogCommonReducer.colors,
+                    CatalogCommonReducer.selectedActive,
+                    CatalogCommonReducer.topfilter
                 )
             )
         } else {
             // SelectedSizeReducer.amount ? temp - 1 : temp,
             dispatch(
-                LoadProductsByButtonClick(
+                LoadByFilters(
                     filterProductsIds,
                     SelectedSizeReducer.amount ? temp - 1 : temp,
                     SelectedSizeReducer.selectedSizeId,
@@ -191,7 +194,14 @@ const CatalogMobileProductList = ({
                     subCatalogSlug,
                     oldMin,
                     oldMax,
-                    true
+                    CatalogCommonReducer.filters,
+                    CatalogCommonReducer.price,
+                    null,
+                    null,
+                    true,
+                    CatalogCommonReducer.colors,
+                    CatalogCommonReducer.selectedActive,
+                    CatalogCommonReducer.topfilter
                 )
             )
         }
@@ -241,16 +251,19 @@ const CatalogMobileProductList = ({
                     oldMin,
                     oldMax,
                     CatalogCommonReducer.filters,
+                    CatalogCommonReducer.price,
                     null,
                     null,
-                    null,
-                    true
+                    true,
+                    CatalogCommonReducer.colors,
+                    CatalogCommonReducer.selectedActive,
+                    CatalogCommonReducer.topfilter
                 )
             )
         } else {
             // SelectedSizeReducer.amount ? temp - 1 : temp,
             dispatch(
-                LoadProductsByButtonClick(
+                LoadByFilters(
                     filterProductsIds,
                     SelectedSizeReducer.amount ? temp - 1 : temp,
                     SelectedSizeReducer.selectedSizeId,
@@ -258,7 +271,14 @@ const CatalogMobileProductList = ({
                     subCatalogSlug,
                     oldMin,
                     oldMax,
-                    true
+                    CatalogCommonReducer.filters,
+                    CatalogCommonReducer.price,
+                    null,
+                    null,
+                    true,
+                    CatalogCommonReducer.colors,
+                    CatalogCommonReducer.selectedActive,
+                    CatalogCommonReducer.topfilter
                 )
             )
         }
@@ -295,6 +315,7 @@ const CatalogMobileProductList = ({
             CatalogCommonReducer.filters &&
             CatalogCommonReducer.filters.length !== 0
         ) {
+            console.log('1')
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -305,16 +326,20 @@ const CatalogMobileProductList = ({
                     oldMin,
                     oldMax,
                     CatalogCommonReducer.filters,
+                    CatalogCommonReducer.price,
                     null,
                     null,
-                    null,
-                    true
+                    true,
+                    CatalogCommonReducer.colors,
+                    CatalogCommonReducer.selectedActive,
+                    CatalogCommonReducer.topfilter
                 )
             )
         } else {
+            console.log('2')
             // SelectedSizeReducer.amount ? p - 1 : p,
             dispatch(
-                LoadProductsByButtonClick(
+                LoadByFilters(
                     filterProductsIds,
                     SelectedSizeReducer.amount ? p - 1 : p,
                     SelectedSizeReducer.selectedSizeId,
@@ -322,7 +347,14 @@ const CatalogMobileProductList = ({
                     subCatalogSlug,
                     oldMin,
                     oldMax,
-                    true
+                    CatalogCommonReducer.filters,
+                    CatalogCommonReducer.price,
+                    null,
+                    null,
+                    true,
+                    CatalogCommonReducer.colors,
+                    CatalogCommonReducer.selectedActive,
+                    CatalogCommonReducer.topfilter
                 )
             )
         }
