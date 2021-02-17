@@ -175,6 +175,15 @@ const CatalogLeftFilter = ({
         return ''
     }
 
+    const getCheckedStyle = (title, index) => {
+        for (let i = 0; i < filterStatus[index].inner.length; i++) {
+            if (filterStatus[index].inner[i].status === 'opened') {
+                return true
+            }
+        }
+        return false
+    }
+
     const onFilterClickHandler = (mainIndex, title) => {
         const clone = filterStatus.concat()
         dispatch(catalogSetPage(1))
@@ -772,7 +781,19 @@ const CatalogLeftFilter = ({
                                                                         styles.catalog_left_filter__checkbox_container
                                                                     }
                                                                 >
-                                                                    <input type="checkbox" />
+                                                                    <input
+                                                                        // onChange={() =>
+                                                                        //     getCheckedStyle(
+                                                                        //         checkbox.label,
+                                                                        //         index
+                                                                        //     )
+                                                                        // }
+                                                                        defaultChecked={getCheckedStyle(
+                                                                            checkbox.label,
+                                                                            index
+                                                                        )}
+                                                                        type="checkbox"
+                                                                    />
                                                                     <span
                                                                         className={
                                                                             styles.catalog_left_filter__checkmark
