@@ -11,6 +11,7 @@ import {
     CATALOG_SET_FILTERS,
     CATALOG_SET_PRICE,
     CATALOG_SET_COLROS,
+    CATALOG_SET_TOP_RESET,
     catalogSetFilters,
 } from './../../actions/CatalogCommon.js'
 import { LoadByFilters } from './../../actions/NewCatalogProductList'
@@ -31,6 +32,8 @@ const CatalogMainFilter = ({
     console.log('filterAPIData', filterAPIData)
     const colors = filterAPIData.colors
 
+    const modalRef = useRef(null)
+
     const oldMin = filterAPIData.price.min
     const oldMax = filterAPIData.price.max
 
@@ -50,7 +53,9 @@ const CatalogMainFilter = ({
         (store) => store.SelectedSizeReducer
     )
 
-    const properties = filterAPIData.properties.concat()
+    const [properties, setProperties] = useState(
+        filterAPIData.properties.concat()
+    )
 
     // Refs
     const priceRef = useRef(null)
@@ -427,6 +432,38 @@ const CatalogMainFilter = ({
         return false
     }
 
+    const onResetClickHandler = () => {
+        const filter_status = []
+
+        for (let i = 0; i < properties.length; i++) {
+            let clone = []
+            if (
+                properties[i].checkboxes &&
+                properties[i].checkboxes.length !== 0
+            ) {
+                for (let j = 0; j < properties[i].checkboxes.length; j++) {
+                    if (properties[i].checkboxes[j].productCount !== 0) {
+                        clone.push({
+                            property: properties[i].checkboxes[j],
+                            status: 'closed',
+                        })
+                    }
+                }
+            }
+            filter_status.push({ filter: properties[i], inner: clone })
+            clone = []
+        }
+
+        // dispatch({ type: CATALOG_SET_TOP_RESET })
+        setFilterStatus(filter_status)
+
+        const clone = filterAPIData.properties.concat()
+        setProperties([])
+        setTimeout(() => {
+            setProperties(clone)
+        }, 0)
+    }
+
     const getYellowTextForSelect = (title) => {
         for (let i = 0; i < selectedActive2.length; i++) {
             if (selectedActive2[i].label === title) {
@@ -445,7 +482,7 @@ const CatalogMainFilter = ({
     }
 
     return (
-        <div className={styles.catalog_main_mobile_filter}>
+        <div ref={modalRef} className={styles.catalog_main_mobile_filter}>
             <div
                 className={`${styles.mobile_burger_menu_city_choise}  mobile-main-filter__${className}`}
             >
@@ -961,6 +998,7 @@ const CatalogMainFilter = ({
                         <button
                             onClick={() => {
                                 window.scroll({ top: 0 })
+                                onClose()
                             }}
                             className={styles.catalog_modal_buttons__see_all}
                         >
@@ -969,7 +1007,10 @@ const CatalogMainFilter = ({
                                 CatalogCommonReducer.amount}{' '}
                             предложений
                         </button>
-                        <button className={styles.catalog_modal_buttons__reset}>
+                        <button
+                            onClick={() => onResetClickHandler()}
+                            className={styles.catalog_modal_buttons__reset}
+                        >
                             Сбросить
                         </button>
                     </div>
