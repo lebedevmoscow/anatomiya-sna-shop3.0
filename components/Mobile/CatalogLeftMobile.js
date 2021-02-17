@@ -31,7 +31,6 @@ const CatalogLeftMobile = ({
     useEffect(() => {
         let c = 0
         if (CatalogCommonReducer.filters.length > 0) {
-            console.log('FILTER COUNT', CatalogCommonReducer.filters)
             for (let i = 0; i < CatalogCommonReducer.filters.length; i++) {
                 if (CatalogCommonReducer.filters[i].inner.length > 0) {
                     for (
@@ -60,7 +59,6 @@ const CatalogLeftMobile = ({
         }
 
         if (c === 0) c = 1
-        console.log('c', c)
         setCountActiveFilter(c)
     }, [CatalogCommonReducer])
 

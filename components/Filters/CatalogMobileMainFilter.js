@@ -428,7 +428,6 @@ const CatalogMainFilter = ({
     }
 
     const getYellowTextForSelect = (title) => {
-        console.log('title arr', title, selectedActive2)
         for (let i = 0; i < selectedActive2.length; i++) {
             if (selectedActive2[i].label === title) {
                 return selectedActive2[i].initial.label

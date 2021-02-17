@@ -315,7 +315,6 @@ const CatalogMobileProductList = ({
             CatalogCommonReducer.filters &&
             CatalogCommonReducer.filters.length !== 0
         ) {
-            console.log('1')
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -336,7 +335,6 @@ const CatalogMobileProductList = ({
                 )
             )
         } else {
-            console.log('2')
             // SelectedSizeReducer.amount ? p - 1 : p,
             dispatch(
                 LoadByFilters(

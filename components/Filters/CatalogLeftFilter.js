@@ -32,7 +32,9 @@ const CatalogLeftFilter = ({
 
     const [click, setClick] = useState(0)
     const options = filterAPIData.size
-    const properties = filterAPIData.properties.concat()
+    const [properties, setProperties] = useState(
+        filterAPIData.properties.concat()
+    )
     const colors = filterAPIData.colors
     const [filterStatus, setFilterStatus] = useState([])
 
@@ -153,6 +155,12 @@ const CatalogLeftFilter = ({
 
         dispatch({ type: CATALOG_SET_TOP_RESET })
         setFilterStatus(filter_status)
+
+        const clone = filterAPIData.properties.concat()
+        setProperties([])
+        setTimeout(() => {
+            setProperties(clone)
+        }, 0)
     }
 
     const OnCloseFilterClickHandler = (title) => {
@@ -173,15 +181,6 @@ const CatalogLeftFilter = ({
             }
         }
         return ''
-    }
-
-    const getCheckedStyle = (title, index) => {
-        for (let i = 0; i < filterStatus[index].inner.length; i++) {
-            if (filterStatus[index].inner[i].status === 'opened') {
-                return true
-            }
-        }
-        return false
     }
 
     const onFilterClickHandler = (mainIndex, title) => {
@@ -233,6 +232,19 @@ const CatalogLeftFilter = ({
 
         dispatch(catalogSetFilters(againClone))
         setFilterStatus(againClone)
+    }
+
+    const getCheckedStyle = (title, index) => {
+        for (let i = 0; i < filterStatus[index].inner.length; i++) {
+            console.log(
+                'filterStatus[index].inner[i]',
+                filterStatus[index].inner[i]
+            )
+            if (filterStatus[index].inner[i].status === 'opened') {
+                return true
+            }
+        }
+        return false
     }
 
     useEffect(() => {
@@ -782,12 +794,6 @@ const CatalogLeftFilter = ({
                                                                     }
                                                                 >
                                                                     <input
-                                                                        // onChange={() =>
-                                                                        //     getCheckedStyle(
-                                                                        //         checkbox.label,
-                                                                        //         index
-                                                                        //     )
-                                                                        // }
                                                                         defaultChecked={getCheckedStyle(
                                                                             checkbox.label,
                                                                             index
