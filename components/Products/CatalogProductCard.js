@@ -582,6 +582,82 @@ const CatalogProductCard = ({
             ? InitialSize[0].Delivery.InStock
             : Prices[0].Delivery.InStock
 
+    let MobileButtonStyleCompared
+    let MobileButtonStyleFavorite
+
+    // style={
+    //     isCompared
+    //         ? {
+    //               backgroundColor: '#0ca5d3',
+    //               borderColor: '#0ca5d3',
+    //           }
+    //         : {}
+    // }
+
+    if (isCompared && viewType === 'single' && IsMobile) {
+        MobileButtonStyleCompared = {
+            top: '5px',
+            position: 'relative',
+            backgroundColor: '#0ca5d3',
+            borderColor: '#0ca5d3',
+            width: '50px',
+            height: '40px',
+        }
+    } else if (!isCompared && viewType === 'single' && IsMobile) {
+        MobileButtonStyleCompared = {
+            top: '5px',
+            position: 'relative',
+            backgroundColor: '#fff',
+            borderColor: '#e8e8e8',
+            width: '50px',
+            height: '40px',
+        }
+    } else if (!isCompared && viewType === 'several' && IsMobile) {
+        MobileButtonStyleCompared = {
+            position: 'relative',
+            backgroundColor: '#fff',
+            borderColor: '#e8e8e8',
+        }
+    } else if (isCompared && viewType === 'several' && IsMobile) {
+        MobileButtonStyleCompared = {
+            position: 'relative',
+            backgroundColor: '#0ca5d3',
+            borderColor: '#0ca5d3',
+        }
+    }
+
+    if (isFavorite && viewType === 'single' && IsMobile) {
+        MobileButtonStyleFavorite = {
+            top: '5px',
+            position: 'relative',
+            backgroundColor: '#0ca5d3',
+            borderColor: '#0ca5d3',
+            width: '50px',
+            height: '40px',
+        }
+    } else if (!isFavorite && viewType === 'single' && IsMobile) {
+        MobileButtonStyleFavorite = {
+            top: '5px',
+            position: 'relative',
+            backgroundColor: '#fff',
+            borderColor: '#e8e8e8',
+            width: '50px',
+            height: '40px',
+        }
+    } else if (!isFavorite && viewType === 'several' && IsMobile) {
+        MobileButtonStyleFavorite = {
+            position: 'relative',
+            backgroundColor: '#fff',
+            borderColor: '#e8e8e8',
+        }
+    } else if (isFavorite && viewType === 'several' && IsMobile) {
+        MobileButtonStyleFavorite = {
+            position: 'relative',
+            backgroundColor: '#0ca5d3',
+            borderColor: '#0ca5d3',
+        }
+    }
+
     return (
         <div
             style={viewTypeStyles.catalog_product_card}
@@ -910,15 +986,42 @@ const CatalogProductCard = ({
                                         className={
                                             styles.catalog_product_card__materials_list_item
                                         }
+                                        style={
+                                            IsMobile && viewType === 'single'
+                                                ? {
+                                                      position: 'relative',
+                                                      height: '37px',
+                                                      width: '37px',
+                                                      marginRight: '10px',
+                                                  }
+                                                : {
+                                                      position: 'relative',
+                                                      height: '12.5px',
+                                                      width: '12.5px',
+                                                      marginRight: '5px',
+                                                  }
+                                        }
                                     >
-                                        <Image
-                                            src={
-                                                'https://www.anatomiyasna.ru' +
-                                                opt.data.Image.FilePath
-                                            }
-                                            height={IsMobile ? 12.5 : 25}
-                                            width={IsMobile ? 12.5 : 25}
-                                        />
+                                        {viewType === 'several' && (
+                                            <Image
+                                                src={
+                                                    'https://www.anatomiyasna.ru' +
+                                                    opt.data.Image.FilePath
+                                                }
+                                                layout={'fill'}
+                                                // height={IsMobile ? 12.5 : 25}
+                                                // width={IsMobile ? 12.5 : 25}
+                                            />
+                                        )}
+                                        {viewType === 'single' && IsMobile && (
+                                            <Image
+                                                src={
+                                                    'https://www.anatomiyasna.ru' +
+                                                    opt.data.Image.FilePath
+                                                }
+                                                layout="fill"
+                                            />
+                                        )}
                                     </li>
                                 )
                             })}
@@ -928,45 +1031,59 @@ const CatalogProductCard = ({
                     <span className={styles.line}></span>
                 )}
 
-                <EqualHeightElement name="CatalogProductCard__options">
-                    <div className={styles.catalog_product_card__info_block}>
-                        <ul className={styles.catalog_product_card__info_list}>
-                            {Properties.map((property, id) => {
-                                const floored = parseInt(property.Value, 10)
-                                return (
-                                    <li
-                                        key={id}
-                                        className={
-                                            styles.catalog_product_card__info_list_item
-                                        }
-                                    >
-                                        <div
+                <div
+                    style={
+                        IsMobile && viewType === 'several'
+                            ? { display: 'none' }
+                            : {}
+                    }
+                >
+                    <EqualHeightElement name="CatalogProductCard__options">
+                        <div
+                            className={styles.catalog_product_card__info_block}
+                        >
+                            <ul
+                                className={
+                                    styles.catalog_product_card__info_list
+                                }
+                            >
+                                {Properties.map((property, id) => {
+                                    const floored = parseInt(property.Value, 10)
+                                    return (
+                                        <li
+                                            key={id}
                                             className={
-                                                styles.catalog_product_card__info_list_item_title
+                                                styles.catalog_product_card__info_list_item
                                             }
                                         >
-                                            {property.PropertyTitle}
-                                        </div>
-                                        <span
-                                            className={
-                                                styles.catalog_product_card__info_list_item_delimiter
-                                            }
-                                        ></span>
-                                        <div
-                                            className={
-                                                styles.catalog_product_card__info_list_item_material
-                                            }
-                                        >
-                                            {isNaN(floored)
-                                                ? property.Value
-                                                : floored}
-                                        </div>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </div>
-                </EqualHeightElement>
+                                            <div
+                                                className={
+                                                    styles.catalog_product_card__info_list_item_title
+                                                }
+                                            >
+                                                {property.PropertyTitle}
+                                            </div>
+                                            <span
+                                                className={
+                                                    styles.catalog_product_card__info_list_item_delimiter
+                                                }
+                                            ></span>
+                                            <div
+                                                className={
+                                                    styles.catalog_product_card__info_list_item_material
+                                                }
+                                            >
+                                                {isNaN(floored)
+                                                    ? property.Value
+                                                    : floored}
+                                            </div>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                    </EqualHeightElement>
+                </div>
 
                 <div
                     style={{
@@ -975,142 +1092,170 @@ const CatalogProductCard = ({
                         justifyContent: 'space-between',
                     }}
                 >
-                    <div className={styles.catalogproductcard__stock}>
-                        <EqualHeightElement name="CatalogProductCard__stock">
-                            {InStock && (
-                                <div
-                                    className={
-                                        styles.catalog_product_card__instockblock
-                                    }
-                                >
-                                    {InStock && (
+                    <div
+                        style={
+                            viewType === 'single' && IsMobile
+                                ? {
+                                      display: 'flex',
+                                      justifyContent: 'space-between',
+                                  }
+                                : {}
+                        }
+                    >
+                        <div
+                            style={
+                                viewType === 'single' && IsMobile
+                                    ? {
+                                          width: '257px',
+                                      }
+                                    : {}
+                            }
+                            className={styles.catalogproductcard__stock}
+                        >
+                            <EqualHeightElement name="CatalogProductCard__stock">
+                                {InStock && (
+                                    <div
+                                        className={
+                                            styles.catalog_product_card__instockblock
+                                        }
+                                    >
+                                        {InStock && (
+                                            <span
+                                                style={
+                                                    !InStock
+                                                        ? { opacity: 0 }
+                                                        : {}
+                                                }
+                                                className={
+                                                    styles.catalog_product_card__instockblock__icon
+                                                }
+                                            ></span>
+                                        )}{' '}
                                         <span
                                             style={
                                                 !InStock ? { opacity: 0 } : {}
                                             }
                                             className={
-                                                styles.catalog_product_card__instockblock__icon
+                                                styles.catalog_product_card__instockblock__text
                                             }
-                                        ></span>
-                                    )}{' '}
-                                    <span
-                                        style={!InStock ? { opacity: 0 } : {}}
-                                        className={
-                                            styles.catalog_product_card__instockblock__text
-                                        }
-                                    >
-                                        {InStock ? 'Есть в наличии' : ''}
-                                    </span>
-                                </div>
-                            )}
+                                        >
+                                            {InStock ? 'Есть в наличии' : ''}
+                                        </span>
+                                    </div>
+                                )}
 
-                            {desktopViewType === 'several' && (
-                                <div
-                                    className={
-                                        styles.catalog_product_card__info_wrap
-                                    }
-                                >
-                                    <button
-                                        className={
-                                            styles.catalog_product_card__info_button
-                                        }
-                                    >
-                                        Подробнее
-                                    </button>
+                                {desktopViewType === 'several' && (
                                     <div
                                         className={
-                                            styles.catalog_product_card__stats_buttons
+                                            styles.catalog_product_card__info_wrap
                                         }
-                                    ></div>
-                                </div>
-                            )}
-                        </EqualHeightElement>
-                    </div>
-
-                    {breakpoint769 && (
-                        <div className={styles.mobile__btns}>
-                            <div
-                                style={
-                                    isCompared
-                                        ? {
-                                              backgroundColor: '#0ca5d3',
-                                              borderColor: '#0ca5d3',
-                                          }
-                                        : {}
-                                }
-                                onClick={() => {
-                                    onAddToCompareClickHandler()
-                                }}
-                                className={styles.mobile__btns__item}
-                            >
-                                <div
-                                    className={
-                                        styles.mobile__btns__image_wrapper
-                                    }
-                                >
-                                    {isCompared && (
-                                        <Image
-                                            src={WhiteStats}
-                                            width={25}
-                                            height={25}
+                                    >
+                                        <button
                                             className={
-                                                styles.mobile__btns__image
+                                                styles.catalog_product_card__info_button
                                             }
-                                        />
-                                    )}
-                                    {!isCompared && (
-                                        <Image
-                                            src={StatsImage}
-                                            width={25}
-                                            height={25}
+                                        >
+                                            Подробнее
+                                        </button>
+                                        <div
                                             className={
-                                                styles.mobile__btns__image
+                                                styles.catalog_product_card__stats_buttons
                                             }
-                                        />
-                                    )}
-                                </div>
-                            </div>
-                            <div
-                                style={
-                                    isFavorite
-                                        ? {
-                                              backgroundColor: '#0ca5d3',
-                                              borderColor: '#0ca5d3',
-                                          }
-                                        : {}
-                                }
-                                onClick={() => onAddToFavoriteClickHandler()}
-                                className={styles.mobile__btns__item}
-                            >
-                                <div
-                                    className={
-                                        styles.mobile__btns__image_wrapper
-                                    }
-                                >
-                                    {isFavorite && (
-                                        <Image
-                                            src={WhiteHeartImage}
-                                            width={25}
-                                            height={25}
-                                            className={
-                                                styles.mobile__btns__image
-                                            }
-                                        />
-                                    )}
-                                    {!isFavorite && (
-                                        <Image
-                                            src={HeartImage}
-                                            width={25}
-                                            height={25}
-                                            className={
-                                                styles.mobile__btns__image
-                                            }
-                                        />
-                                    )}
-                                </div>
-                            </div>
+                                        ></div>
+                                    </div>
+                                )}
+                            </EqualHeightElement>
                         </div>
-                    )}
+
+                        {breakpoint769 && (
+                            <div className={styles.mobile__btns}>
+                                <div
+                                    style={MobileButtonStyleCompared}
+                                    onClick={() => {
+                                        onAddToCompareClickHandler()
+                                    }}
+                                    className={styles.mobile__btns__item}
+                                >
+                                    <div
+                                        style={
+                                            IsMobile && viewType === 'several'
+                                                ? {
+                                                      left: '35%',
+                                                      top: '2.5px',
+                                                  }
+                                                : { left: '25%' }
+                                        }
+                                        className={
+                                            styles.mobile__btns__image_wrapper
+                                        }
+                                    >
+                                        {isCompared && (
+                                            <Image
+                                                src={WhiteStats}
+                                                width={25}
+                                                height={25}
+                                                className={
+                                                    styles.mobile__btns__image
+                                                }
+                                            />
+                                        )}
+                                        {!isCompared && (
+                                            <Image
+                                                src={StatsImage}
+                                                width={25}
+                                                height={25}
+                                                className={
+                                                    styles.mobile__btns__image
+                                                }
+                                            />
+                                        )}
+                                    </div>
+                                </div>
+                                <div
+                                    style={MobileButtonStyleFavorite}
+                                    onClick={() =>
+                                        onAddToFavoriteClickHandler()
+                                    }
+                                    className={styles.mobile__btns__item}
+                                >
+                                    <div
+                                        style={
+                                            IsMobile && viewType === 'several'
+                                                ? {
+                                                      left: '35%',
+                                                      top: '2.5px',
+                                                  }
+                                                : { left: '25%' }
+                                        }
+                                        className={
+                                            styles.mobile__btns__image_wrapper
+                                        }
+                                    >
+                                        {isFavorite && (
+                                            <Image
+                                                src={WhiteHeartImage}
+                                                width={25}
+                                                height={25}
+                                                className={
+                                                    styles.mobile__btns__image
+                                                }
+                                            />
+                                        )}
+                                        {!isFavorite && (
+                                            <Image
+                                                src={HeartImage}
+                                                width={25}
+                                                height={25}
+                                                className={
+                                                    styles.mobile__btns__image
+                                                }
+                                            />
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
 
                     {desktopViewType === 'several' && (
                         <div
@@ -1120,6 +1265,11 @@ const CatalogProductCard = ({
                         >
                             <img
                                 src={CarImage}
+                                style={
+                                    IsMobile && viewType === 'several'
+                                        ? { display: 'none' }
+                                        : {}
+                                }
                                 className={
                                     styles.catalog_product_card__delivery_image
                                 }
