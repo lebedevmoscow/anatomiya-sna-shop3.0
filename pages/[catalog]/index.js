@@ -263,7 +263,7 @@ const CatalogPage = ({
             {!breakpoint1023 && (
                 <MainNavigation headerCatalog={headerCatalog} />
             )}
-            {breakpoint768 && (
+            {IsMobile && breakpoint768 && (
                 <CatalogPresetFilter
                     onClose={() => setPresetFilterIsOpen(false)}
                     className={presetFilterIsOpen ? '' : 'closed'}
@@ -271,7 +271,7 @@ const CatalogPage = ({
                     title={presetFilterTitle}
                 />
             )}
-            {breakpoint768 && (
+            {IsMobile && breakpoint768 && (
                 <CatalogCompositionFilter
                     headers={headers}
                     filterAPIData={filterAPIData}
@@ -281,19 +281,21 @@ const CatalogPage = ({
                     dataList={initialCompositionFilterData}
                 />
             )}
-            <CatalogMainFilter
-                className={mainMobileFilterIsOpen ? '' : 'closed'}
-                filterAPIData={filterAPIData}
-                onClose={() => {
-                    setMainMobileFilterIsOpen(false)
-                }}
-                viewType={viewType}
-                setLastClick={setLastClick}
-                title={'Подбор по параметрам'}
-                filterProductsIds={filterProductsIds}
-                catalogSlug={catalogSlug}
-                subCatalogSlug={subCatalogSlug}
-            />
+            {IsMobile && (
+                <CatalogMainFilter
+                    className={mainMobileFilterIsOpen ? '' : 'closed'}
+                    filterAPIData={filterAPIData}
+                    onClose={() => {
+                        setMainMobileFilterIsOpen(false)
+                    }}
+                    viewType={viewType}
+                    setLastClick={setLastClick}
+                    title={'Подбор по параметрам'}
+                    filterProductsIds={filterProductsIds}
+                    catalogSlug={catalogSlug}
+                    subCatalogSlug={subCatalogSlug}
+                />
+            )}
             {/* {breakpoint720 && (
                 <img className="mobile-menu__mini-banner" src={banner}></img>
             )} */}
