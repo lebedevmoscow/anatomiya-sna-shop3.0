@@ -788,7 +788,7 @@ const CatalogProductCard = ({
                 style={
                     !breakpoint769 && desktopViewType === 'single'
                         ? { order: 3, width: '276px' }
-                        : { position: 'relative', zIndex: 7 }
+                        : { position: 'relative', zIndex: 7, marginTop: '10px' }
                 }
                 className={`${styles.catalog_product_card__desktop_view_type__single} ${styles.catalog_product_card__desktop_view_type__single__third}`}
             >
@@ -833,6 +833,11 @@ const CatalogProductCard = ({
                                     }
                                 >
                                     <div
+                                        style={
+                                            desktopViewType === 'several'
+                                                ? { marginTop: '-18px' }
+                                                : {}
+                                        }
                                         className={
                                             styles.product_card__price_prev
                                         }
