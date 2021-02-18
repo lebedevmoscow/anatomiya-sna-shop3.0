@@ -42,6 +42,7 @@ const PopupOnProductCard = ({
                     zIndex: 6 - index,
                     listStyle: 'none',
                     width: 'fit-content',
+                    whiteSpace: 'nowrap',
                 }}
                 onClick={() => {
                     SetClose(1)
@@ -85,6 +86,7 @@ const PopupOnProductCard = ({
                         zIndex: 6 - index,
                         listStyle: 'none',
                         width: 'fit-content',
+                        whiteSpace: 'nowrap',
                     }}
                     key={index}
                 >
@@ -125,6 +127,7 @@ const PopupOnProductCard = ({
                         listStyle: 'none',
                         width: 'fit-content',
                         cursor: 'pointer',
+                        whiteSpace: 'nowrap',
                     }}
                     key={index}
                     onClick={() => {
@@ -173,6 +176,7 @@ const PopupOnProductCard = ({
                         listStyle: 'none',
                         width: 'fit-content',
                         cursor: 'default',
+                        whiteSpace: 'nowrap',
                     }}
                     key={index}
                     onClick={() => {
@@ -201,7 +205,7 @@ const PopupsOnProductCard = ({
         <div
             style={
                 desktopViewType === 'single'
-                    ? { left: '1%', flexDirection: 'column', width: 'auto' }
+                    ? { left: '1%', flexDirection: 'column', width: '50px' }
                     : {}
             }
             className={popups_styles.product_card__popups}
