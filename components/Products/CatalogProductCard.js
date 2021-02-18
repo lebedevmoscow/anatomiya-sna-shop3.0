@@ -809,9 +809,17 @@ const CatalogProductCard = ({
                             {PriceDiff !== 0 && (
                                 <div
                                     style={
-                                        !IsMobile
+                                        !IsMobile &&
+                                        desktopViewType === 'single'
                                             ? {
                                                   position: 'absolute',
+                                                  top: '25px',
+                                              }
+                                            : !IsMobile &&
+                                              desktopViewType === 'several'
+                                            ? {
+                                                  position: 'absolute',
+                                                  top: '14px',
                                               }
                                             : {
                                                   position: 'absolute',
@@ -849,7 +857,14 @@ const CatalogProductCard = ({
                                     </div>
                                 </div>
                             )}
-                            <div className={styles.catalog_product_card__price}>
+                            <div
+                                style={
+                                    desktopViewType === 'single'
+                                        ? { marginTop: '18px' }
+                                        : {}
+                                }
+                                className={styles.catalog_product_card__price}
+                            >
                                 {Price} Руб.
                             </div>
                             <div
@@ -990,7 +1005,119 @@ const CatalogProductCard = ({
                             : { display: 'none' }
                     }
                 >
-                    <div className={styles.catalog_product_card__info_wrap}>
+                    <div
+                        style={
+                            viewType === 'single' && IsMobile
+                                ? {
+                                      display: 'flex',
+                                      justifyContent: 'space-between',
+                                      width: '276px',
+                                  }
+                                : {}
+                        }
+                    >
+                        <div
+                            style={
+                                viewType === 'single' && IsMobile
+                                    ? {
+                                          width: '257px',
+                                      }
+                                    : {}
+                            }
+                            className={styles.catalogproductcard__stock}
+                        >
+                            {InStock && (
+                                <div
+                                    style={{
+                                        alignItems: 'center',
+                                        display: 'block',
+                                    }}
+                                    className={
+                                        styles.catalog_product_card__instockblock
+                                    }
+                                >
+                                    {InStock && (
+                                        <span
+                                            style={
+                                                !InStock ? { opacity: 0 } : {}
+                                            }
+                                            className={
+                                                styles.catalog_product_card__instockblock__icon
+                                            }
+                                        ></span>
+                                    )}{' '}
+                                    <span
+                                        style={!InStock ? { opacity: 0 } : {}}
+                                        className={
+                                            styles.catalog_product_card__instockblock__text
+                                        }
+                                    >
+                                        {InStock ? 'Есть в наличии' : ''}
+                                    </span>
+                                </div>
+                            )}
+
+                            {desktopViewType === 'several' && (
+                                <div
+                                    className={
+                                        styles.catalog_product_card__info_wrap
+                                    }
+                                >
+                                    <button
+                                        className={
+                                            styles.catalog_product_card__info_button
+                                        }
+                                    >
+                                        Подробнее
+                                    </button>
+                                    <div
+                                        className={
+                                            styles.catalog_product_card__stats_buttons
+                                        }
+                                    ></div>
+                                </div>
+                            )}
+
+                            {desktopViewType === 'several' && (
+                                <div
+                                    className={
+                                        styles.catalog_product_card__delivery_block
+                                    }
+                                >
+                                    <img
+                                        src={CarImage}
+                                        style={
+                                            IsMobile && viewType === 'several'
+                                                ? { display: 'none' }
+                                                : {}
+                                        }
+                                        className={
+                                            styles.catalog_product_card__delivery_image
+                                        }
+                                    ></img>
+
+                                    <div
+                                        className={
+                                            styles.catalog_product_card__delivery_info
+                                        }
+                                    >
+                                        <span className={styles.when}>
+                                            доставим
+                                            <span className={styles.blue}>
+                                                {' '}
+                                                {DeliveryDate}
+                                            </span>
+                                        </span>
+                                        <span className={styles.price}>
+                                            доставка{' '}
+                                            <span className={styles.blue}>
+                                                {DeliveryPrice}
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                         <button
                             className={styles.catalog_product_card__info_button}
                         >
@@ -1189,42 +1316,54 @@ const CatalogProductCard = ({
                     </EqualHeightElement>
                 </div>
 
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: ' column',
-                        justifyContent: 'space-between',
-                    }}
-                >
+                {desktopViewType !== 'single' && (
                     <div
-                        style={
-                            viewType === 'single' && IsMobile
-                                ? {
-                                      display: 'flex',
-                                      justifyContent: 'space-between',
-                                      width: '276px',
-                                  }
-                                : {}
-                        }
+                        style={{
+                            display: 'flex',
+                            flexDirection: ' column',
+                            justifyContent: 'space-between',
+                        }}
                     >
                         <div
                             style={
                                 viewType === 'single' && IsMobile
                                     ? {
-                                          width: '257px',
+                                          display: 'flex',
+                                          justifyContent: 'space-between',
+                                          width: '276px',
                                       }
                                     : {}
                             }
-                            className={styles.catalogproductcard__stock}
                         >
-                            <EqualHeightElement name="CatalogProductCard__stock">
-                                {InStock && (
-                                    <div
-                                        className={
-                                            styles.catalog_product_card__instockblock
-                                        }
-                                    >
-                                        {InStock && (
+                            <div
+                                style={
+                                    viewType === 'single' && IsMobile
+                                        ? {
+                                              width: '257px',
+                                          }
+                                        : {}
+                                }
+                                className={styles.catalogproductcard__stock}
+                            >
+                                <EqualHeightElement name="CatalogProductCard__stock">
+                                    {InStock && (
+                                        <div
+                                            className={
+                                                styles.catalog_product_card__instockblock
+                                            }
+                                        >
+                                            {InStock && (
+                                                <span
+                                                    style={
+                                                        !InStock
+                                                            ? { opacity: 0 }
+                                                            : {}
+                                                    }
+                                                    className={
+                                                        styles.catalog_product_card__instockblock__icon
+                                                    }
+                                                ></span>
+                                            )}{' '}
                                             <span
                                                 style={
                                                     !InStock
@@ -1232,176 +1371,172 @@ const CatalogProductCard = ({
                                                         : {}
                                                 }
                                                 className={
-                                                    styles.catalog_product_card__instockblock__icon
+                                                    styles.catalog_product_card__instockblock__text
                                                 }
-                                            ></span>
-                                        )}{' '}
-                                        <span
-                                            style={
-                                                !InStock ? { opacity: 0 } : {}
-                                            }
-                                            className={
-                                                styles.catalog_product_card__instockblock__text
-                                            }
-                                        >
-                                            {InStock ? 'Есть в наличии' : ''}
-                                        </span>
-                                    </div>
-                                )}
+                                            >
+                                                {InStock
+                                                    ? 'Есть в наличии'
+                                                    : ''}
+                                            </span>
+                                        </div>
+                                    )}
 
-                                {desktopViewType === 'several' && (
-                                    <div
-                                        className={
-                                            styles.catalog_product_card__info_wrap
-                                        }
-                                    >
-                                        <button
-                                            className={
-                                                styles.catalog_product_card__info_button
-                                            }
-                                        >
-                                            Подробнее
-                                        </button>
+                                    {desktopViewType === 'several' && (
                                         <div
                                             className={
-                                                styles.catalog_product_card__stats_buttons
+                                                styles.catalog_product_card__info_wrap
                                             }
-                                        ></div>
-                                    </div>
-                                )}
-                            </EqualHeightElement>
-                        </div>
+                                        >
+                                            <button
+                                                className={
+                                                    styles.catalog_product_card__info_button
+                                                }
+                                            >
+                                                Подробнее
+                                            </button>
+                                            <div
+                                                className={
+                                                    styles.catalog_product_card__stats_buttons
+                                                }
+                                            ></div>
+                                        </div>
+                                    )}
+                                </EqualHeightElement>
+                            </div>
 
-                        {breakpoint769 && (
-                            <div className={styles.mobile__btns}>
-                                <div
-                                    style={MobileButtonStyleCompared}
-                                    onClick={() => {
-                                        onAddToCompareClickHandler()
-                                    }}
-                                    className={styles.mobile__btns__item}
-                                >
+                            {breakpoint769 && (
+                                <div className={styles.mobile__btns}>
                                     <div
-                                        style={
-                                            IsMobile && viewType === 'several'
-                                                ? {
-                                                      left: '35%',
-                                                      top: '2.5px',
-                                                  }
-                                                : { left: '25%' }
-                                        }
-                                        className={
-                                            styles.mobile__btns__image_wrapper
-                                        }
+                                        style={MobileButtonStyleCompared}
+                                        onClick={() => {
+                                            onAddToCompareClickHandler()
+                                        }}
+                                        className={styles.mobile__btns__item}
                                     >
-                                        {isCompared && (
-                                            <Image
-                                                src={WhiteStats}
-                                                width={25}
-                                                height={25}
-                                                className={
-                                                    styles.mobile__btns__image
-                                                }
-                                            />
-                                        )}
-                                        {!isCompared && (
-                                            <Image
-                                                src={StatsImage}
-                                                width={25}
-                                                height={25}
-                                                className={
-                                                    styles.mobile__btns__image
-                                                }
-                                            />
-                                        )}
+                                        <div
+                                            style={
+                                                IsMobile &&
+                                                viewType === 'several'
+                                                    ? {
+                                                          left: '35%',
+                                                          top: '2.5px',
+                                                      }
+                                                    : { left: '25%' }
+                                            }
+                                            className={
+                                                styles.mobile__btns__image_wrapper
+                                            }
+                                        >
+                                            {isCompared && (
+                                                <Image
+                                                    src={WhiteStats}
+                                                    width={25}
+                                                    height={25}
+                                                    className={
+                                                        styles.mobile__btns__image
+                                                    }
+                                                />
+                                            )}
+                                            {!isCompared && (
+                                                <Image
+                                                    src={StatsImage}
+                                                    width={25}
+                                                    height={25}
+                                                    className={
+                                                        styles.mobile__btns__image
+                                                    }
+                                                />
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div
+                                        style={MobileButtonStyleFavorite}
+                                        onClick={() =>
+                                            onAddToFavoriteClickHandler()
+                                        }
+                                        className={styles.mobile__btns__item}
+                                    >
+                                        <div
+                                            style={
+                                                IsMobile &&
+                                                viewType === 'several'
+                                                    ? {
+                                                          left: '35%',
+                                                          top: '2.5px',
+                                                      }
+                                                    : { left: '25%' }
+                                            }
+                                            className={
+                                                styles.mobile__btns__image_wrapper
+                                            }
+                                        >
+                                            {isFavorite && (
+                                                <Image
+                                                    src={WhiteHeartImage}
+                                                    width={25}
+                                                    height={25}
+                                                    className={
+                                                        styles.mobile__btns__image
+                                                    }
+                                                />
+                                            )}
+                                            {!isFavorite && (
+                                                <Image
+                                                    src={HeartImage}
+                                                    width={25}
+                                                    height={25}
+                                                    className={
+                                                        styles.mobile__btns__image
+                                                    }
+                                                />
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
-                                <div
-                                    style={MobileButtonStyleFavorite}
-                                    onClick={() =>
-                                        onAddToFavoriteClickHandler()
+                            )}
+                        </div>
+
+                        {desktopViewType === 'several' && (
+                            <div
+                                className={
+                                    styles.catalog_product_card__delivery_block
+                                }
+                            >
+                                <img
+                                    src={CarImage}
+                                    style={
+                                        IsMobile && viewType === 'several'
+                                            ? { display: 'none' }
+                                            : {}
                                     }
-                                    className={styles.mobile__btns__item}
+                                    className={
+                                        styles.catalog_product_card__delivery_image
+                                    }
+                                ></img>
+
+                                <div
+                                    className={
+                                        styles.catalog_product_card__delivery_info
+                                    }
                                 >
-                                    <div
-                                        style={
-                                            IsMobile && viewType === 'several'
-                                                ? {
-                                                      left: '35%',
-                                                      top: '2.5px',
-                                                  }
-                                                : { left: '25%' }
-                                        }
-                                        className={
-                                            styles.mobile__btns__image_wrapper
-                                        }
-                                    >
-                                        {isFavorite && (
-                                            <Image
-                                                src={WhiteHeartImage}
-                                                width={25}
-                                                height={25}
-                                                className={
-                                                    styles.mobile__btns__image
-                                                }
-                                            />
-                                        )}
-                                        {!isFavorite && (
-                                            <Image
-                                                src={HeartImage}
-                                                width={25}
-                                                height={25}
-                                                className={
-                                                    styles.mobile__btns__image
-                                                }
-                                            />
-                                        )}
-                                    </div>
+                                    <span className={styles.when}>
+                                        доставим
+                                        <span className={styles.blue}>
+                                            {' '}
+                                            {DeliveryDate}
+                                        </span>
+                                    </span>
+                                    <span className={styles.price}>
+                                        доставка{' '}
+                                        <span className={styles.blue}>
+                                            {DeliveryPrice}
+                                        </span>
+                                    </span>
                                 </div>
                             </div>
                         )}
                     </div>
-
-                    {desktopViewType === 'several' && (
-                        <div
-                            className={
-                                styles.catalog_product_card__delivery_block
-                            }
-                        >
-                            <img
-                                src={CarImage}
-                                style={
-                                    IsMobile && viewType === 'several'
-                                        ? { display: 'none' }
-                                        : {}
-                                }
-                                className={
-                                    styles.catalog_product_card__delivery_image
-                                }
-                            ></img>
-
-                            <div
-                                className={
-                                    styles.catalog_product_card__delivery_info
-                                }
-                            >
-                                <span className={styles.when}>
-                                    доставим
-                                    <span className={styles.blue}>
-                                        {' '}
-                                        {DeliveryDate}
-                                    </span>
-                                </span>
-                                <span className={styles.price}>
-                                    доставка{' '}
-                                    <span className={styles.blue}>
-                                        {DeliveryPrice}
-                                    </span>
-                                </span>
-                            </div>
-                        </div>
-                    )}
-                </div>
+                )}
             </div>
         </div>
     )
