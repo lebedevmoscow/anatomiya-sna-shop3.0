@@ -38,10 +38,6 @@ import HeartImage from './../../assets/svg/heart.svg'
 import WhiteHeartImage from './../../assets/svg/white-heart.svg'
 import WhiteStats from './../../assets/svg/white-stats.svg'
 
-import Material1 from './../../assets/materials/material1.jpg'
-import Material2 from './../../assets/materials/material2.jpg'
-import Material3 from './../../assets/materials/material3.jpg'
-
 // import findProducts from '../../../actions/IndexPageMainFilter'
 
 const EqualHeightElement = dynamic(
@@ -674,7 +670,7 @@ const CatalogProductCard = ({
             position: 'relative',
             height: '12.5px',
             width: '12.5px',
-            marginRight: '5px',
+            marginRight: '-3px',
         }
     }
 
@@ -823,9 +819,7 @@ const CatalogProductCard = ({
                                               }
                                             : {
                                                   position: 'absolute',
-                                                  left: '50%',
-                                                  transform:
-                                                      'translateX(-100%)',
+                                                  left: '25%',
                                               }
                                     }
                                     className={
@@ -834,8 +828,14 @@ const CatalogProductCard = ({
                                 >
                                     <div
                                         style={
-                                            desktopViewType === 'several'
+                                            desktopViewType === 'several' &&
+                                            !IsMobile
                                                 ? { marginTop: '-18px' }
+                                                : viewType === 'several' &&
+                                                  IsMobile
+                                                ? {
+                                                      marginTop: '-13px',
+                                                  }
                                                 : {}
                                         }
                                         className={
@@ -850,6 +850,12 @@ const CatalogProductCard = ({
                                             <div
                                                 className={
                                                     styles.product_card__price_diff
+                                                }
+                                                style={
+                                                    viewType === 'several' &&
+                                                    IsMobile
+                                                        ? { width: 'auto' }
+                                                        : {}
                                                 }
                                             >
                                                 -
@@ -1211,15 +1217,15 @@ const CatalogProductCard = ({
                                         }
                                         style={MaterialStyle}
                                     >
-                                        {viewType === 'several' && (
+                                        {viewType === 'several' && IsMobile && (
                                             <Image
                                                 src={
                                                     'https://www.anatomiyasna.ru' +
                                                     opt.data.Image.FilePath
                                                 }
                                                 layout={'fill'}
-                                                // height={IsMobile ? 12.5 : 25}
-                                                // width={IsMobile ? 12.5 : 25}
+                                                // height={12.5}
+                                                // width={12.5}
                                             />
                                         )}
                                         {viewType === 'single' && IsMobile && (
@@ -1231,26 +1237,28 @@ const CatalogProductCard = ({
                                                 layout="fill"
                                             />
                                         )}
-                                        {desktopViewType === 'several' && (
-                                            <Image
-                                                src={
-                                                    'https://www.anatomiyasna.ru' +
-                                                    opt.data.Image.FilePath
-                                                }
-                                                width={27}
-                                                height={27}
-                                            />
-                                        )}
-                                        {desktopViewType === 'single' && (
-                                            <Image
-                                                src={
-                                                    'https://www.anatomiyasna.ru' +
-                                                    opt.data.Image.FilePath
-                                                }
-                                                width={27}
-                                                height={27}
-                                            />
-                                        )}
+                                        {desktopViewType === 'several' &&
+                                            !IsMobile && (
+                                                <Image
+                                                    src={
+                                                        'https://www.anatomiyasna.ru' +
+                                                        opt.data.Image.FilePath
+                                                    }
+                                                    width={27}
+                                                    height={27}
+                                                />
+                                            )}
+                                        {desktopViewType === 'single' &&
+                                            !IsMobile && (
+                                                <Image
+                                                    src={
+                                                        'https://www.anatomiyasna.ru' +
+                                                        opt.data.Image.FilePath
+                                                    }
+                                                    width={27}
+                                                    height={27}
+                                                />
+                                            )}
                                     </li>
                                 )
                             })}
@@ -1335,7 +1343,7 @@ const CatalogProductCard = ({
                                     ? {
                                           display: 'flex',
                                           justifyContent: 'space-between',
-                                          width: '276px',
+                                          width: '100%',
                                       }
                                     : {}
                             }
@@ -1344,7 +1352,7 @@ const CatalogProductCard = ({
                                 style={
                                     viewType === 'single' && IsMobile
                                         ? {
-                                              width: '257px',
+                                              width: '63%',
                                           }
                                         : {}
                                 }
