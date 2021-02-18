@@ -658,6 +658,53 @@ const CatalogProductCard = ({
         }
     }
 
+    let MaterialStyle
+
+    if (IsMobile && viewType === 'single') {
+        MaterialStyle = {
+            position: 'relative',
+            height: '37px',
+            width: '37px',
+            marginRight: '10px',
+        }
+    }
+
+    if (IsMobile && viewType === 'several') {
+        MaterialStyle = {
+            position: 'relative',
+            height: '12.5px',
+            width: '12.5px',
+            marginRight: '5px',
+        }
+    }
+
+    if (!IsMobile && viewType === 'several') {
+        MaterialStyle = {
+            position: 'relative',
+            height: '37px',
+            width: '37px',
+            marginRight: '10px',
+        }
+    }
+
+    // const MaterialStyle = {
+    //     style={
+    //         IsMobile && viewType === 'single'
+    //             ? {
+    //                   position: 'relative',
+    //                   height: '37px',
+    //                   width: '37px',
+    //                   marginRight: '10px',
+    //               }
+    //             : {
+    //                   position: 'relative',
+    //                   height: '12.5px',
+    //                   width: '12.5px',
+    //                   marginRight: '5px',
+    //               }
+    //     }
+    // }
+
     return (
         <div
             style={viewTypeStyles.catalog_product_card}
@@ -986,21 +1033,7 @@ const CatalogProductCard = ({
                                         className={
                                             styles.catalog_product_card__materials_list_item
                                         }
-                                        style={
-                                            IsMobile && viewType === 'single'
-                                                ? {
-                                                      position: 'relative',
-                                                      height: '37px',
-                                                      width: '37px',
-                                                      marginRight: '10px',
-                                                  }
-                                                : {
-                                                      position: 'relative',
-                                                      height: '12.5px',
-                                                      width: '12.5px',
-                                                      marginRight: '5px',
-                                                  }
-                                        }
+                                        style={MaterialStyle}
                                     >
                                         {viewType === 'several' && (
                                             <Image
@@ -1020,6 +1053,16 @@ const CatalogProductCard = ({
                                                     opt.data.Image.FilePath
                                                 }
                                                 layout="fill"
+                                            />
+                                        )}
+                                        {desktopViewType === 'several' && (
+                                            <Image
+                                                src={
+                                                    'https://www.anatomiyasna.ru' +
+                                                    opt.data.Image.FilePath
+                                                }
+                                                width={27}
+                                                height={27}
                                             />
                                         )}
                                     </li>
