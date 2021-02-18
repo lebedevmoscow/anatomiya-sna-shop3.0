@@ -29,7 +29,6 @@ const CatalogMainFilter = ({
     stylesForViewType,
     viewType,
 }) => {
-    console.log('filterAPIData', filterAPIData)
     const colors = filterAPIData.colors
 
     const modalRef = useRef(null)

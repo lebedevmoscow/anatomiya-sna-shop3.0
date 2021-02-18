@@ -314,7 +314,6 @@ export const LoadByFilters = (
         }
 
         const finalUrl = mainUrl + subUrl + encodeURI(url) + encodeURI(sub)
-        console.log('finalUrl', finalUrl)
 
         const reqIds = await fetch(finalUrl)
         const resIds = await reqIds.json()

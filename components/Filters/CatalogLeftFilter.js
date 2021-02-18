@@ -236,10 +236,6 @@ const CatalogLeftFilter = ({
 
     const getCheckedStyle = (title, index) => {
         for (let i = 0; i < filterStatus[index].inner.length; i++) {
-            console.log(
-                'filterStatus[index].inner[i]',
-                filterStatus[index].inner[i]
-            )
             if (filterStatus[index].inner[i].status === 'opened') {
                 return true
             }

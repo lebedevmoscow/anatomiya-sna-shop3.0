@@ -60,10 +60,7 @@ const CatalogProductListForDesktop = ({
                         `https://anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=${CatalogCommonReducer.page}`
                     )
                     const res = await r.json()
-                    console.log(
-                        'url',
-                        `https://anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=${CatalogCommonReducer.page}`
-                    )
+
                     SetArticles(<ArticleListCatalog list={res} />)
                 }
             }
