@@ -687,6 +687,15 @@ const CatalogProductCard = ({
         }
     }
 
+    if (!IsMobile && viewType === 'single') {
+        MaterialStyle = {
+            position: 'relative',
+            height: '37px',
+            width: '37px',
+            marginRight: '10px',
+        }
+    }
+
     // const MaterialStyle = {
     //     style={
     //         IsMobile && viewType === 'single'
@@ -719,7 +728,20 @@ const CatalogProductCard = ({
                 desktopViewType={desktopViewType}
                 Gifts={Gifts}
             />
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div
+                style={
+                    desktopViewType === 'single'
+                        ? {
+                              display: 'flex',
+                              flexDirection: 'column',
+                              width: '276px',
+                          }
+                        : {
+                              display: 'flex',
+                              flexDirection: 'column',
+                          }
+                }
+            >
                 {breakpoint769 && (
                     <div
                         style={{
@@ -771,7 +793,14 @@ const CatalogProductCard = ({
                 className={`${styles.catalog_product_card__desktop_view_type__single} ${styles.catalog_product_card__desktop_view_type__single__third}`}
             >
                 <EqualHeightElement name="CatalogProductCard__Price">
-                    <div className={styles.catalog_product_card__price_block}>
+                    <div
+                        style={
+                            desktopViewType === 'single'
+                                ? { marginBottom: '10px' }
+                                : {}
+                        }
+                        className={styles.catalog_product_card__price_block}
+                    >
                         <div
                             className={
                                 styles.catalog_product_card__price_block_left
@@ -924,7 +953,12 @@ const CatalogProductCard = ({
                         </div>
                     </div>
                 </EqualHeightElement>
-                <span className={styles.line}></span>
+                <span
+                    style={
+                        desktopViewType === 'single' ? { display: 'none' } : {}
+                    }
+                    className={styles.line}
+                ></span>
                 <div className={styles.catalog_product_card__selector_block}>
                     <div
                         className={styles.catalog_product_card__selector_title}
@@ -942,7 +976,12 @@ const CatalogProductCard = ({
                         {SizeSelector}
                     </div>
                 </div>
-                <span className={styles.line}></span>
+                <span
+                    style={
+                        desktopViewType === 'single' ? { display: 'none' } : {}
+                    }
+                    className={styles.line}
+                ></span>
 
                 <div
                     style={
@@ -965,6 +1004,11 @@ const CatalogProductCard = ({
                     </div>
 
                     <div
+                        style={
+                            desktopViewType === 'single'
+                                ? { marginTop: '5px' }
+                                : {}
+                        }
                         className={styles.catalog_product_card__delivery_block}
                     >
                         <img
@@ -1065,13 +1109,30 @@ const CatalogProductCard = ({
                                                 height={27}
                                             />
                                         )}
+                                        {desktopViewType === 'single' && (
+                                            <Image
+                                                src={
+                                                    'https://www.anatomiyasna.ru' +
+                                                    opt.data.Image.FilePath
+                                                }
+                                                width={27}
+                                                height={27}
+                                            />
+                                        )}
                                     </li>
                                 )
                             })}
                     </ul>
                 </div>
                 {OptionsList && OptionsList.length > 0 && (
-                    <span className={styles.line}></span>
+                    <span
+                        style={
+                            desktopViewType === 'single'
+                                ? { display: 'none' }
+                                : {}
+                        }
+                        className={styles.line}
+                    ></span>
                 )}
 
                 <div
@@ -1141,6 +1202,7 @@ const CatalogProductCard = ({
                                 ? {
                                       display: 'flex',
                                       justifyContent: 'space-between',
+                                      width: '276px',
                                   }
                                 : {}
                         }
