@@ -46,21 +46,21 @@ const CatalogProductListForDesktop = ({
         <ArticleListCatalog list={articles} />
     )
 
-    useEffect(() => {
-        if (CatalogCommonReducer.page !== 1) {
-            const req = async () => {
-                if (headers) {
-                    const r = await fetch(
-                        `https://anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=${CatalogCommonReducer.page}`
-                    )
-                    const res = await r.json()
+    // useEffect(() => {
+    //     if (CatalogCommonReducer.page !== 1) {
+    //         const req = async () => {
+    //             if (headers) {
+    //                 const r = await fetch(
+    //                     `https://anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=${CatalogCommonReducer.page}`
+    //                 )
+    //                 const res = await r.json()
 
-                    SetArticles(<ArticleListCatalog list={res} />)
-                }
-            }
-            req()
-        }
-    }, [CatalogCommonReducer.page])
+    //                 SetArticles(<ArticleListCatalog list={res} />)
+    //             }
+    //         }
+    //         req()
+    //     }
+    // }, [CatalogCommonReducer.page])
 
     let subIndex = 0
 
@@ -164,7 +164,7 @@ const CatalogProductListForDesktop = ({
                 )
             }
 
-            // Temp++
+            Temp++
 
             // if (length < 21 && Temp % 3 !== 0) {
             //     if (
@@ -262,7 +262,7 @@ const CatalogProductListForDesktop = ({
                 )
             }
 
-            // Temp++
+            Temp++
 
             // if (length < 20 && Temp % 2 !== 0) {
             //     if (length - 1 === index && Temp % 2 === 1) {

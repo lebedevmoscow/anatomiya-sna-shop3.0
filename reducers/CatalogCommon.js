@@ -13,7 +13,7 @@ import {
 
 const initialState = {
     page: 1,
-    filters: null,
+    filters: [],
     ids: [],
     topfilter: [],
     desktopTopFilter: [],

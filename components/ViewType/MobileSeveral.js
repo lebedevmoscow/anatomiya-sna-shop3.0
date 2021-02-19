@@ -413,7 +413,7 @@ const MobileSeveral = ({
 
     return (
         <div className={styles.catalog_product_card}>
-            <PopupsOnProductCard
+            {/* <PopupsOnProductCard
                 Labels={Labels}
                 SalePercent={SalePercent}
                 key={uuidv4()}
@@ -421,7 +421,7 @@ const MobileSeveral = ({
                 IsMobile={IsMobile}
                 desktopViewType={desktopViewType}
                 Gifts={Gifts}
-            />
+            /> */}
             <div className={styles.catalog_product_card__column}>
                 <div
                     className={
@@ -552,13 +552,13 @@ const MobileSeveral = ({
                         {OptionsList &&
                             OptionsList.map((opt, index) => {
                                 if (
-                                    index > 5 &&
-                                    index != OptionsList.length - 1
+                                    index > 4 &&
+                                    index != OptionsList.length - 2
                                 ) {
                                     return
                                 } else if (
-                                    index > 5 &&
-                                    index === OptionsList.length - 1
+                                    index > 4 &&
+                                    index === OptionsList.length - 2
                                 ) {
                                     return (
                                         <li
@@ -568,7 +568,7 @@ const MobileSeveral = ({
                                             }
                                         >
                                             <span>
-                                                + {OptionsList.length - 5} цвета
+                                                + {OptionsList.length - 4} цвета
                                             </span>
                                         </li>
                                     )
@@ -585,8 +585,7 @@ const MobileSeveral = ({
                                                 'https://www.anatomiyasna.ru' +
                                                 opt.data.Image.FilePath
                                             }
-                                            width={27}
-                                            height={27}
+                                            layout={'fill'}
                                         />
                                     </li>
                                 )
@@ -646,6 +645,29 @@ const MobileSeveral = ({
                                         styles.catalog_product_card__stats_buttons
                                     }
                                 ></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.mobile__btns}>
+                        <div className={styles.mobile__btns__item}>
+                            <div className={styles.mobile__btns__image_wrapper}>
+                                <Image
+                                    src={StatsImage}
+                                    width={25}
+                                    height={25}
+                                    className={styles.mobile__btns__image}
+                                />
+                            </div>
+                        </div>
+                        <div className={styles.mobile__btns__item}>
+                            <div className={styles.mobile__btns__image_wrapper}>
+                                <Image
+                                    src={HeartImage}
+                                    width={25}
+                                    height={25}
+                                    className={styles.mobile__btns__image}
+                                />
                             </div>
                         </div>
                     </div>

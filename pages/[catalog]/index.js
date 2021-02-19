@@ -30,6 +30,11 @@ import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
 //     { ssr: false }
 // )
 
+// const CatalogMobileProductList = dynamic(
+//     () => import('./../../components/Mobile/CatalogMobileProductList'),
+//     { ssr: true }
+// )
+
 const CatalogPage = ({
     banner,
     phoneCommon,
@@ -70,7 +75,7 @@ const CatalogPage = ({
     const [stylesForViewType, setStylesForViewType] = useState({})
     const [stylesForDesktopViewType, setStylesForDesktopViewType] = useState({})
     const [desktopViewType, setDesktopViewType] = useState('several')
-    const [viewType, setViewType] = useState(null)
+    const [viewType, setViewType] = useState('several')
     const [mainMobileFilterIsOpen, setMainMobileFilterIsOpen] = useState(false)
     const [presetFilterIsOpen, setPresetFilterIsOpen] = useState(false)
     const [presetFilterData, setPresetFilterData] = useState([])
@@ -101,154 +106,6 @@ const CatalogPage = ({
     const breakpoint768 = useMedia(768)
     const breakpoint720 = useMedia(720)
 
-    // Use Effects
-    useEffect(() => {
-        if (breakpoint768) {
-            // setViewType('single')
-            setViewType('several')
-        } else if (!breakpoint768) {
-            setDesktopViewType('several')
-        }
-    }, [breakpoint768])
-
-    useEffect(() => {
-        if (viewType === 'single') {
-            setStylesForViewType({
-                catalog_product_card: {
-                    width: '100%',
-                },
-                catalog_product_card__image: {
-                    height: '208px',
-                    width: '332.8px',
-                },
-                catalog_product_card__materials_list_item_img: {
-                    height: '32.39px',
-                    width: '32.39px',
-                },
-                catalog_product_card__info_wrap: {
-                    display: 'flex',
-                },
-                catalog_product_card__info_button: {
-                    width: '63%',
-                },
-                catalog_product_card__stats_buttons: {
-                    top: '0',
-                    width: '34%',
-                },
-                catalog_product_card__stat_block: {
-                    width: '50px',
-                    marginLeft: '10px',
-                },
-                catalog_product_card__stat_block_image: {
-                    left: '1%',
-                    top: '8%',
-                    transform:
-                        'scale(0.33) translateX(-42px) translateY(-71px)',
-                },
-            })
-        }
-
-        if (viewType === 'several') {
-            setStylesForViewType({
-                catalog_product_card: {
-                    width: '43%',
-                },
-                catalog_product_card__image: {
-                    height: '102.31px',
-                    width: '163.72px',
-                },
-                catalog_product_card__materials_list_item_img: {
-                    height: '10.25px',
-                    width: '10.25px',
-                },
-                catalog_product_card__info_wrap: {
-                    display: 'block',
-                },
-                catalog_product_card__info_button: {
-                    width: '100%',
-                    display: 'block',
-                },
-                catalog_product_card__stats_buttons: {
-                    top: '0',
-                    width: '34%',
-                },
-                catalog_product_card__stat_block: {
-                    width: '50px',
-                    marginLeft: '10px',
-                },
-                catalog_product_card__stat_block_image: {
-                    left: '1%',
-                    top: '8%',
-                    transform:
-                        'scale(0.33) translateX(-42px) translateY(-71px)',
-                },
-            })
-        }
-    }, [viewType])
-
-    useEffect(() => {
-        if (desktopViewType === 'single') {
-            setStylesForDesktopViewType({
-                catalog_product_card: {
-                    display: 'flex',
-                    flexDirection: 'row',
-                    width: '100%',
-                },
-                catalog_product_card__smalltext: {
-                    width: '275.19px',
-                },
-                catalog_product_card__title: {
-                    width: '275.19px',
-                },
-                catalog_product_card__desktop_view_type__single__second: {
-                    width: '300px',
-                },
-                line: {
-                    display: 'none',
-                },
-                catalog_product_card__desktop_view_type__single__third: {
-                    width: '276px',
-                },
-                catalog_product_card__selector_block: {
-                    marginTop: '36px',
-                },
-                popup_ul: {
-                    flexDirection: 'column',
-                },
-            })
-        } else if (desktopViewType === 'several') {
-            setStylesForDesktopViewType({
-                catalog_product_card: {
-                    width: '30.5%',
-                },
-                catalog_product_card__smalltext: {
-                    width: 'auto',
-                },
-                catalog_product_card__title: {
-                    width: 'auto',
-                },
-                catalog_product_card__desktop_view_type__single__second: {
-                    width: 'auto',
-                },
-                line: {
-                    display: 'block',
-                },
-                catalog_product_card__desktop_view_type__single__third: {
-                    width: 'auto',
-                },
-                catalog_product_card__selector_block: {
-                    marginTop: '10px',
-                },
-                popup_ul: {
-                    flexDirection: 'row',
-                },
-                catalog_product_card__materials_list_item_img: {
-                    width: '20px',
-                },
-            })
-        }
-    }, [desktopViewType])
-
     return (
         <div className="app">
             {IsMobile && (
@@ -258,7 +115,7 @@ const CatalogPage = ({
                     regions={regions}
                 />
             )}
-            {IsMobile && (
+            {/* {!IsMobile && (
                 <Header
                     banner={null}
                     phoneCommon={phoneCommon}
@@ -266,7 +123,7 @@ const CatalogPage = ({
                 />
             )}
             {!IsMobile && <MainNavigation headerCatalog={headerCatalog} />}
-            {/* {IsMobile && breakpoint768 && (
+            {IsMobile && breakpoint768 && (
                 <CatalogPresetFilter
                     onClose={() => setPresetFilterIsOpen(false)}
                     className={presetFilterIsOpen ? '' : 'closed'}
@@ -283,8 +140,8 @@ const CatalogPage = ({
                     onClose={() => setCompositionPresetFilterIsOpen(false)}
                     dataList={initialCompositionFilterData}
                 />
-            )}
-            {IsMobile && (
+            )} */}
+            {/* {IsMobile && (
                 <CatalogMainFilter
                     className={mainMobileFilterIsOpen ? '' : 'closed'}
                     filterAPIData={filterAPIData}
@@ -302,7 +159,7 @@ const CatalogPage = ({
             {/* {breakpoint720 && (
                 <img className="mobile-menu__mini-banner" src={banner}></img>
             )} */}
-            {/* {IsMobile && breakpoint1023 && (
+            {IsMobile && (
                 <div className={common_styles.container}>
                     <CatalogLeftMobile
                         headers={headers}
@@ -315,7 +172,7 @@ const CatalogPage = ({
                         viewType={viewType}
                     />
                 </div>
-            )} */}
+            )}
             {IsMobile && products && (
                 <div className={common_styles.container}>
                     <CatalogMobileProductList
@@ -333,17 +190,6 @@ const CatalogPage = ({
                         articles={articles}
                         headers={headers}
                     />
-                    {/* <CatalogProductList
-                        catalogSlug={catalogSlug}
-                        subCatalogSlug={subCatalogSlug}
-                        firstLoadProducts={products}
-                        stylesForViewType={stylesForViewType}
-                        viewType={viewType}
-                        oldMin={filterAPIData.price.min}
-                        oldMax={filterAPIData.price.max}
-                        filterProductsIds={filterProductsIds}
-                        newProducts={true}
-                    /> */}
                 </div>
             )}
             {/* {IsMobile && breakpoint1023 && (
@@ -405,10 +251,10 @@ const CatalogPage = ({
                     </div>
                 </div>
             )}
-            <SwiperAssurenaces />
+            {/* <SwiperAssurenaces /> */}
             {/* <Subscribe /> */}
-            <MobileFooter />
-            <Footer />
+            {/* <MobileFooter /> */}
+            {/* <Footer /> */}
         </div>
     )
 }
@@ -471,7 +317,7 @@ export const getServerSideProps = async (ctx) => {
     const headers = response[8]
 
     // const filterAPIData = null
-    // const filterProductsIds = null
+    // const filterProductsIds = [21]
 
     let ids = []
 
@@ -490,18 +336,15 @@ export const getServerSideProps = async (ctx) => {
         `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
     )
 
-    const articlesUrl = encodeURI(
-        `https://www.anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=1`
-    )
-    const articlesReq = await fetch(articlesUrl)
-    const articles = await articlesReq.json()
+    // const articlesUrl = encodeURI(
+    //     `https://www.anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=1`
+    // )
+    // const articlesReq = await fetch(articlesUrl)
+    // const articles = await articlesReq.json()
+
+    const articles = []
 
     const products = await productsURLReq.json()
-
-    console.log(
-        'https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}',
-        `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
-    )
 
     return {
         props: {

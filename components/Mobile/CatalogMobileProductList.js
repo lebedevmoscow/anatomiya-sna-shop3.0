@@ -47,6 +47,7 @@ const CatalogMobileProductList = ({
         (store) => store.SelectedSizeReducer
     )
 
+    const [update, setUpdate] = useState(0)
     const [productList, setProductList] = useState(firstLoadProducts)
     const [data, setData] = useState([])
     const [firstProductList, setFirstProductList] = useState([])
@@ -377,22 +378,27 @@ const CatalogMobileProductList = ({
     }, [page, headers])
 
     useEffect(() => {
-        console.log('here')
-        setFirstProductList(
-            <CatalogProductList
-                catalogSlug={catalogSlug}
-                subCatalogSlug={subCatalogSlug}
-                firstLoadProducts={firstLoadProducts}
-                stylesForViewType={stylesForViewType}
-                viewType={viewType}
-                oldMin={filterAPIData.price.min}
-                oldMax={filterAPIData.price.max}
-                filterProductsIds={filterProductsIds}
-                newProducts={newProducts}
-                IsMobile={true}
-            />
-        )
-    }, [firstLoadProducts, filterProductsIds, viewType, stylesForViewType])
+        setUpdate((p) => ++p)
+    }, [firstLoadProducts, filterProductsIds, viewType])
+
+    useEffect(() => {
+        if (update > 1) {
+            setFirstProductList(
+                <CatalogProductList
+                    catalogSlug={catalogSlug}
+                    subCatalogSlug={subCatalogSlug}
+                    firstLoadProducts={firstLoadProducts}
+                    stylesForViewType={stylesForViewType}
+                    viewType={viewType}
+                    oldMin={filterAPIData.price.min}
+                    oldMax={filterAPIData.price.max}
+                    filterProductsIds={filterProductsIds}
+                    newProducts={newProducts}
+                    IsMobile={true}
+                />
+            )
+        }
+    }, [update])
 
     useEffect(() => {
         setAmount(Math.ceil(filterProductsIds.length / 20))
@@ -436,19 +442,21 @@ const CatalogMobileProductList = ({
     }, [SelectedSizeReducer.amount])
 
     useEffect(() => {
-        if (CatalogProductListReducer.products.length !== 0) {
-            setFirstProductList(
-                <CatalogProductList
-                    catalogSlug={catalogSlug}
-                    firstLoadProducts={CatalogProductListReducer.products}
-                    oldMin={oldMin}
-                    oldMax={oldMax}
-                    filterProductsIds={filterProductsIds}
-                    IsMobile={true}
-                    stylesForViewType={stylesForViewType}
-                    viewType={viewType}
-                />
-            )
+        if (update > 1) {
+            if (CatalogProductListReducer.products.length !== 0) {
+                setFirstProductList(
+                    <CatalogProductList
+                        catalogSlug={catalogSlug}
+                        firstLoadProducts={CatalogProductListReducer.products}
+                        oldMin={oldMin}
+                        oldMax={oldMax}
+                        filterProductsIds={filterProductsIds}
+                        IsMobile={true}
+                        stylesForViewType={stylesForViewType}
+                        viewType={viewType}
+                    />
+                )
+            }
         }
     }, [CatalogProductListReducer.products])
 
@@ -471,43 +479,45 @@ const CatalogMobileProductList = ({
     }, [NewCatalogProductListReducer.emptyIndex])
 
     useEffect(() => {
-        if (NewCatalogProductListReducer.newProducts.length !== 0) {
-            if (lastClick === 'showMore') {
-                const clone = data.concat()
-                clone.push(NewCatalogProductListReducer.newProducts)
-                setData(clone)
-            } else if (lastClick === 'filter') {
-                // setTimeout(() => {
-                setFirstProductList(
-                    <CatalogProductList
-                        catalogSlug={catalogSlug}
-                        firstLoadProducts={
-                            NewCatalogProductListReducer.newProducts
-                        }
-                        oldMin={oldMin}
-                        oldMax={oldMax}
-                        filterProductsIds={filterProductsIds}
-                        IsMobile={true}
-                        stylesForViewType={stylesForViewType}
-                        viewType={viewType}
-                    />
-                )
-                // }, 1000)
-            } else {
-                setFirstProductList(
-                    <CatalogProductList
-                        catalogSlug={catalogSlug}
-                        firstLoadProducts={
-                            NewCatalogProductListReducer.newProducts
-                        }
-                        oldMin={oldMin}
-                        oldMax={oldMax}
-                        filterProductsIds={filterProductsIds}
-                        IsMobile={true}
-                        stylesForViewType={stylesForViewType}
-                        viewType={viewType}
-                    />
-                )
+        if (update > 1) {
+            if (NewCatalogProductListReducer.newProducts.length !== 0) {
+                if (lastClick === 'showMore') {
+                    const clone = data.concat()
+                    clone.push(NewCatalogProductListReducer.newProducts)
+                    setData(clone)
+                } else if (lastClick === 'filter') {
+                    // setTimeout(() => {
+                    setFirstProductList(
+                        <CatalogProductList
+                            catalogSlug={catalogSlug}
+                            firstLoadProducts={
+                                NewCatalogProductListReducer.newProducts
+                            }
+                            oldMin={oldMin}
+                            oldMax={oldMax}
+                            filterProductsIds={filterProductsIds}
+                            IsMobile={true}
+                            stylesForViewType={stylesForViewType}
+                            viewType={viewType}
+                        />
+                    )
+                    // }, 1000)
+                } else {
+                    setFirstProductList(
+                        <CatalogProductList
+                            catalogSlug={catalogSlug}
+                            firstLoadProducts={
+                                NewCatalogProductListReducer.newProducts
+                            }
+                            oldMin={oldMin}
+                            oldMax={oldMax}
+                            filterProductsIds={filterProductsIds}
+                            IsMobile={true}
+                            stylesForViewType={stylesForViewType}
+                            viewType={viewType}
+                        />
+                    )
+                }
             }
         }
     }, [NewCatalogProductListReducer.newProducts])
@@ -521,10 +531,22 @@ const CatalogMobileProductList = ({
     return (
         <>
             {firstProductList}
-            {FirstArticles}
-            {list}
-            {Articles && Articles}
-            <div
+            <CatalogProductList
+                catalogSlug={catalogSlug}
+                subCatalogSlug={subCatalogSlug}
+                firstLoadProducts={firstLoadProducts}
+                stylesForViewType={stylesForViewType}
+                viewType={viewType}
+                oldMin={filterAPIData.price.min}
+                oldMax={filterAPIData.price.max}
+                filterProductsIds={filterProductsIds}
+                newProducts={newProducts}
+                IsMobile={true}
+            />
+            {/* {FirstArticles} */}
+            {/* {list} */}
+            {/* {Articles && Articles} */}
+            {/* <div
                 onClick={() => {
                     setLastClick('showMore')
                     if (lastClick === 'showMore') {
@@ -546,7 +568,7 @@ const CatalogMobileProductList = ({
                     }
                     onGoBackdButtonClickHandler={onGoBackdButtonClickHandler}
                 />
-            </div>
+            </div> */}
         </>
     )
 }
