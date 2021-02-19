@@ -206,6 +206,161 @@ const DesktopSeveral = ({
         SetOptionsForSelect(clone)
     }, [InitialSize.length])
 
+    const onAddToFavoriteClickHandler = () => {
+        if (!isFavorite) {
+            setIsFavorite(true)
+            FavoriteRef.current.style.display = 'block'
+
+            const Price =
+                InitialSize.length !== 0
+                    ? InitialSize[0].PriceDiscount
+                    : Prices[0].PriceDiscount
+            const PriceId =
+                InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
+            const SizeSlug =
+                InitialSize.length !== 0
+                    ? InitialSize[0].SizeSlug
+                    : CurrentSize.value
+            const SizeLabel =
+                InitialSize.length !== 0
+                    ? InitialSize[0].SizeTitle
+                    : CurrentSize.label
+
+            dispatch(
+                AddProductToFavoriteList(
+                    Id,
+                    MainImage.FilePath,
+                    CatalogType,
+                    BrandTitle,
+                    SeriesTitle,
+                    Title,
+                    SizeSlug,
+                    SizeLabel,
+                    Price,
+                    PriceId
+                )
+            )
+            setTimeout(() => {
+                FavoriteRef.current.style.display = 'none'
+            }, 1500)
+        } else {
+            setIsFavorite(false)
+            dispatch(
+                RemoveProductFromFavoriteList(
+                    Id,
+                    MainImage.FilePath,
+                    CatalogType,
+                    BrandTitle,
+                    SeriesTitle,
+                    Title,
+                    SizeSlug,
+                    SizeLabel,
+                    Price,
+                    PriceId
+                )
+            )
+        }
+    }
+
+    const onAddToCompareClickHandler = () => {
+        if (!isCompared) {
+            setIsCompared(true)
+            CompareRef.current.style.display = 'block'
+            const Price =
+                InitialSize.length !== 0
+                    ? InitialSize[0].PriceDiscount
+                    : Prices[0].PriceDiscount
+            const PriceId =
+                InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
+            const SizeSlug =
+                InitialSize.length !== 0
+                    ? InitialSize[0].SizeSlug
+                    : CurrentSize.value
+            const SizeLabel =
+                InitialSize.length !== 0
+                    ? InitialSize[0].SizeTitle
+                    : CurrentSize.label
+
+            dispatch(
+                AddProductToCompareList(
+                    Id,
+                    MainImage.FilePath,
+                    CatalogType,
+                    BrandTitle,
+                    SeriesTitle,
+                    Title,
+                    SizeSlug,
+                    SizeLabel,
+                    Price,
+                    PriceId
+                )
+            )
+            setTimeout(() => {
+                CompareRef.current.style.display = 'none'
+            }, 1500)
+        } else {
+            setIsCompared(false)
+            dispatch(
+                RemoveProductFromCompareList(
+                    Id,
+                    MainImage.FilePath,
+                    CatalogType,
+                    BrandTitle,
+                    SeriesTitle,
+                    Title,
+                    SizeSlug,
+                    SizeLabel,
+                    Price,
+                    PriceId
+                )
+            )
+        }
+    }
+
+    const OnSelectSize = (data) => {
+        // Getting size ID
+        let SizeID = null
+        for (let i = 0; i < Prices.length; i++) {
+            if (Prices[i].SizeSlug === data.value) {
+                SizeID = Prices[i].SizeId
+            }
+        }
+
+        SetLastSelector(
+            <Select
+                isDisabled={OptionsForSelect.length === 1 ? true : false}
+                onChange={(data) => {
+                    SetCurrentSize(data)
+                    OnSelectSize(data)
+                    const Size = {}
+                    Size.value = data.value
+                    Size.label = data.label
+                    SetInitialSelectedSize(Size)
+                }}
+                className={styles.catalog_product_card__selector}
+                classNamePrefix={styles.catalog_product_card__selector__inner}
+                placeholder={placeholderSize}
+                styles={colourStyles}
+                options={OptionsForSelect}
+                isSearchable={false}
+                autoFocus={false}
+            />
+        )
+
+        dispatch({ type: CATALOG_PRODUCT_LIST_SET_EMPTY })
+        dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY })
+        dispatch(SelectSize(data.value, data.label, SizeID))
+        dispatch(
+            LoadProductsBySize(
+                SizeID,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax
+            )
+        )
+    }
+
     const Price =
         InitialSize.length !== 0
             ? InitialSize[0].PriceDiscount.toString().replace(

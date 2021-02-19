@@ -496,8 +496,6 @@ export const getServerSideProps = async (ctx) => {
 
     const products = await productsURLReq.json()
 
-    // const products = null
-
     console.log(
         'https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}',
         `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-// import CatalogTopFilter from './../Filters/CatalogTopFilter'
+import CatalogTopFilter from './../Filters/CatalogTopFilter'
 import CatalogProductListForDesktop from './../Products/CatalogProductList'
 import LoadMoreButton from './../Button/LoadMoreButton'
 import CatalogPagination from './../Pagination/CatalogPagination'
@@ -456,7 +456,7 @@ const CatalogRight = ({
 
     return (
         <div className={styles.catalog_right}>
-            {/* <CatalogTopFilter
+            <CatalogTopFilter
                 catalogSlug={catalogSlug}
                 subCatalogSlug={subCatalogSlug}
                 oldMin={oldMin}
@@ -465,7 +465,7 @@ const CatalogRight = ({
                 updateViewType={updateViewType}
                 desktopViewType={desktopViewType}
                 filterProductsIds={filterProductsIds}
-            /> */}
+            />
             {firstProductList}
             {/* {list}
             {!dontShowButton &&
