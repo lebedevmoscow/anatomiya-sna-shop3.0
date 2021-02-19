@@ -33,7 +33,11 @@ const GoodsWithSwiper = () => {
                 spaceBetween={10}
                 autoHeight={true}
             >
-                <SwiperSlide>
+                <SwiperSlide
+                    style={{
+                        width: '280px',
+                    }}
+                >
                     <div className={styles.assurances__item}>
                         <img
                             src={CarSVG}
@@ -45,7 +49,11 @@ const GoodsWithSwiper = () => {
                     </div>
                 </SwiperSlide>
 
-                <SwiperSlide>
+                <SwiperSlide
+                    style={{
+                        width: '280px',
+                    }}
+                >
                     <div className={styles.assurances__item}>
                         <img
                             src={Like}
@@ -57,7 +65,11 @@ const GoodsWithSwiper = () => {
                         </div>
                     </div>
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide
+                    style={{
+                        width: '280px',
+                    }}
+                >
                     <div className={styles.assurances__item}>
                         <img
                             src={Factory}
@@ -68,7 +80,11 @@ const GoodsWithSwiper = () => {
                         </div>
                     </div>
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide
+                    style={{
+                        width: '280px',
+                    }}
+                >
                     <div className={styles.assurances__item}>
                         <img
                             src={Control}
@@ -79,7 +95,11 @@ const GoodsWithSwiper = () => {
                         </div>
                     </div>
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide
+                    style={{
+                        width: '280px',
+                    }}
+                >
                     <div className={styles.assurances__item}>
                         <img
                             src={CertificateSVG}
@@ -90,7 +110,11 @@ const GoodsWithSwiper = () => {
                         </div>
                     </div>
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide
+                    style={{
+                        width: '280px',
+                    }}
+                >
                     <div className={styles.assurances__item}>
                         <img
                             src={Gift}
@@ -101,7 +125,11 @@ const GoodsWithSwiper = () => {
                         </div>
                     </div>
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide
+                    style={{
+                        width: '280px',
+                    }}
+                >
                     <div className={styles.assurances__item}>
                         <img
                             src={Blank}
@@ -112,7 +140,11 @@ const GoodsWithSwiper = () => {
                         </div>
                     </div>
                 </SwiperSlide>
-                <SwiperSlide>
+                <SwiperSlide
+                    style={{
+                        width: '280px',
+                    }}
+                >
                     <div className={styles.assurances__item}>
                         <img
                             src={PersonalData}
