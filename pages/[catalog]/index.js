@@ -22,6 +22,8 @@ import CatalogMainFilter from './../../components/Filters/CatalogMobileMainFilte
 import CatalogMobileProductList from './../../components/Mobile/CatalogMobileProductList'
 
 import common_styles from './../../styles/pages/catalog.module.sass'
+import MobileFooter from '../../components/Mobile/MobieFooter'
+import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
 
 // Experemental
 // const CatalogProductList = dynamic(
@@ -403,7 +405,9 @@ const CatalogPage = ({
                     </div>
                 </div>
             )}
+            <SwiperAssurenaces />
             {/* <Subscribe /> */}
+            <MobileFooter />
             <Footer />
         </div>
     )
