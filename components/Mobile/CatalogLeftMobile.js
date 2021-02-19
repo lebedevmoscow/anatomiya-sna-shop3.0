@@ -322,7 +322,7 @@ const CatalogLeftMobile = ({
                     className={
                         styles.catalog_left_mobile__main_filters +
                         ' ' +
-                        'catalog_left_mobile__filters_list'
+                        'catalog_left_mobile__filters_list catalog_left_mobile__filters_list__main'
                     }
                     freeMode={true}
                     freeModeMomentum={true}

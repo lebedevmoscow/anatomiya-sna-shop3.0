@@ -368,6 +368,8 @@ const CatalogProductCard = ({
             } else {
                 return {
                     ...styles,
+                    color: '#4d4d4d',
+                    transform: 'scale(0.9)',
                     visibility: 'visible',
                     position: 'absolute',
                     right: '0px',
@@ -1368,8 +1370,7 @@ const CatalogProductCard = ({
                                           display: 'flex',
                                           justifyContent: 'space-between',
                                           width: '100%',
-                                          alignItems: 'center',
-                                          marginTop: '-5px',
+                                          marginTop: '8px',
                                       }
                                     : {}
                             }
@@ -1399,7 +1400,7 @@ const CatalogProductCard = ({
                                                     ? {
                                                           zIndex: '1',
                                                           position: 'absolute',
-                                                          top: '2px',
+                                                          top: '-9px',
                                                           left: '59%',
                                                           whiteSpace: 'nowrap',
                                                       }

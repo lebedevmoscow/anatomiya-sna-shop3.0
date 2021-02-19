@@ -23,17 +23,7 @@ const Modal = ({ title, closed, text, onClose, html }) => {
                     </div>
                     <div className={styles.text}>{text || html}</div>
                     <div className={styles.buttons}>
-                        <button className={styles.button__more}>
-                            Подробнее
-                        </button>
-                        <button
-                            onClick={() => {
-                                onClose()
-                            }}
-                            className={styles.button__proceed}
-                        >
-                            Продолжить покупки
-                        </button>
+                        <button className={styles.button__more}>Готово</button>
                     </div>
                 </div>
             </div>
