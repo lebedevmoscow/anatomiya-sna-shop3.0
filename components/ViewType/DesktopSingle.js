@@ -530,22 +530,65 @@ const DesktopSingle = ({
                         </div>
                     </div>
                 </div>
+                <span
+                    style={
+                        desktopViewType === 'single' ? { display: 'none' } : {}
+                    }
+                    className={styles.line}
+                ></span>
+                <div className={styles.catalog_product_card__selector_block}>
+                    <div
+                        className={styles.catalog_product_card__selector_title}
+                    >
+                        Выберите размер (Ширина*Длина) см.
+                    </div>
+                    <div className={styles.catalog_product_card__selector}>
+                        {!SizeSelector && (
+                            <Skeleton
+                                variant="rect"
+                                width={275.72}
+                                height={48}
+                            />
+                        )}
+                        {SizeSelector}
+                    </div>
+                </div>
+                <div className={styles.catalog_product_card__info_wrap}>
+                    <button
+                        className={styles.catalog_product_card__info_button}
+                    >
+                        Подробнее
+                    </button>
+                    <div
+                        className={styles.catalog_product_card__stats_buttons}
+                    ></div>
+                </div>
+
+                <div className={styles.catalog_product_card__delivery_block}>
+                    <img
+                        src={CarImage}
+                        style={
+                            IsMobile && viewType === 'several'
+                                ? { display: 'none' }
+                                : {}
+                        }
+                        className={styles.catalog_product_card__delivery_image}
+                    ></img>
+
+                    <div className={styles.catalog_product_card__delivery_info}>
+                        <span className={styles.when}>
+                            доставим
+                            <span className={styles.blue}> {DeliveryDate}</span>
+                        </span>
+                        <span className={styles.price}>
+                            доставка{' '}
+                            <span className={styles.blue}>{DeliveryPrice}</span>
+                        </span>
+                    </div>
+                </div>
             </div>
             {/* </EqualHeightElement> */}
 
-            <span
-                style={desktopViewType === 'single' ? { display: 'none' } : {}}
-                className={styles.line}
-            ></span>
-            <div className={styles.catalog_product_card__selector_block}>
-                <div className={styles.catalog_product_card__selector_title}>
-                    Выберите размер (Ширина*Длина) см.
-                </div>
-                <div className={styles.catalog_product_card__selector}>
-                    {SizeSelector}
-                </div>
-            </div>
-            <span className={styles.line}></span>
             <div className={styles.equalhight__wrapper}>
                 <div className={styles.catalog_product_card__materials}>
                     <ul className={styles.catalog_product_card__materials_list}>
@@ -637,91 +680,6 @@ const DesktopSingle = ({
                         </ul>
                     </div>
                     {/* </EqualHeightElement> */}
-                </div>
-
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: ' column',
-                        justifyContent: 'space-between',
-                    }}
-                >
-                    <div>
-                        <div className={styles.catalogproductcard__stock}>
-                            {InStock && (
-                                <div
-                                    className={
-                                        styles.catalog_product_card__instockblock
-                                    }
-                                >
-                                    <span
-                                        style={!InStock ? { opacity: 0 } : {}}
-                                        className={
-                                            styles.catalog_product_card__instockblock__icon
-                                        }
-                                    ></span>{' '}
-                                    <span
-                                        style={!InStock ? { opacity: 0 } : {}}
-                                        className={
-                                            styles.catalog_product_card__instockblock__text
-                                        }
-                                    >
-                                        Есть в наличии
-                                    </span>
-                                </div>
-                            )}
-
-                            <div
-                                className={
-                                    styles.catalog_product_card__info_wrap
-                                }
-                            >
-                                <button
-                                    className={
-                                        styles.catalog_product_card__info_button
-                                    }
-                                >
-                                    Подробнее
-                                </button>
-                                <div
-                                    className={
-                                        styles.catalog_product_card__stats_buttons
-                                    }
-                                ></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div
-                        className={styles.catalog_product_card__delivery_block}
-                    >
-                        <img
-                            src={CarImage}
-                            className={
-                                styles.catalog_product_card__delivery_image
-                            }
-                        ></img>
-
-                        <div
-                            className={
-                                styles.catalog_product_card__delivery_info
-                            }
-                        >
-                            <span className={styles.when}>
-                                доставим
-                                <span className={styles.blue}>
-                                    {' '}
-                                    {DeliveryDate}
-                                </span>
-                            </span>
-                            <span className={styles.price}>
-                                доставка{' '}
-                                <span className={styles.blue}>
-                                    {DeliveryPrice}
-                                </span>
-                            </span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
