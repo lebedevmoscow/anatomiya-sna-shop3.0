@@ -416,6 +416,12 @@ export default CatalogPage
 export const getServerSideProps = async (ctx) => {
     const userAgent = ctx.req.headers['user-agent']
 
+    if (ctx.params.catalog === 'asset-manifest.json') {
+        return {
+            notFound: true,
+        }
+    }
+
     const URLS = [
         'https://www.anatomiyasna.ru/api/menu/mobileCatalogMenu/',
         'https://anatomiyasna.ru/api/menu/mobileMenu/',
@@ -459,13 +465,13 @@ export const getServerSideProps = async (ctx) => {
     const headerCatalog = response[4]
 
     const filterAPIData = response[6]
-    // const filterProductsIds = response[7]
+    const filterProductsIds = response[7]
+    // const filterProductsIds = 23
     // const headers = response[8]
-    const headers = response[7]
 
     // const filterAPIData = null
-    const filterProductsIds = 21
-    // const headers = null
+    // const filterProductsIds = null
+    const headers = null
 
     // let ids = []
 
