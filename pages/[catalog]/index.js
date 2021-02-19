@@ -355,11 +355,13 @@ const CatalogPage = ({
                     <CatalogPagination />
                 </div>
             )} */}
-            {/* {IsMobile && breakpoint1023 && (
-                <div className={common_styles.mobile_help_pickup}>
-                    <CatalogHelpPickUp />
+            {IsMobile && breakpoint1023 && (
+                <div className={common_styles.container}>
+                    <div className={common_styles.mobile_help_pickup}>
+                        <CatalogHelpPickUp />
+                    </div>
                 </div>
-            )} */}
+            )}
             {IsMobile && breakpoint1023 && (
                 <div className={common_styles.container}>
                     <div className={common_styles.catalog_mobile_reviews_title}>
