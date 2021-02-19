@@ -817,7 +817,7 @@ const CatalogProductCard = ({
                                                   position: 'absolute',
                                                   top: '14px',
                                               }
-                                            : IsMobile && viewType === 'severa'
+                                            : IsMobile && viewType === 'several'
                                             ? {
                                                   position: 'absolute',
                                                   left: '25%',

@@ -27,6 +27,10 @@ const CatalogMobileReviews = ({ rev }) => {
         }
     }, [videoRef.current])
 
+    const PriceDiff = Math.floor(
+        parseInt(rev.priceBasic, 10) - parseInt(rev.priceDiscount, 10)
+    )
+
     return (
         <div className={styles.catalog_mobile_review_section}>
             <div className={styles.catalog_mobile_review_section__smalltext}>
@@ -44,6 +48,29 @@ const CatalogMobileReviews = ({ rev }) => {
                 {/* <img src={'https://anatomiyasna.ru' + rev.productImage}></img> */}
             </div>
             <div className={styles.catalog_mobile_review_section__price}>
+                {PriceDiff !== 0 && (
+                    <div
+                        style={{ position: 'absolute', top: '-10px' }}
+                        className={styles.product_card__price_discount}
+                    >
+                        <div className={styles.product_card__price_prev}>
+                            <span>
+                                {Math.floor(rev.priceBasic)
+                                    .toString()
+                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
+                                <div
+                                    className={styles.product_card__price_diff}
+                                >
+                                    -
+                                    {PriceDiff.toString().replace(
+                                        /\B(?=(\d{3})+(?!\d))/g,
+                                        ' '
+                                    )}
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                )}
                 {parseInt(rev.priceDiscount, 10)
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}{' '}
