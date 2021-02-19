@@ -67,6 +67,7 @@ const CatalogMainFilter = ({
         filterAPIData.price.min,
         filterAPIData.price.max,
     ])
+    const [update, setUpdate] = useState(0)
     const [widths, setWidths] = useState([90, 215])
     const [lengths, setLengths] = useState([200, 248])
     const [sizeSelector, setSizeSelector] = useState(null)
@@ -258,33 +259,25 @@ const CatalogMainFilter = ({
         }
 
         setFilterStatus(filter_status)
+        setUpdate((p) => ++p)
     }, [])
 
     useEffect(() => {
-        dispatch({ type: CATALOG_SET_FILTERS, payload: filterStatus })
-        dispatch(
-            LoadByFilters(
-                filterProductsIds,
-                CatalogCommonReducer.page,
-                SelectedSizeReducer.sizeId,
-                catalogSlug,
-                subCatalogSlug,
-                oldMin,
-                oldMax,
-                filterStatus,
-                prices,
-                selectedSize,
-                null,
-                true,
-                activeColors,
-                selectedActive2,
-                CatalogCommonReducer.topfilter
-            )
-        )
-    }, [filterStatus])
+        let flag = false
+        console.log('filterStatus', filterStatus)
+        for (let i = 0; i < filterStatus.length; i++) {
+            console.log('filterStatus[i]', filterStatus[i])
+            for (let j = 0; j < filterStatus[i].inner.length; j++) {
+                if (filterStatus[i].inner[j].status === 'opened') {
+                    flag = true
+                }
+            }
+        }
 
-    useEffect(() => {
-        if (CatalogCommonReducer.topfilter.length > 0) {
+        console.log('flag', flag)
+
+        if (flag) {
+            dispatch({ type: CATALOG_SET_FILTERS, payload: filterStatus })
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
@@ -304,79 +297,111 @@ const CatalogMainFilter = ({
                     CatalogCommonReducer.topfilter
                 )
             )
+        }
+    }, [filterStatus])
+
+    useEffect(() => {
+        if (update >= 1) {
+            if (CatalogCommonReducer.topfilter.length > 0) {
+                dispatch(
+                    LoadByFilters(
+                        filterProductsIds,
+                        CatalogCommonReducer.page,
+                        SelectedSizeReducer.sizeId,
+                        catalogSlug,
+                        subCatalogSlug,
+                        oldMin,
+                        oldMax,
+                        filterStatus,
+                        prices,
+                        selectedSize,
+                        null,
+                        true,
+                        activeColors,
+                        selectedActive2,
+                        CatalogCommonReducer.topfilter
+                    )
+                )
+            }
         }
     }, [CatalogCommonReducer.topfilter])
 
     useEffect(() => {
-        if (selectedSize) {
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    CatalogCommonReducer.page,
-                    SelectedSizeReducer.sizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    filterStatus,
-                    prices,
-                    selectedSize,
-                    null,
-                    true,
-                    activeColors,
-                    selectedActive2,
-                    CatalogCommonReducer.topfilter
+        if (update >= 1) {
+            if (selectedSize) {
+                dispatch(
+                    LoadByFilters(
+                        filterProductsIds,
+                        CatalogCommonReducer.page,
+                        SelectedSizeReducer.sizeId,
+                        catalogSlug,
+                        subCatalogSlug,
+                        oldMin,
+                        oldMax,
+                        filterStatus,
+                        prices,
+                        selectedSize,
+                        null,
+                        true,
+                        activeColors,
+                        selectedActive2,
+                        CatalogCommonReducer.topfilter
+                    )
                 )
-            )
+            }
         }
     }, [selectedSize])
 
     useEffect(() => {
-        if (activeColors) {
-            dispatch({ type: CATALOG_SET_COLROS, payload: activeColors })
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    CatalogCommonReducer.page,
-                    SelectedSizeReducer.sizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    filterStatus,
-                    prices,
-                    selectedSize,
-                    null,
-                    true,
-                    activeColors,
-                    selectedActive2,
-                    CatalogCommonReducer.topfilter
+        if (update >= 1) {
+            if (activeColors) {
+                dispatch({ type: CATALOG_SET_COLROS, payload: activeColors })
+                dispatch(
+                    LoadByFilters(
+                        filterProductsIds,
+                        CatalogCommonReducer.page,
+                        SelectedSizeReducer.sizeId,
+                        catalogSlug,
+                        subCatalogSlug,
+                        oldMin,
+                        oldMax,
+                        filterStatus,
+                        prices,
+                        selectedSize,
+                        null,
+                        true,
+                        activeColors,
+                        selectedActive2,
+                        CatalogCommonReducer.topfilter
+                    )
                 )
-            )
+            }
         }
     }, [activeColors])
 
     useEffect(() => {
-        if (selectedActive2.length > 0) {
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    CatalogCommonReducer.page,
-                    SelectedSizeReducer.sizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    filterStatus,
-                    prices,
-                    selectedSize,
-                    null,
-                    true,
-                    activeColors,
-                    selectedActive2,
-                    CatalogCommonReducer.topfilter
+        if (update >= 1) {
+            if (selectedActive2.length > 0) {
+                dispatch(
+                    LoadByFilters(
+                        filterProductsIds,
+                        CatalogCommonReducer.page,
+                        SelectedSizeReducer.sizeId,
+                        catalogSlug,
+                        subCatalogSlug,
+                        oldMin,
+                        oldMax,
+                        filterStatus,
+                        prices,
+                        selectedSize,
+                        null,
+                        true,
+                        activeColors,
+                        selectedActive2,
+                        CatalogCommonReducer.topfilter
+                    )
                 )
-            )
+            }
         }
     }, [selectedActive2])
 
