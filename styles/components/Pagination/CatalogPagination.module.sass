@@ -34,6 +34,33 @@
         text-align: center
         margin: 0 13px
 
+    .catalog_pagination__prev_button
+        cursor: pointer
+        position: relative
+        font-size: 15px
+        text-align: center
+        min-width: 94px
+        width: 105px
+        height: 26px
+        line-height: 24px
+        border: 1px solid #e6e6e6
+        background: transparent
+        border-radius: 4px
+        margin-left: 10px
+        padding-left: 14px
+        color: #444444
+        &::after
+            content: ""
+            position: absolute
+            top: 50%
+            margin-top: -1px
+            width: 5px
+            height: 3px
+            background: url('./../../../assets/arrow.png') 50% no-repeat
+            background-size: 100% 100%
+            left: 10px
+            transform: rotate(90deg)
+
     .catalog_pagination__next_button
         cursor: pointer
         position: relative

@@ -63,7 +63,7 @@ const CatalogPagination = ({
             {!IsMobile && current !== 1 && (
                 <button
                     onClick={onGoBackdButtonClickHandler}
-                    className={styles.catalog_pagination__next_button}
+                    className={styles.catalog_pagination__prev_button}
                 >
                     Назад
                 </button>
