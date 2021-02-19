@@ -784,7 +784,7 @@ const CatalogProductCard = ({
                 style={
                     !breakpoint769 && desktopViewType === 'single'
                         ? { order: 3, width: '276px' }
-                        : { position: 'relative', zIndex: 7, marginTop: '10px' }
+                        : { position: 'relative', zIndex: 7, marginTop: '0px' }
                 }
                 className={`${styles.catalog_product_card__desktop_view_type__single} ${styles.catalog_product_card__desktop_view_type__single__third}`}
             >
@@ -817,9 +817,14 @@ const CatalogProductCard = ({
                                                   position: 'absolute',
                                                   top: '14px',
                                               }
-                                            : {
+                                            : IsMobile && viewType === 'severa'
+                                            ? {
                                                   position: 'absolute',
                                                   left: '25%',
+                                              }
+                                            : {
+                                                  position: 'absolute',
+                                                  left: '40%',
                                               }
                                     }
                                     className={
@@ -855,7 +860,7 @@ const CatalogProductCard = ({
                                                     viewType === 'several' &&
                                                     IsMobile
                                                         ? { width: 'auto' }
-                                                        : {}
+                                                        : { width: 'auto' }
                                                 }
                                             >
                                                 -
@@ -1269,7 +1274,7 @@ const CatalogProductCard = ({
                         style={
                             desktopViewType === 'single'
                                 ? { display: 'none' }
-                                : {}
+                                : { display: 'none' }
                         }
                         className={styles.line}
                     ></span>
@@ -1279,6 +1284,10 @@ const CatalogProductCard = ({
                     style={
                         IsMobile && viewType === 'several'
                             ? { display: 'none' }
+                            : IsMobile && viewType === 'single'
+                            ? {
+                                  marginTop: '-10px',
+                              }
                             : {}
                     }
                 >
@@ -1298,6 +1307,14 @@ const CatalogProductCard = ({
                                             key={id}
                                             className={
                                                 styles.catalog_product_card__info_list_item
+                                            }
+                                            style={
+                                                viewType === 'single' &&
+                                                IsMobile
+                                                    ? {
+                                                          marginBottom: '14px',
+                                                      }
+                                                    : {}
                                             }
                                         >
                                             <div
@@ -1329,6 +1346,13 @@ const CatalogProductCard = ({
                     </EqualHeightElement>
                 </div>
 
+                {viewType === 'single' && IsMobile && (
+                    <span
+                        style={{ position: 'relative', top: '-10px' }}
+                        className={styles.line}
+                    ></span>
+                )}
+
                 {desktopViewType !== 'single' && (
                     <div
                         style={{
@@ -1344,6 +1368,8 @@ const CatalogProductCard = ({
                                           display: 'flex',
                                           justifyContent: 'space-between',
                                           width: '100%',
+                                          alignItems: 'center',
+                                          marginTop: '-5px',
                                       }
                                     : {}
                             }
@@ -1352,7 +1378,13 @@ const CatalogProductCard = ({
                                 style={
                                     viewType === 'single' && IsMobile
                                         ? {
-                                              width: '63%',
+                                              width: '65%',
+                                              position: 'relative',
+                                          }
+                                        : viewType === 'several' && IsMobile
+                                        ? {
+                                              marginTop: '12px',
+                                              position: 'relative',
                                           }
                                         : {}
                                 }
@@ -1361,6 +1393,27 @@ const CatalogProductCard = ({
                                 <EqualHeightElement name="CatalogProductCard__stock">
                                     {InStock && (
                                         <div
+                                            style={
+                                                viewType === 'single' &&
+                                                IsMobile
+                                                    ? {
+                                                          zIndex: '1',
+                                                          position: 'absolute',
+                                                          top: '2px',
+                                                          left: '59%',
+                                                          whiteSpace: 'nowrap',
+                                                      }
+                                                    : viewType === 'several' &&
+                                                      IsMobile
+                                                    ? {
+                                                          zIndex: '1',
+                                                          position: 'absolute',
+                                                          top: '-14px',
+                                                          left: '19%',
+                                                          whiteSpace: 'nowrap',
+                                                      }
+                                                    : {}
+                                            }
                                             className={
                                                 styles.catalog_product_card__instockblock
                                             }
