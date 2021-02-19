@@ -130,45 +130,45 @@ const CatalogProductListForDesktop = ({
                 />
             )
 
-            Temp++
+            // Temp++
 
-            if (length < 21 && Temp % 3 !== 0) {
-                if (
-                    length - 1 === index &&
-                    (Temp % 3 === 1 || Temp % 3 === 2)
-                ) {
-                    EqualHeightArray.push(
-                        <EqualHeight key={product.Id}>
-                            {ElemenetsArray}
-                        </EqualHeight>
-                    )
-                }
-            } else {
-                if (Temp !== 0 && Temp % 3 === 0) {
-                    subIndex++
-                    if (subIndex === rand && articles && articles.length >= 3) {
-                        EqualHeightArray.push(
-                            <EqualHeight key={uuidv4()}>{Articles}</EqualHeight>
-                        )
-                    }
-                    EqualHeightArray.push(
-                        <EqualHeight key={product.Id}>
-                            {ElemenetsArray}
-                        </EqualHeight>
-                    )
-                    ElemenetsArray = []
-                    Temp = 0
-                }
-            }
-            if (Temp !== 0 && Temp % 3 === 0) {
-                EqualHeightArray.push(
-                    <EqualHeight key={product.Id}>{ElemenetsArray}</EqualHeight>
-                )
-                ElemenetsArray = []
-                Temp = 0
-            }
+            // if (length < 21 && Temp % 3 !== 0) {
+            //     if (
+            //         length - 1 === index &&
+            //         (Temp % 3 === 1 || Temp % 3 === 2)
+            //     ) {
+            //         EqualHeightArray.push(
+            //             <EqualHeight key={product.Id}>
+            //                 {ElemenetsArray}
+            //             </EqualHeight>
+            //         )
+            //     }
+            // } else {
+            //     if (Temp !== 0 && Temp % 3 === 0) {
+            //         subIndex++
+            //         if (subIndex === rand && articles && articles.length >= 3) {
+            //             EqualHeightArray.push(
+            //                 <EqualHeight key={uuidv4()}>{Articles}</EqualHeight>
+            //             )
+            //         }
+            //         EqualHeightArray.push(
+            //             <EqualHeight key={product.Id}>
+            //                 {ElemenetsArray}
+            //             </EqualHeight>
+            //         )
+            //         ElemenetsArray = []
+            //         Temp = 0
+            //     }
+            // }
+            // if (Temp !== 0 && Temp % 3 === 0) {
+            //     EqualHeightArray.push(
+            //         <EqualHeight key={product.Id}>{ElemenetsArray}</EqualHeight>
+            //     )
+            //     ElemenetsArray = []
+            //     Temp = 0
+            // }
         })
-        return EqualHeightArray
+        return ElemenetsArray
     }
 
     return (

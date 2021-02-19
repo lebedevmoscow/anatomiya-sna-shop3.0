@@ -492,8 +492,8 @@ const CatalogRight = ({
                     onGoBackdButtonClickHandler={onGoBackdButtonClickHandler}
                 />
             </div>
-            {/* <CatalogHelpPickUp /> */}
-            {/* <CatalogReviewList headers={headers} /> */}
+            <CatalogHelpPickUp />
+            <CatalogReviewList headers={headers} />
             <IndexPageAssurances catalog={true} container={false} />
         </div>
     )
