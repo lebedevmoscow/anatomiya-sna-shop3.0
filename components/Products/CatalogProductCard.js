@@ -40,10 +40,10 @@ import WhiteStats from './../../assets/svg/white-stats.svg'
 
 // import findProducts from '../../../actions/IndexPageMainFilter'
 
-const EqualHeightElement = dynamic(
-    () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
-    { ssr: false }
-)
+// const EqualHeightElement = dynamic(
+//     () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
+//     { ssr: false }
+// )
 
 const CatalogProductCard = ({
     BrandTitle,
@@ -82,52 +82,52 @@ const CatalogProductCard = ({
         catalog_product_card__stat_block_image: {},
         catalog_product_card__stats_buttons: {},
     })
-    useEffect(() => {
-        const viewTypeStylesClone = {
-            catalog_product_card:
-                (stylesForViewType && stylesForViewType.catalog_product_card) ||
-                (stylesForDesktopViewType &&
-                    stylesForDesktopViewType.catalog_product_card),
-            catalog_product_card__image:
-                (stylesForViewType &&
-                    stylesForViewType.catalog_product_card__image) ||
-                (stylesForDesktopViewType &&
-                    stylesForDesktopViewType.catalog_product_card__image),
-            catalog_product_card__info_button:
-                (stylesForViewType &&
-                    stylesForViewType.catalog_product_card__info_button) ||
-                (stylesForDesktopViewType &&
-                    stylesForDesktopViewType.catalog_product_card__info_button),
-            catalog_product_card__info_wrap:
-                (stylesForViewType &&
-                    stylesForViewType.catalog_product_card__info_wrap) ||
-                (stylesForDesktopViewType &&
-                    stylesForDesktopViewType.catalog_product_card__info_wrap),
-            catalog_product_card__materials_list_item_img:
-                (stylesForViewType &&
-                    stylesForViewType.catalog_product_card__materials_list_item_img) ||
-                (stylesForDesktopViewType &&
-                    stylesForDesktopViewType.catalog_product_card__materials_list_item_img),
-            catalog_product_card__stat_block:
-                (stylesForViewType &&
-                    stylesForViewType.catalog_product_card__stat_block) ||
-                (stylesForDesktopViewType &&
-                    stylesForDesktopViewType.stylesForViewType),
-            catalog_product_card__stat_block_image:
-                (stylesForViewType &&
-                    stylesForViewType.catalog_product_card__stat_block_image) ||
-                (stylesForDesktopViewType &&
-                    stylesForDesktopViewType.catalog_product_card__stat_block_image),
+    // useEffect(() => {
+    //     const viewTypeStylesClone = {
+    //         catalog_product_card:
+    //             (stylesForViewType && stylesForViewType.catalog_product_card) ||
+    //             (stylesForDesktopViewType &&
+    //                 stylesForDesktopViewType.catalog_product_card),
+    //         catalog_product_card__image:
+    //             (stylesForViewType &&
+    //                 stylesForViewType.catalog_product_card__image) ||
+    //             (stylesForDesktopViewType &&
+    //                 stylesForDesktopViewType.catalog_product_card__image),
+    //         catalog_product_card__info_button:
+    //             (stylesForViewType &&
+    //                 stylesForViewType.catalog_product_card__info_button) ||
+    //             (stylesForDesktopViewType &&
+    //                 stylesForDesktopViewType.catalog_product_card__info_button),
+    //         catalog_product_card__info_wrap:
+    //             (stylesForViewType &&
+    //                 stylesForViewType.catalog_product_card__info_wrap) ||
+    //             (stylesForDesktopViewType &&
+    //                 stylesForDesktopViewType.catalog_product_card__info_wrap),
+    //         catalog_product_card__materials_list_item_img:
+    //             (stylesForViewType &&
+    //                 stylesForViewType.catalog_product_card__materials_list_item_img) ||
+    //             (stylesForDesktopViewType &&
+    //                 stylesForDesktopViewType.catalog_product_card__materials_list_item_img),
+    //         catalog_product_card__stat_block:
+    //             (stylesForViewType &&
+    //                 stylesForViewType.catalog_product_card__stat_block) ||
+    //             (stylesForDesktopViewType &&
+    //                 stylesForDesktopViewType.stylesForViewType),
+    //         catalog_product_card__stat_block_image:
+    //             (stylesForViewType &&
+    //                 stylesForViewType.catalog_product_card__stat_block_image) ||
+    //             (stylesForDesktopViewType &&
+    //                 stylesForDesktopViewType.catalog_product_card__stat_block_image),
 
-            catalog_product_card__stats_buttons:
-                (stylesForViewType &&
-                    stylesForViewType.catalog_product_card__stats_buttons) ||
-                (stylesForDesktopViewType &&
-                    stylesForDesktopViewType.catalog_product_card__stats_buttons),
-        }
+    //         catalog_product_card__stats_buttons:
+    //             (stylesForViewType &&
+    //                 stylesForViewType.catalog_product_card__stats_buttons) ||
+    //             (stylesForDesktopViewType &&
+    //                 stylesForDesktopViewType.catalog_product_card__stats_buttons),
+    //     }
 
-        setViewTypeStyles(viewTypeStylesClone)
-    }, [stylesForViewType, stylesForDesktopViewType, desktopViewType])
+    //     setViewTypeStyles(viewTypeStylesClone)
+    // }, [stylesForViewType, stylesForDesktopViewType, desktopViewType])
 
     // Redux
     const dispatch = useDispatch()
@@ -414,115 +414,117 @@ const CatalogProductCard = ({
 
     // Use Effects
 
-    useEffect(() => {
-        setTitle(
-            <EqualHeightElement name="CatalogProductCard">
-                <div
-                    style={PriceDiff !== 0 ? { marginBottom: '10px' } : {}}
-                    className={styles.catalog_product_card__title}
-                >
-                    {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title}
-                    {/* Id: {Id} */}
-                </div>
-            </EqualHeightElement>
-        )
-    }, [])
+    // useEffect(() => {
+    //     setTitle(
+    //         // <EqualHeightElement name="CatalogProductCard">
+    //         <>
+    //             <div
+    //                 style={PriceDiff !== 0 ? { marginBottom: '10px' } : {}}
+    //                 className={styles.catalog_product_card__title}
+    //             >
+    //                 {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title}
+    //                 {/* Id: {Id} */}
+    //             </div>
+    //         </>
+    //         // {/* </EqualHeightElement> */}
+    //     )
+    // }, [])
 
     // Init Data for react-select
-    useEffect(() => {
-        const clone = []
-        if (InitialSize.length !== 0) {
-            SetInitialSelectedSize({
-                value: InitialSize[0].SizeSlug,
-                label: InitialSize[0].SizeTitle,
-            })
-        } else {
-            SetInitialSelectedSize({
-                value: Prices[0].SizeSlug,
-                label: Prices[0].SizeTitle,
-            })
-        }
-        Prices.map((price) => {
-            const additonal =
-                price.OverallWidth && price.OverallLength
-                    ? ` (габ. ${price.OverallWidth}*${price.OverallLength})`
-                    : ''
+    // useEffect(() => {
+    //     const clone = []
+    //     if (InitialSize.length !== 0) {
+    //         SetInitialSelectedSize({
+    //             value: InitialSize[0].SizeSlug,
+    //             label: InitialSize[0].SizeTitle,
+    //         })
+    //     } else {
+    //         SetInitialSelectedSize({
+    //             value: Prices[0].SizeSlug,
+    //             label: Prices[0].SizeTitle,
+    //         })
+    //     }
+    //     Prices.map((price) => {
+    //         const additonal =
+    //             price.OverallWidth && price.OverallLength
+    //                 ? ` (габ. ${price.OverallWidth}*${price.OverallLength})`
+    //                 : ''
 
-            clone.push({
-                value: price.SizeSlug,
-                label: price.SizeTitle + additonal,
-            })
-        })
-        SetOptionsForSelect(clone)
-    }, [InitialSize.length])
+    //         clone.push({
+    //             value: price.SizeSlug,
+    //             label: price.SizeTitle + additonal,
+    //         })
+    //     })
+    //     SetOptionsForSelect(clone)
+    // }, [InitialSize.length])
 
-    useEffect(() => {
-        if (InitialSize.length !== 0) {
-            SetInitialSelectedSize({
-                value: InitialSize[0].SizeSlug,
-                label: InitialSize[0].SizeTitle,
-            })
-        }
-    }, [InitialSize])
+    // useEffect(() => {
+    //     if (InitialSize.length !== 0) {
+    //         SetInitialSelectedSize({
+    //             value: InitialSize[0].SizeSlug,
+    //             label: InitialSize[0].SizeTitle,
+    //         })
+    //     }
+    // }, [InitialSize])
 
     // Load blue background for button if products is favorited
-    useEffect(() => {
-        if (FavoriteListRedux.total && FavoriteListRedux.total.length !== 0) {
-            let flag = false
-            FavoriteListRedux.total.map((item) => {
-                if (item.ProductId === Id) {
-                    flag = true
-                    setIsFavorite(true)
-                }
-            })
-            if (!flag) {
-                setIsFavorite(false)
-            }
-        }
-    }, [FavoriteListRedux])
+    // useEffect(() => {
+    //     if (FavoriteListRedux.total && FavoriteListRedux.total.length !== 0) {
+    //         let flag = false
+    //         FavoriteListRedux.total.map((item) => {
+    //             if (item.ProductId === Id) {
+    //                 flag = true
+    //                 setIsFavorite(true)
+    //             }
+    //         })
+    //         if (!flag) {
+    //             setIsFavorite(false)
+    //         }
+    //     }
+    // }, [FavoriteListRedux])
 
     // Load blue background for button if products is compared
-    useEffect(() => {
-        if (CompareListRedux.total && CompareListRedux.total.length !== 0) {
-            let flag = false
-            CompareListRedux.total.map((item) => {
-                if (item.ProductId === Id) {
-                    flag = true
-                    setIsCompared(true)
-                }
-            })
-            if (!flag) {
-                setIsCompared(false)
-            }
-        }
-    }, [CompareListRedux])
+    // useEffect(() => {
+    //     if (CompareListRedux.total && CompareListRedux.total.length !== 0) {
+    //         let flag = false
+    //         CompareListRedux.total.map((item) => {
+    //             if (item.ProductId === Id) {
+    //                 flag = true
+    //                 setIsCompared(true)
+    //             }
+    //         })
+    //         if (!flag) {
+    //             setIsCompared(false)
+    //         }
+    //     }
+    // }, [CompareListRedux])
 
     // If we inited data for react-select, we initialize the react-select itself
-    useEffect(() => {
-        SetSizeSelector(
-            <Select
-                isDisabled={OptionsForSelect.length === 1 ? true : false}
-                onChange={(data) => {
-                    SetCurrentSize(data)
-                    OnSelectSize(data)
-                    const Size = {}
-                    Size.value = data.value
-                    Size.label = data.label
-                    SetInitialSelectedSize(Size)
-                }}
-                className="main_filter__selector"
-                classNamePrefix="main_filter__selector--inner"
-                placeholder={
-                    SelectedSizeRedux.selectedSizeTitle ||
-                    OptionsForSelect[0].label
-                }
-                styles={colourStyles}
-                options={OptionsForSelect}
-                isSearchable={false}
-                autoFocus={false}
-            />
-        )
-    }, [OptionsForSelect, InitialSelectedSize, SelectedSizeRedux])
+    // useEffect(() => {
+    //     SetSizeSelector(
+    //         <Select
+    //             isDisabled={OptionsForSelect.length === 1 ? true : false}
+    //             onChange={(data) => {
+    //                 SetCurrentSize(data)
+    //                 OnSelectSize(data)
+    //                 const Size = {}
+    //                 Size.value = data.value
+    //                 Size.label = data.label
+    //                 SetInitialSelectedSize(Size)
+    //             }}
+    //             className="main_filter__selector"
+    //             classNamePrefix="main_filter__selector--inner"
+    //             placeholder={
+    //                 SelectedSizeRedux.selectedSizeTitle ||
+    //                 OptionsForSelect[0].label
+    //             }
+    //             styles={colourStyles}
+    //             options={OptionsForSelect}
+    //             isSearchable={false}
+    //             autoFocus={false}
+    //         />
+    //     )
+    // }, [OptionsForSelect, InitialSelectedSize, SelectedSizeRedux])
 
     const [LastSelector, SetLastSelector] = useState(null)
     const [isFavorite, setIsFavorite] = useState(false)
@@ -562,15 +564,15 @@ const CatalogProductCard = ({
             : 'бесплатно'
 
     let DeliveryDate
-    if (DeliveryObject.Days === 0) {
-        DeliveryDate = 'сегодня'
-    } else if (DeliveryObject.Days === 1) {
-        DeliveryDate = 'завтра'
-    } else if (DeliveryObject.Days > 1 && DeliveryObject.Days < 62) {
-        DeliveryDate = DeliveryObject.Date
-    } else {
-        DeliveryDate = 'на заказ'
-    }
+    // if (DeliveryObject.Days === 0) {
+    //     DeliveryDate = 'сегодня'
+    // } else if (DeliveryObject.Days === 1) {
+    //     DeliveryDate = 'завтра'
+    // } else if (DeliveryObject.Days > 1 && DeliveryObject.Days < 62) {
+    //     DeliveryDate = DeliveryObject.Date
+    // } else {
+    //     DeliveryDate = 'на заказ'
+    // }
 
     const SalePercent =
         PriceDiff !== 0 ? Math.floor(100 - (PriceRaw * 100) / PriceOld) : null
@@ -592,69 +594,69 @@ const CatalogProductCard = ({
     //         : {}
     // }
 
-    if (isCompared && viewType === 'single' && IsMobile) {
-        MobileButtonStyleCompared = {
-            top: '5px',
-            position: 'relative',
-            backgroundColor: '#0ca5d3',
-            borderColor: '#0ca5d3',
-            width: '50px',
-            height: '40px',
-        }
-    } else if (!isCompared && viewType === 'single' && IsMobile) {
-        MobileButtonStyleCompared = {
-            top: '5px',
-            position: 'relative',
-            backgroundColor: '#fff',
-            borderColor: '#e8e8e8',
-            width: '50px',
-            height: '40px',
-        }
-    } else if (!isCompared && viewType === 'several' && IsMobile) {
-        MobileButtonStyleCompared = {
-            position: 'relative',
-            backgroundColor: '#fff',
-            borderColor: '#e8e8e8',
-        }
-    } else if (isCompared && viewType === 'several' && IsMobile) {
-        MobileButtonStyleCompared = {
-            position: 'relative',
-            backgroundColor: '#0ca5d3',
-            borderColor: '#0ca5d3',
-        }
-    }
+    // if (isCompared && viewType === 'single' && IsMobile) {
+    //     MobileButtonStyleCompared = {
+    //         top: '5px',
+    //         position: 'relative',
+    //         backgroundColor: '#0ca5d3',
+    //         borderColor: '#0ca5d3',
+    //         width: '50px',
+    //         height: '40px',
+    //     }
+    // } else if (!isCompared && viewType === 'single' && IsMobile) {
+    //     MobileButtonStyleCompared = {
+    //         top: '5px',
+    //         position: 'relative',
+    //         backgroundColor: '#fff',
+    //         borderColor: '#e8e8e8',
+    //         width: '50px',
+    //         height: '40px',
+    //     }
+    // } else if (!isCompared && viewType === 'several' && IsMobile) {
+    //     MobileButtonStyleCompared = {
+    //         position: 'relative',
+    //         backgroundColor: '#fff',
+    //         borderColor: '#e8e8e8',
+    //     }
+    // } else if (isCompared && viewType === 'several' && IsMobile) {
+    //     MobileButtonStyleCompared = {
+    //         position: 'relative',
+    //         backgroundColor: '#0ca5d3',
+    //         borderColor: '#0ca5d3',
+    //     }
+    // }
 
-    if (isFavorite && viewType === 'single' && IsMobile) {
-        MobileButtonStyleFavorite = {
-            top: '5px',
-            position: 'relative',
-            backgroundColor: '#0ca5d3',
-            borderColor: '#0ca5d3',
-            width: '50px',
-            height: '40px',
-        }
-    } else if (!isFavorite && viewType === 'single' && IsMobile) {
-        MobileButtonStyleFavorite = {
-            top: '5px',
-            position: 'relative',
-            backgroundColor: '#fff',
-            borderColor: '#e8e8e8',
-            width: '50px',
-            height: '40px',
-        }
-    } else if (!isFavorite && viewType === 'several' && IsMobile) {
-        MobileButtonStyleFavorite = {
-            position: 'relative',
-            backgroundColor: '#fff',
-            borderColor: '#e8e8e8',
-        }
-    } else if (isFavorite && viewType === 'several' && IsMobile) {
-        MobileButtonStyleFavorite = {
-            position: 'relative',
-            backgroundColor: '#0ca5d3',
-            borderColor: '#0ca5d3',
-        }
-    }
+    // if (isFavorite && viewType === 'single' && IsMobile) {
+    //     MobileButtonStyleFavorite = {
+    //         top: '5px',
+    //         position: 'relative',
+    //         backgroundColor: '#0ca5d3',
+    //         borderColor: '#0ca5d3',
+    //         width: '50px',
+    //         height: '40px',
+    //     }
+    // } else if (!isFavorite && viewType === 'single' && IsMobile) {
+    //     MobileButtonStyleFavorite = {
+    //         top: '5px',
+    //         position: 'relative',
+    //         backgroundColor: '#fff',
+    //         borderColor: '#e8e8e8',
+    //         width: '50px',
+    //         height: '40px',
+    //     }
+    // } else if (!isFavorite && viewType === 'several' && IsMobile) {
+    //     MobileButtonStyleFavorite = {
+    //         position: 'relative',
+    //         backgroundColor: '#fff',
+    //         borderColor: '#e8e8e8',
+    //     }
+    // } else if (isFavorite && viewType === 'several' && IsMobile) {
+    //     MobileButtonStyleFavorite = {
+    //         position: 'relative',
+    //         backgroundColor: '#0ca5d3',
+    //         borderColor: '#0ca5d3',
+    //     }
+    // }
 
     let MaterialStyle
 
@@ -727,54 +729,54 @@ const CatalogProductCard = ({
                 Gifts={Gifts}
             />
             <div
-                style={
-                    desktopViewType === 'single'
-                        ? {
-                              display: 'flex',
-                              flexDirection: 'column',
-                              width: '276px',
-                          }
-                        : {
-                              display: 'flex',
-                              flexDirection: 'column',
-                          }
-                }
+            // style={
+            //     desktopViewType === 'single'
+            //         ? {
+            //               display: 'flex',
+            //               flexDirection: 'column',
+            //               width: '276px',
+            //           }
+            //         : {
+            //               display: 'flex',
+            //               flexDirection: 'column',
+            //           }
+            // }
             >
-                {breakpoint769 && (
+                {/* {breakpoint769 && (
                     <div
-                        style={{
-                            height: viewType === 'single' ? '208px' : '113px',
-                            width: '100%',
-                            position: 'relative',
-                        }}
+                        // style={{
+                        //     height: viewType === 'single' ? '208px' : '113px',
+                        //     width: '100%',
+                        //     position: 'relative',
+                        // }}
                         className="image-wrapper"
                     >
                         <Image layout="fill" src={MainImage.FilePath} />
                     </div>
-                )}
-                {!breakpoint769 && !IsMobile && (
-                    <div
-                        style={{
-                            height:
-                                desktopViewType === 'several'
-                                    ? '172px'
-                                    : '172px',
-                            width:
-                                desktopViewType === 'several'
-                                    ? '272px'
-                                    : '272px',
-                            position: 'relative',
-                            marginBottom: '32px',
-                        }}
-                        className="image-wrapper"
-                    >
-                        <Image layout="fill" src={MainImage.FilePath} />
-                    </div>
-                )}
-
-                {!breakpoint769 && IsMobile && (
+                )} */}
+                {/* {!breakpoint769 && !IsMobile && ( */}
+                <div
+                    // style={{
+                    //     height:
+                    //         desktopViewType === 'several'
+                    //             ? '172px'
+                    //             : '172px',
+                    //     width:
+                    //         desktopViewType === 'several'
+                    //             ? '272px'
+                    //             : '272px',
+                    //     position: 'relative',
+                    //     marginBottom: '32px',
+                    // }}
+                    className="image-wrapper"
+                >
                     <Image layout="fill" src={MainImage.FilePath} />
-                )}
+                </div>
+                {/* )} */}
+
+                {/* {!breakpoint769 && IsMobile && (
+                    <Image layout="fill" src={MainImage.FilePath} />
+                )} */}
 
                 <div className={styles.catalog_product_card__smalltext}>
                     Купить {CatalogType}
@@ -782,211 +784,201 @@ const CatalogProductCard = ({
 
                 {title}
             </div>
-            <div
+            {/* <div
                 style={
                     !breakpoint769 && desktopViewType === 'single'
                         ? { order: 3, width: '276px' }
                         : { position: 'relative', zIndex: 7, marginTop: '0px' }
                 }
                 className={`${styles.catalog_product_card__desktop_view_type__single} ${styles.catalog_product_card__desktop_view_type__single__third}`}
-            >
-                <EqualHeightElement name="CatalogProductCard__Price">
+            > */}
+            {/* <EqualHeightElement name="CatalogProductCard__Price"> */}
+            {/* <div
+                    style={
+                        desktopViewType === 'single'
+                            ? { marginBottom: '10px' }
+                            : {}
+                    }
+                    className={styles.catalog_product_card__price_block}
+                >
                     <div
-                        style={
-                            desktopViewType === 'single'
-                                ? { marginBottom: '10px' }
-                                : {}
+                        className={
+                            styles.catalog_product_card__price_block_left
                         }
-                        className={styles.catalog_product_card__price_block}
                     >
-                        <div
-                            className={
-                                styles.catalog_product_card__price_block_left
-                            }
-                        >
-                            {PriceDiff !== 0 && (
+                        {PriceDiff !== 0 && (
+                            <div
+                                style={
+                                    !IsMobile && desktopViewType === 'single'
+                                        ? {
+                                              position: 'absolute',
+                                              top: '25px',
+                                          }
+                                        : !IsMobile &&
+                                          desktopViewType === 'several'
+                                        ? {
+                                              position: 'absolute',
+                                              top: '14px',
+                                          }
+                                        : IsMobile && viewType === 'several'
+                                        ? {
+                                              position: 'absolute',
+                                              left: '25%',
+                                          }
+                                        : {
+                                              position: 'absolute',
+                                              left: '40%',
+                                          }
+                                }
+                                className={styles.product_card__price_discount}
+                            >
                                 <div
                                     style={
-                                        !IsMobile &&
-                                        desktopViewType === 'single'
+                                        desktopViewType === 'several' &&
+                                        !IsMobile
+                                            ? { marginTop: '-18px' }
+                                            : viewType === 'several' && IsMobile
                                             ? {
-                                                  position: 'absolute',
-                                                  top: '25px',
+                                                  marginTop: '-13px',
                                               }
-                                            : !IsMobile &&
-                                              desktopViewType === 'several'
-                                            ? {
-                                                  position: 'absolute',
-                                                  top: '14px',
-                                              }
-                                            : IsMobile && viewType === 'several'
-                                            ? {
-                                                  position: 'absolute',
-                                                  left: '25%',
-                                              }
-                                            : {
-                                                  position: 'absolute',
-                                                  left: '40%',
-                                              }
+                                            : {}
                                     }
-                                    className={
-                                        styles.product_card__price_discount
-                                    }
+                                    className={styles.product_card__price_prev}
                                 >
-                                    <div
-                                        style={
-                                            desktopViewType === 'several' &&
-                                            !IsMobile
-                                                ? { marginTop: '-18px' }
-                                                : viewType === 'several' &&
-                                                  IsMobile
-                                                ? {
-                                                      marginTop: '-13px',
-                                                  }
-                                                : {}
-                                        }
-                                        className={
-                                            styles.product_card__price_prev
-                                        }
-                                    >
-                                        <span>
-                                            {PriceOld.toString().replace(
+                                    <span>
+                                        {PriceOld.toString().replace(
+                                            /\B(?=(\d{3})+(?!\d))/g,
+                                            ' '
+                                        )}
+                                        <div
+                                            className={
+                                                styles.product_card__price_diff
+                                            }
+                                            style={
+                                                viewType === 'several' &&
+                                                IsMobile
+                                                    ? { width: 'auto' }
+                                                    : { width: 'auto' }
+                                            }
+                                        >
+                                            -
+                                            {PriceDiff.toString().replace(
                                                 /\B(?=(\d{3})+(?!\d))/g,
                                                 ' '
                                             )}
-                                            <div
-                                                className={
-                                                    styles.product_card__price_diff
-                                                }
-                                                style={
-                                                    viewType === 'several' &&
-                                                    IsMobile
-                                                        ? { width: 'auto' }
-                                                        : { width: 'auto' }
-                                                }
-                                            >
-                                                -
-                                                {PriceDiff.toString().replace(
-                                                    /\B(?=(\d{3})+(?!\d))/g,
-                                                    ' '
-                                                )}
-                                            </div>
-                                        </span>
-                                    </div>
+                                        </div>
+                                    </span>
                                 </div>
-                            )}
-                            <div
-                                style={
-                                    desktopViewType === 'single'
-                                        ? { marginTop: '18px' }
-                                        : {}
-                                }
-                                className={styles.catalog_product_card__price}
-                            >
-                                {Price} Руб.
                             </div>
-                            <div
-                                className={
-                                    styles.catalog_product_card__price_credit
-                                }
-                            >
-                                В рассрочку от {Math.ceil(PriceRaw / 6)} руб/мес
-                            </div>
+                        )}
+                        <div
+                            style={
+                                desktopViewType === 'single'
+                                    ? { marginTop: '18px' }
+                                    : {}
+                            }
+                            className={styles.catalog_product_card__price}
+                        >
+                            {Price} Руб.
                         </div>
-
                         <div
                             className={
-                                styles.catalog_product_card__price_block_right
+                                styles.catalog_product_card__price_credit
                             }
                         >
-                            <div
-                                className={
-                                    styles.catalog_product_card__stat_block
-                                }
-                                style={
-                                    isCompared
-                                        ? {
-                                              backgroundColor: '#0ca5d3',
-                                              borderColor: '#0ca5d3',
-                                          }
-                                        : {}
-                                }
-                                onClick={() => {
-                                    onAddToCompareClickHandler()
-                                }}
-                            >
-                                <div
-                                    className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
-                                    ref={CompareRef}
-                                >
-                                    Товар добавлен в{' '}
-                                    <Link href="/">Сравнение!</Link>
-                                </div>
-                                {isCompared && (
-                                    <img
-                                        src={WhiteStats}
-                                        alt="statimage"
-                                        className={
-                                            styles.catalog_product_card__stat_block_image
-                                        }
-                                    ></img>
-                                )}
-                                {!isCompared && (
-                                    <img
-                                        src={StatsImage}
-                                        alt="stat-image"
-                                        className={
-                                            styles.catalog_product_card__stat_block_image
-                                        }
-                                    ></img>
-                                )}
-                            </div>
-                            <div
-                                style={
-                                    isFavorite
-                                        ? {
-                                              backgroundColor: '#0ca5d3',
-                                              borderColor: '#0ca5d3',
-                                          }
-                                        : {}
-                                }
-                                onClick={() => {
-                                    onAddToFavoriteClickHandler()
-                                }}
-                                className={
-                                    styles.catalog_product_card__stat_block
-                                }
-                            >
-                                <div
-                                    ref={FavoriteRef}
-                                    className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
-                                >
-                                    Товар добавлен в{' '}
-                                    <Link href="/">Избранное!</Link>
-                                </div>
-                                {isFavorite && (
-                                    <img
-                                        src={WhiteHeartImage}
-                                        className={
-                                            styles.catalog_product_card__stat_block_image
-                                        }
-                                        alt="stat-image"
-                                    ></img>
-                                )}
-                                {!isFavorite && (
-                                    <img
-                                        src={HeartImage}
-                                        alt="stat-image"
-                                        className={
-                                            styles.catalog_product_card__stat_block_image
-                                        }
-                                    ></img>
-                                )}
-                            </div>
+                            В рассрочку от {Math.ceil(PriceRaw / 6)} руб/мес
                         </div>
                     </div>
-                </EqualHeightElement>
-                <span
+
+                    <div
+                        className={
+                            styles.catalog_product_card__price_block_right
+                        }
+                    >
+                        <div
+                            className={styles.catalog_product_card__stat_block}
+                            style={
+                                isCompared
+                                    ? {
+                                          backgroundColor: '#0ca5d3',
+                                          borderColor: '#0ca5d3',
+                                      }
+                                    : {}
+                            }
+                            onClick={() => {
+                                onAddToCompareClickHandler()
+                            }}
+                        >
+                            <div
+                                className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                                ref={CompareRef}
+                            >
+                                Товар добавлен в{' '}
+                                <Link href="/">Сравнение!</Link>
+                            </div>
+                            {isCompared && (
+                                <img
+                                    src={WhiteStats}
+                                    alt="statimage"
+                                    className={
+                                        styles.catalog_product_card__stat_block_image
+                                    }
+                                ></img>
+                            )}
+                            {!isCompared && (
+                                <img
+                                    src={StatsImage}
+                                    alt="stat-image"
+                                    className={
+                                        styles.catalog_product_card__stat_block_image
+                                    }
+                                ></img>
+                            )}
+                        </div>
+                        <div
+                            style={
+                                isFavorite
+                                    ? {
+                                          backgroundColor: '#0ca5d3',
+                                          borderColor: '#0ca5d3',
+                                      }
+                                    : {}
+                            }
+                            onClick={() => {
+                                onAddToFavoriteClickHandler()
+                            }}
+                            className={styles.catalog_product_card__stat_block}
+                        >
+                            <div
+                                ref={FavoriteRef}
+                                className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                            >
+                                Товар добавлен в{' '}
+                                <Link href="/">Избранное!</Link>
+                            </div>
+                            {isFavorite && (
+                                <img
+                                    src={WhiteHeartImage}
+                                    className={
+                                        styles.catalog_product_card__stat_block_image
+                                    }
+                                    alt="stat-image"
+                                ></img>
+                            )}
+                            {!isFavorite && (
+                                <img
+                                    src={HeartImage}
+                                    alt="stat-image"
+                                    className={
+                                        styles.catalog_product_card__stat_block_image
+                                    }
+                                ></img>
+                            )}
+                        </div>
+                    </div>
+                </div> */}
+            {/* </EqualHeightElement> */}
+            {/* <span
                     style={
                         desktopViewType === 'single' ? { display: 'none' } : {}
                     }
@@ -998,18 +990,18 @@ const CatalogProductCard = ({
                     >
                         Выберите размер (Ширина*Длина) см.
                     </div>
-                    <div className={styles.catalog_product_card__selector}>
-                        {/* {!SizeSelector && (
+                    <div className={styles.catalog_product_card__selector}> */}
+            {/* {!SizeSelector && (
                             <Skeleton
                                 variant="rect"
                                 width={275.72}
                                 height={48}
                             />
                         )} */}
-                        {SizeSelector}
-                    </div>
-                </div>
-                <span
+            {/* {SizeSelector} */}
+            {/* </div> */}
+            {/* </div> */}
+            {/* <span
                     style={
                         desktopViewType === 'single' ? { display: 'none' } : {}
                     }
@@ -1181,16 +1173,16 @@ const CatalogProductCard = ({
                         </div>
                     </div>
                 </div>
-            </div>
-            <div
+            </div> */}
+            {/* <div
                 className={styles.equalhight__wrapper}
                 style={
                     !breakpoint769 && desktopViewType === 'single'
                         ? { order: 2, width: '280px' }
                         : {}
                 }
-            >
-                <div className={styles.catalog_product_card__materials}>
+            > */}
+            {/* <div className={styles.catalog_product_card__materials}>
                     <ul className={styles.catalog_product_card__materials_list}>
                         {OptionsList &&
                             OptionsList.map((opt, index) => {
@@ -1231,8 +1223,6 @@ const CatalogProductCard = ({
                                                     opt.data.Image.FilePath
                                                 }
                                                 layout={'fill'}
-                                                // height={12.5}
-                                                // width={12.5}
                                             />
                                         )}
                                         {viewType === 'single' && IsMobile && (
@@ -1270,8 +1260,8 @@ const CatalogProductCard = ({
                                 )
                             })}
                     </ul>
-                </div>
-                {OptionsList && OptionsList.length > 0 && (
+                </div> */}
+            {/* {OptionsList && OptionsList.length > 0 && (
                     <span
                         style={
                             desktopViewType === 'single'
@@ -1280,9 +1270,9 @@ const CatalogProductCard = ({
                         }
                         className={styles.line}
                     ></span>
-                )}
+                )} */}
 
-                <div
+            {/* <div
                     style={
                         IsMobile && viewType === 'several'
                             ? { display: 'none' }
@@ -1292,145 +1282,126 @@ const CatalogProductCard = ({
                               }
                             : {}
                     }
-                >
-                    <EqualHeightElement name="CatalogProductCard__options">
-                        <div
-                            className={styles.catalog_product_card__info_block}
-                        >
-                            <ul
-                                className={
-                                    styles.catalog_product_card__info_list
-                                }
-                            >
-                                {Properties.map((property, id) => {
-                                    const floored = parseInt(property.Value, 10)
-                                    return (
-                                        <li
-                                            key={id}
+                > */}
+            {/* <EqualHeightElement name="CatalogProductCard__options"> */}
+            {/* <div className={styles.catalog_product_card__info_block}> */}
+            {/* <ul className={styles.catalog_product_card__info_list}>
+                            {Properties.map((property, id) => {
+                                const floored = parseInt(property.Value, 10)
+                                return (
+                                    <li
+                                        key={id}
+                                        className={
+                                            styles.catalog_product_card__info_list_item
+                                        }
+                                        style={
+                                            viewType === 'single' && IsMobile
+                                                ? {
+                                                      marginBottom: '14px',
+                                                  }
+                                                : {}
+                                        }
+                                    >
+                                        <div
                                             className={
-                                                styles.catalog_product_card__info_list_item
-                                            }
-                                            style={
-                                                viewType === 'single' &&
-                                                IsMobile
-                                                    ? {
-                                                          marginBottom: '14px',
-                                                      }
-                                                    : {}
+                                                styles.catalog_product_card__info_list_item_title
                                             }
                                         >
-                                            <div
-                                                className={
-                                                    styles.catalog_product_card__info_list_item_title
-                                                }
-                                            >
-                                                {property.PropertyTitle}
-                                            </div>
-                                            <span
-                                                className={
-                                                    styles.catalog_product_card__info_list_item_delimiter
-                                                }
-                                            ></span>
-                                            <div
-                                                className={
-                                                    styles.catalog_product_card__info_list_item_material
-                                                }
-                                            >
-                                                {isNaN(floored)
-                                                    ? property.Value
-                                                    : floored}
-                                            </div>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </div>
-                    </EqualHeightElement>
-                </div>
+                                            {property.PropertyTitle}
+                                        </div>
+                                        <span
+                                            className={
+                                                styles.catalog_product_card__info_list_item_delimiter
+                                            }
+                                        ></span>
+                                        <div
+                                            className={
+                                                styles.catalog_product_card__info_list_item_material
+                                            }
+                                        >
+                                            {isNaN(floored)
+                                                ? property.Value
+                                                : floored}
+                                        </div>
+                                    </li>
+                                )
+                            })}
+                        </ul> */}
+            {/* </div> */}
+            {/* </EqualHeightElement> */}
+            {/* </div> */}
 
-                {viewType === 'single' && IsMobile && (
+            {/* {viewType === 'single' && IsMobile && (
                     <span
                         style={{ position: 'relative', top: '-10px' }}
                         className={styles.line}
                     ></span>
-                )}
+                )} */}
 
-                {desktopViewType !== 'single' && (
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexDirection: ' column',
-                            justifyContent: 'space-between',
-                        }}
-                    >
-                        <div
+            {/* {desktopViewType !== 'single' && (
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: ' column',
+                        justifyContent: 'space-between',
+                    }}
+                > */}
+            {/* <div
+                        style={
+                            viewType === 'single' && IsMobile
+                                ? {
+                                      display: 'flex',
+                                      justifyContent: 'space-between',
+                                      width: '100%',
+                                      marginTop: '8px',
+                                  }
+                                : {}
+                        }
+                    > */}
+            {/* <div
                             style={
                                 viewType === 'single' && IsMobile
                                     ? {
-                                          display: 'flex',
-                                          justifyContent: 'space-between',
-                                          width: '100%',
-                                          marginTop: '8px',
+                                          width: '65%',
+                                          position: 'relative',
+                                      }
+                                    : viewType === 'several' && IsMobile
+                                    ? {
+                                          marginTop: '12px',
+                                          position: 'relative',
                                       }
                                     : {}
                             }
-                        >
-                            <div
-                                style={
-                                    viewType === 'single' && IsMobile
-                                        ? {
-                                              width: '65%',
-                                              position: 'relative',
-                                          }
-                                        : viewType === 'several' && IsMobile
-                                        ? {
-                                              marginTop: '12px',
-                                              position: 'relative',
-                                          }
-                                        : {}
-                                }
-                                className={styles.catalogproductcard__stock}
-                            >
-                                <EqualHeightElement name="CatalogProductCard__stock">
-                                    {InStock && (
-                                        <div
-                                            style={
-                                                viewType === 'single' &&
-                                                IsMobile
-                                                    ? {
-                                                          zIndex: '1',
-                                                          position: 'absolute',
-                                                          top: '-9px',
-                                                          left: '59%',
-                                                          whiteSpace: 'nowrap',
-                                                      }
-                                                    : viewType === 'several' &&
-                                                      IsMobile
-                                                    ? {
-                                                          zIndex: '1',
-                                                          position: 'absolute',
-                                                          top: '-14px',
-                                                          left: '19%',
-                                                          whiteSpace: 'nowrap',
-                                                      }
-                                                    : {}
-                                            }
-                                            className={
-                                                styles.catalog_product_card__instockblock
-                                            }
-                                        >
-                                            {InStock && (
-                                                <span
-                                                    style={
-                                                        !InStock
-                                                            ? { opacity: 0 }
-                                                            : {}
-                                                    }
-                                                    className={
-                                                        styles.catalog_product_card__instockblock__icon
-                                                    }
-                                                ></span>
-                                            )}{' '}
+                            className={styles.catalogproductcard__stock}
+                        > */}
+            {/* <EqualHeightElement name="CatalogProductCard__stock"> */}
+            {/* {InStock && (
+                                    <div
+                                        style={
+                                            viewType === 'single' && IsMobile
+                                                ? {
+                                                      zIndex: '1',
+                                                      position: 'absolute',
+                                                      top: '-9px',
+                                                      left: '59%',
+                                                      whiteSpace: 'nowrap',
+                                                  }
+                                                : viewType === 'several' &&
+                                                  IsMobile
+                                                ? {
+                                                      zIndex: '1',
+                                                      position: 'absolute',
+                                                      top: '-14px',
+                                                      left: '19%',
+                                                      whiteSpace: 'nowrap',
+                                                  }
+                                                : {}
+                                        }
+                                        className={
+                                            styles.catalog_product_card__instockblock
+                                        }
+                                    >
+                                        {InStock && (
                                             <span
                                                 style={
                                                     !InStock
@@ -1438,40 +1409,47 @@ const CatalogProductCard = ({
                                                         : {}
                                                 }
                                                 className={
-                                                    styles.catalog_product_card__instockblock__text
+                                                    styles.catalog_product_card__instockblock__icon
                                                 }
-                                            >
-                                                {InStock
-                                                    ? 'Есть в наличии'
-                                                    : ''}
-                                            </span>
-                                        </div>
-                                    )}
-
-                                    {desktopViewType === 'several' && (
-                                        <div
+                                            ></span>
+                                        )}{' '}
+                                        <span
+                                            style={
+                                                !InStock ? { opacity: 0 } : {}
+                                            }
                                             className={
-                                                styles.catalog_product_card__info_wrap
+                                                styles.catalog_product_card__instockblock__text
                                             }
                                         >
-                                            <button
-                                                className={
-                                                    styles.catalog_product_card__info_button
-                                                }
-                                            >
-                                                Подробнее
-                                            </button>
-                                            <div
-                                                className={
-                                                    styles.catalog_product_card__stats_buttons
-                                                }
-                                            ></div>
-                                        </div>
-                                    )}
-                                </EqualHeightElement>
-                            </div>
+                                            {InStock ? 'Есть в наличии' : ''}
+                                        </span>
+                                    </div>
+                                )} */}
 
-                            {breakpoint769 && (
+            {/* {desktopViewType === 'several' && (
+                                    <div
+                                        className={
+                                            styles.catalog_product_card__info_wrap
+                                        }
+                                    >
+                                        <button
+                                            className={
+                                                styles.catalog_product_card__info_button
+                                            }
+                                        >
+                                            Подробнее
+                                        </button>
+                                        <div
+                                            className={
+                                                styles.catalog_product_card__stats_buttons
+                                            }
+                                        ></div>
+                                    </div>
+                                )} */}
+            {/* </EqualHeightElement> */}
+            {/* </div> */}
+
+            {/* {breakpoint769 && (
                                 <div className={styles.mobile__btns}>
                                     <div
                                         style={MobileButtonStyleCompared}
@@ -1560,10 +1538,10 @@ const CatalogProductCard = ({
                                         </div>
                                     </div>
                                 </div>
-                            )}
-                        </div>
+                            )} */}
+            {/* </div> */}
 
-                        {desktopViewType === 'several' && (
+            {/* {desktopViewType === 'several' && (
                             <div
                                 className={
                                     styles.catalog_product_card__delivery_block
@@ -1601,10 +1579,10 @@ const CatalogProductCard = ({
                                     </span>
                                 </div>
                             </div>
-                        )}
-                    </div>
-                )}
-            </div>
+                        )} */}
+            {/* </div>
+            )} */}
+            {/* </div> */}
         </div>
     )
 }

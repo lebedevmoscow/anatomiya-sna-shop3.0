@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import CatalogTopFilter from './../Filters/CatalogTopFilter'
+// import CatalogTopFilter from './../Filters/CatalogTopFilter'
 import CatalogProductListForDesktop from './../Products/CatalogProductList'
 import LoadMoreButton from './../Button/LoadMoreButton'
 import CatalogPagination from './../Pagination/CatalogPagination'
@@ -65,133 +65,127 @@ const CatalogRight = ({
     )
 
     const onButtonClickHandler = () => {
-        if (lastClick !== 'filter') {
-            if (
-                CatalogCommonReducer.filters &&
-                CatalogCommonReducer.filters.length !== 0
-            ) {
-                dispatch(
-                    LoadByFilters(
-                        filterProductsIds,
-                        page + 1,
-                        SelectedSizeReducer.selectedSizeId,
-                        catalogSlug,
-                        subCatalogSlug,
-                        oldMin,
-                        oldMax,
-                        CatalogCommonReducer.filters
-                    )
-                )
-            } else {
-                dispatch(
-                    LoadProductsByButtonClick(
-                        filterProductsIds,
-                        page === 1 ? page + 1 : page + 2,
-                        SelectedSizeReducer.selectedSizeId,
-                        catalogSlug,
-                        subCatalogSlug,
-                        oldMin,
-                        oldMax
-                    )
-                )
-            }
-        } else {
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    page + 1,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    CatalogCommonReducer.filters
-                )
-            )
-        }
-
-        setPage((prev) => {
-            dispatch(catalogSetPage(prev + 1))
-            return ++prev
-        })
+        // if (lastClick !== 'filter') {
+        //     if (
+        //         CatalogCommonReducer.filters &&
+        //         CatalogCommonReducer.filters.length !== 0
+        //     ) {
+        //         dispatch(
+        //             LoadByFilters(
+        //                 filterProductsIds,
+        //                 page + 1,
+        //                 SelectedSizeReducer.selectedSizeId,
+        //                 catalogSlug,
+        //                 subCatalogSlug,
+        //                 oldMin,
+        //                 oldMax,
+        //                 CatalogCommonReducer.filters
+        //             )
+        //         )
+        //     } else {
+        //         dispatch(
+        //             LoadProductsByButtonClick(
+        //                 filterProductsIds,
+        //                 page === 1 ? page + 1 : page + 2,
+        //                 SelectedSizeReducer.selectedSizeId,
+        //                 catalogSlug,
+        //                 subCatalogSlug,
+        //                 oldMin,
+        //                 oldMax
+        //             )
+        //         )
+        //     }
+        // } else {
+        //     dispatch(
+        //         LoadByFilters(
+        //             filterProductsIds,
+        //             page + 1,
+        //             SelectedSizeReducer.selectedSizeId,
+        //             catalogSlug,
+        //             subCatalogSlug,
+        //             oldMin,
+        //             oldMax,
+        //             CatalogCommonReducer.filters
+        //         )
+        //     )
+        // }
+        // setPage((prev) => {
+        //     dispatch(catalogSetPage(prev + 1))
+        //     return ++prev
+        // })
     }
 
     const onPageClickHandler = (p) => {
-        setData([])
-        setList([])
-        setPage(p)
-
-        if (
-            CatalogCommonReducer.filters &&
-            CatalogCommonReducer.filters.length !== 0
-        ) {
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    p,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    CatalogCommonReducer.filters
-                )
-            )
-        } else {
-            dispatch(
-                LoadProductsByButtonClick(
-                    filterProductsIds,
-                    p,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax
-                )
-            )
-        }
-
-        dispatch(catalogSetPage(p))
+        // setData([])
+        // setList([])
+        // setPage(p)
+        // if (
+        //     CatalogCommonReducer.filters &&
+        //     CatalogCommonReducer.filters.length !== 0
+        // ) {
+        //     dispatch(
+        //         LoadByFilters(
+        //             filterProductsIds,
+        //             p,
+        //             SelectedSizeReducer.selectedSizeId,
+        //             catalogSlug,
+        //             subCatalogSlug,
+        //             oldMin,
+        //             oldMax,
+        //             CatalogCommonReducer.filters
+        //         )
+        //     )
+        // } else {
+        //     dispatch(
+        //         LoadProductsByButtonClick(
+        //             filterProductsIds,
+        //             p,
+        //             SelectedSizeReducer.selectedSizeId,
+        //             catalogSlug,
+        //             subCatalogSlug,
+        //             oldMin,
+        //             oldMax
+        //         )
+        //     )
+        // }
+        // dispatch(catalogSetPage(p))
     }
 
     const onGoForwardButtonClickHandler = () => {
-        setData([])
-        setList([])
-        let temp = page + 1
-        setPage((prev) => ++prev)
-
-        if (
-            CatalogCommonReducer.filters &&
-            CatalogCommonReducer.filters.length !== 0
-        ) {
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    temp,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    CatalogCommonReducer.filters
-                )
-            )
-        } else {
-            dispatch(
-                LoadProductsByButtonClick(
-                    filterProductsIds,
-                    SelectedSizeReducer.amount ? temp - 1 : temp,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax
-                )
-            )
-        }
-
-        dispatch(catalogSetPage(temp))
-
+        // setData([])
+        // setList([])
+        // let temp = page + 1
+        // setPage((prev) => ++prev)
+        // if (
+        //     CatalogCommonReducer.filters &&
+        //     CatalogCommonReducer.filters.length !== 0
+        // ) {
+        //     dispatch(
+        //         LoadByFilters(
+        //             filterProductsIds,
+        //             temp,
+        //             SelectedSizeReducer.selectedSizeId,
+        //             catalogSlug,
+        //             subCatalogSlug,
+        //             oldMin,
+        //             oldMax,
+        //             CatalogCommonReducer.filters
+        //         )
+        //     )
+        // } else {
+        //     dispatch(
+        //         LoadProductsByButtonClick(
+        //             filterProductsIds,
+        //             SelectedSizeReducer.amount ? temp - 1 : temp,
+        //             SelectedSizeReducer.selectedSizeId,
+        //             catalogSlug,
+        //             subCatalogSlug,
+        //             oldMin,
+        //             oldMax
+        //         )
+        //     )
+        // }
+        // dispatch(catalogSetPage(temp))
         // setData([])
         // setList([])
         // dispatch(
@@ -205,53 +199,48 @@ const CatalogRight = ({
         //         oldMax
         //     )
         // )
-
         // setPage((prev) => {
         //     dispatch(catalogSetPage(prev + 1))
         //     return ++prev
         // })
-
         // dispatch(catalogSetPage(p))
     }
 
     const onGoBackdButtonClickHandler = () => {
-        setData([])
-        setList([])
-        let temp = page - 1
-        setPage((prev) => --prev)
-
-        if (
-            CatalogCommonReducer.filters &&
-            CatalogCommonReducer.filters.length !== 0
-        ) {
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    temp,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    CatalogCommonReducer.filters
-                )
-            )
-        } else {
-            dispatch(
-                LoadProductsByButtonClick(
-                    filterProductsIds,
-                    SelectedSizeReducer.amount ? temp - 1 : temp,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax
-                )
-            )
-        }
-
-        dispatch(catalogSetPage(temp))
-
+        // setData([])
+        // setList([])
+        // let temp = page - 1
+        // setPage((prev) => --prev)
+        // if (
+        //     CatalogCommonReducer.filters &&
+        //     CatalogCommonReducer.filters.length !== 0
+        // ) {
+        //     dispatch(
+        //         LoadByFilters(
+        //             filterProductsIds,
+        //             temp,
+        //             SelectedSizeReducer.selectedSizeId,
+        //             catalogSlug,
+        //             subCatalogSlug,
+        //             oldMin,
+        //             oldMax,
+        //             CatalogCommonReducer.filters
+        //         )
+        //     )
+        // } else {
+        //     dispatch(
+        //         LoadProductsByButtonClick(
+        //             filterProductsIds,
+        //             SelectedSizeReducer.amount ? temp - 1 : temp,
+        //             SelectedSizeReducer.selectedSizeId,
+        //             catalogSlug,
+        //             subCatalogSlug,
+        //             oldMin,
+        //             oldMax
+        //         )
+        //     )
+        // }
+        // dispatch(catalogSetPage(temp))
         // setData([])
         // setList([])
         // dispatch(
@@ -269,13 +258,12 @@ const CatalogRight = ({
         //     dispatch(catalogSetPage(prev - 1))
         //     return --prev
         // })
-
         // dispatch(catalogSetPage(p - 1))
     }
 
-    useEffect(() => {
-        setAmount(Math.ceil(filterProductsIds.length / 21))
-    }, [filterProductsIds])
+    // useEffect(() => {
+    //     setAmount(Math.ceil(filterProductsIds.length / 21))
+    // }, [filterProductsIds])
 
     useEffect(() => {
         setFirstProductList(
@@ -298,177 +286,177 @@ const CatalogRight = ({
         stylesForDesktopViewType,
     ])
 
-    useEffect(() => {
-        dispatch({
-            type: CATALOG_PRODUCT_LIST_SUCCESS,
-            payload: firstLoadProducts,
-        })
-        if (data.length <= 21) {
-            setDontShowButton(true)
-        } else {
-            setDontShowButton(false)
-        }
-        setList(
-            <>
-                {data.map((d, index) => {
-                    return (
-                        <CatalogProductListForDesktop
-                            headers={headers}
-                            articles={articles}
-                            key={index}
-                            catalogSlug={catalogSlug}
-                            desktopViewType={desktopViewType}
-                            stylesForDesktopViewType={stylesForDesktopViewType}
-                            firstLoadProducts={d}
-                            oldMin={oldMin}
-                            oldMax={oldMax}
-                            filterProductsIds={filterProductsIds}
-                            newProducts={true}
-                        />
-                    )
-                })}
-            </>
-        )
-    }, [data, desktopViewType])
+    // useEffect(() => {
+    //     dispatch({
+    //         type: CATALOG_PRODUCT_LIST_SUCCESS,
+    //         payload: firstLoadProducts,
+    //     })
+    //     if (data.length <= 21) {
+    //         setDontShowButton(true)
+    //     } else {
+    //         setDontShowButton(false)
+    //     }
+    //     setList(
+    //         <>
+    //             {data.map((d, index) => {
+    //                 return (
+    //                     <CatalogProductListForDesktop
+    //                         headers={headers}
+    //                         articles={articles}
+    //                         key={index}
+    //                         catalogSlug={catalogSlug}
+    //                         desktopViewType={desktopViewType}
+    //                         stylesForDesktopViewType={stylesForDesktopViewType}
+    //                         firstLoadProducts={d}
+    //                         oldMin={oldMin}
+    //                         oldMax={oldMax}
+    //                         filterProductsIds={filterProductsIds}
+    //                         newProducts={true}
+    //                     />
+    //                 )
+    //             })}
+    //         </>
+    //     )
+    // }, [data, desktopViewType])
 
-    useEffect(() => {
-        setPage(CatalogCommonReducer.page)
-    }, [CatalogCommonReducer.page])
+    // useEffect(() => {
+    //     setPage(CatalogCommonReducer.page)
+    // }, [CatalogCommonReducer.page])
 
-    useEffect(() => {
-        if (SelectedSizeReducer.amount !== null) {
-            if (SelectedSizeReducer.amount <= 21) {
-                setDontShowButton(true)
-            } else {
-                setDontShowButton(false)
-            }
-            setAmount(Math.ceil(SelectedSizeReducer.amount / 21))
-        }
-    }, [SelectedSizeReducer.amount])
+    // useEffect(() => {
+    //     if (SelectedSizeReducer.amount !== null) {
+    //         if (SelectedSizeReducer.amount <= 21) {
+    //             setDontShowButton(true)
+    //         } else {
+    //             setDontShowButton(false)
+    //         }
+    //         setAmount(Math.ceil(SelectedSizeReducer.amount / 21))
+    //     }
+    // }, [SelectedSizeReducer.amount])
 
-    useEffect(() => {
-        if (CatalogProductListReducer.products.length !== 0) {
-            if (CatalogProductListReducer.products.length <= 21) {
-                setDontShowButton(true)
-            } else {
-                setDontShowButton(false)
-            }
-            setFirstProductList(
-                <CatalogProductListForDesktop
-                    headers={headers}
-                    articles={articles}
-                    catalogSlug={catalogSlug}
-                    desktopViewType={desktopViewType}
-                    stylesForDesktopViewType={stylesForDesktopViewType}
-                    firstLoadProducts={CatalogProductListReducer.products}
-                    oldMin={oldMin}
-                    oldMax={oldMax}
-                    filterProductsIds={filterProductsIds}
-                />
-            )
-        }
-    }, [
-        CatalogProductListReducer.products,
-        desktopViewType,
-        stylesForDesktopViewType,
-    ])
+    // useEffect(() => {
+    //     if (CatalogProductListReducer.products.length !== 0) {
+    //         if (CatalogProductListReducer.products.length <= 21) {
+    //             setDontShowButton(true)
+    //         } else {
+    //             setDontShowButton(false)
+    //         }
+    //         setFirstProductList(
+    //             <CatalogProductListForDesktop
+    //                 headers={headers}
+    //                 articles={articles}
+    //                 catalogSlug={catalogSlug}
+    //                 desktopViewType={desktopViewType}
+    //                 stylesForDesktopViewType={stylesForDesktopViewType}
+    //                 firstLoadProducts={CatalogProductListReducer.products}
+    //                 oldMin={oldMin}
+    //                 oldMax={oldMax}
+    //                 filterProductsIds={filterProductsIds}
+    //             />
+    //         )
+    //     }
+    // }, [
+    //     CatalogProductListReducer.products,
+    //     desktopViewType,
+    //     stylesForDesktopViewType,
+    // ])
 
-    useEffect(() => {
-        if (CatalogProductListReducer.emptyIndex !== 0) {
-            dispatch(catalogSetPage(1))
-            setPage(1)
-            setData([])
-            setList([])
-        }
-    }, [CatalogProductListReducer.emptyIndex])
+    // useEffect(() => {
+    //     if (CatalogProductListReducer.emptyIndex !== 0) {
+    //         dispatch(catalogSetPage(1))
+    //         setPage(1)
+    //         setData([])
+    //         setList([])
+    //     }
+    // }, [CatalogProductListReducer.emptyIndex])
 
-    useEffect(() => {
-        if (NewCatalogProductListReducer.emptyIndex !== 0) {
-            dispatch(catalogSetPage(1))
-            setPage(1)
-            setData([])
-            setList()
-        }
-    }, [NewCatalogProductListReducer.emptyIndex])
+    // useEffect(() => {
+    //     if (NewCatalogProductListReducer.emptyIndex !== 0) {
+    //         dispatch(catalogSetPage(1))
+    //         setPage(1)
+    //         setData([])
+    //         setList()
+    //     }
+    // }, [NewCatalogProductListReducer.emptyIndex])
 
-    useEffect(() => {
-        if (NewCatalogProductListReducer.newProducts.length !== 0) {
-            if (NewCatalogProductListReducer.newProducts.length <= 21) {
-                setDontShowButton(true)
-            } else {
-                setDontShowButton(false)
-            }
-            if (lastClick === 'showMore') {
-                const clone = data.concat()
-                clone.push(NewCatalogProductListReducer.newProducts)
-                setData(clone)
-            } else if (lastClick === 'filter') {
-                // setTimeout(() => {
-                setFirstProductList(
-                    <CatalogProductListForDesktop
-                        headers={headers}
-                        articles={articles}
-                        catalogSlug={catalogSlug}
-                        desktopViewType={desktopViewType}
-                        stylesForDesktopViewType={stylesForDesktopViewType}
-                        firstLoadProducts={
-                            NewCatalogProductListReducer.newProducts
-                        }
-                        oldMin={oldMin}
-                        oldMax={oldMax}
-                        filterProductsIds={filterProductsIds}
-                    />
-                )
-                // }, 1000)
-            } else {
-                setFirstProductList(
-                    <CatalogProductListForDesktop
-                        headers={headers}
-                        articles={articles}
-                        catalogSlug={catalogSlug}
-                        desktopViewType={desktopViewType}
-                        stylesForDesktopViewType={stylesForDesktopViewType}
-                        firstLoadProducts={
-                            NewCatalogProductListReducer.newProducts
-                        }
-                        oldMin={oldMin}
-                        oldMax={oldMax}
-                        filterProductsIds={filterProductsIds}
-                    />
-                )
-            }
-        }
-    }, [
-        NewCatalogProductListReducer.newProducts,
-        desktopViewType,
-        stylesForDesktopViewType,
-    ])
+    // useEffect(() => {
+    //     if (NewCatalogProductListReducer.newProducts.length !== 0) {
+    //         if (NewCatalogProductListReducer.newProducts.length <= 21) {
+    //             setDontShowButton(true)
+    //         } else {
+    //             setDontShowButton(false)
+    //         }
+    //         if (lastClick === 'showMore') {
+    //             const clone = data.concat()
+    //             clone.push(NewCatalogProductListReducer.newProducts)
+    //             setData(clone)
+    //         } else if (lastClick === 'filter') {
+    //             // setTimeout(() => {
+    //             setFirstProductList(
+    //                 <CatalogProductListForDesktop
+    //                     headers={headers}
+    //                     articles={articles}
+    //                     catalogSlug={catalogSlug}
+    //                     desktopViewType={desktopViewType}
+    //                     stylesForDesktopViewType={stylesForDesktopViewType}
+    //                     firstLoadProducts={
+    //                         NewCatalogProductListReducer.newProducts
+    //                     }
+    //                     oldMin={oldMin}
+    //                     oldMax={oldMax}
+    //                     filterProductsIds={filterProductsIds}
+    //                 />
+    //             )
+    //             // }, 1000)
+    //         } else {
+    //             setFirstProductList(
+    //                 <CatalogProductListForDesktop
+    //                     headers={headers}
+    //                     articles={articles}
+    //                     catalogSlug={catalogSlug}
+    //                     desktopViewType={desktopViewType}
+    //                     stylesForDesktopViewType={stylesForDesktopViewType}
+    //                     firstLoadProducts={
+    //                         NewCatalogProductListReducer.newProducts
+    //                     }
+    //                     oldMin={oldMin}
+    //                     oldMax={oldMax}
+    //                     filterProductsIds={filterProductsIds}
+    //                 />
+    //             )
+    //         }
+    //     }
+    // }, [
+    //     NewCatalogProductListReducer.newProducts,
+    //     desktopViewType,
+    //     stylesForDesktopViewType,
+    // ])
 
-    useEffect(() => {
-        if (lastClick === 'showMore') {
-            onButtonClickHandler()
-        }
-        // if (lastClick === '')
-    }, [lastClick])
+    // useEffect(() => {
+    //     if (lastClick === 'showMore') {
+    //         onButtonClickHandler()
+    //     }
+    //     // if (lastClick === '')
+    // }, [lastClick])
 
-    useEffect(() => {
-        if (firstProductList.props) {
-            if (
-                firstProductList.props.firstLoadProducts.ShortProductModels
-                    .length >= 21
-            ) {
-                setDontShowButton(false)
-            } else {
-                setDontShowButton(true)
-            }
-        } else {
-            setDontShowButton(false)
-        }
-    })
+    // useEffect(() => {
+    //     if (firstProductList.props) {
+    //         if (
+    //             firstProductList.props.firstLoadProducts.ShortProductModels
+    //                 .length >= 21
+    //         ) {
+    //             setDontShowButton(false)
+    //         } else {
+    //             setDontShowButton(true)
+    //         }
+    //     } else {
+    //         setDontShowButton(false)
+    //     }
+    // })
 
     return (
         <div className={styles.catalog_right}>
-            <CatalogTopFilter
+            {/* <CatalogTopFilter
                 catalogSlug={catalogSlug}
                 subCatalogSlug={subCatalogSlug}
                 oldMin={oldMin}
@@ -477,9 +465,9 @@ const CatalogRight = ({
                 updateViewType={updateViewType}
                 desktopViewType={desktopViewType}
                 filterProductsIds={filterProductsIds}
-            />
+            /> */}
             {firstProductList}
-            {list}
+            {/* {list}
             {!dontShowButton &&
                 page !== Math.ceil(filterProductsIds.length / 21) && (
                     <div
@@ -504,9 +492,9 @@ const CatalogRight = ({
                     }
                     onGoBackdButtonClickHandler={onGoBackdButtonClickHandler}
                 />
-            </div>
-            <CatalogHelpPickUp />
-            <CatalogReviewList headers={headers} />
+            </div> */}
+            {/* <CatalogHelpPickUp /> */}
+            {/* <CatalogReviewList headers={headers} /> */}
             <IndexPageAssurances catalog={true} container={false} />
         </div>
     )
