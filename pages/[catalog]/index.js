@@ -115,7 +115,7 @@ const CatalogPage = ({
                     regions={regions}
                 />
             )}
-            {/* {!IsMobile && (
+            {!IsMobile && (
                 <Header
                     banner={null}
                     phoneCommon={phoneCommon}
@@ -140,8 +140,8 @@ const CatalogPage = ({
                     onClose={() => setCompositionPresetFilterIsOpen(false)}
                     dataList={initialCompositionFilterData}
                 />
-            )} */}
-            {/* {IsMobile && (
+            )}
+            {IsMobile && (
                 <CatalogMainFilter
                     className={mainMobileFilterIsOpen ? '' : 'closed'}
                     filterAPIData={filterAPIData}
@@ -155,7 +155,7 @@ const CatalogPage = ({
                     catalogSlug={catalogSlug}
                     subCatalogSlug={subCatalogSlug}
                 />
-            )} */}
+            )}
             {/* {breakpoint720 && (
                 <img className="mobile-menu__mini-banner" src={banner}></img>
             )} */}
