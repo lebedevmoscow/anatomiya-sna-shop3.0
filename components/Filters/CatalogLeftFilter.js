@@ -682,7 +682,51 @@ const CatalogLeftFilter = ({
                                             )
                                         )
                                     }}
-                                    styles={colourStyles}
+                                    styles={{
+                                        control: (styles) => ({
+                                            ...styles,
+                                            backgroundColor: 'white',
+                                            height: '50px',
+                                        }),
+                                        dropdownIndicator: (styles) => {
+                                            return {
+                                                ...styles,
+                                                position: 'absolute',
+                                                right: '0px',
+                                            }
+                                        },
+                                        placeholder: () => {
+                                            return {
+                                                ...styles,
+                                                position: 'absolute',
+                                                left: '50%',
+                                                transform:
+                                                    'translate(-50%, 0%)',
+                                            }
+                                        },
+                                        option: (
+                                            styles,
+                                            { data, isFocused }
+                                        ) => {
+                                            return {
+                                                ...styles,
+                                                backgroundColor: isFocused
+                                                    ? '#0CA5D3'
+                                                    : '',
+                                                color: isFocused ? 'white' : '',
+                                            }
+                                        },
+
+                                        menuList: (styles, { data }) => {
+                                            return {
+                                                ...styles,
+                                                border: '1px solid #0CA5D3',
+                                                borderRadius: '5px',
+                                                fontFamily: 'Arial, sans-serif',
+                                                fontSize: '14px',
+                                            }
+                                        },
+                                    }}
                                     options={select.data}
                                     isSearchable={false}
                                     autoFocus={false}
