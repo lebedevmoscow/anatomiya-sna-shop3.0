@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 // import CatalogProductCard from './CatalogProductCard'
 import DesktopSeveral from './../ViewType/DesktopSeveral'
 import DesktopSingle from './../ViewType/DesktopSingle'
+import MobileSeveral from './../ViewType/MobileSeveral'
 import ArticleListCatalog from './../Article/ArticleListCatalog'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -204,9 +205,99 @@ const CatalogProductListForDesktop = ({
         return ElemenetsArray
     }
 
+    const renderMobile = () => {
+        console.log('render')
+        let ElemenetsArray = []
+        let EqualHeightArray = []
+        let Temp = 0
+
+        const length = firstLoadProducts.ShortProductModels.length
+
+        firstLoadProducts.ShortProductModels.map((product, index) => {
+            const ListSalesList = GetPopupsList(
+                firstLoadProducts.SaleLabels,
+                product.Prices[0].SaleIds
+            )
+
+            const InitialSize = []
+            for (let i = 0; i < product.Prices.length; i++) {
+                if (
+                    product.Prices[i].SizeSlug ===
+                    SelectedSizeRedux.selectedSizeSlug
+                ) {
+                    InitialSize.push(product.Prices[i])
+                }
+            }
+
+            const OptionsList = GetOptionsList(
+                product.Prices[0].OptionIds,
+                firstLoadProducts.Options
+            )
+
+            if (viewType === 'several') {
+                ElemenetsArray.push(
+                    <MobileSeveral
+                        OptionsList={OptionsList}
+                        IsMobile={IsMobile}
+                        InitialSize={InitialSize}
+                        catalogSlug={catalogSlug}
+                        BrandTitle={product.BrandTitle}
+                        SeriesTitle={product.SeriesTitle}
+                        Title={product.Title}
+                        Slug={product.Slug}
+                        MainImage={product.MainImage}
+                        stylesForViewType={stylesForViewType}
+                        stylesForDesktopViewType={stylesForDesktopViewType}
+                        viewType={viewType}
+                        desktopViewType={desktopViewType}
+                        CatalogType={product.CatalogType}
+                        Properties={product.Properties}
+                        ListSalesList={ListSalesList}
+                        Id={product.Id}
+                        key={product.Id}
+                        Prices={product.Prices}
+                        oldMin={oldMin}
+                        oldMax={oldMax}
+                    />
+                )
+            }
+
+            // Temp++
+
+            // if (length < 20 && Temp % 2 !== 0) {
+            //     if (length - 1 === index && Temp % 2 === 1) {
+            //         EqualHeightArray.push(
+            //             <EqualHeight key={product.Id}>
+            //                 {ElemenetsArray}
+            //             </EqualHeight>
+            //         )
+            //     }
+            // } else {
+            //     if (Temp !== 0 && Temp % 2 === 0) {
+            //         EqualHeightArray.push(
+            //             <EqualHeight key={product.Id}>
+            //                 {ElemenetsArray}
+            //             </EqualHeight>
+            //         )
+            //         ElemenetsArray = []
+            //         Temp = 0
+            //     }
+            // }
+            // if (Temp !== 0 && Temp % 2 === 0) {
+            //     EqualHeightArray.push(
+            //         <EqualHeight key={product.Id}>{ElemenetsArray}</EqualHeight>
+            //     )
+            //     ElemenetsArray = []
+            //     Temp = 0
+            // }
+        })
+        return ElemenetsArray
+    }
+
     return (
         <div className={styles.catalog_product_list_for_desktop}>
-            {render()}
+            {!IsMobile && render()}
+            {IsMobile && renderMobile()}
         </div>
     )
 }

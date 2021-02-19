@@ -251,20 +251,22 @@ const CatalogPage = ({
 
     return (
         <div className="app">
-            <MobileBurgerMenu
-                mobilemenuCatalogs={mobilemenuCatalogs}
-                mobileMenu={mobileMenu}
-                regions={regions}
-            />
-            <Header
-                banner={null}
-                phoneCommon={phoneCommon}
-                worktimeHead={worktimeHead}
-            />
-            {/* {!breakpoint1023 && (
-                <MainNavigation headerCatalog={headerCatalog} />
+            {IsMobile && (
+                <MobileBurgerMenu
+                    mobilemenuCatalogs={mobilemenuCatalogs}
+                    mobileMenu={mobileMenu}
+                    regions={regions}
+                />
             )}
-            {IsMobile && breakpoint768 && (
+            {IsMobile && (
+                <Header
+                    banner={null}
+                    phoneCommon={phoneCommon}
+                    worktimeHead={worktimeHead}
+                />
+            )}
+            {!IsMobile && <MainNavigation headerCatalog={headerCatalog} />}
+            {/* {IsMobile && breakpoint768 && (
                 <CatalogPresetFilter
                     onClose={() => setPresetFilterIsOpen(false)}
                     className={presetFilterIsOpen ? '' : 'closed'}
@@ -281,8 +283,8 @@ const CatalogPage = ({
                     onClose={() => setCompositionPresetFilterIsOpen(false)}
                     dataList={initialCompositionFilterData}
                 />
-            )} */}
-            {/* {IsMobile && (
+            )}
+            {IsMobile && (
                 <CatalogMainFilter
                     className={mainMobileFilterIsOpen ? '' : 'closed'}
                     filterAPIData={filterAPIData}
@@ -314,9 +316,9 @@ const CatalogPage = ({
                     />
                 </div>
             )} */}
-            {IsMobile && breakpoint1023 && products && (
+            {IsMobile && products && (
                 <div className={common_styles.container}>
-                    {/* <CatalogMobileProductList
+                    <CatalogMobileProductList
                         catalogSlug={catalogSlug}
                         subCatalogSlug={subCatalogSlug}
                         firstLoadProducts={products}
@@ -330,7 +332,7 @@ const CatalogPage = ({
                         IsMobile={IsMobile}
                         articles={articles}
                         headers={headers}
-                    /> */}
+                    />
                     {/* <CatalogProductList
                         catalogSlug={catalogSlug}
                         subCatalogSlug={subCatalogSlug}

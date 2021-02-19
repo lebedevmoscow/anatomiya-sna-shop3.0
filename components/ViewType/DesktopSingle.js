@@ -543,13 +543,6 @@ const DesktopSingle = ({
                         Выберите размер (Ширина*Длина) см.
                     </div>
                     <div className={styles.catalog_product_card__selector}>
-                        {!SizeSelector && (
-                            <Skeleton
-                                variant="rect"
-                                width={275.72}
-                                height={48}
-                            />
-                        )}
                         {SizeSelector}
                     </div>
                 </div>

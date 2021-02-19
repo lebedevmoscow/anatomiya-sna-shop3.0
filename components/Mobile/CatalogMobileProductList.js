@@ -377,6 +377,7 @@ const CatalogMobileProductList = ({
     }, [page, headers])
 
     useEffect(() => {
+        console.log('here')
         setFirstProductList(
             <CatalogProductList
                 catalogSlug={catalogSlug}
