@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 // import CatalogProductCard from './CatalogProductCard'
 import DesktopSeveral from './../ViewType/DesktopSeveral'
+import DesktopSingle from './../ViewType/DesktopSingle'
 import ArticleListCatalog from './../Article/ArticleListCatalog'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -102,33 +103,65 @@ const CatalogProductListForDesktop = ({
                 firstLoadProducts.Options
             )
 
-            ElemenetsArray.push(
-                <DesktopSeveral
-                    OptionsList={OptionsList}
-                    IsMobile={IsMobile}
-                    InitialSize={InitialSize}
-                    catalogSlug={catalogSlug}
-                    BrandTitle={product.BrandTitle}
-                    SeriesTitle={product.SeriesTitle}
-                    Title={product.Title}
-                    Slug={product.Slug}
-                    MainImage={product.MainImage}
-                    stylesForViewType={stylesForViewType}
-                    stylesForDesktopViewType={stylesForDesktopViewType}
-                    viewType={viewType}
-                    desktopViewType={desktopViewType}
-                    CatalogType={product.CatalogType}
-                    Properties={product.Properties}
-                    ListSalesList={ListSalesList}
-                    Id={product.Id}
-                    key={product.Id}
-                    Prices={product.Prices}
-                    oldMin={oldMin}
-                    oldMax={oldMax}
-                    Labels={Labels}
-                    Gifts={Gifts}
-                />
-            )
+            if (desktopViewType === 'several') {
+                ElemenetsArray.push(
+                    <DesktopSeveral
+                        OptionsList={OptionsList}
+                        IsMobile={IsMobile}
+                        InitialSize={InitialSize}
+                        catalogSlug={catalogSlug}
+                        BrandTitle={product.BrandTitle}
+                        SeriesTitle={product.SeriesTitle}
+                        Title={product.Title}
+                        Slug={product.Slug}
+                        MainImage={product.MainImage}
+                        stylesForViewType={stylesForViewType}
+                        stylesForDesktopViewType={stylesForDesktopViewType}
+                        viewType={viewType}
+                        desktopViewType={desktopViewType}
+                        CatalogType={product.CatalogType}
+                        Properties={product.Properties}
+                        ListSalesList={ListSalesList}
+                        Id={product.Id}
+                        key={product.Id}
+                        Prices={product.Prices}
+                        oldMin={oldMin}
+                        oldMax={oldMax}
+                        Labels={Labels}
+                        Gifts={Gifts}
+                    />
+                )
+            }
+
+            if (desktopViewType === 'single') {
+                ElemenetsArray.push(
+                    <DesktopSingle
+                        OptionsList={OptionsList}
+                        IsMobile={IsMobile}
+                        InitialSize={InitialSize}
+                        catalogSlug={catalogSlug}
+                        BrandTitle={product.BrandTitle}
+                        SeriesTitle={product.SeriesTitle}
+                        Title={product.Title}
+                        Slug={product.Slug}
+                        MainImage={product.MainImage}
+                        stylesForViewType={stylesForViewType}
+                        stylesForDesktopViewType={stylesForDesktopViewType}
+                        viewType={viewType}
+                        desktopViewType={desktopViewType}
+                        CatalogType={product.CatalogType}
+                        Properties={product.Properties}
+                        ListSalesList={ListSalesList}
+                        Id={product.Id}
+                        key={product.Id}
+                        Prices={product.Prices}
+                        oldMin={oldMin}
+                        oldMax={oldMax}
+                        Labels={Labels}
+                        Gifts={Gifts}
+                    />
+                )
+            }
 
             // Temp++
 
