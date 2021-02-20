@@ -403,6 +403,7 @@ const CatalogMobileProductList = ({
             type: CATALOG_PRODUCT_LIST_SUCCESS,
             payload: firstLoadProducts,
         })
+        console.log('viewType', viewType)
         setList(
             <>
                 {data.map((d, index) => {
@@ -450,7 +451,7 @@ const CatalogMobileProductList = ({
                 />
             )
         }
-    }, [CatalogProductListReducer.products])
+    }, [viewType, CatalogProductListReducer.products])
 
     useEffect(() => {
         if (CatalogProductListReducer.emptyIndex !== 0) {
@@ -459,7 +460,7 @@ const CatalogMobileProductList = ({
             setData([])
             setList([])
         }
-    }, [CatalogProductListReducer.emptyIndex])
+    }, [viewType, CatalogProductListReducer.emptyIndex])
 
     useEffect(() => {
         if (NewCatalogProductListReducer.emptyIndex !== 0) {
@@ -468,7 +469,7 @@ const CatalogMobileProductList = ({
             setData([])
             setList()
         }
-    }, [NewCatalogProductListReducer.emptyIndex])
+    }, [viewType, NewCatalogProductListReducer.emptyIndex])
 
     useEffect(() => {
         if (NewCatalogProductListReducer.newProducts.length !== 0) {

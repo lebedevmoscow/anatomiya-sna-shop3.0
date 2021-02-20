@@ -1,0 +1,654 @@
+
+.catalog_product_card
+    font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+    height: 100%
+    width: 20%
+    padding: 6px 10px
+    border-radius: 5px
+    border: 1px solid #e6e6e6
+    background-color: #fff
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    position: relative
+    margin-top: 5px
+    margin-left: 3.3px
+    &:nth-child(3n)
+        margin-right: 0
+
+    .heart
+        text-align: center
+        position: relative
+        margin-top: 5px
+
+    .stats
+        text-align: center
+        position: relative
+        margin-top: 5px
+
+    .catalog_product_card__column
+        display: flex
+        flex-direction: column
+
+    .catalog_product_card__image_wraper_several
+        height: 199px
+        width: 100%
+        position: relative
+        margin-bottom: 8.5px
+
+    .product_card__price_prev
+        margin-top: -8px
+        color: #444
+        text-decoration: line-through
+        font-size: 17px
+        color: #949393
+        font-weight: 500
+        span
+            font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+            position: relative
+
+    .catalog_product_card__instockblock
+        margin-top: 10px
+        text-align: center
+
+    .catalogproductcard__stock > div
+        margin-top: 5px
+        display: flex
+        align-items: center
+        justify-content: center
+
+    .catalog_product_card__instockblock__icon
+        position: relative
+        display: inline-block
+        vertical-align: middle
+        width: 14px
+        height: 14px
+        border-radius: 100%
+        background: #00a651
+        font-size: 15px
+        color: #444
+        margin-top: -2px
+        &::after
+            content: ""
+            position: absolute
+            left: 0
+            top: -2px
+            width: 8px
+            height: 4px
+            margin: 5px 0 0 3px
+            border-bottom: 1px solid #fff
+            border-left: 1px solid #fff
+            transform: rotate(-50deg)
+
+    .product_card__price_diff
+        white-space: nowrap
+        background-color: #00a651
+        border-radius: 4px
+        padding: 0 3px
+        font-size: 14px
+        color: #ffffff
+        font-weight: 400
+        line-height: 18px
+        position: absolute
+        top: -4px
+        width: auto
+        // right: -35px
+        left: calc(100% + 5px)
+        text-align: center
+
+    .catalog_product_card__image
+        display: block
+        height: 172px
+        margin-bottom: 32px
+
+    .catalog_product_card__smalltext
+        font-size: 11px
+        color: #888
+
+    .catalog_product_card__title
+        margin-top: 5px
+        font-size: 16px
+        color: #444444
+        text-transform: uppercase
+
+    .catalog_product_card__price_block
+        display: flex
+        justify-content: space-between
+        align-items: center
+        margin-top: 10px
+
+    .catalog_product_card__price
+        color: #444444
+        font-size: 22px
+        font-weight: 700
+        margin-top: 5px
+
+    .wrap_single
+        width: 191px
+
+    .catalog_product_card__price_credit
+        font-size: 11px
+        margin-top: 7.5px
+        color: #888888
+
+    .product_card__button__popup
+        display: none
+        position: absolute
+        bottom: 100%
+        right: 0
+        width: 220px
+        margin-bottom: 8px
+        margin-right: -10px
+        box-shadow: 1px 1px 10px rgb(30 30 30 / 9%)
+        border: 1px solid #e6e6e6
+        background-color: #fff
+        border-radius: 5px
+        color: #444
+        font-size: 13px
+        font-weight: 400
+        line-height: 1
+        padding: 9px 0
+        text-align: center
+        z-index: 1
+        a
+            color: #0CA5D3
+
+    .catalog_product_card__price_block_right
+        box-sizing: border-box
+        display: flex
+
+    .catalog_product_card__stat_block
+        border: 1px solid #e8e8e8
+        border-radius: 4px
+        position: relative
+        width: 50px
+        height: 36px
+        &:last-child
+            margin-left: 10px
+
+    .catalog_product_card__stat_block_image
+        display: block
+        transform: scale(0.3) translateX(-42px) translateY(-71px)
+        margin: 0
+        padding: 0
+
+    .line
+        display: block
+        background-color: #E6E6E6
+        width: 100%
+        height: 1px
+        margin-top: 15px
+
+    .catalog_product_card__selector_block
+        margin-top: 10px
+
+    .catalog_product_card__selector_title
+        font-size: 13px
+        margin-bottom: 6px
+        text-align: center
+        color: #444444
+
+    .catalog_product_card__selector
+        z-index: 1
+        color: #444
+        margin-top: 7px
+        position: relative
+        white-space: nowrap
+        .catalog_product_card__selector__inner__control
+            border: 1px solid #0ca5d3
+
+        .catalog_product_card__selector__inner__control__is_focused
+            .catalog_product_card__selector__inner__dropdown_indicator
+                transform: rotate(180deg)
+
+        .catalog_product_card__selector__inner__placeholder
+            color: #444
+        .css_1okebmr_indicatorSeparator
+            display: none
+
+        .catalog_product_card__selector__inner__value_container
+            justify-content: center
+            margin-left: 36px
+            padding: 14px 20px
+
+        .catalog_product_card__selector__inner__indicator
+            svg
+                fill: #000000
+
+    .catalog_product_card__materials
+        margin-top: 10px
+
+    .catalog_product_card__materials_list
+        display: flex
+        align-items: center
+        li
+            margin-left: 3.5px
+            &:first-child
+                margin-left: 0
+            img
+                width: 24.98px
+                height: 24.98px
+                border-radius: 4px
+
+    .line1
+        margin-top: 7.5px
+
+    .catalog_product_card__info_block
+        margin-top: 5px
+
+    .catalog_product_card__info_list_item
+        display: flex
+        margin-top: 10px
+
+    .catalog_product_card__info_list_item_title
+        font-size: 12px
+        color: #444444
+        padding-right: 5px
+        flex: 0 0 auto
+
+    .catalog_product_card__info_list_item_delimiter
+        border-bottom: 1px dotted #a1a1a1
+        margin: 0 5px 4px 0
+        flex: 1 1 auto
+
+    .catalog_product_card__info_list_item_material
+        font-size: 12px
+        color: #0ca5d3
+        flex: 0 1 auto
+
+    .catalog_product_card__info_button
+        font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+        margin-top: 15px
+        width: 100%
+        font-weight: 400
+        font-size: 18px
+        padding: 16px 20px
+        border: none
+        border-radius: 5px
+        cursor: pointer
+        color: #444444
+        line-height: 1
+        box-shadow: 1px 3px 7px rgba(0,0,0,.19)
+        background: #ffdb4d
+
+    .catalog_product_card__buttons_for_several
+        display: flex
+        justify-content: space-between
+        .catalog_product_card__stat_block
+            width: 47%
+            height: 30px
+            img
+                transform: scale(0.25) translateX(-42px) translateY(-90px)
+
+    .catalog_product_card__delivery_block
+        display: flex
+        justify-content: center
+        align-items: center
+        margin-top: 10px
+
+    .catalog_product_card__delivery_image
+        display: block
+        width: 50px
+        height: 50px
+
+    .catalog_product_card__delivery_info
+        font-size: 13px
+        color: #444444
+        margin-left: 10px
+        .when
+            display: block
+
+        .price
+            display: block
+            margin-top: 2.5px
+
+        .blue
+            color: #0ca5d3
+
+    .product_card__popups
+        color: #444
+        position: absolute
+        display: flex
+        flex-wrap: wrap
+        top: 1%
+        left: 4%
+        span
+            position: absolute
+            left: 30%
+
+    .product_card__popup
+        margin-right: 1000px
+        cursor: pointer
+        border: 1px solid rgb(189, 44, 210)
+        border-radius: 6px
+        background-color: #fff
+        padding: 5px 12px
+        font-size: 12px
+        margin-right: 6px
+        margin-top: 5px
+        position: relative
+        z-index: 1
+
+    .first_popup
+        margin-right: 0
+
+    .react_slidedown
+        z-index: 2
+
+    .product_card__fulllpopuplist
+        ul
+            display: flex
+            flex-wrap: wrap
+
+    .popups_text_on_product_card
+        position: absolute
+        background-color: #0ca5d3
+        overflow: hidden
+        width: 280px
+        left: 0
+        border-radius: 4px
+        margin-top: 11px
+
+    .popups_text_on_product_card__text
+        padding: 20px 30px
+        font-size: 13px
+        line-height: 1.3
+
+    .popups_text_on_product_card__close
+        position: absolute
+        top: 10px
+        right: 0px
+        width: 21px
+        height: 21px
+        fill: #fff
+        cursor: pointer
+        opacity: .5
+        transition: 1s all
+
+    .product_card__popup__text
+        white-space: normal
+        margin-top: 10px
+        padding: 20px 30px
+        box-shadow: 1px 1px 10px rgba(30,30,30,.22)
+        color: #fff
+        font-size: 13px
+        font-weight: 400
+        line-height: 1.3
+        border-radius: 5px
+        background-color: #0ca5d3
+        position: relative
+        // width: 150px
+        &::before
+            content: ''
+            position: absolute
+            top: -7px
+            width: 0
+            height: 0
+            border-color: transparent transparent #0ca5d3
+            border-style: solid
+            border-width: 0 6px 8px
+
+    .product_card__wrap
+        z-index: 1
+
+    .product_card__wrap_next
+        z-index: 2
+
+    .product_card__price_discount
+        position: absolute
+        top: 17px
+        left: 37%
+
+    .product-card__fulllpopuplist-inne__card
+        max-width: 125px
+        position: relative
+        // z-index: 10
+
+    .after_title
+        position: relative
+        z-index: 7
+        margin-top: 0px
+
+    .catalog_product_card__desktop_view_type__single__second
+        display: flex
+        flex-direction: column
+
+    .proudct_card__popup_blue
+        display: block
+        position: absolute
+        background-color: #0ca5d3
+        box-shadow: 1px 1px 10px rgba(30,30,30,.22)
+        padding: 20px 30px
+        font-size: 13px
+        font-weight: 400
+        line-height: 1.3
+        border-radius: 6px
+
+    .product_card__popup_last_child
+        width: 9.5px
+
+    .product_card__fulllpopuplist__opened
+        display: flex
+        position: absolute
+        flex-wrap: wrap
+
+    .product_card__popup_load_more
+        border: 1px solid #0ca5d3
+        width: 24px
+        height: 24px
+        margin-right: 0
+        border-radius: 5px
+        text-align: center
+        cursor: pointer
+        background: #fff
+
+    .product_card__popup_last_child
+        box-sizing: border-box
+        width: 24px
+        height: 24px
+        border: 1px solid #0ca5d3
+        span
+            width: 10px
+            margin-left: -1px
+            margin-bottom: 1px
+            // margin-right: 10px
+            svg
+                height: 9px
+                width: 10px
+                // padding-bottom: 3px
+                path
+                    fill: #0ca5d3
+                    transform: scale(1.3)
+
+@media screen and ( max-width: 768px )
+
+    .catalog_product_card
+        width: 46.8%
+        margin-top: 5px
+        margin-left: 2.8px
+
+        .catalog_product_card__instockblock
+            margin-top: 0px
+            font-size: 12px
+            position: relative
+            top: 6px
+
+        .mobile__btns
+            margin-top: 15px
+            display: flex
+            justify-content: space-between
+
+        .mobile__btns__item
+            width: 50px
+            height: 40px
+            background-size: 20px
+            border: 1px solid #e8e8e8
+            border-radius: 4px
+            margin-left: 10px
+            &:last-child
+                margin-right: 0
+
+        .mobile__btns__image_wrapper
+            position: relative
+            left: 25%
+            top: 15%
+            transform: scale(1)
+
+        .product_card__price_prev
+            margin-top: -18px
+            font-size: 12px
+            span
+                font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+                position: relative
+
+        .product_card__price_diff
+            font-size: 12px
+            line-height: 14px
+            top: -1px
+
+        .catalog_product_card__smalltext
+            text-align: center
+
+        .catalog_product_card__title
+            text-align: center
+
+        .catalog_product_card__price_block_right
+            display: none
+
+        .catalog_product_card__price_block
+            justify-content: center
+
+        .catalog_product_card__price_block_left
+            text-align: center
+
+        .catalog_product_card__selector
+            .catalog_product_card__selector__inner__value_container
+                padding: 11px 20px
+
+        .catalog_product_card__materials_list_item
+            position: relative
+            width: 30.5px
+            height: 30.5px
+            margin-right: 7.5px
+            &:last-child
+                font-size: 11px
+                span
+                    white-space: nowrap
+                    margin-left: 5px
+            // img
+            //     display: block
+            //     transform: scale(0.5)
+
+        .catalog_product_card__info_wrap
+            display: flex
+            align-items: center
+            justify-content: space-between
+
+        .catalog_product_card__info_button
+            padding: 11px 20px
+            font-size: 14px
+            width: 63%
+
+        .line
+            margin-top: 10px
+
+        .catalog_product_card__stats_buttons
+            display: flex
+            position: relative
+            top: 9px
+
+            .catalog_product_card__stat_block
+                height: 38px
+
+@media screen and ( max-width:  720px)
+    .catalog_product_card
+        width: 100%
+
+        .catalog_product_card__info_wrap
+            display: block
+            width: 100%
+
+        .catalog_product_card__image
+            height: 102.31px
+            width: 163.72px
+            position: relative
+            right: 10px
+            margin-bottom: 12px
+
+        .catalog_product_card__smalltext
+            text-align: center
+
+        .catalog_product_card__title
+            font-size: 14px
+            text-align: center
+            line-height: 1.2
+            margin-top: 5px
+
+        .catalog_product_card__price
+            text-align: center
+            font-size: 18px
+        .catalog_product_card__price_credit
+            text-align: center
+            margin-top: 0
+
+        .catalog_product_card__price_block_right
+            display: none
+
+        .catalog_product_card__price_block_left
+            width: 100%
+
+        .catalog_product_card__selector_title
+            font-size: 12px
+
+        .catalog_product_card__selector__inner__value_container
+            padding: 12px 20px 11px
+            height: 40px
+            font-size: 12px
+
+        .catalog_product_card__selector__menuList
+            border: 1px solid red !important
+
+        .catalog_product_card__materials_list_item
+            img
+                display: block
+                width: 10.25px
+                height: 10.25px
+                border-radius: 3px
+
+        .mobile_line-1
+            margin-top: 5px
+
+        .catalog_product_card__info_button
+            width: 100%
+            font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+            font-size: 14px
+            margin-top: 5px
+            box-sizing: border-box
+            height: 40px
+            padding: 13px 20px
+
+        .catalog_product_card__stats_buttons
+            margin-top: 5px
+            display: flex
+            justify-content: space-between
+
+        .catalog_product_card__stat_block
+            width: 47%
+            margin-left: 0 !important
+            position: relative
+
+        .catalog_product_card__stat_block_image
+            position: absolute
+            left: 25%
+            top: 25%
+
+        .catalog_product_card__delivery_info
+            font-size: 11px
+
+        .catalog_product_card__delivery_block
+            margin-top: 5px
+
+        .catalog_product_card__stat_block_image
+            left: 14%
+            top: -12%
+            transform: scale(0.25) translateX(-42px) translateY(-71px)

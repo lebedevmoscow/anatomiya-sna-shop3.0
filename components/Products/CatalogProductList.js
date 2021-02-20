@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import DesktopSeveral from './../ViewType/DesktopSeveral'
 import DesktopSingle from './../ViewType/DesktopSingle'
 import MobileSeveral from './../ViewType/MobileSeveral'
+import MobileSingle from '../ViewType/MobileSingle'
 import ArticleListCatalog from './../Article/ArticleListCatalog'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -206,7 +207,7 @@ const CatalogProductListForDesktop = ({
     }
 
     const renderMobile = () => {
-        console.log('render')
+        console.log('render view', viewType)
         let ElemenetsArray = []
         let EqualHeightArray = []
         let Temp = 0
@@ -237,6 +238,34 @@ const CatalogProductListForDesktop = ({
             if (viewType === 'several') {
                 ElemenetsArray.push(
                     <MobileSeveral
+                        OptionsList={OptionsList}
+                        IsMobile={IsMobile}
+                        InitialSize={InitialSize}
+                        catalogSlug={catalogSlug}
+                        BrandTitle={product.BrandTitle}
+                        SeriesTitle={product.SeriesTitle}
+                        Title={product.Title}
+                        Slug={product.Slug}
+                        MainImage={product.MainImage}
+                        stylesForViewType={stylesForViewType}
+                        stylesForDesktopViewType={stylesForDesktopViewType}
+                        viewType={viewType}
+                        desktopViewType={desktopViewType}
+                        CatalogType={product.CatalogType}
+                        Properties={product.Properties}
+                        ListSalesList={ListSalesList}
+                        Id={product.Id}
+                        key={product.Id}
+                        Prices={product.Prices}
+                        oldMin={oldMin}
+                        oldMax={oldMax}
+                    />
+                )
+            }
+
+            if (viewType === 'single') {
+                ElemenetsArray.push(
+                    <MobileSingle
                         OptionsList={OptionsList}
                         IsMobile={IsMobile}
                         InitialSize={InitialSize}
@@ -293,6 +322,10 @@ const CatalogProductListForDesktop = ({
         })
         return ElemenetsArray
     }
+
+    useEffect(() => {
+        console.log('viewType')
+    }, [viewType])
 
     return (
         <div className={styles.catalog_product_list_for_desktop}>
