@@ -330,7 +330,7 @@ const CatalogProductListForDesktop = ({
     return (
         <div className={styles.catalog_product_list_for_desktop}>
             {!IsMobile && render()}
-            {IsMobile && renderMobile()}
+            {renderMobile()}
         </div>
     )
 }

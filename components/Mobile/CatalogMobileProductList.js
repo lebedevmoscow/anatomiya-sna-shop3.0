@@ -521,11 +521,23 @@ const CatalogMobileProductList = ({
     }, [lastClick])
     return (
         <>
-            {firstProductList}
-            {/* {FirstArticles} */}
+            <CatalogProductList
+                catalogSlug={catalogSlug}
+                subCatalogSlug={subCatalogSlug}
+                firstLoadProducts={firstLoadProducts}
+                stylesForViewType={stylesForViewType}
+                viewType={viewType}
+                oldMin={filterAPIData.price.min}
+                oldMax={filterAPIData.price.max}
+                filterProductsIds={filterProductsIds}
+                newProducts={newProducts}
+                IsMobile={true}
+            />
+            {/* {firstProductList}
+            {FirstArticles}
             {list}
-            {/* {Articles && Articles} */}
-            {/* <div
+            {Articles && Articles} */}
+            <div
                 onClick={() => {
                     setLastClick('showMore')
                     if (lastClick === 'showMore') {
@@ -547,7 +559,7 @@ const CatalogMobileProductList = ({
                     }
                     onGoBackdButtonClickHandler={onGoBackdButtonClickHandler}
                 />
-            </div> */}
+            </div>
         </>
     )
 }
