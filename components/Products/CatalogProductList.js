@@ -293,34 +293,34 @@ const CatalogProductListForDesktop = ({
 
             Temp++
 
-            // if (length < 20 && Temp % 2 !== 0) {
-            //     if (length - 1 === index && Temp % 2 === 1) {
-            //         EqualHeightArray.push(
-            //             <EqualHeight key={product.Id}>
-            //                 {ElemenetsArray}
-            //             </EqualHeight>
-            //         )
-            //     }
-            // } else {
-            //     if (Temp !== 0 && Temp % 2 === 0) {
-            //         EqualHeightArray.push(
-            //             <EqualHeight key={product.Id}>
-            //                 {ElemenetsArray}
-            //             </EqualHeight>
-            //         )
-            //         ElemenetsArray = []
-            //         Temp = 0
-            //     }
-            // }
-            // if (Temp !== 0 && Temp % 2 === 0) {
-            //     EqualHeightArray.push(
-            //         <EqualHeight key={product.Id}>{ElemenetsArray}</EqualHeight>
-            //     )
-            //     ElemenetsArray = []
-            //     Temp = 0
-            // }
+            if (length < 20 && Temp % 2 !== 0) {
+                if (length - 1 === index && Temp % 2 === 1) {
+                    EqualHeightArray.push(
+                        <EqualHeight key={product.Id}>
+                            {ElemenetsArray}
+                        </EqualHeight>
+                    )
+                }
+            } else {
+                if (Temp !== 0 && Temp % 2 === 0) {
+                    EqualHeightArray.push(
+                        <EqualHeight key={product.Id}>
+                            {ElemenetsArray}
+                        </EqualHeight>
+                    )
+                    ElemenetsArray = []
+                    Temp = 0
+                }
+            }
+            if (Temp !== 0 && Temp % 2 === 0) {
+                EqualHeightArray.push(
+                    <EqualHeight key={product.Id}>{ElemenetsArray}</EqualHeight>
+                )
+                ElemenetsArray = []
+                Temp = 0
+            }
         })
-        return ElemenetsArray
+        return EqualHeightArray
     }
 
     return (
