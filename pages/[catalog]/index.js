@@ -22,8 +22,8 @@ import CatalogMainFilter from './../../components/Filters/CatalogMobileMainFilte
 import CatalogMobileProductList from './../../components/Mobile/CatalogMobileProductList'
 
 import common_styles from './../../styles/pages/catalog.module.sass'
-import MobileFooter from '../../components/Mobile/MobieFooter'
-import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
+// import MobileFooter from '../../components/Mobile/MobieFooter'
+// import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
 // Experemental
 // const CatalogProductList = dynamic(
 //     () => import('./../../components/Products/CatalogProductList'),
@@ -35,9 +35,24 @@ import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
 //     { ssr: true }
 // )
 
+// const CatalogMobileProductList = dynamic(
+//     () => import('./../../components/Mobile/CatalogMobileProductList'),
+//     { ssr: true }
+// )
+
 const CatalogMobileReview = dynamic(
     () => import('./../../components/Reviews/CatalogMobileReviews'),
     { ssr: false }
+)
+
+const SwiperAssurenaces = dynamic(
+    () => import('./../../components/Mobile/MobileAssurances'),
+    { ssr: true }
+)
+
+const MobileFooter = dynamic(
+    () => import('../../components/Mobile/MobieFooter'),
+    { ssr: true }
 )
 
 const CatalogPage = ({
@@ -120,7 +135,7 @@ const CatalogPage = ({
                     regions={regions}
                 />
             )}
-            {/* {!IsMobile && (
+            {!IsMobile && (
                 <Header
                     banner={null}
                     phoneCommon={phoneCommon}
@@ -160,7 +175,7 @@ const CatalogPage = ({
                     catalogSlug={catalogSlug}
                     subCatalogSlug={subCatalogSlug}
                 />
-            )} */}
+            )}
             {/* {breakpoint720 && (
                 <img className="mobile-menu__mini-banner" src={banner}></img>
             )} */}
@@ -247,10 +262,10 @@ const CatalogPage = ({
                     </div>
                 </div>
             )}
-            {/* <SwiperAssurenaces /> */}
-            {/* <Subscribe /> */}
-            {/* <MobileFooter /> */}
-            {/* <Footer /> */}
+            {IsMobile && <SwiperAssurenaces />}
+            {!IsMobile && <Subscribe />}
+            {IsMobile && <MobileFooter />}
+            {!IsMobile && <Footer />}
         </div>
     )
 }
