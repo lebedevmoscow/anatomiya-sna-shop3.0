@@ -323,14 +323,10 @@ const CatalogProductListForDesktop = ({
         return ElemenetsArray
     }
 
-    useEffect(() => {
-        console.log('viewType')
-    }, [viewType])
-
     return (
         <div className={styles.catalog_product_list_for_desktop}>
             {!IsMobile && render()}
-            {renderMobile()}
+            {IsMobile && renderMobile()}
         </div>
     )
 }

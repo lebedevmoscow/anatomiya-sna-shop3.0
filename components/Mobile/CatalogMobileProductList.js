@@ -377,53 +377,58 @@ const CatalogMobileProductList = ({
         }
     }, [page, headers])
 
-    useEffect(() => {
-        setFirstProductList(
-            <CatalogProductList
-                catalogSlug={catalogSlug}
-                subCatalogSlug={subCatalogSlug}
-                firstLoadProducts={firstLoadProducts}
-                stylesForViewType={stylesForViewType}
-                viewType={viewType}
-                oldMin={filterAPIData.price.min}
-                oldMax={filterAPIData.price.max}
-                filterProductsIds={filterProductsIds}
-                newProducts={newProducts}
-                IsMobile={true}
-            />
-        )
-    }, [])
+    // useEffect(() => {
+    //     setFirstProductList(
+    //         <CatalogProductList
+    //             catalogSlug={catalogSlug}
+    //             subCatalogSlug={subCatalogSlug}
+    //             firstLoadProducts={firstLoadProducts}
+    //             stylesForViewType={stylesForViewType}
+    //             viewType={viewType}
+    //             oldMin={filterAPIData.price.min}
+    //             oldMax={filterAPIData.price.max}
+    //             filterProductsIds={filterProductsIds}
+    //             newProducts={newProducts}
+    //             IsMobile={true}
+    //         />
+    //     )
+    // }, [])
 
     useEffect(() => {
         setAmount(Math.ceil(filterProductsIds.length / 20))
     }, [filterProductsIds])
 
     useEffect(() => {
-        dispatch({
-            type: CATALOG_PRODUCT_LIST_SUCCESS,
-            payload: firstLoadProducts,
-        })
-        console.log('viewType', viewType)
-        setList(
-            <>
-                {data.map((d, index) => {
-                    return (
-                        <CatalogProductList
-                            key={index}
-                            catalogSlug={catalogSlug}
-                            firstLoadProducts={d}
-                            oldMin={oldMin}
-                            oldMax={oldMax}
-                            filterProductsIds={filterProductsIds}
-                            newProducts={true}
-                            IsMobile={true}
-                            stylesForViewType={stylesForViewType}
-                            viewType={viewType}
-                        />
-                    )
-                })}
-            </>
-        )
+        if (data.length > 0) {
+            dispatch({
+                type: CATALOG_PRODUCT_LIST_SUCCESS,
+                payload: firstLoadProducts,
+            })
+            console.log('viewType', viewType)
+
+            console.log('data', data)
+
+            setList(
+                <>
+                    {data.map((d, index) => {
+                        return (
+                            <CatalogProductList
+                                key={index}
+                                catalogSlug={catalogSlug}
+                                firstLoadProducts={d}
+                                oldMin={oldMin}
+                                oldMax={oldMax}
+                                filterProductsIds={filterProductsIds}
+                                newProducts={true}
+                                IsMobile={true}
+                                stylesForViewType={stylesForViewType}
+                                viewType={viewType}
+                            />
+                        )
+                    })}
+                </>
+            )
+        }
     }, [data, viewType, stylesForViewType])
 
     useEffect(() => {
@@ -436,22 +441,23 @@ const CatalogMobileProductList = ({
         }
     }, [SelectedSizeReducer.amount])
 
-    useEffect(() => {
-        if (CatalogProductListReducer.products.length !== 0) {
-            setFirstProductList(
-                <CatalogProductList
-                    catalogSlug={catalogSlug}
-                    firstLoadProducts={CatalogProductListReducer.products}
-                    oldMin={oldMin}
-                    oldMax={oldMax}
-                    filterProductsIds={filterProductsIds}
-                    IsMobile={true}
-                    stylesForViewType={stylesForViewType}
-                    viewType={viewType}
-                />
-            )
-        }
-    }, [viewType, CatalogProductListReducer.products])
+    // useEffect(() => {
+    //     if (CatalogProductListReducer.products.length !== 0) {
+    //         console.log('2')
+    //         setFirstProductList(
+    //             <CatalogProductList
+    //                 catalogSlug={catalogSlug}
+    //                 firstLoadProducts={CatalogProductListReducer.products}
+    //                 oldMin={oldMin}
+    //                 oldMax={oldMax}
+    //                 filterProductsIds={filterProductsIds}
+    //                 IsMobile={true}
+    //                 stylesForViewType={stylesForViewType}
+    //                 viewType={viewType}
+    //             />
+    //         )
+    //     }
+    // }, [viewType, CatalogProductListReducer.products])
 
     useEffect(() => {
         if (CatalogProductListReducer.emptyIndex !== 0) {
@@ -474,6 +480,7 @@ const CatalogMobileProductList = ({
     useEffect(() => {
         if (NewCatalogProductListReducer.newProducts.length !== 0) {
             if (lastClick === 'showMore') {
+                console.log('show')
                 const clone = data.concat()
                 clone.push(NewCatalogProductListReducer.newProducts)
                 setData(clone)
@@ -495,6 +502,7 @@ const CatalogMobileProductList = ({
                 )
                 // }, 1000)
             } else {
+                console.log('new')
                 setFirstProductList(
                     <CatalogProductList
                         catalogSlug={catalogSlug}
@@ -514,6 +522,7 @@ const CatalogMobileProductList = ({
     }, [NewCatalogProductListReducer.newProducts])
 
     useEffect(() => {
+        console.log('last click', lastClick)
         if (lastClick === 'showMore') {
             onButtonClickHandler()
         }
@@ -521,22 +530,24 @@ const CatalogMobileProductList = ({
     }, [lastClick])
     return (
         <>
-            <CatalogProductList
-                catalogSlug={catalogSlug}
-                subCatalogSlug={subCatalogSlug}
-                firstLoadProducts={firstLoadProducts}
-                stylesForViewType={stylesForViewType}
-                viewType={viewType}
-                oldMin={filterAPIData.price.min}
-                oldMax={filterAPIData.price.max}
-                filterProductsIds={filterProductsIds}
-                newProducts={newProducts}
-                IsMobile={true}
-            />
-            {/* {firstProductList}
-            {FirstArticles}
+            {CatalogCommonReducer.filters.length === 0 && (
+                <CatalogProductList
+                    catalogSlug={catalogSlug}
+                    subCatalogSlug={subCatalogSlug}
+                    firstLoadProducts={firstLoadProducts}
+                    stylesForViewType={stylesForViewType}
+                    viewType={viewType}
+                    oldMin={filterAPIData.price.min}
+                    oldMax={filterAPIData.price.max}
+                    filterProductsIds={filterProductsIds}
+                    newProducts={newProducts}
+                    IsMobile={true}
+                />
+            )}
+            {firstProductList}
+            {/* {FirstArticles} */}
             {list}
-            {Articles && Articles} */}
+            {/* {Articles} */}
             <div
                 onClick={() => {
                     setLastClick('showMore')
@@ -548,7 +559,7 @@ const CatalogMobileProductList = ({
             >
                 <LoadMoreButton firstText={'Показать еще'} />
             </div>
-            <div className={common_styles.mobile_catalog_pagination}>
+            {/* <div className={common_styles.mobile_catalog_pagination}>
                 <CatalogPagination
                     IsMobile={true}
                     onPageClickHandler={onPageClickHandler}
@@ -559,7 +570,7 @@ const CatalogMobileProductList = ({
                     }
                     onGoBackdButtonClickHandler={onGoBackdButtonClickHandler}
                 />
-            </div>
+            </div> */}
         </>
     )
 }
