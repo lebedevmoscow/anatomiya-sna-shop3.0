@@ -217,17 +217,12 @@ const CatalogLeftMobile = ({
             </div>
             <div className={styles.catalog_left_mobile__filters}>
                 <Swiper
-                    className={
-                        styles.catalog_left_mobile__filters_list +
-                        ' ' +
-                        'catalog_left_mobile__filters_list'
-                    }
+                    className={styles.catalog_left_mobile__filters_list}
                     freeMode={true}
                     freeModeMomentum={true}
                     resistance={true}
                     resistanceRatio={0}
                     slidesPerView={'auto'}
-                    spaceBetween={10}
                     autoHeight={true}
                 >
                     <SwiperSlide>
@@ -268,7 +263,6 @@ const CatalogLeftMobile = ({
                     resistance={true}
                     resistanceRatio={0}
                     slidesPerView={'auto'}
-                    spaceBetween={5}
                     autoHeight={false}
                 >
                     <SwiperSlide>
@@ -319,17 +313,12 @@ const CatalogLeftMobile = ({
                 </Swiper>
 
                 <Swiper
-                    className={
-                        styles.catalog_left_mobile__main_filters +
-                        ' ' +
-                        'catalog_left_mobile__filters_list catalog_left_mobile__filters_list__main'
-                    }
+                    className={styles.catalog_left_mobile__main_filters}
                     freeMode={true}
                     freeModeMomentum={true}
                     resistance={true}
                     resistanceRatio={0}
                     slidesPerView={'auto'}
-                    spaceBetween={10}
                     autoHeight={false}
                 >
                     <SwiperSlide>

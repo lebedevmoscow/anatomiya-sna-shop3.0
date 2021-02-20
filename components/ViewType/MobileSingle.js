@@ -413,7 +413,7 @@ const MobileSingle = ({
 
     return (
         <div className={styles.catalog_product_card}>
-            <PopupsOnProductCard
+            {/* <PopupsOnProductCard
                 Labels={Labels}
                 SalePercent={SalePercent}
                 key={uuidv4()}
@@ -421,7 +421,7 @@ const MobileSingle = ({
                 IsMobile={IsMobile}
                 desktopViewType={desktopViewType}
                 Gifts={Gifts}
-            />
+            /> */}
             <div className={styles.catalog_product_card__column}>
                 <div
                     className={
@@ -713,10 +713,11 @@ const MobileSingle = ({
                     </div>
                 </div>
                 <div className={styles.catalog_product_card__delivery_block}>
-                    <img
+                    <Image src={CarImage} width={50} height={50} />
+                    {/* <img
                         src={CarImage}
                         className={styles.catalog_product_card__delivery_image}
-                    ></img>
+                    ></img> */}
                     <div className={styles.catalog_product_card__delivery_info}>
                         <span className={styles.when}>
                             доставим

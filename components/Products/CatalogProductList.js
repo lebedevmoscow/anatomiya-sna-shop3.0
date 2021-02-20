@@ -207,63 +207,30 @@ const CatalogProductListForDesktop = ({
     }
 
     const renderMobile = () => {
-        console.log('render view', viewType)
-        let ElemenetsArray = []
-        let EqualHeightArray = []
-        let Temp = 0
+        if (viewType === 'single') {
+            let ElemenetsArray = []
 
-        const length = firstLoadProducts.ShortProductModels.length
-
-        firstLoadProducts.ShortProductModels.map((product, index) => {
-            const ListSalesList = GetPopupsList(
-                firstLoadProducts.SaleLabels,
-                product.Prices[0].SaleIds
-            )
-
-            const InitialSize = []
-            for (let i = 0; i < product.Prices.length; i++) {
-                if (
-                    product.Prices[i].SizeSlug ===
-                    SelectedSizeRedux.selectedSizeSlug
-                ) {
-                    InitialSize.push(product.Prices[i])
-                }
-            }
-
-            const OptionsList = GetOptionsList(
-                product.Prices[0].OptionIds,
-                firstLoadProducts.Options
-            )
-
-            if (viewType === 'several') {
-                ElemenetsArray.push(
-                    <MobileSeveral
-                        OptionsList={OptionsList}
-                        IsMobile={IsMobile}
-                        InitialSize={InitialSize}
-                        catalogSlug={catalogSlug}
-                        BrandTitle={product.BrandTitle}
-                        SeriesTitle={product.SeriesTitle}
-                        Title={product.Title}
-                        Slug={product.Slug}
-                        MainImage={product.MainImage}
-                        stylesForViewType={stylesForViewType}
-                        stylesForDesktopViewType={stylesForDesktopViewType}
-                        viewType={viewType}
-                        desktopViewType={desktopViewType}
-                        CatalogType={product.CatalogType}
-                        Properties={product.Properties}
-                        ListSalesList={ListSalesList}
-                        Id={product.Id}
-                        key={product.Id}
-                        Prices={product.Prices}
-                        oldMin={oldMin}
-                        oldMax={oldMax}
-                    />
+            firstLoadProducts.ShortProductModels.map((product, index) => {
+                const ListSalesList = GetPopupsList(
+                    firstLoadProducts.SaleLabels,
+                    product.Prices[0].SaleIds
                 )
-            }
 
-            if (viewType === 'single') {
+                const InitialSize = []
+                for (let i = 0; i < product.Prices.length; i++) {
+                    if (
+                        product.Prices[i].SizeSlug ===
+                        SelectedSizeRedux.selectedSizeSlug
+                    ) {
+                        InitialSize.push(product.Prices[i])
+                    }
+                }
+
+                const OptionsList = GetOptionsList(
+                    product.Prices[0].OptionIds,
+                    firstLoadProducts.Options
+                )
+
                 ElemenetsArray.push(
                     <MobileSingle
                         OptionsList={OptionsList}
@@ -289,19 +256,119 @@ const CatalogProductListForDesktop = ({
                         oldMax={oldMax}
                     />
                 )
-            }
+            })
+            return ElemenetsArray
+        } else if (viewType === 'several') {
+            let ElemenetsArray = []
+            let EqualHeightArray = []
+            let Temp = 0
 
-            Temp++
+            const length = firstLoadProducts.ShortProductModels.length
 
-            if (length < 20 && Temp % 2 !== 0) {
-                if (length - 1 === index && Temp % 2 === 1) {
-                    EqualHeightArray.push(
-                        <EqualHeight key={product.Id}>
-                            {ElemenetsArray}
-                        </EqualHeight>
+            const rand = Math.floor(
+                (Math.random() * firstLoadProducts.ShortProductModels.length) /
+                    3 +
+                    3
+            )
+
+            firstLoadProducts.ShortProductModels.map((product, index) => {
+                const ListSalesList = GetPopupsList(
+                    firstLoadProducts.SaleLabels,
+                    product.Prices[0].SaleIds
+                )
+
+                const InitialSize = []
+                for (let i = 0; i < product.Prices.length; i++) {
+                    if (
+                        product.Prices[i].SizeSlug ===
+                        SelectedSizeRedux.selectedSizeSlug
+                    ) {
+                        InitialSize.push(product.Prices[i])
+                    }
+                }
+
+                const OptionsList = GetOptionsList(
+                    product.Prices[0].OptionIds,
+                    firstLoadProducts.Options
+                )
+
+                if (viewType === 'several') {
+                    ElemenetsArray.push(
+                        <MobileSeveral
+                            OptionsList={OptionsList}
+                            IsMobile={IsMobile}
+                            InitialSize={InitialSize}
+                            catalogSlug={catalogSlug}
+                            BrandTitle={product.BrandTitle}
+                            SeriesTitle={product.SeriesTitle}
+                            Title={product.Title}
+                            Slug={product.Slug}
+                            MainImage={product.MainImage}
+                            stylesForViewType={stylesForViewType}
+                            stylesForDesktopViewType={stylesForDesktopViewType}
+                            viewType={viewType}
+                            desktopViewType={desktopViewType}
+                            CatalogType={product.CatalogType}
+                            Properties={product.Properties}
+                            ListSalesList={ListSalesList}
+                            Id={product.Id}
+                            key={product.Id}
+                            Prices={product.Prices}
+                            oldMin={oldMin}
+                            oldMax={oldMax}
+                        />
                     )
                 }
-            } else {
+
+                if (viewType === 'single') {
+                    ElemenetsArray.push(
+                        <MobileSingle
+                            OptionsList={OptionsList}
+                            IsMobile={IsMobile}
+                            InitialSize={InitialSize}
+                            catalogSlug={catalogSlug}
+                            BrandTitle={product.BrandTitle}
+                            SeriesTitle={product.SeriesTitle}
+                            Title={product.Title}
+                            Slug={product.Slug}
+                            MainImage={product.MainImage}
+                            stylesForViewType={stylesForViewType}
+                            stylesForDesktopViewType={stylesForDesktopViewType}
+                            viewType={viewType}
+                            desktopViewType={desktopViewType}
+                            CatalogType={product.CatalogType}
+                            Properties={product.Properties}
+                            ListSalesList={ListSalesList}
+                            Id={product.Id}
+                            key={product.Id}
+                            Prices={product.Prices}
+                            oldMin={oldMin}
+                            oldMax={oldMax}
+                        />
+                    )
+                }
+
+                Temp++
+
+                if (length < 20 && Temp % 2 !== 0) {
+                    if (length - 1 === index && Temp % 2 === 1) {
+                        EqualHeightArray.push(
+                            <EqualHeight key={product.Id}>
+                                {ElemenetsArray}
+                            </EqualHeight>
+                        )
+                    }
+                } else {
+                    if (Temp !== 0 && Temp % 2 === 0) {
+                        EqualHeightArray.push(
+                            <EqualHeight key={product.Id}>
+                                {ElemenetsArray}
+                            </EqualHeight>
+                        )
+                        ElemenetsArray = []
+                        Temp = 0
+                    }
+                }
                 if (Temp !== 0 && Temp % 2 === 0) {
                     EqualHeightArray.push(
                         <EqualHeight key={product.Id}>
@@ -311,16 +378,10 @@ const CatalogProductListForDesktop = ({
                     ElemenetsArray = []
                     Temp = 0
                 }
-            }
-            if (Temp !== 0 && Temp % 2 === 0) {
-                EqualHeightArray.push(
-                    <EqualHeight key={product.Id}>{ElemenetsArray}</EqualHeight>
-                )
-                ElemenetsArray = []
-                Temp = 0
-            }
-        })
-        return EqualHeightArray
+            })
+
+            return EqualHeightArray
+        }
     }
 
     return (
