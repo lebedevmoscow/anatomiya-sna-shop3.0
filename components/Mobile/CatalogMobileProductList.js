@@ -545,9 +545,9 @@ const CatalogMobileProductList = ({
                 />
             )}
             {firstProductList}
-            {/* {FirstArticles} */}
+            {FirstArticles}
             {list}
-            {/* {Articles} */}
+            {Articles}
             <div
                 onClick={() => {
                     setLastClick('showMore')
@@ -559,7 +559,7 @@ const CatalogMobileProductList = ({
             >
                 <LoadMoreButton firstText={'Показать еще'} />
             </div>
-            {/* <div className={common_styles.mobile_catalog_pagination}>
+            <div className={common_styles.mobile_catalog_pagination}>
                 <CatalogPagination
                     IsMobile={true}
                     onPageClickHandler={onPageClickHandler}
@@ -570,7 +570,7 @@ const CatalogMobileProductList = ({
                     }
                     onGoBackdButtonClickHandler={onGoBackdButtonClickHandler}
                 />
-            </div> */}
+            </div>
         </>
     )
 }

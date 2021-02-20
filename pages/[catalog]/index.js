@@ -15,7 +15,7 @@ import CatalogProductList from './../../components/Products/CatalogProductList'
 import LoadMoreButton from './../../components/Button/LoadMoreButton'
 import CatalogPagination from '../../components/Pagination/CatalogPagination'
 import CatalogHelpPickUp from '../../components/Catalog/CatalogHelpPickUp'
-import CatalogMobileReview from './../../components/Reviews/CatalogMobileReviews'
+// import CatalogMobileReview from './../../components/Reviews/CatalogMobileReviews'
 import CatalogLeftFilter from '../../components/Filters/CatalogLeftFilter'
 import CatalogRight from '../../components/Catalog/CatalogRight'
 import CatalogMainFilter from './../../components/Filters/CatalogMobileMainFilter'
@@ -34,6 +34,11 @@ import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
 //     () => import('./../../components/Mobile/CatalogMobileProductList'),
 //     { ssr: true }
 // )
+
+const CatalogMobileReview = dynamic(
+    () => import('./../../components/Reviews/CatalogMobileReviews'),
+    { ssr: false }
+)
 
 const CatalogPage = ({
     banner,
@@ -115,7 +120,7 @@ const CatalogPage = ({
                     regions={regions}
                 />
             )}
-            {!IsMobile && (
+            {/* {!IsMobile && (
                 <Header
                     banner={null}
                     phoneCommon={phoneCommon}
@@ -155,7 +160,7 @@ const CatalogPage = ({
                     catalogSlug={catalogSlug}
                     subCatalogSlug={subCatalogSlug}
                 />
-            )}
+            )} */}
             {/* {breakpoint720 && (
                 <img className="mobile-menu__mini-banner" src={banner}></img>
             )} */}
@@ -192,22 +197,13 @@ const CatalogPage = ({
                     />
                 </div>
             )}
-            {/* {IsMobile && breakpoint1023 && (
-                <div style={{ marginTop: '5px' }}>
-                    <LoadMoreButton firstText={'Показать еще +20'} />
-                </div>
-            )}{' '}
-            {IsMobile && breakpoint1023 && (
-                <div className={common_styles.mobile_catalog_pagination}>
-                    <CatalogPagination />
-                </div>
-            )} */}
+
             {/* {IsMobile && breakpoint1023 && (
                 <div className={common_styles.mobile_help_pickup}>
                     <CatalogHelpPickUp />
                 </div>
             )} */}
-            {/* {IsMobile && breakpoint1023 && (
+            {IsMobile && (
                 <div className={common_styles.container}>
                     <div className={common_styles.catalog_mobile_reviews_title}>
                         Отзывы на кровати
@@ -219,7 +215,7 @@ const CatalogPage = ({
                         })}
                     </div>
                 </div>
-            )} */}
+            )}
             {!IsMobile && !breakpoint1023 && (
                 <div className={common_styles.container}>
                     <div className={common_styles.catalog}>
