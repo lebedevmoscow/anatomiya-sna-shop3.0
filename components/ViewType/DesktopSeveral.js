@@ -433,105 +433,113 @@ const DesktopSeveral = ({
                 <div className={styles.catalog_product_card__smalltext}>
                     Купить {CatalogType}
                 </div>
-                {/* <EqualHeightElement name="CatalogProductCard"> */}
-                <div
-                    style={PriceDiff !== 0 ? { marginBottom: '10px' } : {}}
-                    className={styles.catalog_product_card__title}
-                >
-                    {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title}
-                </div>
-                {/* </EqualHeightElement> */}
-            </div>
-            {/* <EqualHeightElement name="CatalogProductCard__Price"> */}
-            <div className={`${styles.after_title}`}>
-                <div className={styles.catalog_product_card__price_block}>
+                <EqualHeightElement name="CatalogProductCard">
                     <div
-                        className={
-                            styles.catalog_product_card__price_block_left
-                        }
+                        style={PriceDiff !== 0 ? { marginBottom: '10px' } : {}}
+                        className={styles.catalog_product_card__title}
                     >
-                        {PriceDiff !== 0 && (
-                            <div
-                                className={styles.product_card__price_discount}
-                            >
+                        {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title}
+                    </div>
+                </EqualHeightElement>
+            </div>
+            <EqualHeightElement name="CatalogProductCard__Price">
+                <div className={`${styles.after_title}`}>
+                    <div className={styles.catalog_product_card__price_block}>
+                        <div
+                            className={
+                                styles.catalog_product_card__price_block_left
+                            }
+                        >
+                            {PriceDiff !== 0 && (
                                 <div
-                                    className={styles.product_card__price_prev}
+                                    className={
+                                        styles.product_card__price_discount
+                                    }
                                 >
-                                    <span>
-                                        {PriceOld.toString().replace(
-                                            /\B(?=(\d{3})+(?!\d))/g,
-                                            ' '
-                                        )}
-                                        <div
-                                            className={
-                                                styles.product_card__price_diff
-                                            }
-                                        >
-                                            -
-                                            {PriceDiff.toString().replace(
+                                    <div
+                                        className={
+                                            styles.product_card__price_prev
+                                        }
+                                    >
+                                        <span>
+                                            {PriceOld.toString().replace(
                                                 /\B(?=(\d{3})+(?!\d))/g,
                                                 ' '
                                             )}
-                                        </div>
-                                    </span>
+                                            <div
+                                                className={
+                                                    styles.product_card__price_diff
+                                                }
+                                            >
+                                                -
+                                                {PriceDiff.toString().replace(
+                                                    /\B(?=(\d{3})+(?!\d))/g,
+                                                    ' '
+                                                )}
+                                            </div>
+                                        </span>
+                                    </div>
                                 </div>
+                            )}
+                            <div className={styles.catalog_product_card__price}>
+                                {Price} Руб.
                             </div>
-                        )}
-                        <div className={styles.catalog_product_card__price}>
-                            {Price} Руб.
+                            <div
+                                className={
+                                    styles.catalog_product_card__price_credit
+                                }
+                            >
+                                В рассрочку от {Math.ceil(PriceRaw / 6)} руб/мес
+                            </div>
                         </div>
+
                         <div
                             className={
-                                styles.catalog_product_card__price_credit
+                                styles.catalog_product_card__price_block_right
                             }
                         >
-                            В рассрочку от {Math.ceil(PriceRaw / 6)} руб/мес
-                        </div>
-                    </div>
-
-                    <div
-                        className={
-                            styles.catalog_product_card__price_block_right
-                        }
-                    >
-                        <div
-                            className={styles.catalog_product_card__stat_block}
-                        >
                             <div
-                                className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                                className={
+                                    styles.catalog_product_card__stat_block
+                                }
                             >
-                                Товар добавлен в{' '}
-                                <Link href="/">Сравнение!</Link>
+                                <div
+                                    className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                                >
+                                    Товар добавлен в{' '}
+                                    <Link href="/">Сравнение!</Link>
+                                </div>
+                                <div className={styles.stats}>
+                                    <Image
+                                        src={StatsImage}
+                                        width={24}
+                                        height={24}
+                                    />
+                                </div>
                             </div>
-                            <div className={styles.stats}>
-                                <Image
-                                    src={StatsImage}
-                                    width={24}
-                                    height={24}
-                                />
-                            </div>
-                        </div>
-                        <div
-                            className={styles.catalog_product_card__stat_block}
-                        >
                             <div
-                                className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                                className={
+                                    styles.catalog_product_card__stat_block
+                                }
                             >
-                                Товар добавлен в{' '}
-                                <Link href="/">Избранное!</Link>
-                            </div>
-                            <div className={styles.heart}>
-                                <Image
-                                    src={HeartImage}
-                                    width={24}
-                                    height={24}
-                                />
+                                <div
+                                    className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                                >
+                                    Товар добавлен в{' '}
+                                    <Link href="/">Избранное!</Link>
+                                </div>
+                                <div className={styles.heart}>
+                                    <Image
+                                        src={HeartImage}
+                                        width={24}
+                                        height={24}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            {/* </EqualHeightElement> */}
+            </EqualHeightElement>
 
             <span
                 style={desktopViewType === 'single' ? { display: 'none' } : {}}
@@ -598,45 +606,51 @@ const DesktopSeveral = ({
                 )}
 
                 <div>
-                    {/* <EqualHeightElement name="Propertyes_height"> */}
-                    <div className={styles.catalog_product_card__info_block}>
-                        <ul className={styles.catalog_product_card__info_list}>
-                            {Properties.map((property, id) => {
-                                const floored = parseInt(property.Value, 10)
-                                return (
-                                    <li
-                                        key={id}
-                                        className={
-                                            styles.catalog_product_card__info_list_item
-                                        }
-                                    >
-                                        <div
+                    <EqualHeightElement name="Propertyes_height">
+                        <div
+                            className={styles.catalog_product_card__info_block}
+                        >
+                            <ul
+                                className={
+                                    styles.catalog_product_card__info_list
+                                }
+                            >
+                                {Properties.map((property, id) => {
+                                    const floored = parseInt(property.Value, 10)
+                                    return (
+                                        <li
+                                            key={id}
                                             className={
-                                                styles.catalog_product_card__info_list_item_title
+                                                styles.catalog_product_card__info_list_item
                                             }
                                         >
-                                            {property.PropertyTitle}
-                                        </div>
-                                        <span
-                                            className={
-                                                styles.catalog_product_card__info_list_item_delimiter
-                                            }
-                                        ></span>
-                                        <div
-                                            className={
-                                                styles.catalog_product_card__info_list_item_material
-                                            }
-                                        >
-                                            {isNaN(floored)
-                                                ? property.Value
-                                                : floored}
-                                        </div>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </div>
-                    {/* </EqualHeightElement> */}
+                                            <div
+                                                className={
+                                                    styles.catalog_product_card__info_list_item_title
+                                                }
+                                            >
+                                                {property.PropertyTitle}
+                                            </div>
+                                            <span
+                                                className={
+                                                    styles.catalog_product_card__info_list_item_delimiter
+                                                }
+                                            ></span>
+                                            <div
+                                                className={
+                                                    styles.catalog_product_card__info_list_item_material
+                                                }
+                                            >
+                                                {isNaN(floored)
+                                                    ? property.Value
+                                                    : floored}
+                                            </div>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                    </EqualHeightElement>
                 </div>
 
                 <div

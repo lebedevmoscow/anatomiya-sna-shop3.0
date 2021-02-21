@@ -9,7 +9,22 @@ import Select from 'react-select'
 import StatsImage from './../../assets/svg/stats.svg'
 import HeartImage from './../../assets/svg/heart.svg'
 import CarImage from './../../assets/svg/car.svg'
-import { useSelector, useDispatch } from 'react-redux'
+import { CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY } from './../../actions/NewCatalogProductList'
+import { SelectSize } from './../../actions/SelectedSize'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    AddProductToFavoriteList,
+    RemoveProductFromFavoriteList,
+} from './../../actions/FavoritesProductsList'
+import {
+    AddProductToCompareList,
+    RemoveProductFromCompareList,
+} from './../../actions/CompareProductsList'
+import {
+    LoadProductsBySize,
+    LoadProductsByButtonClick,
+    CATALOG_PRODUCT_LIST_SET_EMPTY,
+} from './../../actions/CatalogProductList'
 
 const EqualHeightElement = dynamic(
     () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
@@ -156,19 +171,25 @@ const MobileSingle = ({
         },
     }
 
+    // Selected Size
+    const [CurrentSize, SetCurrentSize] = useState({
+        value: Prices[0].SizeSlug,
+        label: Prices[0].SizeTitle,
+    })
+
     // If we inited data for react-select, we initialize the react-select itself
     useEffect(() => {
         SetSizeSelector(
             <Select
                 isDisabled={OptionsForSelect.length === 1 ? true : false}
-                // onChange={(data) => {
-                //     SetCurrentSize(data)
-                //     OnSelectSize(data)
-                //     const Size = {}
-                //     Size.value = data.value
-                //     Size.label = data.label
-                //     SetInitialSelectedSize(Size)
-                // }}
+                onChange={(data) => {
+                    SetCurrentSize(data)
+                    OnSelectSize(data)
+                    const Size = {}
+                    Size.value = data.value
+                    Size.label = data.label
+                    SetInitialSelectedSize(Size)
+                }}
                 className="main_filter__selector"
                 classNamePrefix="main_filter__selector--inner"
                 placeholder={
@@ -330,27 +351,6 @@ const MobileSingle = ({
                 SizeID = Prices[i].SizeId
             }
         }
-
-        SetLastSelector(
-            <Select
-                isDisabled={OptionsForSelect.length === 1 ? true : false}
-                onChange={(data) => {
-                    SetCurrentSize(data)
-                    OnSelectSize(data)
-                    const Size = {}
-                    Size.value = data.value
-                    Size.label = data.label
-                    SetInitialSelectedSize(Size)
-                }}
-                className={styles.catalog_product_card__selector}
-                classNamePrefix={styles.catalog_product_card__selector__inner}
-                placeholder={placeholderSize}
-                styles={colourStyles}
-                options={OptionsForSelect}
-                isSearchable={false}
-                autoFocus={false}
-            />
-        )
 
         dispatch({ type: CATALOG_PRODUCT_LIST_SET_EMPTY })
         dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY })

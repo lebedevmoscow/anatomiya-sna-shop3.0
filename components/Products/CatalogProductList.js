@@ -66,46 +66,47 @@ const CatalogProductListForDesktop = ({
     let subIndex = 0
 
     const render = () => {
-        let ElemenetsArray = []
-        let EqualHeightArray = []
-        let Temp = 0
+        if (desktopViewType === 'several') {
+            let ElemenetsArray = []
+            let EqualHeightArray = []
+            let Temp = 0
 
-        const length = firstLoadProducts.ShortProductModels.length
+            const length = firstLoadProducts.ShortProductModels.length
 
-        const rand = Math.floor(
-            (Math.random() * firstLoadProducts.ShortProductModels.length) / 3 +
-                3
-        )
-
-        firstLoadProducts.ShortProductModels.map((product, index) => {
-            const ListSalesList = GetPopupsList(
-                firstLoadProducts.SaleLabels,
-                product.Prices[0].SaleIds
+            const rand = Math.floor(
+                (Math.random() * firstLoadProducts.ShortProductModels.length) /
+                    3 +
+                    3
             )
 
-            const InitialSize = []
-            for (let i = 0; i < product.Prices.length; i++) {
-                if (
-                    product.Prices[i].SizeSlug ===
-                    SelectedSizeRedux.selectedSizeSlug
-                ) {
-                    InitialSize.push(product.Prices[i])
+            firstLoadProducts.ShortProductModels.map((product, index) => {
+                const ListSalesList = GetPopupsList(
+                    firstLoadProducts.SaleLabels,
+                    product.Prices[0].SaleIds
+                )
+
+                const InitialSize = []
+                for (let i = 0; i < product.Prices.length; i++) {
+                    if (
+                        product.Prices[i].SizeSlug ===
+                        SelectedSizeRedux.selectedSizeSlug
+                    ) {
+                        InitialSize.push(product.Prices[i])
+                    }
                 }
-            }
 
-            const Labels = product.ProductLabels
+                const Labels = product.ProductLabels
 
-            const Gifts = GetGiftsList(
-                product.Prices[0].GiftIds,
-                firstLoadProducts.GiftLabels
-            )
+                const Gifts = GetGiftsList(
+                    product.Prices[0].GiftIds,
+                    firstLoadProducts.GiftLabels
+                )
 
-            const OptionsList = GetOptionsList(
-                product.Prices[0].OptionIds,
-                firstLoadProducts.Options
-            )
+                const OptionsList = GetOptionsList(
+                    product.Prices[0].OptionIds,
+                    firstLoadProducts.Options
+                )
 
-            if (desktopViewType === 'several') {
                 ElemenetsArray.push(
                     <DesktopSeveral
                         OptionsList={OptionsList}
@@ -133,9 +134,85 @@ const CatalogProductListForDesktop = ({
                         Gifts={Gifts}
                     />
                 )
-            }
 
-            if (desktopViewType === 'single') {
+                Temp++
+
+                if (length < 21 && Temp % 3 !== 0) {
+                    if (
+                        length - 1 === index &&
+                        (Temp % 3 === 1 || Temp % 3 === 2)
+                    ) {
+                        EqualHeightArray.push(
+                            <EqualHeight key={product.Id}>
+                                {ElemenetsArray}
+                            </EqualHeight>
+                        )
+                    }
+                } else {
+                    if (Temp !== 0 && Temp % 3 === 0) {
+                        subIndex++
+                        if (
+                            subIndex === rand &&
+                            articles &&
+                            articles.length >= 3
+                        ) {
+                            EqualHeightArray.push(
+                                <EqualHeight key={uuidv4()}>
+                                    {Articles}
+                                </EqualHeight>
+                            )
+                        }
+                        EqualHeightArray.push(
+                            <EqualHeight key={product.Id}>
+                                {ElemenetsArray}
+                            </EqualHeight>
+                        )
+                        ElemenetsArray = []
+                        Temp = 0
+                    }
+                }
+                if (Temp !== 0 && Temp % 3 === 0) {
+                    EqualHeightArray.push(
+                        <EqualHeight key={product.Id}>
+                            {ElemenetsArray}
+                        </EqualHeight>
+                    )
+                    ElemenetsArray = []
+                    Temp = 0
+                }
+            })
+            return EqualHeightArray
+        } else if (desktopViewType === 'single') {
+            let ElemenetsArray = []
+
+            firstLoadProducts.ShortProductModels.map((product, index) => {
+                const ListSalesList = GetPopupsList(
+                    firstLoadProducts.SaleLabels,
+                    product.Prices[0].SaleIds
+                )
+
+                const InitialSize = []
+                for (let i = 0; i < product.Prices.length; i++) {
+                    if (
+                        product.Prices[i].SizeSlug ===
+                        SelectedSizeRedux.selectedSizeSlug
+                    ) {
+                        InitialSize.push(product.Prices[i])
+                    }
+                }
+
+                const Labels = product.ProductLabels
+
+                const Gifts = GetGiftsList(
+                    product.Prices[0].GiftIds,
+                    firstLoadProducts.GiftLabels
+                )
+
+                const OptionsList = GetOptionsList(
+                    product.Prices[0].OptionIds,
+                    firstLoadProducts.Options
+                )
+
                 ElemenetsArray.push(
                     <DesktopSingle
                         OptionsList={OptionsList}
@@ -163,47 +240,9 @@ const CatalogProductListForDesktop = ({
                         Gifts={Gifts}
                     />
                 )
-            }
-
-            Temp++
-
-            // if (length < 21 && Temp % 3 !== 0) {
-            //     if (
-            //         length - 1 === index &&
-            //         (Temp % 3 === 1 || Temp % 3 === 2)
-            //     ) {
-            //         EqualHeightArray.push(
-            //             <EqualHeight key={product.Id}>
-            //                 {ElemenetsArray}
-            //             </EqualHeight>
-            //         )
-            //     }
-            // } else {
-            //     if (Temp !== 0 && Temp % 3 === 0) {
-            //         subIndex++
-            //         if (subIndex === rand && articles && articles.length >= 3) {
-            //             EqualHeightArray.push(
-            //                 <EqualHeight key={uuidv4()}>{Articles}</EqualHeight>
-            //             )
-            //         }
-            //         EqualHeightArray.push(
-            //             <EqualHeight key={product.Id}>
-            //                 {ElemenetsArray}
-            //             </EqualHeight>
-            //         )
-            //         ElemenetsArray = []
-            //         Temp = 0
-            //     }
-            // }
-            // if (Temp !== 0 && Temp % 3 === 0) {
-            //     EqualHeightArray.push(
-            //         <EqualHeight key={product.Id}>{ElemenetsArray}</EqualHeight>
-            //     )
-            //     ElemenetsArray = []
-            //     Temp = 0
-            // }
-        })
-        return ElemenetsArray
+            })
+            return ElemenetsArray
+        }
     }
 
     const renderMobile = () => {
