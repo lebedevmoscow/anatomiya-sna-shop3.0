@@ -437,6 +437,10 @@ const CatalogMobileProductList = ({
 
     useEffect(() => {
         if (SelectedSizeReducer.amount !== null) {
+            dispatch(catalogSetPage(1))
+            setPage(1)
+            setData([])
+            setList([])
             setAmount(Math.ceil(SelectedSizeReducer.amount / 20))
         }
     }, [SelectedSizeReducer.amount])
@@ -545,9 +549,9 @@ const CatalogMobileProductList = ({
                 />
             )}
             {firstProductList}
-            {FirstArticles}
+            {/* {FirstArticles} */}
             {list}
-            {Articles}
+            {/* {Articles} */}
             <div
                 onClick={() => {
                     setLastClick('showMore')
