@@ -68,22 +68,6 @@ const CatalogMobileProductList = ({
                 CatalogCommonReducer.filters &&
                 CatalogCommonReducer.filters.length !== 0
             ) {
-                // filterProductsIds,
-                // CatalogCommonReducer.page,
-                // SelectedSizeReducer.sizeId,
-                // catalogSlug,
-                // subCatalogSlug,
-                // oldMin,
-                // oldMax,
-                // filterStatus,
-                // prices,
-                // selectedSize,
-                // null,
-                // true,
-                // activeColors,
-                // selectedActive,
-                // CatalogCommonReducer.topfilter
-
                 dispatch(
                     LoadByFilters(
                         filterProductsIds,
@@ -340,7 +324,8 @@ const CatalogMobileProductList = ({
             dispatch(
                 LoadByFilters(
                     filterProductsIds,
-                    SelectedSizeReducer.amount ? p - 1 : p,
+                    // SelectedSizeReducer.amount ? p - 1 : p,
+                    p,
                     SelectedSizeReducer.selectedSizeId,
                     catalogSlug,
                     subCatalogSlug,
