@@ -534,20 +534,21 @@ const CatalogMobileProductList = ({
     }, [lastClick])
     return (
         <>
-            {CatalogCommonReducer.filters.length === 0 && (
-                <CatalogProductList
-                    catalogSlug={catalogSlug}
-                    subCatalogSlug={subCatalogSlug}
-                    firstLoadProducts={firstLoadProducts}
-                    stylesForViewType={stylesForViewType}
-                    viewType={viewType}
-                    oldMin={filterAPIData.price.min}
-                    oldMax={filterAPIData.price.max}
-                    filterProductsIds={filterProductsIds}
-                    newProducts={newProducts}
-                    IsMobile={true}
-                />
-            )}
+            {!CatalogCommonReducer.amount &&
+                CatalogCommonReducer.filters.length === 0 && (
+                    <CatalogProductList
+                        catalogSlug={catalogSlug}
+                        subCatalogSlug={subCatalogSlug}
+                        firstLoadProducts={firstLoadProducts}
+                        stylesForViewType={stylesForViewType}
+                        viewType={viewType}
+                        oldMin={filterAPIData.price.min}
+                        oldMax={filterAPIData.price.max}
+                        filterProductsIds={filterProductsIds}
+                        newProducts={newProducts}
+                        IsMobile={true}
+                    />
+                )}
             {firstProductList}
             {/* {FirstArticles} */}
             {list}
