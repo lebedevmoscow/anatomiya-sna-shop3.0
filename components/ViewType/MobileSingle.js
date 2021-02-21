@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import styles from './../../styles/components/ViewType/MobileSingle.module.sass'
-import PopupsOnProductCard from './../Popups/PopupsOnProductCard'
+// import PopupsOnProductCard from './../Popups/PopupsOnProductCard'
 import { v4 as uuidv4 } from 'uuid'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,6 +13,11 @@ import { useSelector, useDispatch } from 'react-redux'
 
 const EqualHeightElement = dynamic(
     () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
+    { ssr: false }
+)
+
+const PopupsOnProductCard = dynamic(
+    () => import('./../Popups/PopupsOnProductCard'),
     { ssr: false }
 )
 
@@ -413,7 +418,7 @@ const MobileSingle = ({
 
     return (
         <div className={styles.catalog_product_card}>
-            {/* <PopupsOnProductCard
+            <PopupsOnProductCard
                 Labels={Labels}
                 SalePercent={SalePercent}
                 key={uuidv4()}
@@ -421,7 +426,7 @@ const MobileSingle = ({
                 IsMobile={IsMobile}
                 desktopViewType={desktopViewType}
                 Gifts={Gifts}
-            /> */}
+            />
             <div className={styles.catalog_product_card__column}>
                 <div
                     className={

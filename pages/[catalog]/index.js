@@ -14,7 +14,7 @@ import CatalogLeftMobile from './../../components/Mobile/CatalogLeftMobile'
 import CatalogProductList from './../../components/Products/CatalogProductList'
 import LoadMoreButton from './../../components/Button/LoadMoreButton'
 import CatalogPagination from '../../components/Pagination/CatalogPagination'
-import CatalogHelpPickUp from '../../components/Catalog/CatalogHelpPickUp'
+// import CatalogHelpPickUp from '../../components/Catalog/CatalogHelpPickUp'
 // import CatalogMobileReview from './../../components/Reviews/CatalogMobileReviews'
 import CatalogLeftFilter from '../../components/Filters/CatalogLeftFilter'
 import CatalogRight from '../../components/Catalog/CatalogRight'
@@ -52,6 +52,11 @@ const SwiperAssurenaces = dynamic(
 
 const MobileFooter = dynamic(
     () => import('../../components/Mobile/MobieFooter'),
+    { ssr: true }
+)
+
+const CatalogHelpPickUp = dynamic(
+    () => import('../../components/Catalog/CatalogHelpPickUp'),
     { ssr: true }
 )
 
@@ -213,11 +218,11 @@ const CatalogPage = ({
                 </div>
             )}
 
-            {/* {IsMobile && breakpoint1023 && (
+            {IsMobile && breakpoint1023 && (
                 <div className={common_styles.mobile_help_pickup}>
                     <CatalogHelpPickUp />
                 </div>
-            )} */}
+            )}
             {IsMobile && (
                 <div className={common_styles.container}>
                     <div className={common_styles.catalog_mobile_reviews_title}>
