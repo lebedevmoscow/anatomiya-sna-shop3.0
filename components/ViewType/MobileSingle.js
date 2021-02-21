@@ -433,7 +433,11 @@ const MobileSingle = ({
                         styles.catalog_product_card__image_wraper_several
                     }
                 >
-                    <Image layout="fill" src={MainImage.FilePath} />
+                    <img
+                        style={{ width: '100%' }}
+                        src={MainImage.FilePath}
+                    ></img>
+                    {/* <Image layout="fill" src={MainImage.FilePath} /> */}
                 </div>
                 <div className={styles.catalog_product_card__smalltext}>
                     Купить {CatalogType}
