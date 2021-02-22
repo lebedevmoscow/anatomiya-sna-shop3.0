@@ -1,6 +1,17 @@
+import { useEffect } from 'react'
 import styles from './../../styles/components/Modal/index.module.sass'
 
 const Modal = ({ title, closed, text, onClose, html }) => {
+    const hasWindow = typeof window !== 'undefined'
+
+    useEffect(() => {
+        if (!closed && hasWindow) {
+            document.querySelector('html').style.overflowY = 'hidden'
+        } else {
+            document.querySelector('html').style.overflowY = 'visible'
+        }
+    }, [closed])
+
     return (
         <div
             style={closed ? { display: 'none' } : { display: 'block' }}
