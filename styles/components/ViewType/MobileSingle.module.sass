@@ -13,6 +13,7 @@
     position: relative
     margin-top: 5px
     margin-left: 3.3px
+    z-index: 1
     &:nth-child(3n)
         margin-right: 0
 
@@ -124,7 +125,7 @@
         margin-top: 5px
 
     .wrap_single
-        width: 191px
+        width: 100%
 
     .catalog_product_card__price_credit
         font-size: 11px
@@ -189,7 +190,7 @@
         color: #444444
 
     .catalog_product_card__selector
-        z-index: 1
+        z-index: auto
         color: #444
         margin-top: 7px
         position: relative
@@ -406,7 +407,7 @@
 
     .after_title
         position: relative
-        z-index: 7
+        // z-index: 7
         margin-top: 0px
 
     .catalog_product_card__desktop_view_type__single__second
@@ -463,7 +464,7 @@
 @media screen and ( max-width: 768px )
 
     .catalog_product_card
-        width: 46.8%
+        width: 45.8%
         margin-top: 5px
         margin-left: 2.8px
 
@@ -549,7 +550,7 @@
         .catalog_product_card__info_button
             padding: 11px 20px
             font-size: 14px
-            width: 63%
+            // width: 63%
 
         .line
             margin-top: 10px
@@ -654,3 +655,13 @@
             left: 14%
             top: -12%
             transform: scale(0.25) translateX(-42px) translateY(-71px)
+
+@media screen and ( max-width: 450px )
+
+    .catalog_product_card
+        width: 100%
+        margin-top: 5px
+        margin-left: 2.8px
+
+        .wrap_single
+            width: 191px

@@ -44,7 +44,10 @@ const Modal = ({
                     <div className={styles.text}>{text || html}</div>
                     {IsMore && (
                         <div className={styles.buttons}>
-                            <button className={styles.button__more}>
+                            <button
+                                onClick={() => onClose()}
+                                className={styles.button__more}
+                            >
                                 Готово
                             </button>
                         </div>

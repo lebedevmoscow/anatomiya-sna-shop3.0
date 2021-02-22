@@ -146,6 +146,16 @@
                 transform: rotate(360deg)
                 color: #000
 
+@media screen and ( max-width: 1250px )
+
+    .main_navigation
+        .main_navigation__list
+            li
+                white-space: nowrap
+                padding-right: 23px
+                .arrow
+                    right: -10px
+
 @media screen and ( max-width: 1120px )
 
     .main_navigation
@@ -158,7 +168,12 @@
             left: 50%
             transform: translateX(-50%)
         .main_navigation__list li
+            white-space: nowrap
             font-size: 10px
+            padding-right: 29px
+
+            .arrow
+                right: 0px
 
 @media screen and ( max-width: 1024px )
 

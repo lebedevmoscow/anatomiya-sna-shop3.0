@@ -88,7 +88,6 @@ const DesktopSingle = ({
                     fontSize: IsMobile ? '12px' : '',
                     textAlign: 'center',
                     height: !IsMobile ? '50px' : '40px',
-                    zIndex: '11',
                 }
             } else {
                 return {
@@ -100,7 +99,6 @@ const DesktopSingle = ({
                     padding: !IsMobile ? '7px 0px 7px 7px' : '1px 0',
                     textAlign: 'center',
                     height: !IsMobile ? '50px' : '40px',
-                    zIndex: '11',
                 }
             }
         },
@@ -108,7 +106,7 @@ const DesktopSingle = ({
         container: (styles) => {
             return {
                 ...styles,
-                zIndex: 11,
+                zIndex: 0,
             }
         },
         option: (styles, { isFocused }) => {

@@ -40,12 +40,15 @@ const CatalogMobileReviews = ({ rev }) => {
                 {rev.productTitle}
             </div>
             <div className={styles.catalog_mobile_review_section__image}>
-                <Image
+                {/* <Image
                     layout={'fill'}
                     src={'https://anatomiyasna.ru' + rev.productImage}
-                />
+                /> */}
                 {/* //{' '} */}
-                {/* <img src={'https://anatomiyasna.ru' + rev.productImage}></img> */}
+                <img
+                    style={{ height: '100%', width: '100%' }}
+                    src={'https://anatomiyasna.ru' + rev.productImage}
+                ></img>
             </div>
             <div className={styles.catalog_mobile_review_section__price}>
                 {PriceDiff !== 0 && (

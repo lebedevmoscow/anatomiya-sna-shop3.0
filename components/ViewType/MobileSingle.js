@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import styles from './../../styles/components/ViewType/MobileSingle.module.sass'
 // import PopupsOnProductCard from './../Popups/PopupsOnProductCard'
 import { v4 as uuidv4 } from 'uuid'
@@ -7,7 +7,9 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import Select from 'react-select'
 import StatsImage from './../../assets/svg/stats.svg'
+import WhiteStatsImage from './../../assets/svg/white-stats.svg'
 import HeartImage from './../../assets/svg/heart.svg'
+import WhiteHeartImage from './../../assets/svg/white-heart.svg'
 import CarImage from './../../assets/svg/car.svg'
 import { CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY } from './../../actions/NewCatalogProductList'
 import { SelectSize } from './../../actions/SelectedSize'
@@ -79,6 +81,15 @@ const MobileSingle = ({
     )
     const SelectedSizeRedux = useSelector((store) => store.SelectedSizeReducer)
 
+    // Selected Size
+    const [CurrentSize, SetCurrentSize] = useState({
+        value: Prices[0].SizeSlug,
+        label: Prices[0].SizeTitle,
+    })
+
+    const [isFavorite, setIsFavorite] = useState(false)
+    const [isCompared, setIsCompared] = useState(false)
+
     // Style for react-select
     const colourStyles = {
         control: (styles) => {
@@ -90,7 +101,6 @@ const MobileSingle = ({
                     fontSize: IsMobile ? '12px' : '',
                     textAlign: 'center',
                     height: !IsMobile ? '50px' : '40px',
-                    zIndex: '11',
                 }
             } else {
                 return {
@@ -102,7 +112,6 @@ const MobileSingle = ({
                     padding: !IsMobile ? '7px 0px 7px 7px' : '1px 0',
                     textAlign: 'center',
                     height: !IsMobile ? '50px' : '40px',
-                    zIndex: '11',
                 }
             }
         },
@@ -110,7 +119,7 @@ const MobileSingle = ({
         container: (styles) => {
             return {
                 ...styles,
-                zIndex: 11,
+                zIndex: 0,
             }
         },
         option: (styles, { isFocused }) => {
@@ -171,12 +180,6 @@ const MobileSingle = ({
         },
     }
 
-    // Selected Size
-    const [CurrentSize, SetCurrentSize] = useState({
-        value: Prices[0].SizeSlug,
-        label: Prices[0].SizeTitle,
-    })
-
     // If we inited data for react-select, we initialize the react-select itself
     useEffect(() => {
         SetSizeSelector(
@@ -233,24 +236,23 @@ const MobileSingle = ({
     }, [InitialSize.length])
 
     const onAddToFavoriteClickHandler = () => {
+        const Price =
+            InitialSize.length !== 0
+                ? InitialSize[0].PriceDiscount
+                : Prices[0].PriceDiscount
+        const PriceId =
+            InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
+        const SizeSlug =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeSlug
+                : CurrentSize.value
+        const SizeLabel =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeTitle
+                : CurrentSize.label
+
         if (!isFavorite) {
             setIsFavorite(true)
-            FavoriteRef.current.style.display = 'block'
-
-            const Price =
-                InitialSize.length !== 0
-                    ? InitialSize[0].PriceDiscount
-                    : Prices[0].PriceDiscount
-            const PriceId =
-                InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
-            const SizeSlug =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeSlug
-                    : CurrentSize.value
-            const SizeLabel =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeTitle
-                    : CurrentSize.label
 
             dispatch(
                 AddProductToFavoriteList(
@@ -266,9 +268,6 @@ const MobileSingle = ({
                     PriceId
                 )
             )
-            setTimeout(() => {
-                FavoriteRef.current.style.display = 'none'
-            }, 1500)
         } else {
             setIsFavorite(false)
             dispatch(
@@ -289,23 +288,23 @@ const MobileSingle = ({
     }
 
     const onAddToCompareClickHandler = () => {
+        const Price =
+            InitialSize.length !== 0
+                ? InitialSize[0].PriceDiscount
+                : Prices[0].PriceDiscount
+        const PriceId =
+            InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
+        const SizeSlug =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeSlug
+                : CurrentSize.value
+        const SizeLabel =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeTitle
+                : CurrentSize.label
+
         if (!isCompared) {
             setIsCompared(true)
-            CompareRef.current.style.display = 'block'
-            const Price =
-                InitialSize.length !== 0
-                    ? InitialSize[0].PriceDiscount
-                    : Prices[0].PriceDiscount
-            const PriceId =
-                InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
-            const SizeSlug =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeSlug
-                    : CurrentSize.value
-            const SizeLabel =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeTitle
-                    : CurrentSize.label
 
             dispatch(
                 AddProductToCompareList(
@@ -321,9 +320,6 @@ const MobileSingle = ({
                     PriceId
                 )
             )
-            setTimeout(() => {
-                CompareRef.current.style.display = 'none'
-            }, 1500)
         } else {
             setIsCompared(false)
             dispatch(
@@ -434,7 +430,11 @@ const MobileSingle = ({
                     }
                 >
                     <img
-                        style={{ width: '100%' }}
+                        style={{
+                            width: '95%',
+                            display: 'block',
+                            margin: '0 auto',
+                        }}
                         src={MainImage.FilePath}
                     ></img>
                     {/* <Image layout="fill" src={MainImage.FilePath} /> */}
@@ -495,47 +495,6 @@ const MobileSingle = ({
                             }
                         >
                             В рассрочку от {Math.ceil(PriceRaw / 6)} руб/мес
-                        </div>
-                    </div>
-
-                    <div
-                        className={
-                            styles.catalog_product_card__price_block_right
-                        }
-                    >
-                        <div
-                            className={styles.catalog_product_card__stat_block}
-                        >
-                            <div
-                                className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
-                            >
-                                Товар добавлен в{' '}
-                                <Link href="/">Сравнение!</Link>
-                            </div>
-                            <div className={styles.stats}>
-                                <Image
-                                    src={StatsImage}
-                                    width={24}
-                                    height={24}
-                                />
-                            </div>
-                        </div>
-                        <div
-                            className={styles.catalog_product_card__stat_block}
-                        >
-                            <div
-                                className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
-                            >
-                                Товар добавлен в{' '}
-                                <Link href="/">Избранное!</Link>
-                            </div>
-                            <div className={styles.heart}>
-                                <Image
-                                    src={HeartImage}
-                                    width={24}
-                                    height={24}
-                                />
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -699,24 +658,64 @@ const MobileSingle = ({
                     </div>
 
                     <div className={styles.mobile__btns}>
-                        <div className={styles.mobile__btns__item}>
+                        <div
+                            onClick={() => onAddToCompareClickHandler()}
+                            style={
+                                !isCompared
+                                    ? {
+                                          background: '#fff',
+                                      }
+                                    : { background: '#0CA5D3' }
+                            }
+                            className={styles.mobile__btns__item}
+                        >
                             <div className={styles.mobile__btns__image_wrapper}>
-                                <Image
-                                    src={StatsImage}
-                                    width={25}
-                                    height={25}
-                                    className={styles.mobile__btns__image}
-                                />
+                                {isCompared && (
+                                    <Image
+                                        src={WhiteStatsImage}
+                                        width={25}
+                                        height={25}
+                                        className={styles.mobile__btns__image}
+                                    />
+                                )}
+                                {!isCompared && (
+                                    <Image
+                                        src={StatsImage}
+                                        width={25}
+                                        height={25}
+                                        className={styles.mobile__btns__image}
+                                    />
+                                )}
                             </div>
                         </div>
-                        <div className={styles.mobile__btns__item}>
+                        <div
+                            onClick={() => onAddToFavoriteClickHandler()}
+                            style={
+                                !isFavorite
+                                    ? {
+                                          background: '#fff',
+                                      }
+                                    : { background: '#0CA5D3' }
+                            }
+                            className={styles.mobile__btns__item}
+                        >
                             <div className={styles.mobile__btns__image_wrapper}>
-                                <Image
-                                    src={HeartImage}
-                                    width={25}
-                                    height={25}
-                                    className={styles.mobile__btns__image}
-                                />
+                                {isFavorite && (
+                                    <Image
+                                        src={WhiteHeartImage}
+                                        width={25}
+                                        height={25}
+                                        className={styles.mobile__btns__image}
+                                    />
+                                )}
+                                {!isFavorite && (
+                                    <Image
+                                        src={HeartImage}
+                                        width={25}
+                                        height={25}
+                                        className={styles.mobile__btns__image}
+                                    />
+                                )}
                             </div>
                         </div>
                     </div>

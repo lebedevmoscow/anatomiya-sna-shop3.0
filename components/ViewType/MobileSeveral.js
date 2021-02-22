@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import styles from './../../styles/components/ViewType/MobileSeveral.module.sass'
 // import PopupsOnProductCard from './../Popups/PopupsOnProductCard'
 import { v4 as uuidv4 } from 'uuid'
@@ -7,9 +7,20 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import Select from 'react-select'
 import StatsImage from './../../assets/svg/stats.svg'
+import WhiteStatsImage from './../../assets/svg/white-stats.svg'
 import HeartImage from './../../assets/svg/heart.svg'
+import WhiteHeartImage from './../../assets/svg/white-heart.svg'
 import CarImage from './../../assets/svg/car.svg'
+
 import { useSelector, useDispatch } from 'react-redux'
+import {
+    AddProductToFavoriteList,
+    RemoveProductFromFavoriteList,
+} from './../../actions/FavoritesProductsList'
+import {
+    AddProductToCompareList,
+    RemoveProductFromCompareList,
+} from './../../actions/CompareProductsList'
 
 const EqualHeightElement = dynamic(
     () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
@@ -64,6 +75,19 @@ const MobileSeveral = ({
     )
     const SelectedSizeRedux = useSelector((store) => store.SelectedSizeReducer)
 
+    // Selected Size
+    const [CurrentSize, SetCurrentSize] = useState({
+        value: Prices[0].SizeSlug,
+        label: Prices[0].SizeTitle,
+    })
+
+    const [isFavorite, setIsFavorite] = useState(false)
+    const [isCompared, setIsCompared] = useState(false)
+
+    // Refs
+    const FavoriteRef = useRef(null)
+    const CompareRef = useRef(null)
+
     // Style for react-select
     const colourStyles = {
         control: (styles) => {
@@ -75,7 +99,6 @@ const MobileSeveral = ({
                     fontSize: IsMobile ? '12px' : '',
                     textAlign: 'center',
                     height: !IsMobile ? '50px' : '40px',
-                    zIndex: '11',
                 }
             } else {
                 return {
@@ -87,7 +110,6 @@ const MobileSeveral = ({
                     padding: !IsMobile ? '7px 0px 7px 7px' : '1px 0',
                     textAlign: 'center',
                     height: !IsMobile ? '50px' : '40px',
-                    zIndex: '11',
                 }
             }
         },
@@ -95,7 +117,7 @@ const MobileSeveral = ({
         container: (styles) => {
             return {
                 ...styles,
-                zIndex: 11,
+                zIndex: 0,
             }
         },
         option: (styles, { isFocused }) => {
@@ -212,24 +234,23 @@ const MobileSeveral = ({
     }, [InitialSize.length])
 
     const onAddToFavoriteClickHandler = () => {
+        const Price =
+            InitialSize.length !== 0
+                ? InitialSize[0].PriceDiscount
+                : Prices[0].PriceDiscount
+        const PriceId =
+            InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
+        const SizeSlug =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeSlug
+                : CurrentSize.value
+        const SizeLabel =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeTitle
+                : CurrentSize.label
+
         if (!isFavorite) {
             setIsFavorite(true)
-            FavoriteRef.current.style.display = 'block'
-
-            const Price =
-                InitialSize.length !== 0
-                    ? InitialSize[0].PriceDiscount
-                    : Prices[0].PriceDiscount
-            const PriceId =
-                InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
-            const SizeSlug =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeSlug
-                    : CurrentSize.value
-            const SizeLabel =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeTitle
-                    : CurrentSize.label
 
             dispatch(
                 AddProductToFavoriteList(
@@ -245,9 +266,6 @@ const MobileSeveral = ({
                     PriceId
                 )
             )
-            setTimeout(() => {
-                FavoriteRef.current.style.display = 'none'
-            }, 1500)
         } else {
             setIsFavorite(false)
             dispatch(
@@ -268,23 +286,23 @@ const MobileSeveral = ({
     }
 
     const onAddToCompareClickHandler = () => {
+        const Price =
+            InitialSize.length !== 0
+                ? InitialSize[0].PriceDiscount
+                : Prices[0].PriceDiscount
+        const PriceId =
+            InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
+        const SizeSlug =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeSlug
+                : CurrentSize.value
+        const SizeLabel =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeTitle
+                : CurrentSize.label
+
         if (!isCompared) {
             setIsCompared(true)
-            CompareRef.current.style.display = 'block'
-            const Price =
-                InitialSize.length !== 0
-                    ? InitialSize[0].PriceDiscount
-                    : Prices[0].PriceDiscount
-            const PriceId =
-                InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
-            const SizeSlug =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeSlug
-                    : CurrentSize.value
-            const SizeLabel =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeTitle
-                    : CurrentSize.label
 
             dispatch(
                 AddProductToCompareList(
@@ -300,9 +318,6 @@ const MobileSeveral = ({
                     PriceId
                 )
             )
-            setTimeout(() => {
-                CompareRef.current.style.display = 'none'
-            }, 1500)
         } else {
             setIsCompared(false)
             dispatch(
@@ -676,36 +691,70 @@ const MobileSeveral = ({
                             </div>
 
                             <div className={styles.mobile__btns}>
-                                <div className={styles.mobile__btns__item}>
+                                <div
+                                    onClick={() => onAddToCompareClickHandler()}
+                                    style={
+                                        !isCompared
+                                            ? {
+                                                  background: '#fff',
+                                              }
+                                            : { background: '#0CA5D3' }
+                                    }
+                                    className={styles.mobile__btns__item}
+                                >
                                     <div
                                         className={
                                             styles.mobile__btns__image_wrapper
                                         }
                                     >
-                                        <Image
-                                            src={StatsImage}
-                                            width={25}
-                                            height={25}
-                                            className={
-                                                styles.mobile__btns__image
-                                            }
-                                        />
+                                        {isCompared && (
+                                            <Image
+                                                src={WhiteStatsImage}
+                                                width={24}
+                                                height={24}
+                                            />
+                                        )}
+                                        {!isCompared && (
+                                            <Image
+                                                src={StatsImage}
+                                                width={24}
+                                                height={24}
+                                            />
+                                        )}
                                     </div>
                                 </div>
-                                <div className={styles.mobile__btns__item}>
+                                <div
+                                    onClick={() =>
+                                        onAddToFavoriteClickHandler()
+                                    }
+                                    style={
+                                        !isFavorite
+                                            ? {
+                                                  background: '#fff',
+                                              }
+                                            : { background: '#0CA5D3' }
+                                    }
+                                    className={styles.mobile__btns__item}
+                                >
                                     <div
                                         className={
                                             styles.mobile__btns__image_wrapper
                                         }
                                     >
-                                        <Image
-                                            src={HeartImage}
-                                            width={25}
-                                            height={25}
-                                            className={
-                                                styles.mobile__btns__image
-                                            }
-                                        />
+                                        {isFavorite && (
+                                            <Image
+                                                src={WhiteHeartImage}
+                                                width={24}
+                                                height={24}
+                                            />
+                                        )}
+                                        {!isFavorite && (
+                                            <Image
+                                                src={HeartImage}
+                                                width={24}
+                                                height={24}
+                                            />
+                                        )}
                                     </div>
                                 </div>
                             </div>

@@ -267,7 +267,11 @@ const CatalogPage = ({
                     </div>
                 </div>
             )}
-            {IsMobile && <SwiperAssurenaces />}
+            {IsMobile && (
+                <div style={{ marginTop: '25px' }}>
+                    <SwiperAssurenaces />
+                </div>
+            )}
             {!IsMobile && <Subscribe />}
             {IsMobile && <MobileFooter />}
             {!IsMobile && <Footer />}
