@@ -61,6 +61,8 @@ const PopupOnProductCard = ({
                 {/* Modals */}
                 {Mobile && (
                     <Modal
+                        Popup={true}
+                        IsMore={false}
                         title={ListSaleItem.data.Title}
                         text={ListSaleItem.data.Text}
                         onClose={() => SetPopupIsClosed(true)}
@@ -160,7 +162,13 @@ const PopupOnProductCard = ({
         return (
             <>
                 {/* Modals */}
-                {Mobile && <Modal title={ListSaleItem.Title} />}
+                {Mobile && (
+                    <Modal
+                        Popup={true}
+                        IsMore={false}
+                        title={ListSaleItem.Title}
+                    />
+                )}
 
                 <li
                     style={{
