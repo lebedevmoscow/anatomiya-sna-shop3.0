@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import styles from './../../styles/components/ViewType/DesktopSingle.module.sass'
 import PopupsOnProductCard from './../Popups/PopupsOnProductCard'
 import { v4 as uuidv4 } from 'uuid'
@@ -7,14 +7,19 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import Select from 'react-select'
 import StatsImage from './../../assets/svg/stats.svg'
+import WhiteStatsImage from './../../assets/svg/white-stats.svg'
 import HeartImage from './../../assets/svg/heart.svg'
+import WhiteHeartImage from './../../assets/svg/white-heart.svg'
 import CarImage from './../../assets/svg/car.svg'
 import { useSelector, useDispatch } from 'react-redux'
-
-const EqualHeightElement = dynamic(
-    () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
-    { ssr: false }
-)
+import {
+    AddProductToFavoriteList,
+    RemoveProductFromFavoriteList,
+} from './../../actions/FavoritesProductsList'
+import {
+    AddProductToCompareList,
+    RemoveProductFromCompareList,
+} from './../../actions/CompareProductsList'
 
 const DesktopSingle = ({
     BrandTitle,
@@ -41,6 +46,10 @@ const DesktopSingle = ({
     Labels,
     Gifts,
 }) => {
+    // Refs
+    const FavoriteRef = useRef(null)
+    const CompareRef = useRef(null)
+
     const [SizeSelector, SetSizeSelector] = useState(null)
     const [InitialSelectedSize, SetInitialSelectedSize] = useState({
         value: '',
@@ -49,6 +58,15 @@ const DesktopSingle = ({
     const [OptionsForSelect, SetOptionsForSelect] = useState([
         { value: '', label: '' },
     ])
+
+    // Selected Size
+    const [CurrentSize, SetCurrentSize] = useState({
+        value: Prices[0].SizeSlug,
+        label: Prices[0].SizeTitle,
+    })
+
+    const [isFavorite, setIsFavorite] = useState(false)
+    const [isCompared, setIsCompared] = useState(false)
 
     const dispatch = useDispatch()
     const FavoriteListRedux = useSelector(
@@ -207,24 +225,24 @@ const DesktopSingle = ({
     }, [InitialSize.length])
 
     const onAddToFavoriteClickHandler = () => {
+        const Price =
+            InitialSize.length !== 0
+                ? InitialSize[0].PriceDiscount
+                : Prices[0].PriceDiscount
+        const PriceId =
+            InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
+        const SizeSlug =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeSlug
+                : CurrentSize.value
+        const SizeLabel =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeTitle
+                : CurrentSize.label
+
         if (!isFavorite) {
             setIsFavorite(true)
             FavoriteRef.current.style.display = 'block'
-
-            const Price =
-                InitialSize.length !== 0
-                    ? InitialSize[0].PriceDiscount
-                    : Prices[0].PriceDiscount
-            const PriceId =
-                InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
-            const SizeSlug =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeSlug
-                    : CurrentSize.value
-            const SizeLabel =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeTitle
-                    : CurrentSize.label
 
             dispatch(
                 AddProductToFavoriteList(
@@ -263,23 +281,24 @@ const DesktopSingle = ({
     }
 
     const onAddToCompareClickHandler = () => {
+        const Price =
+            InitialSize.length !== 0
+                ? InitialSize[0].PriceDiscount
+                : Prices[0].PriceDiscount
+        const PriceId =
+            InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
+        const SizeSlug =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeSlug
+                : CurrentSize.value
+        const SizeLabel =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeTitle
+                : CurrentSize.label
+
         if (!isCompared) {
             setIsCompared(true)
             CompareRef.current.style.display = 'block'
-            const Price =
-                InitialSize.length !== 0
-                    ? InitialSize[0].PriceDiscount
-                    : Prices[0].PriceDiscount
-            const PriceId =
-                InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
-            const SizeSlug =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeSlug
-                    : CurrentSize.value
-            const SizeLabel =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeTitle
-                    : CurrentSize.label
 
             dispatch(
                 AddProductToCompareList(
@@ -495,37 +514,73 @@ const DesktopSingle = ({
                         }
                     >
                         <div
+                            onClick={() => onAddToCompareClickHandler()}
                             className={styles.catalog_product_card__stat_block}
+                            style={
+                                !isCompared
+                                    ? {
+                                          background: '#fff',
+                                      }
+                                    : { background: '#0CA5D3' }
+                            }
                         >
                             <div
+                                ref={CompareRef}
                                 className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
                             >
                                 Товар добавлен в{' '}
                                 <Link href="/">Сравнение!</Link>
                             </div>
                             <div className={styles.stats}>
-                                <Image
-                                    src={StatsImage}
-                                    width={24}
-                                    height={24}
-                                />
+                                {!isCompared && (
+                                    <Image
+                                        src={StatsImage}
+                                        width={24}
+                                        height={24}
+                                    />
+                                )}
+                                {isCompared && (
+                                    <Image
+                                        src={WhiteStatsImage}
+                                        width={24}
+                                        height={24}
+                                    />
+                                )}
                             </div>
                         </div>
                         <div
+                            onClick={() => onAddToFavoriteClickHandler()}
                             className={styles.catalog_product_card__stat_block}
+                            style={
+                                !isFavorite
+                                    ? {
+                                          background: '#fff',
+                                      }
+                                    : { background: '#0CA5D3' }
+                            }
                         >
                             <div
+                                ref={FavoriteRef}
                                 className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
                             >
                                 Товар добавлен в{' '}
                                 <Link href="/">Избранное!</Link>
                             </div>
                             <div className={styles.heart}>
-                                <Image
-                                    src={HeartImage}
-                                    width={24}
-                                    height={24}
-                                />
+                                {!isFavorite && (
+                                    <Image
+                                        src={HeartImage}
+                                        width={24}
+                                        height={24}
+                                    />
+                                )}
+                                {isFavorite && (
+                                    <Image
+                                        src={WhiteHeartImage}
+                                        width={24}
+                                        height={24}
+                                    />
+                                )}
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import styles from './../../styles/components/ViewType/DesktopSeveral.module.sass'
 import PopupsOnProductCard from './../Popups/PopupsOnProductCard'
 import { v4 as uuidv4 } from 'uuid'
@@ -7,9 +7,19 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import Select from 'react-select'
 import StatsImage from './../../assets/svg/stats.svg'
+import WhiteStatsImage from './../../assets/svg/white-stats.svg'
 import HeartImage from './../../assets/svg/heart.svg'
+import WhiteHeartImage from './../../assets/svg/white-heart.svg'
 import CarImage from './../../assets/svg/car.svg'
 import { useSelector, useDispatch } from 'react-redux'
+import {
+    AddProductToFavoriteList,
+    RemoveProductFromFavoriteList,
+} from './../../actions/FavoritesProductsList'
+import {
+    AddProductToCompareList,
+    RemoveProductFromCompareList,
+} from './../../actions/CompareProductsList'
 
 const EqualHeightElement = dynamic(
     () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
@@ -49,6 +59,19 @@ const DesktopSeveral = ({
     const [OptionsForSelect, SetOptionsForSelect] = useState([
         { value: '', label: '' },
     ])
+
+    // Selected Size
+    const [CurrentSize, SetCurrentSize] = useState({
+        value: Prices[0].SizeSlug,
+        label: Prices[0].SizeTitle,
+    })
+
+    const [isFavorite, setIsFavorite] = useState(false)
+    const [isCompared, setIsCompared] = useState(false)
+
+    // Refs
+    const FavoriteRef = useRef(null)
+    const CompareRef = useRef(null)
 
     const dispatch = useDispatch()
     const FavoriteListRedux = useSelector(
@@ -156,14 +179,14 @@ const DesktopSeveral = ({
         SetSizeSelector(
             <Select
                 isDisabled={OptionsForSelect.length === 1 ? true : false}
-                // onChange={(data) => {
-                //     SetCurrentSize(data)
-                //     OnSelectSize(data)
-                //     const Size = {}
-                //     Size.value = data.value
-                //     Size.label = data.label
-                //     SetInitialSelectedSize(Size)
-                // }}
+                onChange={(data) => {
+                    SetCurrentSize(data)
+                    OnSelectSize(data)
+                    const Size = {}
+                    Size.value = data.value
+                    Size.label = data.label
+                    SetInitialSelectedSize(Size)
+                }}
                 className="main_filter__selector"
                 classNamePrefix="main_filter__selector--inner"
                 placeholder={
@@ -206,25 +229,57 @@ const DesktopSeveral = ({
         SetOptionsForSelect(clone)
     }, [InitialSize.length])
 
+    // Load blue background for button if products is favorited
+    useEffect(() => {
+        if (FavoriteListRedux.total && FavoriteListRedux.total.length !== 0) {
+            let flag = false
+            FavoriteListRedux.total.map((item) => {
+                if (item.ProductId === Id) {
+                    flag = true
+                    setIsFavorite(true)
+                }
+            })
+            if (!flag) {
+                setIsFavorite(false)
+            }
+        }
+    }, [FavoriteListRedux])
+
+    // Load blue background for button if products is compared
+    useEffect(() => {
+        if (CompareListRedux.total && CompareListRedux.total.length !== 0) {
+            let flag = false
+            CompareListRedux.total.map((item) => {
+                if (item.ProductId === Id) {
+                    flag = true
+                    setIsCompared(true)
+                }
+            })
+            if (!flag) {
+                setIsCompared(false)
+            }
+        }
+    }, [CompareListRedux])
+
     const onAddToFavoriteClickHandler = () => {
+        const Price =
+            InitialSize.length !== 0
+                ? InitialSize[0].PriceDiscount
+                : Prices[0].PriceDiscount
+        const PriceId =
+            InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
+        const SizeSlug =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeSlug
+                : CurrentSize.value
+        const SizeLabel =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeTitle
+                : CurrentSize.label
+
         if (!isFavorite) {
             setIsFavorite(true)
             FavoriteRef.current.style.display = 'block'
-
-            const Price =
-                InitialSize.length !== 0
-                    ? InitialSize[0].PriceDiscount
-                    : Prices[0].PriceDiscount
-            const PriceId =
-                InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
-            const SizeSlug =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeSlug
-                    : CurrentSize.value
-            const SizeLabel =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeTitle
-                    : CurrentSize.label
 
             dispatch(
                 AddProductToFavoriteList(
@@ -263,23 +318,24 @@ const DesktopSeveral = ({
     }
 
     const onAddToCompareClickHandler = () => {
+        const Price =
+            InitialSize.length !== 0
+                ? InitialSize[0].PriceDiscount
+                : Prices[0].PriceDiscount
+        const PriceId =
+            InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
+        const SizeSlug =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeSlug
+                : CurrentSize.value
+        const SizeLabel =
+            InitialSize.length !== 0
+                ? InitialSize[0].SizeTitle
+                : CurrentSize.label
+
         if (!isCompared) {
             setIsCompared(true)
             CompareRef.current.style.display = 'block'
-            const Price =
-                InitialSize.length !== 0
-                    ? InitialSize[0].PriceDiscount
-                    : Prices[0].PriceDiscount
-            const PriceId =
-                InitialSize.length !== 0 ? InitialSize[0].Id : Prices[0].Id
-            const SizeSlug =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeSlug
-                    : CurrentSize.value
-            const SizeLabel =
-                InitialSize.length !== 0
-                    ? InitialSize[0].SizeTitle
-                    : CurrentSize.label
 
             dispatch(
                 AddProductToCompareList(
@@ -428,7 +484,11 @@ const DesktopSeveral = ({
                         styles.catalog_product_card__image_wraper_several
                     }
                 >
-                    <Image width={275} height={172} src={MainImage.FilePath} />
+                    <img
+                        style={{ width: '100%' }}
+                        src={MainImage.FilePath}
+                    ></img>
+                    {/* <Image width={275} height={172} src={MainImage.FilePath} /> */}
                 </div>
                 <div className={styles.catalog_product_card__smalltext}>
                     Купить {CatalogType}
@@ -442,104 +502,151 @@ const DesktopSeveral = ({
                     </div>
                 </EqualHeightElement>
             </div>
-            <EqualHeightElement name="CatalogProductCard__Price">
-                <div className={`${styles.after_title}`}>
-                    <div className={styles.catalog_product_card__price_block}>
+            <div className={styles.pricewrap}>
+                <EqualHeightElement name="CatalogProductCard__Price">
+                    <div className={`${styles.after_title}`}>
                         <div
-                            className={
-                                styles.catalog_product_card__price_block_left
-                            }
+                            className={styles.catalog_product_card__price_block}
                         >
-                            {PriceDiff !== 0 && (
-                                <div
-                                    className={
-                                        styles.product_card__price_discount
-                                    }
-                                >
+                            <div
+                                className={
+                                    styles.catalog_product_card__price_block_left
+                                }
+                            >
+                                {PriceDiff !== 0 && (
                                     <div
                                         className={
-                                            styles.product_card__price_prev
+                                            styles.product_card__price_discount
                                         }
                                     >
-                                        <span>
-                                            {PriceOld.toString().replace(
-                                                /\B(?=(\d{3})+(?!\d))/g,
-                                                ' '
-                                            )}
-                                            <div
-                                                className={
-                                                    styles.product_card__price_diff
-                                                }
-                                            >
-                                                -
-                                                {PriceDiff.toString().replace(
+                                        <div
+                                            className={
+                                                styles.product_card__price_prev
+                                            }
+                                        >
+                                            <span>
+                                                {PriceOld.toString().replace(
                                                     /\B(?=(\d{3})+(?!\d))/g,
                                                     ' '
                                                 )}
-                                            </div>
-                                        </span>
+                                                <div
+                                                    className={
+                                                        styles.product_card__price_diff
+                                                    }
+                                                >
+                                                    -
+                                                    {PriceDiff.toString().replace(
+                                                        /\B(?=(\d{3})+(?!\d))/g,
+                                                        ' '
+                                                    )}
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                )}
+                                <div
+                                    className={
+                                        styles.catalog_product_card__price
+                                    }
+                                >
+                                    {Price} Руб.
+                                </div>
+                                <div
+                                    className={
+                                        styles.catalog_product_card__price_credit
+                                    }
+                                >
+                                    В рассрочку от {Math.ceil(PriceRaw / 6)}{' '}
+                                    руб/мес
+                                </div>
+                            </div>
+
+                            <div
+                                className={
+                                    styles.catalog_product_card__price_block_right
+                                }
+                            >
+                                <div
+                                    onClick={() => onAddToCompareClickHandler()}
+                                    className={
+                                        styles.catalog_product_card__stat_block
+                                    }
+                                    style={
+                                        !isCompared
+                                            ? {
+                                                  background: '#fff',
+                                              }
+                                            : { background: '#0CA5D3' }
+                                    }
+                                >
+                                    <div
+                                        ref={CompareRef}
+                                        className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                                    >
+                                        Товар добавлен в{' '}
+                                        <Link href="/">Сравнение!</Link>
+                                    </div>
+                                    <div className={styles.stats}>
+                                        {!isCompared && (
+                                            <Image
+                                                src={StatsImage}
+                                                width={24}
+                                                height={24}
+                                            />
+                                        )}
+                                        {isCompared && (
+                                            <Image
+                                                src={WhiteStatsImage}
+                                                width={24}
+                                                height={24}
+                                            />
+                                        )}
                                     </div>
                                 </div>
-                            )}
-                            <div className={styles.catalog_product_card__price}>
-                                {Price} Руб.
-                            </div>
-                            <div
-                                className={
-                                    styles.catalog_product_card__price_credit
-                                }
-                            >
-                                В рассрочку от {Math.ceil(PriceRaw / 6)} руб/мес
-                            </div>
-                        </div>
-
-                        <div
-                            className={
-                                styles.catalog_product_card__price_block_right
-                            }
-                        >
-                            <div
-                                className={
-                                    styles.catalog_product_card__stat_block
-                                }
-                            >
                                 <div
-                                    className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                                    onClick={() =>
+                                        onAddToFavoriteClickHandler()
+                                    }
+                                    className={
+                                        styles.catalog_product_card__stat_block
+                                    }
+                                    style={
+                                        !isFavorite
+                                            ? {
+                                                  background: '#fff',
+                                              }
+                                            : { background: '#0CA5D3' }
+                                    }
                                 >
-                                    Товар добавлен в{' '}
-                                    <Link href="/">Сравнение!</Link>
-                                </div>
-                                <div className={styles.stats}>
-                                    <Image
-                                        src={StatsImage}
-                                        width={24}
-                                        height={24}
-                                    />
-                                </div>
-                            </div>
-                            <div
-                                className={
-                                    styles.catalog_product_card__stat_block
-                                }
-                            >
-                                <div
-                                    className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
-                                >
-                                    Товар добавлен в{' '}
-                                    <Link href="/">Избранное!</Link>
-                                </div>
-                                <div className={styles.heart}>
-                                    <Image
-                                        src={HeartImage}
-                                        width={24}
-                                        height={24}
-                                    />
+                                    <div
+                                        ref={FavoriteRef}
+                                        className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                                    >
+                                        Товар добавлен в{' '}
+                                        <Link href="/">Избранное!</Link>
+                                    </div>
+                                    <div className={styles.heart}>
+                                        {!isFavorite && (
+                                            <Image
+                                                src={HeartImage}
+                                                width={24}
+                                                height={24}
+                                            />
+                                        )}
+                                        {isFavorite && (
+                                            <Image
+                                                src={WhiteHeartImage}
+                                                width={24}
+                                                height={24}
+                                            />
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </EqualHeightElement>
+                </EqualHeightElement>
+            </div>
 
             <span
                 style={desktopViewType === 'single' ? { display: 'none' } : {}}
@@ -653,89 +760,105 @@ const DesktopSeveral = ({
                     </EqualHeightElement>
                 </div>
 
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: ' column',
-                        justifyContent: 'space-between',
-                    }}
-                >
-                    <div>
-                        <div className={styles.catalogproductcard__stock}>
-                            {InStock && (
+                <div className={styles.stockwrap}>
+                    <EqualHeightElement name="CatalogProductCard__Stock">
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: ' column',
+                                justifyContent: 'flex-end',
+                            }}
+                        >
+                            <div>
                                 <div
-                                    className={
-                                        styles.catalog_product_card__instockblock
-                                    }
+                                    className={styles.catalogproductcard__stock}
                                 >
-                                    <span
-                                        style={!InStock ? { opacity: 0 } : {}}
+                                    {InStock && (
+                                        <div
+                                            className={
+                                                styles.catalog_product_card__instockblock
+                                            }
+                                        >
+                                            <span
+                                                style={
+                                                    !InStock
+                                                        ? { opacity: 0 }
+                                                        : {}
+                                                }
+                                                className={
+                                                    styles.catalog_product_card__instockblock__icon
+                                                }
+                                            ></span>{' '}
+                                            <span
+                                                style={
+                                                    !InStock
+                                                        ? { opacity: 0 }
+                                                        : {}
+                                                }
+                                                className={
+                                                    styles.catalog_product_card__instockblock__text
+                                                }
+                                            >
+                                                Есть в наличии
+                                            </span>
+                                        </div>
+                                    )}
+
+                                    <div
                                         className={
-                                            styles.catalog_product_card__instockblock__icon
-                                        }
-                                    ></span>{' '}
-                                    <span
-                                        style={!InStock ? { opacity: 0 } : {}}
-                                        className={
-                                            styles.catalog_product_card__instockblock__text
+                                            styles.catalog_product_card__info_wrap
                                         }
                                     >
-                                        Есть в наличии
-                                    </span>
+                                        <button
+                                            className={
+                                                styles.catalog_product_card__info_button
+                                            }
+                                        >
+                                            Подробнее
+                                        </button>
+                                        <div
+                                            className={
+                                                styles.catalog_product_card__stats_buttons
+                                            }
+                                        ></div>
+                                    </div>
                                 </div>
-                            )}
+                            </div>
 
                             <div
                                 className={
-                                    styles.catalog_product_card__info_wrap
+                                    styles.catalog_product_card__delivery_block
                                 }
                             >
-                                <button
+                                <img
+                                    src={CarImage}
                                     className={
-                                        styles.catalog_product_card__info_button
+                                        styles.catalog_product_card__delivery_image
                                     }
-                                >
-                                    Подробнее
-                                </button>
+                                ></img>
+
                                 <div
                                     className={
-                                        styles.catalog_product_card__stats_buttons
+                                        styles.catalog_product_card__delivery_info
                                     }
-                                ></div>
+                                >
+                                    <span className={styles.when}>
+                                        доставим
+                                        <span className={styles.blue}>
+                                            {' '}
+                                            {DeliveryDate}
+                                        </span>
+                                    </span>
+                                    <span className={styles.price}>
+                                        доставка{' '}
+                                        <span className={styles.blue}>
+                                            {DeliveryPrice}
+                                        </span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div
-                        className={styles.catalog_product_card__delivery_block}
-                    >
-                        <img
-                            src={CarImage}
-                            className={
-                                styles.catalog_product_card__delivery_image
-                            }
-                        ></img>
-
-                        <div
-                            className={
-                                styles.catalog_product_card__delivery_info
-                            }
-                        >
-                            <span className={styles.when}>
-                                доставим
-                                <span className={styles.blue}>
-                                    {' '}
-                                    {DeliveryDate}
-                                </span>
-                            </span>
-                            <span className={styles.price}>
-                                доставка{' '}
-                                <span className={styles.blue}>
-                                    {DeliveryPrice}
-                                </span>
-                            </span>
-                        </div>
-                    </div>
+                    </EqualHeightElement>
                 </div>
             </div>
         </div>

@@ -380,6 +380,7 @@ const CatalogMobileProductList = ({
     // }, [])
 
     useEffect(() => {
+        console.log('filterProductsIds', filterProductsIds)
         setAmount(Math.ceil(filterProductsIds.length / 20))
     }, [filterProductsIds])
 
@@ -389,9 +390,6 @@ const CatalogMobileProductList = ({
                 type: CATALOG_PRODUCT_LIST_SUCCESS,
                 payload: firstLoadProducts,
             })
-            console.log('viewType', viewType)
-
-            console.log('data', data)
 
             setList(
                 <>
@@ -422,8 +420,8 @@ const CatalogMobileProductList = ({
 
     useEffect(() => {
         if (SelectedSizeReducer.amount !== null) {
-            dispatch(catalogSetPage(1))
-            setPage(1)
+            // dispatch(catalogSetPage(1))
+            // setPage(1)
             setData([])
             setList([])
             setAmount(Math.ceil(SelectedSizeReducer.amount / 20))
