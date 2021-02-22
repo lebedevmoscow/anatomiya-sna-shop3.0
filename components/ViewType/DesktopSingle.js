@@ -432,7 +432,7 @@ const DesktopSingle = ({
 
     return (
         <div className={styles.catalog_product_card}>
-            <PopupsOnProductCard
+            {/* <PopupsOnProductCard
                 Labels={Labels}
                 SalePercent={SalePercent}
                 key={uuidv4()}
@@ -440,7 +440,7 @@ const DesktopSingle = ({
                 IsMobile={IsMobile}
                 desktopViewType={desktopViewType}
                 Gifts={Gifts}
-            />
+            /> */}
             <div className={styles.catalog_product_card__column}>
                 <div
                     className={
