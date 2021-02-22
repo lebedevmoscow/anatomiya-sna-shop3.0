@@ -477,6 +477,7 @@ const DesktopSeveral = ({
                 IsMobile={IsMobile}
                 desktopViewType={desktopViewType}
                 Gifts={Gifts}
+                DontShow={true}
             />
             <div className={styles.catalog_product_card__column}>
                 <div

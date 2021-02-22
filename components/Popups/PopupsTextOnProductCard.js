@@ -25,6 +25,7 @@ const PopupsTextOnProductCard = ({
                     width: '280px',
                     left: '0',
                     borderRadius: '4px',
+                    zIndex: '100',
                 }}
                 closed={PopupIsClosed}
             >
@@ -72,6 +73,7 @@ const PopupsTextOnProductCard = ({
                     width: '280px',
                     left: '0',
                     borderRadius: '4px',
+                    zIndex: '100',
                 }}
                 closed={PopupIsClosed}
             >
