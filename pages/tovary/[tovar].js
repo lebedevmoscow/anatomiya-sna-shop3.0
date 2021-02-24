@@ -35,6 +35,7 @@ import ReviewTab from './../../components/Tabs/ReviewTab'
 import DeliveryTab from './../../components/Tabs/DeliveryTab'
 import MobileBurgerMenu from './../../components/Mobile/MobileBurgerMenu'
 import ProductPageMobileTabs from './../../components/Tabs/ProductPageMobileTabs'
+import ProductPageMobileProductGallery from './../../components/Products/ProductPageMobileProductGallery'
 
 SwiperCore.use([SwiperNavigationCore, Thumbs])
 
@@ -290,7 +291,10 @@ const ProductPage = ({
                         </>
                     )}
                 </div>
-                {breakpoint1023 && <ProductPageMobileTabs />}
+                {IsMobile && <ProductPageMobileTabs />}
+                {IsMobile && (
+                    <ProductPageMobileProductGallery images={images} />
+                )}
                 {/* <div className="container">
                     <CatalogHelpPickUp />
                     {width && width <= 1024 && width > 768 && (

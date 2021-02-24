@@ -1,0 +1,54 @@
+
+.swiper_wrapper
+    width: 90vw
+    margin: 0 auto
+    padding: 0 10px
+    overflow: hidden
+    position: relative
+
+    .swiper_slide
+        width: auto
+        img
+            display: block
+            width: 90vw
+            margin: 0 auto
+
+    .product_page_mobile_gallery_next
+        background: #fff
+        border-radius: 10px
+        width: 26px
+        height: 26px
+        position: absolute
+        z-index: 1
+        right: 10px
+        top: 50%
+        transform: translate(0%, -50%)
+
+        svg
+            transform: scale(0.8)
+
+    .product_page_mobile_gallery_prev
+        background: #fff
+        border-radius: 10px
+        width: 26px
+        height: 26px
+        position: absolute
+        z-index: 1
+        left: 0px
+        top: 50%
+        transform: translate(0%, -50%)
+        svg
+            transform: scale(0.8) rotate(180deg)
+
+.swiper_wrapper > div
+    overflow: visible
+
+.product_page_mobile_gallery_swiper_scrollbar_element
+    height: 4px
+    background-color: #e8e8e8
+
+.product_page_mobile_gallery_swiper_scrollbar_element > div
+    height: 4px
+    background-color: #0ca5d3
+    transition: left .3s ease
+    border-radius: 4px
