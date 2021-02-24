@@ -30,6 +30,7 @@ import Footer from './../../components/Footer/FooterDesktop'
 import ProductPageGallery from './../../components/Products/ProductPageGallery'
 import ProductPageInfoBlock from './../../components/Products/ProductPageInfoBlock'
 import ProductPageDescriptionTab from './../../components/Tabs/ProductPageDescriptionTab'
+import PaletteTab from './../../components/Tabs/PaletteTab'
 
 SwiperCore.use([SwiperNavigationCore, Thumbs])
 
@@ -263,7 +264,7 @@ const ProductPage = ({
                                     articles={articles}
                                 />
                             )}
-                            {/* {activeTab === 'options' && <PaletteTab />} */}
+                            {activeTab === 'options' && <PaletteTab />}
                             {/* {activeTab === 'review' && <ReviewTab />} */}
                             {/* {activeTab === 'delivery' && <DeliveryTab />} */}
                         </div>
