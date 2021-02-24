@@ -47,7 +47,7 @@ const UsefulArticles = ({ articles }) => {
         // }
 
         if (!breakpoint769) {
-            const final = []
+            let final = []
             let sub = []
 
             articles.map((article, id) => {
@@ -59,31 +59,43 @@ const UsefulArticles = ({ articles }) => {
                 } else sub.push(<Article article={article} key={id} />)
             })
             setList(<EqualHeight>{final}</EqualHeight>)
-            // if (loadMore) {
-            //     lst = articles.map((article, id) => {
-            //         if (id > 3) return
-            //         return (
-            //             <Article
-            //                 height={maxHeight}
-            //                 article={article}
-            //                 imgHeight={'165.39px'}
-            //                 key={id}
-            //             />
-            //         )
-            //     })
-            //     const newLst = articles.map((article, id) => {
-            //         if (id < 4) return
-            //         return (
-            //             <Article
-            //                 height={maxHeight}
-            //                 article={article}
-            //                 imgHeight={'165.39px'}
-            //                 key={id}
-            //             />
-            //         )
-            //     })
-            //     setList([...lst, newLst])
-            // }
+
+            sub = []
+
+            if (loadMore) {
+                articles.map((article, id) => {
+                    if (id < 4) return
+                    if (id !== 0 && id % 2 === 1) {
+                        sub.push(<Article article={article} key={id} />)
+                        final.push(<EqualHeight>{sub}</EqualHeight>)
+                        sub = []
+                    } else sub.push(<Article article={article} key={id} />)
+                })
+
+                // lst = articles.map((article, id) => {
+                //     if (id > 3) return
+                //     return (
+                //         <Article
+                //             height={maxHeight}
+                //             article={article}
+                //             imgHeight={'165.39px'}
+                //             key={id}
+                //         />
+                //     )
+                // })
+                // const newLst = articles.map((article, id) => {
+                //     if (id < 4) return
+                //     return (
+                //         <Article
+                //             height={maxHeight}
+                //             article={article}
+                //             imgHeight={'165.39px'}
+                //             key={id}
+                //         />
+                //     )
+                // })
+                setList(final)
+            }
         }
     }, [loadMore, maxHeight])
 

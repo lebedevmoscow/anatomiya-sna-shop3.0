@@ -18,12 +18,16 @@ const Article = ({ article }) => {
         <Link href={`https://www.anatomiyasna.ru/journal/${article.Slug}`}>
             <a>
                 <div className={article_styles.article}>
-                    <Image
+                    {/* <Image
                         className={article_styles.article__image}
                         height={148.19}
                         width={264.63}
                         src={article.Image}
-                    />
+                    /> */}
+                    <img
+                        className={article_styles.article__image}
+                        src={article.Image}
+                    ></img>
 
                     <EqualHeightElement name="ArticleTitle">
                         <div className={article_styles.article__title}>
@@ -31,12 +35,17 @@ const Article = ({ article }) => {
                         </div>
                     </EqualHeightElement>
                     <div className={article_styles.aritcle__author}>
-                        <Image
+                        {/* <Image
                             src={article.AuthorImage}
                             height={50}
                             width={50}
                             className={article_styles.article__author_avatar}
-                        />
+                        /> */}
+
+                        <img
+                            className={article_styles.article__author_avatar}
+                            src={article.AuthorImage}
+                        ></img>
 
                         <div className={article_styles.aritcle__author_info}>
                             <div
