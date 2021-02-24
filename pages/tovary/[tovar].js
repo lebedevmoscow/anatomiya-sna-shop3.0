@@ -29,6 +29,7 @@ import URLComponent from './../../components/URLComponent'
 import Footer from './../../components/Footer/FooterDesktop'
 import ProductPageGallery from './../../components/Products/ProductPageGallery'
 import ProductPageInfoBlock from './../../components/Products/ProductPageInfoBlock'
+import ProductPageDescriptionTab from './../../components/Tabs/ProductPageDescriptionTab'
 
 SwiperCore.use([SwiperNavigationCore, Thumbs])
 
@@ -37,6 +38,8 @@ const ProductPage = ({
     phoneCommon,
     worktimeHead,
     banner = null,
+    IsMobile,
+    articles,
 }) => {
     const [width, setWidth] = useState(null)
     const [activeTab, setActiveTab] = useState('description')
@@ -254,16 +257,16 @@ const ProductPage = ({
                                 </div>
                             </div>
                         </div>
-                        {/* <div className="product-page__current-tab">
-                                {activeTab === 'description' && (
-                                    <ProductPageDescriptionTab
-                                        articles={articles}
-                                    />
-                                )}
-                                {activeTab === 'options' && <PaletteTab />}
-                                {activeTab === 'review' && <ReviewTab />}
-                                {activeTab === 'delivery' && <DeliveryTab />}
-                            </div> */}
+                        <div className="product-page__current-tab">
+                            {activeTab === 'description' && (
+                                <ProductPageDescriptionTab
+                                    articles={articles}
+                                />
+                            )}
+                            {/* {activeTab === 'options' && <PaletteTab />} */}
+                            {/* {activeTab === 'review' && <ReviewTab />} */}
+                            {/* {activeTab === 'delivery' && <DeliveryTab />} */}
+                        </div>
                     </>
                     {/* )} */}
                 </div>
@@ -325,6 +328,7 @@ export const getServerSideProps = async (ctx) => {
     const URLS = [
         'https://www.anatomiyasna.ru/api/menu/headerCatalog/',
         'https://www.anatomiyasna.ru/api/parameters/all/',
+        'https://www.anatomiyasna.ru/api/journal/article-list?mode=new&page=1&limit=8',
     ]
 
     let response = {}
@@ -340,6 +344,7 @@ export const getServerSideProps = async (ctx) => {
     const phoneCommon = response[1].phone_common
     const worktimeHead = response[1].worktime_head
     const assurances = response[1].main_page_warranty_text
+    const articles = response[2]
 
     const regex = /Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/
     let IsMobile = null
@@ -356,6 +361,8 @@ export const getServerSideProps = async (ctx) => {
             phoneCommon,
             worktimeHead,
             assurances,
+            articles,
+            IsMobile,
         },
     }
 }
