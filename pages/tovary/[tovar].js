@@ -32,6 +32,7 @@ import ProductPageInfoBlock from './../../components/Products/ProductPageInfoBlo
 import ProductPageDescriptionTab from './../../components/Tabs/ProductPageDescriptionTab'
 import PaletteTab from './../../components/Tabs/PaletteTab'
 import ReviewTab from './../../components/Tabs/ReviewTab'
+import DeliveryTab from './../../components/Tabs/DeliveryTab'
 
 SwiperCore.use([SwiperNavigationCore, Thumbs])
 
@@ -267,7 +268,7 @@ const ProductPage = ({
                             )}
                             {activeTab === 'options' && <PaletteTab />}
                             {activeTab === 'review' && <ReviewTab />}
-                            {/* {activeTab === 'delivery' && <DeliveryTab />} */}
+                            {activeTab === 'delivery' && <DeliveryTab />}
                         </div>
                     </>
                     {/* )} */}
