@@ -33,6 +33,8 @@ import ProductPageDescriptionTab from './../../components/Tabs/ProductPageDescri
 import PaletteTab from './../../components/Tabs/PaletteTab'
 import ReviewTab from './../../components/Tabs/ReviewTab'
 import DeliveryTab from './../../components/Tabs/DeliveryTab'
+import MobileBurgerMenu from './../../components/Mobile/MobileBurgerMenu'
+import ProductPageMobileTabs from './../../components/Tabs/ProductPageMobileTabs'
 
 SwiperCore.use([SwiperNavigationCore, Thumbs])
 
@@ -43,19 +45,13 @@ const ProductPage = ({
     banner = null,
     IsMobile,
     articles,
+    mobileMenu,
+    mobilemenuCatalogs,
+    regions,
 }) => {
-    const [width, setWidth] = useState(null)
     const [activeTab, setActiveTab] = useState('description')
-    const hasWindow = typeof window !== 'undefined'
 
-    // Experemental
     const breakpoint1023 = useMedia(1023)
-
-    useEffect(() => {
-        if (hasWindow) {
-            setWidth(window.innerWidth)
-        }
-    }, [hasWindow])
 
     const images = [
         ImageForSlider1,
@@ -77,14 +73,22 @@ const ProductPage = ({
     return (
         <>
             {/* Modals */}
-            {width && width <= 1023 && <MobileBurgerMenu />}
+            {IsMobile && (
+                <MobileBurgerMenu
+                    mobileMenu={mobileMenu}
+                    mobilemenuCatalogs={mobilemenuCatalogs}
+                    regions={regions}
+                />
+            )}
 
-            <Header
-                banner={banner}
-                phoneCommon={phoneCommon}
-                worktimeHead={worktimeHead}
-            />
-            <Navigation headerCatalog={headerCatalog} />
+            {!IsMobile && (
+                <Header
+                    banner={banner}
+                    phoneCommon={phoneCommon}
+                    worktimeHead={worktimeHead}
+                />
+            )}
+            {!IsMobile && <Navigation headerCatalog={headerCatalog} />}
             <div className={`${styles.container} ${styles.url_component}`}>
                 <URLComponent
                     breadcrumbs={[
@@ -100,9 +104,10 @@ const ProductPage = ({
                         КРОВАТЬ ВОЛХОВА С-436 М/С-436 М1/С-437 М/С-437 М1/С-438
                         М/С-438 М1
                     </div>
-                    <div className={styles.product_page__content_wrap}>
-                        <div className={styles.product_page__left}>
-                            {/* <ul className="product-page__thumbs-list">
+                    {!IsMobile && (
+                        <div className={styles.product_page__content_wrap}>
+                            <div className={styles.product_page__left}>
+                                {/* <ul className="product-page__thumbs-list">
                                 <li>
                                     <ProductPageSaleThumb
                                         text={
@@ -127,153 +132,165 @@ const ProductPage = ({
                                     />
                                 </li>
                             </ul> */}
-                            <ProductPageGallery images={images} />
+                                <ProductPageGallery images={images} />
+                            </div>
+                            <div className={styles.product_page__right}>
+                                <ProductPageInfoBlock />
+                            </div>
                         </div>
-                        <div className={styles.product_page__right}>
-                            <ProductPageInfoBlock />
-                        </div>
-                    </div>
-                    <div className={styles.product_page__statements}>
-                        <ul className={styles.product_page__statements_list}>
-                            <li
-                                className={
-                                    styles.product_page__statements_list_item
-                                }
-                            >
-                                {/* <Image
+                    )}
+                    {!IsMobile && (
+                        <>
+                            <div className={styles.product_page__statements}>
+                                <ul
+                                    className={
+                                        styles.product_page__statements_list
+                                    }
+                                >
+                                    <li
+                                        className={
+                                            styles.product_page__statements_list_item
+                                        }
+                                    >
+                                        {/* <Image
                                     className="product-page__statements-list-item-image"
                                     src={CreditCardImage}
                                     height={51}
                                     width={51}
                                 /> */}
-                                <img src={CreditCardImage}></img>
-                                <div className={styles.text}>
-                                    Оплата при получении наличными, банковской
-                                    картой, электронным кошельком, оплата по
-                                    счету.
-                                    <br />
-                                    <span>В кредит или рассрочку</span> от{' '}
-                                    <span>862 руб/меc.</span>
-                                </div>
-                            </li>
-                            <li
-                                className={
-                                    styles.product_page__statements_list_item
-                                }
-                            >
-                                <img src={CertificateImage} />
-                                {/* <Image
+                                        <img src={CreditCardImage}></img>
+                                        <div className={styles.text}>
+                                            Оплата при получении наличными,
+                                            банковской картой, электронным
+                                            кошельком, оплата по счету.
+                                            <br />
+                                            <span>
+                                                В кредит или рассрочку
+                                            </span>{' '}
+                                            от <span>862 руб/меc.</span>
+                                        </div>
+                                    </li>
+                                    <li
+                                        className={
+                                            styles.product_page__statements_list_item
+                                        }
+                                    >
+                                        <img src={CertificateImage} />
+                                        {/* <Image
                                     className="product-page__statements-list-item-image"
                                     src={CertificateImage}
                                     height={51}
                                     width={51}
                                 /> */}
-                                <div className={styles.text}>
-                                    Официальный дилер фабрики. Гарантия
-                                    производителя 2 года. Возврат и обмен товара
-                                    в полном соответствии закона.
-                                </div>
-                            </li>
-                            <li
-                                className={
-                                    styles.product_page__statements_list_item
-                                }
-                            >
-                                {/* <Image
+                                        <div className={styles.text}>
+                                            Официальный дилер фабрики. Гарантия
+                                            производителя 2 года. Возврат и
+                                            обмен товара в полном соответствии
+                                            закона.
+                                        </div>
+                                    </li>
+                                    <li
+                                        className={
+                                            styles.product_page__statements_list_item
+                                        }
+                                    >
+                                        {/* <Image
                                     className="product-page__statements-list-item-image"
                                     src={CarImage}
                                     height={51}
                                     width={51}
                                 /> */}
-                                <img src={CarImage}></img>
-                                <div className={styles.text}>
-                                    Доставка <span>по Москве</span>
-                                    <br />
-                                    Ближайшая доставка: <span>03.02.2021</span>
-                                    <br />
-                                    Стоимость доставки: <span>1 500 руб.</span>
-                                    <br />
-                                    Подъем на груз. лифте:{' '}
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    {/* {width && width >= 1024 && ( */}
-                    <>
-                        <div className={styles.product_page__tabs}>
-                            <div className={styles.product_page__tabs_list}>
-                                <div
-                                    onClick={() =>
-                                        onActiveTabClickHandler('description')
-                                    }
-                                    className={`${
-                                        styles.product_page_tabs_list_item
-                                    } ${
-                                        activeTab === 'description'
-                                            ? `${styles.product_page_tabs_list_item__active}`
-                                            : ''
-                                    }`}
-                                >
-                                    Описание <br /> и характеристики
-                                </div>
-                                <div
-                                    onClick={() =>
-                                        onActiveTabClickHandler('options')
-                                    }
-                                    className={`${
-                                        styles.product_page_tabs_list_item
-                                    } ${
-                                        activeTab === 'options'
-                                            ? `${styles.product_page_tabs_list_item__active}`
-                                            : ''
-                                    }`}
-                                >
-                                    Палитра и доп. опции
-                                </div>
-                                <div
-                                    onClick={() =>
-                                        onActiveTabClickHandler('review')
-                                    }
-                                    className={`${
-                                        styles.product_page_tabs_list_item
-                                    } ${
-                                        activeTab === 'review'
-                                            ? `${styles.product_page_tabs_list_item__active}`
-                                            : ''
-                                    }`}
-                                >
-                                    Оставьте отзыв
-                                </div>
-                                <div
-                                    onClick={() =>
-                                        onActiveTabClickHandler('delivery')
-                                    }
-                                    className={`${
-                                        styles.product_page_tabs_list_item
-                                    } ${
-                                        activeTab === 'delivery'
-                                            ? `${styles.product_page_tabs_list_item__active}`
-                                            : ''
-                                    }`}
-                                >
-                                    Доставка и оплата
+                                        <img src={CarImage}></img>
+                                        <div className={styles.text}>
+                                            Доставка <span>по Москве</span>
+                                            <br />
+                                            Ближайшая доставка:{' '}
+                                            <span>03.02.2021</span>
+                                            <br />
+                                            Стоимость доставки:{' '}
+                                            <span>1 500 руб.</span>
+                                            <br />
+                                            Подъем на груз. лифте:{' '}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className={styles.product_page__tabs}>
+                                <div className={styles.product_page__tabs_list}>
+                                    <div
+                                        onClick={() =>
+                                            onActiveTabClickHandler(
+                                                'description'
+                                            )
+                                        }
+                                        className={`${
+                                            styles.product_page_tabs_list_item
+                                        } ${
+                                            activeTab === 'description'
+                                                ? `${styles.product_page_tabs_list_item__active}`
+                                                : ''
+                                        }`}
+                                    >
+                                        Описание <br /> и характеристики
+                                    </div>
+                                    <div
+                                        onClick={() =>
+                                            onActiveTabClickHandler('options')
+                                        }
+                                        className={`${
+                                            styles.product_page_tabs_list_item
+                                        } ${
+                                            activeTab === 'options'
+                                                ? `${styles.product_page_tabs_list_item__active}`
+                                                : ''
+                                        }`}
+                                    >
+                                        Палитра и доп. опции
+                                    </div>
+                                    <div
+                                        onClick={() =>
+                                            onActiveTabClickHandler('review')
+                                        }
+                                        className={`${
+                                            styles.product_page_tabs_list_item
+                                        } ${
+                                            activeTab === 'review'
+                                                ? `${styles.product_page_tabs_list_item__active}`
+                                                : ''
+                                        }`}
+                                    >
+                                        Оставьте отзыв
+                                    </div>
+                                    <div
+                                        onClick={() =>
+                                            onActiveTabClickHandler('delivery')
+                                        }
+                                        className={`${
+                                            styles.product_page_tabs_list_item
+                                        } ${
+                                            activeTab === 'delivery'
+                                                ? `${styles.product_page_tabs_list_item__active}`
+                                                : ''
+                                        }`}
+                                    >
+                                        Доставка и оплата
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="product-page__current-tab">
-                            {activeTab === 'description' && (
-                                <ProductPageDescriptionTab
-                                    articles={articles}
-                                />
-                            )}
-                            {activeTab === 'options' && <PaletteTab />}
-                            {activeTab === 'review' && <ReviewTab />}
-                            {activeTab === 'delivery' && <DeliveryTab />}
-                        </div>
-                    </>
-                    {/* )} */}
+                            <div className="product-page__current-tab">
+                                {activeTab === 'description' && (
+                                    <ProductPageDescriptionTab
+                                        articles={articles}
+                                    />
+                                )}
+                                {activeTab === 'options' && <PaletteTab />}
+                                {activeTab === 'review' && <ReviewTab />}
+                                {activeTab === 'delivery' && <DeliveryTab />}
+                            </div>
+                        </>
+                    )}
                 </div>
-                {/* {width && width <= 1023 && <ProductPageMobileTabs />} */}
+                {breakpoint1023 && <ProductPageMobileTabs />}
                 {/* <div className="container">
                     <CatalogHelpPickUp />
                     {width && width <= 1024 && width > 768 && (
@@ -295,28 +312,12 @@ const ProductPage = ({
                 </div> */}
             </div>
             {/* <IndexPageSubscribe /> */}
-            <Footer />
+            {!IsMobile && <Footer />}
         </>
     )
 }
 
 export default ProductPage
-
-// export const getServerSideProps = async (ctx) => {
-//     // Грузим статьи (8 штук)
-//     const articlesReq = await fetch(
-//         'https://www.anatomiyasna.ru/api/journal/article-list?mode=new&page=1&limit=8'
-//     )
-//     const articles = await articlesReq.json()
-
-//     return {
-//         props: {
-//             articles,
-//         },
-//     }
-// }
-
-// export default ProductPage
 
 export const getServerSideProps = async (ctx) => {
     const userAgent = ctx.req.headers['user-agent']
@@ -332,6 +333,9 @@ export const getServerSideProps = async (ctx) => {
         'https://www.anatomiyasna.ru/api/menu/headerCatalog/',
         'https://www.anatomiyasna.ru/api/parameters/all/',
         'https://www.anatomiyasna.ru/api/journal/article-list?mode=new&page=1&limit=8',
+        'https://www.anatomiyasna.ru/api/menu/mobileCatalogMenu/',
+        'https://anatomiyasna.ru/api/menu/mobileMenu/',
+        'https://anatomiyasna.ru/api/region/getRegions/',
     ]
 
     let response = {}
@@ -348,6 +352,9 @@ export const getServerSideProps = async (ctx) => {
     const worktimeHead = response[1].worktime_head
     const assurances = response[1].main_page_warranty_text
     const articles = response[2]
+    const mobilemenuCatalogs = response[3]
+    const mobileMenu = response[4]
+    const regions = response[5]
 
     const regex = /Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/
     let IsMobile = null
@@ -365,6 +372,9 @@ export const getServerSideProps = async (ctx) => {
             worktimeHead,
             assurances,
             articles,
+            mobileMenu,
+            mobilemenuCatalogs,
+            regions,
             IsMobile,
         },
     }
