@@ -352,6 +352,8 @@ export const getServerSideProps = async (ctx) => {
     }
     const productSubUrl = ids.join('')
 
+    console.log('da', productSubUrl)
+
     const productsURLReq = await fetch(
         `https://www.anatomiyasna.ru/api/productService/getShortProductModels/?${productSubUrl}`
     )
