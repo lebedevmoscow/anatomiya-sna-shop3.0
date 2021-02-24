@@ -2,11 +2,12 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, {
     Navigation as SwiperNavigationCore,
     Scrollbar,
+    Pagination,
 } from 'swiper'
 
 import styles from './../../styles/components/Products/ProductPageMobileProductGallery.module.sass'
 
-SwiperCore.use([SwiperNavigationCore, Scrollbar])
+SwiperCore.use([SwiperNavigationCore, Scrollbar, Pagination])
 
 const ProductPageMobileProductGallery = ({ images }) => {
     return (
@@ -17,6 +18,10 @@ const ProductPageMobileProductGallery = ({ images }) => {
                 navigation={{
                     nextEl: '#swiper_mobile_productpage__next',
                     prevEl: '#swiper_mobile_productpage__prev',
+                }}
+                pagination={{
+                    el: '#product_page_mobile_gallery_swiper_count_element',
+                    type: 'fraction',
                 }}
                 scrollbar={{
                     el: '#product_page_mobile_gallery_swiper_scrollbar_element',
@@ -53,12 +58,20 @@ const ProductPageMobileProductGallery = ({ images }) => {
                     )
                 })}
             </Swiper>
-            <div
-                className={
-                    styles.product_page_mobile_gallery_swiper_scrollbar_element
-                }
-                id="product_page_mobile_gallery_swiper_scrollbar_element"
-            ></div>
+            <div className={styles.swiper_features_wrap}>
+                <div
+                    className={
+                        styles.product_page_mobile_gallery_swiper_scrollbar_element
+                    }
+                    id="product_page_mobile_gallery_swiper_scrollbar_element"
+                ></div>
+                <div
+                    id="product_page_mobile_gallery_swiper_count_element"
+                    className={
+                        styles.product_page_mobile_gallery_swiper_count_element
+                    }
+                ></div>
+            </div>
         </div>
     )
 }
