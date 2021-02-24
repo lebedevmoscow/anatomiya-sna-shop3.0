@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import SwiperCore, { Navigation as SwiperNavigationCore, Thumbs } from 'swiper'
 
+// Styles
+import styles from './../../styles/pages/tovar.module.sass'
+
 // Images
 import ImageForSlider1 from './../../TEMP/productpagegallery/1.jpg'
 import ImageForSlider2 from './../../TEMP/productpagegallery/2.jpg'
@@ -24,6 +27,7 @@ import Header from './../../components/Header'
 import Navigation from './../../components/Nav/MainNavigation'
 import URLComponent from './../../components/URLComponent'
 import Footer from './../../components/Footer/FooterDesktop'
+import ProductPageGallery from './../../components/Products/ProductPageGallery'
 
 SwiperCore.use([SwiperNavigationCore, Thumbs])
 
@@ -74,18 +78,24 @@ const ProductPage = ({
                 worktimeHead={worktimeHead}
             />
             <Navigation headerCatalog={headerCatalog} />
-            <div className="url-component-product-page container">
-                <URLComponent breadcrumbs={['крошка1', 'крошка2', 'крошка3']} />
+            <div className={`${styles.container} ${styles.url_component}`}>
+                <URLComponent
+                    breadcrumbs={[
+                        { url: '/', title: 'крошка1' },
+                        { url: '/', title: 'крошка2' },
+                        { url: '/', title: 'крошка3' },
+                    ]}
+                />
             </div>
-            {/* <div className="product-page">
-                <div className="container">
-                    <div className="product-page__title">
+            <div className={styles.product_page}>
+                <div className={styles.container}>
+                    <div className={styles.product_page__title}>
                         КРОВАТЬ ВОЛХОВА С-436 М/С-436 М1/С-437 М/С-437 М1/С-438
                         М/С-438 М1
                     </div>
-                    <div className="product-page__content-wrap">
-                        <div className="product-page__left">
-                            <ul className="product-page__thumbs-list">
+                    <div className={styles.product_page__content_wrap}>
+                        <div className={styles.product_page__left}>
+                            {/* <ul className="product-page__thumbs-list">
                                 <li>
                                     <ProductPageSaleThumb
                                         text={
@@ -109,65 +119,75 @@ const ProductPage = ({
                                         background={'#fff'}
                                     />
                                 </li>
-                            </ul>
+                            </ul> */}
                             <ProductPageGallery images={images} />
                         </div>
                         <div className="product-page__right">
-                            <ProductPageInfoBlock />
+                            {/* <ProductPageInfoBlock /> */}
                         </div>
                     </div>
-                    <div className="product-page__statements">
-                        <ul className="product-page__statements-list">
-                            <li className="product-page__statements-list-item">
-                                <Image
+                    <div className={styles.product_page__statements}>
+                        <ul className={styles.product_page__statements_list}>
+                            <li
+                                className={
+                                    styles.product_page__statements_list_item
+                                }
+                            >
+                                {/* <Image
                                     className="product-page__statements-list-item-image"
                                     src={CreditCardImage}
                                     height={51}
                                     width={51}
-                                />
-                                <div className="text">
+                                /> */}
+                                <img src={CreditCardImage}></img>
+                                <div>
                                     Оплата при получении наличными, банковской
                                     картой, электронным кошельком, оплата по
                                     счету.
                                     <br />
-                                    <span className="blue">
-                                        В кредит или рассрочку
-                                    </span>{' '}
-                                    от <span className="red">862 руб/меc.</span>
+                                    <span>В кредит или рассрочку</span> от{' '}
+                                    <span>862 руб/меc.</span>
                                 </div>
                             </li>
-                            <li className="product-page__statements-list-item">
-                                <Image
+                            <li
+                                className={
+                                    styles.product_page__statements_list_item
+                                }
+                            >
+                                <img src={CertificateImage} />
+                                {/* <Image
                                     className="product-page__statements-list-item-image"
                                     src={CertificateImage}
                                     height={51}
                                     width={51}
-                                />
-                                <div className="text">
+                                /> */}
+                                <div>
                                     Официальный дилер фабрики. Гарантия
                                     производителя 2 года. Возврат и обмен товара
                                     в полном соответствии закона.
                                 </div>
                             </li>
-                            <li className="product-page__statements-list-item">
-                                <Image
+                            <li
+                                className={
+                                    styles.product_page__statements_list_item
+                                }
+                            >
+                                {/* <Image
                                     className="product-page__statements-list-item-image"
                                     src={CarImage}
                                     height={51}
                                     width={51}
-                                />
-                                <div className="text">
-                                    Доставка{' '}
-                                    <span className="blue">по Москве</span>
+                                /> */}
+                                <img src={CarImage}></img>
+                                <div>
+                                    Доставка <span>по Москве</span>
                                     <br />
-                                    Ближайшая доставка:{' '}
-                                    <span className="blue">03.02.2021</span>
+                                    Ближайшая доставка: <span>03.02.2021</span>
                                     <br />
-                                    Стоимость доставки:{' '}
-                                    <span className="blue">1 500 руб.</span>
+                                    Стоимость доставки: <span>1 500 руб.</span>
                                     <br />
                                     Подъем на груз. лифте:{' '}
-                                    <span className="blue">
+                                    <span>
                                         1% от стоимости мебели, на пассажирском
                                         1,1% от стоимости мебели, но не менее
                                         100 руб. Условия доставки и оплаты.
@@ -177,9 +197,9 @@ const ProductPage = ({
                             </li>
                         </ul>
                     </div>
-                    {width && width >= 1024 && (
-                        <>
-                            <div className="product-page__tabs">
+                    {/* {width && width >= 1024 && ( */}
+                    <>
+                        {/* <div className="product-page__tabs">
                                 <div className="product-page__tabs-list">
                                     <div
                                         onClick={() =>
@@ -232,8 +252,8 @@ const ProductPage = ({
                                         Доставка и оплата
                                     </div>
                                 </div>
-                            </div>
-                            <div className="product-page__current-tab">
+                            </div> */}
+                        {/* <div className="product-page__current-tab">
                                 {activeTab === 'description' && (
                                     <ProductPageDescriptionTab
                                         articles={articles}
@@ -242,12 +262,12 @@ const ProductPage = ({
                                 {activeTab === 'options' && <PaletteTab />}
                                 {activeTab === 'review' && <ReviewTab />}
                                 {activeTab === 'delivery' && <DeliveryTab />}
-                            </div>
-                        </>
-                    )}
+                            </div> */}
+                    </>
+                    {/* )} */}
                 </div>
-                {width && width <= 1023 && <ProductPageMobileTabs />}
-                <div className="container">
+                {/* {width && width <= 1023 && <ProductPageMobileTabs />} */}
+                {/* <div className="container">
                     <CatalogHelpPickUp />
                     {width && width <= 1024 && width > 768 && (
                         <UsefulArticles articles={articles} />
@@ -265,8 +285,8 @@ const ProductPage = ({
                         способом. Доставка в Москве в любое удобном для вас
                         время.
                     </div>
-                </div>
-            </div> */}
+                </div> */}
+            </div>
             {/* <IndexPageSubscribe /> */}
             <Footer />
         </>
