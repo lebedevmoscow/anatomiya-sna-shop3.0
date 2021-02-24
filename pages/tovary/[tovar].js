@@ -28,6 +28,7 @@ import Navigation from './../../components/Nav/MainNavigation'
 import URLComponent from './../../components/URLComponent'
 import Footer from './../../components/Footer/FooterDesktop'
 import ProductPageGallery from './../../components/Products/ProductPageGallery'
+import ProductPageInfoBlock from './../../components/Products/ProductPageInfoBlock'
 
 SwiperCore.use([SwiperNavigationCore, Thumbs])
 
@@ -122,8 +123,8 @@ const ProductPage = ({
                             </ul> */}
                             <ProductPageGallery images={images} />
                         </div>
-                        <div className="product-page__right">
-                            {/* <ProductPageInfoBlock /> */}
+                        <div className={styles.product_page__right}>
+                            <ProductPageInfoBlock />
                         </div>
                     </div>
                     <div className={styles.product_page__statements}>

@@ -1,0 +1,213 @@
+.product_page__info
+    margin-top: 25px
+
+    .product_page__info_block
+        background-color: #F7F9FB
+        font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+        padding: 14px
+
+    .line
+        display: block
+        width: 100%
+        height: 1px
+        background-color: #E6E6E6
+        margin-top: 15px
+        margin-bottom: 15px
+
+    .hint
+        font-size: 18px
+        color: #444444
+
+    .product_page__price
+        color: #e71616
+        font-size: 33px
+        text-align: center
+        margin-top: 10px
+        span
+            font-size: 40px
+            font-weight: 900
+            color: #e71616
+
+    .product_page__main_buttons
+        margin-top: 20px
+
+    .product_page__main_button
+        background: #0ea8d5
+        color: #fff
+        font-size: 24px
+        padding: 18px 20px
+        font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+        width: 100%
+        display: block
+        line-height: 1
+        font-weight: 400
+        position: relative
+        margin-bottom: 8px
+        border-radius: 5px
+        box-shadow: none
+        border: none
+        text-decoration: none
+        text-align: center
+        cursor: pointer
+
+    .product_page__buy_one_click
+        background: #ffdb4d
+        border-color: #ffdb4d
+        color: #444444
+
+    .product_page__call
+        background: #00A651
+        border-color: #00A651
+        color: #ffffff
+
+    .product_page__meta_info
+        font-size: 18px
+        color: #444444
+        display: flex
+        justify-content: space-between
+        .blue
+            color: #0CA5D3
+            margin-left: 5px
+
+    .hover_element
+        box-sizing: border-box
+        width: 160px
+        height: 200px
+        position: absolute
+        top: -215px
+        left: -100%
+        z-index: 1
+        background-color: #fff
+        padding: 14px
+        box-shadow: 6px 2px 20px -5px rgba(0,0,0,0.75)
+        display: none
+
+        &::after
+            top: 11%
+            left: 47%
+            content: ''
+            position: relative
+            width: 0
+            height: 0
+            border-style: solid
+            border-width: 8px 8px 0 8px
+            border-color: #ffffff transparent transparent transparent
+
+        .hover_element__title
+            text-align: center
+        .hover_element__image
+            margin-top: 10px
+
+    .product_page__suboptions_row_list_item
+        width: 46px
+        height: 46px
+        padding: 5px
+        border: 1px solid transparent
+        border-radius: 5px
+        margin-right: 20px
+        position: relative
+        &:hover
+            .hover_element
+                display: block
+        div
+            border-radius: 5px
+
+    .product_page__line_with_buttons
+        display: flex
+        justify-content: space-between
+        margin-bottom: 5px
+
+        .big_button
+            padding: 5px 10px 6px
+            outline: none
+            position: relative
+            display: flex
+            align-items: center
+            justify-content: center
+            border-radius: 5px
+            background-color: #fff
+            color: #444
+            font-size: 17px
+            font-weight: 400
+            border: 1px solid #e6e6e6
+            width: 283px
+            box-sizing: border-box
+            height: 35px
+            font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+            cursor: pointer
+            span
+                color: #0ca5d3
+                margin-right: 5px
+                margin-left: 5px
+                &:hover
+                    border-color: #e71616
+            .button
+                padding: 5px 10px 6px
+                outline: none
+                position: relative
+                display: flex
+                align-items: center
+                justify-content: center
+                border-radius: 5px
+                background-color: #fff
+                color: #444
+                font-size: 17px
+                font-weight: 400
+                border: 1px solid #e6e6e6
+                width: 51.69px
+                height: 35px
+                box-sizing: border-box
+                font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+                cursor: pointer
+
+                svg
+                    overflow: visible
+                    height: 25px
+                    width: 25px
+                    fill: #0ca5d3
+                    opacity: 0.8
+
+                &:hover
+                    border-color: #e71616
+                img
+                    transform: scale(0.85)
+
+@media screen and ( max-width: 1025px )
+
+    .product_page__info
+        .product_page__info_block
+            .hint
+                font-size: 16px
+
+        .product-page__price
+            font-size: 30px
+            span
+                font-size: 30px
+
+@media screen and ( max-width: 1023px )
+
+    .product_page__info
+        .product_page__with_buttons_wrapper
+            display: flex
+            justify-content: space-between
+            margin-bottom: 10px
+            .button
+                width: 65px
+                box-sizing: border-box
+                padding: 12.5px
+                border: 1px solid #e6e6e6
+                border-radius: 5px
+                div
+                    width: 25px
+                    transform: translateX(8px)
+
+                    svg
+                        overflow: visible
+                        height: 25px
+                        width: 25px
+                        fill: #0ca5d3
+                        opacity: 0.8
+                        transform: translateX(8px)
+
+        .product-page__price
+            color: #333333
