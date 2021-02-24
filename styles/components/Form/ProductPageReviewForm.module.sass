@@ -1,0 +1,189 @@
+.product_page_review_form
+    font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+    margin-top: 40px
+    .product_page_review_form__title
+        font-size: 30px
+        color: #444444
+        text-align: center
+        margin-bottom: 30px
+
+    .product_page_review_form__inputs_line
+        display: flex
+        justify-content: space-between
+
+    .product_page_review_form__inputs_line input
+        margin-top: 0
+
+    .product_page_review_from__input
+        box-sizing: border-box
+        display: block
+        height: 60px
+        padding: 0 35px
+        border: 1px solid #e6e6e6
+        background: #f8f8f8
+        box-shadow: none
+        border-radius: 5px
+        font-size: 17px
+        font-weight: 400
+        line-height: 1
+        letter-spacing: .6px
+        color: #444444
+        width: 100%
+        outline: none
+        margin-top: 20px
+        &::placeholder
+            color: #000000
+
+    .product_page_review_from__input__green
+        &::placeholder
+            color: #2d8604
+
+    .product_page_review_from__input__red
+        &::placeholder
+            color: #ff0000
+
+    .product_page_review_from__small_input
+        width: 31%
+        display: block
+
+    .product_page_review_from__checkboxes_line
+        margin-top: 25px
+        display: flex
+        justify-content: space-between
+
+    .product_page_review_from__checkboxes_line_left_wrap
+        display: flex
+        justify-content: space-around
+
+    .product_page_review_from__checkboxes_line__stars
+        margin-left: 80px
+        margin-right: 120px
+        .stars-list
+            margin-top: 15px
+            display: flex
+
+    .star_image
+        display: block
+        width: 25px
+        height: 25px
+        margin-right: 5px
+        margin-top: 15px
+
+    .product_page_review_from__checkboxes_line__recommend
+        margin-right: 120px
+
+    .checkboxes_list
+        margin-top: 25px
+
+    .checkboxes_list__checkbox_container
+        display: block
+        position: relative
+        margin-bottom: 12px
+        cursor: default
+        -webkit-user-select: none
+        -moz-user-select: none
+        -ms-user-select: none
+        user-select: none
+        margin-top: 12px
+        margin-left: 10px
+        input
+            position: absolute
+            opacity: 0
+            cursor: pointer
+            height: 0
+            width: 0
+        h6
+            display: block
+            font-size: 13px
+            display: block
+            position: relative
+            top: -2px
+            margin-left: 18px
+    .checkboxes_list__checkmark
+        position: absolute
+        top: -4.5px
+        left: -10px
+        height: 20px
+        width: 20px
+        background-color: #F8F8F8
+        border: 1px solid rgba(0, 0, 0, 0.1)
+        border-radius: 6px
+        &::after
+            content: ''
+            position: absolute
+            display: none
+
+    .checkboxes_list__title
+        margin-left: 20px
+
+    .checkboxes_list__checkbox_container input:checked ~ .checkboxes_list__checkmark:after
+        display: block
+
+    .checkboxes_list__selector__inner__indicator
+        svg
+            fill: black
+            transform: scale(0.8)
+
+    .checkboxes_list__checkbox_container .checkboxes_list__checkmark:after
+        content: ""
+        position: absolute
+        left: 1px
+        top: 0px
+        width: 11px
+        height: 6px
+        margin: 4px 0 0 2px
+        border-bottom: 2px solid #e71616
+        border-left: 2px solid #e71616
+        transform: rotate(-50deg) scale(0.9)
+
+    .star_required
+        color: #0ca5d3
+
+    // Input file styling
+    input[type="file"]
+        display: none
+
+    .custom_file_upload
+        margin-top: 30px
+        border: 1px solid #ccc
+        cursor: pointer
+        width: 100%
+        display: flex
+        justify-content: center
+        align-items: center
+        height: 140px
+        .hint
+            font-size: 17px
+            color: #444444
+            margin-left: 60px
+
+    .product_page_review_form__rules_block
+        margin-left: 40px
+        margin-top: 25px
+        .title_line
+            display: flex
+            align-items: center
+            font-size: 24px
+            color: #444444
+            span
+                margin-left: 10px
+
+    .product_page_review_form__rules_list
+        margin-top: 20px
+        font-size: 15px
+        color: #444444
+        li
+            margin-bottom: 15px
+
+    .product_page_review_form__rules_btn
+        text-align: center
+        margin-top: 50px
+
+    .product_page_review_form__rules_personal_data_agree
+        margin-top: 25px
+        text-align: center
+        font-size: 15px
+        color: #444444
+        a
+            color: #0ca5d3
+            text-decoration: underline
