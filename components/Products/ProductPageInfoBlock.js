@@ -21,7 +21,14 @@ const ProductPageInfoBlock = () => {
     const [mainSelector, setMainSelector] = useState(null)
 
     const colourStyles = {
-        control: (styles) => ({ ...styles, backgroundColor: 'white' }),
+        control: (styles) => ({
+            ...styles,
+            backgroundColor: 'white',
+            height: '60px',
+            borderRadius: '5px',
+            border: '1px solid #0ca5d3',
+            font: '24px/60px Lato,sans-serif',
+        }),
         option: (styles, { data, isFocused }) => {
             return {
                 ...styles,
@@ -29,6 +36,16 @@ const ProductPageInfoBlock = () => {
                 color: isFocused ? 'white' : '',
             }
         },
+
+        placeholder: (styles) => {
+            return {
+                ...styles,
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                color: '#444',
+            }
+        },
+
         menuList: (styles, { data }) => {
             return {
                 ...styles,
@@ -148,7 +165,7 @@ const ProductPageInfoBlock = () => {
                     <span>5 170</span> Руб.
                 </div>
                 <span className={styles.line}></span>
-                <div>
+                <div className={styles.selector_wrapper}>
                     <div className={styles.hint}>
                         Выберите размер (Ширина*Длина) см.
                     </div>
@@ -156,7 +173,7 @@ const ProductPageInfoBlock = () => {
                 </div>
                 <div>
                     <div className={styles.hint}>Материал каркаса</div>
-                    <ul>
+                    <ul className={styles.suboption_list}>
                         <li
                             className={
                                 styles.product_page__suboptions_row_list_item
@@ -236,7 +253,7 @@ const ProductPageInfoBlock = () => {
                 </div>
                 <div>
                     <div className={styles.hint}>Основание</div>
-                    <ul>
+                    <ul className={styles.suboption_list}>
                         <li
                             className={
                                 styles.product_page__suboptions_row_list_item
@@ -314,12 +331,12 @@ const ProductPageInfoBlock = () => {
                         </li>
                     </ul>
                 </div>
-                <span className={styles.line}></span>
+                <span className={styles.line2}></span>
                 <div className={styles.product_page__meta_info}>
                     <div>ID 382206</div>
                     <div>
                         Продано
-                        <span>22</span> шт.
+                        <span className={styles.blue}> 22</span> шт.
                     </div>
                 </div>
                 <div className={styles.product_page__main_buttons}>

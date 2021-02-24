@@ -141,7 +141,7 @@ const ProductPage = ({
                                     width={51}
                                 /> */}
                                 <img src={CreditCardImage}></img>
-                                <div>
+                                <div className={styles.text}>
                                     Оплата при получении наличными, банковской
                                     картой, электронным кошельком, оплата по
                                     счету.
@@ -162,7 +162,7 @@ const ProductPage = ({
                                     height={51}
                                     width={51}
                                 /> */}
-                                <div>
+                                <div className={styles.text}>
                                     Официальный дилер фабрики. Гарантия
                                     производителя 2 года. Возврат и обмен товара
                                     в полном соответствии закона.
@@ -180,7 +180,7 @@ const ProductPage = ({
                                     width={51}
                                 /> */}
                                 <img src={CarImage}></img>
-                                <div>
+                                <div className={styles.text}>
                                     Доставка <span>по Москве</span>
                                     <br />
                                     Ближайшая доставка: <span>03.02.2021</span>
@@ -188,72 +188,72 @@ const ProductPage = ({
                                     Стоимость доставки: <span>1 500 руб.</span>
                                     <br />
                                     Подъем на груз. лифте:{' '}
-                                    <span>
-                                        1% от стоимости мебели, на пассажирском
-                                        1,1% от стоимости мебели, но не менее
-                                        100 руб. Условия доставки и оплаты.
-                                        Подробнее
-                                    </span>
                                 </div>
                             </li>
                         </ul>
                     </div>
                     {/* {width && width >= 1024 && ( */}
                     <>
-                        {/* <div className="product-page__tabs">
-                                <div className="product-page__tabs-list">
-                                    <div
-                                        onClick={() =>
-                                            onActiveTabClickHandler(
-                                                'description'
-                                            )
-                                        }
-                                        className={`product-page_tabs-list-item ${
-                                            activeTab === 'description'
-                                                ? 'product-page_tabs-list-item product-page_tabs-list-item--active'
-                                                : ''
-                                        }`}
-                                    >
-                                        Описание <br /> и характеристики
-                                    </div>
-                                    <div
-                                        onClick={() =>
-                                            onActiveTabClickHandler('options')
-                                        }
-                                        className={`product-page_tabs-list-item ${
-                                            activeTab === 'options'
-                                                ? 'product-page_tabs-list-item product-page_tabs-list-item--active'
-                                                : ''
-                                        }`}
-                                    >
-                                        Палитра и доп. опции
-                                    </div>
-                                    <div
-                                        onClick={() =>
-                                            onActiveTabClickHandler('review')
-                                        }
-                                        className={`product-page_tabs-list-item ${
-                                            activeTab === 'review'
-                                                ? 'product-page_tabs-list-item product-page_tabs-list-item--active'
-                                                : ''
-                                        }`}
-                                    >
-                                        Оставьте отзыв
-                                    </div>
-                                    <div
-                                        onClick={() =>
-                                            onActiveTabClickHandler('delivery')
-                                        }
-                                        className={`product-page_tabs-list-item ${
-                                            activeTab === 'delivery'
-                                                ? 'product-page_tabs-list-item product-page_tabs-list-item--active'
-                                                : ''
-                                        }`}
-                                    >
-                                        Доставка и оплата
-                                    </div>
+                        <div className={styles.product_page__tabs}>
+                            <div className={styles.product_page__tabs_list}>
+                                <div
+                                    onClick={() =>
+                                        onActiveTabClickHandler('description')
+                                    }
+                                    className={`${
+                                        styles.product_page_tabs_list_item
+                                    } ${
+                                        activeTab === 'description'
+                                            ? `${styles.product_page_tabs_list_item__active}`
+                                            : ''
+                                    }`}
+                                >
+                                    Описание <br /> и характеристики
                                 </div>
-                            </div> */}
+                                <div
+                                    onClick={() =>
+                                        onActiveTabClickHandler('options')
+                                    }
+                                    className={`${
+                                        styles.product_page_tabs_list_item
+                                    } ${
+                                        activeTab === 'options'
+                                            ? `${styles.product_page_tabs_list_item__active}`
+                                            : ''
+                                    }`}
+                                >
+                                    Палитра и доп. опции
+                                </div>
+                                <div
+                                    onClick={() =>
+                                        onActiveTabClickHandler('review')
+                                    }
+                                    className={`${
+                                        styles.product_page_tabs_list_item
+                                    } ${
+                                        activeTab === 'review'
+                                            ? `${styles.product_page_tabs_list_item__active}`
+                                            : ''
+                                    }`}
+                                >
+                                    Оставьте отзыв
+                                </div>
+                                <div
+                                    onClick={() =>
+                                        onActiveTabClickHandler('delivery')
+                                    }
+                                    className={`${
+                                        styles.product_page_tabs_list_item
+                                    } ${
+                                        activeTab === 'delivery'
+                                            ? `${styles.product_page_tabs_list_item__active}`
+                                            : ''
+                                    }`}
+                                >
+                                    Доставка и оплата
+                                </div>
+                            </div>
+                        </div>
                         {/* <div className="product-page__current-tab">
                                 {activeTab === 'description' && (
                                     <ProductPageDescriptionTab
