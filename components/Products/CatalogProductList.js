@@ -43,6 +43,8 @@ const CatalogProductListForDesktop = ({
         (store) => store.CatalogCommonReducer
     )
 
+    const [list, setList] = useState([])
+
     const [Articles, SetArticles] = useState(
         <ArticleListCatalog list={articles} />
     )
@@ -181,7 +183,8 @@ const CatalogProductListForDesktop = ({
                     Temp = 0
                 }
             })
-            return EqualHeightArray
+            // return EqualHeightArray
+            setList(EqualHeightArray)
         } else if (desktopViewType === 'single') {
             let ElemenetsArray = []
 
@@ -423,9 +426,17 @@ const CatalogProductListForDesktop = ({
         }
     }
 
+    useEffect(() => {
+        if (!IsMobile) {
+            render()
+            console.log('rendered')
+        }
+    }, [])
+
     return (
         <div className={styles.catalog_product_list_for_desktop}>
-            {!IsMobile && render()}
+            {/* {!IsMobile && render()} */}
+            {!IsMobile && list}
             {IsMobile && renderMobile()}
         </div>
     )

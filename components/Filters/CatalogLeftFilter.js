@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { Range, getTrackBackground } from 'react-range'
+import Skeleton from '@material-ui/lab/Skeleton'
 
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -624,6 +625,10 @@ const CatalogLeftFilter = ({
                     {sizeSelector}
                 </div>
             </div>
+
+            {closeStatus.length === 0 && (
+                <Skeleton variant="rect" width={241} height={1000} />
+            )}
 
             {selectedActive &&
                 selectedActive.length > 0 &&

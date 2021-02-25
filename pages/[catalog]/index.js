@@ -78,6 +78,8 @@ const CatalogPage = ({
     headers,
     articles,
 }) => {
+    console.log('products', products)
+
     // Vars
     const initialCompositionFilterData = [
         'Размер',

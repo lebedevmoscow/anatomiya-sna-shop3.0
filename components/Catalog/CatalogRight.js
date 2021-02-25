@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
+import Skeleton from '@material-ui/lab/Skeleton'
 
-import CatalogTopFilter from './../Filters/CatalogTopFilter'
+// import CatalogTopFilter from './../Filters/CatalogTopFilter'
 import CatalogProductListForDesktop from './../Products/CatalogProductList'
 import LoadMoreButton from './../Button/LoadMoreButton'
 import CatalogPagination from './../Pagination/CatalogPagination'
@@ -22,6 +24,11 @@ import {
 import { LoadProductsByButtonClick } from './../../actions/NewCatalogProductList'
 
 import styles from './../../styles/components/Catalog/CatalogRight.module.sass'
+
+const CatalogTopFilter = dynamic(
+    () => import('./../Filters/CatalogTopFilter'),
+    { ssr: true }
+)
 
 const CatalogRight = ({
     lastClick,
@@ -453,6 +460,17 @@ const CatalogRight = ({
         }
     })
 
+    const renderLoadedList = () => {
+        const d = []
+
+        for (let i = 0; i < 21; i++) {
+            d.push(<Skeleton variant="react" width={298} height={651} />)
+        }
+        return d
+    }
+
+    const [loading, setLoading] = useState(true)
+
     return (
         <div className={styles.catalog_right}>
             <CatalogTopFilter
@@ -465,7 +483,12 @@ const CatalogRight = ({
                 desktopViewType={desktopViewType}
                 filterProductsIds={filterProductsIds}
             />
-            {firstProductList}
+            <div className={styles.firstLoadProducts}>{firstProductList}</div>
+            {loading && (
+                <div className={styles.catalog_loading_list}>
+                    {renderLoadedList()}
+                </div>
+            )}
             {list}
             {!dontShowButton &&
                 page !== Math.ceil(filterProductsIds.length / 21) && (

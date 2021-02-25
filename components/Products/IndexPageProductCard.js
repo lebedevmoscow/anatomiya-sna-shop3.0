@@ -55,6 +55,7 @@ const ProductCard = ({
     key,
     Id,
     DefaultSize,
+    DontShowFirst = false,
 }) => {
     // Redux
     const dispatch = useDispatch()
@@ -215,7 +216,7 @@ const ProductCard = ({
 
     return (
         <div key={key} className={card_styles.product_card}>
-            <Popups ListSalesList={ListSalesList} />
+            <Popups DontShow={true} ListSalesList={ListSalesList} />
             <div className={card_styles.product_card__wrap_1}>
                 <a target="_blank" rel="noreferrer">
                     <Image src={MainImage} width={208} height={130} />

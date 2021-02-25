@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import Link from 'next/link'
 
 // Redux
@@ -79,14 +79,6 @@ const CatalogTopFilter = ({
 
         if (title === 'popular' && isPopularShowMore) {
             const n = []
-            for (let i = 0; i < 6; i++) {
-                if (i < headers.popularLinks.length) {
-                    n.push({
-                        title: headers.popularLinks[i].title,
-                        link: headers.popularLinks[i].link,
-                    })
-                }
-            }
             setIsPopularShowMore((p) => !p)
             setPopularList(n)
         }
@@ -112,18 +104,18 @@ const CatalogTopFilter = ({
         }
     }
 
-    useEffect(() => {
-        const arr = []
-        for (let i = 0; i < 6; i++) {
-            if (i < headers.popularLinks.length) {
-                arr.push({
-                    title: headers.popularLinks[i].title,
-                    link: headers.popularLinks[i].link,
-                })
-            }
-        }
-        setPopularList(arr)
-    }, [])
+    // useLayoutEffect(() => {
+    //     const arr = []
+    //     for (let i = 0; i < 6; i++) {
+    //         if (i < headers.popularLinks.length) {
+    //             arr.push({
+    //                 title: headers.popularLinks[i].title,
+    //                 link: headers.popularLinks[i].link,
+    //             })
+    //         }
+    //     }
+    //     setPopularList(arr)
+    // }, [])
 
     useEffect(() => {
         if (clicks > 0) {
@@ -203,6 +195,35 @@ const CatalogTopFilter = ({
                     Популярное:
                 </div>
                 <ul className={styles.catalog_top_filter__popular_list}>
+                    {/* {popularList.map((element, index) => {
+                        return (
+                            <Link href={'http://localhost:3000' + element.link}>
+                                <li
+                                    key={index}
+                                    className={
+                                        styles.catalog_top_filter__popular_list_item
+                                    }
+                                >
+                                    <a href="#">{element.title}</a>
+                                </li>
+                            </Link>
+                        )
+                    })} */}
+                    {headers.popularLinks.map((element, index) => {
+                        if (index >= 6) return
+                        return (
+                            <Link href={'http://localhost:3000' + element.link}>
+                                <li
+                                    key={index}
+                                    className={
+                                        styles.catalog_top_filter__popular_list_item
+                                    }
+                                >
+                                    <a href="#">{element.title}</a>
+                                </li>
+                            </Link>
+                        )
+                    })}
                     {popularList.map((element, index) => {
                         return (
                             <Link href={'http://localhost:3000' + element.link}>
