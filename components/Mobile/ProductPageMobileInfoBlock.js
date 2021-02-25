@@ -77,6 +77,11 @@ const ProductPageMobileInfoBlock = () => {
     }, [])
 
     const [cartModalClosed, setCartModalClosed] = useState(true)
+    const [buyOneClickModalClosed, setBuyOneClickModalClosed] = useState(true)
+
+    useEffect(() => {
+        console.log('buyOneClickModalClosed', buyOneClickModalClosed)
+    }, [buyOneClickModalClosed])
 
     return (
         <>
@@ -86,6 +91,16 @@ const ProductPageMobileInfoBlock = () => {
                 isCart={true}
                 closed={cartModalClosed}
                 onClose={() => setCartModalClosed(true)}
+                title={
+                    'Кровать Уют Сервис Гарун К08-К09-К12-К14-К16-К18 в 1 клик!'
+                }
+            />
+            <Modal
+                IsMore={false}
+                isCart={false}
+                BuyOneClick={true}
+                closed={buyOneClickModalClosed}
+                onClose={() => setBuyOneClickModalClosed(true)}
                 title={
                     'Кровать Уют Сервис Гарун К08-К09-К12-К14-К16-К18 в 1 клик!'
                 }
@@ -159,6 +174,9 @@ const ProductPageMobileInfoBlock = () => {
                     </div>
                     <div className={styles.buttons_list_item}>
                         <button
+                            onClick={() => {
+                                setBuyOneClickModalClosed(false)
+                            }}
                             className={`${styles.button} ${styles.button_buy}`}
                         >
                             Купить в 1 клик
