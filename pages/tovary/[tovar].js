@@ -41,6 +41,8 @@ import ProductPageMobileInfoBlock from './../../components/Mobile/ProductPageMob
 import ProductPageMobileAssurances from './../../components/Mobile/ProductPageMobileAssurances'
 // import HelpPickUp from './../../components/Mobile/'
 
+// const Header = dynamic(() => import('./../../components/Header'), { ssr: true })
+
 const CatalogHelpPickUp = dynamic(
     () => import('../../components/Catalog/CatalogHelpPickUp'),
     { ssr: true }

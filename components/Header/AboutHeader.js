@@ -1,11 +1,17 @@
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
 // Styles
 import aboutheader_styles from './../../styles/components/Header/AboutHeader.module.sass'
 
 // React components
-import CityChoiseDesktop from './CityChoiseDesktop/CityChoiseDesktop'
+// import CityChoiseDesktop from './CityChoiseDesktop/CityChoiseDesktop'
+
+const CityChoiseDesktop = dynamic(
+    () => import('./CityChoiseDesktop/CityChoiseDesktop'),
+    { ssr: false }
+)
 
 const AboutHeader = ({ worktimeHead }) => {
     const [Closed, SetClosed] = useState(true)

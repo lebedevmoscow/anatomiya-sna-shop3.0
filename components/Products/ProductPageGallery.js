@@ -56,7 +56,6 @@ const ProductPageGallery = ({ images }) => {
                 watchSlidesVisibility
                 watchSlidesProgress
                 slidesPerView={'auto'}
-                spaceBetween={5}
                 className={styles.product_page__swiper_submain_carousel}
                 navigation={{
                     nextEl: '#productpage__productgallery_submaingallery__next',
@@ -85,7 +84,12 @@ const ProductPageGallery = ({ images }) => {
                 </div>
                 {images.map((image, id) => {
                     return (
-                        <SwiperSlide key={id}>
+                        <SwiperSlide
+                            className={
+                                styles.product_page__swiper_submain_carousel__slide
+                            }
+                            key={id}
+                        >
                             <img src={image} alt="image"></img>
                             {/* <Image
                                 src={image}
