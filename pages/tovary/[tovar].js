@@ -291,7 +291,6 @@ const ProductPage = ({
                         </>
                     )}
                 </div>
-                {IsMobile && <ProductPageMobileTabs />}
                 {IsMobile && (
                     <ProductPageMobileProductGallery images={images} />
                 )}
@@ -312,6 +311,8 @@ const ProductPage = ({
                         <ProductPageMobileAssurances />
                     </div>
                 )}
+                {IsMobile && <ProductPageMobileTabs />}
+
                 {/* <div className="container">
                     <CatalogHelpPickUp />
                     {width && width <= 1024 && width > 768 && (

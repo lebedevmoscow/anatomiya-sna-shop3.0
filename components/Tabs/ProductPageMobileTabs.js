@@ -20,6 +20,8 @@ import EmptyStar from './../../assets/empty-star.png'
 import ImportantImage from './../../assets/warning.png'
 import LoadFilesImage from './../../assets/load-files.png'
 
+import styles from './../../styles/components/Tabs/ProductPageMobileTabs.module.sass'
+
 const ProductPageMobileTabs = () => {
     const content1 = (
         <>
@@ -176,98 +178,185 @@ const ProductPageMobileTabs = () => {
     )
 
     const content4 = (
-        <div className="product-page-review-tab-content-mobile__form-block">
-            <div className="product-page-review-tab-content-mobile__input-wrapper">
+        <div
+            className={
+                styles.product_page_review_tab_content_mobile__form_block
+            }
+        >
+            <div
+                className={
+                    styles.product_page_review_tab_content_mobile__input_wrapper
+                }
+            >
                 <input
-                    className="product-page-review-tab-content-mobile__input"
+                    className={
+                        styles.product_page_review_tab_content_mobile__input
+                    }
                     placeholder="Ваше имя*"
                 ></input>
             </div>
-            <div className="product-page-review-tab-content-mobile__input-wrapper">
+            <div
+                className={
+                    styles.product_page_review_tab_content_mobile__input_wrapper
+                }
+            >
                 <input
-                    className="product-page-review-tab-content-mobile__input"
+                    className={
+                        styles.product_page_review_tab_content_mobile__input
+                    }
                     placeholder="Ваш Email"
                 ></input>
             </div>
-            <div className="product-page-review-tab-content-mobile__input-wrapper">
+            <div
+                className={
+                    styles.product_page_review_tab_content_mobile__input_wrapper
+                }
+            >
                 <input
-                    className="product-page-review-tab-content-mobile__input"
+                    className={
+                        styles.product_page_review_tab_content_mobile__input
+                    }
                     placeholder="Город"
                 ></input>
             </div>
-            <div className="product-page-review-tab-content-mobile__input-wrapper">
+            <div
+                className={
+                    styles.product_page_review_tab_content_mobile__input_wrapper
+                }
+            >
                 <input
-                    className="product-page-review-tab-content-mobile__input product-page-review-tab-content-mobile__input--green"
+                    className={`${styles.product_page_review_tab_content_mobile__input} ${styles.product_page_review_tab_content_mobile__input_green}`}
                     placeholder="Преимущества"
                 ></input>
             </div>
-            <div className="product-page-review-tab-content-mobile__input-wrapper">
+            <div
+                className={
+                    styles.product_page_review_tab_content_mobile__input_wrapper
+                }
+            >
                 <input
-                    className="product-page-review-tab-content-mobile__input product-page-review-tab-content-mobile__input--red"
+                    className={`${styles.product_page_review_tab_content_mobile__input} ${styles.product_page_review_tab_content_mobile__input__red}`}
                     placeholder="Недостатки"
                 ></input>
             </div>
-            <div className="product-page-review-tab-content-mobile__input-wrapper">
+            <div
+                className={
+                    styles.product_page_review_tab_content_mobile__input_wrapper
+                }
+            >
                 <input
-                    className="product-page-review-tab-content-mobile__input"
+                    className={
+                        styles.product_page_review_tab_content_mobile__input
+                    }
                     placeholder="Комментарий*"
                 ></input>
             </div>
-            <div className="product-page-review-tab-content-mobile__your-rating">
-                <div className="title">Ваша оценка*:</div>
-                <ul className="stars-list">
+            <div
+                className={
+                    styles.product_page_review_tab_content_mobile__your_rating
+                }
+            >
+                <div className={styles.title}>Ваша оценка*:</div>
+                <ul className={styles.stars_list}>
                     <li>
-                        <img src={EmptyStar} className="star-list__image"></img>
+                        <img
+                            src={EmptyStar}
+                            className={styles.star_list__image}
+                        ></img>
                         {/* <Image src={EmptyStar} width={25} height={24} /> */}
                     </li>
                     <li>
-                        <img src={EmptyStar} className="star-list__image"></img>
+                        <img
+                            src={EmptyStar}
+                            className={styles.star_list__image}
+                        ></img>
                         {/* <Image src={EmptyStar} width={25} height={24} /> */}
                     </li>
                     <li>
-                        <img src={EmptyStar} className="star-list__image"></img>
+                        <img
+                            src={EmptyStar}
+                            className={styles.star_list__image}
+                        ></img>
                         {/* <Image src={EmptyStar} width={25} height={24} /> */}
                     </li>
                     <li>
-                        <img src={EmptyStar} className="star-list__image"></img>
+                        <img
+                            src={EmptyStar}
+                            className={styles.star_list__image}
+                        ></img>
                         {/* <Image src={EmptyStar} width={25} height={24} /> */}
                     </li>
                     <li>
-                        <img src={EmptyStar} className="star-list__image"></img>
+                        <img
+                            src={EmptyStar}
+                            className={styles.star_list__image}
+                        ></img>
                         {/* <Image src={EmptyStar} width={25} height={24} /> */}
                     </li>
                 </ul>
             </div>
-            <div className="product-page-review-tab-content-mobile__do-you-recommend">
-                <div className="title">Рекоммендуете товар:*</div>
-                <ul className="buttons-list">
-                    <button className="product-page-review-tab-content-mobile__button-2 product-page-review-tab-content-mobile__button-2--active">
+            <div
+                className={
+                    styles.product_page_review_tab_content_mobile__do_you_recommend
+                }
+            >
+                <div className={styles.title}>Рекоммендуете товар:*</div>
+                <ul className={styles.buttons_list}>
+                    <button
+                        className={`${styles.product_page_review_tab_content_mobile__button_2} ${styles.product_page_review_tab_content_mobile__button_2__active}`}
+                    >
                         Да
                     </button>
-                    <button className="product-page-review-tab-content-mobile__button-2">
+                    <button
+                        className={
+                            styles.product_page_review_tab_content_mobile__button_2
+                        }
+                    >
                         Нет
                     </button>
                 </ul>
             </div>
-            <div className="product-page-review-tab-content-mobile__period-of-use">
-                <div className="title">Период использования:*</div>
-                <ul className="buttons-list">
-                    <button className="product-page-review-tab-content-mobile__button-2 product-page-review-tab-content-mobile__button-2--active">
+            <div
+                className={
+                    styles.product_page_review_tab_content_mobile__period_of_use
+                }
+            >
+                <div className={styles.title}>Период использования:*</div>
+                <ul className={styles.buttons_list}>
+                    <button
+                        className={`${styles.product_page_review_tab_content_mobile__button_2} ${styles.product_page_review_tab_content_mobile__button_2__active}`}
+                    >
                         Менее месяца
                     </button>
-                    <button className="product-page-review-tab-content-mobile__button-2">
+                    <button
+                        className={
+                            styles.product_page_review_tab_content_mobile__button_2
+                        }
+                    >
                         Менее года
                     </button>
-                    <button className="product-page-review-tab-content-mobile__button-2">
+                    <button
+                        className={
+                            styles.product_page_review_tab_content_mobile__button_2
+                        }
+                    >
                         Более года
                     </button>
                 </ul>
             </div>
-            <div className="product-page-review-tab-content-mobile__important-field">
+            <div
+                className={
+                    styles.product_page_review_tab_content_mobile__important_field
+                }
+            >
                 * Обязательные поля
             </div>
-            <div className="product-page-review-tab-content-mobile__load-file-block">
-                <label class="custom-file-upload">
+            <div
+                className={
+                    styles.product_page_review_tab_content_mobile__load_file_block
+                }
+            >
+                <label className={styles.custom_file_upload}>
                     <input type="file" />
                     <Image
                         className="image"
@@ -275,14 +364,18 @@ const ProductPageMobileTabs = () => {
                         height={40}
                         src={LoadFilesImage}
                     />
-                    <span className="hint">
+                    <span className={styles.hint}>
                         Нажмите или перетащите сюда фотографии или видео для
                         загрузки (0/10)
                     </span>
                 </label>
             </div>
-            <div className="product-page-review-tab-content-mobile__rules-block">
-                <div className="title">
+            <div
+                className={
+                    styles.product_page_review_tab_content_mobile__rules_block
+                }
+            >
+                <div className={styles.title}>
                     <Image
                         className="image"
                         width={50}
@@ -291,27 +384,55 @@ const ProductPageMobileTabs = () => {
                     />
                     <span>В отзывах запрещено:</span>
                 </div>
-                <ul className="product-page-review-tab-content-mobile__rules-list">
-                    <li className="product-page-review-tab-content-mobile__rules-list-item">
+                <ul
+                    className={
+                        styles.product_page_review_tab_content_mobile__rules_list
+                    }
+                >
+                    <li
+                        className={
+                            styles.product_page_review_tab_content_mobile__rules_list_item
+                        }
+                    >
                         - Использовать нецензурные выражения, оскорбления,
                         угрозы.
                     </li>
-                    <li className="product-page-review-tab-content-mobile__rules-list-item">
+                    <li
+                        className={
+                            styles.product_page_review_tab_content_mobile__rules_list_item
+                        }
+                    >
                         - Публиковать адреса, телефоны и ссылки, содержащие
                         прямую рекламу
                     </li>
-                    <li className="product-page-review-tab-content-mobile__rules-list-item">
+                    <li
+                        className={
+                            styles.product_page_review_tab_content_mobile__rules_list_item
+                        }
+                    >
                         - Обсуждать цену товара в разных регионах и ее изменение
                     </li>
-                    <li className="product-page-review-tab-content-mobile__rules-list-item">
+                    <li
+                        className={
+                            styles.product_page_review_tab_content_mobile__rules_list_item
+                        }
+                    >
                         - Писать отвлеченные от темы и бессмысленные комментарии
                     </li>
                 </ul>
-                <button className="product-page-review-tab-content-mobile__rules-button--reveal">
+                <button
+                    className={
+                        styles.product_page_review_tab_content_mobile__rules_button__reveal
+                    }
+                >
                     Оставить отзыв
                 </button>
             </div>
-            <div className="product-page-review-tab-content-mobile__policy">
+            <div
+                className={
+                    styles.product_page_review_tab_content_mobile__policy
+                }
+            >
                 Нажимая кнопу “Оставить отзыв”, я даю согласие на{' '}
                 <Link href="/">
                     <a>обработку персональных данных</a>
@@ -327,12 +448,28 @@ const ProductPageMobileTabs = () => {
             title: 'Палитра и доп. опции',
             state: 'closed',
             content: [
-                <div className="product-page-option-tab-content-mobile-wrapper">
-                    <div className="product-page-option-tab-content-mobile__block">
-                        <div className="product-page-option-tab-content-mobile__title-block">
+                <div
+                    className={
+                        styles.product_page_option_tab_content_mobile_wrapper
+                    }
+                >
+                    <div
+                        className={
+                            styles.product_page_option_tab_content_mobile__block
+                        }
+                    >
+                        <div
+                            className={
+                                styles.product_page_option_tab_content_mobile__title_block
+                            }
+                        >
                             Материал каркаса
                         </div>
-                        <div className="product-page-option-tab-content-mobile">
+                        <div
+                            className={
+                                styles.product_page_option_tab_content_mobile
+                            }
+                        >
                             <ProductPageOptionTabContentMobile
                                 img={MaterialImage1}
                                 title={'ЛДСП, цвет дуб молочный'}
@@ -350,11 +487,23 @@ const ProductPageMobileTabs = () => {
                             ,
                         </div>
                     </div>
-                    <div className="product-page-option-tab-content-mobile__block">
-                        <div className="product-page-option-tab-content-mobile__title-block">
+                    <div
+                        className={
+                            styles.product_page_option_tab_content_mobile__block
+                        }
+                    >
+                        <div
+                            className={
+                                styles.product_page_option_tab_content_mobile__title_block
+                            }
+                        >
                             Основание
                         </div>
-                        <div className="product-page-option-tab-content-mobile">
+                        <div
+                            className={
+                                styles.product_page_option_tab_content_mobile
+                            }
+                        >
                             <ProductPageOptionTabContentMobile
                                 img={FoundamentImage1}
                                 title={'Без основания'}
@@ -462,10 +611,10 @@ const ProductPageMobileTabs = () => {
 
         if (
             e.target.classList.contains(
-                'product-page-mobile-tabs__list-item'
+                styles.product_page_mobile_tabs__list_item
             ) ||
             e.target.classList.contains(
-                'product-page-mobile-tabs__list-item-title'
+                styles.product_page_mobile_tabs__list_item_title
             )
         ) {
             for (let i = 0; i < clone.length; i++) {
@@ -487,20 +636,26 @@ const ProductPageMobileTabs = () => {
     }
 
     return (
-        <div className="product-page-mobile-tabs">
-            <ul className="product-page-mobile-tabs__list">
+        <div className={styles.product_page_mobile_tabs}>
+            <ul className={styles.product_page_mobile_tabs__list}>
                 {tabs.map((tab, index) => {
                     return (
                         <li
                             onClick={(e) => onTabClickHandler(tab.title, e)}
-                            className={`product-page-mobile-tabs__list-item ${
+                            className={`${
+                                styles.product_page_mobile_tabs__list_item
+                            } ${
                                 tab.state === 'opened'
-                                    ? 'product-page-mobile-tabs__list-item--opened'
+                                    ? `${styles.product_page_mobile_tabs__list_item__opened}`
                                     : ''
                             }`}
                             key={index}
                         >
-                            <div className="product-page-mobile-tabs__list-item-title">
+                            <div
+                                className={
+                                    styles.product_page_mobile_tabs__list_item_title
+                                }
+                            >
                                 {tab.title}
                             </div>
                             <div
@@ -515,8 +670,12 @@ const ProductPageMobileTabs = () => {
                                               marginTop: '20px',
                                           }
                                 }
-                                className={`product-page-mobile-tabs__list-item-content ${
-                                    tab.state === 'opened' ? 'opened' : ''
+                                className={`${
+                                    styles.product_page_mobile_tabs__list_item_content
+                                } ${
+                                    tab.state === 'opened'
+                                        ? `${styles.opened}`
+                                        : ''
                                 }`}
                             >
                                 {tab.content}
