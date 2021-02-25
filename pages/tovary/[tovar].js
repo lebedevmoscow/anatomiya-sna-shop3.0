@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import SwiperCore, { Navigation as SwiperNavigationCore, Thumbs } from 'swiper'
+import React, { useState } from 'react'
 
 // Styles
 import styles from './../../styles/pages/tovar.module.sass'
@@ -36,8 +35,7 @@ import DeliveryTab from './../../components/Tabs/DeliveryTab'
 import MobileBurgerMenu from './../../components/Mobile/MobileBurgerMenu'
 import ProductPageMobileTabs from './../../components/Tabs/ProductPageMobileTabs'
 import ProductPageMobileProductGallery from './../../components/Products/ProductPageMobileProductGallery'
-
-SwiperCore.use([SwiperNavigationCore, Thumbs])
+import ProductPageMobileButtons from './../../components/Button/ProductPageMobileButtons'
 
 const ProductPage = ({
     headerCatalog,
@@ -294,6 +292,11 @@ const ProductPage = ({
                 {IsMobile && <ProductPageMobileTabs />}
                 {IsMobile && (
                     <ProductPageMobileProductGallery images={images} />
+                )}
+                {IsMobile && (
+                    <div className={styles.container}>
+                        <ProductPageMobileButtons />
+                    </div>
                 )}
                 {/* <div className="container">
                     <CatalogHelpPickUp />

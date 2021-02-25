@@ -72,6 +72,7 @@ const ProductPageMobileProductGallery = ({ images }) => {
                     }
                 ></div>
             </div>
+            <div className={styles.empty}></div>
         </div>
     )
 }
