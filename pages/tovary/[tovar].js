@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import dynamic from 'next/dynamic'
 
 // Styles
 import styles from './../../styles/pages/tovar.module.sass'
@@ -38,6 +39,17 @@ import ProductPageMobileProductGallery from './../../components/Products/Product
 import ProductPageMobileButtons from './../../components/Button/ProductPageMobileButtons'
 import ProductPageMobileInfoBlock from './../../components/Mobile/ProductPageMobileInfoBlock'
 import ProductPageMobileAssurances from './../../components/Mobile/ProductPageMobileAssurances'
+// import HelpPickUp from './../../components/Mobile/'
+
+const CatalogHelpPickUp = dynamic(
+    () => import('../../components/Catalog/CatalogHelpPickUp'),
+    { ssr: true }
+)
+
+const SwiperAssurenaces = dynamic(
+    () => import('./../../components/Mobile/MobileAssurances'),
+    { ssr: true }
+)
 
 const ProductPage = ({
     headerCatalog,
@@ -312,6 +324,21 @@ const ProductPage = ({
                     </div>
                 )}
                 {IsMobile && <ProductPageMobileTabs />}
+                {IsMobile && <CatalogHelpPickUp />}
+                {IsMobile && <SwiperAssurenaces />}
+                {IsMobile && (
+                    <div className={styles.container}>
+                        <div className={styles.bottom_text}>
+                            В интернет магазине Анатомия сна вы найдете лучшие
+                            цены на товары фабрики Уют Сервис. Мы являемся
+                            официальным дилером производителя и гарантируем
+                            низкие цены . Вы можете купить Кровать Уют Сервис
+                            Гарун К08-К09-К12-К14-К16-К18 и оплатить удобным для
+                            вас способом. Доставка в Москве в любое удобном для
+                            вас время.
+                        </div>
+                    </div>
+                )}
 
                 {/* <div className="container">
                     <CatalogHelpPickUp />
