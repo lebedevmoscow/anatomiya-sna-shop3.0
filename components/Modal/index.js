@@ -10,6 +10,7 @@ const Modal = ({
     html,
     IsMore = true,
     Popup = false,
+    isCart,
 }) => {
     const hasWindow = typeof window !== 'undefined'
 
@@ -40,7 +41,9 @@ const Modal = ({
                             className={styles.arrow_left}
                         ></i>
                         <span className={styles.modal_titel}>{title}</span>
+                        <span className={styles.line}></span>
                     </div>
+
                     <div className={styles.text}>{text || html}</div>
                     {IsMore && (
                         <div className={styles.buttons}>
@@ -62,6 +65,22 @@ const Modal = ({
                                 </a>
                             </Link>
                             <button className={styles.button__proceed}>
+                                Продолжить покупки
+                            </button>
+                        </div>
+                    )}
+                    {isCart && (
+                        <div className={styles.cart_wrapper}>
+                            <div className={styles.cart_title}>
+                                Добавлен в корзину!
+                            </div>
+                            <button className={styles.go_to_cart}>
+                                Перейти в корзину
+                            </button>
+                            <button
+                                onClick={() => onClose()}
+                                className={styles.proceed}
+                            >
                                 Продолжить покупки
                             </button>
                         </div>
