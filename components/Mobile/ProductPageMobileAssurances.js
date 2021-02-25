@@ -116,7 +116,6 @@ const ProductPageMobileAssurances = () => {
                         </span>
                     </div>
                 </div>
-                <span className={styles.line}></span>
             </div>
         </div>
     )

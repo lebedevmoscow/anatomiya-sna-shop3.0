@@ -13,7 +13,7 @@ const ProductPageReviewTabContentMobile = ({
         <>
             <div
                 style={
-                    className === `${styles.styles}`
+                    className === `closed`
                         ? { display: 'none' }
                         : { display: 'block' }
                 }

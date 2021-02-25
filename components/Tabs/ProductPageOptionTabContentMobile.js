@@ -18,7 +18,7 @@ const ProductPageOptionTabContentMobile = ({ img, title, price }) => {
                 style={
                     active
                         ? {
-                              borderColor: '#0ca5d3',
+                              border: '1px solid #0ca5d3',
                               boxShadow: '1px 3px 7px rgba(0,0,0,.19)',
                           }
                         : {}
@@ -47,6 +47,11 @@ const ProductPageOptionTabContentMobile = ({ img, title, price }) => {
                     className={
                         styles.product_page_option_tab_content_mobile__img
                     }
+                    style={{
+                        display: 'block',
+                        width: '169.5px',
+                        height: '169.5px',
+                    }}
                     src={img}
                 ></img>
                 <div
@@ -69,7 +74,9 @@ const ProductPageOptionTabContentMobile = ({ img, title, price }) => {
                               }
                             : {}
                     }
-                    className={styles.product_page_option_tab_content_mobile__button}
+                    className={
+                        styles.product_page_option_tab_content_mobile__button
+                    }
                 >
                     {active ? 'Добавлено' : 'Добавить'}
                 </button>

@@ -506,7 +506,9 @@ const ProductPageMobileTabs = () => {
                         >
                             <ProductPageOptionTabContentMobile
                                 img={FoundamentImage1}
-                                title={'Без основания'}
+                                title={
+                                    'Реечное основание из фанеры толщиной 1,2 см'
+                                }
                             />
                             ,
                             <ProductPageOptionTabContentMobile
@@ -520,7 +522,7 @@ const ProductPageMobileTabs = () => {
                             <ProductPageOptionTabContentMobile
                                 img={FoundamentImage3}
                                 title={
-                                    'Ортопедическое на ножках с берёзовыми ламелями'
+                                    'Реечное основание из фанеры толщиной 1,2 см'
                                 }
                                 price={4650}
                             />
@@ -568,12 +570,13 @@ const ProductPageMobileTabs = () => {
             state: 'closed',
             content: (
                 <ProductPageReviewTabContentMobile
-                    title={'Оставить отзыв'}
-                    className={reviewModalIsOpen ? '' : 'closed'}
-                    onClose={() => setReviewModalIsOpen(false)}
-                    onClick={() => {
-                        setReviewModalIsOpen(true)
-                    }}
+                    title={'rofl'}
+                    className={'closed'}
+                    // className={reviewModalIsOpen ? '' : 'closed'}
+                    // onClose={() => setReviewModalIsOpen(false)}
+                    // onClick={() => {
+                    //     setReviewModalIsOpen(true)
+                    // }}
                     content={content4}
                 />
             ),
@@ -585,27 +588,27 @@ const ProductPageMobileTabs = () => {
         },
     ])
 
-    useEffect(() => {
-        const clone = tabs.concat()
+    // useEffect(() => {
+    //     const clone = tabs.concat()
 
-        for (let i = 0; i < clone.length; i++) {
-            if (clone[i].title === 'Оставьте отзыв') {
-                clone[i].content = (
-                    <ProductPageReviewTabContentMobile
-                        title={'Оставить отзыв'}
-                        className={reviewModalIsOpen ? '' : 'closed'}
-                        onClose={() => setReviewModalIsOpen(false)}
-                        onClick={() => {
-                            setReviewModalIsOpen(true)
-                        }}
-                        content={content4}
-                    />
-                )
-            }
-        }
+    //     for (let i = 0; i < clone.length; i++) {
+    //         if (clone[i].title === 'Оставьте отзыв') {
+    //             clone[i].content = (
+    //                 <ProductPageReviewTabContentMobile
+    //                     title={'Оставить отзыв'}
+    //                     className={reviewModalIsOpen ? '' : 'closed'}
+    //                     onClose={() => setReviewModalIsOpen(false)}
+    //                     onClick={() => {
+    //                         setReviewModalIsOpen(true)
+    //                     }}
+    //                     content={content4}
+    //                 />
+    //             )
+    //         }
+    //     }
 
-        setTabs(clone)
-    }, [reviewModalIsOpen])
+    //     setTabs(clone)
+    // }, [reviewModalIsOpen])
     const onTabClickHandler = (title, e) => {
         const clone = tabs.concat()
 
