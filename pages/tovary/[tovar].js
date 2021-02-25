@@ -37,6 +37,7 @@ import ProductPageMobileTabs from './../../components/Tabs/ProductPageMobileTabs
 import ProductPageMobileProductGallery from './../../components/Products/ProductPageMobileProductGallery'
 import ProductPageMobileButtons from './../../components/Button/ProductPageMobileButtons'
 import ProductPageMobileInfoBlock from './../../components/Mobile/ProductPageMobileInfoBlock'
+import ProductPageMobileAssurances from './../../components/Mobile/ProductPageMobileAssurances'
 
 const ProductPage = ({
     headerCatalog,
@@ -304,6 +305,11 @@ const ProductPage = ({
                         <div className={styles.container}>
                             <ProductPageMobileInfoBlock />
                         </div>
+                    </div>
+                )}
+                {IsMobile && (
+                    <div className={styles.container}>
+                        <ProductPageMobileAssurances />
                     </div>
                 )}
                 {/* <div className="container">
