@@ -21,6 +21,13 @@ import {
     RemoveProductFromCompareList,
 } from './../../actions/CompareProductsList'
 
+import {
+    CATALOG_PRODUCT_LIST_SET_EMPTY,
+    LoadProductsBySize,
+} from './../../actions/CatalogProductList'
+import { CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY } from './../../actions/NewCatalogProductList'
+import { SelectSize } from './../../actions/SelectedSize'
+
 const EqualHeightElement = dynamic(
     () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
     { ssr: false }

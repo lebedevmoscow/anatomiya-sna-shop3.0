@@ -81,24 +81,48 @@ const CatalogRight = ({
                     LoadByFilters(
                         filterProductsIds,
                         page + 1,
-                        SelectedSizeReducer.selectedSizeId,
+                        SelectedSizeReducer.sizeId,
                         catalogSlug,
                         subCatalogSlug,
                         oldMin,
                         oldMax,
-                        CatalogCommonReducer.filters
+                        CatalogCommonReducer.filters,
+                        CatalogCommonReducer.price,
+                        null,
+                        CatalogCommonReducer.desktopTopFilter,
+                        false,
+                        null,
+                        null
                     )
                 )
             } else {
+                // dispatch(
+                //     LoadProductsByButtonClick(
+                //         filterProductsIds,
+                //         page === 1 ? page + 1 : page + 2,
+                //         SelectedSizeReducer.selectedSizeId,
+                //         catalogSlug,
+                //         subCatalogSlug,
+                //         oldMin,
+                //         oldMax
+                //     )
+                // )
                 dispatch(
-                    LoadProductsByButtonClick(
+                    LoadByFilters(
                         filterProductsIds,
-                        page === 1 ? page + 1 : page + 2,
-                        SelectedSizeReducer.selectedSizeId,
+                        page + 1,
+                        SelectedSizeReducer.sizeId,
                         catalogSlug,
                         subCatalogSlug,
                         oldMin,
-                        oldMax
+                        oldMax,
+                        CatalogCommonReducer.filters,
+                        CatalogCommonReducer.price,
+                        null,
+                        CatalogCommonReducer.desktopTopFilter,
+                        false,
+                        null,
+                        null
                     )
                 )
             }
@@ -107,12 +131,18 @@ const CatalogRight = ({
                 LoadByFilters(
                     filterProductsIds,
                     page + 1,
-                    SelectedSizeReducer.selectedSizeId,
+                    SelectedSizeReducer.sizeId,
                     catalogSlug,
                     subCatalogSlug,
                     oldMin,
                     oldMax,
-                    CatalogCommonReducer.filters
+                    CatalogCommonReducer.filters,
+                    CatalogCommonReducer.price,
+                    null,
+                    CatalogCommonReducer.desktopTopFilter,
+                    false,
+                    null,
+                    null
                 )
             )
         }
