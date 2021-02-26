@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Select from 'react-select'
 import Skeleton from '@material-ui/lab/Skeleton'
 import { SlideDown } from 'react-slidedown'
+import OutsideClickHandler from 'react-outside-click-handler'
 
 // Images
 import StatsImage from './../../assets/svg/stats.svg'
@@ -317,39 +318,59 @@ const ProductPageInfoBlock = () => {
                     </div>
                 </div>
                 <div className={styles.product_page__main_buttons}>
-                    <button
-                        onClick={() => setCartPopupClosed((p) => !p)}
-                        className={`${styles.product_page__main_button} ${styles.product_page__add_to_cart_button}`}
+                    <OutsideClickHandler
+                        onOutsideClick={() => {
+                            setCartPopupClosed(true)
+                            console.log('outside')
+                        }}
                     >
-                        Добавить в корзину
-                        <SlideDown
-                            className={
-                                styles.product_page__add_to_cart_button__popup
-                            }
-                            closed={cartPopupClosed}
+                        <button
+                            className={`${styles.product_page__main_button} ${styles.product_page__add_to_cart_button}`}
                         >
                             <div
                                 style={{
-                                    padding: '30px 20px 1px',
-                                    paddingBottom: '30px',
+                                    padding: '18px 20px',
                                 }}
+                                onClick={() => setCartPopupClosed((p) => !p)}
                             >
-                                <div className={styles.title}>
-                                    Матрас Аскона Balance Smart
-                                </div>
-                                <div className={styles.hint}>
-                                    Добавлен в корзину!
-                                </div>
-                                <div className={styles.popup_button}>
-                                    Перейти в корзину
-                                </div>
+                                Добавить в корзину
                             </div>
-                        </SlideDown>
-                    </button>
+                            <SlideDown
+                                className={
+                                    styles.product_page__add_to_cart_button__popup
+                                }
+                                closed={cartPopupClosed}
+                            >
+                                <div
+                                    style={{
+                                        padding: '30px 20px 1px',
+                                        paddingBottom: '30px',
+                                    }}
+                                >
+                                    <div className={styles.title}>
+                                        Матрас Аскона Balance Smart
+                                    </div>
+                                    <div className={styles.hint}>
+                                        Добавлен в корзину!
+                                    </div>
+                                    <div className={styles.popup_button}>
+                                        Перейти в корзину
+                                    </div>
+                                </div>
+                            </SlideDown>
+                        </button>
+                    </OutsideClickHandler>
+
                     <button
                         className={`${styles.product_page__main_button} ${styles.product_page__buy_one_click}`}
                     >
-                        Купить в 1 клик
+                        <div
+                            style={{
+                                padding: '18px 20px',
+                            }}
+                        >
+                            Купить в 1 клик
+                        </div>
                     </button>
                 </div>
             </div>
