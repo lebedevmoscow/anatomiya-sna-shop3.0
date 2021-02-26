@@ -4,6 +4,8 @@ import Select from 'react-select'
 import Skeleton from '@material-ui/lab/Skeleton'
 import { SlideDown } from 'react-slidedown'
 import OutsideClickHandler from 'react-outside-click-handler'
+import InputMask from 'react-input-mask'
+import Link from 'next/link'
 
 // Images
 import StatsImage from './../../assets/svg/stats.svg'
@@ -66,6 +68,7 @@ const ProductPageInfoBlock = () => {
     ]
 
     const [cartPopupClosed, setCartPopupClosed] = useState(true)
+    const [buyOneClickPopupClosed, setBuyOneClickPopupClosed] = useState(true)
 
     return (
         <div className={styles.product_page__info}>
@@ -321,7 +324,6 @@ const ProductPageInfoBlock = () => {
                     <OutsideClickHandler
                         onOutsideClick={() => {
                             setCartPopupClosed(true)
-                            console.log('outside')
                         }}
                     >
                         <button
@@ -361,17 +363,66 @@ const ProductPageInfoBlock = () => {
                         </button>
                     </OutsideClickHandler>
 
-                    <button
-                        className={`${styles.product_page__main_button} ${styles.product_page__buy_one_click}`}
+                    <OutsideClickHandler
+                        onOutsideClick={() => {
+                            setBuyOneClickPopupClosed(true)
+                        }}
                     >
-                        <div
-                            style={{
-                                padding: '18px 20px',
-                            }}
+                        <button
+                            className={`${styles.product_page__main_button} ${styles.product_page__buy_one_click}`}
                         >
-                            Купить в 1 клик
-                        </div>
-                    </button>
+                            <div
+                                style={{
+                                    padding: '18px 20px',
+                                }}
+                                onClick={() =>
+                                    setBuyOneClickPopupClosed((p) => !p)
+                                }
+                            >
+                                Купить в 1 клик
+                            </div>
+                            <SlideDown
+                                className={
+                                    styles.product_page__buy_one_click_popup
+                                }
+                                closed={buyOneClickPopupClosed}
+                            >
+                                <div
+                                    style={{
+                                        padding: '30px 20px 1px',
+                                        paddingBottom: '30px',
+                                    }}
+                                >
+                                    <div className={styles.title}>
+                                        Матрас Аскона Balance Smart в 1 клик!
+                                    </div>
+                                    <div className={styles.text}>
+                                        Заполните форму быстрого заказа, и наши
+                                        менеджеры свяжутся с вами.
+                                    </div>
+                                    <div className={styles.hint}>
+                                        Ваш телефон*
+                                    </div>
+                                    <div className={styles.input_wrapper}>
+                                        <InputMask
+                                            placeholder={'+7 (___) ___  __ __'}
+                                            mask="+7 (999) 99 99"
+                                            maskChar="_"
+                                        />
+                                    </div>
+                                    <div className={styles.popup_button}>
+                                        Отправить заказ
+                                    </div>
+                                    <div className={styles.copy}>
+                                        Нажимая на кнопку, я даю согласие на{' '}
+                                        <Link href="/">
+                                            <a>обработку персональных данных</a>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </SlideDown>
+                        </button>
+                    </OutsideClickHandler>
                 </div>
             </div>
         </div>
