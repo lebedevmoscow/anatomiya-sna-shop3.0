@@ -84,6 +84,51 @@
             color: #0CA5D3
             margin-left: 5px
 
+    .product_page__add_to_cart_button
+        position: relative
+        box-sizing: border-box
+
+    .product_page__add_to_cart_button__popup
+        box-sizing: border-box
+        position: absolute
+        background-color: #0EA8D5
+        z-index: 1
+        left: 0
+        top: calc(100% + 5px)
+        width: 100%
+
+        &::after
+            position: absolute
+            bottom: 100%
+            left: 100px
+            content: ""
+            width: 0
+            height: 0
+            border-color: transparent transparent #0ca5d3
+            border-style: solid
+            border-width: 0 5px 7px
+        .hint
+            font-size: 15px
+            color: #fff
+            text-align: center
+            margin-bottom: 12px
+            text-transform: uppercase
+            margin-top: 25px
+        .popup_button
+            padding: 20px
+            width: 90%
+            border-radius: 5px
+            font-size: 24px
+            line-height: 1
+            box-shadow: 1px 3px 7px rgb(0 0 0 / 19%)
+            background: #ffdb4d
+            color: #444
+            outline: none
+            text-decoration: none
+            display: inline-block
+            text-align: center
+            border: none
+
     .hover_element
         box-sizing: border-box
         width: 160px

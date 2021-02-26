@@ -343,26 +343,26 @@ const DesktopSingle = ({
             }
         }
 
-        SetLastSelector(
-            <Select
-                isDisabled={OptionsForSelect.length === 1 ? true : false}
-                onChange={(data) => {
-                    SetCurrentSize(data)
-                    OnSelectSize(data)
-                    const Size = {}
-                    Size.value = data.value
-                    Size.label = data.label
-                    SetInitialSelectedSize(Size)
-                }}
-                className={styles.catalog_product_card__selector}
-                classNamePrefix={styles.catalog_product_card__selector__inner}
-                placeholder={placeholderSize}
-                styles={colourStyles}
-                options={OptionsForSelect}
-                isSearchable={false}
-                autoFocus={false}
-            />
-        )
+        // SetLastSelector(
+        //     <Select
+        //         isDisabled={OptionsForSelect.length === 1 ? true : false}
+        //         onChange={(data) => {
+        //             SetCurrentSize(data)
+        //             OnSelectSize(data)
+        //             const Size = {}
+        //             Size.value = data.value
+        //             Size.label = data.label
+        //             SetInitialSelectedSize(Size)
+        //         }}
+        //         className={styles.catalog_product_card__selector}
+        //         classNamePrefix={styles.catalog_product_card__selector__inner}
+        //         placeholder={placeholderSize}
+        //         styles={colourStyles}
+        //         options={OptionsForSelect}
+        //         isSearchable={false}
+        //         autoFocus={false}
+        //     />
+        // )
 
         dispatch({ type: CATALOG_PRODUCT_LIST_SET_EMPTY })
         dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY })

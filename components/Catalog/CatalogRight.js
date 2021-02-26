@@ -460,16 +460,16 @@ const CatalogRight = ({
         }
     })
 
-    const renderLoadedList = () => {
-        const d = []
+    // const renderLoadedList = () => {
+    //     const d = []
 
-        for (let i = 0; i < 21; i++) {
-            d.push(<Skeleton variant="react" width={298} height={651} />)
-        }
-        return d
-    }
+    //     for (let i = 0; i < 21; i++) {
+    //         d.push(<Skeleton variant="react" width={298} height={651} />)
+    //     }
+    //     return d
+    // }
 
-    const [loading, setLoading] = useState(true)
+    // const [loading, setLoading] = useState(true)
 
     return (
         <div className={styles.catalog_right}>
@@ -483,12 +483,17 @@ const CatalogRight = ({
                 desktopViewType={desktopViewType}
                 filterProductsIds={filterProductsIds}
             />
-            <div className={styles.firstLoadProducts}>{firstProductList}</div>
-            {loading && (
+            <div
+                // onLoad={() => setLoading(false)}
+                className={styles.firstLoadProducts}
+            >
+                {firstProductList}
+            </div>
+            {/* {loading && (
                 <div className={styles.catalog_loading_list}>
                     {renderLoadedList()}
                 </div>
-            )}
+            )} */}
             {list}
             {!dontShowButton &&
                 page !== Math.ceil(filterProductsIds.length / 21) && (

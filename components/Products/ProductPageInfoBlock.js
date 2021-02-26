@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Select from 'react-select'
 import Skeleton from '@material-ui/lab/Skeleton'
+import { SlideDown } from 'react-slidedown'
 
 // Images
 import StatsImage from './../../assets/svg/stats.svg'
@@ -62,6 +63,8 @@ const ProductPageInfoBlock = () => {
         { value: '190*60', label: '190*60' },
         { value: '190*60', label: '190*60' },
     ]
+
+    const [cartPopupClosed, setCartPopupClosed] = useState(true)
 
     return (
         <div className={styles.product_page__info}>
@@ -315,9 +318,33 @@ const ProductPageInfoBlock = () => {
                 </div>
                 <div className={styles.product_page__main_buttons}>
                     <button
+                        onClick={() => setCartPopupClosed((p) => !p)}
                         className={`${styles.product_page__main_button} ${styles.product_page__add_to_cart_button}`}
                     >
                         Добавить в корзину
+                        <SlideDown
+                            className={
+                                styles.product_page__add_to_cart_button__popup
+                            }
+                            closed={cartPopupClosed}
+                        >
+                            <div
+                                style={{
+                                    padding: '30px 20px 1px',
+                                    paddingBottom: '30px',
+                                }}
+                            >
+                                <div className={styles.title}>
+                                    Матрас Аскона Balance Smart
+                                </div>
+                                <div className={styles.hint}>
+                                    Добавлен в корзину!
+                                </div>
+                                <div className={styles.popup_button}>
+                                    Перейти в корзину
+                                </div>
+                            </div>
+                        </SlideDown>
                     </button>
                     <button
                         className={`${styles.product_page__main_button} ${styles.product_page__buy_one_click}`}

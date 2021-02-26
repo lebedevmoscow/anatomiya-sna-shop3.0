@@ -183,8 +183,8 @@ const CatalogProductListForDesktop = ({
                     Temp = 0
                 }
             })
-            // return EqualHeightArray
-            setList(EqualHeightArray)
+            return EqualHeightArray
+            // setList(EqualHeightArray)
         } else if (desktopViewType === 'single') {
             let ElemenetsArray = []
 
@@ -426,17 +426,9 @@ const CatalogProductListForDesktop = ({
         }
     }
 
-    useEffect(() => {
-        if (!IsMobile) {
-            render()
-            console.log('rendered')
-        }
-    }, [])
-
     return (
         <div className={styles.catalog_product_list_for_desktop}>
-            {/* {!IsMobile && render()} */}
-            {!IsMobile && list}
+            {!IsMobile && render()}
             {IsMobile && renderMobile()}
         </div>
     )
