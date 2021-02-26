@@ -131,14 +131,21 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
                                             menu_styles.mobile_menu__item
                                         }
                                     >
-                                        <Image
+                                        {/* <Image
                                             src={
                                                 'https://anatomiyasna.ru' +
                                                 catalog.image
                                             }
                                             width={46}
                                             height={46}
-                                        />
+                                        /> */}
+
+                                        <img
+                                            src={
+                                                'https://anatomiyasna.ru' +
+                                                catalog.image
+                                            }
+                                        ></img>
 
                                         <Link href={'/' + catalog.url}>
                                             <a>
@@ -192,18 +199,20 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
                                 }
                             >
                                 <li onClick={onSearchBarClickHandler}>
-                                    <Image
+                                    <img src={SearchIcon}></img>
+                                    {/* <Image
                                         src={SearchIcon}
                                         width={25.5}
                                         height={25.5}
-                                    />
+                                    /> */}
                                 </li>
                                 <li>
-                                    <Image
+                                    {/* <Image
                                         src={PhoneIcon}
                                         width={25.5}
                                         height={25.5}
-                                    />
+                                    /> */}
+                                    <img src={PhoneIcon}></img>
                                 </li>
                                 <li
                                     style={{ marginRight: 0 }}
@@ -233,14 +242,20 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
                                                 menu_styles.mobile_nav_menu__list_item
                                             }
                                         >
-                                            <Image
+                                            {/* <Image
                                                 src={
                                                     'https://anatomiyasna.ru' +
                                                     item.image
                                                 }
                                                 width={46}
                                                 height={46}
-                                            />
+                                            /> */}
+                                            <img
+                                                src={
+                                                    'https://anatomiyasna.ru' +
+                                                    item.image
+                                                }
+                                            ></img>
                                             <span>{item.title}</span>
                                             <i
                                                 className={
@@ -257,14 +272,20 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
                                                 menu_styles.mobile_nav_menu__list_item
                                             }
                                         >
-                                            <Image
+                                            {/* <Image
                                                 src={
                                                     'https://anatomiyasna.ru' +
                                                     item.image
                                                 }
                                                 width={46}
                                                 height={46}
-                                            />
+                                            /> */}
+                                            <img
+                                                src={
+                                                    'https://anatomiyasna.ru' +
+                                                    item.image
+                                                }
+                                            ></img>
                                             <span>{item.title}</span>
                                         </li>
                                     )

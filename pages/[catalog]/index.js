@@ -241,7 +241,7 @@ const CatalogPage = ({
             {!IsMobile && !breakpoint1023 && (
                 <div className={common_styles.container}>
                     <div className={common_styles.catalog}>
-                        <CatalogLeftFilter
+                        {/* <CatalogLeftFilter
                             lastClick={lastClick}
                             setLastClick={setLastClick}
                             filterAPIData={filterAPIData}
@@ -250,7 +250,7 @@ const CatalogPage = ({
                             filterProductsIds={filterProductsIds}
                             catalogSlug={catalogSlug}
                             subCatalogSlug={subCatalogSlug}
-                        />
+                        /> */}
                         <CatalogRight
                             headers={headers}
                             lastClick={lastClick}

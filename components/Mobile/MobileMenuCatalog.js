@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Image from 'next/image'
+// import Image from 'next/image'
 
 import useMedia from './../../hooks/useMedia'
 
@@ -14,12 +14,20 @@ const MobileMenuCatalog = ({ banner, mobilemenuCatalogs }) => {
             {banner && breakpoint769 && (
                 <Link href={'/' + banner.slug}>
                     <a style={{ display: 'block', marginTop: '43px' }}>
-                        <Image
+                        <img
+                            style={{
+                                display: 'block',
+                                width: '688px',
+                                height: '41.02px',
+                            }}
+                            src={'https://anatomiyasna.ru' + banner.image}
+                        ></img>
+                        {/* <Image
                             className={menu_styles.mobile_menu__mini_banner}
                             src={'https://anatomiyasna.ru' + banner.image}
                             width={688}
                             height={41.02}
-                        />
+                        /> */}
                     </a>
                 </Link>
             )}
@@ -32,14 +40,20 @@ const MobileMenuCatalog = ({ banner, mobilemenuCatalogs }) => {
                                     key={index}
                                     className={menu_styles.mobile_menu__item}
                                 >
-                                    <Image
+                                    {/* <Image
                                         width={46}
                                         height={46}
                                         src={
                                             'https://www.anatomiyasna.ru' +
                                             catalog.image
                                         }
-                                    />
+                                    /> */}
+                                    <img
+                                        src={
+                                            'https://www.anatomiyasna.ru' +
+                                            catalog.image
+                                        }
+                                    ></img>
                                     <Link href={'/' + catalog.url}>
                                         <a>
                                             <span>{catalog.title}</span>

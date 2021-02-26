@@ -26,11 +26,27 @@ import Subscribe from './../components/Subscribe'
 import MobileFooter from './../components/Mobile/MobieFooter'
 import SwiperAssurenaces from './../components/Mobile/MobileAssurances'
 
+// const SwiperAssurenaces = dynamic(
+//     () => import('./../components/Mobile/MobileAssurances'),
+//     { ssr: true }
+// )
+
+// const MobileFooter = dynamic(
+//     () => import('./../components/Mobile/MobieFooter'),
+//     { ssr: true }
+// )
+
 // Experemental
 // const IndexLazyLoad = dynamic(
 //     () => import('./../components/NOSSR/IndexLazyLoad'),
 //     { ssr: false }
 // )
+
+// const MobileBurgerMenu = dynamic(
+//     () => import('./../components/Mobile/MobileBurgerMenu'),
+//     { ssr: true }
+// )
+
 // const ProductListForDesktop = dynamic(
 //     () => import('./../components/Products/IndexPageProductListForDesktop'),
 //     { ssr: false }
@@ -83,6 +99,7 @@ const App = ({
     mobileCatalogs,
     reviews,
     sales,
+    IsMobile,
     // mattrassesText,
     // assurances,
 }) => {
@@ -96,25 +113,31 @@ const App = ({
 
     return (
         <div className="app">
-            <MobileBurgerMenu
-                mobilemenuCatalogs={mobilemenuCatalogs}
-                mobileMenu={mobileMenu}
-                regions={regions}
-            />
-            <Header
-                worktimeHead={worktimeHead}
-                banner={null}
-                phoneCommon={phoneCommon}
-            />
-            {!breakpoint1023 && (
+            {IsMobile && (
+                <MobileBurgerMenu
+                    mobilemenuCatalogs={mobilemenuCatalogs}
+                    mobileMenu={mobileMenu}
+                    regions={regions}
+                />
+            )}
+            {!IsMobile && (
+                <Header
+                    worktimeHead={worktimeHead}
+                    banner={null}
+                    phoneCommon={phoneCommon}
+                />
+            )}
+            {!IsMobile && !breakpoint1023 && (
                 <MainNavigation headerCatalog={headerCatalog} />
             )}
-            <MobileMenuCatalog
-                banner={null}
-                mobilemenuCatalogs={mobilemenuCatalogs}
-            />
+            {IsMobile && (
+                <MobileMenuCatalog
+                    banner={null}
+                    mobilemenuCatalogs={mobilemenuCatalogs}
+                />
+            )}
 
-            {!breakpoint600 && (
+            {!IsMobile && !breakpoint600 && (
                 <div
                     className={`${common_styles.container} ${common_styles.header} `}
                 >
@@ -129,11 +152,14 @@ const App = ({
                     </div>
                 </div>
             )}
-            <div className={common_styles.container}>
-                {!breakpoint720 && (
-                    <ProductListForDesktop products={products} />
-                )}
-            </div>
+
+            {!IsMobile && (
+                <div className={common_styles.container}>
+                    {!breakpoint720 && (
+                        <ProductListForDesktop products={products} />
+                    )}
+                </div>
+            )}
             <CatalogList mobileCatalogs={mobileCatalogs} />
             <ReviewList reviews={reviews} />
 
@@ -152,7 +178,19 @@ const App = ({
 
 export default App
 
-export const getStaticProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
+    const userAgent = ctx.req.headers['user-agent']
+
+    const regex = /Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/
+
+    let IsMobile = null
+
+    if (userAgent.match(regex)) {
+        IsMobile = true
+    } else {
+        IsMobile = false
+    }
+
     // Fetching Data
     const URLS = [
         'https://www.anatomiyasna.ru/api/journal/article-list?mode=new&page=1&limit=6',
@@ -176,7 +214,17 @@ export const getStaticProps = async (ctx) => {
     let Response = {}
     await Promise.all(
         URLS.map(async (url, index) => {
+            // Only for Desktop
+            if ((index === 8 || index === 9 || index === 10) && IsMobile) {
+                return null
+            }
+            // Only for Mobile
+            if ((index === 5 || index === 6) && !IsMobile) {
+                return null
+            }
+
             return fetch(url).then((resp) => {
+                console.log('url', url)
                 if (resp && resp.status !== 404) {
                     if (index === 14) {
                         return resp.text()
@@ -208,7 +256,7 @@ export const getStaticProps = async (ctx) => {
     // const assurances = Response[4].main_page_warranty_text
 
     const phoneCommon = '8 (495) 287-87-95'
-    const filterProductsCount = filterProductsIds.length
+    const filterProductsCount = IsMobile ? null : filterProductsIds.length
     return {
         props: {
             articles,
@@ -225,6 +273,7 @@ export const getStaticProps = async (ctx) => {
             mobileCatalogs,
             reviews,
             sales,
+            IsMobile,
             // mattrassesText,
             // assurances,
         },

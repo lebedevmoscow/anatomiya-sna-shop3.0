@@ -493,6 +493,7 @@ const DesktopSeveral = ({
                 </div>
                 <div className={styles.catalog_product_card__smalltext}>
                     Купить {CatalogType}
+                    (id: {Id})
                 </div>
                 <EqualHeightElement name="CatalogProductCard">
                     <div
