@@ -83,10 +83,7 @@ const ProductPageInfoBlock = () => {
     const [cartPopupClosed, setCartPopupClosed] = useState(true)
     const [buyOneClickPopupClosed, setBuyOneClickPopupClosed] = useState(true)
     const [giftPopupIsClosed, setGiftPopupIsClosed] = useState(true)
-
-    useEffect(() => {
-        console.log('giftPopupIsClosed', giftPopupIsClosed)
-    }, [giftPopupIsClosed])
+    const [savePricePopupIsClosed, setSavePricePopupIsClosed] = useState(true)
 
     const [isFavorite, setIsFavorite] = useState(false)
     const [isCompared, setIsCompared] = useState(false)
@@ -146,7 +143,78 @@ const ProductPageInfoBlock = () => {
             </div>
             <div className={styles.product_page__line_with_buttons}>
                 <div className={styles.big_button}>
-                    Хотите <span>сохранить цену?</span>
+                    <OutsideClickHandler
+                        onOutsideClick={() => {
+                            setSavePricePopupIsClosed(true)
+                        }}
+                    >
+                        <p
+                            style={{
+                                width: '100%',
+                                textAlign: 'center',
+                            }}
+                            onClick={() => setSavePricePopupIsClosed((p) => !p)}
+                        >
+                            Хотите <span>сохранить цену?</span>
+                        </p>
+
+                        <SlideDown
+                            className={styles.savepricepopup}
+                            closed={savePricePopupIsClosed}
+                        >
+                            <div
+                                style={{
+                                    padding: '30px 20px 1px',
+                                    paddingBottom: '30px',
+                                }}
+                            >
+                                <div className={styles.title}>
+                                    Хотите сохранить цену?
+                                </div>
+                                <div className={styles.text}>
+                                    Нет возможности купить сейчас? Не упустите
+                                    выгодную цену! <br />
+                                    Оформите заказ с текущей скидкой <br />и
+                                    оплатите его в течение 30 дней
+                                </div>
+                                <div className={styles.form_wrapper}>
+                                    <div className={styles.subform_wrapper}>
+                                        <div className={styles.form_title}>
+                                            Ваше имя
+                                        </div>
+                                        <div className={styles.input_wrapper}>
+                                            <input type="text" />
+                                        </div>
+                                    </div>
+                                    <div className={styles.subform_wrapper}>
+                                        <div className={styles.form_title}>
+                                            Телефон
+                                        </div>
+                                        <div className={styles.input_wrapper}>
+                                            <InputMask
+                                                placeholder={
+                                                    '+7 (___) ___  __ __'
+                                                }
+                                                mask="+7 (999) 99 99"
+                                                maskChar="_"
+                                            />
+                                        </div>
+                                    </div>
+                                    <button className={styles.button}>
+                                        Заказать
+                                    </button>
+                                    <div className={styles.copy}>
+                                        Нажимая на кнопку, я даю согласие на{' '}
+                                        <Link href="/">
+                                            <a>
+                                                обработку персональных данных{' '}
+                                            </a>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </SlideDown>
+                    </OutsideClickHandler>
                 </div>
                 <div className={styles.button}>
                     <svg
