@@ -17,10 +17,23 @@ import FoundamentImage1 from './../../TEMP/foundament/1.jpg'
 import FoundamentImage2 from './../../TEMP/foundament/2.jpg'
 import FoundamentImage3 from './../../TEMP/foundament/3.jpg'
 
+// Redux
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    AddProductToFavoriteList,
+    RemoveProductFromFavoriteList,
+} from './../../actions/FavoritesProductsList'
+import {
+    AddProductToCompareList,
+    RemoveProductFromCompareList,
+} from './../../actions/CompareProductsList'
+
 // Styles
 import styles from './../../styles/components/Products/ProductPageInfoBlock.module.sass'
 
 const ProductPageInfoBlock = () => {
+    const dispatch = useDispatch()
+
     const colourStyles = {
         control: (styles) => ({
             ...styles,
@@ -69,13 +82,61 @@ const ProductPageInfoBlock = () => {
 
     const [cartPopupClosed, setCartPopupClosed] = useState(true)
     const [buyOneClickPopupClosed, setBuyOneClickPopupClosed] = useState(true)
+    const [giftPopupIsClosed, setGiftPopupIsClosed] = useState(true)
+
+    useEffect(() => {
+        console.log('giftPopupIsClosed', giftPopupIsClosed)
+    }, [giftPopupIsClosed])
+
+    const [isFavorite, setIsFavorite] = useState(false)
+    const [isCompared, setIsCompared] = useState(false)
 
     return (
         <div className={styles.product_page__info}>
             <div className={styles.product_page__line_with_buttons}>
                 <div className={styles.big_button}>
-                    <span>+101 </span>cнов в подарок!
+                    <OutsideClickHandler
+                        onOutsideClick={() => {
+                            setGiftPopupIsClosed(true)
+                            console.log('outside')
+                        }}
+                    >
+                        <p
+                            style={{
+                                width: '100%',
+                                textAlign: 'center',
+                            }}
+                            onClick={() => setGiftPopupIsClosed((p) => !p)}
+                        >
+                            <span>+101 </span>
+                            cнов в подарок!
+                        </p>
+
+                        <SlideDown
+                            className={styles.product_page_gift_popup}
+                            closed={giftPopupIsClosed}
+                        >
+                            <div
+                                style={{
+                                    padding: '30px 20px 1px',
+                                    paddingBottom: '30px',
+                                }}
+                            >
+                                <div className={styles.title}>
+                                    Бонусная программа Анатомии Сна
+                                </div>
+                                <div className={styles.text}>
+                                    Оформите заказ через корзину и получите
+                                    бонусные сны в подарок! Скидка действует на
+                                    весь заказ при условии онлайн-оплаты.
+                                    Подробную информацию уточняйте у
+                                    продавцов-консультантов!
+                                </div>
+                            </div>
+                        </SlideDown>
+                    </OutsideClickHandler>
                 </div>
+
                 <div className={styles.button}>
                     <Image src={StatsImage} width={30} height={30} />
                 </div>
