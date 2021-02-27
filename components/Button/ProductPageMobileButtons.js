@@ -4,7 +4,10 @@ import styles from './../../styles/components/Button/ProductPageMobileButtons.mo
 import StatsImage from './../../assets/svg/stats.svg'
 import HeartImage from './../../assets/svg/heart.svg'
 
-const ProductPageMobileButtons = () => {
+const ProductPageMobileButtons = ({
+    setGiftModalMobileClosed,
+    setSavePriceModalMobileClosed,
+}) => {
     return (
         <div className={styles.product_page_mobile_btns}>
             <div className={styles.product_page__mobile_btns__row}>
@@ -41,6 +44,10 @@ const ProductPageMobileButtons = () => {
             </div>
             <div className={styles.product_page__mobile_btns__row}>
                 <div
+                    onClick={() => {
+                        setGiftModalMobileClosed((p) => !p)
+                        console.log('click')
+                    }}
                     className={styles.product_page__mobile_btns__row__big_item}
                 >
                     <span className={styles.text}>
@@ -49,6 +56,9 @@ const ProductPageMobileButtons = () => {
                     </span>
                 </div>
                 <div
+                    onClick={() => {
+                        setSavePriceModalMobileClosed((p) => !p)
+                    }}
                     className={styles.product_page__mobile_btns__row__big_item}
                 >
                     <span className={styles.text}>

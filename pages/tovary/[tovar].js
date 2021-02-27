@@ -40,6 +40,8 @@ import ProductPageMobileButtons from './../../components/Button/ProductPageMobil
 import ProductPageMobileInfoBlock from './../../components/Mobile/ProductPageMobileInfoBlock'
 import ProductPageMobileAssurances from './../../components/Mobile/ProductPageMobileAssurances'
 import ProductPageDesktopPopup from './../../components/Popups/ProductPageDesktopPopup'
+import InputMask from 'react-input-mask'
+import Link from 'next/link'
 import Modal from './../../components/Modal'
 // import HelpPickUp from './../../components/Mobile/'
 
@@ -90,6 +92,9 @@ const ProductPage = ({
     const txt =
         'Оформите заказ на сумму от 500 до 10 000 руб без первоначального взноса и переплат,  не выходя из дома, сроком на 4 месяца.'
 
+    const txt2 =
+        'Оформите заказ через корзину и получите бонусные сны в подарок! Скидка действует на весь заказ при условии онлайн-оплаты. Подробную информацию уточняйте у продавцов-консультантов!'
+
     const saleContentModalMobile = (
         <>
             <button
@@ -106,7 +111,62 @@ const ProductPage = ({
         </>
     )
 
+    const giftContentModalMobile = (
+        <>
+            <button
+                onClick={() => setGiftModalMobileClosed(true)}
+                className={`${styles.modal_button_sale} ${styles.modal_button_sale__proceed}`}
+            >
+                Продолжить покупки
+            </button>
+        </>
+    )
+
+    const SavePriceModalMobileContent = (
+        <>
+            <div className={styles.form_wrapper}>
+                <div className={styles.subform_wrapper}>
+                    <div className={styles.form_title}>Ваше имя</div>
+                    <div className={styles.input_wrapper}>
+                        <input type="text" />
+                    </div>
+                </div>
+                <div className={styles.subform_wrapper}>
+                    <div className={styles.form_title}>Телефон</div>
+                    <div className={styles.input_wrapper}>
+                        <InputMask
+                            placeholder={'+7 (___) ___  __ __'}
+                            mask="+7 (999) 99 99"
+                            maskChar="_"
+                        />
+                    </div>
+                </div>
+                <button className={styles.button}>Заказать</button>
+                <div className={styles.copy}>
+                    Нажимая на кнопку, я даю согласие на{' '}
+                    <Link href="/">
+                        <a>обработку персональных данных </a>
+                    </Link>
+                </div>
+            </div>
+            <button
+                onClick={() => setSavePriceModalMobileClosed(true)}
+                style={{
+                    marginTop: '20px',
+                }}
+                className={`${styles.modal_button_sale} ${styles.modal_button_sale__proceed}`}
+            >
+                Продолжить покупки
+            </button>
+        </>
+    )
+
     const [saleModalMobileClosed, setModalMobileClosed] = useState(true)
+    const [
+        savePriceModalMobileClosed,
+        setSavePriceModalMobileClosed,
+    ] = useState(true)
+    const [giftModalMobileClosed, setGiftModalMobileClosed] = useState(true)
 
     return (
         <>
@@ -129,6 +189,34 @@ const ProductPage = ({
                     Popup={false}
                     BuyOneClick={false}
                     content={saleContentModalMobile}
+                />
+            )}
+
+            {IsMobile && (
+                <Modal
+                    closed={giftModalMobileClosed}
+                    onClose={() => setGiftModalMobileClosed(true)}
+                    title={'Бонусная программа Анатомии Сна'}
+                    text={txt2}
+                    IsMore={false}
+                    Popup={false}
+                    BuyOneClick={false}
+                    content={giftContentModalMobile}
+                />
+            )}
+
+            {IsMobile && (
+                <Modal
+                    closed={savePriceModalMobileClosed}
+                    onClose={() => setSavePriceModalMobileClosed(true)}
+                    title={'Хотите сохранить цену?'}
+                    text={
+                        'Нет возможности купить сейчас? Не упустите выгодную цену! Оформите заказ с текущей скидкой и оплатите его в течение 30 дней'
+                    }
+                    IsMore={false}
+                    Popup={false}
+                    BuyOneClick={false}
+                    content={SavePriceModalMobileContent}
                 />
             )}
 
@@ -465,7 +553,12 @@ const ProductPage = ({
                 )}
                 {IsMobile && (
                     <div className={styles.container}>
-                        <ProductPageMobileButtons />
+                        <ProductPageMobileButtons
+                            setSavePriceModalMobileClosed={
+                                setSavePriceModalMobileClosed
+                            }
+                            setGiftModalMobileClosed={setGiftModalMobileClosed}
+                        />
                     </div>
                 )}
                 {IsMobile && (
