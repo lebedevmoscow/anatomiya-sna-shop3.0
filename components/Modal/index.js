@@ -13,6 +13,7 @@ const Modal = ({
     Popup = false,
     isCart,
     BuyOneClick = false,
+    content = false,
 }) => {
     const hasWindow = typeof window !== 'undefined'
 
@@ -120,6 +121,7 @@ const Modal = ({
                             </button>
                         </div>
                     )}
+                    {content && content}
                 </div>
             </div>
         </div>

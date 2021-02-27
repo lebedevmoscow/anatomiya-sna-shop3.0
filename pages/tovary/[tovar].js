@@ -40,6 +40,7 @@ import ProductPageMobileButtons from './../../components/Button/ProductPageMobil
 import ProductPageMobileInfoBlock from './../../components/Mobile/ProductPageMobileInfoBlock'
 import ProductPageMobileAssurances from './../../components/Mobile/ProductPageMobileAssurances'
 import ProductPageDesktopPopup from './../../components/Popups/ProductPageDesktopPopup'
+import Modal from './../../components/Modal'
 // import HelpPickUp from './../../components/Mobile/'
 
 // const Header = dynamic(() => import('./../../components/Header'), { ssr: true })
@@ -86,6 +87,27 @@ const ProductPage = ({
         setActiveTab(title)
     }
 
+    const txt =
+        'Оформите заказ на сумму от 500 до 10 000 руб без первоначального взноса и переплат,  не выходя из дома, сроком на 4 месяца.'
+
+    const saleContentModalMobile = (
+        <>
+            <button
+                className={`${styles.modal_button_sale} ${styles.modal_button_sale__more}`}
+            >
+                Подробнее
+            </button>
+            <button
+                onClick={() => setModalMobileClosed(true)}
+                className={`${styles.modal_button_sale} ${styles.modal_button_sale__proceed}`}
+            >
+                Продолжить покупки
+            </button>
+        </>
+    )
+
+    const [saleModalMobileClosed, setModalMobileClosed] = useState(true)
+
     return (
         <>
             {/* Modals */}
@@ -94,6 +116,19 @@ const ProductPage = ({
                     mobileMenu={mobileMenu}
                     mobilemenuCatalogs={mobilemenuCatalogs}
                     regions={regions}
+                />
+            )}
+
+            {IsMobile && (
+                <Modal
+                    closed={saleModalMobileClosed}
+                    onClose={() => setModalMobileClosed(true)}
+                    title={'Акция'}
+                    text={txt}
+                    IsMore={false}
+                    Popup={false}
+                    BuyOneClick={false}
+                    content={saleContentModalMobile}
                 />
             )}
 
@@ -120,6 +155,75 @@ const ProductPage = ({
                         КРОВАТЬ ВОЛХОВА С-436 М/С-436 М1/С-437 М/С-437 М1/С-438
                         М/С-438 М1
                     </div>
+                    {IsMobile && (
+                        <div className={styles.popups_wrapper}>
+                            <div onClick={() => setModalMobileClosed(false)}>
+                                <ProductPageDesktopPopup
+                                    text={
+                                        'В подарок месяц подписки на онлайн-кинотеатр IVI при покупке данного товара. IVI - это онлайн-кинотеатр, крупнейший сервис легального видеоконтента в России.'
+                                    }
+                                    title={'CashBack 1000 руб. за видеоотзыв!'}
+                                    txtColor={'#fff'}
+                                    bgc={'#000'}
+                                    borderColor={'#000'}
+                                    Mobile={true}
+                                />
+                            </div>
+
+                            <div onClick={() => setModalMobileClosed(false)}>
+                                <ProductPageDesktopPopup
+                                    text={
+                                        'В подарок месяц подписки на онлайн-кинотеатр IVI при покупке данного товара. IVI - это онлайн-кинотеатр, крупнейший сервис легального видеоконтента в России.'
+                                    }
+                                    title={'Подписка IVI в подарок!'}
+                                    txtColor={'#fff'}
+                                    bgc={'#F83A73'}
+                                    borderColor={'#F83A73'}
+                                    Mobile={true}
+                                />
+                            </div>
+
+                            <div onClick={() => setModalMobileClosed(false)}>
+                                <ProductPageDesktopPopup
+                                    text={
+                                        'В подарок месяц подписки на онлайн-кинотеатр IVI при покупке данного товара. IVI - это онлайн-кинотеатр, крупнейший сервис легального видеоконтента в России.'
+                                    }
+                                    title={'-5% на матрас'}
+                                    txtColor={'#000'}
+                                    bgc={'#fff'}
+                                    borderColor={'#bd2cd2'}
+                                    Mobile={true}
+                                />
+                            </div>
+
+                            <div onClick={() => setModalMobileClosed(false)}>
+                                <ProductPageDesktopPopup
+                                    text={
+                                        'В подарок месяц подписки на онлайн-кинотеатр IVI при покупке данного товара. IVI - это онлайн-кинотеатр, крупнейший сервис легального видеоконтента в России.'
+                                    }
+                                    title={'Рассрочка 0/0/4'}
+                                    txtColor={'#fff'}
+                                    bgc={'#F76249'}
+                                    borderColor={'#F76249'}
+                                    Mobile={true}
+                                />
+                            </div>
+
+                            <div onClick={() => setModalMobileClosed(false)}>
+                                <ProductPageDesktopPopup
+                                    text={
+                                        'В подарок месяц подписки на онлайн-кинотеатр IVI при покупке данного товара. IVI - это онлайн-кинотеатр, крупнейший сервис легального видеоконтента в России.'
+                                    }
+                                    title={'Новинка'}
+                                    txtColor={'#000'}
+                                    bgc={'#fff'}
+                                    borderColor={'#bd2cd2'}
+                                    dontShowPopup={true}
+                                    Mobile={true}
+                                />
+                            </div>
+                        </div>
+                    )}
                     {!IsMobile && (
                         <div className={styles.product_page__content_wrap}>
                             <div className={styles.product_page__left}>

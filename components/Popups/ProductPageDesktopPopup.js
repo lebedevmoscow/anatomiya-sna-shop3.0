@@ -10,6 +10,7 @@ const ProductPageDesktopPopup = ({
     title,
     text,
     dontShowPopup = false,
+    Mobile = false,
 }) => {
     const [popupIsClosed, setPopupIsClosed] = useState(true)
 
@@ -33,21 +34,23 @@ const ProductPageDesktopPopup = ({
                 className={styles.product_page_desktop_popup}
             >
                 <span onClick={() => setPopupIsClosed((p) => !p)}>{title}</span>
-                <div className={styles.popup__inner__wrap}>
-                    <SlideDown
-                        className={styles.popup__inner}
-                        closed={popupIsClosed}
-                    >
-                        <div
-                            style={{
-                                padding: '30px 20px 1px',
-                                paddingBottom: '30px',
-                            }}
+                {!Mobile && (
+                    <div className={styles.popup__inner__wrap}>
+                        <SlideDown
+                            className={styles.popup__inner}
+                            closed={popupIsClosed}
                         >
-                            {text}
-                        </div>
-                    </SlideDown>
-                </div>
+                            <div
+                                style={{
+                                    padding: '30px 20px 1px',
+                                    paddingBottom: '30px',
+                                }}
+                            >
+                                {text}
+                            </div>
+                        </SlideDown>
+                    </div>
+                )}
             </div>
         </OutsideClickHandler>
     )
