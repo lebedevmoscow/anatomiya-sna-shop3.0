@@ -1,0 +1,35 @@
+
+.product_page_desktop_popup
+    padding: 4px 15px
+    font-size: 17px
+    margin-bottom: 5px
+    cursor: pointer
+    color: #fff
+    position: relative
+    display: inline-block
+    vertical-align: top
+    font-weight: 400
+    line-height: 1
+    margin-right: 5px
+    flex: 0 0 auto
+    border-radius: 5px
+
+    .popup__inner
+        position: absolute
+        z-index: 1
+        background-color: #0ca5d3
+        left: 0
+        top: calc(100% + 10px)
+        border-radius: 5px
+        font-size: 13px
+        color: #fff
+        &::before
+            content: ""
+            position: absolute
+            bottom: 100%
+            left: 25%
+            width: 0
+            height: 0
+            border-color: transparent transparent #0ca5d3
+            border-style: solid
+            border-width: 0 6px 8px

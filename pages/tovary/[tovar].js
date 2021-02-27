@@ -39,6 +39,7 @@ import ProductPageMobileProductGallery from './../../components/Products/Product
 import ProductPageMobileButtons from './../../components/Button/ProductPageMobileButtons'
 import ProductPageMobileInfoBlock from './../../components/Mobile/ProductPageMobileInfoBlock'
 import ProductPageMobileAssurances from './../../components/Mobile/ProductPageMobileAssurances'
+import ProductPageDesktopPopup from './../../components/Popups/ProductPageDesktopPopup'
 // import HelpPickUp from './../../components/Mobile/'
 
 // const Header = dynamic(() => import('./../../components/Header'), { ssr: true })
@@ -122,6 +123,56 @@ const ProductPage = ({
                     {!IsMobile && (
                         <div className={styles.product_page__content_wrap}>
                             <div className={styles.product_page__left}>
+                                <div className={styles.popups_wrapper}>
+                                    <ProductPageDesktopPopup
+                                        text={
+                                            'В подарок месяц подписки на онлайн-кинотеатр IVI при покупке данного товара. IVI - это онлайн-кинотеатр, крупнейший сервис легального видеоконтента в России.'
+                                        }
+                                        title={
+                                            'CashBack 1000 руб. за видеоотзыв!'
+                                        }
+                                        txtColor={'#fff'}
+                                        bgc={'#000'}
+                                        borderColor={'#000'}
+                                    />
+                                    <ProductPageDesktopPopup
+                                        text={
+                                            'В подарок месяц подписки на онлайн-кинотеатр IVI при покупке данного товара. IVI - это онлайн-кинотеатр, крупнейший сервис легального видеоконтента в России.'
+                                        }
+                                        title={'Подписка IVI в подарок!'}
+                                        txtColor={'#fff'}
+                                        bgc={'#F83A73'}
+                                        borderColor={'#F83A73'}
+                                    />
+                                    <ProductPageDesktopPopup
+                                        text={
+                                            'В подарок месяц подписки на онлайн-кинотеатр IVI при покупке данного товара. IVI - это онлайн-кинотеатр, крупнейший сервис легального видеоконтента в России.'
+                                        }
+                                        title={'-5% на матрас'}
+                                        txtColor={'#000'}
+                                        bgc={'#fff'}
+                                        borderColor={'#bd2cd2'}
+                                    />
+                                    <ProductPageDesktopPopup
+                                        text={
+                                            'В подарок месяц подписки на онлайн-кинотеатр IVI при покупке данного товара. IVI - это онлайн-кинотеатр, крупнейший сервис легального видеоконтента в России.'
+                                        }
+                                        title={'Рассрочка 0/0/4'}
+                                        txtColor={'#fff'}
+                                        bgc={'#F76249'}
+                                        borderColor={'#F76249'}
+                                    />
+                                    <ProductPageDesktopPopup
+                                        text={
+                                            'В подарок месяц подписки на онлайн-кинотеатр IVI при покупке данного товара. IVI - это онлайн-кинотеатр, крупнейший сервис легального видеоконтента в России.'
+                                        }
+                                        title={'Новинка'}
+                                        txtColor={'#000'}
+                                        bgc={'#fff'}
+                                        borderColor={'#bd2cd2'}
+                                        dontShowPopup={true}
+                                    />
+                                </div>
                                 {/* <ul className="product-page__thumbs-list">
                                 <li>
                                     <ProductPageSaleThumb
