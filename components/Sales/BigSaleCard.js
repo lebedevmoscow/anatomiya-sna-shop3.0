@@ -17,6 +17,8 @@ const BigSaleCard = ({ sale }) => {
 
     const [backgroundSizeType, setBackgroundTypeSize] = useState('cover')
 
+    const SaleIsEnd = days < 0 ? true : false
+
     return (
         <div className={styles.bigsalecard}>
             <div className={styles.sale_item__date}>
@@ -31,37 +33,60 @@ const BigSaleCard = ({ sale }) => {
                 <img src={sale.image}></img>
             </span>
 
-            <div className={styles.sale_item__tillend}>
-                <div className={styles.sale_item__tillend_small_text}>
-                    До конца акции осталось:
-                </div>
-                <div className={styles.sale_item__counter}>
-                    <div className={styles.sale_item__days}>
-                        <span className={styles.sale_item__number}>{days}</span>
-                        <span className={styles.sale_item__date_string}>
-                            Дней
-                        </span>
+            <div
+                style={
+                    !SaleIsEnd
+                        ? {
+                              backgroundColor: '#0ca5d3',
+                          }
+                        : {
+                              backgroundColor: '#333333',
+                              padding: '15px 12px',
+                          }
+                }
+                className={styles.sale_item__tillend}
+            >
+                {!SaleIsEnd && (
+                    <div className={styles.sale_item__tillend_small_text}>
+                        До конца акции осталось:
                     </div>
-                    <span className={styles.sale_item__delimiter}>:</span>
-                    <div className={styles.sale_item__days}>
-                        <span className={styles.sale_item__number}>
-                            {hours}
-                        </span>
-                        <span className={styles.sale_item__date_string}>
-                            Часов
-                        </span>
-                    </div>
-                    <span className={styles.sale_item__delimiter}>:</span>
+                )}
+                {!SaleIsEnd && (
+                    <div className={styles.sale_item__counter}>
+                        <div className={styles.sale_item__days}>
+                            <span className={styles.sale_item__number}>
+                                {days}
+                            </span>
+                            <span className={styles.sale_item__date_string}>
+                                Дней
+                            </span>
+                        </div>
+                        <span className={styles.sale_item__delimiter}>:</span>
+                        <div className={styles.sale_item__days}>
+                            <span className={styles.sale_item__number}>
+                                {hours}
+                            </span>
+                            <span className={styles.sale_item__date_string}>
+                                Часов
+                            </span>
+                        </div>
+                        <span className={styles.sale_item__delimiter}>:</span>
 
-                    <div className={styles.sale_item__days}>
-                        <span className={styles.sale_item__number}>
-                            {minutes}
-                        </span>
-                        <span className={styles.sale_item__date_string}>
-                            Минут
-                        </span>
+                        <div className={styles.sale_item__days}>
+                            <span className={styles.sale_item__number}>
+                                {minutes}
+                            </span>
+                            <span className={styles.sale_item__date_string}>
+                                Минут
+                            </span>
+                        </div>
                     </div>
-                </div>
+                )}
+                {SaleIsEnd && (
+                    <div className={card_styles.sale_is_end}>
+                        Акция закончилась
+                    </div>
+                )}
             </div>
         </div>
     )

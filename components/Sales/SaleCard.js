@@ -38,6 +38,8 @@ const Sale = ({ sale }) => {
     if (minutes > 0 && minutes < 10) minutes = '0' + minutes
     if (hours > 0 && hours < 10) hours = '0' + hours
 
+    const SaleIsEnd = days < 0 ? true : false
+
     return (
         <div className={card_styles.sale_item__wrapper}>
             <div
@@ -56,49 +58,80 @@ const Sale = ({ sale }) => {
                     ></img>
                     <span>{dateStartParsed}</span>
                 </div>
-                <div className={card_styles.sale_item__tillend}>
-                    <div className={card_styles.sale_item__tillend_small_text}>
-                        До конца акции осталось:
-                    </div>
-                    <div className={card_styles.sale_item__counter}>
-                        <div className={card_styles.sale_item__days}>
-                            <span className={card_styles.sale_item__number}>
-                                {days}
-                            </span>
-                            <span
-                                className={card_styles.sale_item__date_string}
-                            >
-                                Дней
-                            </span>
+                <div
+                    style={
+                        !SaleIsEnd
+                            ? {
+                                  backgroundColor: '#0ca5d3',
+                              }
+                            : {
+                                  backgroundColor: '#333333',
+                                  padding: '15px 12px',
+                              }
+                    }
+                    className={card_styles.sale_item__tillend}
+                >
+                    {!SaleIsEnd && (
+                        <div
+                            className={
+                                card_styles.sale_item__tillend_small_text
+                            }
+                        >
+                            До конца акции осталось:
                         </div>
-                        <span className={card_styles.sale_item__delimiter}>
-                            :
-                        </span>
-                        <div className={card_styles.sale_item__days}>
-                            <span className={card_styles.sale_item__number}>
-                                {hours}
+                    )}
+                    {!SaleIsEnd && (
+                        <div className={card_styles.sale_item__counter}>
+                            <div className={card_styles.sale_item__days}>
+                                <span className={card_styles.sale_item__number}>
+                                    {days}
+                                </span>
+                                <span
+                                    className={
+                                        card_styles.sale_item__date_string
+                                    }
+                                >
+                                    Дней
+                                </span>
+                            </div>
+                            <span className={card_styles.sale_item__delimiter}>
+                                :
                             </span>
-                            <span
-                                className={card_styles.sale_item__date_string}
-                            >
-                                Часов
+                            <div className={card_styles.sale_item__days}>
+                                <span className={card_styles.sale_item__number}>
+                                    {hours}
+                                </span>
+                                <span
+                                    className={
+                                        card_styles.sale_item__date_string
+                                    }
+                                >
+                                    Часов
+                                </span>
+                            </div>
+                            <span className={card_styles.sale_item__delimiter}>
+                                :
                             </span>
-                        </div>
-                        <span className={card_styles.sale_item__delimiter}>
-                            :
-                        </span>
 
-                        <div className={card_styles.sale_item__days}>
-                            <span className={card_styles.sale_item__number}>
-                                {minutes}
-                            </span>
-                            <span
-                                className={card_styles.sale_item__date_string}
-                            >
-                                Минут
-                            </span>
+                            <div className={card_styles.sale_item__days}>
+                                <span className={card_styles.sale_item__number}>
+                                    {minutes}
+                                </span>
+                                <span
+                                    className={
+                                        card_styles.sale_item__date_string
+                                    }
+                                >
+                                    Минут
+                                </span>
+                            </div>
                         </div>
-                    </div>
+                    )}
+                    {SaleIsEnd && (
+                        <div className={card_styles.sale_is_end}>
+                            Акция закончилась
+                        </div>
+                    )}
                 </div>
             </div>
             <div className={card_styles.sale_item__title}>{sale.title}</div>
