@@ -7,9 +7,11 @@ import URLComponent from './../../components/URLComponent'
 import BigSaleCard from './../../components/Sales/BigSaleCard'
 import SaleCard from './../../components/Sales/SaleCard'
 import Pagination from './../../components/Pagination/CatalogPagination'
+import ShowMoreButton from './../../components/Button/LoadMoreButton'
 
 // Styles
 import styles from './../../styles/pages/aktsii.module.sass'
+import LoadMoreButton from './../../components/Button/LoadMoreButton'
 
 const SalePage = ({
     banner = null,
@@ -25,6 +27,7 @@ const SalePage = ({
             else return <SaleCard key={index} sale={sale} />
         })
     )
+    const [additionalList, setAdditionalList] = useState([])
 
     const reqNewArticles = async (url) => {
         const req = await fetch(url)
@@ -33,10 +36,10 @@ const SalePage = ({
     }
 
     const onPageClickHandler = async (p) => {
+        setAdditionalList([])
         const newList = await reqNewArticles(
             `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${p}&limit=14`
         )
-        console.log('newList', newList)
         setList(
             newList.map((sale, index) => {
                 if (index === 0) return <BigSaleCard sale={sale} />
@@ -44,6 +47,25 @@ const SalePage = ({
             })
         )
         setPage(p)
+    }
+
+    const onShowMoreButtonClickHandler = async () => {
+        const clone = additionalList.concat()
+        const newList = await reqNewArticles(
+            `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
+                page + 1
+            }&limit=14`
+        )
+
+        for (let i = 0; i < newList.length; i++) {
+            if (i === 0) {
+                clone.push(<BigSaleCard sale={newList[i]} />)
+            } else {
+                clone.push(<SaleCard sale={newList[i]} />)
+            }
+        }
+        setAdditionalList(clone)
+        setPage((p) => ++p)
     }
 
     return (
@@ -64,7 +86,20 @@ const SalePage = ({
                         ]}
                     />
                 </div>
-                <div className={styles.saleslist}>{list}</div>
+                <div className={styles.saleslist}>
+                    {
+                        <>
+                            {list}
+                            {additionalList}
+                        </>
+                    }
+                </div>
+                <div
+                    onClick={() => onShowMoreButtonClickHandler()}
+                    className={styles.button_wrapper}
+                >
+                    <LoadMoreButton firstText={'Показать еще +14'} />
+                </div>
                 <Pagination
                     onGoForwardButtonClickHandler={() => {}}
                     onGoBackdButtonClickHandler={() => {}}
