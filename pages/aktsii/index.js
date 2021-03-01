@@ -14,7 +14,9 @@ import HelpPickUp from './../../components/Catalog/CatalogHelpPickUp'
 import Assurances from './../../components/Assurances'
 import Subscribe from './../../components/Subscribe'
 import Footer from './../../components/Footer/FooterDesktop'
+import MobileFooter from './../../components/Mobile/MobieFooter'
 import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
+import MobileBurgerMenu from './../../components/Mobile/MobileBurgerMenu'
 
 // Styles
 import styles from './../../styles/pages/aktsii.module.sass'
@@ -25,6 +27,9 @@ const SalePage = ({
     phoneCommon,
     headerCatalog,
     salesFirst,
+    mobilemenuCatalogs,
+    mobileMenu,
+    regions,
     IsMobile,
 }) => {
     const breakpoint1024 = useMedia(1024)
@@ -161,6 +166,14 @@ const SalePage = ({
 
     return (
         <div className={styles.sale_page}>
+            {breakpoint1024 && (
+                <MobileBurgerMenu
+                    mobilemenuCatalogs={mobilemenuCatalogs}
+                    mobileMenu={mobileMenu}
+                    regions={regions}
+                />
+            )}
+
             {!breakpoint769 && (
                 <Header
                     phoneCommon={phoneCommon}
@@ -189,7 +202,6 @@ const SalePage = ({
                         resistance={true}
                         resistanceRatio={0}
                         slidesPerView={'auto'}
-                        spaceBetween={10}
                         autoHeight={true}
                     >
                         <SwiperSlide className={styles.themes__item}>
@@ -235,11 +247,10 @@ const SalePage = ({
                 <div className={styles.saleslist}>
                     {
                         <>
-                            {(!IsMobile || !breakpoint769) && list}
-                            {(!IsMobile || !breakpoint769) && additionalList}
-                            {(IsMobile || breakpoint769) && mobileList}
-                            {(IsMobile || breakpoint769) &&
-                                mobileAdditionalList}
+                            {!IsMobile && list}
+                            {!IsMobile && additionalList}
+                            {IsMobile && mobileList}
+                            {IsMobile && mobileAdditionalList}
                         </>
                     }
                 </div>
@@ -273,15 +284,18 @@ const SalePage = ({
                     />
                 )}
                 <HelpPickUp />
-                <Assurances dontShowBanner={true} />
+                {!IsMobile && !breakpoint1024 && (
+                    <Assurances dontShowBanner={true} />
+                )}
                 {(IsMobile || breakpoint1024) && (
                     <div style={{ marginTop: '25px' }}>
                         <SwiperAssurenaces />
                     </div>
                 )}
             </div>
-            <Subscribe />
-            <Footer />
+            {(!IsMobile || !breakpoint1024) && <Subscribe />}
+            {(IsMobile || breakpoint1024) && <MobileFooter />}
+            {(!IsMobile || !breakpoint1024) && <Footer />}
         </div>
     )
 }
@@ -306,6 +320,9 @@ export const getServerSideProps = async (ctx) => {
         'https://www.anatomiyasna.ru/api/parameters/all/',
         'https://www.anatomiyasna.ru/api/menu/headerCatalog/',
         'https://www.anatomiyasna.ru/api/sale/sale-list/?page=1&limit=14',
+        'https://www.anatomiyasna.ru/api/menu/mobileCatalogMenu/',
+        'https://anatomiyasna.ru/api/menu/mobileMenu/',
+        'https://anatomiyasna.ru/api/region/getRegions/',
     ]
     await Promise.all(
         URLS.map(async (url, index) => {
@@ -326,6 +343,9 @@ export const getServerSideProps = async (ctx) => {
     const worktimeHead = Response[0].worktime_head
     const headerCatalog = Response[1]
     const salesFirst = Response[2]
+    const mobilemenuCatalogs = Response[3]
+    const mobileMenu = Response[4]
+    const regions = Response[5]
 
     return {
         props: {
@@ -334,6 +354,9 @@ export const getServerSideProps = async (ctx) => {
             headerCatalog,
             salesFirst,
             IsMobile,
+            mobilemenuCatalogs,
+            mobileMenu,
+            regions,
         },
     }
 }
