@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
 import ReactHoverObserver from 'react-hover-observer'
+import OutsideClickHandler from 'react-outside-click-handler'
 
 // Styles
 import common_styles from './../../styles/common.module.sass'
@@ -78,6 +79,8 @@ const MainNavigation = ({ headerCatalog }) => {
         }
     }, [updateFilter])
 
+    const [menuIsOpened, setMenuIsOpened] = useState(false)
+
     return (
         <div className={common_styles.container}>
             <div className={nav_styles.main_navigation}>
@@ -95,18 +98,30 @@ const MainNavigation = ({ headerCatalog }) => {
                         </li>
                     </ReactHoverObserver>
                     {headerCatalog.catalogs.map((catalog, index) => {
+                        const tempFn = (childes) => {
+                            onOverCategoryHandler(childes)
+                        }
+                        const tempFn2 = () => {
+                            onOutSaleHandler()
+                            setMenuIsOpened(false)
+                        }
                         return (
                             <ReactHoverObserver
                                 key={index}
                                 hoverDelayInMs={250}
                             >
-                                <UtilComponent
-                                    proto={() => {
-                                        onOverCategoryHandler(catalog.childes)
+                                {menuIsOpened && (
+                                    <UtilComponent
+                                        proto={() => tempFn(catalog.childes)}
+                                        close={tempFn2}
+                                    />
+                                )}
+                                <li
+                                    onClick={() => {
+                                        setMenuIsOpened(true)
                                     }}
-                                    close={onOutSaleHandler}
-                                />
-                                <li key={index}>
+                                    key={index}
+                                >
                                     {catalog.title}
                                     <span className={nav_styles.arrow}></span>
                                     <span
