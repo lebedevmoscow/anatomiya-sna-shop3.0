@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 // React components
 import Header from './../../components/Header'
@@ -125,7 +126,45 @@ const SalePage = ({
                 <div className={styles.title}>АКЦИИ АНАТОМИИ СНА</div>
                 <div className={styles.themes}>
                     <div className={styles.themes__title}>Темы</div>
-                    <div className={styles.themes__list}>
+                    <Swiper
+                        className={styles.themes__list}
+                        freeMode={true}
+                        freeModeMomentum={true}
+                        resistance={true}
+                        resistanceRatio={0}
+                        slidesPerView={'auto'}
+                        spaceBetween={10}
+                        autoHeight={true}
+                    >
+                        <SwiperSlide className={styles.themes__item}>
+                            Матрасы
+                        </SwiperSlide>
+                        <SwiperSlide className={styles.themes__item}>
+                            Кровати
+                        </SwiperSlide>
+                        <SwiperSlide className={styles.themes__item}>
+                            Основания
+                        </SwiperSlide>
+                        <SwiperSlide className={styles.themes__item}>
+                            Чехлы
+                        </SwiperSlide>
+                        <SwiperSlide className={styles.themes__item}>
+                            Подушки
+                        </SwiperSlide>
+                        <SwiperSlide className={styles.themes__item}>
+                            Одеяла
+                        </SwiperSlide>
+                        <SwiperSlide className={styles.themes__item}>
+                            Скидки
+                        </SwiperSlide>
+                        <SwiperSlide className={styles.themes__item}>
+                            Кэшбэки
+                        </SwiperSlide>
+                        <SwiperSlide className={styles.themes__item}>
+                            Подарки
+                        </SwiperSlide>
+                    </Swiper>
+                    {/* <div className={styles.themes__list}>
                         <div className={styles.themes__item}>Матрасы</div>
                         <div className={styles.themes__item}>Кровати</div>
                         <div className={styles.themes__item}>Основания</div>
@@ -135,7 +174,7 @@ const SalePage = ({
                         <div className={styles.themes__item}>Скидки</div>
                         <div className={styles.themes__item}>Кэшбэки</div>
                         <div className={styles.themes__item}>Подарки</div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className={styles.saleslist}>
                     {
