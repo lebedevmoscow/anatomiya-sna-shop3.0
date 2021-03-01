@@ -49,6 +49,38 @@ const SalePage = ({
         setPage(p)
     }
 
+    const onGoForwardButtonClickHandler = async () => {
+        setAdditionalList([])
+        const newList = await reqNewArticles(
+            `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
+                page + 1
+            }&limit=14`
+        )
+        setList(
+            newList.map((sale, index) => {
+                if (index === 0) return <BigSaleCard sale={sale} />
+                else return <SaleCard sale={sale} />
+            })
+        )
+        setPage(page + 1)
+    }
+
+    const onGoBackButtonClickHandler = async () => {
+        setAdditionalList([])
+        const newList = await reqNewArticles(
+            `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
+                page - 1
+            }&limit=14`
+        )
+        setList(
+            newList.map((sale, index) => {
+                if (index === 0) return <BigSaleCard sale={sale} />
+                else return <SaleCard sale={sale} />
+            })
+        )
+        setPage(page - 1)
+    }
+
     const onShowMoreButtonClickHandler = async () => {
         const clone = additionalList.concat()
         const newList = await reqNewArticles(
@@ -115,8 +147,10 @@ const SalePage = ({
                     <LoadMoreButton firstText={'Показать еще +14'} />
                 </div>
                 <Pagination
-                    onGoForwardButtonClickHandler={() => {}}
-                    onGoBackdButtonClickHandler={() => {}}
+                    onGoForwardButtonClickHandler={
+                        onGoForwardButtonClickHandler
+                    }
+                    onGoBackdButtonClickHandler={onGoBackButtonClickHandler}
                     onPageClickHandler={onPageClickHandler}
                     amount={30}
                     current={page}
