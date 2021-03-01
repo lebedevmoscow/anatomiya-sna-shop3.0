@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 // React components
 import Header from './../../components/Header'
 import MainNavigation from './../../components/Nav/MainNavigation'
@@ -16,6 +18,34 @@ const SalePage = ({
     headerCatalog,
     salesFirst,
 }) => {
+    const [page, setPage] = useState(1)
+    const [list, setList] = useState(
+        salesFirst.map((sale, index) => {
+            if (index === 0) return <BigSaleCard key={index} sale={sale} />
+            else return <SaleCard key={index} sale={sale} />
+        })
+    )
+
+    const reqNewArticles = async (url) => {
+        const req = await fetch(url)
+        const res = await req.json()
+        return res
+    }
+
+    const onPageClickHandler = async (p) => {
+        const newList = await reqNewArticles(
+            `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${p}&limit=14`
+        )
+        console.log('newList', newList)
+        setList(
+            newList.map((sale, index) => {
+                if (index === 0) return <BigSaleCard sale={sale} />
+                else return <SaleCard sale={sale} />
+            })
+        )
+        setPage(p)
+    }
+
     return (
         <div className={styles.sale_page}>
             <Header
@@ -34,18 +64,13 @@ const SalePage = ({
                         ]}
                     />
                 </div>
-                <div className={styles.saleslist}>
-                    {salesFirst.map((sale, index) => {
-                        if (index === 0) return <BigSaleCard sale={sale} />
-                        else return <SaleCard sale={sale} />
-                    })}
-                </div>
+                <div className={styles.saleslist}>{list}</div>
                 <Pagination
                     onGoForwardButtonClickHandler={() => {}}
                     onGoBackdButtonClickHandler={() => {}}
-                    onPageClickHandler={() => {}}
+                    onPageClickHandler={onPageClickHandler}
                     amount={30}
-                    current={1}
+                    current={page}
                 />
             </div>
         </div>
