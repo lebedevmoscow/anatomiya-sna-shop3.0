@@ -7,11 +7,11 @@ import URLComponent from './../../components/URLComponent'
 import BigSaleCard from './../../components/Sales/BigSaleCard'
 import SaleCard from './../../components/Sales/SaleCard'
 import Pagination from './../../components/Pagination/CatalogPagination'
-import ShowMoreButton from './../../components/Button/LoadMoreButton'
+import LoadMoreButton from './../../components/Button/LoadMoreButton'
+import HelpPickUp from './../../components/Catalog/CatalogHelpPickUp'
 
 // Styles
 import styles from './../../styles/pages/aktsii.module.sass'
-import LoadMoreButton from './../../components/Button/LoadMoreButton'
 
 const SalePage = ({
     banner = null,
@@ -155,6 +155,7 @@ const SalePage = ({
                     amount={30}
                     current={page}
                 />
+                <HelpPickUp />
             </div>
         </div>
     )
