@@ -24,6 +24,7 @@ const SalePage = ({
     phoneCommon,
     headerCatalog,
     salesFirst,
+    IsMobile,
 }) => {
     const breakpoint1024 = useMedia(1024)
     const breakpoint769 = useMedia(769)
@@ -35,7 +36,15 @@ const SalePage = ({
             else return <SaleCard key={index} sale={sale} />
         })
     )
+
+    const [mobileList, setMobileList] = useState(
+        salesFirst.map((sale, index) => {
+            return <SaleCard key={index} sale={sale} />
+        })
+    )
+
     const [additionalList, setAdditionalList] = useState([])
+    const [mobileAdditionalList, setMobileAdditionalList] = useState([])
 
     const reqNewArticles = async (url) => {
         const req = await fetch(url)
@@ -45,6 +54,7 @@ const SalePage = ({
 
     const onPageClickHandler = async (p) => {
         setAdditionalList([])
+        setMobileAdditionalList([])
         const newList = await reqNewArticles(
             `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${p}&limit=14`
         )
@@ -57,10 +67,20 @@ const SalePage = ({
             )
 
             setPage(p)
+        } else if (breakpoint1024) {
+            setMobileList(
+                newList.map((sale, index) => {
+                    return <SaleCard sale={sale} />
+                })
+            )
+
+            setPage(p)
         }
     }
     const onGoForwardButtonClickHandler = async () => {
         setAdditionalList([])
+        setMobileAdditionalList([])
+
         const newList = await reqNewArticles(
             `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
                 page + 1
@@ -73,12 +93,20 @@ const SalePage = ({
                     else return <SaleCard sale={sale} />
                 })
             )
+        } else if (breakpoint1024) {
+            setMobileList(
+                newList.map((sale, index) => {
+                    return <SaleCard sale={sale} />
+                })
+            )
         }
         setPage(page + 1)
     }
 
     const onGoBackButtonClickHandler = async () => {
         setAdditionalList([])
+        setMobileAdditionalList([])
+
         const newList = await reqNewArticles(
             `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
                 page - 1
@@ -91,12 +119,19 @@ const SalePage = ({
                     else return <SaleCard sale={sale} />
                 })
             )
+        } else if (breakpoint1024) {
+            setMobileList(
+                newList.map((sale, index) => {
+                    return <SaleCard sale={sale} />
+                })
+            )
         }
         setPage(page - 1)
     }
 
     const onShowMoreButtonClickHandler = async () => {
         const clone = additionalList.concat()
+        const mobileClone = mobileAdditionalList.concat()
         const newList = await reqNewArticles(
             `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
                 page + 1
@@ -112,7 +147,13 @@ const SalePage = ({
                 }
             }
             setAdditionalList(clone)
+        } else if (breakpoint1024) {
+            for (let i = 0; i < newList.length; i++) {
+                mobileClone.push(<SaleCard sale={newList[i]} />)
+            }
+            setMobileAdditionalList(mobileClone)
         }
+
         setPage((p) => ++p)
     }
 
@@ -191,8 +232,11 @@ const SalePage = ({
                 <div className={styles.saleslist}>
                     {
                         <>
-                            {!breakpoint769 && list}
-                            {!breakpoint769 && additionalList}
+                            {(!IsMobile || !breakpoint769) && list}
+                            {(!IsMobile || !breakpoint769) && additionalList}
+                            {(IsMobile || breakpoint769) && mobileList}
+                            {(IsMobile || breakpoint769) &&
+                                mobileAdditionalList}
                         </>
                     }
                 </div>
@@ -202,15 +246,29 @@ const SalePage = ({
                 >
                     <LoadMoreButton firstText={'Показать еще +14'} />
                 </div>
-                <Pagination
-                    onGoForwardButtonClickHandler={
-                        onGoForwardButtonClickHandler
-                    }
-                    onGoBackdButtonClickHandler={onGoBackButtonClickHandler}
-                    onPageClickHandler={onPageClickHandler}
-                    amount={30}
-                    current={page}
-                />
+                {(IsMobile || breakpoint1024) && (
+                    <Pagination
+                        IsMobile={true}
+                        onGoForwardButtonClickHandler={
+                            onGoForwardButtonClickHandler
+                        }
+                        onGoBackdButtonClickHandler={onGoBackButtonClickHandler}
+                        onPageClickHandler={onPageClickHandler}
+                        amount={30}
+                        current={page}
+                    />
+                )}
+                {(!IsMobile || !breakpoint1024) && (
+                    <Pagination
+                        onGoForwardButtonClickHandler={
+                            onGoForwardButtonClickHandler
+                        }
+                        onGoBackdButtonClickHandler={onGoBackButtonClickHandler}
+                        onPageClickHandler={onPageClickHandler}
+                        amount={30}
+                        current={page}
+                    />
+                )}
                 <HelpPickUp />
                 <Assurances dontShowBanner={true} />
             </div>
@@ -221,6 +279,18 @@ const SalePage = ({
 }
 
 export const getServerSideProps = async (ctx) => {
+    const userAgent = ctx.req.headers['user-agent']
+
+    const regex = /Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/
+
+    let IsMobile = null
+
+    if (userAgent.match(regex)) {
+        IsMobile = true
+    } else {
+        IsMobile = false
+    }
+
     const phoneCommon = '8 (495) 287-87-95'
 
     let Response = {}
@@ -255,6 +325,7 @@ export const getServerSideProps = async (ctx) => {
             worktimeHead,
             headerCatalog,
             salesFirst,
+            IsMobile,
         },
     }
 }
