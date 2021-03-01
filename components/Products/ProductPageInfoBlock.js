@@ -242,7 +242,10 @@ const ProductPageInfoBlock = () => {
                 </div>
                 <span className={styles.line}></span>
                 <div className={styles.selector_wrapper}>
-                    <div className={styles.hint}>
+                    <div
+                        style={{ marginBottom: '10px' }}
+                        className={styles.hint}
+                    >
                         Выберите размер (Ширина*Длина) см.
                     </div>
                     <Select
