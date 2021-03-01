@@ -99,12 +99,12 @@ const Sale = ({ sale }) => {
                 </div>
             </div>
             <div className={card_styles.sale_item__title}>{sale.title}</div>
-            {sale.annotation && (
+            {/* {sale.annotation && (
                 <div
                     ref={salesDisclaimerRef}
                     className={card_styles.sales__disclaimer}
                 ></div>
-            )}
+            )} */}
         </div>
     )
     return null
