@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import useMedia from './../../hooks/useMedia'
 
@@ -10,16 +11,31 @@ import BigSaleCard from './../../components/Sales/BigSaleCard'
 import SaleCard from './../../components/Sales/SaleCard'
 import Pagination from './../../components/Pagination/CatalogPagination'
 import LoadMoreButton from './../../components/Button/LoadMoreButton'
-import HelpPickUp from './../../components/Catalog/CatalogHelpPickUp'
+// import HelpPickUp from './../../components/Catalog/CatalogHelpPickUp'
 import Assurances from './../../components/Assurances'
 import Subscribe from './../../components/Subscribe'
-import Footer from './../../components/Footer/FooterDesktop'
-import MobileFooter from './../../components/Mobile/MobieFooter'
-import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
+// import Footer from './../../components/Footer/FooterDesktop'
+// import MobileFooter from './../../components/Mobile/MobieFooter'
+// import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
 import MobileBurgerMenu from './../../components/Mobile/MobileBurgerMenu'
 
 // Styles
 import styles from './../../styles/pages/aktsii.module.sass'
+
+const SwiperAssurenaces = dynamic(
+    () => import('./../../components/Mobile/MobileAssurances'),
+    { ssr: true }
+)
+
+const MobileFooter = dynamic(
+    () => import('../../components/Mobile/MobieFooter'),
+    { ssr: true }
+)
+
+const HelpPickUp = dynamic(
+    () => import('../../components/Catalog/CatalogHelpPickUp'),
+    { ssr: true }
+)
 
 const SalePage = ({
     banner = null,
