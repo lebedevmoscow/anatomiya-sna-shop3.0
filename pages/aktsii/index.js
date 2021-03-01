@@ -14,6 +14,7 @@ import HelpPickUp from './../../components/Catalog/CatalogHelpPickUp'
 import Assurances from './../../components/Assurances'
 import Subscribe from './../../components/Subscribe'
 import Footer from './../../components/Footer/FooterDesktop'
+import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
 
 // Styles
 import styles from './../../styles/pages/aktsii.module.sass'
@@ -27,6 +28,7 @@ const SalePage = ({
     IsMobile,
 }) => {
     const breakpoint1024 = useMedia(1024)
+
     const breakpoint769 = useMedia(769)
 
     const [page, setPage] = useState(1)
@@ -176,6 +178,7 @@ const SalePage = ({
                         ]}
                     />
                 </div>
+
                 <div className={styles.title}>АКЦИИ АНАТОМИИ СНА</div>
                 <div className={styles.themes}>
                     <div className={styles.themes__title}>Темы</div>
@@ -271,6 +274,11 @@ const SalePage = ({
                 )}
                 <HelpPickUp />
                 <Assurances dontShowBanner={true} />
+                {(IsMobile || breakpoint1024) && (
+                    <div style={{ marginTop: '25px' }}>
+                        <SwiperAssurenaces />
+                    </div>
+                )}
             </div>
             <Subscribe />
             <Footer />
