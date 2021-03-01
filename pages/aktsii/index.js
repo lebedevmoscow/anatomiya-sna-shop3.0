@@ -4,6 +4,7 @@ import MainNavigation from './../../components/Nav/MainNavigation'
 import URLComponent from './../../components/URLComponent'
 import BigSaleCard from './../../components/Sales/BigSaleCard'
 import SaleCard from './../../components/Sales/SaleCard'
+import Pagination from './../../components/Pagination/CatalogPagination'
 
 // Styles
 import styles from './../../styles/pages/aktsii.module.sass'
@@ -39,6 +40,13 @@ const SalePage = ({
                         else return <SaleCard sale={sale} />
                     })}
                 </div>
+                <Pagination
+                    onGoForwardButtonClickHandler={() => {}}
+                    onGoBackdButtonClickHandler={() => {}}
+                    onPageClickHandler={() => {}}
+                    amount={30}
+                    current={1}
+                />
             </div>
         </div>
     )
