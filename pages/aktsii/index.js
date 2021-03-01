@@ -9,6 +9,9 @@ import SaleCard from './../../components/Sales/SaleCard'
 import Pagination from './../../components/Pagination/CatalogPagination'
 import LoadMoreButton from './../../components/Button/LoadMoreButton'
 import HelpPickUp from './../../components/Catalog/CatalogHelpPickUp'
+import Assurances from './../../components/Assurances'
+import Subscribe from './../../components/Subscribe'
+import Footer from './../../components/Footer/FooterDesktop'
 
 // Styles
 import styles from './../../styles/pages/aktsii.module.sass'
@@ -20,6 +23,8 @@ const SalePage = ({
     headerCatalog,
     salesFirst,
 }) => {
+    console.log('salesFirst', salesFirst)
+
     const [page, setPage] = useState(1)
     const [list, setList] = useState(
         salesFirst.map((sale, index) => {
@@ -156,7 +161,10 @@ const SalePage = ({
                     current={page}
                 />
                 <HelpPickUp />
+                <Assurances dontShowBanner={true} />
             </div>
+            <Subscribe />
+            <Footer />
         </div>
     )
 }

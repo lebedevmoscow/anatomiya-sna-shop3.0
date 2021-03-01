@@ -15,7 +15,11 @@ import Control from './../../assets/svg/list.svg'
 import PersonalData from './../../assets/svg/security-personal-data.svg'
 import Banner from './../../assets/assurances-banner.jpg'
 
-const IndexPageAssurances = ({ catalog, container = false }) => {
+const IndexPageAssurances = ({
+    catalog,
+    container = false,
+    dontShowBanner = false,
+}) => {
     const breakpoint768 = useMedia(768)
 
     return (
@@ -124,7 +128,7 @@ const IndexPageAssurances = ({ catalog, container = false }) => {
                     </div>
                 </div>
             </div>
-            {!breakpoint768 && !catalog && (
+            {!breakpoint768 && !catalog && !dontShowBanner && (
                 <div
                     style={{
                         position: 'relative',

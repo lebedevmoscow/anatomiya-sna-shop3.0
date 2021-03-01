@@ -18,15 +18,7 @@ const BigSaleCard = ({ sale }) => {
     const [backgroundSizeType, setBackgroundTypeSize] = useState('cover')
 
     return (
-        <div
-            // style={{
-            //     background: `url(${sale.image}) no-repeat`,
-            //     backgroundSize: `${backgroundSizeType}`,
-            //     backgroundPosition: 'top center',
-            //     // backgroundSize: 'contain',
-            // }}
-            className={styles.bigsalecard}
-        >
+        <div className={styles.bigsalecard}>
             <div className={styles.sale_item__date}>
                 <img
                     className={styles.sale_item__calendar_image}
