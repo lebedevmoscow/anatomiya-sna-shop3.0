@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import useMedia from './../../hooks/useMedia'
 
 // React components
 import Header from './../../components/Header'
@@ -24,7 +25,8 @@ const SalePage = ({
     headerCatalog,
     salesFirst,
 }) => {
-    console.log('salesFirst', salesFirst)
+    const breakpoint1024 = useMedia(1024)
+    const breakpoint769 = useMedia(769)
 
     const [page, setPage] = useState(1)
     const [list, setList] = useState(
@@ -46,15 +48,17 @@ const SalePage = ({
         const newList = await reqNewArticles(
             `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${p}&limit=14`
         )
-        setList(
-            newList.map((sale, index) => {
-                if (index === 0) return <BigSaleCard sale={sale} />
-                else return <SaleCard sale={sale} />
-            })
-        )
-        setPage(p)
-    }
+        if (!breakpoint1024) {
+            setList(
+                newList.map((sale, index) => {
+                    if (index === 0) return <BigSaleCard sale={sale} />
+                    else return <SaleCard sale={sale} />
+                })
+            )
 
+            setPage(p)
+        }
+    }
     const onGoForwardButtonClickHandler = async () => {
         setAdditionalList([])
         const newList = await reqNewArticles(
@@ -62,12 +66,14 @@ const SalePage = ({
                 page + 1
             }&limit=14`
         )
-        setList(
-            newList.map((sale, index) => {
-                if (index === 0) return <BigSaleCard sale={sale} />
-                else return <SaleCard sale={sale} />
-            })
-        )
+        if (!breakpoint1024) {
+            setList(
+                newList.map((sale, index) => {
+                    if (index === 0) return <BigSaleCard sale={sale} />
+                    else return <SaleCard sale={sale} />
+                })
+            )
+        }
         setPage(page + 1)
     }
 
@@ -78,12 +84,14 @@ const SalePage = ({
                 page - 1
             }&limit=14`
         )
-        setList(
-            newList.map((sale, index) => {
-                if (index === 0) return <BigSaleCard sale={sale} />
-                else return <SaleCard sale={sale} />
-            })
-        )
+        if (!breakpoint1024) {
+            setList(
+                newList.map((sale, index) => {
+                    if (index === 0) return <BigSaleCard sale={sale} />
+                    else return <SaleCard sale={sale} />
+                })
+            )
+        }
         setPage(page - 1)
     }
 
@@ -95,25 +103,29 @@ const SalePage = ({
             }&limit=14`
         )
 
-        for (let i = 0; i < newList.length; i++) {
-            if (i === 0) {
-                clone.push(<BigSaleCard sale={newList[i]} />)
-            } else {
-                clone.push(<SaleCard sale={newList[i]} />)
+        if (!breakpoint1024) {
+            for (let i = 0; i < newList.length; i++) {
+                if (i === 0) {
+                    clone.push(<BigSaleCard sale={newList[i]} />)
+                } else {
+                    clone.push(<SaleCard sale={newList[i]} />)
+                }
             }
+            setAdditionalList(clone)
         }
-        setAdditionalList(clone)
         setPage((p) => ++p)
     }
 
     return (
         <div className={styles.sale_page}>
-            <Header
-                phoneCommon={phoneCommon}
-                worktimeHead={worktimeHead}
-                banner={banner}
-            />
-            <MainNavigation headerCatalog={headerCatalog} />
+            {!breakpoint769 && (
+                <Header
+                    phoneCommon={phoneCommon}
+                    worktimeHead={worktimeHead}
+                    banner={banner}
+                />
+            )}
+            {!breakpoint769 && <MainNavigation headerCatalog={headerCatalog} />}
             <div className={styles.container}>
                 <div className={styles.url_wrapper}>
                     <URLComponent
@@ -179,8 +191,8 @@ const SalePage = ({
                 <div className={styles.saleslist}>
                     {
                         <>
-                            {list}
-                            {additionalList}
+                            {!breakpoint769 && list}
+                            {!breakpoint769 && additionalList}
                         </>
                     }
                 </div>
