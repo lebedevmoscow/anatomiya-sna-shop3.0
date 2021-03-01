@@ -194,7 +194,7 @@ export const getStaticProps = async (ctx) => {
     const articles = Response[0]
     const headerCatalog = Response[2]
     const banner = Response[3]
-    const worktimeHead = Response[4].worktime_heado
+    const worktimeHead = Response[4].worktime_head
     const mobilemenuCatalogs = Response[5]
     const mobileMenu = Response[6]
     const regions = Response[7]

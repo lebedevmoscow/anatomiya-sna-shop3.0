@@ -80,11 +80,25 @@ const SalePage = ({
                 <div className={styles.url_wrapper}>
                     <URLComponent
                         breadcrumbs={[
-                            { url: '/', title: 'крошка1' },
-                            { url: '/', title: 'крошка2' },
-                            { url: '/', title: 'крошка3' },
+                            { url: '/', title: 'Главная' },
+                            { url: '/', title: 'Акции' },
                         ]}
                     />
+                </div>
+                <div className={styles.title}>АКЦИИ АНАТОМИИ СНА</div>
+                <div className={styles.themes}>
+                    <div className={styles.themes__title}>Темы</div>
+                    <div className={styles.themes__list}>
+                        <div className={styles.themes__item}>Матрасы</div>
+                        <div className={styles.themes__item}>Кровати</div>
+                        <div className={styles.themes__item}>Основания</div>
+                        <div className={styles.themes__item}>Чехлы</div>
+                        <div className={styles.themes__item}>Подушки</div>
+                        <div className={styles.themes__item}>Одеяла</div>
+                        <div className={styles.themes__item}>Скидки</div>
+                        <div className={styles.themes__item}>Кэшбэки</div>
+                        <div className={styles.themes__item}>Подарки</div>
+                    </div>
                 </div>
                 <div className={styles.saleslist}>
                     {
@@ -140,8 +154,6 @@ export const getServerSideProps = async (ctx) => {
     const worktimeHead = Response[0].worktime_head
     const headerCatalog = Response[1]
     const salesFirst = Response[2]
-
-    console.log('salesFirst', salesFirst)
 
     return {
         props: {
