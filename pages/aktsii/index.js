@@ -53,6 +53,7 @@ const SalePage = ({
 
     const breakpoint769 = useMedia(769)
 
+    const [group, setGroup] = useState(null)
     const [page, setPage] = useState(1)
     const [list, setList] = useState(
         salesFirst.map((sale, index) => {
@@ -100,14 +101,17 @@ const SalePage = ({
 
             setPage(1)
         }
+        setGroup(title)
     }
 
     const onPageClickHandler = async (p) => {
         setAdditionalList([])
         setMobileAdditionalList([])
-        const newList = await reqNewArticles(
-            `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${p}&limit=14`
-        )
+        const url =
+            group === null
+                ? `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${p}&limit=14`
+                : `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${p}&limit=14&category=${group}`
+        const newList = await reqNewArticles(url)
         if (!breakpoint1024) {
             setList(
                 newList.map((sale, index) => {
@@ -131,11 +135,16 @@ const SalePage = ({
         setAdditionalList([])
         setMobileAdditionalList([])
 
-        const newList = await reqNewArticles(
-            `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
-                page + 1
-            }&limit=14`
-        )
+        const url =
+            group === null
+                ? `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
+                      page + 1
+                  }&limit=14`
+                : `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
+                      page + 1
+                  }&limit=14&category=${group}`
+
+        const newList = await reqNewArticles(url)
         if (!breakpoint1024) {
             setList(
                 newList.map((sale, index) => {
@@ -157,11 +166,16 @@ const SalePage = ({
         setAdditionalList([])
         setMobileAdditionalList([])
 
-        const newList = await reqNewArticles(
-            `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
-                page - 1
-            }&limit=14`
-        )
+        const url =
+            group === null
+                ? `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
+                      page - 1
+                  }&limit=14`
+                : `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
+                      page - 1
+                  }&limit=14&category=${group}`
+
+        const newList = await reqNewArticles(url)
         if (!breakpoint1024) {
             setList(
                 newList.map((sale, index) => {
@@ -182,11 +196,17 @@ const SalePage = ({
     const onShowMoreButtonClickHandler = async () => {
         const clone = additionalList.concat()
         const mobileClone = mobileAdditionalList.concat()
-        const newList = await reqNewArticles(
-            `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
-                page + 1
-            }&limit=14`
-        )
+
+        const url =
+            group === null
+                ? `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
+                      page + 1
+                  }&limit=14`
+                : `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
+                      page + 1
+                  }&limit=14&category=${group}`
+
+        const newList = await reqNewArticles(url)
 
         if (!breakpoint1024) {
             for (let i = 0; i < newList.length; i++) {
