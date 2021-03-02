@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import moment from 'moment'
 import useMediaQuery from './../../hooks/useMedia'
 import DateImage from './../../assets/date.png'

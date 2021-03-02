@@ -14,7 +14,7 @@ import LoadMoreButton from './../../components/Button/LoadMoreButton'
 // import HelpPickUp from './../../components/Catalog/CatalogHelpPickUp'
 import Assurances from './../../components/Assurances'
 import Subscribe from './../../components/Subscribe'
-// import Footer from './../../components/Footer/FooterDesktop'
+import Footer from './../../components/Footer/FooterDesktop'
 // import MobileFooter from './../../components/Mobile/MobieFooter'
 // import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
 import MobileBurgerMenu from './../../components/Mobile/MobileBurgerMenu'
@@ -47,6 +47,7 @@ const SalePage = ({
     mobileMenu,
     regions,
     IsMobile,
+    groups,
 }) => {
     const breakpoint1024 = useMedia(1024)
 
@@ -73,6 +74,32 @@ const SalePage = ({
         const req = await fetch(url)
         const res = await req.json()
         return res
+    }
+
+    const onGroupClickHandler = async (title) => {
+        setAdditionalList([])
+        setMobileAdditionalList([])
+        const newList = await reqNewArticles(
+            `https://www.anatomiyasna.ru/api/sale/sale-list/?page=1&limit=14&category=${title}`
+        )
+        if (!breakpoint1024) {
+            setList(
+                newList.map((sale, index) => {
+                    if (index === 0) return <BigSaleCard sale={sale} />
+                    else return <SaleCard sale={sale} />
+                })
+            )
+
+            setPage(1)
+        } else if (breakpoint1024) {
+            setMobileList(
+                newList.map((sale, index) => {
+                    return <SaleCard sale={sale} />
+                })
+            )
+
+            setPage(1)
+        }
     }
 
     const onPageClickHandler = async (p) => {
@@ -211,54 +238,31 @@ const SalePage = ({
                 <div className={styles.title}>АКЦИИ АНАТОМИИ СНА</div>
                 <div className={styles.themes}>
                     <div className={styles.themes__title}>Темы</div>
-                    <Swiper
-                        className={styles.themes__list}
-                        freeMode={true}
-                        freeModeMomentum={true}
-                        resistance={true}
-                        resistanceRatio={0}
-                        slidesPerView={'auto'}
-                        autoHeight={true}
-                    >
-                        <SwiperSlide className={styles.themes__item}>
-                            Матрасы
-                        </SwiperSlide>
-                        <SwiperSlide className={styles.themes__item}>
-                            Кровати
-                        </SwiperSlide>
-                        <SwiperSlide className={styles.themes__item}>
-                            Основания
-                        </SwiperSlide>
-                        <SwiperSlide className={styles.themes__item}>
-                            Чехлы
-                        </SwiperSlide>
-                        <SwiperSlide className={styles.themes__item}>
-                            Подушки
-                        </SwiperSlide>
-                        <SwiperSlide className={styles.themes__item}>
-                            Одеяла
-                        </SwiperSlide>
-                        <SwiperSlide className={styles.themes__item}>
-                            Скидки
-                        </SwiperSlide>
-                        <SwiperSlide className={styles.themes__item}>
-                            Кэшбэки
-                        </SwiperSlide>
-                        <SwiperSlide className={styles.themes__item}>
-                            Подарки
-                        </SwiperSlide>
-                    </Swiper>
-                    {/* <div className={styles.themes__list}>
-                        <div className={styles.themes__item}>Матрасы</div>
-                        <div className={styles.themes__item}>Кровати</div>
-                        <div className={styles.themes__item}>Основания</div>
-                        <div className={styles.themes__item}>Чехлы</div>
-                        <div className={styles.themes__item}>Подушки</div>
-                        <div className={styles.themes__item}>Одеяла</div>
-                        <div className={styles.themes__item}>Скидки</div>
-                        <div className={styles.themes__item}>Кэшбэки</div>
-                        <div className={styles.themes__item}>Подарки</div>
-                    </div> */}
+                    {groups && groups.length > 0 && (
+                        <Swiper
+                            className={styles.themes__list}
+                            freeMode={true}
+                            freeModeMomentum={true}
+                            resistance={true}
+                            resistanceRatio={0}
+                            slidesPerView={'auto'}
+                            autoHeight={true}
+                        >
+                            {groups.map((group, index) => {
+                                return (
+                                    <SwiperSlide
+                                        onClick={() =>
+                                            onGroupClickHandler(group.title)
+                                        }
+                                        key={index}
+                                        className={styles.themes__item}
+                                    >
+                                        {group.title}
+                                    </SwiperSlide>
+                                )
+                            })}
+                        </Swiper>
+                    )}
                 </div>
                 <div className={styles.saleslist}>
                     {
@@ -339,6 +343,7 @@ export const getServerSideProps = async (ctx) => {
         'https://www.anatomiyasna.ru/api/menu/mobileCatalogMenu/',
         'https://anatomiyasna.ru/api/menu/mobileMenu/',
         'https://anatomiyasna.ru/api/region/getRegions/',
+        'https://anatomiyasna.ru/api/sale/sale-group-list/',
     ]
     await Promise.all(
         URLS.map(async (url, index) => {
@@ -362,6 +367,7 @@ export const getServerSideProps = async (ctx) => {
     const mobilemenuCatalogs = Response[3]
     const mobileMenu = Response[4]
     const regions = Response[5]
+    const groups = Response[6]
 
     return {
         props: {
@@ -373,6 +379,7 @@ export const getServerSideProps = async (ctx) => {
             mobilemenuCatalogs,
             mobileMenu,
             regions,
+            groups,
         },
     }
 }
