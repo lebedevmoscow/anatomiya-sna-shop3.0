@@ -53,7 +53,7 @@ const SalePage = ({
 
     const breakpoint769 = useMedia(769)
 
-    const [group, setGroup] = useState(null)
+    const [groupActive, setGroup] = useState(null)
     const [page, setPage] = useState(1)
     const [list, setList] = useState(
         salesFirst.map((sale, index) => {
@@ -108,9 +108,9 @@ const SalePage = ({
         setAdditionalList([])
         setMobileAdditionalList([])
         const url =
-            group === null
+            groupActive === null
                 ? `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${p}&limit=14`
-                : `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${p}&limit=14&category=${group}`
+                : `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${p}&limit=14&category=${groupActive}`
         const newList = await reqNewArticles(url)
         if (!breakpoint1024) {
             setList(
@@ -136,13 +136,13 @@ const SalePage = ({
         setMobileAdditionalList([])
 
         const url =
-            group === null
+            groupActive === null
                 ? `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
                       page + 1
                   }&limit=14`
                 : `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
                       page + 1
-                  }&limit=14&category=${group}`
+                  }&limit=14&category=${groupActive}`
 
         const newList = await reqNewArticles(url)
         if (!breakpoint1024) {
@@ -167,13 +167,13 @@ const SalePage = ({
         setMobileAdditionalList([])
 
         const url =
-            group === null
+            groupActive === null
                 ? `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
                       page - 1
                   }&limit=14`
                 : `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
                       page - 1
-                  }&limit=14&category=${group}`
+                  }&limit=14&category=${groupActive}`
 
         const newList = await reqNewArticles(url)
         if (!breakpoint1024) {
@@ -198,13 +198,13 @@ const SalePage = ({
         const mobileClone = mobileAdditionalList.concat()
 
         const url =
-            group === null
+            groupActive === null
                 ? `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
                       page + 1
                   }&limit=14`
                 : `https://www.anatomiyasna.ru/api/sale/sale-list/?page=${
                       page + 1
-                  }&limit=14&category=${group}`
+                  }&limit=14&category=${groupActive}`
 
         const newList = await reqNewArticles(url)
 
@@ -269,13 +269,17 @@ const SalePage = ({
                             autoHeight={true}
                         >
                             {groups.map((group, index) => {
+                                const additionalClassName =
+                                    group.title === groupActive
+                                        ? styles.themes__item__active
+                                        : ''
                                 return (
                                     <SwiperSlide
                                         onClick={() =>
                                             onGroupClickHandler(group.title)
                                         }
                                         key={index}
-                                        className={styles.themes__item}
+                                        className={`${styles.themes__item} ${additionalClassName}`}
                                     >
                                         {group.title}
                                     </SwiperSlide>
