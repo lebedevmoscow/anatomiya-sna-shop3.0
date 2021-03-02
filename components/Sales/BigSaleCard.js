@@ -11,9 +11,12 @@ const BigSaleCard = ({ sale }) => {
     const now = moment(new Date())
     const end = moment(sale.dateEnd)
     const duration = moment.duration(now.diff(end))
-    const days = Math.floor(duration.asDays() * -1)
-    const hours = Math.floor(duration.hours() * -1)
-    const minutes = Math.floor(duration.minutes() * -1)
+    let days = Math.floor(duration.asDays() * -1)
+    let hours = Math.floor(duration.hours() * -1)
+    let minutes = Math.floor(duration.minutes() * -1)
+
+    if (minutes > 0 && minutes < 10) minutes = '0' + minutes
+    if (hours > 0 && hours < 10) hours = '0' + hours
 
     const [backgroundSizeType, setBackgroundTypeSize] = useState('cover')
 

@@ -32,8 +32,8 @@ const Sale = ({ sale }) => {
     const now = moment(new Date())
     const end = moment(sale.dateEnd)
     const duration = moment.duration(now.diff(end))
-    let days = Math.floor(duration.asDays() * -1) + 1
-    let hours = Math.floor(duration.hours())
+    let days = Math.floor(duration.asDays() * -1)
+    let hours = Math.floor(duration.hours() * -1)
     let minutes = Math.floor(duration.minutes() * -1)
 
     if (minutes > 0 && minutes < 10) minutes = '0' + minutes
