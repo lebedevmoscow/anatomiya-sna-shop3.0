@@ -42,6 +42,7 @@ const PartneramPage = ({
 }) => {
     const breakpoint1024 = useMedia(1024)
     const breakpoint769 = useMedia(769)
+    const breakpoint721 = useMedia(721)
 
     return (
         <div className={styles.partneram_page}>
@@ -236,6 +237,89 @@ const PartneramPage = ({
                         </li>
                     </ul>
                 </div>
+                {!breakpoint721 && (
+                    <div className={styles.conditions}>
+                        <ul className={styles.conditions__list}>
+                            <li className={styles.conditions__list__item}>
+                                <img src={CartShieldImage}></img>
+                                <div
+                                    className={
+                                        styles.conditions__list__item__text
+                                    }
+                                >
+                                    Ведем честное сотрудничество, основанное на
+                                    заключении договора
+                                </div>
+                            </li>
+                            <li className={styles.conditions__list__item}>
+                                <img src={FolderImage}></img>
+                                <div
+                                    className={
+                                        styles.conditions__list__item__text
+                                    }
+                                >
+                                    Расскажите о компании и товарах кратко и
+                                    емко – объемные презентации не являются
+                                    гарантией заключения договора.
+                                </div>
+                            </li>
+                            <li className={styles.conditions__list__item}>
+                                <img src={OfficialImage}></img>
+                                <div
+                                    className={
+                                        styles.conditions__list__item__text
+                                    }
+                                >
+                                    Работаем "в белую", выплаты наличными
+                                    средствами или переводом на банковскую карту
+                                    не интересуют.
+                                </div>
+                            </li>
+                            <li className={styles.conditions__list__item}>
+                                <img src={MedalImage}></img>
+                                <div
+                                    className={
+                                        styles.conditions__list__item__text
+                                    }
+                                >
+                                    Уверены, качество Вашей продукции находится
+                                    на высоком уровне. Чтобы заявка на
+                                    сотрудничество принесла положительный
+                                    результат, попробуйте рассказать о других
+                                    преимуществах Вашей компании.
+                                </div>
+                            </li>
+                            <li className={styles.conditions__list__item}>
+                                <img src={MailImage}></img>
+                                <div
+                                    className={
+                                        styles.conditions__list__item__text
+                                    }
+                                >
+                                    Чтобы рассмотреть Ваше предложение, нам
+                                    потребуется некоторое время. Пожалуйста,
+                                    заявку отсылайте на указанный e-mail – мы
+                                    обязательно ответим Вам!
+                                </div>
+                            </li>
+
+                            <li className={styles.conditions__list__item}>
+                                <img src={StarPocket}></img>
+                                <div
+                                    className={
+                                        styles.conditions__list__item__text
+                                    }
+                                >
+                                    Предлагаем взаимовыгодное сотрудничество
+                                    молодым и опытным компаниям, которые хотят
+                                    развивать бизнес и выйти на высокий доход.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                )}
+            </div>
+            {breakpoint721 && (
                 <div className={styles.conditions}>
                     <ul className={styles.conditions__list}>
                         <li className={styles.conditions__list__item}>
@@ -302,7 +386,7 @@ const PartneramPage = ({
                         </li>
                     </ul>
                 </div>
-            </div>
+            )}
             {(!IsMobile || !breakpoint1024) && <Subscribe />}
             {(IsMobile || breakpoint1024) && <MobileFooter />}
             {(!IsMobile || !breakpoint1024) && <Footer />}
