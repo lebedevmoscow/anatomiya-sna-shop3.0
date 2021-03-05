@@ -3,6 +3,7 @@ import useMedia from './../../hooks/useMedia'
 import Link from 'next/link'
 import Select from 'react-select'
 import InputMask from 'react-input-mask'
+import Image from 'next/image'
 
 // React components
 import Header from './../../components/Header'
@@ -11,18 +12,26 @@ import MobileBurgerMenu from './../../components/Mobile/MobileBurgerMenu'
 import Subscribe from './../../components/Subscribe'
 import Footer from './../../components/Footer/FooterDesktop'
 import URLComponent from './../../components/URLComponent'
+import Assuracnes from './../../components/Assurances'
 
 // Images
 import MattrassImportantImage from './../../assets/mattrass-important.png'
 import MattrassCheckmarkImage from './../../assets/mattrass-checkmarkpng.png'
 import MattrassGearImage from './../../assets/mattrass-gearpng.png'
 import MattrassPurseImage from './../../assets/mattrass-pursepng.png'
+import LoadFilesImage from './../../assets/load-files.png'
+import WarningImage from './../../assets/warning.png'
 
 // Styles
 import styles from './../../styles/pages/obmen-i-vozvrat.module.sass'
 
 const MobileFooter = dynamic(
     () => import('../../components/Mobile/MobieFooter'),
+    { ssr: true }
+)
+
+const CatalogHelpPickUp = dynamic(
+    () => import('../../components/Catalog/CatalogHelpPickUp'),
     { ssr: true }
 )
 
@@ -36,6 +45,17 @@ const ObmenIVozvratPage = ({
     regions,
     banner = null,
 }) => {
+    const options1 = [
+        {
+            value: 'change',
+            label: 'Замена продукции',
+        },
+        {
+            value: 'payback',
+            label: 'Возврат денежных средств',
+        },
+    ]
+
     const colourStyles = {
         control: (styles) => ({
             ...styles,
@@ -93,7 +113,7 @@ const ObmenIVozvratPage = ({
         menuList: (styles, { data }) => {
             return {
                 ...styles,
-                border: '1px solid #0CA5D3',
+                border: 'none',
                 borderRadius: '5px',
                 fontFamily: 'Arial, sans-serif',
                 fontSize: '14px',
@@ -387,6 +407,7 @@ const ObmenIVozvratPage = ({
                                 styles={colourStyles}
                                 isSearchable={false}
                                 autoFocus={false}
+                                options={options1}
                             />
                             <Select
                                 className="product-card__selector"
@@ -410,6 +431,47 @@ const ObmenIVozvratPage = ({
                             ></textarea>
                         </div>
                     </div>
+                    <div className={styles.form__important_field}>
+                        <span>*</span> Обязательные поля
+                    </div>
+                </div>
+                <div className={styles.custom_file_upload__wrapper}>
+                    <label className={styles.custom_file_upload}>
+                        <input type="file" />
+                        <img
+                            className={styles.custom_file_upload__image}
+                            src={LoadFilesImage}
+                        ></img>
+                        <span className={styles.custom_file_upload__text}>
+                            Нажмите или перетащите сюда фотографию для загрузки
+                        </span>
+                    </label>
+                </div>
+                <div className={styles.warning__wrapper}>
+                    <div className={styles.warning__wrapper__inner}>
+                        <img src={WarningImage}></img>
+                        <span className={styles.warning__wrapper__inner__text}>
+                            Ваше обращение будет рассмотрено в ближайшие часы и
+                            отдел качества свяжется с вами по этому вопросу
+                        </span>
+                    </div>
+                </div>
+                <div className={styles.send_req__wrapper}>
+                    <button className={styles.send_req__button}>
+                        Отправить запрос
+                    </button>
+                </div>
+                <div className={styles.copy}>
+                    Нажимая на кнопку, я даю согласие на{' '}
+                    <Link href="/">
+                        <a>обработку персональных данных</a>
+                    </Link>
+                </div>
+                <div className={styles.help_pickup__wrapper}>
+                    <CatalogHelpPickUp withoutContainer={true} />
+                </div>
+                <div className={styles.assurances__wrapper}>
+                    <Assuracnes dontShowBanner={true} />
                 </div>
             </div>
             {(!IsMobile || !breakpoint1024) && <Subscribe />}

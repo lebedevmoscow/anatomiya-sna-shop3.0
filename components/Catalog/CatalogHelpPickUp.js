@@ -13,11 +13,20 @@ String.prototype.replaceAt = function (index, replacement) {
     )
 }
 
-const CatalogHelpPickUp = () => {
+const CatalogHelpPickUp = ({ withoutContainer = false }) => {
     return (
         <div className={styles.catalog_help_pickup}>
             <div className={styles.catalog_help_pickup__content}>
-                <div className={styles.catalog_help_pickup__left}>
+                <div
+                    style={
+                        withoutContainer
+                            ? {
+                                  width: '59%',
+                              }
+                            : {}
+                    }
+                    className={styles.catalog_help_pickup__left}
+                >
                     <div className={styles.catalog_help_pickup__left_subtitle}>
                         Сложно выбрать кровать?
                     </div>
@@ -53,8 +62,27 @@ const CatalogHelpPickUp = () => {
                         Консультация не обязывает вас к покупке кровати
                     </div>
                 </div>
-                <div className={styles.catalog_help_pickup__right}>
-                    <img src={Girl}></img>
+                <div
+                    style={
+                        withoutContainer
+                            ? {
+                                  top: '-34px',
+                                  right: '123px',
+                              }
+                            : {}
+                    }
+                    className={styles.catalog_help_pickup__right}
+                >
+                    <img
+                        style={
+                            withoutContainer
+                                ? {
+                                      width: '300px',
+                                  }
+                                : {}
+                        }
+                        src={Girl}
+                    ></img>
                 </div>
             </div>
         </div>
