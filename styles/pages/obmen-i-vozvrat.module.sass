@@ -244,9 +244,135 @@
 .assurances__wrapper
     margin-bottom: 75px
 
+.modal_contnet__mini_text
+    font-size: 18px
+    color: #444
+    text-align: center
+    margin-bottom: 20px
+
+.mobile_content__warning img
+    display: block
+    margin: 0 auto
+    margin-bottom: 10px
+
+.mobile_content__warning__text
+    font-size: 13px
+    color: #444
+    text-align: center
+    margin-bottom: 25px
+
+.mobile_content__send_req
+    font-size: 20px
+    padding: 10px 20px
+    display: block
+    width: 100%
+    font-weight: 400
+    border-radius: 5px
+    line-height: 1
+    box-shadow: 1px 3px 7px rgb(0 0 0 / 19%)
+    background: #ffdb4d
+    color: #444
+    text-align: center
+    border: none
+    outline: none
+    box-sizing: border-box
+
+.mobile__content__copy
+    color: #444
+    font-size: 15px
+    margin-top: 15px
+    text-align: center
+    margin-bottom: 30px
+    a
+        text-decoration: underline
+        color: #0ca5d3
+
+// Input file styling
+.modal_content__custom_file_upload__wrapper
+    margin-bottom: 15px
+    input[type="file"]
+        display: none
+
+    .modal_content__custom_file_upload__image
+        display: block
+        width: 200px
+        height: 40px
+
+    .modal_content__custom_file_upload
+        margin-top: 30px
+        border-radius: 5px
+        border: 1px solid #e6e6e6
+        cursor: pointer
+        width: 100%
+        display: flex
+        align-items: center
+        flex-direction: column
+        justify-content: center
+        height: 140px
+        .modal_content__custom_file_upload__text
+            font-size: 17px
+            color: #444444
+            text-align: center
+            margin-top: 15px
+
+.modal_content__form
+    input
+        height: 40px
+        box-shadow: none
+        color: #444
+        border: 1px solid #e6e6e6
+        background: #f8f8f8
+        border-radius: 5px
+        padding: 0 20px
+        margin-right: 10px
+        box-sizing: border-box
+        font-size: 16px
+        font-weight: 400
+        line-height: 1
+        letter-spacing: .6px
+        max-width: 100%
+        outline: none
+        width: 100%
+        margin-bottom: 15px
+
+    textarea
+        display: block
+        width: 100%
+        border: 1px solid #e6e6e6
+        background: #f8f8f8
+        border-radius: 5px
+        padding: 20px 20px
+        height: 170px
+        box-shadow: none
+        color: #444
+        font-size: 16px
+        font-weight: 400
+        line-height: 1
+        letter-spacing: .6px
+        outline: none
+        box-sizing: border-box
+
+        &::placeholder
+            color: grey
+            font-family: Lato,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif
+            font-size: 16px
+            font-weight: 400
+            letter-spacing: 0.6px
+            outline: none
+
+.modal_content__important_field
+    color: #444
+    text-align: right
+    margin-top: 15px
+    span
+        color: #0ca5d3
+
 @media screen and ( max-width: 1023px )
 
     .container
+        padding: 0 15px
+
+    .container2
         padding: 0 15px
 
 @media screen and ( max-width: 720px )
@@ -312,4 +438,7 @@
 @media screen and ( max-width: 450px )
 
     .container
+        padding: 0 10px
+
+    .container2
         padding: 0 10px

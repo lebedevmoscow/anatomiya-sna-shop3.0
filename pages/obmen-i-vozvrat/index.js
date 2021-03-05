@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import { useState, useEffect } from 'react'
 import useMedia from './../../hooks/useMedia'
 import Link from 'next/link'
 import Select from 'react-select'
@@ -14,6 +15,7 @@ import Footer from './../../components/Footer/FooterDesktop'
 import URLComponent from './../../components/URLComponent'
 import Assuracnes from './../../components/Assurances'
 import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
+import MobileModalForm from './../../components/MobileModalForm'
 
 // Images
 import MattrassImportantImage from './../../assets/mattrass-important.png'
@@ -46,6 +48,8 @@ const ObmenIVozvratPage = ({
     regions,
     banner = null,
 }) => {
+    const [modalIsClosed, setModalIsClosed] = useState(true)
+
     const options1 = [
         {
             value: 'change',
@@ -56,6 +60,77 @@ const ObmenIVozvratPage = ({
             label: 'Возврат денежных средств',
         },
     ]
+
+    const mobileStyles = {
+        control: (styles) => ({
+            ...styles,
+            padding: '0 20px',
+            border: '1px solid #e6e6e6',
+            background: '#f8f8f8',
+            borderRadius: '5px',
+            boxShadow: 'none',
+            height: '40px',
+            boxSizing: 'border-box',
+            marginBottom: '15px',
+            '&:hover': {
+                border: '1px solid #e6e6e6 !important',
+                outline: 'none !important',
+            },
+        }),
+        option: (styles, { data, isFocused }) => {
+            return {
+                ...styles,
+                backgroundColor: isFocused ? '#0CA5D3' : '',
+                color: isFocused ? 'white' : '',
+            }
+        },
+
+        placeholder: (styles) => {
+            return {
+                ...styles,
+                marginLeft: '-10px',
+                color: 'grey',
+                fontSize: '16px',
+                fontWeight: '400',
+                lineHeight: '1',
+                letterSpacing: '.6px',
+                outline: 'none',
+            }
+        },
+
+        indicatorSeparator: (styles) => {
+            return {
+                ...styles,
+                display: 'none',
+            }
+        },
+
+        dropdownIndicator: (styles) => {
+            return {
+                ...styles,
+                color: '#000',
+                position: 'absolute',
+                right: '6px',
+                transform: 'scale(0.8)',
+            }
+        },
+
+        menuList: (styles, { data }) => {
+            return {
+                ...styles,
+                border: 'none',
+                borderRadius: '5px',
+                fontFamily: 'Arial, sans-serif',
+                fontSize: '14px',
+            }
+        },
+        valueContainer: (styles) => {
+            return {
+                ...styles,
+                height: '40px',
+            }
+        },
+    }
 
     const colourStyles = {
         control: (styles) => ({
@@ -126,8 +201,94 @@ const ObmenIVozvratPage = ({
     const breakpoint769 = useMedia(769)
     const breakpoint721 = useMedia(721)
 
+    const modalContent = (
+        <div className={styles.modal_content}>
+            <div className={styles.modal_contnet__mini_text}>
+                Мы свяжемся с вами в ближайшее время.
+            </div>
+            <div className={styles.modal_content__form}>
+                <input type="text" placeholder="Ваше имя *"></input>
+                <input type="text" placeholder="Ваш email *"></input>
+                <input type="text" placeholder="Телефон *"></input>
+                <input type="text" placeholder="Город"></input>
+                <input type="text" placeholder="Номер заказа"></input>
+                <input type="text" placeholder="Номер накладной"></input>
+                <Select
+                    className="product-card__selector"
+                    classNamePrefix="product-card__selector--inner"
+                    placeholder={'Замена продукции'}
+                    styles={mobileStyles}
+                    isSearchable={false}
+                    autoFocus={false}
+                    options={options1}
+                />
+                <Select
+                    className="product-card__selector"
+                    classNamePrefix="product-card__selector--inner"
+                    placeholder={'Аскона'}
+                    styles={mobileStyles}
+                    isSearchable={false}
+                    autoFocus={false}
+                    options={options1}
+                />
+                <input type="text" placeholder="Наименование товара"></input>
+                <textarea type="text" placeholder="Ваш вопрос *"></textarea>
+            </div>
+            <div className={styles.modal_content__important_field}>
+                <span>*</span> Обязательные поля
+            </div>
+
+            <div className={styles.modal_content__custom_file_upload__wrapper}>
+                <label className={styles.modal_content__custom_file_upload}>
+                    <input type="file" />
+                    <img
+                        className={
+                            styles.modal_content__custom_file_upload__image
+                        }
+                        src={LoadFilesImage}
+                    ></img>
+                    <span
+                        className={
+                            styles.modal_content__custom_file_upload__text
+                        }
+                    >
+                        Нажмите или перетащите сюда фотографию для загрузки
+                    </span>
+                </label>
+            </div>
+            <div className={styles.mobile_content__warning}>
+                <img src={WarningImage}></img>
+                <div className={styles.mobile_content__warning__text}>
+                    Ваше обращение будет рассмотрено в ближайшие часы и отдел
+                    качества свяжется с вами по этому вопросу
+                </div>
+            </div>
+            <div className={styles.mobile_content__send_req__wrapper}>
+                <button className={styles.mobile_content__send_req}>
+                    Отправить запрос
+                </button>
+            </div>
+            <div className={styles.mobile_content__copy__wrapper}>
+                <div className={styles.mobile__content__copy}>
+                    Нажимая на кнопку, я даю согласие на{' '}
+                    <Link href="/">
+                        <a>обработку персональных данных</a>
+                    </Link>
+                </div>
+            </div>
+        </div>
+    )
+
     return (
         <div className={styles.obmenivozvratpage}>
+            {/* Modals */}
+            <MobileModalForm
+                closed={modalIsClosed}
+                onClose={() => setModalIsClosed(true)}
+                title={'Оставьте заявку'}
+                content={modalContent}
+            />
+
             {breakpoint1024 && (
                 <MobileBurgerMenu
                     mobilemenuCatalogs={mobilemenuCatalogs}
@@ -475,7 +636,10 @@ const ObmenIVozvratPage = ({
                         </div>
                     </>
                 )}
-                <div className={styles.send_req__wrapper}>
+                <div
+                    onClick={() => setModalIsClosed(false)}
+                    className={styles.send_req__wrapper}
+                >
                     <button className={styles.send_req__button}>
                         Отправить запрос
                     </button>
