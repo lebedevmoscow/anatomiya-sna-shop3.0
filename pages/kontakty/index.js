@@ -44,8 +44,44 @@ const KontaktyPage = ({
 
     const [modalIsClosed, setModalIsClosed] = useState(true)
 
+    const modalContent = (
+        <div className={styles.modal_content}>
+            <div className={styles.modal_content__mini_text}>
+                Мы свяжемся с вами в ближайшее время.
+            </div>
+            <div className={styles.modal_content__form__wrapper}>
+                <div className={styles.modal_content__form}>
+                    <input type="text" placeholder="Ваше имя *" />
+                    <input type="text" placeholder="Ваш email *" />
+                    <input type="text" placeholder="Телефон *" />
+                    <textarea placeholder="Ваш вопрос *" />
+                </div>
+            </div>
+            <div className={styles.modal_content__important_fileds}>
+                <span className={styles.blue}>* </span> Обязательные поля
+            </div>
+            <button className={styles.modal_content__send_req}>
+                Отправить заявку
+            </button>
+            <div className={styles.modal_content__copy}>
+                Нажимая на кнопку, я даю согласие на{' '}
+                <Link href="/">
+                    <a> обработку персональных данных</a>
+                </Link>
+            </div>
+        </div>
+    )
+
     return (
         <div className={styles.kontakty_page}>
+            {/* Modals */}
+            <MobileModalForm
+                title="Оставьте заявку"
+                closed={modalIsClosed}
+                content={modalContent}
+                onClose={() => setModalIsClosed(true)}
+            />
+
             {breakpoint1024 && (
                 <MobileBurgerMenu
                     mobilemenuCatalogs={mobilemenuCatalogs}
