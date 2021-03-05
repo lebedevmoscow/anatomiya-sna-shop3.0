@@ -23,7 +23,6 @@ import MattrassType1Image1 from './../../assets/mattrass_type1.jpg'
 import MattrassType1Image2 from './../../assets/mattrass_type2.jpg'
 import MattrassType1Image3 from './../../assets/mattrass_type3.jpg'
 import MattrassType1Image4 from './../../assets/mattrass_type4.jpg'
-import WarningImage from './../../assets/warning.png'
 
 // Styles
 import styles from './../../styles/pages/optovikam.module.sass'
