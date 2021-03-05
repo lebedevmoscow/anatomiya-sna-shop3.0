@@ -13,13 +13,13 @@ String.prototype.replaceAt = function (index, replacement) {
     )
 }
 
-const CatalogHelpPickUp = ({ withoutContainer = false }) => {
+const CatalogHelpPickUp = ({ withoutContainer = false, Mobile = false }) => {
     return (
         <div className={styles.catalog_help_pickup}>
             <div className={styles.catalog_help_pickup__content}>
                 <div
                     style={
-                        withoutContainer
+                        withoutContainer && !Mobile
                             ? {
                                   width: '59%',
                               }
@@ -64,7 +64,7 @@ const CatalogHelpPickUp = ({ withoutContainer = false }) => {
                 </div>
                 <div
                     style={
-                        withoutContainer
+                        withoutContainer && !Mobile
                             ? {
                                   top: '-34px',
                                   right: '123px',
@@ -75,7 +75,7 @@ const CatalogHelpPickUp = ({ withoutContainer = false }) => {
                 >
                     <img
                         style={
-                            withoutContainer
+                            withoutContainer && !Mobile
                                 ? {
                                       width: '300px',
                                   }

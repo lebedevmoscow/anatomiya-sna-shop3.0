@@ -13,6 +13,7 @@ import Subscribe from './../../components/Subscribe'
 import Footer from './../../components/Footer/FooterDesktop'
 import URLComponent from './../../components/URLComponent'
 import Assuracnes from './../../components/Assurances'
+import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
 
 // Images
 import MattrassImportantImage from './../../assets/mattrass-important.png'
@@ -371,91 +372,109 @@ const ObmenIVozvratPage = ({
                         </li>
                     </ul>
                 </div>
-                <div className={styles.form}>
-                    <div className={styles.form__title}>
-                        Мы свяжемся с вами в ближайшее время.
+                {!breakpoint721 && (
+                    <div className={styles.form}>
+                        <div className={styles.form__title}>
+                            Мы свяжемся с вами в ближайшее время.
+                        </div>
+                        <div className={styles.form__inner}>
+                            <div className={styles.line__three}>
+                                <input
+                                    type="text"
+                                    placeholder="Ваше имя *"
+                                ></input>
+                                <input
+                                    type="text"
+                                    placeholder="Ваше email *"
+                                ></input>
+                                <InputMask
+                                    placeholder={'Ваш телефон *'}
+                                    mask="+7 (999) 999 99 99"
+                                    maskChar="_"
+                                />
+                            </div>
+                            <div className={styles.line__three}>
+                                <input type="text" placeholder="Город"></input>
+                                <input
+                                    type="text"
+                                    placeholder="Номер заказ"
+                                ></input>
+                                <input
+                                    type="text"
+                                    placeholder="Номер накладной"
+                                ></input>
+                            </div>
+                            <div className={styles.line__two}>
+                                <Select
+                                    className="product-card__selector"
+                                    classNamePrefix="product-card__selector--inner"
+                                    placeholder={'Замена продукции'}
+                                    styles={colourStyles}
+                                    isSearchable={false}
+                                    autoFocus={false}
+                                    options={options1}
+                                />
+                                <Select
+                                    className="product-card__selector"
+                                    classNamePrefix="product-card__selector--inner"
+                                    placeholder={'Аскона'}
+                                    styles={colourStyles}
+                                    isSearchable={false}
+                                    autoFocus={false}
+                                />
+                            </div>
+                            <div className={styles.line__one}>
+                                <input
+                                    type="text"
+                                    placeholder="Наименование продукции"
+                                ></input>
+                            </div>
+                            <div className={styles.line__one}>
+                                <textarea
+                                    type="text"
+                                    placeholder="Ваш вопрос *"
+                                ></textarea>
+                            </div>
+                        </div>
+                        <div className={styles.form__important_field}>
+                            <span>*</span> Обязательные поля
+                        </div>
                     </div>
-                    <div className={styles.form__inner}>
-                        <div className={styles.line__three}>
-                            <input type="text" placeholder="Ваше имя *"></input>
-                            <input
-                                type="text"
-                                placeholder="Ваше email *"
-                            ></input>
-                            <InputMask
-                                placeholder={'Ваш телефон *'}
-                                mask="+7 (999) 999 99 99"
-                                maskChar="_"
-                            />
+                )}
+                {!breakpoint721 && (
+                    <>
+                        <div className={styles.custom_file_upload__wrapper}>
+                            <label className={styles.custom_file_upload}>
+                                <input type="file" />
+                                <img
+                                    className={styles.custom_file_upload__image}
+                                    src={LoadFilesImage}
+                                ></img>
+                                <span
+                                    className={styles.custom_file_upload__text}
+                                >
+                                    Нажмите или перетащите сюда фотографию для
+                                    загрузки
+                                </span>
+                            </label>
                         </div>
-                        <div className={styles.line__three}>
-                            <input type="text" placeholder="Город"></input>
-                            <input
-                                type="text"
-                                placeholder="Номер заказ"
-                            ></input>
-                            <input
-                                type="text"
-                                placeholder="Номер накладной"
-                            ></input>
+
+                        <div className={styles.warning__wrapper}>
+                            <div className={styles.warning__wrapper__inner}>
+                                <img src={WarningImage}></img>
+                                <span
+                                    className={
+                                        styles.warning__wrapper__inner__text
+                                    }
+                                >
+                                    Ваше обращение будет рассмотрено в ближайшие
+                                    часы и отдел качества свяжется с вами по
+                                    этому вопросу
+                                </span>
+                            </div>
                         </div>
-                        <div className={styles.line__two}>
-                            <Select
-                                className="product-card__selector"
-                                classNamePrefix="product-card__selector--inner"
-                                placeholder={'Замена продукции'}
-                                styles={colourStyles}
-                                isSearchable={false}
-                                autoFocus={false}
-                                options={options1}
-                            />
-                            <Select
-                                className="product-card__selector"
-                                classNamePrefix="product-card__selector--inner"
-                                placeholder={'Аскона'}
-                                styles={colourStyles}
-                                isSearchable={false}
-                                autoFocus={false}
-                            />
-                        </div>
-                        <div className={styles.line__one}>
-                            <input
-                                type="text"
-                                placeholder="Наименование продукции"
-                            ></input>
-                        </div>
-                        <div className={styles.line__one}>
-                            <textarea
-                                type="text"
-                                placeholder="Ваш вопрос *"
-                            ></textarea>
-                        </div>
-                    </div>
-                    <div className={styles.form__important_field}>
-                        <span>*</span> Обязательные поля
-                    </div>
-                </div>
-                <div className={styles.custom_file_upload__wrapper}>
-                    <label className={styles.custom_file_upload}>
-                        <input type="file" />
-                        <img
-                            className={styles.custom_file_upload__image}
-                            src={LoadFilesImage}
-                        ></img>
-                        <span className={styles.custom_file_upload__text}>
-                            Нажмите или перетащите сюда фотографию для загрузки
-                        </span>
-                    </label>
-                </div>
-                <div className={styles.warning__wrapper}>
-                    <div className={styles.warning__wrapper__inner}>
-                        <img src={WarningImage}></img>
-                        <span className={styles.warning__wrapper__inner__text}>
-                            Ваше обращение будет рассмотрено в ближайшие часы и
-                            отдел качества свяжется с вами по этому вопросу
-                        </span>
-                    </div>
-                </div>
+                    </>
+                )}
                 <div className={styles.send_req__wrapper}>
                     <button className={styles.send_req__button}>
                         Отправить запрос
@@ -468,11 +487,21 @@ const ObmenIVozvratPage = ({
                     </Link>
                 </div>
                 <div className={styles.help_pickup__wrapper}>
-                    <CatalogHelpPickUp withoutContainer={true} />
+                    <CatalogHelpPickUp
+                        Mobile={IsMobile}
+                        withoutContainer={true}
+                    />
                 </div>
-                <div className={styles.assurances__wrapper}>
-                    <Assuracnes dontShowBanner={true} />
-                </div>
+                {!breakpoint721 && (
+                    <div className={styles.assurances__wrapper}>
+                        <Assuracnes dontShowBanner={true} />
+                    </div>
+                )}
+                {breakpoint721 && (
+                    <div className={styles.mobile_assurances__wrapper}>
+                        <SwiperAssurenaces />
+                    </div>
+                )}
             </div>
             {(!IsMobile || !breakpoint1024) && <Subscribe />}
             {(IsMobile || breakpoint1024) && <MobileFooter />}
