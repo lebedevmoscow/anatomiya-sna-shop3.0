@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import { useState } from 'react'
 import useMedia from './../../hooks/useMedia'
 import Link from 'next/link'
 
@@ -9,8 +10,6 @@ import MobileBurgerMenu from './../../components/Mobile/MobileBurgerMenu'
 import Subscribe from './../../components/Subscribe'
 import Footer from './../../components/Footer/FooterDesktop'
 import URLComponent from './../../components/URLComponent'
-import Assuracnes from './../../components/Assurances'
-import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
 import MobileModalForm from './../../components/MobileModalForm'
 
 // Images
@@ -24,9 +23,15 @@ import MattrassType1Image1 from './../../assets/mattrass_type1.jpg'
 import MattrassType1Image2 from './../../assets/mattrass_type2.jpg'
 import MattrassType1Image3 from './../../assets/mattrass_type3.jpg'
 import MattrassType1Image4 from './../../assets/mattrass_type4.jpg'
+import WarningImage from './../../assets/warning.png'
 
 // Styles
 import styles from './../../styles/pages/optovikam.module.sass'
+
+const MobileFooter = dynamic(
+    () => import('../../components/Mobile/MobieFooter'),
+    { ssr: true }
+)
 
 const OptovikamPage = ({
     phoneCommon,
@@ -41,8 +46,46 @@ const OptovikamPage = ({
     const breakpoint769 = useMedia(769)
     const breakpoint1024 = useMedia(1024)
 
+    const [modalIsClosed, setModalIsClosed] = useState(true)
+
+    const modalContent = (
+        <div className={styles.modal_content}>
+            <div className={styles.modal_content__mini_text}>
+                Мы свяжемся с вами в ближайшее время.
+            </div>
+            <div className={styles.modal_content__form__wrapper}>
+                <div className={styles.modal_content__form}>
+                    <input type="text" placeholder="Ваше имя *" />
+                    <input type="text" placeholder="Ваш email *" />
+                    <input type="text" placeholder="Телефон *" />
+                    <textarea placeholder="Ваш вопрос *" />
+                </div>
+            </div>
+            <div className={styles.modal_content__important_fileds}>
+                <span className={styles.blue}>* </span> Обязательные поля
+            </div>
+            <button className={styles.modal_content__send_req}>
+                Отправить заявку
+            </button>
+            <div className={styles.modal_content__copy}>
+                Нажимая на кнопку, я даю согласие на{' '}
+                <Link href="/">
+                    <a> обработку персональных данных</a>
+                </Link>
+            </div>
+        </div>
+    )
+
     return (
         <div className={styles.optovikam_page}>
+            {/* Modals */}
+            <MobileModalForm
+                title="Оставьте заявку"
+                closed={modalIsClosed}
+                content={modalContent}
+                onClose={() => setModalIsClosed(true)}
+            />
+
             {breakpoint1024 && (
                 <MobileBurgerMenu
                     mobilemenuCatalogs={mobilemenuCatalogs}
@@ -331,33 +374,44 @@ const OptovikamPage = ({
                         </li>
                     </ul>
                 </div>
-                <div className={styles.we_will_contact}>
-                    Мы свяжемся с вами в ближайшее время.
-                </div>
-                <div className={styles.form__wrapper}>
-                    <div className={styles.form}>
-                        <div className={styles.form__line__three}>
-                            <input type="text" placeholder="Ваше имя *" />
-                            <input type="text" placeholder="Ваш email *" />
-                            <input type="text" placeholder="Телефон *" />
-                        </div>
-                        <textarea placeholder="Ваш вопрос *" />
+                {!breakpoint769 && (
+                    <div className={styles.we_will_contact}>
+                        Мы свяжемся с вами в ближайшее время.
                     </div>
-                </div>
-                <div className={styles.important_fields}>
-                    <span className={styles.blue}>*</span> Обязательные поля
-                </div>
-                <div className={styles.send_req_button__wrapper}>
+                )}
+                {!breakpoint769 && (
+                    <div className={styles.form__wrapper}>
+                        <div className={styles.form}>
+                            <div className={styles.form__line__three}>
+                                <input type="text" placeholder="Ваше имя *" />
+                                <input type="text" placeholder="Ваш email *" />
+                                <input type="text" placeholder="Телефон *" />
+                            </div>
+                            <textarea placeholder="Ваш вопрос *" />
+                        </div>
+                    </div>
+                )}
+                {!breakpoint769 && (
+                    <div className={styles.important_fields}>
+                        <span className={styles.blue}>*</span> Обязательные поля
+                    </div>
+                )}
+                <div
+                    onClick={() => setModalIsClosed(false)}
+                    className={styles.send_req_button__wrapper}
+                >
                     <button className={styles.send_req_button}>
                         Отправить заявку
                     </button>
                 </div>
-                <div className={styles.copy}>
-                    Нажимая на кнопку, я даю согласие на{' '}
-                    <Link href="/">
-                        <a>обработку персональных данных</a>
-                    </Link>
-                </div>
+                {!breakpoint769 && (
+                    <div className={styles.copy}>
+                        Нажимая на кнопку, я даю согласие на{' '}
+                        <Link href="/">
+                            <a>обработку персональных данных</a>
+                        </Link>
+                    </div>
+                )}
             </div>
             {(!IsMobile || !breakpoint1024) && <Subscribe />}
             {(IsMobile || breakpoint1024) && <MobileFooter />}
