@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import PopupsTextOnProductCard from './PopupsTextOnProductCard'
 import OutsideClickHandler from 'react-outside-click-handler'
 import Modal from './../Modal'
+import { useSelector } from 'react-redux'
 import { capitalizeFirstLetter } from './../../utils/capitalizeFirstLetter'
 
 import popups_styles from './../../styles/components/Popups/Popups.module.sass'
@@ -207,6 +208,8 @@ const PopupsOnProductCard = ({
     Gifts = [],
     DontShow = false,
 }) => {
+    const CatalogReducer = useSelector((store) => store.CatalogReducer)
+
     const [mount, setMount] = useState(false)
     const Ref = useRef(null)
     const [IsClosed, SetIsClosed] = useState(true)
@@ -227,7 +230,7 @@ const PopupsOnProductCard = ({
     return (
         <div
             style={
-                desktopViewType === 'single'
+                CatalogReducer.desktopViewType === 'single'
                     ? { left: '1%', flexDirection: 'column', width: '50px' }
                     : {}
             }
@@ -282,10 +285,19 @@ const PopupsOnProductCard = ({
                         style={
                             IsClosed
                                 ? {
-                                      top: '-5px',
+                                      top:
+                                          CatalogReducer.desktopViewType ===
+                                          'single'
+                                              ? '0px'
+                                              : '-5px',
                                       marginBottom: '5px',
                                       position: 'absolute',
-                                      right: !IsMobile ? '-30px' : '-25px',
+                                      right:
+                                          !IsMobile &&
+                                          CatalogReducer.desktopViewType ===
+                                              'several'
+                                              ? '-30px'
+                                              : '-25px',
                                       zIndex: '-1',
                                   }
                                 : {
