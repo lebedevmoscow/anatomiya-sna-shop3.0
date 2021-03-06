@@ -18,6 +18,11 @@ import { GetGiftsList } from './../../utils/GetGiftList'
 
 import styles from './../../styles/components/Products/CatalogProductList.module.sass'
 
+const EqualHeight = dynamic(
+    () => import('react-equal-height').then((mod) => mod.EqualHeight),
+    { ssr: true }
+)
+
 const CatalogProductListForDesktop = ({
     stylesForViewType,
     stylesForDesktopViewType,
@@ -38,9 +43,20 @@ const CatalogProductListForDesktop = ({
         (store) => store.CatalogCommonReducer
     )
 
+    let subIndex = 0
     const render = () => {
         if (desktopViewType === 'several') {
             let ElemenetsArray = []
+            let EqualHeightArray = []
+            let Temp = 0
+
+            const length = firstLoadProducts.ShortProductModels.length
+
+            const rand = Math.floor(
+                (Math.random() * firstLoadProducts.ShortProductModels.length) /
+                    3 +
+                    3
+            )
 
             firstLoadProducts.ShortProductModels.map((product, index) => {
                 const ListSalesList = GetPopupsList(
@@ -72,7 +88,6 @@ const CatalogProductListForDesktop = ({
 
                 ElemenetsArray.push(
                     <DesktopSeveral
-                        key={index}
                         OptionsList={OptionsList}
                         IsMobile={IsMobile}
                         InitialSize={InitialSize}
@@ -98,8 +113,54 @@ const CatalogProductListForDesktop = ({
                         Gifts={Gifts}
                     />
                 )
+
+                Temp++
+
+                if (length < 21 && Temp % 3 !== 0) {
+                    if (
+                        length - 1 === index &&
+                        (Temp % 3 === 1 || Temp % 3 === 2)
+                    ) {
+                        EqualHeightArray.push(
+                            <EqualHeight key={product.Id}>
+                                {ElemenetsArray}
+                            </EqualHeight>
+                        )
+                    }
+                } else {
+                    if (Temp !== 0 && Temp % 3 === 0) {
+                        subIndex++
+                        if (
+                            subIndex === rand &&
+                            articles &&
+                            articles.length >= 3
+                        ) {
+                            EqualHeightArray.push(
+                                <EqualHeight key={uuidv4()}>
+                                    {Articles}
+                                </EqualHeight>
+                            )
+                        }
+                        EqualHeightArray.push(
+                            <EqualHeight key={product.Id}>
+                                {ElemenetsArray}
+                            </EqualHeight>
+                        )
+                        ElemenetsArray = []
+                        Temp = 0
+                    }
+                }
+                if (Temp !== 0 && Temp % 3 === 0) {
+                    EqualHeightArray.push(
+                        <EqualHeight key={product.Id}>
+                            {ElemenetsArray}
+                        </EqualHeight>
+                    )
+                    ElemenetsArray = []
+                    Temp = 0
+                }
             })
-            return ElemenetsArray
+            return EqualHeightArray
         }
     }
     return (
