@@ -213,7 +213,6 @@ const CatalogRight = ({
     useEffect(() => {
         const length = Object.keys(CatalogReducer.new).length
         if (length > 0) {
-            console.log('here')
             const element = (
                 <CatalogProductListForDesktop
                     headers={headers}
@@ -268,7 +267,8 @@ const CatalogRight = ({
                     onPageClickHandler={onPageClickHandler}
                     current={CatalogReducer.page}
                     amount={
-                        CatalogReducer.amount ||
+                        (CatalogReducer.amount &&
+                            Math.ceil(CatalogReducer.amount / 21)) ||
                         Math.ceil(filterProductsIds.length / 21)
                     }
                     onGoForwardButtonClickHandler={
