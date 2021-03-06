@@ -91,22 +91,11 @@ const CatalogRight = ({
                         null,
                         CatalogCommonReducer.desktopTopFilter,
                         false,
-                        null,
-                        null
+                        CatalogCommonReducer.colors,
+                        CatalogCommonReducer.selectedActive
                     )
                 )
             } else {
-                // dispatch(
-                //     LoadProductsByButtonClick(
-                //         filterProductsIds,
-                //         page === 1 ? page + 1 : page + 2,
-                //         SelectedSizeReducer.selectedSizeId,
-                //         catalogSlug,
-                //         subCatalogSlug,
-                //         oldMin,
-                //         oldMax
-                //     )
-                // )
                 dispatch(
                     LoadByFilters(
                         filterProductsIds,
@@ -121,8 +110,8 @@ const CatalogRight = ({
                         null,
                         CatalogCommonReducer.desktopTopFilter,
                         false,
-                        null,
-                        null
+                        CatalogCommonReducer.colors,
+                        CatalogCommonReducer.selectedActive
                     )
                 )
             }
@@ -141,8 +130,8 @@ const CatalogRight = ({
                     null,
                     CatalogCommonReducer.desktopTopFilter,
                     false,
-                    null,
-                    null
+                    CatalogCommonReducer.colors,
+                    CatalogCommonReducer.selectedActive
                 )
             )
         }
@@ -164,24 +153,37 @@ const CatalogRight = ({
                 LoadByFilters(
                     filterProductsIds,
                     p,
-                    SelectedSizeReducer.selectedSizeId,
+                    SelectedSizeReducer.sizeId,
                     catalogSlug,
                     subCatalogSlug,
                     oldMin,
                     oldMax,
-                    CatalogCommonReducer.filters
+                    CatalogCommonReducer.filters,
+                    CatalogCommonReducer.price,
+                    null,
+                    CatalogCommonReducer.desktopTopFilter,
+                    false,
+                    CatalogCommonReducer.colors,
+                    CatalogCommonReducer.selectedActive
                 )
             )
         } else {
             dispatch(
-                LoadProductsByButtonClick(
+                LoadByFilters(
                     filterProductsIds,
                     p,
-                    SelectedSizeReducer.selectedSizeId,
+                    SelectedSizeReducer.sizeId,
                     catalogSlug,
                     subCatalogSlug,
                     oldMin,
-                    oldMax
+                    oldMax,
+                    CatalogCommonReducer.filters,
+                    CatalogCommonReducer.price,
+                    null,
+                    CatalogCommonReducer.desktopTopFilter,
+                    false,
+                    CatalogCommonReducer.colors,
+                    CatalogCommonReducer.selectedActive
                 )
             )
         }
@@ -404,6 +406,7 @@ const CatalogRight = ({
             setPage(1)
             setData([])
             setList([])
+            setFirstProductList([])
         }
     }, [CatalogProductListReducer.emptyIndex])
 
@@ -413,6 +416,7 @@ const CatalogRight = ({
             setPage(1)
             setData([])
             setList()
+            setFirstProductList([])
         }
     }, [NewCatalogProductListReducer.emptyIndex])
 
@@ -512,6 +516,8 @@ const CatalogRight = ({
                 updateViewType={updateViewType}
                 desktopViewType={desktopViewType}
                 filterProductsIds={filterProductsIds}
+                setFirstProductList={setFirstProductList}
+                setList={setList}
             />
             <div
                 // onLoad={() => setLoading(false)}

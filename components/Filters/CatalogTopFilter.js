@@ -4,7 +4,12 @@ import Link from 'next/link'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { CATALOG_SET_TOP_FILTER_DESKTOP } from './../../actions/CatalogCommon'
-import { LoadByFilters } from './../../actions/NewCatalogProductList'
+import {
+    LoadByFilters,
+    CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY,
+} from './../../actions/NewCatalogProductList'
+
+import { CATALOG_PRODUCT_LIST_SET_EMPTY } from './../../actions/CatalogProductList'
 
 import Url from './../../components/URLComponent'
 
@@ -19,6 +24,8 @@ const CatalogTopFilter = ({
     subCatalogSlug,
     oldMin,
     oldMax,
+    setFirstProductList,
+    setList,
 }) => {
     const SelectedSizeReducer = useSelector(
         (store) => store.SelectedSizeReducer
@@ -123,21 +130,30 @@ const CatalogTopFilter = ({
                 type: CATALOG_SET_TOP_FILTER_DESKTOP,
                 payload: sortType,
             })
-            // dispatch(
-            //     LoadByFilters(
-            //         filterProductsIds,
-            //         CatalogCommonReducer.page,
-            //         SelectedSizeReducer.sizeId,
-            //         catalogSlug,
-            //         subCatalogSlug,
-            //         oldMin,
-            //         oldMax,
-            //         CatalogCommonReducer.filters,
-            //         null,
-            //         null,
-            //         sortType
-            //     )
-            // )
+
+            setFirstProductList([])
+            setList([])
+
+            dispatch(
+                LoadByFilters(
+                    null,
+                    1,
+                    SelectedSizeReducer.sizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    CatalogCommonReducer.filters,
+                    CatalogCommonReducer.price,
+                    null,
+                    CatalogCommonReducer.desktopTopFilter,
+                    false,
+                    CatalogCommonReducer.colors,
+                    CatalogCommonReducer.selectedActive
+                )
+            )
+            // dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY })
+            // dispatch({ type: CATALOG_PRODUCT_LIST_SET_EMPTY })
         }
     }, [sortType])
 
