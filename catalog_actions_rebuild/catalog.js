@@ -5,12 +5,14 @@ export const CATALOG_SET_SELECT = 'CATALOG_SET_SELECT'
 export const CATALOG_SET_PRICE = 'CATALOG_SET_PRICE'
 export const CATALOG_SET_COLORS = 'CATALOG_SET_COLORS'
 export const CATALOG_SET_SORT = 'CATALOG_SET_SORT'
+export const CATALOG_SET_SORT_MOBILE = 'CATALOG_SET_SORT_MOBILE'
 export const CATALOG_SET_NEW = 'CATALOG_SET_NEW'
 export const CATALOG_SET_ALL = 'CATALOG_SET_ALL'
 export const CATALOG_SET_UPDATE_LIST = 'CATALOG_SET_UPDATE_LIST'
 export const CATALOG_SET_AMOUNT = 'CATALOG_SET_AMOUNT'
 export const CATALOG_SET_LOADING = 'CATALOG_SET_LOADING'
 export const CATALOG_SET_DESKTOP_VIEWTYPE = 'CATALOG_SET_DESKTOP_VIEWTYPE'
+export const CATALOG_SET_MOBILE_VIEWTYPE = 'CATALOG_SET_MOBILE_VIEWTYPE'
 
 export const CatalogLoadByFilter = (
     IsMobile = false,
@@ -23,7 +25,8 @@ export const CatalogLoadByFilter = (
     price = null,
     sortType = null,
     colors,
-    select
+    select,
+    sortMobile = null
 ) => async (dispatch) => {
     try {
         dispatch({ type: CATALOG_SET_LOADING, payload: true })
@@ -125,6 +128,59 @@ export const CatalogLoadByFilter = (
                         params =
                             params + `&filter[selectedFlags][]=free_delivery`
                     }
+                }
+            }
+        }
+
+        if (sortMobile.length > 0) {
+            for (let i = 0; i < sortMobile.length; i++) {
+                if (
+                    sortMobile[i].title === 'По популярности' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[sorting]=popular'
+                }
+                if (
+                    sortMobile[i].title === 'По убыванию цены' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[sorting]=price_down'
+                }
+                if (
+                    sortMobile[i].title === 'По возрастанию цены' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[sorting]=price_up'
+                }
+                if (
+                    sortMobile[i].title === 'Со скидкой' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=discount'
+                }
+                if (
+                    sortMobile[i].title === 'Новинка' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=newest'
+                }
+                if (
+                    sortMobile[i].title === 'С подарком' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=gift'
+                }
+                if (
+                    sortMobile[i].title === 'Выбор покупателей' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=recommended'
+                }
+                if (
+                    sortMobile[i].title === 'Бесплатная доставка' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=free_delivery'
                 }
             }
         }
@@ -204,7 +260,8 @@ export const CatalogLoadProductsByFilter = (
     price = null,
     sortType = null,
     colors,
-    select
+    select,
+    sortMobile = null
 ) => async (dispatch) => {
     try {
         dispatch({ type: CATALOG_SET_LOADING, payload: true })
@@ -306,6 +363,59 @@ export const CatalogLoadProductsByFilter = (
                         params =
                             params + `&filter[selectedFlags][]=free_delivery`
                     }
+                }
+            }
+        }
+
+        if (sortMobile.length > 0) {
+            for (let i = 0; i < sortMobile.length; i++) {
+                if (
+                    sortMobile[i].title === 'По популярности' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[sorting]=popular'
+                }
+                if (
+                    sortMobile[i].title === 'По убыванию цены' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[sorting]=price_down'
+                }
+                if (
+                    sortMobile[i].title === 'По возрастанию цены' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[sorting]=price_up'
+                }
+                if (
+                    sortMobile[i].title === 'Со скидкой' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=discount'
+                }
+                if (
+                    sortMobile[i].title === 'Новинка' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=newest'
+                }
+                if (
+                    sortMobile[i].title === 'С подарком' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=gift'
+                }
+                if (
+                    sortMobile[i].title === 'Выбор покупателей' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=recommended'
+                }
+                if (
+                    sortMobile[i].title === 'Бесплатная доставка' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=free_delivery'
                 }
             }
         }
@@ -386,7 +496,8 @@ export const CatalogLoadProductsByLoadMoreButton = (
     price = null,
     sortType = null,
     colors,
-    select
+    select,
+    sortMobile = null
 ) => async (dispatch) => {
     try {
         dispatch({ type: CATALOG_SET_LOADING, payload: true })
@@ -487,6 +598,59 @@ export const CatalogLoadProductsByLoadMoreButton = (
                         params =
                             params + `&filter[selectedFlags][]=free_delivery`
                     }
+                }
+            }
+        }
+
+        if (sortMobile.length > 0) {
+            for (let i = 0; i < sortMobile.length; i++) {
+                if (
+                    sortMobile[i].title === 'По популярности' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[sorting]=popular'
+                }
+                if (
+                    sortMobile[i].title === 'По убыванию цены' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[sorting]=price_down'
+                }
+                if (
+                    sortMobile[i].title === 'По возрастанию цены' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[sorting]=price_up'
+                }
+                if (
+                    sortMobile[i].title === 'Со скидкой' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=discount'
+                }
+                if (
+                    sortMobile[i].title === 'Новинка' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=newest'
+                }
+                if (
+                    sortMobile[i].title === 'С подарком' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=gift'
+                }
+                if (
+                    sortMobile[i].title === 'Выбор покупателей' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=recommended'
+                }
+                if (
+                    sortMobile[i].title === 'Бесплатная доставка' &&
+                    sortMobile[i].status === 'active'
+                ) {
+                    params = params + '&filter[selectedFlags][]=free_delivery'
                 }
             }
         }

@@ -5,7 +5,16 @@ import Link from 'next/link'
 import Modal from './../Modal'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { catalogSetTopFilter } from './../../actions/CatalogCommon'
+
+// Constants
+import {
+    CATALOG_SET_SORT_MOBILE,
+    CATALOG_SET_UPDATE_LIST,
+    CATALOG_SET_PAGE,
+} from './../../catalog_actions_rebuild/catalog'
+
+// Actions
+import { CatalogLoadProductsByFilter } from './../../catalog_actions_rebuild/catalog'
 
 import styles from './../../styles/components/Mobile/CatalogLeftMobile.module.sass'
 
@@ -16,7 +25,13 @@ const CatalogLeftMobile = ({
     updateViewType,
     viewType,
     headers,
+    catalogSlug,
+    subCatalogSlug = null,
+    oldMin,
+    oldMax,
 }) => {
+    const CatalogReducer = useSelector((store) => store.CatalogReducer)
+
     const dispatch = useDispatch()
 
     const CatalogCommonReducer = useSelector(
@@ -159,7 +174,25 @@ const CatalogLeftMobile = ({
                 clone[7].status = 'disabled'
             }
         }
-        dispatch(catalogSetTopFilter(clone))
+        dispatch({ type: CATALOG_SET_SORT_MOBILE, payload: clone })
+        dispatch({ type: CATALOG_SET_UPDATE_LIST })
+        dispatch({ type: CATALOG_SET_PAGE, payload: 1 })
+        dispatch(
+            CatalogLoadProductsByFilter(
+                true,
+                CatalogReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                CatalogReducer.filters,
+                CatalogReducer.price,
+                null,
+                CatalogReducer.colors,
+                CatalogReducer.select,
+                clone
+            )
+        )
         setSortType(clone)
     }
 

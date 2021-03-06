@@ -12,6 +12,7 @@ import {
     CATALOG_SET_PAGE,
     CATALOG_SET_FILTERS,
     CATALOG_SET_UPDATE_LIST,
+    CATALOG_SET_COLORS,
 } from './../../catalog_actions_rebuild/catalog'
 
 // Actions
@@ -110,8 +111,6 @@ const CatalogLeftFilter = ({
         return a
     }
 
-    const RetrunSelectedActiveColorsInitial = () => {}
-
     const [selectedActive, setSelectedActive] = useState(
         RetrunSelectedActiveInitial()
     )
@@ -198,6 +197,24 @@ const CatalogLeftFilter = ({
                 }
             }
         }
+        dispatch({ type: CATALOG_SET_COLORS, payload: clone })
+        dispatch({ type: CATALOG_SET_UPDATE_LIST })
+        dispatch(
+            CatalogLoadByFilter(
+                false,
+                CatalogReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                filterStatus,
+                CatalogReducer.price,
+                CatalogReducer.sort,
+                CatalogReducer.colors,
+                CatalogReducer.select
+            )
+        )
+
         setActiveColors(clone)
     }
 
@@ -298,11 +315,11 @@ const CatalogLeftFilter = ({
             }
         }
 
-        if (hasWindow) {
-            setTimeout(() => {
-                scrollTo(0, 0)
-            }, 250)
-        }
+        // if (hasWindow) {
+        //     setTimeout(() => {
+        //         scrollTo(0, 0)
+        //     }, 250)
+        // }
 
         dispatch({ type: CATALOG_SET_FILTERS, payload: filterStatus })
         dispatch({ type: CATALOG_SET_UPDATE_LIST })

@@ -13,6 +13,8 @@ import {
     CATALOG_SET_AMOUNT,
     CATALOG_SET_LOADING,
     CATALOG_SET_DESKTOP_VIEWTYPE,
+    CATALOG_SET_MOBILE_VIEWTYPE,
+    CATALOG_SET_SORT_MOBILE,
 } from './../catalog_actions_rebuild/catalog'
 
 const initialState = {
@@ -23,10 +25,12 @@ const initialState = {
     filters: [],
     colors: [],
     sort: [],
+    sortMobile: [],
     update_list: 0,
     amount: null,
     loading: false,
     desktopViewType: 'several',
+    mobileViewType: 'single',
     all: [],
     new: {},
 }
@@ -115,6 +119,18 @@ const CatalogReducer = (state = initialState, action) => {
             return {
                 ...state,
                 desktopViewType: action.payload,
+            }
+        }
+        case CATALOG_SET_MOBILE_VIEWTYPE: {
+            return {
+                ...state,
+                mobileViewType: action.payload,
+            }
+        }
+        case CATALOG_SET_SORT_MOBILE: {
+            return {
+                ...state,
+                sortMobile: [],
             }
         }
         default: {

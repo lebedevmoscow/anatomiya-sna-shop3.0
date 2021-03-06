@@ -7,14 +7,23 @@ import { v4 as uuidv4 } from 'uuid'
 import styles from './../../styles/components/Filters/CatalogMobileMobileFilter.module.sass'
 
 import { useSelector, useDispatch } from 'react-redux'
+
+// Actions
+import { CatalogLoadByFilter } from './../../catalog_actions_rebuild/catalog'
+
+// Constants
 import {
+    CATALOG_SET_PAGE,
+    CATALOG_SET_SIZE_ID,
     CATALOG_SET_FILTERS,
+    CATALOG_SET_SELECT,
     CATALOG_SET_PRICE,
-    CATALOG_SET_COLROS,
-    CATALOG_SET_TOP_RESET,
-    catalogSetFilters,
-} from './../../actions/CatalogCommon.js'
-import { LoadByFilters } from './../../actions/NewCatalogProductList'
+    CATALOG_SET_COLORS,
+    CATALOG_SET_SORT,
+    CATALOG_SET_NEW,
+    CATALOG_SET_ALL,
+    CATALOG_SET_UPDATE_LIST,
+} from './../../catalog_actions_rebuild/catalog'
 
 const CatalogMainFilter = ({
     className,
@@ -29,6 +38,7 @@ const CatalogMainFilter = ({
     stylesForViewType,
     viewType,
 }) => {
+    const CatalogReducer = useSelector((store) => store.CatalogReducer)
     const colors = filterAPIData.colors
 
     const modalRef = useRef(null)
@@ -154,6 +164,25 @@ const CatalogMainFilter = ({
                 }
             }
         }
+
+        dispatch({ type: CATALOG_SET_COLORS, payload: clone })
+        dispatch({ type: CATALOG_SET_UPDATE_LIST })
+        dispatch(
+            CatalogLoadByFilter(
+                false,
+                CatalogReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                filterStatus,
+                CatalogReducer.price,
+                CatalogReducer.sort,
+                clone,
+                CatalogReducer.select
+            )
+        )
+
         setActiveColors(clone)
     }
 
@@ -325,59 +354,6 @@ const CatalogMainFilter = ({
             }
         }
     }, [CatalogCommonReducer.topfilter])
-
-    useEffect(() => {
-        if (update >= 1) {
-            if (selectedSize) {
-                dispatch(
-                    LoadByFilters(
-                        filterProductsIds,
-                        CatalogCommonReducer.page,
-                        SelectedSizeReducer.sizeId,
-                        catalogSlug,
-                        subCatalogSlug,
-                        oldMin,
-                        oldMax,
-                        filterStatus,
-                        prices,
-                        selectedSize,
-                        null,
-                        true,
-                        activeColors,
-                        selectedActive2,
-                        CatalogCommonReducer.topfilter
-                    )
-                )
-            }
-        }
-    }, [selectedSize])
-
-    useEffect(() => {
-        if (update >= 1) {
-            if (activeColors) {
-                dispatch({ type: CATALOG_SET_COLROS, payload: activeColors })
-                dispatch(
-                    LoadByFilters(
-                        filterProductsIds,
-                        CatalogCommonReducer.page,
-                        SelectedSizeReducer.sizeId,
-                        catalogSlug,
-                        subCatalogSlug,
-                        oldMin,
-                        oldMax,
-                        filterStatus,
-                        prices,
-                        selectedSize,
-                        null,
-                        true,
-                        activeColors,
-                        selectedActive2,
-                        CatalogCommonReducer.topfilter
-                    )
-                )
-            }
-        }
-    }, [activeColors])
 
     useEffect(() => {
         if (update >= 1) {
@@ -588,23 +564,22 @@ const CatalogMainFilter = ({
                                                 type: CATALOG_SET_PRICE,
                                                 payload: prices,
                                             })
+                                            dispatch({
+                                                type: CATALOG_SET_UPDATE_LIST,
+                                            })
                                             dispatch(
-                                                LoadByFilters(
-                                                    filterProductsIds,
-                                                    CatalogCommonReducer.page,
-                                                    SelectedSizeReducer.sizeId,
+                                                CatalogLoadByFilter(
+                                                    false,
+                                                    CatalogReducer.sizeId,
                                                     catalogSlug,
                                                     subCatalogSlug,
                                                     oldMin,
                                                     oldMax,
-                                                    filterStatus,
+                                                    CatalogReducer.filters,
                                                     prices,
-                                                    selectedSize,
-                                                    null,
-                                                    false,
-                                                    activeColors,
-                                                    selectedActive2,
-                                                    CatalogCommonReducer.topfilter
+                                                    CatalogReducer.sort,
+                                                    CatalogReducer.colors,
+                                                    CatalogReducer.select
                                                 )
                                             )
                                         }}

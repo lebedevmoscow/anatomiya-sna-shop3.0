@@ -195,6 +195,10 @@ const CatalogPage = ({
                         onClick={onPresetFilterClickHandler}
                         updateViewType={setViewType}
                         viewType={viewType}
+                        catalogSlug={catalogSlug}
+                        subCatalogSlug={subCatalogSlug}
+                        oldMin={filterAPIData.price.min}
+                        oldMax={filterAPIData.price.max}
                     />
                 </div>
             )}

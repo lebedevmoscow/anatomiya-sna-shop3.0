@@ -261,7 +261,6 @@ const PopupsOnProductCard = ({
                         : {
                               flexDirection: 'column',
                               zIndex: '1',
-                              overflow: 'hidden',
                           }
                 }
                 // style={

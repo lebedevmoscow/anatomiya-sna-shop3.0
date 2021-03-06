@@ -4,16 +4,26 @@ import common_styles from './../../styles/common.module.sass'
 import CatalogProductList from './../Products/CatalogProductList'
 import LoadMoreButton from './../Button/LoadMoreButton'
 import CatalogPagination from './../Pagination/CatalogPagination'
-import ArticleCatalogSwiperList from './../Article/ArticleCatalogSwiperList'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 
-import { CATALOG_PRODUCT_LIST_SUCCESS } from './../../actions/CatalogProductList'
+// Actions
+import { CatalogLoadProductsByLoadMoreButton } from './../../catalog_actions_rebuild/catalog'
 
-import { LoadByFilters } from './../../actions/NewCatalogProductList'
-import { catalogSetPage } from './../../actions/CatalogCommon'
-import { LoadProductsByButtonClick } from './../../actions/NewCatalogProductList'
+// Constants
+import {
+    CATALOG_SET_PAGE,
+    CATALOG_SET_SIZE_ID,
+    CATALOG_SET_FILTERS,
+    CATALOG_SET_SELECT,
+    CATALOG_SET_PRICE,
+    CATALOG_SET_COLORS,
+    CATALOG_SET_SORT,
+    CATALOG_SET_NEW,
+    CATALOG_SET_ALL,
+    CATALOG_SET_UPDATE_LIST,
+} from './../../catalog_actions_rebuild/catalog'
 
 const CatalogMobileProductList = ({
     catalogSlug,
@@ -23,536 +33,206 @@ const CatalogMobileProductList = ({
     viewType,
     filterAPIData,
     filterProductsIds,
-    newProducts,
-    lastClick,
-    setLastClick,
     headers,
     articles,
 }) => {
+    const CatalogReducer = useSelector((store) => store.CatalogReducer)
+
     const oldMin = filterAPIData.price.min
     const oldMax = filterAPIData.price.max
 
     const dispatch = useDispatch()
-    const CatalogCommonReducer = useSelector(
-        (store) => store.CatalogCommonReducer
-    )
 
-    const CatalogProductListReducer = useSelector(
-        (store) => store.CatalogProductListReducer
+    const [first, setFirst] = useState(
+        <CatalogProductList
+            IsMobile={true}
+            headers={headers}
+            articles={articles}
+            catalogSlug={catalogSlug}
+            viewType={viewType}
+            stylesForViewType={stylesForViewType}
+            firstLoadProducts={firstLoadProducts}
+            oldMin={oldMin}
+            oldMax={oldMax}
+            filterProductsIds={filterProductsIds}
+        />
     )
-    const NewCatalogProductListReducer = useSelector(
-        (store) => store.NewCatalogProductListReducer
-    )
-    const SelectedSizeReducer = useSelector(
-        (store) => store.SelectedSizeReducer
-    )
+    const [loadedMore, setLoadedMore] = useState([])
 
-    const [update, setUpdate] = useState(0)
-    const [productList, setProductList] = useState(firstLoadProducts)
-    const [data, setData] = useState([])
-    const [firstProductList, setFirstProductList] = useState([])
-    const [page, setPage] = useState(1)
-    const [list, setList] = useState([])
-    const [amount, setAmount] = useState(
-        Math.ceil(filterProductsIds.length / 20)
-    )
-    const [FirstArticles, FirstSetArticles] = useState(
-        <ArticleCatalogSwiperList list={articles} />
-    )
-
-    const [Articles, SetArticles] = useState(null)
+    // Handlers
+    const scrollTo = (x, y) => {
+        if (hasWindow) {
+            window.scrollTo({
+                top: x,
+                left: y,
+                behavior: 'instant',
+            })
+        }
+    }
 
     const onButtonClickHandler = () => {
-        if (lastClick !== 'filter') {
-            if (
-                CatalogCommonReducer.filters &&
-                CatalogCommonReducer.filters.length !== 0
-            ) {
-                dispatch(
-                    LoadByFilters(
-                        filterProductsIds,
-                        page + 1,
-                        SelectedSizeReducer.selectedSizeId,
-                        catalogSlug,
-                        subCatalogSlug,
-                        oldMin,
-                        oldMax,
-                        CatalogCommonReducer.filters,
-                        CatalogCommonReducer.price,
-                        null,
-                        null,
-                        true,
-                        CatalogCommonReducer.colors,
-                        CatalogCommonReducer.selectedActive,
-                        CatalogCommonReducer.topfilter
-                    )
-                )
-            } else {
-                // page === 1 ? page + 1 : page + 2,
-                dispatch(
-                    LoadProductsByButtonClick(
-                        filterProductsIds,
-                        page === 1 ? page + 1 : page + 2,
-                        SelectedSizeReducer.selectedSizeId,
-                        catalogSlug,
-                        subCatalogSlug,
-                        oldMin,
-                        oldMax,
-                        CatalogCommonReducer.filters,
-                        CatalogCommonReducer.price,
-                        null,
-                        null,
-                        true,
-                        CatalogCommonReducer.colors,
-                        CatalogCommonReducer.selectedActive,
-                        CatalogCommonReducer.topfilter
-                    )
-                )
-            }
-        } else {
-            // page + 1,
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    page + 1,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    CatalogCommonReducer.filters,
-                    CatalogCommonReducer.price,
-                    null,
-                    null,
-                    true,
-                    CatalogCommonReducer.colors,
-                    CatalogCommonReducer.selectedActive,
-                    CatalogCommonReducer.topfilter
-                )
+        const page = CatalogReducer.page
+        dispatch(
+            CatalogLoadProductsByLoadMoreButton(
+                false,
+                page + 1,
+                CatalogReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                CatalogReducer.filters,
+                CatalogReducer.price,
+                CatalogReducer.sort,
+                CatalogReducer.colors,
+                CatalogReducer.select
             )
-        }
-
-        setPage((prev) => {
-            dispatch(catalogSetPage(prev + 1))
-            return ++prev
-        })
+        )
+        dispatch({ type: CATALOG_SET_PAGE, payload: page + 1 })
     }
 
     const onGoForwardButtonClickHandler = () => {
-        setData([])
-        setList([])
-        let temp = page + 1
-        setPage((prev) => ++prev)
+        scrollTo(0, 0)
 
-        if (
-            CatalogCommonReducer.filters &&
-            CatalogCommonReducer.filters.length !== 0
-        ) {
-            // temp,
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    temp,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    CatalogCommonReducer.filters,
-                    CatalogCommonReducer.price,
-                    null,
-                    null,
-                    true,
-                    CatalogCommonReducer.colors,
-                    CatalogCommonReducer.selectedActive,
-                    CatalogCommonReducer.topfilter
-                )
+        const page = CatalogReducer.page
+
+        dispatch({ type: CATALOG_SET_UPDATE_LIST })
+        dispatch(
+            CatalogLoadProductsByLoadMoreButton(
+                false,
+                page + 1,
+                CatalogReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                CatalogReducer.filters,
+                CatalogReducer.price,
+                CatalogReducer.sort,
+                CatalogReducer.colors,
+                CatalogReducer.select
             )
-        } else {
-            // SelectedSizeReducer.amount ? temp - 1 : temp,
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    SelectedSizeReducer.amount ? temp - 1 : temp,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    CatalogCommonReducer.filters,
-                    CatalogCommonReducer.price,
-                    null,
-                    null,
-                    true,
-                    CatalogCommonReducer.colors,
-                    CatalogCommonReducer.selectedActive,
-                    CatalogCommonReducer.topfilter
-                )
-            )
-        }
-
-        dispatch(catalogSetPage(temp))
-
-        // setData([])
-        // setList([])
-        // dispatch(
-        //     LoadProductsByButtonClick(
-        //         filterProductsIds,
-        //         page + 1,
-        //         SelectedSizeReducer.selectedSizeId,
-        //         catalogSlug,
-        //         subCatalogSlug,
-        //         oldMin,
-        //         oldMax
-        //     )
-        // )
-
-        // setPage((prev) => {
-        //     dispatch(catalogSetPage(prev + 1))
-        //     return ++prev
-        // })
-
-        // dispatch(catalogSetPage(p))
+        )
+        dispatch({ type: CATALOG_SET_PAGE, payload: page + 1 })
     }
 
     const onGoBackdButtonClickHandler = () => {
-        setData([])
-        setList([])
-        let temp = page - 1
-        setPage((prev) => --prev)
+        scrollTo(0, 0)
 
-        if (
-            CatalogCommonReducer.filters &&
-            CatalogCommonReducer.filters.length !== 0
-        ) {
-            // temp,
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    temp,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    CatalogCommonReducer.filters,
-                    CatalogCommonReducer.price,
-                    null,
-                    null,
-                    true,
-                    CatalogCommonReducer.colors,
-                    CatalogCommonReducer.selectedActive,
-                    CatalogCommonReducer.topfilter
-                )
+        const page = CatalogReducer.page
+
+        dispatch({ type: CATALOG_SET_UPDATE_LIST })
+        dispatch(
+            CatalogLoadProductsByLoadMoreButton(
+                false,
+                page - 1,
+                CatalogReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                CatalogReducer.filters,
+                CatalogReducer.price,
+                CatalogReducer.sort,
+                CatalogReducer.colors,
+                CatalogReducer.select
             )
-        } else {
-            // SelectedSizeReducer.amount ? temp - 1 : temp,
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    SelectedSizeReducer.amount ? temp - 1 : temp,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    CatalogCommonReducer.filters,
-                    CatalogCommonReducer.price,
-                    null,
-                    null,
-                    true,
-                    CatalogCommonReducer.colors,
-                    CatalogCommonReducer.selectedActive,
-                    CatalogCommonReducer.topfilter
-                )
-            )
-        }
-
-        dispatch(catalogSetPage(temp))
-
-        // setData([])
-        // setList([])
-        // dispatch(
-        //     LoadProductsByButtonClick(
-        //         filterProductsIds,
-        //         page - 1,
-        //         SelectedSizeReducer.selectedSizeId,
-        //         catalogSlug,
-        //         subCatalogSlug,
-        //         oldMin,
-        //         oldMax
-        //     )
-        // )
-        // setPage((prev) => {
-        //     dispatch(catalogSetPage(prev - 1))
-        //     return --prev
-        // })
-
-        // dispatch(catalogSetPage(p - 1))
+        )
+        dispatch({ type: CATALOG_SET_PAGE, payload: page - 1 })
     }
 
     const onPageClickHandler = (p) => {
-        setData([])
-        setList([])
-        setPage(p)
-
-        if (
-            CatalogCommonReducer.filters &&
-            CatalogCommonReducer.filters.length !== 0
-        ) {
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    p,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    CatalogCommonReducer.filters,
-                    CatalogCommonReducer.price,
-                    null,
-                    null,
-                    true,
-                    CatalogCommonReducer.colors,
-                    CatalogCommonReducer.selectedActive,
-                    CatalogCommonReducer.topfilter
-                )
+        scrollTo(0, 0)
+        dispatch({ type: CATALOG_SET_UPDATE_LIST })
+        dispatch(
+            CatalogLoadProductsByLoadMoreButton(
+                false,
+                p,
+                CatalogReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                CatalogReducer.filters,
+                CatalogReducer.price,
+                CatalogReducer.sort,
+                CatalogReducer.colors,
+                CatalogReducer.select
             )
-        } else {
-            // SelectedSizeReducer.amount ? p - 1 : p,
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    // SelectedSizeReducer.amount ? p - 1 : p,
-                    p,
-                    SelectedSizeReducer.selectedSizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    CatalogCommonReducer.filters,
-                    CatalogCommonReducer.price,
-                    null,
-                    null,
-                    true,
-                    CatalogCommonReducer.colors,
-                    CatalogCommonReducer.selectedActive,
-                    CatalogCommonReducer.topfilter
-                )
-            )
-        }
-
-        dispatch(catalogSetPage(p))
+        )
+        dispatch({ type: CATALOG_SET_PAGE, payload: p })
     }
 
-    useEffect(() => {
-        if (CatalogCommonReducer.page !== 1) {
-            const req = async () => {
-                if (headers) {
-                    const r = await fetch(
-                        `https://anatomiyasna.ru/api/journal/article-list?group=${headers.catalogTitle}&limit=3&page=${CatalogCommonReducer.page}`
-                    )
-                    const res = await r.json()
-
-                    SetArticles(<ArticleCatalogSwiperList list={res} />)
-                }
-            }
-            req()
-        }
-    }, [page, headers])
-
-    // useEffect(() => {
-    //     setFirstProductList(
-    //         <CatalogProductList
-    //             catalogSlug={catalogSlug}
-    //             subCatalogSlug={subCatalogSlug}
-    //             firstLoadProducts={firstLoadProducts}
-    //             stylesForViewType={stylesForViewType}
-    //             viewType={viewType}
-    //             oldMin={filterAPIData.price.min}
-    //             oldMax={filterAPIData.price.max}
-    //             filterProductsIds={filterProductsIds}
-    //             newProducts={newProducts}
-    //             IsMobile={true}
-    //         />
-    //     )
-    // }, [])
+    // Use Effects
 
     useEffect(() => {
-        console.log('filterProductsIds', filterProductsIds)
-        setAmount(Math.ceil(filterProductsIds.length / 20))
-    }, [filterProductsIds])
+        dispatch({
+            type: CATALOG_SET_ALL,
+            payload: [
+                <CatalogProductList
+                    IsMobile={true}
+                    headers={headers}
+                    articles={articles}
+                    catalogSlug={catalogSlug}
+                    viewType={viewType}
+                    stylesForViewType={stylesForViewType}
+                    firstLoadProducts={firstLoadProducts}
+                    oldMin={oldMin}
+                    oldMax={oldMax}
+                    filterProductsIds={filterProductsIds}
+                />,
+            ],
+        })
+    }, [])
 
     useEffect(() => {
-        if (data.length > 0) {
-            dispatch({
-                type: CATALOG_PRODUCT_LIST_SUCCESS,
-                payload: firstLoadProducts,
-            })
-
-            setList(
-                <>
-                    {data.map((d, index) => {
-                        return (
-                            <CatalogProductList
-                                key={index}
-                                catalogSlug={catalogSlug}
-                                firstLoadProducts={d}
-                                oldMin={oldMin}
-                                oldMax={oldMax}
-                                filterProductsIds={filterProductsIds}
-                                newProducts={true}
-                                IsMobile={true}
-                                stylesForViewType={stylesForViewType}
-                                viewType={viewType}
-                            />
-                        )
-                    })}
-                </>
+        const length = Object.keys(CatalogReducer.new).length
+        if (length > 0) {
+            console.log('here')
+            const element = (
+                <CatalogProductList
+                    IsMobile={true}
+                    headers={headers}
+                    articles={articles}
+                    catalogSlug={catalogSlug}
+                    viewType={viewType}
+                    stylesForViewType={stylesForViewType}
+                    firstLoadProducts={CatalogReducer.new}
+                    oldMin={oldMin}
+                    oldMax={oldMax}
+                    filterProductsIds={filterProductsIds}
+                />
             )
+            const copy = loadedMore.concat()
+            copy.push(element)
+            setLoadedMore(copy)
         }
-    }, [data, viewType, stylesForViewType])
+    }, [CatalogReducer.new])
 
     useEffect(() => {
-        setPage(CatalogCommonReducer.page)
-    }, [CatalogCommonReducer.page])
-
-    useEffect(() => {
-        if (SelectedSizeReducer.amount !== null) {
-            // dispatch(catalogSetPage(1))
-            // setPage(1)
-            setData([])
-            setList([])
-            setAmount(Math.ceil(SelectedSizeReducer.amount / 20))
+        if (CatalogReducer.update_list > 0) {
+            setFirst([])
+            setLoadedMore([])
         }
-    }, [SelectedSizeReducer.amount])
+    }, [CatalogReducer.update_list])
 
-    // useEffect(() => {
-    //     if (CatalogProductListReducer.products.length !== 0) {
-    //         console.log('2')
-    //         setFirstProductList(
-    //             <CatalogProductList
-    //                 catalogSlug={catalogSlug}
-    //                 firstLoadProducts={CatalogProductListReducer.products}
-    //                 oldMin={oldMin}
-    //                 oldMax={oldMax}
-    //                 filterProductsIds={filterProductsIds}
-    //                 IsMobile={true}
-    //                 stylesForViewType={stylesForViewType}
-    //                 viewType={viewType}
-    //             />
-    //         )
-    //     }
-    // }, [viewType, CatalogProductListReducer.products])
-
-    useEffect(() => {
-        if (CatalogProductListReducer.emptyIndex !== 0) {
-            dispatch(catalogSetPage(1))
-            setPage(1)
-            setData([])
-            setList([])
-        }
-    }, [viewType, CatalogProductListReducer.emptyIndex])
-
-    useEffect(() => {
-        if (NewCatalogProductListReducer.emptyIndex !== 0) {
-            dispatch(catalogSetPage(1))
-            setPage(1)
-            setData([])
-            setList()
-        }
-    }, [viewType, NewCatalogProductListReducer.emptyIndex])
-
-    useEffect(() => {
-        if (NewCatalogProductListReducer.newProducts.length !== 0) {
-            if (lastClick === 'showMore') {
-                console.log('show')
-                const clone = data.concat()
-                clone.push(NewCatalogProductListReducer.newProducts)
-                setData(clone)
-            } else if (lastClick === 'filter') {
-                // setTimeout(() => {
-                setFirstProductList(
-                    <CatalogProductList
-                        catalogSlug={catalogSlug}
-                        firstLoadProducts={
-                            NewCatalogProductListReducer.newProducts
-                        }
-                        oldMin={oldMin}
-                        oldMax={oldMax}
-                        filterProductsIds={filterProductsIds}
-                        IsMobile={true}
-                        stylesForViewType={stylesForViewType}
-                        viewType={viewType}
-                    />
-                )
-                // }, 1000)
-            } else {
-                console.log('new')
-                setFirstProductList(
-                    <CatalogProductList
-                        catalogSlug={catalogSlug}
-                        firstLoadProducts={
-                            NewCatalogProductListReducer.newProducts
-                        }
-                        oldMin={oldMin}
-                        oldMax={oldMax}
-                        filterProductsIds={filterProductsIds}
-                        IsMobile={true}
-                        stylesForViewType={stylesForViewType}
-                        viewType={viewType}
-                    />
-                )
-            }
-        }
-    }, [NewCatalogProductListReducer.newProducts])
-
-    useEffect(() => {
-        console.log('last click', lastClick)
-        if (lastClick === 'showMore') {
-            onButtonClickHandler()
-        }
-        // if (lastClick === '')
-    }, [lastClick])
     return (
         <>
-            {!CatalogCommonReducer.amount &&
-                CatalogCommonReducer.filters.length === 0 && (
-                    <CatalogProductList
-                        catalogSlug={catalogSlug}
-                        subCatalogSlug={subCatalogSlug}
-                        firstLoadProducts={firstLoadProducts}
-                        stylesForViewType={stylesForViewType}
-                        viewType={viewType}
-                        oldMin={filterAPIData.price.min}
-                        oldMax={filterAPIData.price.max}
-                        filterProductsIds={filterProductsIds}
-                        newProducts={newProducts}
-                        IsMobile={true}
-                    />
-                )}
-            {firstProductList}
-            {/* {FirstArticles} */}
-            {list}
-            {/* {Articles} */}
-            <div
-                onClick={() => {
-                    setLastClick('showMore')
-                    if (lastClick === 'showMore') {
-                        onButtonClickHandler()
-                    }
-                }}
-                style={{ marginTop: '5px' }}
-            >
+            {first}
+            {loadedMore}
+            <div onClick={onButtonClickHandler} style={{ marginTop: '5px' }}>
                 <LoadMoreButton firstText={'Показать еще'} />
             </div>
             <div className={common_styles.mobile_catalog_pagination}>
                 <CatalogPagination
                     IsMobile={true}
                     onPageClickHandler={onPageClickHandler}
-                    current={page}
-                    amount={amount}
+                    current={CatalogReducer.page}
+                    amount={
+                        (CatalogReducer.amount &&
+                            Math.ceil(CatalogReducer.amount / 21)) ||
+                        filterProductsIds.length
+                    }
                     onGoForwardButtonClickHandler={
                         onGoForwardButtonClickHandler
                     }
