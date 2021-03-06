@@ -78,8 +78,6 @@ const CatalogPage = ({
     headers,
     articles,
 }) => {
-    console.log('products', products)
-
     // Vars
     const initialCompositionFilterData = [
         'Размер',
@@ -241,7 +239,7 @@ const CatalogPage = ({
             {!IsMobile && !breakpoint1023 && (
                 <div className={common_styles.container}>
                     <div className={common_styles.catalog}>
-                        <CatalogLeftFilter
+                        {/* <CatalogLeftFilter
                             lastClick={lastClick}
                             setLastClick={setLastClick}
                             filterAPIData={filterAPIData}
@@ -250,11 +248,9 @@ const CatalogPage = ({
                             filterProductsIds={filterProductsIds}
                             catalogSlug={catalogSlug}
                             subCatalogSlug={subCatalogSlug}
-                        />
+                        /> */}
                         <CatalogRight
                             headers={headers}
-                            lastClick={lastClick}
-                            setLastClick={setLastClick}
                             oldMin={filterAPIData.price.min}
                             oldMax={filterAPIData.price.max}
                             firstLoadProducts={products}
@@ -264,7 +260,6 @@ const CatalogPage = ({
                             catalogSlug={catalogSlug}
                             subCatalogSlug={subCatalogSlug}
                             filterProductsIds={filterProductsIds}
-                            articles={articles}
                         />
                     </div>
                 </div>

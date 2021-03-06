@@ -1,47 +1,41 @@
-import { useState, useRef, useEffect, useLayoutEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { CATALOG_SET_TOP_FILTER_DESKTOP } from './../../actions/CatalogCommon'
+
+// Actions
+import { CatalogLoadProductsByFilter } from './../../catalog_actions_rebuild/catalog'
+
+// Constants
 import {
-    LoadByFilters,
-    CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY,
-} from './../../actions/NewCatalogProductList'
+    CATALOG_SET_SORT,
+    CATALOG_SET_UPDATE_LIST,
+    CATALOG_SET_PAGE,
+} from './../../catalog_actions_rebuild/catalog'
 
-import { CATALOG_PRODUCT_LIST_SET_EMPTY } from './../../actions/CatalogProductList'
-
+// React components
 import Url from './../../components/URLComponent'
 
+// Styles
 import styles from './../../styles/components/Filters/CatalogTopFilter.module.sass'
 
 const CatalogTopFilter = ({
-    updateViewType,
-    desktopViewType,
     headers,
-    filterProductsIds,
     catalogSlug,
     subCatalogSlug,
     oldMin,
     oldMax,
-    setFirstProductList,
-    setList,
 }) => {
-    const SelectedSizeReducer = useSelector(
-        (store) => store.SelectedSizeReducer
-    )
-    const CatalogCommonReducer = useSelector(
-        (store) => store.CatalogCommonReducer
-    )
-
+    const CatalogReducer = useSelector((store) => store.CatalogReducer)
     const dispatch = useDispatch()
 
-    const barFirstRef = useRef(null)
-    const barSecondRef = useRef(null)
+    // const barFirstRef = useRef(null)
+    // const barSecondRef = useRef(null)
 
-    const onClickBarHandler = (bar) => {
-        updateViewType(bar)
-    }
+    // const onClickBarHandler = (bar) => {
+    //     updateViewType(bar)
+    // }
 
     const [isPopularShowMore, setIsPopularShowMore] = useState(false)
     const [isSortByShowMore, setIsSortByShowMore] = useState(false)
@@ -126,34 +120,25 @@ const CatalogTopFilter = ({
 
     useEffect(() => {
         if (clicks > 0) {
-            dispatch({
-                type: CATALOG_SET_TOP_FILTER_DESKTOP,
-                payload: sortType,
-            })
-
-            setFirstProductList([])
-            setList([])
+            dispatch({ type: CATALOG_SET_SORT, payload: sortType })
+            dispatch({ type: CATALOG_SET_UPDATE_LIST })
+            dispatch({ type: CATALOG_SET_PAGE, payload: 1 })
 
             dispatch(
-                LoadByFilters(
-                    null,
-                    1,
-                    SelectedSizeReducer.sizeId,
+                CatalogLoadProductsByFilter(
+                    false,
+                    CatalogReducer.sizeId,
                     catalogSlug,
                     subCatalogSlug,
                     oldMin,
                     oldMax,
-                    CatalogCommonReducer.filters,
-                    CatalogCommonReducer.price,
-                    null,
-                    CatalogCommonReducer.desktopTopFilter,
-                    false,
-                    CatalogCommonReducer.colors,
-                    CatalogCommonReducer.selectedActive
+                    CatalogReducer.filters,
+                    CatalogReducer.price,
+                    sortType,
+                    CatalogReducer.colors,
+                    CatalogReducer.select
                 )
             )
-            // dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY })
-            // dispatch({ type: CATALOG_PRODUCT_LIST_SET_EMPTY })
         }
     }, [sortType])
 
@@ -362,27 +347,6 @@ const CatalogTopFilter = ({
                             </span>
                         </li>
                     </ul>
-                </div>
-                <div className={styles.second_wrap}>
-                    <div className={styles.title}>Вид:</div>
-                    <span
-                        onClick={() => onClickBarHandler('single')}
-                        ref={barFirstRef}
-                        className={`${styles.bar_first} ${
-                            desktopViewType === 'single'
-                                ? `${styles.active}`
-                                : ''
-                        }`}
-                    ></span>
-                    <span
-                        onClick={() => onClickBarHandler('several')}
-                        ref={barSecondRef}
-                        className={`${styles.bar_second} ${
-                            desktopViewType === 'several'
-                                ? `${styles.active}`
-                                : ''
-                        }`}
-                    ></span>
                 </div>
             </div>
         </div>
