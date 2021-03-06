@@ -12,6 +12,7 @@ import {
     CATALOG_SET_UPDATE_LIST,
     CATALOG_SET_AMOUNT,
     CATALOG_SET_LOADING,
+    CATALOG_SET_DESKTOP_VIEWTYPE,
 } from './../catalog_actions_rebuild/catalog'
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
     update_list: 0,
     amount: null,
     loading: false,
+    desktopViewType: 'several',
     all: [],
     new: {},
 }
@@ -75,7 +77,6 @@ const CatalogReducer = (state = initialState, action) => {
         }
         case CATALOG_SET_NEW: {
             const prev = state.all.concat()
-            console.log('prev', prev)
             prev.push(prev)
 
             return {
@@ -108,6 +109,12 @@ const CatalogReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: action.payload,
+            }
+        }
+        case CATALOG_SET_DESKTOP_VIEWTYPE: {
+            return {
+                ...state,
+                desktopViewType: action.payload,
             }
         }
         default: {

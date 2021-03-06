@@ -38,6 +38,7 @@ const CatalogProductListForDesktop = ({
     articles,
     headers,
 }) => {
+    const CatalogReducer = useSelector((store) => store.CatalogReducer)
     const SelectedSizeRedux = useSelector((store) => store.SelectedSizeReducer)
     const CatalogCommonReducer = useSelector(
         (store) => store.CatalogCommonReducer
@@ -45,7 +46,7 @@ const CatalogProductListForDesktop = ({
 
     let subIndex = 0
     const render = () => {
-        if (desktopViewType === 'several') {
+        if (CatalogReducer.desktopViewType === 'several') {
             let ElemenetsArray = []
             let EqualHeightArray = []
             let Temp = 0
@@ -161,6 +162,66 @@ const CatalogProductListForDesktop = ({
                 }
             })
             return EqualHeightArray
+        } else if (CatalogReducer.desktopViewType === 'single') {
+            let ElemenetsArray = []
+
+            firstLoadProducts.ShortProductModels.map((product, index) => {
+                const ListSalesList = GetPopupsList(
+                    firstLoadProducts.SaleLabels,
+                    product.Prices[0].SaleIds
+                )
+
+                const InitialSize = []
+                for (let i = 0; i < product.Prices.length; i++) {
+                    if (
+                        product.Prices[i].SizeSlug ===
+                        SelectedSizeRedux.selectedSizeSlug
+                    ) {
+                        InitialSize.push(product.Prices[i])
+                    }
+                }
+
+                const Labels = product.ProductLabels
+
+                const Gifts = GetGiftsList(
+                    product.Prices[0].GiftIds,
+                    firstLoadProducts.GiftLabels
+                )
+
+                const OptionsList = GetOptionsList(
+                    product.Prices[0].OptionIds,
+                    firstLoadProducts.Options
+                )
+
+                ElemenetsArray.push(
+                    <DesktopSingle
+                        OptionsList={OptionsList}
+                        IsMobile={IsMobile}
+                        InitialSize={InitialSize}
+                        catalogSlug={catalogSlug}
+                        BrandTitle={product.BrandTitle}
+                        SeriesTitle={product.SeriesTitle}
+                        Title={product.Title}
+                        Slug={product.Slug}
+                        MainImage={product.MainImage}
+                        stylesForViewType={stylesForViewType}
+                        stylesForDesktopViewType={stylesForDesktopViewType}
+                        viewType={viewType}
+                        desktopViewType={desktopViewType}
+                        CatalogType={product.CatalogType}
+                        Properties={product.Properties}
+                        ListSalesList={ListSalesList}
+                        Id={product.Id}
+                        key={product.Id}
+                        Prices={product.Prices}
+                        oldMin={oldMin}
+                        oldMax={oldMax}
+                        Labels={Labels}
+                        Gifts={Gifts}
+                    />
+                )
+            })
+            return ElemenetsArray
         }
     }
     return (

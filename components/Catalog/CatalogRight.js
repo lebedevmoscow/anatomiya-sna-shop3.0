@@ -40,6 +40,7 @@ const CatalogTopFilter = dynamic(
 
 const CatalogRight = ({
     stylesForDesktopViewType,
+    updateViewType,
     desktopViewType,
     firstLoadProducts,
     catalogSlug,
@@ -247,6 +248,8 @@ const CatalogRight = ({
                 oldMin={oldMin}
                 oldMax={oldMax}
                 headers={headers}
+                updateViewType={updateViewType}
+                desktopViewType={desktopViewType}
             />
             {CatalogReducer.loading && (
                 <div className={styles.loading}>{renderLoading()}</div>

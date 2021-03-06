@@ -476,7 +476,7 @@ const DesktopSeveral = ({
 
     return (
         <div className={styles.catalog_product_card}>
-            {/* <PopupsOnProductCard
+            <PopupsOnProductCard
                 Labels={Labels}
                 SalePercent={SalePercent}
                 key={uuidv4()}
@@ -485,7 +485,7 @@ const DesktopSeveral = ({
                 desktopViewType={desktopViewType}
                 Gifts={Gifts}
                 DontShow={true}
-            /> */}
+            />
             <div className={styles.catalog_product_card__column}>
                 <div
                     className={

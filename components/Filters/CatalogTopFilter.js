@@ -12,6 +12,7 @@ import {
     CATALOG_SET_SORT,
     CATALOG_SET_UPDATE_LIST,
     CATALOG_SET_PAGE,
+    CATALOG_SET_DESKTOP_VIEWTYPE,
 } from './../../catalog_actions_rebuild/catalog'
 
 // React components
@@ -26,16 +27,18 @@ const CatalogTopFilter = ({
     subCatalogSlug,
     oldMin,
     oldMax,
+    desktopViewType,
+    updateViewType,
 }) => {
     const CatalogReducer = useSelector((store) => store.CatalogReducer)
     const dispatch = useDispatch()
 
-    // const barFirstRef = useRef(null)
-    // const barSecondRef = useRef(null)
+    const barFirstRef = useRef(null)
+    const barSecondRef = useRef(null)
 
-    // const onClickBarHandler = (bar) => {
-    //     updateViewType(bar)
-    // }
+    const onClickBarHandler = (bar) => {
+        updateViewType(bar)
+    }
 
     const [isPopularShowMore, setIsPopularShowMore] = useState(false)
     const [isSortByShowMore, setIsSortByShowMore] = useState(false)
@@ -104,19 +107,6 @@ const CatalogTopFilter = ({
             setSortByList(n)
         }
     }
-
-    // useLayoutEffect(() => {
-    //     const arr = []
-    //     for (let i = 0; i < 6; i++) {
-    //         if (i < headers.popularLinks.length) {
-    //             arr.push({
-    //                 title: headers.popularLinks[i].title,
-    //                 link: headers.popularLinks[i].link,
-    //             })
-    //         }
-    //     }
-    //     setPopularList(arr)
-    // }, [])
 
     useEffect(() => {
         if (clicks > 0) {
@@ -196,20 +186,6 @@ const CatalogTopFilter = ({
                     Популярное:
                 </div>
                 <ul className={styles.catalog_top_filter__popular_list}>
-                    {/* {popularList.map((element, index) => {
-                        return (
-                            <Link href={'http://localhost:3000' + element.link}>
-                                <li
-                                    key={index}
-                                    className={
-                                        styles.catalog_top_filter__popular_list_item
-                                    }
-                                >
-                                    <a href="#">{element.title}</a>
-                                </li>
-                            </Link>
-                        )
-                    })} */}
                     {headers.popularLinks.map((element, index) => {
                         if (index >= 6) return
                         return (
@@ -283,48 +259,55 @@ const CatalogTopFilter = ({
                             }
 
                             return (
-                                <li
-                                    key={index}
-                                    onClick={() => {
-                                        onSortByClickHandler(element)
-                                        setClicks((p) => ++p)
-                                    }}
-                                    className={
-                                        styles.catalog_top_filter__sortby_list_item +
-                                        ' ' +
-                                        additionalClassName
-                                    }
-                                >
-                                    <span>{element}</span>{' '}
-                                    {element === 'Цене' &&
-                                        sortType[1].sort === 'up-to-down' && (
-                                            <svg
-                                                viewBox="0 0 14.566 14.566"
-                                                id="sort"
-                                                xmlns="https://www.w3.org/2000/svg"
-                                            >
-                                                <g>
-                                                    <path d="M0 .196h4.955v2.486H0zM0 3.929h8.272v2.486H0zM0 7.907h10.871v2.485H0zM0 11.885h14.566v2.485H0zM9.362 4.062l2.415 2.35s.16.187.327.019c.23-.229 2.355-2.425 2.355-2.425s.294-.292-.096-.292h-1.011v-.429V.336s.004-.14-.176-.14H10.69c-.252 0-.209.167-.209.167v3.42H9.386c-.321 0-.024.279-.024.279z"></path>
-                                                </g>
-                                            </svg>
-                                        )}
-                                    {element === 'Цене' &&
-                                        sortType[1].sort === 'down-to-up' && (
-                                            <svg
-                                                style={{
-                                                    transform:
-                                                        'rotate(180deg) scale(-1, 1)',
-                                                }}
-                                                viewBox="0 0 14.566 14.566"
-                                                id="sort"
-                                                xmlns="https://www.w3.org/2000/svg"
-                                            >
-                                                <g>
-                                                    <path d="M0 .196h4.955v2.486H0zM0 3.929h8.272v2.486H0zM0 7.907h10.871v2.485H0zM0 11.885h14.566v2.485H0zM9.362 4.062l2.415 2.35s.16.187.327.019c.23-.229 2.355-2.425 2.355-2.425s.294-.292-.096-.292h-1.011v-.429V.336s.004-.14-.176-.14H10.69c-.252 0-.209.167-.209.167v3.42H9.386c-.321 0-.024.279-.024.279z"></path>
-                                                </g>
-                                            </svg>
-                                        )}
-                                </li>
+                                <>
+                                    {index === 5 && (
+                                        <div style={{ width: '150px' }}></div>
+                                    )}
+                                    <li
+                                        key={index}
+                                        onClick={() => {
+                                            onSortByClickHandler(element)
+                                            setClicks((p) => ++p)
+                                        }}
+                                        className={
+                                            styles.catalog_top_filter__sortby_list_item +
+                                            ' ' +
+                                            additionalClassName
+                                        }
+                                    >
+                                        <span>{element}</span>{' '}
+                                        {element === 'Цене' &&
+                                            sortType[1].sort ===
+                                                'up-to-down' && (
+                                                <svg
+                                                    viewBox="0 0 14.566 14.566"
+                                                    id="sort"
+                                                    xmlns="https://www.w3.org/2000/svg"
+                                                >
+                                                    <g>
+                                                        <path d="M0 .196h4.955v2.486H0zM0 3.929h8.272v2.486H0zM0 7.907h10.871v2.485H0zM0 11.885h14.566v2.485H0zM9.362 4.062l2.415 2.35s.16.187.327.019c.23-.229 2.355-2.425 2.355-2.425s.294-.292-.096-.292h-1.011v-.429V.336s.004-.14-.176-.14H10.69c-.252 0-.209.167-.209.167v3.42H9.386c-.321 0-.024.279-.024.279z"></path>
+                                                    </g>
+                                                </svg>
+                                            )}
+                                        {element === 'Цене' &&
+                                            sortType[1].sort ===
+                                                'down-to-up' && (
+                                                <svg
+                                                    style={{
+                                                        transform:
+                                                            'rotate(180deg) scale(-1, 1)',
+                                                    }}
+                                                    viewBox="0 0 14.566 14.566"
+                                                    id="sort"
+                                                    xmlns="https://www.w3.org/2000/svg"
+                                                >
+                                                    <g>
+                                                        <path d="M0 .196h4.955v2.486H0zM0 3.929h8.272v2.486H0zM0 7.907h10.871v2.485H0zM0 11.885h14.566v2.485H0zM9.362 4.062l2.415 2.35s.16.187.327.019c.23-.229 2.355-2.425 2.355-2.425s.294-.292-.096-.292h-1.011v-.429V.336s.004-.14-.176-.14H10.69c-.252 0-.209.167-.209.167v3.42H9.386c-.321 0-.024.279-.024.279z"></path>
+                                                    </g>
+                                                </svg>
+                                            )}
+                                    </li>
+                                </>
                             )
                         })}
                         <li
@@ -347,6 +330,39 @@ const CatalogTopFilter = ({
                             </span>
                         </li>
                     </ul>
+                </div>
+                <div className={styles.second_wrap}>
+                    <div className={styles.title}>Вид:</div>
+                    <span
+                        onClick={() => {
+                            onClickBarHandler('single')
+                            dispatch({
+                                type: CATALOG_SET_DESKTOP_VIEWTYPE,
+                                payload: 'single',
+                            })
+                        }}
+                        ref={barFirstRef}
+                        className={`${styles.bar_first} ${
+                            desktopViewType === 'single'
+                                ? `${styles.active}`
+                                : ''
+                        }`}
+                    ></span>
+                    <span
+                        onClick={() => {
+                            onClickBarHandler('several')
+                            dispatch({
+                                type: CATALOG_SET_DESKTOP_VIEWTYPE,
+                                payload: 'several',
+                            })
+                        }}
+                        ref={barSecondRef}
+                        className={`${styles.bar_second} ${
+                            desktopViewType === 'several'
+                                ? `${styles.active}`
+                                : ''
+                        }`}
+                    ></span>
                 </div>
             </div>
         </div>
