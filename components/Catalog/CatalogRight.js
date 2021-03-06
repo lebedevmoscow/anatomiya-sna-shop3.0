@@ -22,7 +22,14 @@ import {
     CATALOG_SET_SORT,
     CATALOG_SET_NEW,
     CATALOG_SET_ALL,
+    CATALOG_SET_UPDATE_LIST,
 } from './../../catalog_actions_rebuild/catalog'
+
+// React Components
+import CatalogPagination from './../Pagination/CatalogPagination'
+import CatalogHelpPickUp from './../Catalog/CatalogHelpPickUp'
+import CatalogReviewList from './../Reviews/CatalogDesktopReviewList'
+import IndexPageAssurances from './../Assurances'
 
 import styles from './../../styles/components/Catalog/CatalogRight.module.sass'
 
@@ -44,6 +51,7 @@ const CatalogRight = ({
     articles,
 }) => {
     const CatalogReducer = useSelector((store) => store.CatalogReducer)
+    const hasWindow = typeof window !== 'undefined'
 
     const [first, setFirst] = useState(
         <CatalogProductListForDesktop
@@ -58,11 +66,35 @@ const CatalogRight = ({
             filterProductsIds={filterProductsIds}
         />
     )
+    const [isLoading, setIsLoading] = useState(false)
     const [loadedMore, setLoadedMore] = useState([])
 
     const dispatch = useDispatch()
 
+    // Custom functions
+    const renderLoading = () => {
+        const white = []
+        if (!first || first.length <= 0) {
+            for (let i = 0; i < 21; i++) {
+                white.push(
+                    <Skeleton variant="react" width={298} height={651} />
+                )
+            }
+        }
+        return white
+    }
+
     // Handlers
+    const scrollTo = (x, y) => {
+        if (hasWindow) {
+            window.scrollTo({
+                top: x,
+                left: y,
+                behavior: 'instant',
+            })
+        }
+    }
+
     const onLoadButtonClickHandler = () => {
         const page = CatalogReducer.page
         dispatch(
@@ -82,6 +114,78 @@ const CatalogRight = ({
             )
         )
         dispatch({ type: CATALOG_SET_PAGE, payload: page + 1 })
+    }
+
+    const onPageClickHandler = (p) => {
+        scrollTo(0, 0)
+        dispatch({ type: CATALOG_SET_UPDATE_LIST })
+        dispatch(
+            CatalogLoadProductsByLoadMoreButton(
+                false,
+                p,
+                CatalogReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                CatalogReducer.filters,
+                CatalogReducer.price,
+                CatalogReducer.sort,
+                CatalogReducer.colors,
+                CatalogReducer.select
+            )
+        )
+        dispatch({ type: CATALOG_SET_PAGE, payload: p })
+    }
+
+    const onGoForwardButtonClickHandler = () => {
+        scrollTo(0, 0)
+
+        const page = CatalogReducer.page
+
+        dispatch({ type: CATALOG_SET_UPDATE_LIST })
+        dispatch(
+            CatalogLoadProductsByLoadMoreButton(
+                false,
+                page + 1,
+                CatalogReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                CatalogReducer.filters,
+                CatalogReducer.price,
+                CatalogReducer.sort,
+                CatalogReducer.colors,
+                CatalogReducer.select
+            )
+        )
+        dispatch({ type: CATALOG_SET_PAGE, payload: page + 1 })
+    }
+
+    const onGoBackButtonClickHandler = () => {
+        scrollTo(0, 0)
+
+        const page = CatalogReducer.page
+
+        dispatch({ type: CATALOG_SET_UPDATE_LIST })
+        dispatch(
+            CatalogLoadProductsByLoadMoreButton(
+                false,
+                page - 1,
+                CatalogReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                CatalogReducer.filters,
+                CatalogReducer.price,
+                CatalogReducer.sort,
+                CatalogReducer.colors,
+                CatalogReducer.select
+            )
+        )
+        dispatch({ type: CATALOG_SET_PAGE, payload: page - 1 })
     }
 
     // UseEffects
@@ -144,6 +248,9 @@ const CatalogRight = ({
                 oldMax={oldMax}
                 headers={headers}
             />
+            {CatalogReducer.loading && (
+                <div className={styles.loading}>{renderLoading()}</div>
+            )}
             <div className={styles.firstLoadProducts}>{first}</div>
             <div className={styles.firstLoadProducts}>{loadedMore}</div>
 
@@ -153,6 +260,23 @@ const CatalogRight = ({
             >
                 <LoadMoreButton firstText={'Показать еще +21'} />
             </div>
+            <div>
+                <CatalogPagination
+                    onPageClickHandler={onPageClickHandler}
+                    current={CatalogReducer.page}
+                    amount={
+                        CatalogReducer.amount ||
+                        Math.ceil(filterProductsIds.length / 21)
+                    }
+                    onGoForwardButtonClickHandler={
+                        onGoForwardButtonClickHandler
+                    }
+                    onGoBackdButtonClickHandler={onGoBackButtonClickHandler}
+                />
+            </div>
+            <CatalogHelpPickUp />
+            <CatalogReviewList headers={headers} />
+            <IndexPageAssurances catalog={true} container={false} />
         </div>
     )
 }

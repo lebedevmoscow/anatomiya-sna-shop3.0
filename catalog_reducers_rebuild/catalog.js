@@ -10,6 +10,8 @@ import {
     CATALOG_SET_NEW,
     CATALOG_SET_ALL,
     CATALOG_SET_UPDATE_LIST,
+    CATALOG_SET_AMOUNT,
+    CATALOG_SET_LOADING,
 } from './../catalog_actions_rebuild/catalog'
 
 const initialState = {
@@ -20,8 +22,10 @@ const initialState = {
     filters: [],
     colors: [],
     sort: [],
-    all: [],
     update_list: 0,
+    amount: null,
+    loading: false,
+    all: [],
     new: {},
 }
 
@@ -92,6 +96,18 @@ const CatalogReducer = (state = initialState, action) => {
             return {
                 ...state,
                 all: action.payload,
+            }
+        }
+        case CATALOG_SET_AMOUNT: {
+            return {
+                ...state,
+                amount: action.payload,
+            }
+        }
+        case CATALOG_SET_LOADING: {
+            return {
+                ...state,
+                loading: action.payload,
             }
         }
         default: {

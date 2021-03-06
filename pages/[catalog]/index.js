@@ -239,16 +239,14 @@ const CatalogPage = ({
             {!IsMobile && !breakpoint1023 && (
                 <div className={common_styles.container}>
                     <div className={common_styles.catalog}>
-                        {/* <CatalogLeftFilter
-                            lastClick={lastClick}
-                            setLastClick={setLastClick}
+                        <CatalogLeftFilter
                             filterAPIData={filterAPIData}
                             oldMin={filterAPIData.price.min}
                             oldMax={filterAPIData.price.max}
                             filterProductsIds={filterProductsIds}
                             catalogSlug={catalogSlug}
                             subCatalogSlug={subCatalogSlug}
-                        /> */}
+                        />
                         <CatalogRight
                             headers={headers}
                             oldMin={filterAPIData.price.min}

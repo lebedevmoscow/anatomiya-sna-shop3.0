@@ -3,15 +3,29 @@ import Select from 'react-select'
 import { Range, getTrackBackground } from 'react-range'
 import Skeleton from '@material-ui/lab/Skeleton'
 
+// Redux
 import { useSelector, useDispatch } from 'react-redux'
+
+// Constants
 import {
-    CATALOG_SET_TOP_RESET,
-    catalogSetPage,
-    catalogSetFilters,
-} from './../../actions/CatalogCommon.js'
-import { LoadByFilters } from './../../actions/NewCatalogProductList'
+    CATALOG_SET_PRICE,
+    CATALOG_SET_PAGE,
+    CATALOG_SET_FILTERS,
+    CATALOG_SET_UPDATE_LIST,
+} from './../../catalog_actions_rebuild/catalog'
+
+// Actions
+import { CatalogLoadByFilter } from './../../catalog_actions_rebuild/catalog'
+
+// import {
+//     CATALOG_SET_TOP_RESET,
+//     catalogSetPage,
+//     catalogSetFilters,
+// } from './../../actions/CatalogCommon.js'
+// import { LoadByFilters } from './../../actions/NewCatalogProductList'
 
 import styles from './../../styles/components/Filters/CatalogLeftFilter.module.sass'
+import { LoadByFilters } from '../../actions/NewCatalogProductList'
 
 const CatalogLeftFilter = ({
     filterAPIData,
@@ -20,9 +34,10 @@ const CatalogLeftFilter = ({
     filterProductsIds,
     catalogSlug,
     subCatalogSlug,
-    setLastClick,
 }) => {
     const dispatch = useDispatch()
+
+    const CatalogReducer = useSelector((store) => store.CatalogReducer)
 
     const SelectedSizeReducer = useSelector(
         (store) => store.SelectedSizeReducer
@@ -47,7 +62,49 @@ const CatalogLeftFilter = ({
     const [closeStatus, setCloseStatus] = useState([])
     const [selectedSize, setSelectedSize] = useState(null)
     const [activeColors, setActiveColors] = useState([])
-    const [selectedActive, setSelectedActive] = useState([])
+
+    const RetrunSelectedActiveInitial = () => {
+        const a = []
+        for (let i = 0; i < filterAPIData.properties.length; i++) {
+            if (
+                filterAPIData.properties[i].select &&
+                filterAPIData.properties[i].select.length > 0
+            ) {
+                const selectedData = []
+
+                for (
+                    let j = 0;
+                    j < filterAPIData.properties[i].select.length;
+                    j++
+                ) {
+                    if (
+                        filterAPIData.properties[i].select[j].productCount > 0
+                    ) {
+                        selectedData.push(filterAPIData.properties[i].select[j])
+                    }
+                }
+
+                const obj = {
+                    id: filterAPIData.properties[i].id,
+                    label: filterAPIData.properties[i].title,
+                    initial: filterAPIData.properties[i].select[0],
+                    update: 0,
+                    data: selectedData,
+                }
+
+                a.push(obj)
+            }
+        }
+        return a
+    }
+
+    const RetrunSelectedActiveColorsInitial = () => {}
+
+    const [selectedActive, setSelectedActive] = useState(
+        RetrunSelectedActiveInitial()
+    )
+
+    console.log('RetrunSelectedActiveInitial', RetrunSelectedActiveInitial())
 
     const colourStyles = {
         control: (styles) => ({ ...styles, backgroundColor: 'white' }),
@@ -186,9 +243,7 @@ const CatalogLeftFilter = ({
 
     const onFilterClickHandler = (mainIndex, title) => {
         const clone = filterStatus.concat()
-        dispatch(catalogSetPage(1))
-
-        setLastClick('filter')
+        dispatch({ type: CATALOG_SET_PAGE, payload: 1 })
 
         const n = []
         for (let i = 0; i < clone.length; i++) {
@@ -231,7 +286,23 @@ const CatalogLeftFilter = ({
             }
         }
 
-        dispatch(catalogSetFilters(againClone))
+        dispatch({ type: CATALOG_SET_FILTERS, payload: filterStatus })
+        dispatch({ type: CATALOG_SET_UPDATE_LIST })
+        dispatch(
+            CatalogLoadByFilter(
+                false,
+                CatalogReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                filterStatus,
+                CatalogReducer.price,
+                CatalogReducer.sort,
+                CatalogReducer.colors,
+                CatalogReducer.select
+            )
+        )
         setFilterStatus(againClone)
     }
 
@@ -384,97 +455,97 @@ const CatalogLeftFilter = ({
         return () => setSizeSelector(null)
     }, [SizeSelectorStyles])
 
-    useEffect(() => {
-        if (selectedSize) {
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    CatalogCommonReducer.page,
-                    SelectedSizeReducer.sizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    filterStatus,
-                    prices,
-                    selectedSize,
-                    CatalogCommonReducer.desktopTopFilter,
-                    false,
-                    activeColors,
-                    selectedActive
-                )
-            )
-        }
-    }, [selectedSize])
+    // useEffect(() => {
+    //     if (selectedSize) {
+    //         dispatch(
+    //             LoadByFilters(
+    //                 filterProductsIds,
+    //                 CatalogCommonReducer.page,
+    //                 SelectedSizeReducer.sizeId,
+    //                 catalogSlug,
+    //                 subCatalogSlug,
+    //                 oldMin,
+    //                 oldMax,
+    //                 filterStatus,
+    //                 prices,
+    //                 selectedSize,
+    //                 CatalogCommonReducer.desktopTopFilter,
+    //                 false,
+    //                 activeColors,
+    //                 selectedActive
+    //             )
+    //         )
+    //     }
+    // }, [selectedSize])
 
-    useEffect(() => {
-        if (activeColors.length > 0) {
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    CatalogCommonReducer.page,
-                    SelectedSizeReducer.sizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    filterStatus,
-                    prices,
-                    selectedSize,
-                    CatalogCommonReducer.desktopTopFilter,
-                    false,
-                    activeColors,
-                    selectedActive
-                )
-            )
-        }
-    }, [activeColors])
+    // useEffect(() => {
+    //     if (activeColors.length > 0) {
+    //         dispatch(
+    //             LoadByFilters(
+    //                 filterProductsIds,
+    //                 CatalogCommonReducer.page,
+    //                 SelectedSizeReducer.sizeId,
+    //                 catalogSlug,
+    //                 subCatalogSlug,
+    //                 oldMin,
+    //                 oldMax,
+    //                 filterStatus,
+    //                 prices,
+    //                 selectedSize,
+    //                 CatalogCommonReducer.desktopTopFilter,
+    //                 false,
+    //                 activeColors,
+    //                 selectedActive
+    //             )
+    //         )
+    //     }
+    // }, [activeColors])
 
-    useEffect(() => {
-        if (click > 0) {
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    CatalogCommonReducer.page,
-                    SelectedSizeReducer.sizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    filterStatus,
-                    prices,
-                    selectedSize,
-                    CatalogCommonReducer.desktopTopFilter,
-                    false,
-                    activeColors,
-                    selectedActive
-                )
-            )
-        }
-    }, [filterStatus])
+    // useEffect(() => {
+    //     if (click > 0) {
+    //         dispatch(
+    //             LoadByFilters(
+    //                 filterProductsIds,
+    //                 CatalogCommonReducer.page,
+    //                 SelectedSizeReducer.sizeId,
+    //                 catalogSlug,
+    //                 subCatalogSlug,
+    //                 oldMin,
+    //                 oldMax,
+    //                 filterStatus,
+    //                 prices,
+    //                 selectedSize,
+    //                 CatalogCommonReducer.desktopTopFilter,
+    //                 false,
+    //                 activeColors,
+    //                 selectedActive
+    //             )
+    //         )
+    //     }
+    // }, [filterStatus])
 
-    useEffect(() => {
-        if (CatalogCommonReducer.desktopTopFilter.length > 0) {
-            dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    CatalogCommonReducer.page,
-                    SelectedSizeReducer.sizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    filterStatus,
-                    prices,
-                    selectedSize,
-                    CatalogCommonReducer.desktopTopFilter,
-                    false,
-                    activeColors,
-                    selectedActive
-                )
-            )
-        }
-    }, [CatalogCommonReducer.desktopTopFilter])
+    // useEffect(() => {
+    //     if (CatalogCommonReducer.desktopTopFilter.length > 0) {
+    //         dispatch(
+    //             LoadByFilters(
+    //                 filterProductsIds,
+    //                 CatalogCommonReducer.page,
+    //                 SelectedSizeReducer.sizeId,
+    //                 catalogSlug,
+    //                 subCatalogSlug,
+    //                 oldMin,
+    //                 oldMax,
+    //                 filterStatus,
+    //                 prices,
+    //                 selectedSize,
+    //                 CatalogCommonReducer.desktopTopFilter,
+    //                 false,
+    //                 activeColors,
+    //                 selectedActive
+    //             )
+    //         )
+    //     }
+    // }, [CatalogCommonReducer.desktopTopFilter])
 
     return (
         <div className={styles.catalog_left_filter}>
@@ -532,22 +603,24 @@ const CatalogLeftFilter = ({
                         max={filterAPIData.price.max}
                         onChange={(v) => setPrices(v)}
                         onFinalChange={() => {
+                            dispatch({
+                                type: CATALOG_SET_PRICE,
+                                payload: prices,
+                            })
+                            dispatch({ type: CATALOG_SET_UPDATE_LIST })
                             dispatch(
-                                LoadByFilters(
-                                    filterProductsIds,
-                                    CatalogCommonReducer.page,
-                                    SelectedSizeReducer.sizeId,
+                                CatalogLoadByFilter(
+                                    false,
+                                    CatalogReducer.sizeId,
                                     catalogSlug,
                                     subCatalogSlug,
                                     oldMin,
                                     oldMax,
-                                    filterStatus,
+                                    CatalogReducer.filters,
                                     prices,
-                                    selectedSize,
-                                    null,
-                                    CatalogCommonReducer.desktopTopFilter,
-                                    activeColors,
-                                    selectedActive
+                                    CatalogReducer.sort,
+                                    CatalogReducer.colors,
+                                    CatalogReducer.select
                                 )
                             )
                         }}
@@ -627,10 +700,6 @@ const CatalogLeftFilter = ({
                     {sizeSelector}
                 </div>
             </div>
-
-            {closeStatus.length === 0 && (
-                <Skeleton variant="rect" width={241} height={1000} />
-            )}
 
             {selectedActive &&
                 selectedActive.length > 0 &&
@@ -947,137 +1016,129 @@ const CatalogLeftFilter = ({
                 </div>
             )}
 
-            {filterStatus.length > 0 &&
-                properties.map((property, index) => {
-                    if (property.select) return
-                    if (property.range) return
-                    if (index < 3) return
-                    return (
+            {properties.map((property, index) => {
+                if (property.select) return
+                if (property.range) return
+                if (index < 3) return
+                return (
+                    <div
+                        key={index}
+                        className={`${
+                            styles.catalog_left_filter__tab_wrapper
+                        } ${
+                            styles.catalog_left_filter__tab_wrapper__checkboxs
+                        } ${setClass(property.title)}`}
+                    >
                         <div
-                            key={index}
-                            className={`${
-                                styles.catalog_left_filter__tab_wrapper
-                            } ${
-                                styles.catalog_left_filter__tab_wrapper__checkboxs
-                            } ${setClass(property.title)}`}
+                            className={
+                                styles.catalog_left_filter__tab_wrapper_title
+                            }
                         >
-                            <div
-                                className={
-                                    styles.catalog_left_filter__tab_wrapper_title
+                            <span className={styles.arrow}></span>
+                            <span
+                                onClick={() =>
+                                    OnCloseFilterClickHandler(property.title)
                                 }
+                                className={styles.text}
                             >
-                                <span className={styles.arrow}></span>
-                                <span
-                                    onClick={() =>
-                                        OnCloseFilterClickHandler(
-                                            property.title
-                                        )
-                                    }
-                                    className={styles.text}
-                                >
-                                    {property.title}
-                                </span>
-                                {property.description && (
-                                    <span className={styles.question}>
-                                        <svg
-                                            viewBox="0 0 30 30"
-                                            xmlns="https://www.w3.org/2000/svg"
-                                        >
-                                            <path d="M11 7v3c3 0 5-1 5 1s-3 4-3 6v2c6 0 2-1 5-4 1-1 2-3 2-5s-1-3-3-4c-3 0-4 1-6 1zM12 22c0 1 1 3 3 3 1 0 2-1 2-3 0-3-5-3-5 0z"></path>
-                                        </svg>
-                                        <span className={styles.info_block}>
-                                            {property.description}
-                                        </span>
+                                {property.title}
+                            </span>
+                            {property.description && (
+                                <span className={styles.question}>
+                                    <svg
+                                        viewBox="0 0 30 30"
+                                        xmlns="https://www.w3.org/2000/svg"
+                                    >
+                                        <path d="M11 7v3c3 0 5-1 5 1s-3 4-3 6v2c6 0 2-1 5-4 1-1 2-3 2-5s-1-3-3-4c-3 0-4 1-6 1zM12 22c0 1 1 3 3 3 1 0 2-1 2-3 0-3-5-3-5 0z"></path>
+                                    </svg>
+                                    <span className={styles.info_block}>
+                                        {property.description}
                                     </span>
-                                )}
-                                {property.description && (
-                                    <div
+                                </span>
+                            )}
+                            {property.description && (
+                                <div
+                                    className={styles.catalog_left_filter__info}
+                                ></div>
+                            )}
+                        </div>
+                        <div
+                            className={
+                                styles.catalog_left_filter__tab_wrapper_inner
+                            }
+                        >
+                            {property.checkboxes &&
+                                property.checkboxes.length !== 0 && (
+                                    <ul
                                         className={
-                                            styles.catalog_left_filter__info
+                                            styles.catalog_left_filter__tab_options
                                         }
-                                    ></div>
-                                )}
-                            </div>
-                            <div
-                                className={
-                                    styles.catalog_left_filter__tab_wrapper_inner
-                                }
-                            >
-                                {property.checkboxes &&
-                                    property.checkboxes.length !== 0 && (
-                                        <ul
-                                            className={
-                                                styles.catalog_left_filter__tab_options
-                                            }
-                                        >
-                                            {property.checkboxes.map(
-                                                (checkbox, index2) => {
-                                                    if (
-                                                        checkbox.productCount !==
-                                                        0
-                                                    ) {
-                                                        return (
-                                                            <li
-                                                                onClick={() => {
-                                                                    if (
-                                                                        click %
-                                                                            2 ==
-                                                                        0
-                                                                    ) {
-                                                                        onFilterClickHandler(
-                                                                            index,
-                                                                            checkbox.label
-                                                                        )
-                                                                    }
-                                                                    setClick(
-                                                                        (p) =>
-                                                                            ++p
+                                    >
+                                        {property.checkboxes.map(
+                                            (checkbox, index2) => {
+                                                if (
+                                                    checkbox.productCount !== 0
+                                                ) {
+                                                    return (
+                                                        <li
+                                                            onClick={() => {
+                                                                if (
+                                                                    click % 2 ==
+                                                                    0
+                                                                ) {
+                                                                    onFilterClickHandler(
+                                                                        index,
+                                                                        checkbox.label
                                                                     )
-                                                                }}
-                                                                key={index2}
+                                                                }
+                                                                setClick(
+                                                                    (p) => ++p
+                                                                )
+                                                            }}
+                                                            key={index2}
+                                                            className={
+                                                                styles.catalog_left_filter__tab_options_item
+                                                            }
+                                                        >
+                                                            <label
                                                                 className={
-                                                                    styles.catalog_left_filter__tab_options_item
+                                                                    styles.catalog_left_filter__checkbox_container
                                                                 }
                                                             >
-                                                                <label
+                                                                <input type="checkbox" />
+                                                                <span
                                                                     className={
-                                                                        styles.catalog_left_filter__checkbox_container
+                                                                        styles.catalog_left_filter__checkmark
+                                                                    }
+                                                                ></span>
+                                                                <h6>
+                                                                    {
+                                                                        checkbox.label
+                                                                    }
+                                                                </h6>
+                                                                <span
+                                                                    className={
+                                                                        styles.amount
                                                                     }
                                                                 >
-                                                                    <input type="checkbox" />
-                                                                    <span
-                                                                        className={
-                                                                            styles.catalog_left_filter__checkmark
-                                                                        }
-                                                                    ></span>
-                                                                    <h6>
-                                                                        {
-                                                                            checkbox.label
-                                                                        }
-                                                                    </h6>
-                                                                    <span
-                                                                        className={
-                                                                            styles.amount
-                                                                        }
-                                                                    >
-                                                                        (
-                                                                        {
-                                                                            checkbox.productCount
-                                                                        }
-                                                                        )
-                                                                    </span>
-                                                                </label>
-                                                            </li>
-                                                        )
-                                                    }
+                                                                    (
+                                                                    {
+                                                                        checkbox.productCount
+                                                                    }
+                                                                    )
+                                                                </span>
+                                                            </label>
+                                                        </li>
+                                                    )
                                                 }
-                                            )}
-                                        </ul>
-                                    )}
-                            </div>
+                                            }
+                                        )}
+                                    </ul>
+                                )}
                         </div>
-                    )
-                })}
+                    </div>
+                )
+            })}
 
             <button
                 onClick={onResetClickHandler}

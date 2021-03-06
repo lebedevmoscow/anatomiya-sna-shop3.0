@@ -100,24 +100,6 @@ const CatalogPagination = ({
                         )}
                     </li>
                 )}
-
-                {/* <li
-                    className={`${styles.catalog_pagination__pages_list_item} ${styles.active}`}
-                >
-                    1
-                </li>
-                <li className={styles.catalog_pagination__pages_list_item}>
-                    2
-                </li>
-                <li className={styles.catalog_pagination__pages_list_item}>
-                    3
-                </li>
-                <li className={styles.catalog_pagination__pages_list_item}>
-                    4
-                </li>
-                <li className={styles.catalog_pagination__pages_list_item}>
-                    5
-                </li> */}
             </ul>
             {!IsMobile && current !== amount && (
                 <button
@@ -127,12 +109,6 @@ const CatalogPagination = ({
                     Вперед
                 </button>
             )}
-            {/* {IsMobile && current !== amount && (
-                <button
-                    onClick={onGoForwardButtonClickHandler}
-                    className={styles.catalog_pagination__next_button_mobile}
-                ></button>
-            )} */}
         </div>
     )
 }
