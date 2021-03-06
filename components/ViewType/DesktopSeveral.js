@@ -496,7 +496,6 @@ const DesktopSeveral = ({
                         style={{ width: '100%' }}
                         src={MainImage.FilePath}
                     ></img>
-                    {/* <Image width={275} height={172} src={MainImage.FilePath} /> */}
                 </div>
                 <div className={styles.catalog_product_card__smalltext}>
                     Купить {CatalogType}
@@ -626,6 +625,13 @@ const DesktopSeveral = ({
                                             : { background: '#0CA5D3' }
                                     }
                                 >
+                                    <div
+                                        ref={FavoriteRef}
+                                        className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                                    >
+                                        Товар добавлен в{' '}
+                                        <Link href="/">Избранное!</Link>
+                                    </div>
                                     <div className={styles.heart}>
                                         {!isFavorite && (
                                             <Image
