@@ -35,6 +35,8 @@ const CatalogLeftFilter = ({
     catalogSlug,
     subCatalogSlug,
 }) => {
+    const hasWindow = typeof window !== 'undefined'
+
     const dispatch = useDispatch()
 
     const CatalogReducer = useSelector((store) => store.CatalogReducer)
@@ -62,6 +64,16 @@ const CatalogLeftFilter = ({
     const [closeStatus, setCloseStatus] = useState([])
     const [selectedSize, setSelectedSize] = useState(null)
     const [activeColors, setActiveColors] = useState([])
+
+    const scrollTo = (x, y) => {
+        if (hasWindow) {
+            window.scrollTo({
+                top: x,
+                left: y,
+                behavior: 'instant',
+            })
+        }
+    }
 
     const RetrunSelectedActiveInitial = () => {
         const a = []
@@ -286,6 +298,12 @@ const CatalogLeftFilter = ({
             }
         }
 
+        if (hasWindow) {
+            setTimeout(() => {
+                scrollTo(0, 0)
+            }, 250)
+        }
+
         dispatch({ type: CATALOG_SET_FILTERS, payload: filterStatus })
         dispatch({ type: CATALOG_SET_UPDATE_LIST })
         dispatch(
@@ -303,6 +321,7 @@ const CatalogLeftFilter = ({
                 CatalogReducer.select
             )
         )
+
         setFilterStatus(againClone)
     }
 
@@ -454,98 +473,6 @@ const CatalogLeftFilter = ({
 
         return () => setSizeSelector(null)
     }, [SizeSelectorStyles])
-
-    // useEffect(() => {
-    //     if (selectedSize) {
-    //         dispatch(
-    //             LoadByFilters(
-    //                 filterProductsIds,
-    //                 CatalogCommonReducer.page,
-    //                 SelectedSizeReducer.sizeId,
-    //                 catalogSlug,
-    //                 subCatalogSlug,
-    //                 oldMin,
-    //                 oldMax,
-    //                 filterStatus,
-    //                 prices,
-    //                 selectedSize,
-    //                 CatalogCommonReducer.desktopTopFilter,
-    //                 false,
-    //                 activeColors,
-    //                 selectedActive
-    //             )
-    //         )
-    //     }
-    // }, [selectedSize])
-
-    // useEffect(() => {
-    //     if (activeColors.length > 0) {
-    //         dispatch(
-    //             LoadByFilters(
-    //                 filterProductsIds,
-    //                 CatalogCommonReducer.page,
-    //                 SelectedSizeReducer.sizeId,
-    //                 catalogSlug,
-    //                 subCatalogSlug,
-    //                 oldMin,
-    //                 oldMax,
-    //                 filterStatus,
-    //                 prices,
-    //                 selectedSize,
-    //                 CatalogCommonReducer.desktopTopFilter,
-    //                 false,
-    //                 activeColors,
-    //                 selectedActive
-    //             )
-    //         )
-    //     }
-    // }, [activeColors])
-
-    // useEffect(() => {
-    //     if (click > 0) {
-    //         dispatch(
-    //             LoadByFilters(
-    //                 filterProductsIds,
-    //                 CatalogCommonReducer.page,
-    //                 SelectedSizeReducer.sizeId,
-    //                 catalogSlug,
-    //                 subCatalogSlug,
-    //                 oldMin,
-    //                 oldMax,
-    //                 filterStatus,
-    //                 prices,
-    //                 selectedSize,
-    //                 CatalogCommonReducer.desktopTopFilter,
-    //                 false,
-    //                 activeColors,
-    //                 selectedActive
-    //             )
-    //         )
-    //     }
-    // }, [filterStatus])
-
-    // useEffect(() => {
-    //     if (CatalogCommonReducer.desktopTopFilter.length > 0) {
-    //         dispatch(
-    //             LoadByFilters(
-    //                 filterProductsIds,
-    //                 CatalogCommonReducer.page,
-    //                 SelectedSizeReducer.sizeId,
-    //                 catalogSlug,
-    //                 subCatalogSlug,
-    //                 oldMin,
-    //                 oldMax,
-    //                 filterStatus,
-    //                 prices,
-    //                 selectedSize,
-    //                 CatalogCommonReducer.desktopTopFilter,
-    //                 false,
-    //                 activeColors,
-    //                 selectedActive
-    //             )
-    //         )
-    //     }
-    // }, [CatalogCommonReducer.desktopTopFilter])
 
     return (
         <div className={styles.catalog_left_filter}>
