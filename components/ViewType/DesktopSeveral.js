@@ -11,6 +11,9 @@ import WhiteStatsImage from './../../assets/svg/white-stats.svg'
 import HeartImage from './../../assets/svg/heart.svg'
 import WhiteHeartImage from './../../assets/svg/white-heart.svg'
 import CarImage from './../../assets/svg/car.svg'
+
+// Redux
+
 import { useSelector, useDispatch } from 'react-redux'
 import {
     AddProductToFavoriteList,
@@ -21,12 +24,14 @@ import {
     RemoveProductFromCompareList,
 } from './../../actions/CompareProductsList'
 
+// Constants
+import { CatalogLoadByFilter } from './../../catalog_actions_rebuild/catalog'
+
+// Actions
 import {
-    CATALOG_PRODUCT_LIST_SET_EMPTY,
-    LoadProductsBySize,
-} from './../../actions/CatalogProductList'
-import { CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY } from './../../actions/NewCatalogProductList'
-import { SelectSize } from './../../actions/SelectedSize'
+    CATALOG_SET_SIZE_ID,
+    CATALOG_SET_UPDATE_LIST,
+} from './../../catalog_actions_rebuild/catalog'
 
 const EqualHeightElement = dynamic(
     () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
@@ -58,6 +63,8 @@ const DesktopSeveral = ({
     Labels,
     Gifts,
 }) => {
+    const CatalogReducer = useSelector((store) => store.CatalogReducer)
+
     const [SizeSelector, SetSizeSelector] = useState(null)
     const [InitialSelectedSize, SetInitialSelectedSize] = useState({
         value: '',
@@ -389,37 +396,21 @@ const DesktopSeveral = ({
             }
         }
 
-        // SetLastSelector(
-        //     <Select
-        //         isDisabled={OptionsForSelect.length === 1 ? true : false}
-        //         onChange={(data) => {
-        //             SetCurrentSize(data)
-        //             OnSelectSize(data)
-        //             const Size = {}
-        //             Size.value = data.value
-        //             Size.label = data.label
-        //             SetInitialSelectedSize(Size)
-        //         }}
-        //         className={styles.catalog_product_card__selector}
-        //         classNamePrefix={styles.catalog_product_card__selector__inner}
-        //         placeholder={placeholderSize}
-        //         styles={colourStyles}
-        //         options={OptionsForSelect}
-        //         isSearchable={false}
-        //         autoFocus={false}
-        //     />
-        // )
-
-        dispatch({ type: CATALOG_PRODUCT_LIST_SET_EMPTY })
-        dispatch({ type: CATALOG_PRODUCT_lIST_LOAD_BY_BUTTON_SET_EMPTY })
-        dispatch(SelectSize(data.value, data.label, SizeID))
+        dispatch({ type: CATALOG_SET_UPDATE_LIST })
+        dispatch({ type: CATALOG_SET_SIZE_ID, payload: SizeID })
         dispatch(
-            LoadProductsBySize(
+            CatalogLoadByFilter(
+                false,
                 SizeID,
                 catalogSlug,
                 subCatalogSlug,
                 oldMin,
-                oldMax
+                oldMax,
+                CatalogReducer.filters,
+                CatalogReducer.price,
+                CatalogReducer.sort,
+                CatalogReducer.colors,
+                CatalogReducer.select
             )
         )
     }
