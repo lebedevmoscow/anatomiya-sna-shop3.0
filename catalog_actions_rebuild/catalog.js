@@ -132,7 +132,7 @@ export const CatalogLoadByFilter = (
             }
         }
 
-        if (sortMobile.length > 0) {
+        if (sortMobile && sortMobile.length > 0) {
             for (let i = 0; i < sortMobile.length; i++) {
                 if (
                     sortMobile[i].title === 'По популярности' &&
@@ -367,7 +367,7 @@ export const CatalogLoadProductsByFilter = (
             }
         }
 
-        if (sortMobile.length > 0) {
+        if (sortMobile && sortMobile.length > 0) {
             for (let i = 0; i < sortMobile.length; i++) {
                 if (
                     sortMobile[i].title === 'По популярности' &&
@@ -602,7 +602,7 @@ export const CatalogLoadProductsByLoadMoreButton = (
             }
         }
 
-        if (sortMobile.length > 0) {
+        if (sortMobile && sortMobile.length > 0) {
             for (let i = 0; i < sortMobile.length; i++) {
                 if (
                     sortMobile[i].title === 'По популярности' &&

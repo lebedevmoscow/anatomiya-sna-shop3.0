@@ -136,7 +136,8 @@ const CatalogMainFilter = ({
             }
         }
 
-        dispatch(catalogSetFilters(againClone))
+        dispatch({ type: CATALOG_SET_FILTERS, payload: againClone })
+
         setFilterStatus(againClone)
     }
 
@@ -175,11 +176,12 @@ const CatalogMainFilter = ({
                 subCatalogSlug,
                 oldMin,
                 oldMax,
-                filterStatus,
+                CatalogReducer.filters,
                 CatalogReducer.price,
-                CatalogReducer.sort,
+                null,
                 clone,
-                CatalogReducer.select
+                CatalogReducer.select,
+                CatalogReducer.sortMobile
             )
         )
 
@@ -293,9 +295,7 @@ const CatalogMainFilter = ({
 
     useEffect(() => {
         let flag = false
-        console.log('filterStatus', filterStatus)
         for (let i = 0; i < filterStatus.length; i++) {
-            console.log('filterStatus[i]', filterStatus[i])
             for (let j = 0; j < filterStatus[i].inner.length; j++) {
                 if (filterStatus[i].inner[j].status === 'opened') {
                     flag = true
@@ -303,81 +303,46 @@ const CatalogMainFilter = ({
             }
         }
 
-        console.log('flag', flag)
-
         if (flag) {
-            dispatch({ type: CATALOG_SET_FILTERS, payload: filterStatus })
+            dispatch({ type: CATALOG_SET_UPDATE_LIST })
             dispatch(
-                LoadByFilters(
-                    filterProductsIds,
-                    CatalogCommonReducer.page,
-                    SelectedSizeReducer.sizeId,
+                CatalogLoadByFilter(
+                    false,
+                    CatalogReducer.sizeId,
                     catalogSlug,
                     subCatalogSlug,
                     oldMin,
                     oldMax,
                     filterStatus,
-                    prices,
-                    selectedSize,
+                    CatalogReducer.price,
                     null,
-                    true,
-                    activeColors,
-                    selectedActive2,
-                    CatalogCommonReducer.topfilter
+                    CatalogReducer.colors,
+                    CatalogReducer.select,
+                    CatalogReducer.sortMobile
                 )
             )
         }
     }, [filterStatus])
 
     useEffect(() => {
-        if (update >= 1) {
-            if (CatalogCommonReducer.topfilter.length > 0) {
-                dispatch(
-                    LoadByFilters(
-                        filterProductsIds,
-                        CatalogCommonReducer.page,
-                        SelectedSizeReducer.sizeId,
-                        catalogSlug,
-                        subCatalogSlug,
-                        oldMin,
-                        oldMax,
-                        filterStatus,
-                        prices,
-                        selectedSize,
-                        null,
-                        true,
-                        activeColors,
-                        selectedActive2,
-                        CatalogCommonReducer.topfilter
-                    )
+        if (selectedActive2.length > 0) {
+            dispatch({ type: CATALOG_SET_SELECT, payload: selectedActive2 })
+            dispatch(
+                CatalogLoadByFilter(
+                    false,
+                    CatalogReducer.sizeId,
+                    catalogSlug,
+                    subCatalogSlug,
+                    oldMin,
+                    oldMax,
+                    CatalogReducer.filters,
+                    CatalogReducer.price,
+                    null,
+                    CatalogReducer.colors,
+                    selectedActive2,
+                    CatalogReducer.sortMobile
                 )
-            }
-        }
-    }, [CatalogCommonReducer.topfilter])
-
-    useEffect(() => {
-        if (update >= 1) {
-            if (selectedActive2.length > 0) {
-                dispatch(
-                    LoadByFilters(
-                        filterProductsIds,
-                        CatalogCommonReducer.page,
-                        SelectedSizeReducer.sizeId,
-                        catalogSlug,
-                        subCatalogSlug,
-                        oldMin,
-                        oldMax,
-                        filterStatus,
-                        prices,
-                        selectedSize,
-                        null,
-                        true,
-                        activeColors,
-                        selectedActive2,
-                        CatalogCommonReducer.topfilter
-                    )
-                )
-            }
+            )
         }
     }, [selectedActive2])
 
@@ -432,37 +397,7 @@ const CatalogMainFilter = ({
         return false
     }
 
-    const onResetClickHandler = () => {
-        const filter_status = []
-
-        for (let i = 0; i < properties.length; i++) {
-            let clone = []
-            if (
-                properties[i].checkboxes &&
-                properties[i].checkboxes.length !== 0
-            ) {
-                for (let j = 0; j < properties[i].checkboxes.length; j++) {
-                    if (properties[i].checkboxes[j].productCount !== 0) {
-                        clone.push({
-                            property: properties[i].checkboxes[j],
-                            status: 'closed',
-                        })
-                    }
-                }
-            }
-            filter_status.push({ filter: properties[i], inner: clone })
-            clone = []
-        }
-
-        // dispatch({ type: CATALOG_SET_TOP_RESET })
-        setFilterStatus(filter_status)
-
-        const clone = filterAPIData.properties.concat()
-        setProperties([])
-        setTimeout(() => {
-            setProperties(clone)
-        }, 0)
-    }
+    const onResetClickHandler = () => {}
 
     const getYellowTextForSelect = (title) => {
         for (let i = 0; i < selectedActive2.length; i++) {
@@ -577,9 +512,10 @@ const CatalogMainFilter = ({
                                                     oldMax,
                                                     CatalogReducer.filters,
                                                     prices,
-                                                    CatalogReducer.sort,
+                                                    null,
                                                     CatalogReducer.colors,
-                                                    CatalogReducer.select
+                                                    CatalogReducer.select,
+                                                    CatalogReducer.sortMobile
                                                 )
                                             )
                                         }}

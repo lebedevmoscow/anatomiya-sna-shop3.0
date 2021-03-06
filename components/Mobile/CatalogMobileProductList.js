@@ -36,6 +36,8 @@ const CatalogMobileProductList = ({
     headers,
     articles,
 }) => {
+    const hasWindow = typeof window !== 'undefined'
+
     const CatalogReducer = useSelector((store) => store.CatalogReducer)
 
     const oldMin = filterAPIData.price.min
@@ -83,9 +85,10 @@ const CatalogMobileProductList = ({
                 oldMax,
                 CatalogReducer.filters,
                 CatalogReducer.price,
-                CatalogReducer.sort,
+                null,
                 CatalogReducer.colors,
-                CatalogReducer.select
+                CatalogReducer.select,
+                CatalogReducer.mobileSort
             )
         )
         dispatch({ type: CATALOG_SET_PAGE, payload: page + 1 })
@@ -108,9 +111,10 @@ const CatalogMobileProductList = ({
                 oldMax,
                 CatalogReducer.filters,
                 CatalogReducer.price,
-                CatalogReducer.sort,
+                null,
                 CatalogReducer.colors,
-                CatalogReducer.select
+                CatalogReducer.select,
+                CatalogReducer.mobileSort
             )
         )
         dispatch({ type: CATALOG_SET_PAGE, payload: page + 1 })
@@ -133,9 +137,10 @@ const CatalogMobileProductList = ({
                 oldMax,
                 CatalogReducer.filters,
                 CatalogReducer.price,
-                CatalogReducer.sort,
+                nill,
                 CatalogReducer.colors,
-                CatalogReducer.select
+                CatalogReducer.select,
+                CatalogReducer.mobileSort
             )
         )
         dispatch({ type: CATALOG_SET_PAGE, payload: page - 1 })
@@ -155,9 +160,10 @@ const CatalogMobileProductList = ({
                 oldMax,
                 CatalogReducer.filters,
                 CatalogReducer.price,
-                CatalogReducer.sort,
+                null,
                 CatalogReducer.colors,
-                CatalogReducer.select
+                CatalogReducer.select,
+                CatalogReducer.mobileSort
             )
         )
         dispatch({ type: CATALOG_SET_PAGE, payload: p })
