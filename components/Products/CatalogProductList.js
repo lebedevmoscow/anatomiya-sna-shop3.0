@@ -20,7 +20,7 @@ import styles from './../../styles/components/Products/CatalogProductList.module
 
 const EqualHeight = dynamic(
     () => import('react-equal-height').then((mod) => mod.EqualHeight),
-    { ssr: true }
+    { ssr: false }
 )
 
 const CatalogProductListForDesktop = ({

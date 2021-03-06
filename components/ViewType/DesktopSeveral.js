@@ -35,7 +35,7 @@ import {
 
 const EqualHeightElement = dynamic(
     () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
-    { ssr: true }
+    { ssr: false }
 )
 
 const DesktopSeveral = ({
@@ -676,6 +676,9 @@ const DesktopSeveral = ({
                                     return (
                                         <li
                                             key={index}
+                                            style={{
+                                                whiteSpace: 'nowrap',
+                                            }}
                                             className={
                                                 styles.catalog_product_card__materials_list_item
                                             }
