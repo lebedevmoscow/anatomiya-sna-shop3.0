@@ -289,6 +289,18 @@ export const getServerSideProps = async (ctx) => {
         }
     }
 
+    // Unparse get params
+    let params = ''
+    let count = 0
+    let length = Object.keys(ctx.params).length
+
+    for (let key in ctx.query) {
+        // if (count === length - 1) break
+        params = params + `&${key}=${ctx.query[key]}`
+        count++
+    }
+    params = encodeURI(params.replace(' ', ''))
+
     const URLS = [
         'https://www.anatomiyasna.ru/api/menu/mobileCatalogMenu/',
         'https://anatomiyasna.ru/api/menu/mobileMenu/',
@@ -297,7 +309,7 @@ export const getServerSideProps = async (ctx) => {
         'https://www.anatomiyasna.ru/api/menu/headerCatalog/',
         'https://www.anatomiyasna.ru/api/parameters/all/',
         `https://www.anatomiyasna.ru/api/filter/filterModel/?slug=${ctx.params.catalog}`,
-        `https://anatomiyasna.ru/api/filter/filtredProducts/?slug=${ctx.params.catalog}`,
+        `https://anatomiyasna.ru/api/filter/filtredProducts/?slug=${ctx.params.catalog}&${params}`,
         `https://anatomiyasna.ru/api/pageData/getPageData/?slug=${ctx.params.catalog}`,
     ]
 
@@ -319,6 +331,8 @@ export const getServerSideProps = async (ctx) => {
     ).then((res) => {
         response = res
     })
+
+    console.log('URL7', URLS[7])
 
     const mobilemenuCatalogs = response[0]
     const mobileMenu = response[1]
