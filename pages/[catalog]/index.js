@@ -21,6 +21,13 @@ import CatalogRight from '../../components/Catalog/CatalogRight'
 import CatalogMainFilter from './../../components/Filters/CatalogMobileMainFilter'
 import CatalogMobileProductList from './../../components/Mobile/CatalogMobileProductList'
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { CATALOG_SET_PRELOAD_GET_PARAMS } from './../../catalog_actions_rebuild/catalog'
+
+// Utils
+import { unparseGetParamsToFilter } from './../../utils/unparseGetParamsToFilter'
+
 import common_styles from './../../styles/pages/catalog.module.sass'
 // import MobileFooter from '../../components/Mobile/MobieFooter'
 // import SwiperAssurenaces from './../../components/Mobile/MobileAssurances'
@@ -77,7 +84,11 @@ const CatalogPage = ({
     filterProductsIds,
     headers,
     articles,
+    params,
+    filterObject,
 }) => {
+    const dispatch = useDispatch()
+
     // Vars
     const initialCompositionFilterData = [
         'Размер',
@@ -95,6 +106,9 @@ const CatalogPage = ({
         'Декор',
         'Производители',
     ]
+
+    dispatch({ type: CATALOG_SET_PRELOAD_GET_PARAMS, payload: filterObject })
+    console.log('filterObject', filterObject)
 
     // State
     const [stylesForViewType, setStylesForViewType] = useState({})
@@ -294,12 +308,59 @@ export const getServerSideProps = async (ctx) => {
     let count = 0
     let length = Object.keys(ctx.params).length
 
+    let priceMin = null
+    let priceMax = null
+    let oldMin = null
+    let oldMax = null
+
+    const propregex = /filter\[properties\]\[\d{1,10}\]\[\]/g
+    const properties = []
+
     for (let key in ctx.query) {
-        // if (count === length - 1) break
-        params = params + `&${key}=${ctx.query[key]}`
+        console.log('key value\n', key, ctx.query[key])
+
+        if (count === 0) {
+            params = params + `${key}=${ctx.query[key]}`
+        } else {
+            params = params + `&${key}=${ctx.query[key]}`
+        }
+
+        if (key === 'filter[price][selectedMin]') {
+            priceMin = ctx.query[key]
+        }
+
+        if (key === 'filter[price][selectedMax]') {
+            priceMax = ctx.query[key]
+        }
+
+        if (key === 'filter[price][oldMin]') {
+            oldMin = ctx.query[key]
+        }
+
+        if (key === 'filter[price][oldMax]') {
+            oldMax = ctx.query[key]
+        }
+
+        if (key.match(propregex)) {
+            properties.push({
+                property: key,
+                value: ctx.query[key],
+            })
+        }
+
         count++
     }
     params = encodeURI(params.replace(' ', ''))
+
+    const filterObject = {
+        price: {
+            min: priceMin,
+            max: priceMax,
+            oldMin,
+            oldMax,
+        },
+        properties,
+    }
 
     const URLS = [
         'https://www.anatomiyasna.ru/api/menu/mobileCatalogMenu/',
@@ -331,8 +392,6 @@ export const getServerSideProps = async (ctx) => {
     ).then((res) => {
         response = res
     })
-
-    console.log('URL7', URLS[7])
 
     const mobilemenuCatalogs = response[0]
     const mobileMenu = response[1]
@@ -397,6 +456,8 @@ export const getServerSideProps = async (ctx) => {
             IsMobile,
             filterProductsIds,
             articles,
+            params,
+            filterObject,
         },
     }
 }

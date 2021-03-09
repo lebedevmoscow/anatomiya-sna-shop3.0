@@ -15,6 +15,7 @@ import {
     CATALOG_SET_DESKTOP_VIEWTYPE,
     CATALOG_SET_MOBILE_VIEWTYPE,
     CATALOG_SET_SORT_MOBILE,
+    CATALOG_SET_PRELOAD_GET_PARAMS,
 } from './../catalog_actions_rebuild/catalog'
 
 const initialState = {
@@ -31,6 +32,7 @@ const initialState = {
     loading: false,
     desktopViewType: 'several',
     mobileViewType: 'single',
+    getParams: [],
     all: [],
     new: {},
 }
@@ -131,6 +133,12 @@ const CatalogReducer = (state = initialState, action) => {
             return {
                 ...state,
                 sortMobile: [],
+            }
+        }
+        case CATALOG_SET_PRELOAD_GET_PARAMS: {
+            return {
+                ...state,
+                getParams: action.payload,
             }
         }
         default: {

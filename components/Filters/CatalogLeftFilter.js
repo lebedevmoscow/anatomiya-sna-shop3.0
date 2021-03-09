@@ -26,7 +26,7 @@ import { CatalogLoadByFilter } from './../../catalog_actions_rebuild/catalog'
 // import { LoadByFilters } from './../../actions/NewCatalogProductList'
 
 import styles from './../../styles/components/Filters/CatalogLeftFilter.module.sass'
-import { LoadByFilters } from '../../actions/NewCatalogProductList'
+// import { LoadByFilters } from '../../actions/NewCatalogProductList'
 
 const CatalogLeftFilter = ({
     filterAPIData,
@@ -57,10 +57,17 @@ const CatalogLeftFilter = ({
     const colors = filterAPIData.colors
     const [filterStatus, setFilterStatus] = useState([])
 
-    const [prices, setPrices] = useState([
-        filterAPIData.price.min,
-        filterAPIData.price.max,
-    ])
+    const priceMin =
+        (CatalogReducer.getParams.price.min &&
+            parseInt(CatalogReducer.getParams.price.min.replace(' ', ''))) ||
+        filterAPIData.price.min
+
+    const priceMax =
+        (CatalogReducer.getParams.price.max &&
+            parseInt(CatalogReducer.getParams.price.max.replace(' ', ''))) ||
+        filterAPIData.price.max
+
+    const [prices, setPrices] = useState([priceMin, priceMax])
     const [sizeSelector, setSizeSelector] = useState(null)
     const [closeStatus, setCloseStatus] = useState([])
     const [selectedSize, setSelectedSize] = useState(null)
@@ -210,7 +217,7 @@ const CatalogLeftFilter = ({
                 filterStatus,
                 CatalogReducer.price,
                 CatalogReducer.sort,
-                CatalogReducer.colors,
+                clone,
                 CatalogReducer.select
             )
         )

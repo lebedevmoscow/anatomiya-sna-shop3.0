@@ -13,6 +13,7 @@ export const CATALOG_SET_AMOUNT = 'CATALOG_SET_AMOUNT'
 export const CATALOG_SET_LOADING = 'CATALOG_SET_LOADING'
 export const CATALOG_SET_DESKTOP_VIEWTYPE = 'CATALOG_SET_DESKTOP_VIEWTYPE'
 export const CATALOG_SET_MOBILE_VIEWTYPE = 'CATALOG_SET_MOBILE_VIEWTYPE'
+export const CATALOG_SET_PRELOAD_GET_PARAMS = 'CATALOG_SET_PRELOAD_GET_PARAMS'
 
 export const CatalogLoadByFilter = (
     IsMobile = false,
@@ -196,7 +197,8 @@ export const CatalogLoadByFilter = (
 
         // Check for selected colors
 
-        if (colors) {
+        if (colors.length > 0) {
+            console.log('COLORS', colors)
             for (let i = 0; i < colors.length; i++) {
                 params = params + `&filter[colors][]=${colors[i]}`
             }
