@@ -32,10 +32,10 @@ import WhiteStats from './../../assets/svg/white-stats.svg'
 
 import card_styles from './../../styles/components/Products/IndexPageProductCard.module.sass'
 
-// const EqualHeightElement = dynamic(
-//     () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
-//     { ssr: false }
-// )
+const EqualHeightElement = dynamic(
+    () => import('react-equal-height').then((mod) => mod.EqualHeightElement),
+    { ssr: false }
+)
 
 const Popups = dynamic(() => import('./../Popups/PopupsOnProductCard'), {
     ssr: false,
@@ -217,158 +217,161 @@ const ProductCard = ({
     return (
         <div key={key} className={card_styles.product_card}>
             <Popups DontShow={true} ListSalesList={ListSalesList} />
-            <div className={card_styles.product_card__wrap_1}>
-                <a target="_blank" rel="noreferrer">
-                    <Image src={MainImage} width={208} height={130} />
-                    {/* <img
+
+            <Link href={`/tovary/${Slug}`}>
+                <a>
+                    <div className={card_styles.product_card__wrap_1}>
+                        <Image src={MainImage} width={208} height={130} />
+                        {/* <img
                         className={card_styles.product_card__image}
                         src={MainImage}
                     /> */}
-                </a>
-                <a target="_blank" rel="noreferrer">
-                    <h6 className={card_styles.product_card__smalltext}>
-                        {CatalogType}
-                    </h6>
-                </a>
-                {/* <EqualHeightElement name="Title"> */}
-                <a target="_blank" rel="noreferrer">
-                    <h4 className={card_styles.product_card__productname}>
-                        {(BrandTitle || '') +
-                            ' ' +
-                            (SeriesTitle || '') +
-                            ' ' +
-                            (Title || '')}
-                    </h4>
-                </a>
-                {/* </EqualHeightElement> */}
-            </div>
-            <div className={card_styles.product_card__wrap_2}>
-                <a>
-                    <div className={card_styles.product_card__price_section}>
-                        <div
-                            style={{ position: 'relative', top: '5px' }}
-                            className={card_styles.product_card__price}
-                        >
-                            {PriceDiff !== 0 && (
-                                <div
-                                    style={{ position: 'absolute' }}
+                        <h6 className={card_styles.product_card__smalltext}>
+                            {CatalogType}
+                        </h6>
+                        <EqualHeightElement name="Title">
+                            <a target="_blank" rel="noreferrer">
+                                <h4
                                     className={
-                                        card_styles.product_card__price_discount
+                                        card_styles.product_card__productname
                                     }
                                 >
-                                    <div
-                                        className={
-                                            card_styles.product_card__price_prev
-                                        }
-                                    >
-                                        <span>
-                                            {PriceBasic}
-                                            <div
-                                                className={
-                                                    card_styles.product_card__price_diff
-                                                }
-                                            >
-                                                -{PriceDiff}
-                                            </div>
-                                        </span>
-                                    </div>
-                                </div>
-                            )}
-                            <div
-                                className={
-                                    card_styles.product_card__price_current
-                                }
-                            >
-                                {PriceDiscount} Руб.
-                                {/* 222 Руб. */}
-                            </div>
-                        </div>
+                                    {(BrandTitle || '') +
+                                        ' ' +
+                                        (SeriesTitle || '') +
+                                        ' ' +
+                                        (Title || '')}
+                                </h4>
+                            </a>
+                        </EqualHeightElement>
+                    </div>
+                    <div className={card_styles.product_card__wrap_2}>
                         <div
-                            className={
-                                card_styles.product_card__stats_buttons_section
-                            }
+                            className={card_styles.product_card__price_section}
                         >
                             <div
-                                className={
-                                    card_styles.product_card__stats_button
-                                }
-                                style={
-                                    isCompared
-                                        ? {
-                                              backgroundColor: '#0ca5d3',
-                                              borderColor: '#0ca5d3',
-                                          }
-                                        : {}
-                                }
-                                onClick={() => {
-                                    onAddToCompareClickHandler()
-                                }}
+                                style={{ position: 'relative', top: '5px' }}
+                                className={card_styles.product_card__price}
                             >
+                                {PriceDiff !== 0 && (
+                                    <div
+                                        style={{ position: 'absolute' }}
+                                        className={
+                                            card_styles.product_card__price_discount
+                                        }
+                                    >
+                                        <div
+                                            className={
+                                                card_styles.product_card__price_prev
+                                            }
+                                        >
+                                            <span>
+                                                {PriceBasic}
+                                                <div
+                                                    className={
+                                                        card_styles.product_card__price_diff
+                                                    }
+                                                >
+                                                    -{PriceDiff}
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                )}
                                 <div
-                                    ref={compareRef}
-                                    className={`${card_styles.product_card__button__popup} ${card_styles.product_card__stats_button__popup}`}
+                                    className={
+                                        card_styles.product_card__price_current
+                                    }
                                 >
-                                    Товар добавлен в{' '}
-                                    <Link href="/">Сравнение!</Link>
+                                    {PriceDiscount} Руб.
+                                    {/* 222 Руб. */}
                                 </div>
-                                {isCompared && (
-                                    <img
-                                        src={WhiteStats}
-                                        alt="stat-image"
-                                    ></img>
-                                )}
-                                {!isCompared && (
-                                    <img
-                                        src={StatsImage}
-                                        alt="stat-image"
-                                    ></img>
-                                )}
                             </div>
                             <div
                                 className={
-                                    card_styles.product_card__stats_button
+                                    card_styles.product_card__stats_buttons_section
                                 }
-                                style={
-                                    isFavorite
-                                        ? {
-                                              backgroundColor: '#0ca5d3',
-                                              borderColor: '#0ca5d3',
-                                          }
-                                        : {}
-                                }
-                                onClick={() => {
-                                    onAddToFavoriteClickHandler()
-                                }}
                             >
                                 <div
-                                    ref={favoriteRef}
-                                    className={`${card_styles.product_card__button__popup} ${card_styles.product_card__stats_button__popup}`}
+                                    className={
+                                        card_styles.product_card__stats_button
+                                    }
+                                    style={
+                                        isCompared
+                                            ? {
+                                                  backgroundColor: '#0ca5d3',
+                                                  borderColor: '#0ca5d3',
+                                              }
+                                            : {}
+                                    }
+                                    onClick={() => {
+                                        onAddToCompareClickHandler()
+                                    }}
                                 >
-                                    Товар добавлен в{' '}
-                                    <Link href="/">Избранное!</Link>
+                                    <div
+                                        ref={compareRef}
+                                        className={`${card_styles.product_card__button__popup} ${card_styles.product_card__stats_button__popup}`}
+                                    >
+                                        Товар добавлен в{' '}
+                                        <Link href="/">Сравнение!</Link>
+                                    </div>
+                                    {isCompared && (
+                                        <img
+                                            src={WhiteStats}
+                                            alt="stat-image"
+                                        ></img>
+                                    )}
+                                    {!isCompared && (
+                                        <img
+                                            src={StatsImage}
+                                            alt="stat-image"
+                                        ></img>
+                                    )}
                                 </div>
-                                {isFavorite && (
-                                    <img
-                                        src={WhiteHeartImage}
-                                        alt="stat-image"
-                                    ></img>
-                                )}
-                                {!isFavorite && (
-                                    <img
-                                        src={HeartImage}
-                                        alt="stat-image"
-                                    ></img>
-                                )}
+                                <div
+                                    className={
+                                        card_styles.product_card__stats_button
+                                    }
+                                    style={
+                                        isFavorite
+                                            ? {
+                                                  backgroundColor: '#0ca5d3',
+                                                  borderColor: '#0ca5d3',
+                                              }
+                                            : {}
+                                    }
+                                    onClick={() => {
+                                        onAddToFavoriteClickHandler()
+                                    }}
+                                >
+                                    <div
+                                        ref={favoriteRef}
+                                        className={`${card_styles.product_card__button__popup} ${card_styles.product_card__stats_button__popup}`}
+                                    >
+                                        Товар добавлен в{' '}
+                                        <Link href="/">Избранное!</Link>
+                                    </div>
+                                    {isFavorite && (
+                                        <img
+                                            src={WhiteHeartImage}
+                                            alt="stat-image"
+                                        ></img>
+                                    )}
+                                    {!isFavorite && (
+                                        <img
+                                            src={HeartImage}
+                                            alt="stat-image"
+                                        ></img>
+                                    )}
+                                </div>
                             </div>
                         </div>
+                        <button className={card_styles.product_card__button}>
+                            Подробнее
+                        </button>
                     </div>
                 </a>
-                <a>
-                    <button className={card_styles.product_card__button}>
-                        Подробнее
-                    </button>
-                </a>
-            </div>
+            </Link>
         </div>
     )
 }

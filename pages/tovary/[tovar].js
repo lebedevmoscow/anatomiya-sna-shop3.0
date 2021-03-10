@@ -43,6 +43,7 @@ import ProductPageDesktopPopup from './../../components/Popups/ProductPageDeskto
 import InputMask from 'react-input-mask'
 import Link from 'next/link'
 import Modal from './../../components/Modal'
+
 // import HelpPickUp from './../../components/Mobile/'
 
 // const Header = dynamic(() => import('./../../components/Header'), { ssr: true })
@@ -67,23 +68,16 @@ const ProductPage = ({
     mobileMenu,
     mobilemenuCatalogs,
     regions,
+    productInfo,
 }) => {
     const [activeTab, setActiveTab] = useState('description')
 
     const breakpoint1023 = useMedia(1023)
 
-    const images = [
-        ImageForSlider1,
-        ImageForSlider2,
-        ImageForSlider3,
-        ImageForSlider4,
-        ImageForSlider5,
-        ImageForSlider6,
-        ImageForSlider7,
-        ImageForSlider8,
-        ImageForSlider9,
-        ImageForSlider10,
-    ]
+    const images = [productInfo.ProductCard.MainImage.FilePath]
+    for (let i = 0; i < productInfo.ProductCard.Images.length; i++) {
+        images.push(productInfo.ProductCard.Images[i].FilePath)
+    }
 
     const onActiveTabClickHandler = (title) => {
         setActiveTab(title)
@@ -240,8 +234,11 @@ const ProductPage = ({
             <div className={styles.product_page}>
                 <div className={styles.container}>
                     <div className={styles.product_page__title}>
-                        КРОВАТЬ ВОЛХОВА С-436 М/С-436 М1/С-437 М/С-437 М1/С-438
-                        М/С-438 М1
+                        {productInfo.ProductCard.BrandTitle +
+                            ' ' +
+                            (productInfo.ProductCard.SeriesTitle || '') +
+                            ' ' +
+                            productInfo.ProductCard.Title}
                     </div>
                     {IsMobile && (
                         <div className={styles.popups_wrapper}>
@@ -538,6 +535,7 @@ const ProductPage = ({
                             <div className="product-page__current-tab">
                                 {activeTab === 'description' && (
                                     <ProductPageDescriptionTab
+                                        Layers={productInfo.Layers}
                                         articles={articles}
                                     />
                                 )}
@@ -635,6 +633,7 @@ export const getServerSideProps = async (ctx) => {
         'https://www.anatomiyasna.ru/api/menu/mobileCatalogMenu/',
         'https://anatomiyasna.ru/api/menu/mobileMenu/',
         'https://anatomiyasna.ru/api/region/getRegions/',
+        `https://anatomiyasna.ru/api/productService/getProductModel/?slug=${ctx.params.tovar}`,
     ]
 
     let response = {}
@@ -654,6 +653,7 @@ export const getServerSideProps = async (ctx) => {
     const mobilemenuCatalogs = response[3]
     const mobileMenu = response[4]
     const regions = response[5]
+    const productInfo = response[6]
 
     const regex = /Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/
     let IsMobile = null
@@ -675,6 +675,7 @@ export const getServerSideProps = async (ctx) => {
             mobilemenuCatalogs,
             regions,
             IsMobile,
+            productInfo,
         },
     }
 }

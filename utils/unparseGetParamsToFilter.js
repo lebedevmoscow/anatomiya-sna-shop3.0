@@ -31,14 +31,16 @@ export const unparseGetParamsToFilter = (origin, obj) => {
             let clone = null
             let index = null
 
-            console.log('propId', propId)
-            console.log('id', id)
             if (propId === id) {
                 index = i
                 clone = Object.assign({}, filter_status[i])
-                console.log('clone', clone)
 
                 for (let k = 0; k < clone.inner.length; k++) {
+                    // console.log(
+                    //     'clone.inner[k].property.value',
+                    //     clone.inner[k].property.value
+                    // )
+                    // console.log('value', value)
                     if (clone.inner[k].property.value === value) {
                         clone.inner[k].status = 'opened'
                     }

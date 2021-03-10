@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react'
 
 import RevealButton from './../Button/RevealButton'
 import UsefulArticles from './../Article/UsefulArticleOnProductPage'
+import MattrassComposition from './../../components/MattrassComposition'
 
 import styles from './../../styles/components/Tabs/ProductPageDescriptionTab.module.sass'
 
-const ProductPageDescriptionTab = ({ articles }) => {
+const ProductPageDescriptionTab = ({ articles, Layers }) => {
     const hasWindow = typeof window !== 'undefined'
     const [width, setWidth] = useState(null)
 
@@ -59,6 +60,7 @@ const ProductPageDescriptionTab = ({ articles }) => {
     return (
         <div className={styles.product_page__description_tab}>
             <div className={styles.product_page__description_tab__left}>
+                <MattrassComposition Layers={Layers} />
                 <div
                     className={styles.product_page__description_tab__hint_title}
                 >

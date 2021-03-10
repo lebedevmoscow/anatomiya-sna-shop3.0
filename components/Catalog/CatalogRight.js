@@ -250,9 +250,9 @@ const CatalogRight = ({
                 updateViewType={updateViewType}
                 desktopViewType={desktopViewType}
             />
-            {CatalogReducer.loading && (
+            {/* {CatalogReducer.loading && (
                 <div className={styles.loading}>{renderLoading()}</div>
-            )}
+            )} */}
             <div className={styles.firstLoadProducts}>{first}</div>
             <div className={styles.firstLoadProducts}>{loadedMore}</div>
 

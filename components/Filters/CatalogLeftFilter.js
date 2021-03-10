@@ -35,6 +35,7 @@ const CatalogLeftFilter = ({
     filterProductsIds,
     catalogSlug,
     subCatalogSlug,
+    history,
 }) => {
     const router = useRouter()
     const hasWindow = typeof window !== 'undefined'
@@ -74,21 +75,11 @@ const CatalogLeftFilter = ({
     const [selectedSize, setSelectedSize] = useState(null)
     const [activeColors, setActiveColors] = useState([])
     const [colorsIds, setColorsIds] = useState(CatalogReducer.colors)
-    const [urlrouterhistory, setUrlrouterhistory] = useState(
-        subCatalogSlug
-            ? `/${catalogSlug}/${subCatalogSlug}?`
-            : `${catalogSlug}?`
-    )
-
-    const scrollTo = (x, y) => {
-        if (hasWindow) {
-            window.scrollTo({
-                top: x,
-                left: y,
-                behavior: 'instant',
-            })
-        }
-    }
+    // const [urlrouterhistory, setUrlrouterhistory] = useState(
+    //     subCatalogSlug
+    //         ? `/${catalogSlug}/${subCatalogSlug}?${history}`
+    //         : `${catalogSlug}?${history}`
+    // )
 
     const RetrunSelectedActiveInitial = () => {
         const a = []
@@ -351,38 +342,39 @@ const CatalogLeftFilter = ({
             )
         )
 
+        console.log('onFilterClickHandler')
         setFilterStatus(againClone)
 
         // Replace url
 
-        for (let i = 0; i < againClone.length; i++) {
-            for (let j = 0; j < againClone[i].inner.length; j++) {
-                if (againClone[i].inner[j].status === 'opened') {
-                    let c = urlrouterhistory
-                    const id = againClone[i].filter.id
-                    const value = againClone[i].inner[j].property.value
-                    c = c + `filter[properties][${id}][]=${value}&`
-                    setUrlrouterhistory(c)
-                    router.push(encodeURI(c))
-                    console.log('c', c)
-                }
-            }
-        }
+        // for (let i = 0; i < againClone.length; i++) {
+        //     for (let j = 0; j < againClone[i].inner.length; j++) {
+        //         if (againClone[i].inner[j].status === 'opened') {
+        //             let c = urlrouterhistory
+        //             const id = againClone[i].filter.id
+        //             const value = againClone[i].inner[j].property.value
+        //             c = c + `filter[properties][${id}][]=${value}&`
+        //             setUrlrouterhistory(c)
+        //             router.push(encodeURI(c))
+        //             console.log('c', c)
+        //         }
+        //     }
+        // }
     }
 
     const getCheckedStyle = (title, index, name) => {
-        for (let i = 0; i < CatalogReducer.filters.length; i++) {
-            if (CatalogReducer.filters[i].filter.title === name) {
-                for (
-                    let j = 0;
-                    j < CatalogReducer.filters[i].inner.length;
-                    j++
-                ) {
+        for (let i = 0; i < filterStatus.length; i++) {
+            if (filterStatus[i].filter.title === name) {
+                for (let j = 0; j < filterStatus[i].inner.length; j++) {
                     if (
-                        CatalogReducer.filters[i].inner[j].property.label ===
-                            title &&
-                        CatalogReducer.filters[i].inner[j].status === 'opened'
+                        filterStatus[i].inner[j].property.label === title &&
+                        filterStatus[i].inner[j].status === 'opened'
                     ) {
+                        console.log(
+                            'label title',
+                            filterStatus[i].inner[j].property.label,
+                            title
+                        )
                         return true
                     }
                 }
@@ -480,27 +472,27 @@ const CatalogLeftFilter = ({
             />
         )
 
-        const filter_status = []
+        // const filter_status = []
 
-        for (let i = 0; i < properties.length; i++) {
-            let clone = []
-            if (
-                properties[i].checkboxes &&
-                properties[i].checkboxes.length !== 0
-            ) {
-                for (let j = 0; j < properties[i].checkboxes.length; j++) {
-                    if (properties[i].checkboxes[j].productCount !== 0) {
-                        clone.push({
-                            property: properties[i].checkboxes[j],
-                            status: 'closed',
-                        })
-                    }
-                }
-            }
-            filter_status.push({ filter: properties[i], inner: clone })
-            clone = []
-        }
-        setFilterStatus(filter_status)
+        // for (let i = 0; i < properties.length; i++) {
+        //     let clone = []
+        //     if (
+        //         properties[i].checkboxes &&
+        //         properties[i].checkboxes.length !== 0
+        //     ) {
+        //         for (let j = 0; j < properties[i].checkboxes.length; j++) {
+        //             if (properties[i].checkboxes[j].productCount !== 0) {
+        //                 clone.push({
+        //                     property: properties[i].checkboxes[j],
+        //                     status: 'closed',
+        //                 })
+        //             }
+        //         }
+        //     }
+        //     filter_status.push({ filter: properties[i], inner: clone })
+        //     clone = []
+        // }
+        // setFilterStatus(filter_status)
 
         const a = []
         for (let i = 0; i < filterAPIData.properties.length; i++) {
@@ -904,6 +896,11 @@ const CatalogLeftFilter = ({
                                                                 >
                                                                     <input
                                                                         defaultChecked={getCheckedStyle(
+                                                                            checkbox.label,
+                                                                            index,
+                                                                            property.title
+                                                                        )}
+                                                                        checked={getCheckedStyle(
                                                                             checkbox.label,
                                                                             index,
                                                                             property.title
