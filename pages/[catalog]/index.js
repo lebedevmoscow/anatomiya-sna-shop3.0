@@ -23,7 +23,10 @@ import CatalogMobileProductList from './../../components/Mobile/CatalogMobilePro
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { CATALOG_SET_PRELOAD_GET_PARAMS } from './../../catalog_actions_rebuild/catalog'
+import {
+    CATALOG_SET_PRELOAD_GET_PARAMS,
+    CATALOG_SET_FILTERS,
+} from './../../catalog_actions_rebuild/catalog'
 
 // Utils
 import { unparseGetParamsToFilter } from './../../utils/unparseGetParamsToFilter'
@@ -88,6 +91,13 @@ const CatalogPage = ({
     filterObject,
 }) => {
     const dispatch = useDispatch()
+
+    console.log(filterAPIData)
+
+    dispatch({
+        type: CATALOG_SET_FILTERS,
+        payload: unparseGetParamsToFilter(filterAPIData, filterObject).filters,
+    })
 
     // Vars
     const initialCompositionFilterData = [

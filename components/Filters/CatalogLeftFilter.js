@@ -122,8 +122,6 @@ const CatalogLeftFilter = ({
         RetrunSelectedActiveInitial()
     )
 
-    console.log('RetrunSelectedActiveInitial', RetrunSelectedActiveInitial())
-
     const colourStyles = {
         control: (styles) => ({ ...styles, backgroundColor: 'white' }),
         option: (styles, { data, isFocused }) => {
@@ -349,10 +347,24 @@ const CatalogLeftFilter = ({
         setFilterStatus(againClone)
     }
 
-    const getCheckedStyle = (title, index) => {
-        for (let i = 0; i < filterStatus[index].inner.length; i++) {
-            if (filterStatus[index].inner[i].status === 'opened') {
-                return true
+    console.log('CatalogReducer.filters', CatalogReducer.filters)
+
+    const getCheckedStyle = (title, index, name) => {
+        for (let i = 0; i < CatalogReducer.filters.length; i++) {
+            if (CatalogReducer.filters[i].filter.title === name) {
+                for (
+                    let j = 0;
+                    j < CatalogReducer.filters[i].inner.length;
+                    j++
+                ) {
+                    if (
+                        CatalogReducer.filters[i].inner[j].property.label ===
+                            title &&
+                        CatalogReducer.filters[i].inner[j].status === 'opened'
+                    ) {
+                        return true
+                    }
+                }
             }
         }
         return false
@@ -863,7 +875,8 @@ const CatalogLeftFilter = ({
                                                                     <input
                                                                         defaultChecked={getCheckedStyle(
                                                                             checkbox.label,
-                                                                            index
+                                                                            index,
+                                                                            property.title
                                                                         )}
                                                                         type="checkbox"
                                                                     />
