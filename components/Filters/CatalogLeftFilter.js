@@ -56,7 +56,7 @@ const CatalogLeftFilter = ({
         filterAPIData.properties.concat()
     )
     const colors = filterAPIData.colors
-    const [filterStatus, setFilterStatus] = useState([])
+    const [filterStatus, setFilterStatus] = useState(CatalogReducer.filters)
 
     const priceMin =
         (CatalogReducer.getParams.price.min &&

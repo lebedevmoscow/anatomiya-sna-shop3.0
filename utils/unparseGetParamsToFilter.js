@@ -19,18 +19,24 @@ export const unparseGetParamsToFilter = (origin, obj) => {
         filter_status.push({ filter: origin.properties[i], inner: clone })
         clone = []
     }
-    for (let i = 0; i < obj.properties.length; i++) {
-        const propId = obj.properties[i].property.match(/\d{1,10}/g)[0]
-        const value = obj.properties[i].value
 
-        let clone = null
-        let index = null
-        let id = filter_status[i].filter.id.toString()
+    for (let i = 0; i < filter_status.length; i++) {
+        const id = parseInt(filter_status[i].filter.id)
 
-        for (let j = 0; j < filter_status.length; j++) {
-            if (id === propId) {
-                index = j
-                clone = Object.assign({}, filter_status[j])
+        for (let j = 0; j < obj.properties.length; j++) {
+            const propId = parseInt(
+                obj.properties[j].property.match(/\d{1,10}/g)[0]
+            )
+            const value = obj.properties[j].value
+            let clone = null
+            let index = null
+
+            console.log('propId', propId)
+            console.log('id', id)
+            if (propId === id) {
+                index = i
+                clone = Object.assign({}, filter_status[i])
+                console.log('clone', clone)
 
                 for (let k = 0; k < clone.inner.length; k++) {
                     if (clone.inner[k].property.value === value) {
@@ -38,9 +44,40 @@ export const unparseGetParamsToFilter = (origin, obj) => {
                     }
                 }
             }
+            filter_status[index] = clone
         }
-        filter_status[index] = clone
     }
+
+    // for (let i = 0; i < obj.properties.length; i++) {
+    //     const propId = parseInt(
+    //         obj.properties[i].property.match(/\d{1,10}/g)[0]
+    //     )
+    //     const value = obj.properties[i].value
+
+    //     let clone = null
+    //     let index = null
+    //     let id = parseInt(filter_status[i].filter.id)
+
+    //     console.log('id', id)
+    //     console.log('propId', propId)
+
+    //     for (let j = 0; j < filter_status.length; j++) {
+    //         if (id === propId) {
+    //             index = j
+    //             clone = Object.assign({}, filter_status[j])
+    //             console.log('clone', clone)
+
+    //             for (let k = 0; k < clone.inner.length; k++) {
+    //                 if (clone.inner[k].property.value === value) {
+    //                     clone.inner[k].status = 'opened'
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     filter_status[index] = clone
+    // }
+
+    console.log('filter_status', filter_status)
 
     return {
         filters: filter_status,
