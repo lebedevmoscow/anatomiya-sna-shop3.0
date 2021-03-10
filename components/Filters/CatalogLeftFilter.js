@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { Range, getTrackBackground } from 'react-range'
-import Skeleton from '@material-ui/lab/Skeleton'
+import { useRouter } from 'next/router'
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
@@ -36,6 +36,7 @@ const CatalogLeftFilter = ({
     catalogSlug,
     subCatalogSlug,
 }) => {
+    const router = useRouter()
     const hasWindow = typeof window !== 'undefined'
 
     const dispatch = useDispatch()
@@ -73,6 +74,11 @@ const CatalogLeftFilter = ({
     const [selectedSize, setSelectedSize] = useState(null)
     const [activeColors, setActiveColors] = useState([])
     const [colorsIds, setColorsIds] = useState(CatalogReducer.colors)
+    const [urlrouterhistory, setUrlrouterhistory] = useState(
+        subCatalogSlug
+            ? `/${catalogSlug}/${subCatalogSlug}?`
+            : `${catalogSlug}?`
+    )
 
     const scrollTo = (x, y) => {
         if (hasWindow) {
@@ -287,6 +293,12 @@ const CatalogLeftFilter = ({
                     clone[i].inner[j].property.label === title &&
                     i === mainIndex
                 ) {
+                    console.log(
+                        'clone[i].inner[j].property',
+                        clone[i].inner[j].property
+                    )
+                    const id = clone[i].filter.id
+                    const value = clone[i].inner[j].property.value
                     if (clone[i].inner[j].status === 'closed') {
                         const clone2 = clone[i].inner.concat()
                         clone2[j].status = 'opened'
@@ -321,12 +333,6 @@ const CatalogLeftFilter = ({
             }
         }
 
-        // if (hasWindow) {
-        //     setTimeout(() => {
-        //         scrollTo(0, 0)
-        //     }, 250)
-        // }
-
         dispatch({ type: CATALOG_SET_FILTERS, payload: filterStatus })
         dispatch({ type: CATALOG_SET_UPDATE_LIST })
         dispatch(
@@ -346,6 +352,22 @@ const CatalogLeftFilter = ({
         )
 
         setFilterStatus(againClone)
+
+        // Replace url
+
+        for (let i = 0; i < againClone.length; i++) {
+            for (let j = 0; j < againClone[i].inner.length; j++) {
+                if (againClone[i].inner[j].status === 'opened') {
+                    let c = urlrouterhistory
+                    const id = againClone[i].filter.id
+                    const value = againClone[i].inner[j].property.value
+                    c = c + `filter[properties][${id}][]=${value}&`
+                    setUrlrouterhistory(c)
+                    router.push(encodeURI(c))
+                    console.log('c', c)
+                }
+            }
+        }
     }
 
     const getCheckedStyle = (title, index, name) => {
@@ -369,7 +391,6 @@ const CatalogLeftFilter = ({
         return false
     }
 
-    console.log('colorsIds', colorsIds)
     const getColorCheckedStyle = (value) => {
         for (let i = 0; i < colorsIds.length; i++) {
             if (colorsIds[i] === value) {
