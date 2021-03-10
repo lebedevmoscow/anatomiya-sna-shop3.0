@@ -79,10 +79,6 @@ const ProductPageMobileInfoBlock = () => {
     const [cartModalClosed, setCartModalClosed] = useState(true)
     const [buyOneClickModalClosed, setBuyOneClickModalClosed] = useState(true)
 
-    useEffect(() => {
-        console.log('buyOneClickModalClosed', buyOneClickModalClosed)
-    }, [buyOneClickModalClosed])
-
     return (
         <>
             {/* Modals */}

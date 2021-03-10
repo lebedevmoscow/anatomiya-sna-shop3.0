@@ -26,6 +26,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
     CATALOG_SET_PRELOAD_GET_PARAMS,
     CATALOG_SET_FILTERS,
+    CATALOG_SET_COLORS,
 } from './../../catalog_actions_rebuild/catalog'
 
 // Utils
@@ -91,13 +92,14 @@ const CatalogPage = ({
     filterObject,
 }) => {
     const dispatch = useDispatch()
-
-    console.log(filterAPIData)
+    console.log('filterObject', filterObject)
 
     dispatch({
         type: CATALOG_SET_FILTERS,
         payload: unparseGetParamsToFilter(filterAPIData, filterObject).filters,
     })
+
+    dispatch({ type: CATALOG_SET_COLORS, payload: filterObject.colors })
 
     // Vars
     const initialCompositionFilterData = [
@@ -118,7 +120,6 @@ const CatalogPage = ({
     ]
 
     dispatch({ type: CATALOG_SET_PRELOAD_GET_PARAMS, payload: filterObject })
-    console.log('filterObject', filterObject)
 
     // State
     const [stylesForViewType, setStylesForViewType] = useState({})
@@ -325,10 +326,10 @@ export const getServerSideProps = async (ctx) => {
 
     const propregex = /filter\[properties\]\[\d{1,10}\]\[\]/g
     const properties = []
+    const colors = []
 
     for (let key in ctx.query) {
-        console.log('key value\n', key, ctx.query[key])
-
+        console.log('key', key)
         if (count === 0) {
             params = params + `${key}=${ctx.query[key]}`
         } else {
@@ -358,6 +359,10 @@ export const getServerSideProps = async (ctx) => {
             })
         }
 
+        if (key === 'filter[colors][]') {
+            colors.push(ctx.query[key])
+        }
+
         count++
     }
     params = encodeURI(params.replace(' ', ''))
@@ -370,6 +375,7 @@ export const getServerSideProps = async (ctx) => {
             oldMax,
         },
         properties,
+        colors,
     }
 
     const URLS = [

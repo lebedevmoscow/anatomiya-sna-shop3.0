@@ -72,6 +72,7 @@ const CatalogLeftFilter = ({
     const [closeStatus, setCloseStatus] = useState([])
     const [selectedSize, setSelectedSize] = useState(null)
     const [activeColors, setActiveColors] = useState([])
+    const [colorsIds, setColorsIds] = useState(CatalogReducer.colors)
 
     const scrollTo = (x, y) => {
         if (hasWindow) {
@@ -347,8 +348,6 @@ const CatalogLeftFilter = ({
         setFilterStatus(againClone)
     }
 
-    console.log('CatalogReducer.filters', CatalogReducer.filters)
-
     const getCheckedStyle = (title, index, name) => {
         for (let i = 0; i < CatalogReducer.filters.length; i++) {
             if (CatalogReducer.filters[i].filter.title === name) {
@@ -365,6 +364,16 @@ const CatalogLeftFilter = ({
                         return true
                     }
                 }
+            }
+        }
+        return false
+    }
+
+    console.log('colorsIds', colorsIds)
+    const getColorCheckedStyle = (value) => {
+        for (let i = 0; i < colorsIds.length; i++) {
+            if (colorsIds[i] === value) {
+                return true
             }
         }
         return false
@@ -949,7 +958,7 @@ const CatalogLeftFilter = ({
                                             styles.catalog_left_filter__tab_options_item
                                         }
                                         onClick={() => {
-                                            if (click % 2 === 0) {
+                                            if (click > 0) {
                                                 onColorClick(color.label)
                                             }
                                             setClick((p) => ++p)
@@ -960,7 +969,12 @@ const CatalogLeftFilter = ({
                                                 styles.catalog_left_filter__checkbox_container
                                             }
                                         >
-                                            <input type="checkbox" />
+                                            <input
+                                                defaultChecked={getColorCheckedStyle(
+                                                    color.value
+                                                )}
+                                                type="checkbox"
+                                            />
                                             <span
                                                 style={{
                                                     background: color.color,

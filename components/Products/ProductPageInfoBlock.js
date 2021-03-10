@@ -95,7 +95,6 @@ const ProductPageInfoBlock = () => {
                     <OutsideClickHandler
                         onOutsideClick={() => {
                             setGiftPopupIsClosed(true)
-                            console.log('outside')
                         }}
                     >
                         <p

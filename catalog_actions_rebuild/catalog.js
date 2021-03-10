@@ -198,7 +198,6 @@ export const CatalogLoadByFilter = (
         // Check for selected colors
 
         if (colors.length > 0) {
-            console.log('COLORS', colors)
             for (let i = 0; i < colors.length; i++) {
                 params = params + `&filter[colors][]=${colors[i]}`
             }

@@ -46,7 +46,6 @@ const ProductPageMobileButtons = ({
                 <div
                     onClick={() => {
                         setGiftModalMobileClosed((p) => !p)
-                        console.log('click')
                     }}
                     className={styles.product_page__mobile_btns__row__big_item}
                 >

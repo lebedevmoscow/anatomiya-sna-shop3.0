@@ -4,7 +4,6 @@ import Link from 'next/link'
 const Url = ({ breadcrumbs }) => {
     const render = () => {
         if (breadcrumbs) {
-            console.log('breadcrumbs', breadcrumbs)
             const data = []
             for (let i = 0; i < breadcrumbs.length; i++) {
                 if (i === 0) {

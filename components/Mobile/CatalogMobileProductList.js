@@ -194,7 +194,6 @@ const CatalogMobileProductList = ({
     useEffect(() => {
         const length = Object.keys(CatalogReducer.new).length
         if (length > 0) {
-            console.log('here')
             const element = (
                 <CatalogProductList
                     IsMobile={true}

@@ -22,7 +22,6 @@ export const unparseGetParamsToFilter = (origin, obj) => {
     for (let i = 0; i < obj.properties.length; i++) {
         const propId = obj.properties[i].property.match(/\d{1,10}/g)[0]
         const value = obj.properties[i].value
-        console.log('propId', propId)
 
         let clone = null
         let index = null

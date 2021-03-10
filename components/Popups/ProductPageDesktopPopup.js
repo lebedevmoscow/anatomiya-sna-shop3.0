@@ -14,10 +14,6 @@ const ProductPageDesktopPopup = ({
 }) => {
     const [popupIsClosed, setPopupIsClosed] = useState(true)
 
-    useEffect(() => {
-        console.log('popupIsClosed', popupIsClosed)
-    }, [popupIsClosed])
-
     return (
         <OutsideClickHandler
             onOutsideClick={() => {
