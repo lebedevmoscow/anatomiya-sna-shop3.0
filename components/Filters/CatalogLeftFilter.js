@@ -75,11 +75,16 @@ const CatalogLeftFilter = ({
     const [selectedSize, setSelectedSize] = useState(null)
     const [activeColors, setActiveColors] = useState([])
     const [colorsIds, setColorsIds] = useState(CatalogReducer.colors)
-    // const [urlrouterhistory, setUrlrouterhistory] = useState(
-    //     subCatalogSlug
-    //         ? `/${catalogSlug}/${subCatalogSlug}?${history}`
-    //         : `${catalogSlug}?${history}`
-    // )
+    const [urlrouterhistory, setUrlrouterhistory] = useState(
+        subCatalogSlug
+            ? `/${catalogSlug}/${subCatalogSlug}?${history}`
+            : `/${catalogSlug}?${history}`
+    )
+
+    // useEffect(() => {
+    //     router.push(encodeURI(urlrouterhistory))
+    //     console.log('urlrouterhistory', urlrouterhistory)
+    // }, [urlrouterhistory])
 
     const RetrunSelectedActiveInitial = () => {
         const a = []
@@ -183,10 +188,12 @@ const CatalogLeftFilter = ({
 
     const onColorClick = (title) => {
         const clone = activeColors.concat()
+        let index = null
         for (let i = 0; i < colors.length; i++) {
             if (colors[i].label === title) {
                 let flag = false
                 let temp = null
+                index = i
                 for (let j = 0; j < clone.length; j++) {
                     if (colors[i].value === clone[j]) {
                         flag = true
@@ -219,6 +226,14 @@ const CatalogLeftFilter = ({
         )
 
         setActiveColors(clone)
+
+        let historyClone = urlrouterhistory
+
+        console.log('historyClone1', historyClone)
+        historyClone =
+            historyClone + `filter[colors][]=${clone[clone.length - 1]}` + '&'
+        console.log('historyClone2', historyClone)
+        setUrlrouterhistory(historyClone)
     }
 
     const onResetClickHandler = () => {
@@ -347,19 +362,18 @@ const CatalogLeftFilter = ({
 
         // Replace url
 
-        // for (let i = 0; i < againClone.length; i++) {
-        //     for (let j = 0; j < againClone[i].inner.length; j++) {
-        //         if (againClone[i].inner[j].status === 'opened') {
-        //             let c = urlrouterhistory
-        //             const id = againClone[i].filter.id
-        //             const value = againClone[i].inner[j].property.value
-        //             c = c + `filter[properties][${id}][]=${value}&`
-        //             setUrlrouterhistory(c)
-        //             router.push(encodeURI(c))
-        //             console.log('c', c)
-        //         }
-        //     }
-        // }
+        for (let i = 0; i < againClone.length; i++) {
+            for (let j = 0; j < againClone[i].inner.length; j++) {
+                if (againClone[i].inner[j].status === 'opened') {
+                    let c = urlrouterhistory
+                    const id = againClone[i].filter.id
+                    const value = againClone[i].inner[j].property.value
+                    c = c + `filter[properties][${id}][]=${value}&`
+                    setUrlrouterhistory(c)
+                    console.log('c', c)
+                }
+            }
+        }
     }
 
     const getCheckedStyle = (title, index, name) => {
@@ -895,6 +909,7 @@ const CatalogLeftFilter = ({
                                                                     }
                                                                 >
                                                                     <input
+                                                                        onChange={() => {}}
                                                                         defaultChecked={getCheckedStyle(
                                                                             checkbox.label,
                                                                             index,

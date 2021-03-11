@@ -92,7 +92,6 @@ const CatalogPage = ({
     filterObject,
 }) => {
     const dispatch = useDispatch()
-    console.log('filterObject', filterObject)
     const renderHistory = () => {
         let h = ''
         for (let i = 0; i < filterObject.properties.length; i++) {
@@ -103,9 +102,15 @@ const CatalogPage = ({
                 filterObject.properties[i].value +
                 '&'
         }
+        for (let i = 0; i < filterObject.colors.length; i++) {
+            h = h + 'filter[colors][]=' + filterObject.colors[i] + '&'
+        }
         return h
     }
-    const h = renderHistory()
+    const h = encodeURI(renderHistory())
+    console.log('h', h)
+
+    console.log('filterObject', filterObject)
 
     dispatch({
         type: CATALOG_SET_FILTERS,
@@ -288,7 +293,7 @@ const CatalogPage = ({
                             filterProductsIds={filterProductsIds}
                             catalogSlug={catalogSlug}
                             subCatalogSlug={subCatalogSlug}
-                            history={null}
+                            history={h}
                         />
                         <CatalogRight
                             headers={headers}
