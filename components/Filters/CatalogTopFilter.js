@@ -42,14 +42,8 @@ const CatalogTopFilter = ({
 
     const [isPopularShowMore, setIsPopularShowMore] = useState(false)
     const [isSortByShowMore, setIsSortByShowMore] = useState(false)
-    const [sortType, setSortType] = useState([
-        { title: 'Популярности', isActive: false, sort: null },
-        { title: 'Цене', isActive: true, sort: 'up-to-down' },
-        { title: 'Дате доставки', isActive: false, sort: null },
-        { title: 'Скидка', isActive: false, sort: null },
-        { title: 'Новинка', isActive: false, sort: null },
-        { title: 'Бесплатная доставка', isActive: false, sort: null },
-    ])
+    const [sortType, setSortType] = useState(CatalogReducer.sort)
+    console.log('sortType', sortType)
 
     const [clicks, setClicks] = useState(0)
     const [sortByList, setSortByList] = useState([
@@ -245,18 +239,23 @@ const CatalogTopFilter = ({
                     <ul className={styles.catalog_top_filter__sortby_list}>
                         {sortByList.map((element, index) => {
                             let additionalClassName = ''
-                            if (
-                                (element === 'Популярности' ||
-                                    element === 'Цене') &&
-                                sortType[index].isActive
-                            ) {
-                                additionalClassName = styles.red_border
-                            } else if (
-                                (element !== 'Популярности' ||
-                                    element !== 'Цене') &&
-                                sortType[index].isActive
-                            ) {
-                                additionalClassName = styles.blue_border
+
+                            for (let i = 0; i < sortType.length; i++) {
+                                if (
+                                    sortType[i].isActive &&
+                                    sortType[i].title === element &&
+                                    (element === 'Цене' ||
+                                        element === 'Популярности')
+                                ) {
+                                    additionalClassName = styles.red_border
+                                } else if (
+                                    sortType[i].isActive &&
+                                    sortType[i].title === element &&
+                                    element !== 'Цене' &&
+                                    element !== 'Популярности'
+                                ) {
+                                    additionalClassName = styles.blue_border
+                                }
                             }
 
                             return (

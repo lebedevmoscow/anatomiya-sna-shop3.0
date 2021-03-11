@@ -28,6 +28,8 @@ import {
     CATALOG_SET_FILTERS,
     CATALOG_SET_COLORS,
     CATALOG_SET_PAGE,
+    CATALOG_SET_SORT,
+    CATALOG_SET_SORT_MOBILE,
 } from './../../catalog_actions_rebuild/catalog'
 
 // Utils
@@ -109,6 +111,7 @@ const CatalogPage = ({
         return h
     }
     const h = encodeURI(renderHistory())
+    console.log('filterObject', filterObject)
 
     dispatch({
         type: CATALOG_SET_FILTERS,
@@ -119,6 +122,45 @@ const CatalogPage = ({
         dispatch({ type: CATALOG_SET_PAGE, payload: filterObject.page })
     }
 
+    const defaultSort = [
+        { title: 'Популярности', isActive: false, sort: null },
+        { title: 'Цене', isActive: true, sort: 'up-to-down' },
+        { title: 'Дате доставки', isActive: false, sort: null },
+        { title: 'Скидка', isActive: false, sort: null },
+        { title: 'Новинка', isActive: false, sort: null },
+        { title: 'Бесплатная доставка', isActive: false, sort: null },
+    ]
+
+    if (filterObject.sort === 'price_down') {
+        defaultSort[0].isActive = false
+        defaultSort[1].isActive = true
+        defaultSort[1].sort = 'down-to-up'
+    }
+
+    if (filterObject.sort === 'price_up') {
+        defaultSort[0].isActive = false
+        defaultSort[1].isActive = true
+        defaultSort[1].sort = 'up-to-down'
+    }
+
+    if (filterObject.sort === 'popular') {
+        defaultSort[0].isActive = true
+        defaultSort[1].isActive = false
+    }
+
+    for (let i = 0; i < filterObject.flags.length; i++) {
+        if (filterObject.flags[i] === 'deliverySorting') {
+            defaultSort[2].isActive = true
+        } else if (filterObject.flags[i] === 'discount') {
+            defaultSort[3].isActive = true
+        } else if (filterObject.flags[i] === 'newest') {
+            defaultSort[4].isActive = true
+        } else if (filterObject.flags[i] === 'free_delivery') {
+            defaultSort[5].isActive = true
+        }
+    }
+
+    dispatch({ type: CATALOG_SET_SORT, payload: defaultSort })
     dispatch({ type: CATALOG_SET_COLORS, payload: filterObject.colors })
 
     // Vars
@@ -350,6 +392,8 @@ export const getServerSideProps = async (ctx) => {
     const properties = []
     const colors = []
     let page = null
+    let sort = null
+    let flags = []
 
     for (let key in ctx.query) {
         console.log('key', key)
@@ -390,6 +434,14 @@ export const getServerSideProps = async (ctx) => {
             colors.push(ctx.query[key])
         }
 
+        if (key === 'filter[sorting]') {
+            sort = ctx.query[key]
+        }
+
+        if (key === 'filter[selectedFlags][]') {
+            flags.push(ctx.query[key])
+        }
+
         count++
     }
     params = encodeURI(params.replace(' ', ''))
@@ -404,6 +456,8 @@ export const getServerSideProps = async (ctx) => {
         properties,
         colors,
         page: parseInt(page, 10),
+        sort,
+        flags,
     }
 
     const URLS = [
