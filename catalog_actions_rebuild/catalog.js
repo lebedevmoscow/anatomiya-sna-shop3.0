@@ -285,7 +285,8 @@ export const CatalogLoadProductsByFilter = (
     sortType = null,
     colors,
     select,
-    sortMobile = null
+    sortMobile = null,
+    page
 ) => async (dispatch) => {
     try {
         dispatch({ type: CATALOG_SET_LOADING, payload: true })
@@ -479,6 +480,9 @@ export const CatalogLoadProductsByFilter = (
 
         let rawurl = params + filter_params
         rawurl = rawurl.slice(1)
+        if (page && page > 1) {
+            rawurl = rawurl + '&page=' + page + '&'
+        }
 
         window.history.pushState(
             '',
@@ -494,11 +498,21 @@ export const CatalogLoadProductsByFilter = (
 
         let ids = []
 
-        for (let i = 0; i < amount; i++) {
-            if (i !== resIds.length) {
-                ids.push(`products[]=${resIds[i]}&`)
-            } else {
-                break
+        if (page && page > 1) {
+            for (let i = amount * (page - 1); i < amount * page; i++) {
+                if (i !== resIds.length) {
+                    ids.push(`products[]=${resIds[i]}&`)
+                } else {
+                    break
+                }
+            }
+        } else {
+            for (let i = 0; i < amount; i++) {
+                if (i !== resIds.length) {
+                    ids.push(`products[]=${resIds[i]}&`)
+                } else {
+                    break
+                }
             }
         }
 

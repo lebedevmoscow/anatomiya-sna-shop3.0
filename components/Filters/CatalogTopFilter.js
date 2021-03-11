@@ -126,7 +126,8 @@ const CatalogTopFilter = ({
                     CatalogReducer.price,
                     sortType,
                     CatalogReducer.colors,
-                    CatalogReducer.select
+                    CatalogReducer.select,
+                    CatalogTopFilter.page
                 )
             )
         }
