@@ -50,6 +50,7 @@ const CatalogRight = ({
     filterProductsIds,
     headers,
     articles,
+    filterObject,
 }) => {
     const CatalogReducer = useSelector((store) => store.CatalogReducer)
     const hasWindow = typeof window !== 'undefined'

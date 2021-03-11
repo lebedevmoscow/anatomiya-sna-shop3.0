@@ -221,7 +221,6 @@ export const CatalogLoadByFilter = (
 
         let rawurl = params + filter_params
         rawurl = rawurl.slice(1)
-        console.log('rawurl', rawurl)
 
         window.history.pushState(
             '',
@@ -698,6 +697,18 @@ export const CatalogLoadProductsByLoadMoreButton = (
                 }
             }
         }
+
+        let rawurl = params + filter_params
+        rawurl = rawurl.slice(1)
+        if (page !== 1) {
+            rawurl = rawurl + '&page=' + page + '&'
+        }
+
+        window.history.pushState(
+            '',
+            '',
+            `http://localhost:3000/${catalogSlug}?${encodeURI(rawurl)}`
+        )
 
         const finalUrl =
             root + useful_url + encodeURI(params) + encodeURI(filter_params)

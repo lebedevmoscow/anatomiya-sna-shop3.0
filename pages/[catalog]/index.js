@@ -27,6 +27,7 @@ import {
     CATALOG_SET_PRELOAD_GET_PARAMS,
     CATALOG_SET_FILTERS,
     CATALOG_SET_COLORS,
+    CATALOG_SET_PAGE,
 } from './../../catalog_actions_rebuild/catalog'
 
 // Utils
@@ -108,14 +109,15 @@ const CatalogPage = ({
         return h
     }
     const h = encodeURI(renderHistory())
-    console.log('h', h)
-
-    console.log('filterObject', filterObject)
 
     dispatch({
         type: CATALOG_SET_FILTERS,
         payload: unparseGetParamsToFilter(filterAPIData, filterObject).filters,
     })
+
+    if (filterObject.page) {
+        dispatch({ type: CATALOG_SET_PAGE, payload: filterObject.page })
+    }
 
     dispatch({ type: CATALOG_SET_COLORS, payload: filterObject.colors })
 
@@ -296,6 +298,7 @@ const CatalogPage = ({
                             history={h}
                         />
                         <CatalogRight
+                            filterObject={filterObject}
                             headers={headers}
                             oldMin={filterAPIData.price.min}
                             oldMax={filterAPIData.price.max}
@@ -346,6 +349,7 @@ export const getServerSideProps = async (ctx) => {
     const propregex = /filter\[properties\]\[\d{1,10}\]\[\]/g
     const properties = []
     const colors = []
+    let page = null
 
     for (let key in ctx.query) {
         console.log('key', key)
@@ -378,6 +382,10 @@ export const getServerSideProps = async (ctx) => {
             })
         }
 
+        if (key === 'page') {
+            page = ctx.query[key]
+        }
+
         if (key === 'filter[colors][]') {
             colors.push(ctx.query[key])
         }
@@ -395,6 +403,7 @@ export const getServerSideProps = async (ctx) => {
         },
         properties,
         colors,
+        page: parseInt(page, 10),
     }
 
     const URLS = [
@@ -450,13 +459,24 @@ export const getServerSideProps = async (ctx) => {
 
     const index = IsMobile ? 20 : 21
 
-    for (let i = 0; i < index; i++) {
-        if (i !== filterProductsIds.length - 1) {
-            ids.push(`products[]=${filterProductsIds[i]}&`)
-        } else {
-            break
+    if (page && page > 1) {
+        for (let i = 21 * (page - 1); i < 21 * page; i++) {
+            if (i !== filterProductsIds.length - 1) {
+                ids.push(`products[]=${filterProductsIds[i]}&`)
+            } else {
+                break
+            }
+        }
+    } else {
+        for (let i = 0; i < index; i++) {
+            if (i !== filterProductsIds.length - 1) {
+                ids.push(`products[]=${filterProductsIds[i]}&`)
+            } else {
+                break
+            }
         }
     }
+
     const productSubUrl = ids.join('')
 
     const productsURLReq = await fetch(
