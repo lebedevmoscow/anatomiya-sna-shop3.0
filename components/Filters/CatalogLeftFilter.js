@@ -221,7 +221,8 @@ const CatalogLeftFilter = ({
                 CatalogReducer.price,
                 CatalogReducer.sort,
                 clone,
-                CatalogReducer.select
+                CatalogReducer.select,
+                CatalogReducer.page
             )
         )
 
@@ -353,7 +354,8 @@ const CatalogLeftFilter = ({
                 CatalogReducer.price,
                 CatalogReducer.sort,
                 CatalogReducer.colors,
-                CatalogReducer.select
+                CatalogReducer.select,
+                CatalogReducer.page
             )
         )
 
@@ -619,7 +621,8 @@ const CatalogLeftFilter = ({
                                     prices,
                                     CatalogReducer.sort,
                                     CatalogReducer.colors,
-                                    CatalogReducer.select
+                                    CatalogReducer.select,
+                                    CatalogReducer.page
                                 )
                             )
                         }}
