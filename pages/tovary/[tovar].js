@@ -625,7 +625,11 @@ const ProductPage = ({
                         <ProductPageMobileAssurances />
                     </div>
                 )}
-                {IsMobile && <ProductPageMobileTabs />}
+                {IsMobile && (
+                    <ProductPageMobileTabs
+                        properties={productInfo.ProductCard.Properties}
+                    />
+                )}
                 {IsMobile && <CatalogHelpPickUp />}
                 {IsMobile && <SwiperAssurenaces />}
                 {IsMobile && (

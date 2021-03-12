@@ -93,6 +93,7 @@ const ProductPageDescriptionTab = ({
                             {properties.map((prop, index) => {
                                 return (
                                     <div
+                                        key={index}
                                         className={
                                             styles.product_page__description_tab__specification_list_item
                                         }

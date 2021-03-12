@@ -22,7 +22,7 @@ import LoadFilesImage from './../../assets/load-files.png'
 
 import styles from './../../styles/components/Tabs/ProductPageMobileTabs.module.sass'
 
-const ProductPageMobileTabs = () => {
+const ProductPageMobileTabs = ({ properties }) => {
     const content1 = (
         <>
             <p>
@@ -534,7 +534,12 @@ const ProductPageMobileTabs = () => {
         {
             title: 'Характеристики',
             state: 'closed',
-            content: <ProductPageTechTabContentMobile />,
+            content:
+                properties && properties.length > 0 ? (
+                    <ProductPageTechTabContentMobile properties={properties} />
+                ) : (
+                    <></>
+                ),
         },
         {
             title: 'Сертификаты и инструкции',
