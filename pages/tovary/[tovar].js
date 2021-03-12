@@ -77,7 +77,9 @@ const ProductPage = ({
 
     const breakpoint1023 = useMedia(1023)
 
-    const sizes = getAllProductSizes(productInfo.ProductCard.Prices)
+    const [sizes, setSizes] = useState(
+        getAllProductSizes(productInfo.ProductCard.Prices)
+    )
 
     const images = [productInfo.ProductCard.MainImage.FilePath]
     for (let i = 0; i < productInfo.ProductCard.Images.length; i++) {

@@ -6,8 +6,8 @@ import FavoritesProductsListReducer from './FavoritesProductsList'
 import CompareProductsListReducer from './CompareProductsList'
 import SelectedSizeReducer from './SelectedSize'
 import CatalogProductListReducer from './CatalogProductList'
-import NewCatalogProductListReducer from './NewCatalogProductList'
 import CatalogCommonReducer from './CatalogCommon'
+import ProductPageReducer from './ProductPage'
 
 import CatalogReducer from './../catalog_reducers_rebuild/catalog'
 
@@ -18,9 +18,9 @@ const rootReducer = combineReducers({
     CompareProductsListReducer,
     SelectedSizeReducer,
     CatalogProductListReducer,
-    NewCatalogProductListReducer,
     CatalogCommonReducer,
     CatalogReducer,
+    ProductPageReducer,
 })
 
 export default rootReducer

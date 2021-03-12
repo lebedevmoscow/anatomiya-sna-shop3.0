@@ -301,6 +301,9 @@ const ProductPageInfoBlock = ({ sizes, prices }) => {
                         Выберите размер (Ширина*Длина) см.
                     </div>
                     <Select
+                        onChange={(data) => {
+                            console.log('data', data)
+                        }}
                         className="product-card__selector"
                         classNamePrefix="product-card__selector--inner"
                         placeholder={options[0].label}
