@@ -78,6 +78,11 @@ const ProductPage = ({
     for (let i = 0; i < productInfo.ProductCard.Images.length; i++) {
         images.push(productInfo.ProductCard.Images[i].FilePath)
     }
+    if (productInfo.ProductCard.BrandImages && productInfo.ProductCard.BrandImages.length > 0) {
+        for (let i = 0; i < productInfo.ProductCard.BrandImages.length; i++) {
+            images.push( productInfo.ProductCard.BrandImages[i].FilePath)
+        }
+    }
 
     const onActiveTabClickHandler = (title) => {
         setActiveTab(title)
