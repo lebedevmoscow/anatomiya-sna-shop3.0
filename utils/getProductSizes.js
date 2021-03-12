@@ -10,3 +10,13 @@ export const getAllProductSizes = (origin) => {
     }
     return sizes
 }
+
+export const getDataBySizeId = (origin, id) => {
+    let data = null
+    for (let i = 0; i < origin.length; i++) {
+        if (origin[i].SizeId === id) {
+            data = origin[i]
+        }
+    }
+    return data
+}

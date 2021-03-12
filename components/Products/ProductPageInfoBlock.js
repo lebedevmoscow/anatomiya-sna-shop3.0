@@ -17,8 +17,16 @@ import FoundamentImage1 from './../../TEMP/foundament/1.jpg'
 import FoundamentImage2 from './../../TEMP/foundament/2.jpg'
 import FoundamentImage3 from './../../TEMP/foundament/3.jpg'
 
+// Utils
+import { getDataBySizeId } from './../../utils/getProductSizes'
+
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
+import {
+    PRODUCT_PAGE_SIZE_CHANGED,
+    PRODUCT_PAGE_SET_DATA,
+} from './../../actions/ProductPage'
+
 import {
     AddProductToFavoriteList,
     RemoveProductFromFavoriteList,
@@ -33,6 +41,7 @@ import styles from './../../styles/components/Products/ProductPageInfoBlock.modu
 
 const ProductPageInfoBlock = ({ sizes, prices }) => {
     const dispatch = useDispatch()
+    const ProductPageReducer = useSelector((store) => store.ProductPageReducer)
 
     const colourStyles = {
         control: (styles) => ({
@@ -75,6 +84,8 @@ const ProductPageInfoBlock = ({ sizes, prices }) => {
         return {
             label: size.title,
             value: size.slug,
+            id: size.id,
+            sizeId: size.sizeId,
         }
     })
 
@@ -90,22 +101,31 @@ const ProductPageInfoBlock = ({ sizes, prices }) => {
     let discountPrice
     let differencePrice
 
-    if (prices[0].PriceBasic === prices[0].PriceDiscount) {
+    if (
+        ProductPageReducer.data.PriceBasic ===
+        ProductPageReducer.data.PriceDiscount
+    ) {
         prevPrice = null
-        discountPrice = prices[0].PriceDiscount.toString().replace(
+        discountPrice = ProductPageReducer.data.PriceDiscount.toString().replace(
             /(\d)(?=(\d\d\d)+([^\d]|$))/g,
             '$1 '
         )
         differencePrice = 0
-    } else if (prices[0].PriceBasic !== prices[0].PriceDiscount) {
-        differencePrice = (prices[0].PriceBasic - prices[0].PriceDiscount)
+    } else if (
+        ProductPageReducer.data.PriceBasic !==
+        ProductPageReducer.data.PriceDiscount
+    ) {
+        differencePrice = (
+            ProductPageReducer.data.PriceBasic -
+            ProductPageReducer.data.PriceDiscount
+        )
             .toString()
             .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
-        prevPrice = prices[0].PriceBasic.toString().replace(
+        prevPrice = ProductPageReducer.data.PriceBasic.toString().replace(
             /(\d)(?=(\d\d\d)+([^\d]|$))/g,
             '$1 '
         )
-        discountPrice = prices[0].PriceDiscount.toString().replace(
+        discountPrice = ProductPageReducer.data.PriceDiscount.toString().replace(
             /(\d)(?=(\d\d\d)+([^\d]|$))/g,
             '$1 '
         )
@@ -302,7 +322,20 @@ const ProductPageInfoBlock = ({ sizes, prices }) => {
                     </div>
                     <Select
                         onChange={(data) => {
-                            console.log('data', data)
+                            dispatch({
+                                type: PRODUCT_PAGE_SIZE_CHANGED,
+                                payload: {
+                                    selectedSizeId: data.sizeId,
+                                    selectedId: data.id,
+                                    selectedValue: data.value,
+                                    selectedTitle: data.title,
+                                },
+                            })
+                            const d = getDataBySizeId(prices, data.sizeId)
+                            dispatch({
+                                type: PRODUCT_PAGE_SET_DATA,
+                                payload: d,
+                            })
                         }}
                         className="product-card__selector"
                         classNamePrefix="product-card__selector--inner"

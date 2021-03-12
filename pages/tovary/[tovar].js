@@ -5,16 +5,6 @@ import dynamic from 'next/dynamic'
 import styles from './../../styles/pages/tovar.module.sass'
 
 // Images
-import ImageForSlider1 from './../../TEMP/productpagegallery/1.jpg'
-import ImageForSlider2 from './../../TEMP/productpagegallery/2.jpg'
-import ImageForSlider3 from './../../TEMP/productpagegallery/3.jpg'
-import ImageForSlider4 from './../../TEMP/productpagegallery/4.jpg'
-import ImageForSlider5 from './../../TEMP/productpagegallery/5.jpg'
-import ImageForSlider6 from './../../TEMP/productpagegallery/6.jpg'
-import ImageForSlider7 from './../../TEMP/productpagegallery/7.jpg'
-import ImageForSlider8 from './../../TEMP/productpagegallery/8.jpg'
-import ImageForSlider9 from './../../TEMP/productpagegallery/9.jpg'
-import ImageForSlider10 from './../..//TEMP/productpagegallery/10.jpg'
 import CreditCardImage from './../..//assets/svg/credit-card.svg'
 import CertificateImage from './../../assets/svg/certificate.svg'
 import CarImage from './../../assets/svg/car.svg'
@@ -47,6 +37,13 @@ import Modal from './../../components/Modal'
 // Utils
 import { getAllProductSizes } from './../../utils/getProductSizes'
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux'
+import {
+    PRODUCT_PAGE_SET_DATA,
+    PRODUCT_PAGE_SIZE_CHANGED,
+} from './../../actions/ProductPage'
+
 // import HelpPickUp from './../../components/Mobile/'
 
 // const Header = dynamic(() => import('./../../components/Header'), { ssr: true })
@@ -73,10 +70,26 @@ const ProductPage = ({
     regions,
     productInfo,
 }) => {
+    const dispatch = useDispatch()
+
+    dispatch({
+        type: PRODUCT_PAGE_SIZE_CHANGED,
+        payload: {
+            selectedSizeId: productInfo.ProductCard.Prices[0].SizeId,
+            selectedId: productInfo.ProductCard.Prices[0].Id,
+            selectedValue: productInfo.ProductCard.Prices[0].SizeSlug,
+            selectedTitle: productInfo.ProductCard.Prices[0].SizeTitle,
+        },
+    })
+
+    dispatch({
+        type: PRODUCT_PAGE_SET_DATA,
+        payload: productInfo.ProductCard.Prices[0],
+    })
+
     const [activeTab, setActiveTab] = useState('description')
 
     const breakpoint1023 = useMedia(1023)
-
     const [sizes, setSizes] = useState(
         getAllProductSizes(productInfo.ProductCard.Prices)
     )
