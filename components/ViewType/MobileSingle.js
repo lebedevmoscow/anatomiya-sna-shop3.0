@@ -423,34 +423,45 @@ const MobileSingle = ({
                 desktopViewType={desktopViewType}
                 Gifts={Gifts}
             />
-            <div className={styles.catalog_product_card__column}>
-                <div
-                    className={
-                        styles.catalog_product_card__image_wraper_several
-                    }
-                >
-                    <img
-                        style={{
-                            width: '95%',
-                            display: 'block',
-                            margin: '0 auto',
-                        }}
-                        src={MainImage.FilePath}
-                    ></img>
-                    {/* <Image layout="fill" src={MainImage.FilePath} /> */}
-                </div>
-                <div className={styles.catalog_product_card__smalltext}>
-                    Купить {CatalogType}
-                </div>
-                {/* <EqualHeightElement name="CatalogProductCard"> */}
-                <div
-                    style={PriceDiff !== 0 ? { marginBottom: '10px' } : {}}
-                    className={styles.catalog_product_card__title}
-                >
-                    {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title}
-                </div>
-                {/* </EqualHeightElement> */}
-            </div>
+            <Link href={`http://localhost:3000/tovary/${Slug}`}>
+                <a>
+                    <div className={styles.catalog_product_card__column}>
+                        <div
+                            className={
+                                styles.catalog_product_card__image_wraper_several
+                            }
+                        >
+                            <img
+                                style={{
+                                    width: '95%',
+                                    display: 'block',
+                                    margin: '0 auto',
+                                }}
+                                src={MainImage.FilePath}
+                            ></img>
+                            {/* <Image layout="fill" src={MainImage.FilePath} /> */}
+                        </div>
+                        <div className={styles.catalog_product_card__smalltext}>
+                            Купить {CatalogType}
+                        </div>
+                        {/* <EqualHeightElement name="CatalogProductCard"> */}
+                        <div
+                            style={
+                                PriceDiff !== 0 ? { marginBottom: '10px' } : {}
+                            }
+                            className={styles.catalog_product_card__title}
+                        >
+                            {BrandTitle +
+                                ' ' +
+                                (SeriesTitle || '') +
+                                ' ' +
+                                Title}
+                        </div>
+                        {/* </EqualHeightElement> */}
+                    </div>
+                </a>
+            </Link>
+
             {/* <EqualHeightElement name="CatalogProductCard__Price"> */}
             <div className={`${styles.after_title}`}>
                 <div className={styles.catalog_product_card__price_block}>
@@ -634,28 +645,34 @@ const MobileSingle = ({
                         alignItems: 'center',
                     }}
                 >
-                    <div className={styles.wrap_single}>
-                        <div className={styles.catalogproductcard__stock}>
-                            <div
-                                className={
-                                    styles.catalog_product_card__info_wrap
-                                }
-                            >
-                                <button
-                                    className={
-                                        styles.catalog_product_card__info_button
-                                    }
-                                >
-                                    Подробнее
-                                </button>
+                    <Link href={`http://localhost:3000/tovary/${Slug}`}>
+                        <a>
+                            <div className={styles.wrap_single}>
                                 <div
-                                    className={
-                                        styles.catalog_product_card__stats_buttons
-                                    }
-                                ></div>
+                                    className={styles.catalogproductcard__stock}
+                                >
+                                    <div
+                                        className={
+                                            styles.catalog_product_card__info_wrap
+                                        }
+                                    >
+                                        <button
+                                            className={
+                                                styles.catalog_product_card__info_button
+                                            }
+                                        >
+                                            Подробнее
+                                        </button>
+                                        <div
+                                            className={
+                                                styles.catalog_product_card__stats_buttons
+                                            }
+                                        ></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </a>
+                    </Link>
 
                     <div className={styles.mobile__btns}>
                         <div
