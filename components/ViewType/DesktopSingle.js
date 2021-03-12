@@ -437,26 +437,41 @@ const DesktopSingle = ({
                 desktopViewType={desktopViewType}
                 Gifts={Gifts}
             />
-            <div className={styles.catalog_product_card__column}>
-                <div
-                    className={
-                        styles.catalog_product_card__image_wraper_several
-                    }
-                >
-                    <Image width={275} height={172} src={MainImage.FilePath} />
-                </div>
-                <div className={styles.catalog_product_card__smalltext}>
-                    Купить {CatalogType}
-                </div>
-                {/* <EqualHeightElement name="CatalogProductCard"> */}
-                <div
-                    style={PriceDiff !== 0 ? { marginBottom: '10px' } : {}}
-                    className={styles.catalog_product_card__title}
-                >
-                    {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title}
-                </div>
-                {/* </EqualHeightElement> */}
-            </div>
+            <Link href={`http://localhost:3000/tovary/${Slug}`}>
+                <a>
+                    <div className={styles.catalog_product_card__column}>
+                        <div
+                            className={
+                                styles.catalog_product_card__image_wraper_several
+                            }
+                        >
+                            <Image
+                                width={275}
+                                height={172}
+                                src={MainImage.FilePath}
+                            />
+                        </div>
+                        <div className={styles.catalog_product_card__smalltext}>
+                            Купить {CatalogType}
+                        </div>
+                        {/* <EqualHeightElement name="CatalogProductCard"> */}
+                        <div
+                            style={
+                                PriceDiff !== 0 ? { marginBottom: '10px' } : {}
+                            }
+                            className={styles.catalog_product_card__title}
+                        >
+                            {BrandTitle +
+                                ' ' +
+                                (SeriesTitle || '') +
+                                ' ' +
+                                Title}
+                        </div>
+                        {/* </EqualHeightElement> */}
+                    </div>
+                </a>
+            </Link>
+
             {/* <EqualHeightElement name="CatalogProductCard__Price"> */}
             <div className={`${styles.after_title}`}>
                 <div className={styles.catalog_product_card__price_block}>
@@ -597,16 +612,24 @@ const DesktopSingle = ({
                         {SizeSelector}
                     </div>
                 </div>
-                <div className={styles.catalog_product_card__info_wrap}>
-                    <button
-                        className={styles.catalog_product_card__info_button}
-                    >
-                        Подробнее
-                    </button>
-                    <div
-                        className={styles.catalog_product_card__stats_buttons}
-                    ></div>
-                </div>
+                <Link href={`http://localhost:3000/tovary/${Slug}`}>
+                    <a>
+                        <div className={styles.catalog_product_card__info_wrap}>
+                            <button
+                                className={
+                                    styles.catalog_product_card__info_button
+                                }
+                            >
+                                Подробнее
+                            </button>
+                            <div
+                                className={
+                                    styles.catalog_product_card__stats_buttons
+                                }
+                            ></div>
+                        </div>
+                    </a>
+                </Link>
 
                 <div className={styles.catalog_product_card__delivery_block}>
                     <img
