@@ -44,6 +44,9 @@ import InputMask from 'react-input-mask'
 import Link from 'next/link'
 import Modal from './../../components/Modal'
 
+// Utils
+import { getAllProductSizes } from './../../utils/getProductSizes'
+
 // import HelpPickUp from './../../components/Mobile/'
 
 // const Header = dynamic(() => import('./../../components/Header'), { ssr: true })
@@ -74,13 +77,18 @@ const ProductPage = ({
 
     const breakpoint1023 = useMedia(1023)
 
+    const sizes = getAllProductSizes(productInfo.ProductCard.Prices)
+
     const images = [productInfo.ProductCard.MainImage.FilePath]
     for (let i = 0; i < productInfo.ProductCard.Images.length; i++) {
         images.push(productInfo.ProductCard.Images[i].FilePath)
     }
-    if (productInfo.ProductCard.BrandImages && productInfo.ProductCard.BrandImages.length > 0) {
+    if (
+        productInfo.ProductCard.BrandImages &&
+        productInfo.ProductCard.BrandImages.length > 0
+    ) {
         for (let i = 0; i < productInfo.ProductCard.BrandImages.length; i++) {
-            images.push( productInfo.ProductCard.BrandImages[i].FilePath)
+            images.push(productInfo.ProductCard.BrandImages[i].FilePath)
         }
     }
 
@@ -395,7 +403,7 @@ const ProductPage = ({
                                 <ProductPageGallery images={images} />
                             </div>
                             <div className={styles.product_page__right}>
-                                <ProductPageInfoBlock />
+                                <ProductPageInfoBlock sizes={sizes} />
                             </div>
                         </div>
                     )}
@@ -572,7 +580,7 @@ const ProductPage = ({
                 {IsMobile && (
                     <div className={styles.mobile_info_block__wrapper}>
                         <div className={styles.container}>
-                            <ProductPageMobileInfoBlock />
+                            <ProductPageMobileInfoBlock sizes={sizes} />
                         </div>
                     </div>
                 )}

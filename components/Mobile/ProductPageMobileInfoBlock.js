@@ -11,7 +11,7 @@ import FoundamentImage1 from './../../TEMP/foundament/1.jpg'
 import FoundamentImage2 from './../../TEMP/foundament/2.jpg'
 import FoundamentImage3 from './../../TEMP/foundament/3.jpg'
 
-const ProductPageMobileInfoBlock = () => {
+const ProductPageMobileInfoBlock = ({ sizes }) => {
     const price = 5368
 
     const [mainSelector, setMainSelector] = useState(null)

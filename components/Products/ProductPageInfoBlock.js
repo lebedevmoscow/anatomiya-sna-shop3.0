@@ -31,7 +31,7 @@ import {
 // Styles
 import styles from './../../styles/components/Products/ProductPageInfoBlock.module.sass'
 
-const ProductPageInfoBlock = () => {
+const ProductPageInfoBlock = ({ sizes }) => {
     const dispatch = useDispatch()
 
     const colourStyles = {
@@ -71,14 +71,12 @@ const ProductPageInfoBlock = () => {
         },
     }
 
-    const options = [
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-    ]
+    const options = sizes.map((size) => {
+        return {
+            label: size.title,
+            value: size.slug,
+        }
+    })
 
     const [cartPopupClosed, setCartPopupClosed] = useState(true)
     const [buyOneClickPopupClosed, setBuyOneClickPopupClosed] = useState(true)
