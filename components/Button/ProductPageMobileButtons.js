@@ -1,25 +1,182 @@
+import { useState, useEffect } from 'react'
 import styles from './../../styles/components/Button/ProductPageMobileButtons.module.sass'
 
 // Images
 import StatsImage from './../../assets/svg/stats.svg'
+import WhiteStatsImage from './../../assets/svg/white-stats.svg'
 import HeartImage from './../../assets/svg/heart.svg'
+import WhiteHeartImage from './../../assets/svg/white-heart.svg'
+
+// Utils
+import { getDataBySizeId } from './../../utils/getProductSizes'
+
+// Redux
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    PRODUCT_PAGE_SIZE_CHANGED,
+    PRODUCT_PAGE_SET_DATA,
+} from './../../actions/ProductPage'
+
+import {
+    AddProductToFavoriteList,
+    RemoveProductFromFavoriteList,
+} from './../../actions/FavoritesProductsList'
+import {
+    AddProductToCompareList,
+    RemoveProductFromCompareList,
+} from './../../actions/CompareProductsList'
 
 const ProductPageMobileButtons = ({
     setGiftModalMobileClosed,
     setSavePriceModalMobileClosed,
 }) => {
+    const dispatch = useDispatch()
+    const ProductPageReducer = useSelector((store) => store.ProductPageReducer)
+
+    const FavoriteListRedux = useSelector(
+        (store) => store.FavoritesProductsListReducer
+    )
+    const CompareListRedux = useSelector(
+        (store) => store.CompareProductsListReducer
+    )
+
+    const [isFavorite, setIsFavorite] = useState(false)
+    const [isCompared, setIsCompared] = useState(false)
+
+    // Load blue background for button if products is favorited
+    useEffect(() => {
+        if (FavoriteListRedux.total && FavoriteListRedux.total.length !== 0) {
+            let flag = false
+            FavoriteListRedux.total.map((item) => {
+                if (item.ProductId === ProductPageReducer.info.id) {
+                    flag = true
+                    setIsFavorite(true)
+                }
+            })
+            if (!flag) {
+                setIsFavorite(false)
+            }
+        }
+    }, [FavoriteListRedux])
+
+    // Load blue background for button if products is compared
+    useEffect(() => {
+        if (CompareListRedux.total && CompareListRedux.total.length !== 0) {
+            let flag = false
+            CompareListRedux.total.map((item) => {
+                if (item.ProductId === ProductPageReducer.info.id) {
+                    flag = true
+                    setIsCompared(true)
+                }
+            })
+            if (!flag) {
+                setIsCompared(false)
+            }
+        }
+    }, [CompareListRedux])
+
+    const onAddToFavoriteClickHandler = () => {
+        if (!isFavorite) {
+            setIsFavorite(true)
+
+            dispatch(
+                AddProductToFavoriteList(
+                    ProductPageReducer.info.id,
+                    ProductPageReducer.info.image,
+                    ProductPageReducer.info.catalogType,
+                    ProductPageReducer.info.brandTitle,
+                    ProductPageReducer.info.seriesTitle,
+                    ProductPageReducer.info.title,
+                    ProductPageReducer.selectedValue,
+                    ProductPageReducer.selectedTitle,
+                    ProductPageReducer.data.PriceDiscount,
+                    ProductPageReducer.data.Id
+                )
+            )
+        } else {
+            setIsFavorite(false)
+            dispatch(
+                RemoveProductFromFavoriteList(
+                    ProductPageReducer.info.id,
+                    ProductPageReducer.info.image,
+                    ProductPageReducer.info.catalogType,
+                    ProductPageReducer.info.brandTitle,
+                    ProductPageReducer.info.seriesTitle,
+                    ProductPageReducer.info.title,
+                    ProductPageReducer.selectedValue,
+                    ProductPageReducer.selectedTitle,
+                    ProductPageReducer.data.PriceDiscount,
+                    ProductPageReducer.data.Id
+                )
+            )
+        }
+    }
+
+    const onAddToCompareClickHandler = () => {
+        if (!isCompared) {
+            setIsCompared(true)
+
+            dispatch(
+                AddProductToCompareList(
+                    ProductPageReducer.info.id,
+                    ProductPageReducer.info.image,
+                    ProductPageReducer.info.catalogType,
+                    ProductPageReducer.info.brandTitle,
+                    ProductPageReducer.info.seriesTitle,
+                    ProductPageReducer.info.title,
+                    ProductPageReducer.selectedValue,
+                    ProductPageReducer.selectedTitle,
+                    ProductPageReducer.data.PriceDiscount,
+                    ProductPageReducer.data.Id
+                )
+            )
+        } else {
+            setIsCompared(false)
+            dispatch(
+                RemoveProductFromCompareList(
+                    ProductPageReducer.info.id,
+                    ProductPageReducer.info.image,
+                    ProductPageReducer.info.catalogType,
+                    ProductPageReducer.info.brandTitle,
+                    ProductPageReducer.info.seriesTitle,
+                    ProductPageReducer.info.title,
+                    ProductPageReducer.selectedValue,
+                    ProductPageReducer.selectedTitle,
+                    ProductPageReducer.data.PriceDiscount,
+                    ProductPageReducer.data.Id
+                )
+            )
+        }
+    }
+
     return (
         <div className={styles.product_page_mobile_btns}>
             <div className={styles.product_page__mobile_btns__row}>
-                <div className={styles.product_page__mobile_btns__item}>
+                <div
+                    style={
+                        isCompared
+                            ? { background: '#0EA8D5' }
+                            : { background: '#fff' }
+                    }
+                    className={styles.product_page__mobile_btns__item}
+                    onClick={onAddToCompareClickHandler}
+                >
                     <img
-                        src={StatsImage}
+                        src={isCompared ? WhiteStatsImage : StatsImage}
                         className={styles.product_page__mobile_btns__image}
                     ></img>
                 </div>
-                <div className={styles.product_page__mobile_btns__item}>
+                <div
+                    style={
+                        isFavorite
+                            ? { background: '#0EA8D5' }
+                            : { background: '#fff' }
+                    }
+                    className={styles.product_page__mobile_btns__item}
+                    onClick={onAddToFavoriteClickHandler}
+                >
                     <img
-                        src={HeartImage}
+                        src={isFavorite ? WhiteHeartImage : HeartImage}
                         className={styles.product_page__mobile_btns__image}
                     ></img>
                 </div>

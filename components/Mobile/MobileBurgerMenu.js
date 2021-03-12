@@ -4,6 +4,11 @@ import Image from 'next/image'
 
 import menu_styles from './../../styles/components/Mobile/MobileBurgerMenu.module.sass'
 
+// Redux
+import { useSelector, useDispatch } from 'react-redux'
+import { init as favoriteInit } from './../../actions/FavoritesProductsList'
+import { init as compareInit } from './../../actions/CompareProductsList'
+
 // Icons
 import SearchIcon from './../../assets/svg/white-search.svg'
 import PhoneIcon from './../../assets/svg/white-phone.svg'
@@ -18,6 +23,7 @@ import MobileBurgerMenuChoiseCity from './../Mobile/MobileBurgerMenuChoiseCity'
 let lastScrollNavigateArrow = 0
 
 const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
+    const dispatch = useDispatch()
     const burgerRef = useRef(null)
     const catalogRef = useRef(null)
     const cartIconRef = useRef(null)
@@ -34,6 +40,16 @@ const MobileBurgerMenu = ({ mobileMenu, mobilemenuCatalogs, regions }) => {
 
         burgerRef.current.classList.toggle(`${menu_styles.burger_opened}`)
     }
+
+    const hasWindow = typeof window !== 'undefined'
+
+    useEffect(() => {
+        if (hasWindow) {
+            // Init function to grab all procuts from favorite list
+            dispatch(favoriteInit())
+            dispatch(compareInit())
+        }
+    }, [hasWindow])
 
     useEffect(() => {
         document.addEventListener('scroll', () => {
