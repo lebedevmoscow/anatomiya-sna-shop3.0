@@ -532,9 +532,13 @@ const ProductPage = ({
                                     </div>
                                 </div>
                             </div>
+
                             <div className="product-page__current-tab">
                                 {activeTab === 'description' && (
                                     <ProductPageDescriptionTab
+                                        properties={
+                                            productInfo.ProductCard.Properties
+                                        }
                                         Layers={productInfo.Layers}
                                         articles={articles}
                                     />

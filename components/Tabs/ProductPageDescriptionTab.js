@@ -6,7 +6,7 @@ import MattrassComposition from './../../components/MattrassComposition'
 
 import styles from './../../styles/components/Tabs/ProductPageDescriptionTab.module.sass'
 
-const ProductPageDescriptionTab = ({ articles, Layers }) => {
+const ProductPageDescriptionTab = ({ articles, Layers, properties }) => {
     const hasWindow = typeof window !== 'undefined'
     const [width, setWidth] = useState(null)
 
@@ -57,267 +57,59 @@ const ProductPageDescriptionTab = ({ articles, Layers }) => {
         }
     }, [hasWindow])
 
+    console.log('properties', properties)
+
     return (
         <div className={styles.product_page__description_tab}>
             <div className={styles.product_page__description_tab__left}>
                 <MattrassComposition Layers={Layers} />
-                <div
-                    className={styles.product_page__description_tab__hint_title}
-                >
-                    Характеристики
-                </div>
-                <div
-                    className={
-                        styles.product_page__description_tab__specifications
-                    }
-                >
+                {properties && properties.length > 0 && (
                     <div
                         className={
-                            styles.product_page__description_tab__specifications_list
+                            styles.product_page__description_tab__hint_title
+                        }
+                    >
+                        Характеристики
+                    </div>
+                )}
+                {properties && properties.length > 0 && (
+                    <div
+                        className={
+                            styles.product_page__description_tab__specifications
                         }
                     >
                         <div
                             className={
-                                styles.product_page__description_tab__specification_list_item
+                                styles.product_page__description_tab__specifications_list
                             }
                         >
-                            <div
-                                className={
-                                    styles.product_page__description_tab__manufacturer
-                                }
-                            >
-                                Производитель:
-                            </div>
-                            <div
-                                className={
-                                    styles.product_page__description_tab__output
-                                }
-                            >
-                                Волхова
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                styles.product_page__description_tab__specification_list_item
-                            }
-                        >
-                            <div
-                                className={
-                                    styles.product_page__description_tab__manufacturer
-                                }
-                            >
-                                Страна бренда:
-                            </div>
-                            <div
-                                className={
-                                    styles.product_page__description_tab__output
-                                }
-                            >
-                                Россия
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                styles.product_page__description_tab__specification_list_item
-                            }
-                        >
-                            <div
-                                className={
-                                    styles.product_page__description_tab__manufacturer
-                                }
-                            >
-                                Страна производитель:
-                            </div>
-                            <div
-                                className={
-                                    styles.product_page__description_tab__output
-                                }
-                            >
-                                Россия
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                styles.product_page__description_tab__specification_list_item
-                            }
-                        >
-                            <div
-                                className={
-                                    styles.product_page__description_tab__manufacturer
-                                }
-                            >
-                                Гарантия:
-                            </div>
-                            <div
-                                className={
-                                    styles.product_page__description_tab__output
-                                }
-                            >
-                                2 года
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                styles.product_page__description_tab__specification_list_item
-                            }
-                        >
-                            <div
-                                className={
-                                    styles.product_page__description_tab__manufacturer
-                                }
-                            >
-                                Высота изголовья, см:
-                            </div>
-                            <div
-                                className={
-                                    styles.product_page__description_tab__output
-                                }
-                            >
-                                73
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                styles.product_page__description_tab__specification_list_item
-                            }
-                        >
-                            <div
-                                className={
-                                    styles.product_page__description_tab__manufacturer
-                                }
-                            >
-                                Форма:
-                            </div>
-                            <div
-                                className={
-                                    styles.product_page__description_tab__output
-                                }
-                            >
-                                Прямоугольная
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                styles.product_page__description_tab__specification_list_item
-                            }
-                        >
-                            <div
-                                className={
-                                    styles.product_page__description_tab__manufacturer
-                                }
-                            >
-                                Материал каркаса:
-                            </div>
-                            <div
-                                className={
-                                    styles.product_page__description_tab__output
-                                }
-                            >
-                                ЛДСП
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                styles.product_page__description_tab__specification_list_item
-                            }
-                        >
-                            <div
-                                className={
-                                    styles.product_page__description_tab__manufacturer
-                                }
-                            >
-                                Основание:
-                            </div>
-                            <div
-                                className={
-                                    styles.product_page__description_tab__output
-                                }
-                            >
-                                Доп.опция
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                styles.product_page__description_tab__specification_list_item
-                            }
-                        >
-                            <div
-                                className={
-                                    styles.product_page__description_tab__manufacturer
-                                }
-                            >
-                                Возможные опции:
-                            </div>
-                            <div
-                                className={
-                                    styles.product_page__description_tab__output
-                                }
-                            >
-                                Реечное основание (настил)
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                styles.product_page__description_tab__specification_list_item
-                            }
-                        >
-                            <div
-                                className={
-                                    styles.product_page__description_tab__manufacturer
-                                }
-                            >
-                                Декор:
-                            </div>
-                            <div
-                                className={
-                                    styles.product_page__description_tab__output
-                                }
-                            >
-                                Без декора
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                styles.product_page__description_tab__specification_list_item
-                            }
-                        >
-                            <div
-                                className={
-                                    styles.product_page__description_tab__manufacturer
-                                }
-                            >
-                                Углы каркаса кровати:
-                            </div>
-                            <div
-                                className={
-                                    styles.product_page__description_tab__output
-                                }
-                            >
-                                Прямые
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                styles.product_page__description_tab__specification_list_item
-                            }
-                        >
-                            <div
-                                className={
-                                    styles.product_page__description_tab__manufacturer
-                                }
-                            >
-                                Матрас:
-                            </div>
-                            <div
-                                className={
-                                    styles.product_page__description_tab__output
-                                }
-                            >
-                                Приобретается отдельно
-                            </div>
+                            {properties.map((prop, index) => {
+                                return (
+                                    <div
+                                        className={
+                                            styles.product_page__description_tab__specification_list_item
+                                        }
+                                    >
+                                        <div
+                                            className={
+                                                styles.product_page__description_tab__manufacturer
+                                            }
+                                        >
+                                            {prop.PropertyTitle}:
+                                        </div>
+                                        <div
+                                            className={
+                                                styles.product_page__description_tab__output
+                                            }
+                                        >
+                                            {prop.Value}
+                                        </div>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
-                </div>
+                )}
             </div>
             <div className={styles.product_page__description_tab__right}>
                 <div
