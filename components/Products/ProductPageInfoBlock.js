@@ -59,6 +59,38 @@ const ProductPageInfoBlock = ({ sizes, prices }) => {
     const [isFavorite, setIsFavorite] = useState(false)
     const [isCompared, setIsCompared] = useState(false)
 
+    // Load blue background for button if products is favorited
+    useEffect(() => {
+        if (FavoriteListRedux.total && FavoriteListRedux.total.length !== 0) {
+            let flag = false
+            FavoriteListRedux.total.map((item) => {
+                if (item.ProductId === ProductPageReducer.info.id) {
+                    flag = true
+                    setIsFavorite(true)
+                }
+            })
+            if (!flag) {
+                setIsFavorite(false)
+            }
+        }
+    }, [FavoriteListRedux])
+
+    // Load blue background for button if products is compared
+    useEffect(() => {
+        if (CompareListRedux.total && CompareListRedux.total.length !== 0) {
+            let flag = false
+            CompareListRedux.total.map((item) => {
+                if (item.ProductId === ProductPageReducer.info.id) {
+                    flag = true
+                    setIsCompared(true)
+                }
+            })
+            if (!flag) {
+                setIsCompared(false)
+            }
+        }
+    }, [CompareListRedux])
+
     const onAddToFavoriteClickHandler = () => {
         const Price = ProductPageReducer.data.PriceDiscount
         const PriceId = ProductPageReducer.data.Id
