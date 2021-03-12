@@ -132,7 +132,7 @@ const CatalogReducer = (state = initialState, action) => {
         case CATALOG_SET_SORT_MOBILE: {
             return {
                 ...state,
-                sortMobile: [],
+                sortMobile: action.payload,
             }
         }
         case CATALOG_SET_PRELOAD_GET_PARAMS: {

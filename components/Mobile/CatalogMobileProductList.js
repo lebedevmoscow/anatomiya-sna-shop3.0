@@ -74,6 +74,7 @@ const CatalogMobileProductList = ({
 
     const onButtonClickHandler = () => {
         const page = CatalogReducer.page
+        console.log('CatalogReducer.mobileSort', CatalogReducer.mobileSort)
         dispatch(
             CatalogLoadProductsByLoadMoreButton(
                 false,
@@ -88,7 +89,7 @@ const CatalogMobileProductList = ({
                 null,
                 CatalogReducer.colors,
                 CatalogReducer.select,
-                CatalogReducer.mobileSort
+                CatalogReducer.sortMobile
             )
         )
         dispatch({ type: CATALOG_SET_PAGE, payload: page + 1 })
@@ -114,7 +115,7 @@ const CatalogMobileProductList = ({
                 null,
                 CatalogReducer.colors,
                 CatalogReducer.select,
-                CatalogReducer.mobileSort
+                CatalogReducer.sortMobile
             )
         )
         dispatch({ type: CATALOG_SET_PAGE, payload: page + 1 })
@@ -140,7 +141,7 @@ const CatalogMobileProductList = ({
                 nill,
                 CatalogReducer.colors,
                 CatalogReducer.select,
-                CatalogReducer.mobileSort
+                CatalogReducer.sortMobile
             )
         )
         dispatch({ type: CATALOG_SET_PAGE, payload: page - 1 })
@@ -163,7 +164,7 @@ const CatalogMobileProductList = ({
                 null,
                 CatalogReducer.colors,
                 CatalogReducer.select,
-                CatalogReducer.mobileSort
+                CatalogReducer.sortMobile
             )
         )
         dispatch({ type: CATALOG_SET_PAGE, payload: p })

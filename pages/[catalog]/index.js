@@ -29,7 +29,6 @@ import {
     CATALOG_SET_COLORS,
     CATALOG_SET_PAGE,
     CATALOG_SET_SORT,
-    CATALOG_SET_SORT_MOBILE,
 } from './../../catalog_actions_rebuild/catalog'
 
 // Utils
