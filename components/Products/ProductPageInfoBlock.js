@@ -316,6 +316,11 @@ const ProductPageInfoBlock = ({ sizes, prices }) => {
                 <div
                     onClick={() => onAddToCompareClickHandler()}
                     className={styles.button}
+                    style={
+                        isCompared
+                            ? { background: '#0EA8D5' }
+                            : { background: '#fff' }
+                    }
                 >
                     <Image
                         src={isCompared ? WhiteStatsImage : StatsImage}
@@ -332,6 +337,11 @@ const ProductPageInfoBlock = ({ sizes, prices }) => {
                 <div
                     onClick={() => onAddToFavoriteClickHandler()}
                     className={styles.button}
+                    style={
+                        isFavorite
+                            ? { background: '#0EA8D5' }
+                            : { background: '#fff' }
+                    }
                 >
                     <Image
                         src={isFavorite ? WhiteHeartImage : HeartImage}
