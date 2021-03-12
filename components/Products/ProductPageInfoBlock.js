@@ -98,12 +98,9 @@ const ProductPageInfoBlock = ({ sizes, prices }) => {
         )
         differencePrice = 0
     } else if (prices[0].PriceBasic !== prices[0].PriceDiscount) {
-        differencePrice =
-            prices[0].PriceBasic -
-            prices[0].PriceDiscount.toString().replace(
-                /(\d)(?=(\d\d\d)+([^\d]|$))/g,
-                '$1 '
-            )
+        differencePrice = (prices[0].PriceBasic - prices[0].PriceDiscount)
+            .toString()
+            .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
         prevPrice = prices[0].PriceBasic.toString().replace(
             /(\d)(?=(\d\d\d)+([^\d]|$))/g,
             '$1 '
@@ -261,8 +258,38 @@ const ProductPageInfoBlock = ({ sizes, prices }) => {
                 </div>
             </div>
 
+            {console.log('differencePrice', differencePrice)}
             <div className={styles.product_page__info_block}>
                 <div className={styles.product_page__price}>
+                    {differencePrice !== 0 && (
+                        <div
+                            className={
+                                styles.product_page__price_discount_block
+                            }
+                        >
+                            <div
+                                className={
+                                    styles.product_page__price_discount_block__prev
+                                }
+                            >
+                                {prevPrice}
+                            </div>
+                            <div
+                                className={
+                                    styles.product_page__price_discount_block__discount
+                                }
+                            >
+                                Экономия{' '}
+                                <span
+                                    className={
+                                        styles.product_page__price_discount_block__discount__span
+                                    }
+                                >
+                                    {differencePrice}
+                                </span>
+                            </div>
+                        </div>
+                    )}
                     <span>{discountPrice}</span> Руб.
                 </div>
                 <span className={styles.line}></span>
