@@ -403,7 +403,10 @@ const ProductPage = ({
                                 <ProductPageGallery images={images} />
                             </div>
                             <div className={styles.product_page__right}>
-                                <ProductPageInfoBlock sizes={sizes} />
+                                <ProductPageInfoBlock
+                                    sizes={sizes}
+                                    prices={productInfo.ProductCard.Prices}
+                                />
                             </div>
                         </div>
                     )}

@@ -31,7 +31,7 @@ import {
 // Styles
 import styles from './../../styles/components/Products/ProductPageInfoBlock.module.sass'
 
-const ProductPageInfoBlock = ({ sizes }) => {
+const ProductPageInfoBlock = ({ sizes, prices }) => {
     const dispatch = useDispatch()
 
     const colourStyles = {
@@ -85,6 +85,34 @@ const ProductPageInfoBlock = ({ sizes }) => {
 
     const [isFavorite, setIsFavorite] = useState(false)
     const [isCompared, setIsCompared] = useState(false)
+
+    let prevPrice
+    let discountPrice
+    let differencePrice
+
+    if (prices[0].PriceBasic === prices[0].PriceDiscount) {
+        prevPrice = null
+        discountPrice = prices[0].PriceDiscount.toString().replace(
+            /(\d)(?=(\d\d\d)+([^\d]|$))/g,
+            '$1 '
+        )
+        differencePrice = 0
+    } else if (prices[0].PriceBasic !== prices[0].PriceDiscount) {
+        differencePrice =
+            prices[0].PriceBasic -
+            prices[0].PriceDiscount.toString().replace(
+                /(\d)(?=(\d\d\d)+([^\d]|$))/g,
+                '$1 '
+            )
+        prevPrice = prices[0].PriceBasic.toString().replace(
+            /(\d)(?=(\d\d\d)+([^\d]|$))/g,
+            '$1 '
+        )
+        discountPrice = prices[0].PriceDiscount.toString().replace(
+            /(\d)(?=(\d\d\d)+([^\d]|$))/g,
+            '$1 '
+        )
+    }
 
     return (
         <div className={styles.product_page__info}>
@@ -235,7 +263,7 @@ const ProductPageInfoBlock = ({ sizes }) => {
 
             <div className={styles.product_page__info_block}>
                 <div className={styles.product_page__price}>
-                    <span>5 170</span> Руб.
+                    <span>{discountPrice}</span> Руб.
                 </div>
                 <span className={styles.line}></span>
                 <div className={styles.selector_wrapper}>
