@@ -11,8 +11,19 @@ import FoundamentImage1 from './../../TEMP/foundament/1.jpg'
 import FoundamentImage2 from './../../TEMP/foundament/2.jpg'
 import FoundamentImage3 from './../../TEMP/foundament/3.jpg'
 
-const ProductPageMobileInfoBlock = ({ sizes }) => {
-    const price = 5368
+// utils
+import { getDataBySizeId } from './../../utils/getProductSizes'
+
+// redux
+import { useSelector, useDispatch } from 'react-redux'
+import {
+    PRODUCT_PAGE_SIZE_CHANGED,
+    PRODUCT_PAGE_SET_DATA,
+} from './../../actions/ProductPage'
+
+const ProductPageMobileInfoBlock = ({ sizes, prices }) => {
+    const dispatch = useDispatch()
+    const ProductPageReducer = useSelector((store) => store.ProductPageReducer)
 
     const [mainSelector, setMainSelector] = useState(null)
 
@@ -53,18 +64,34 @@ const ProductPageMobileInfoBlock = ({ sizes }) => {
         },
     }
 
-    const options = [
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-        { value: '190*60', label: '190*60' },
-    ]
+    const options = sizes.map((size) => {
+        return {
+            label: size.title,
+            value: size.slug,
+            id: size.id,
+            sizeId: size.sizeId,
+        }
+    })
 
     useEffect(() => {
         setMainSelector(
             <Select
+                onChange={(data) => {
+                    dispatch({
+                        type: PRODUCT_PAGE_SIZE_CHANGED,
+                        payload: {
+                            selectedSizeId: data.sizeId,
+                            selectedId: data.id,
+                            selectedValue: data.value,
+                            selectedTitle: data.title,
+                        },
+                    })
+                    const d = getDataBySizeId(prices, data.sizeId)
+                    dispatch({
+                        type: PRODUCT_PAGE_SET_DATA,
+                        payload: d,
+                    })
+                }}
                 className="product-card__selector"
                 classNamePrefix="product-card__selector--inner"
                 placeholder={options[0].label}
@@ -78,6 +105,40 @@ const ProductPageMobileInfoBlock = ({ sizes }) => {
 
     const [cartModalClosed, setCartModalClosed] = useState(true)
     const [buyOneClickModalClosed, setBuyOneClickModalClosed] = useState(true)
+
+    let prevPrice
+    let discountPrice
+    let differencePrice
+
+    if (
+        ProductPageReducer.data.PriceBasic ===
+        ProductPageReducer.data.PriceDiscount
+    ) {
+        prevPrice = null
+        discountPrice = ProductPageReducer.data.PriceDiscount.toString().replace(
+            /(\d)(?=(\d\d\d)+([^\d]|$))/g,
+            '$1 '
+        )
+        differencePrice = 0
+    } else if (
+        ProductPageReducer.data.PriceBasic !==
+        ProductPageReducer.data.PriceDiscount
+    ) {
+        differencePrice = (
+            ProductPageReducer.data.PriceBasic -
+            ProductPageReducer.data.PriceDiscount
+        )
+            .toString()
+            .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+        prevPrice = ProductPageReducer.data.PriceBasic.toString().replace(
+            /(\d)(?=(\d\d\d)+([^\d]|$))/g,
+            '$1 '
+        )
+        discountPrice = ProductPageReducer.data.PriceDiscount.toString().replace(
+            /(\d)(?=(\d\d\d)+([^\d]|$))/g,
+            '$1 '
+        )
+    }
 
     return (
         <>
@@ -104,9 +165,7 @@ const ProductPageMobileInfoBlock = ({ sizes }) => {
 
             <div className={styles.mobile_info_block}>
                 <div className={styles.mobile_info_block__price}>
-                    <span className={styles.price_itself}>
-                        {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
-                    </span>
+                    <span className={styles.price_itself}>{discountPrice}</span>
                     <span className={styles.price_text}> Руб.</span>
                 </div>
                 <span className={styles.line}></span>

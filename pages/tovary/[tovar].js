@@ -616,7 +616,10 @@ const ProductPage = ({
                 {IsMobile && (
                     <div className={styles.mobile_info_block__wrapper}>
                         <div className={styles.container}>
-                            <ProductPageMobileInfoBlock sizes={sizes} />
+                            <ProductPageMobileInfoBlock
+                                prices={productInfo.ProductCard.Prices}
+                                sizes={sizes}
+                            />
                         </div>
                     </div>
                 )}
