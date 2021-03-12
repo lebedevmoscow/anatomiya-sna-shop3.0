@@ -42,11 +42,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
     PRODUCT_PAGE_SET_DATA,
     PRODUCT_PAGE_SIZE_CHANGED,
+    PRODUCT_SET_PRODUCT_INFO,
 } from './../../actions/ProductPage'
-
-// import HelpPickUp from './../../components/Mobile/'
-
-// const Header = dynamic(() => import('./../../components/Header'), { ssr: true })
 
 const CatalogHelpPickUp = dynamic(
     () => import('../../components/Catalog/CatalogHelpPickUp'),
@@ -85,6 +82,18 @@ const ProductPage = ({
     dispatch({
         type: PRODUCT_PAGE_SET_DATA,
         payload: productInfo.ProductCard.Prices[0],
+    })
+
+    dispatch({
+        type: PRODUCT_SET_PRODUCT_INFO,
+        payload: {
+            id: productInfo.ProductCard.Id,
+            image: productInfo.ProductCard.MainImage.FilePath,
+            catalogType: productInfo.ProductCard.CatalogType,
+            brandTitle: productInfo.ProductCard.BrandTitle,
+            title: productInfo.ProductCard.Title,
+            seriesTitle: productInfo.ProductCard.SeriesTitle,
+        },
     })
 
     const [activeTab, setActiveTab] = useState('description')

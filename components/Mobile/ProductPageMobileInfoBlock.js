@@ -165,6 +165,35 @@ const ProductPageMobileInfoBlock = ({ sizes, prices }) => {
 
             <div className={styles.mobile_info_block}>
                 <div className={styles.mobile_info_block__price}>
+                    {differencePrice !== 0 && (
+                        <div
+                            className={
+                                styles.product_page__price_discount_block
+                            }
+                        >
+                            <div
+                                className={
+                                    styles.product_page__price_discount_block__prev
+                                }
+                            >
+                                {prevPrice}
+                            </div>
+                            <div
+                                className={
+                                    styles.product_page__price_discount_block__discount
+                                }
+                            >
+                                Экономия{' '}
+                                <span
+                                    className={
+                                        styles.product_page__price_discount_block__discount__span
+                                    }
+                                >
+                                    {differencePrice}
+                                </span>
+                            </div>
+                        </div>
+                    )}
                     <span className={styles.price_itself}>{discountPrice}</span>
                     <span className={styles.price_text}> Руб.</span>
                 </div>

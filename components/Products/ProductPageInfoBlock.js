@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Select from 'react-select'
 import Skeleton from '@material-ui/lab/Skeleton'
@@ -9,7 +9,9 @@ import Link from 'next/link'
 
 // Images
 import StatsImage from './../../assets/svg/stats.svg'
+import WhiteStatsImage from './../../assets/svg/white-stats.svg'
 import HeartImage from './../../assets/svg/heart.svg'
+import WhiteHeartImage from './../../assets/svg/white-heart.svg'
 import MaterialImage1 from './../../assets/materials/material1.jpg'
 import MaterialImage2 from './../../assets/materials/material2.jpg'
 import MaterialImage3 from './../../assets/materials/material3.jpg'
@@ -42,6 +44,112 @@ import styles from './../../styles/components/Products/ProductPageInfoBlock.modu
 const ProductPageInfoBlock = ({ sizes, prices }) => {
     const dispatch = useDispatch()
     const ProductPageReducer = useSelector((store) => store.ProductPageReducer)
+
+    // Refs
+    const FavoriteRef = useRef(null)
+    const CompareRef = useRef(null)
+
+    const FavoriteListRedux = useSelector(
+        (store) => store.FavoritesProductsListReducer
+    )
+    const CompareListRedux = useSelector(
+        (store) => store.CompareProductsListReducer
+    )
+
+    const [isFavorite, setIsFavorite] = useState(false)
+    const [isCompared, setIsCompared] = useState(false)
+
+    const onAddToFavoriteClickHandler = () => {
+        const Price = ProductPageReducer.data.PriceDiscount
+        const PriceId = ProductPageReducer.data.Id
+        const SizeSlug = ProductPageReducer.data.SizeSlug
+        const SizeLabel = ProductPageReducer.data.SizeTitle
+
+        if (!isFavorite) {
+            setIsFavorite(true)
+            FavoriteRef.current.style.display = 'block'
+
+            dispatch(
+                AddProductToFavoriteList(
+                    ProductPageReducer.info.id,
+                    ProductPageReducer.info.image,
+                    ProductPageReducer.info.catalogType,
+                    ProductPageReducer.info.brandTitle,
+                    ProductPageReducer.info.seriesTitle,
+                    ProductPageReducer.info.title,
+                    ProductPageReducer.selectedValue,
+                    ProductPageReducer.selectedTitle,
+                    ProductPageReducer.data.PriceDiscount,
+                    ProductPageReducer.data.Id
+                )
+            )
+            setTimeout(() => {
+                FavoriteRef.current.style.display = 'none'
+            }, 1500)
+        } else {
+            setIsFavorite(false)
+            dispatch(
+                RemoveProductFromFavoriteList(
+                    ProductPageReducer.info.id,
+                    ProductPageReducer.info.image,
+                    ProductPageReducer.info.catalogType,
+                    ProductPageReducer.info.brandTitle,
+                    ProductPageReducer.info.seriesTitle,
+                    ProductPageReducer.info.title,
+                    ProductPageReducer.selectedValue,
+                    ProductPageReducer.selectedTitle,
+                    ProductPageReducer.data.PriceDiscount,
+                    ProductPageReducer.data.Id
+                )
+            )
+        }
+    }
+
+    const onAddToCompareClickHandler = () => {
+        const Price = ProductPageReducer.data.PriceDiscount
+        const PriceId = ProductPageReducer.data.Id
+        const SizeSlug = ProductPageReducer.data.SizeSlug
+        const SizeLabel = ProductPageReducer.data.SizeTitle
+
+        if (!isCompared) {
+            setIsCompared(true)
+            CompareRef.current.style.display = 'block'
+
+            dispatch(
+                AddProductToCompareList(
+                    ProductPageReducer.info.id,
+                    ProductPageReducer.info.image,
+                    ProductPageReducer.info.catalogType,
+                    ProductPageReducer.info.brandTitle,
+                    ProductPageReducer.info.seriesTitle,
+                    ProductPageReducer.info.title,
+                    ProductPageReducer.selectedValue,
+                    ProductPageReducer.selectedTitle,
+                    ProductPageReducer.data.PriceDiscount,
+                    ProductPageReducer.data.Id
+                )
+            )
+            setTimeout(() => {
+                CompareRef.current.style.display = 'none'
+            }, 1500)
+        } else {
+            setIsCompared(false)
+            dispatch(
+                RemoveProductFromCompareList(
+                    ProductPageReducer.info.id,
+                    ProductPageReducer.info.image,
+                    ProductPageReducer.info.catalogType,
+                    ProductPageReducer.info.brandTitle,
+                    ProductPageReducer.info.seriesTitle,
+                    ProductPageReducer.info.title,
+                    ProductPageReducer.selectedValue,
+                    ProductPageReducer.selectedTitle,
+                    ProductPageReducer.data.PriceDiscount,
+                    ProductPageReducer.data.Id
+                )
+            )
+        }
+    }
 
     const colourStyles = {
         control: (styles) => ({
@@ -93,9 +201,6 @@ const ProductPageInfoBlock = ({ sizes, prices }) => {
     const [buyOneClickPopupClosed, setBuyOneClickPopupClosed] = useState(true)
     const [giftPopupIsClosed, setGiftPopupIsClosed] = useState(true)
     const [savePricePopupIsClosed, setSavePricePopupIsClosed] = useState(true)
-
-    const [isFavorite, setIsFavorite] = useState(false)
-    const [isCompared, setIsCompared] = useState(false)
 
     let prevPrice
     let discountPrice
@@ -176,11 +281,37 @@ const ProductPageInfoBlock = ({ sizes, prices }) => {
                     </OutsideClickHandler>
                 </div>
 
-                <div className={styles.button}>
-                    <Image src={StatsImage} width={30} height={30} />
+                <div
+                    onClick={() => onAddToCompareClickHandler()}
+                    className={styles.button}
+                >
+                    <Image
+                        src={isCompared ? WhiteStatsImage : StatsImage}
+                        width={30}
+                        height={30}
+                    />
+                    <div
+                        ref={CompareRef}
+                        className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                    >
+                        {/* Товар добавлен в <Link href="/">Сравнение!</Link> */}
+                    </div>
                 </div>
-                <div className={styles.button}>
-                    <Image src={HeartImage} width={30} height={30} />
+                <div
+                    onClick={() => onAddToFavoriteClickHandler()}
+                    className={styles.button}
+                >
+                    <Image
+                        src={isFavorite ? WhiteHeartImage : HeartImage}
+                        width={30}
+                        height={30}
+                    />
+                    <div
+                        ref={FavoriteRef}
+                        className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
+                    >
+                        {/* Товар добавлен в <Link href="/">Избранное!</Link> */}
+                    </div>
                 </div>
             </div>
             <div className={styles.product_page__line_with_buttons}>
