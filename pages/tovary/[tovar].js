@@ -450,10 +450,13 @@ const ProductPage = ({
                                             банковской картой, электронным
                                             кошельком, оплата по счету.
                                             <br />
-                                            <span>
+                                            <span className={styles.small_blue}>
                                                 В кредит или рассрочку
                                             </span>{' '}
-                                            от <span>862 руб/меc.</span>
+                                            от{' '}
+                                            <span className={styles.red}>
+                                                862 руб/меc.
+                                            </span>
                                         </div>
                                     </li>
                                     <li
@@ -488,15 +491,30 @@ const ProductPage = ({
                                 /> */}
                                         <img src={CarImage}></img>
                                         <div className={styles.text}>
-                                            Доставка <span>по Москве</span>
+                                            Доставка{' '}
+                                            <span className={styles.blue}>
+                                                по Москве
+                                            </span>
                                             <br />
                                             Ближайшая доставка:{' '}
-                                            <span>03.02.2021</span>
+                                            <span className={styles.blue}>
+                                                03.02.2021
+                                            </span>
                                             <br />
                                             Стоимость доставки:{' '}
-                                            <span>1 500 руб.</span>
+                                            <span className={styles.blue}>
+                                                1 500 руб.
+                                            </span>
                                             <br />
                                             Подъем на груз. лифте:{' '}
+                                            <span className={styles.blue}>
+                                                400 Руб.
+                                            </span>
+                                            <br />
+                                            <span className={styles.small_blue}>
+                                                Условия доставки и оплаты.
+                                                Подробнее
+                                            </span>
                                         </div>
                                     </li>
                                 </ul>
