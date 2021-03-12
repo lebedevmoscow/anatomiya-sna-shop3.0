@@ -5,8 +5,15 @@ import UsefulArticles from './../Article/UsefulArticleOnProductPage'
 import MattrassComposition from './../../components/MattrassComposition'
 
 import styles from './../../styles/components/Tabs/ProductPageDescriptionTab.module.sass'
+import { LightgalleryProvider } from 'react-lightgallery'
+import { LightgalleryItem } from 'react-lightgallery'
 
-const ProductPageDescriptionTab = ({ articles, Layers, properties }) => {
+const ProductPageDescriptionTab = ({
+    articles,
+    Layers,
+    properties,
+    certificates,
+}) => {
     const hasWindow = typeof window !== 'undefined'
     const [width, setWidth] = useState(null)
 
@@ -112,6 +119,56 @@ const ProductPageDescriptionTab = ({ articles, Layers, properties }) => {
                 )}
             </div>
             <div className={styles.product_page__description_tab__right}>
+                {console.log('certificates', certificates)}
+                {certificates && certificates.length !== 0 && (
+                    <div
+                        className={
+                            styles.product_page__description_tab__right__certification_block
+                        }
+                    >
+                        <div
+                            className={
+                                styles.product_page__description_tab__right__certification_block__title
+                            }
+                        >
+                            Сертификаты и инструкции
+                        </div>
+                        <LightgalleryProvider galleryClassName="certificates__gallery">
+                            <ul
+                                className={
+                                    styles.product_page__description_tab__right__certification_block__list
+                                }
+                            >
+                                {certificates.map((certificate, index) => {
+                                    return (
+                                        <li
+                                            className={
+                                                styles.product_page__description_tab__right__certification_block__list__item
+                                            }
+                                        >
+                                            <LightgalleryItem
+                                                group="certificate"
+                                                src={
+                                                    'https://anatomiyasna.ru' +
+                                                    certificate.FilePath
+                                                }
+                                                key={index}
+                                            >
+                                                <img
+                                                    src={
+                                                        'https://anatomiyasna.ru' +
+                                                        certificate.FilePath
+                                                    }
+                                                ></img>
+                                            </LightgalleryItem>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </LightgalleryProvider>
+                    </div>
+                )}
+
                 <div
                     className={
                         styles.product_page__description_tab__right_text_block

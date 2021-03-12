@@ -541,6 +541,7 @@ const ProductPage = ({
                                         }
                                         Layers={productInfo.Layers}
                                         articles={articles}
+                                        certificates={productInfo.Certificates}
                                     />
                                 )}
                                 {activeTab === 'options' && <PaletteTab />}
