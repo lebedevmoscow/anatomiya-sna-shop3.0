@@ -22,7 +22,16 @@ import LoadFilesImage from './../../assets/load-files.png'
 
 import styles from './../../styles/components/Tabs/ProductPageMobileTabs.module.sass'
 
-const ProductPageMobileTabs = ({ properties }) => {
+const ProductPageMobileTabs = ({ certificates, properties }) => {
+    const certificatesImages = []
+    if (certificates && certificates.length > 0) {
+        for (let i = 0; i < certificates.length; i++) {
+            console.log('certificatesImages[i]', certificates[i])
+            certificatesImages.push(
+                'https://anatomiyasna.ru' + certificates[i].FilePath
+            )
+        }
+    }
     const content1 = (
         <>
             <p>
@@ -544,7 +553,14 @@ const ProductPageMobileTabs = ({ properties }) => {
         {
             title: 'Сертификаты и инструкции',
             state: 'closed',
-            content: <ProductPageImageTabContentMobile />,
+            content:
+                certificates && certificates.length > 0 ? (
+                    <ProductPageImageTabContentMobile
+                        images={certificatesImages}
+                    />
+                ) : (
+                    <></>
+                ),
         },
         {
             title: 'Описание',

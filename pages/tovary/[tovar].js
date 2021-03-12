@@ -625,8 +625,10 @@ const ProductPage = ({
                         <ProductPageMobileAssurances />
                     </div>
                 )}
+
                 {IsMobile && (
                     <ProductPageMobileTabs
+                        certificates={productInfo.Certificates}
                         properties={productInfo.ProductCard.Properties}
                     />
                 )}
