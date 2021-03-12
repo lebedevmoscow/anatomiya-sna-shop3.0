@@ -331,7 +331,7 @@ const ProductPageInfoBlock = ({ sizes, prices }) => {
                         ref={CompareRef}
                         className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
                     >
-                        {/* Товар добавлен в <Link href="/">Сравнение!</Link> */}
+                        Товар добавлен в <Link href="/">Сравнение!</Link>
                     </div>
                 </div>
                 <div
@@ -352,7 +352,7 @@ const ProductPageInfoBlock = ({ sizes, prices }) => {
                         ref={FavoriteRef}
                         className={`${styles.product_card__button__popup} ${styles.product_card__stats_button__popup}`}
                     >
-                        {/* Товар добавлен в <Link href="/">Избранное!</Link> */}
+                        Товар добавлен в <Link href="/">Избранное!</Link>
                     </div>
                 </div>
             </div>
