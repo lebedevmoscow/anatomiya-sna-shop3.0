@@ -477,29 +477,42 @@ const DesktopSeveral = ({
                 Gifts={Gifts}
                 DontShow={true}
             />
-            <div className={styles.catalog_product_card__column}>
-                <div
-                    className={
-                        styles.catalog_product_card__image_wraper_several
-                    }
-                >
-                    <img
-                        style={{ width: '100%' }}
-                        src={MainImage.FilePath}
-                    ></img>
-                </div>
-                <div className={styles.catalog_product_card__smalltext}>
-                    Купить {CatalogType}
-                </div>
-                <EqualHeightElement name="CatalogProductCard">
-                    <div
-                        style={PriceDiff !== 0 ? { marginBottom: '10px' } : {}}
-                        className={styles.catalog_product_card__title}
-                    >
-                        {BrandTitle + ' ' + (SeriesTitle || '') + ' ' + Title}
+
+            <Link href={`http://localhost:3000/tovary/${Slug}`}>
+                <a>
+                    <div className={styles.catalog_product_card__column}>
+                        <div
+                            className={
+                                styles.catalog_product_card__image_wraper_several
+                            }
+                        >
+                            <img
+                                style={{ width: '100%' }}
+                                src={MainImage.FilePath}
+                            ></img>
+                        </div>
+                        <div className={styles.catalog_product_card__smalltext}>
+                            Купить {CatalogType}
+                        </div>
+                        <EqualHeightElement name="CatalogProductCard">
+                            <div
+                                style={
+                                    PriceDiff !== 0
+                                        ? { marginBottom: '10px' }
+                                        : {}
+                                }
+                                className={styles.catalog_product_card__title}
+                            >
+                                {BrandTitle +
+                                    ' ' +
+                                    (SeriesTitle || '') +
+                                    ' ' +
+                                    Title}
+                            </div>
+                        </EqualHeightElement>
                     </div>
-                </EqualHeightElement>
-            </div>
+                </a>
+            </Link>
             <div className={styles.pricewrap}>
                 <EqualHeightElement name="CatalogProductCard__Price">
                     <div className={`${styles.after_title}`}>
@@ -798,24 +811,30 @@ const DesktopSeveral = ({
                                     </div>
                                 )}
 
-                                <div
-                                    className={
-                                        styles.catalog_product_card__info_wrap
-                                    }
+                                <Link
+                                    href={`http://localhost:3000/tovary/${Slug}`}
                                 >
-                                    <button
-                                        className={
-                                            styles.catalog_product_card__info_button
-                                        }
-                                    >
-                                        Подробнее
-                                    </button>
-                                    <div
-                                        className={
-                                            styles.catalog_product_card__stats_buttons
-                                        }
-                                    ></div>
-                                </div>
+                                    <a>
+                                        <div
+                                            className={
+                                                styles.catalog_product_card__info_wrap
+                                            }
+                                        >
+                                            <button
+                                                className={
+                                                    styles.catalog_product_card__info_button
+                                                }
+                                            >
+                                                Подробнее
+                                            </button>
+                                            <div
+                                                className={
+                                                    styles.catalog_product_card__stats_buttons
+                                                }
+                                            ></div>
+                                        </div>
+                                    </a>
+                                </Link>
                             </div>
                         </div>
 
