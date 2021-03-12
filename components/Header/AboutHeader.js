@@ -52,7 +52,7 @@ const AboutHeader = ({ worktimeHead }) => {
                             <li>Гарантия</li>
                         </a>
                     </Link>
-                    <Link href="/">
+                    <Link href="/obmen-i-vozvrat">
                         <a>
                             <li>Обмен и возврат</li>
                         </a>
@@ -67,12 +67,12 @@ const AboutHeader = ({ worktimeHead }) => {
                             <li>Контакты</li>
                         </a>
                     </Link>
-                    <Link href="/">
+                    <Link href="/optovikam">
                         <a>
                             <li>Оптовикам</li>
                         </a>
                     </Link>
-                    <Link href="/">
+                    <Link href="/partneram">
                         <a>
                             <li>Партнерам</li>
                         </a>
