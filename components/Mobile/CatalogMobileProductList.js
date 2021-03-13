@@ -74,7 +74,6 @@ const CatalogMobileProductList = ({
 
     const onButtonClickHandler = () => {
         const page = CatalogReducer.page
-        console.log('CatalogReducer.mobileSort', CatalogReducer.mobileSort)
         dispatch(
             CatalogLoadProductsByLoadMoreButton(
                 false,
@@ -237,7 +236,7 @@ const CatalogMobileProductList = ({
                     amount={
                         (CatalogReducer.amount &&
                             Math.ceil(CatalogReducer.amount / 21)) ||
-                        filterProductsIds.length
+                        Math.ceil(filterProductsIds.length / 21)
                     }
                     onGoForwardButtonClickHandler={
                         onGoForwardButtonClickHandler

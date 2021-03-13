@@ -37,6 +37,7 @@ const CatalogMainFilter = ({
     filterProductsIds,
     stylesForViewType,
     viewType,
+    history,
 }) => {
     const CatalogReducer = useSelector((store) => store.CatalogReducer)
     const colors = filterAPIData.colors
@@ -83,15 +84,22 @@ const CatalogMainFilter = ({
     const [sizeSelector, setSizeSelector] = useState(null)
     const [titleOfAdditionalMenu, setTitleOfAdditionMenu] = useState(null)
     const [closeStatus, setCloseStatus] = useState([])
-    const [filterStatus, setFilterStatus] = useState([])
+    const [filterStatus, setFilterStatus] = useState(CatalogReducer.filters)
     const [click, setClick] = useState(0)
     const [selectedActive, setSelectedActive] = useState([])
     const [selectedActive2, setSelectedActive2] = useState([])
+
+    const [urlrouterhistory, setUrlrouterhistory] = useState(
+        subCatalogSlug
+            ? `/${catalogSlug}/${subCatalogSlug}?${history}`
+            : `/${catalogSlug}?${history}`
+    )
 
     const [selectedSize, setSelectedSize] = useState(null)
 
     const onFilterClickHandler = (mainIndex, title) => {
         const clone = filterStatus.concat()
+        dispatch({ type: CATALOG_SET_PAGE, payload: 1 })
 
         setLastClick('filter')
 
@@ -137,8 +145,39 @@ const CatalogMainFilter = ({
         }
 
         dispatch({ type: CATALOG_SET_FILTERS, payload: againClone })
-
+        dispatch({ type: CATALOG_SET_UPDATE_LIST })
+        dispatch(
+            CatalogLoadByFilter(
+                true,
+                CatalogReducer.sizeId,
+                catalogSlug,
+                subCatalogSlug,
+                oldMin,
+                oldMax,
+                againClone,
+                CatalogReducer.price,
+                null,
+                CatalogReducer.colors,
+                CatalogReducer.select,
+                CatalogReducer.sortMobile,
+                CatalogReducer.page
+            )
+        )
         setFilterStatus(againClone)
+
+        // Replace url
+        for (let i = 0; i < againClone.length; i++) {
+            for (let j = 0; j < againClone[i].inner.length; j++) {
+                if (againClone[i].inner[j].status === 'opened') {
+                    let c = urlrouterhistory
+                    const id = againClone[i].filter.id
+                    const value = againClone[i].inner[j].property.value
+                    c = c + `filter[properties][${id}][]=${value}&`
+                    setUrlrouterhistory(c)
+                    console.log('c', c)
+                }
+            }
+        }
     }
 
     const [activeColors, setActiveColors] = useState([])
@@ -293,36 +332,36 @@ const CatalogMainFilter = ({
         setUpdate((p) => ++p)
     }, [])
 
-    useEffect(() => {
-        let flag = false
-        for (let i = 0; i < filterStatus.length; i++) {
-            for (let j = 0; j < filterStatus[i].inner.length; j++) {
-                if (filterStatus[i].inner[j].status === 'opened') {
-                    flag = true
-                }
-            }
-        }
+    // useEffect(() => {
+    //     let flag = false
+    //     for (let i = 0; i < filterStatus.length; i++) {
+    //         for (let j = 0; j < filterStatus[i].inner.length; j++) {
+    //             if (filterStatus[i].inner[j].status === 'opened') {
+    //                 flag = true
+    //             }
+    //         }
+    //     }
 
-        if (flag) {
-            dispatch({ type: CATALOG_SET_UPDATE_LIST })
-            dispatch(
-                CatalogLoadByFilter(
-                    false,
-                    CatalogReducer.sizeId,
-                    catalogSlug,
-                    subCatalogSlug,
-                    oldMin,
-                    oldMax,
-                    filterStatus,
-                    CatalogReducer.price,
-                    null,
-                    CatalogReducer.colors,
-                    CatalogReducer.select,
-                    CatalogReducer.sortMobile
-                )
-            )
-        }
-    }, [filterStatus])
+    //     if (flag) {
+    //         dispatch({ type: CATALOG_SET_UPDATE_LIST })
+    //         dispatch(
+    //             CatalogLoadByFilter(
+    //                 false,
+    //                 CatalogReducer.sizeId,
+    //                 catalogSlug,
+    //                 subCatalogSlug,
+    //                 oldMin,
+    //                 oldMax,
+    //                 filterStatus,
+    //                 CatalogReducer.price,
+    //                 null,
+    //                 CatalogReducer.colors,
+    //                 CatalogReducer.select,
+    //                 CatalogReducer.sortMobile
+    //             )
+    //         )
+    //     }
+    // }, [filterStatus])
 
     useEffect(() => {
         if (selectedActive2.length > 0) {
@@ -380,17 +419,21 @@ const CatalogMainFilter = ({
         }
     }
 
-    const getCheckedStyle = (index, title) => {
-        const clone = filterStatus.concat()
-        const obj = clone[index].inner
-
-        for (let i = 0; i < obj.length; i++) {
-            const prop = obj[i].property
-            if (prop.label === title) {
-                if (obj[i].status === 'closed') {
-                    return false
-                } else {
-                    return true
+    const getCheckedStyle = (title, index, name) => {
+        for (let i = 0; i < filterStatus.length; i++) {
+            if (filterStatus[i].filter.title === name) {
+                for (let j = 0; j < filterStatus[i].inner.length; j++) {
+                    if (
+                        filterStatus[i].inner[j].property.label === title &&
+                        filterStatus[i].inner[j].status === 'opened'
+                    ) {
+                        console.log(
+                            'label title',
+                            filterStatus[i].inner[j].property.label,
+                            title
+                        )
+                        return true
+                    }
                 }
             }
         }
@@ -794,9 +837,16 @@ const CatalogMainFilter = ({
                                                                             }
                                                                         >
                                                                             <input
+                                                                                onChange={() => {}}
                                                                                 defaultChecked={getCheckedStyle(
+                                                                                    prop2.label,
                                                                                     index,
-                                                                                    prop2.label
+                                                                                    prop.title
+                                                                                )}
+                                                                                checked={getCheckedStyle(
+                                                                                    prop2.label,
+                                                                                    index,
+                                                                                    prop.title
                                                                                 )}
                                                                                 type="checkbox"
                                                                             />

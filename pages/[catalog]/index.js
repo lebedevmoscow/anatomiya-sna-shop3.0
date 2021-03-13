@@ -111,7 +111,6 @@ const CatalogPage = ({
         return h
     }
     const h = encodeURI(renderHistory())
-    console.log('filterObject', filterObject)
 
     dispatch({
         type: CATALOG_SET_FILTERS,
@@ -309,6 +308,7 @@ const CatalogPage = ({
                     filterProductsIds={filterProductsIds}
                     catalogSlug={catalogSlug}
                     subCatalogSlug={subCatalogSlug}
+                    history={h}
                 />
             )}
             {/* {breakpoint720 && (
