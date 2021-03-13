@@ -29,6 +29,7 @@ import {
     CATALOG_SET_COLORS,
     CATALOG_SET_PAGE,
     CATALOG_SET_SORT,
+    CATALOG_SET_SORT_MOBILE,
 } from './../../catalog_actions_rebuild/catalog'
 
 // Utils
@@ -130,36 +131,79 @@ const CatalogPage = ({
         { title: 'Бесплатная доставка', isActive: false, sort: null },
     ]
 
+    const mobileSort = [
+        { title: 'По популярности', status: 'disabled' },
+        { title: 'По убыванию цены', status: 'disabled' },
+        { title: 'По возрастанию цены', status: 'active' },
+        { title: 'Со скидкой', status: 'disabled' },
+        { title: 'Новинка', status: 'disabled' },
+        { title: 'С подарком', status: 'disabled' },
+        { title: 'Выбор покупателей', status: 'disabled' },
+        { title: 'Бесплатная доставка', status: 'disabled' },
+    ]
+
     if (filterObject.sort === 'price_down') {
-        defaultSort[0].isActive = false
-        defaultSort[1].isActive = true
-        defaultSort[1].sort = 'down-to-up'
+        if (!IsMobile) {
+            defaultSort[0].isActive = false
+            defaultSort[1].isActive = true
+            defaultSort[1].sort = 'down-to-up'
+        } else {
+            mobileSort[1].status = 'active'
+            mobileSort[2].status = 'disabled'
+        }
     }
 
     if (filterObject.sort === 'price_up') {
-        defaultSort[0].isActive = false
-        defaultSort[1].isActive = true
-        defaultSort[1].sort = 'up-to-down'
+        if (!IsMobile) {
+            defaultSort[0].isActive = false
+            defaultSort[1].isActive = true
+            defaultSort[1].sort = 'up-to-down'
+        } else {
+            mobileSort[1].status = 'disabled'
+            mobileSort[2].status = 'active'
+        }
     }
 
     if (filterObject.sort === 'popular') {
-        defaultSort[0].isActive = true
-        defaultSort[1].isActive = false
+        if (!IsMobile) {
+            defaultSort[0].isActive = true
+            defaultSort[1].isActive = false
+        } else {
+            mobileSort[0].status = 'active'
+        }
     }
 
     for (let i = 0; i < filterObject.flags.length; i++) {
         if (filterObject.flags[i] === 'deliverySorting') {
-            defaultSort[2].isActive = true
+            if (!IsMobile) {
+                defaultSort[2].isActive = true
+            } else {
+                mobileSort[7].status = 'active'
+            }
         } else if (filterObject.flags[i] === 'discount') {
-            defaultSort[3].isActive = true
+            if (IsMobile) {
+                defaultSort[3].isActive = true
+            } else {
+                mobileSort[3].status = 'active'
+            }
         } else if (filterObject.flags[i] === 'newest') {
-            defaultSort[4].isActive = true
+            if (IsMobile) {
+                defaultSort[4].isActive = true
+            } else {
+                mobileSort[4].isActive = true
+            }
         } else if (filterObject.flags[i] === 'free_delivery') {
-            defaultSort[5].isActive = true
+            if (IsMobile) {
+                defaultSort[5].isActive = true
+            }
         }
     }
 
-    dispatch({ type: CATALOG_SET_SORT, payload: defaultSort })
+    if (!IsMobile) {
+        dispatch({ type: CATALOG_SET_SORT, payload: defaultSort })
+    } else {
+        dispatch({ type: CATALOG_SET_SORT_MOBILE, payload: mobileSort })
+    }
     dispatch({ type: CATALOG_SET_COLORS, payload: filterObject.colors })
 
     // Vars

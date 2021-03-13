@@ -493,8 +493,11 @@ export const CatalogLoadProductsByFilter = (
         const finalUrl =
             root + useful_url + encodeURI(params) + encodeURI(filter_params)
 
+        console.log('finalUrl', finalUrl)
+
         const reqIds = await fetch(finalUrl)
         const resIds = await reqIds.json()
+        console.log('resids', resIds)
 
         let ids = []
 

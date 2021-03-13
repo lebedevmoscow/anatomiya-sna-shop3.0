@@ -77,16 +77,7 @@ const CatalogLeftMobile = ({
         setCountActiveFilter(c)
     }, [CatalogCommonReducer])
 
-    const [sortType, setSortType] = useState([
-        { title: 'По популярности', status: 'disabled' },
-        { title: 'По убыванию цены', status: 'disabled' },
-        { title: 'По возрастанию цены', status: 'active' },
-        { title: 'Со скидкой', status: 'disabled' },
-        { title: 'Новинка', status: 'disabled' },
-        { title: 'С подарком', status: 'disabled' },
-        { title: 'Выбор покупателей', status: 'disabled' },
-        { title: 'Бесплатная доставка', status: 'disabled' },
-    ])
+    const [sortType, setSortType] = useState(CatalogReducer.sortMobile)
 
     const getActiveSortTypeCount = () => {
         let count = 0
